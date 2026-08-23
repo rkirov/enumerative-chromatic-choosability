@@ -54,8 +54,8 @@ project:
     even-cycle blocks at list size 3 are the substance of the proof and are handled by a
     tensor capacity argument.
 
-    There is no sorry, admit or native_decide in ListColoring/ or Cacti/. Every claimed result
-    depends on exactly propext, Classical.choice and Quot.sound.
+    There is no sorry, admit or native_decide in ListColoring/, Cacti/ or NonPersistence/. Every
+    claimed result depends on exactly propext, Classical.choice and Quot.sound.
   authors: ["Radoslav Kirov"]
   responsible_maintainers: ["Radoslav Kirov"]
   license: Apache-2.0
@@ -63,17 +63,22 @@ project:
   entry_point: ListColoring.lean
   additional_library: Cacti
   additional_entry_point: Cacti.lean
+  # Zhang-Dong 2026 (arXiv:2608.19773) Theorem 6, which refutes Kirov-Naimi section 6 Question 2.
+  # Imports ListColoring; imported only by OpenProblems.lean, to discharge that question.
+  further_library: NonPersistence
+  further_entry_point: NonPersistence.lean
   open_problems_library: OpenProblems
   open_problems_entry_point: OpenProblems.lean
   lean_toolchain: "leanprover/lean4:v4.33.0"
   mathlib_rev: "db584cd6d46c92f209a44c0f1c829460d327499d"
   permitted_axioms: [propext, Classical.choice, Quot.sound]
   standard_of_proof: >-
-    No sorry, admit or native_decide anywhere in ListColoring/ or Cacti/. Every headline
-    result depends on exactly the three permitted axioms, asserted by #print axioms at the foot
-    of each file and enforced in CI by leanprover/comparator against comparator/Challenge.lean.
-    The only sorries in the repository are the three in OpenProblems.lean, which is imported by
-    nothing: there a sorry means the question is open, not that a proof is missing.
+    No sorry, admit or native_decide anywhere in ListColoring/, Cacti/ or NonPersistence/. Every
+    headline result depends on exactly the three permitted axioms, asserted by #print axioms at
+    the foot of each file and enforced in CI by leanprover/comparator against
+    comparator/Challenge.lean. The only sorries in the repository are the two in
+    OpenProblems.lean, which is imported by nothing: there a sorry means the question is open,
+    not that a proof is missing. It held three until Zhang-Dong 2026 answered Question 2.
 
 classification:
   arxiv: [math.CO, cs.LO]
@@ -84,7 +89,7 @@ classification:
     - "68V20"   # formalization of mathematics in connection with theorem provers
 
 # What was formalized. The cactus classification of Cacti/ is original to this repository, but
-# ten of the thirteen compared theorems formalize prior work, so the submitted result is
+# ten of the fifteen compared theorems formalize prior work, so the submitted result is
 # source-based and no original-proof entry is claimed here.
 sources:
   - title: "List coloring and n-monophilic graphs"
@@ -558,15 +563,19 @@ results:
     lean:
       name: ListColoring.OpenProblem.Question2
       file: OpenProblems.lean
-      also: [ListColoring.OpenProblem.question2]
-    status: stated_open
-    credit: "Kirov-Naimi 2016, Question 2"
+      also: [ListColoring.OpenProblem.not_question2, ZhangDong.not_persistence]
+    status: refuted
+    credit: "Kirov-Naimi 2016, Question 2; refuted by Zhang-Dong 2026 (arXiv:2608.19773)"
     note: >-
-      OPEN. In modern terms: is nu(G) = tau(G) for every graph? It is Question 2 of
-      Allred-Mudrock and Question 1 of Chi et al. 2026, both tracing it to this paper. The
-      chi = 2 case is settled by Allred-Mudrock's Theorem 10. SimpleGraph.ecc_iff_forall_two_le
-      and provenance.md section 4 record why ListColoring.ecc_two_iff is a statement about
-      ECCAt _ 2 and not about ECC.
+      REFUTED, and the refutation is formalized here. In modern terms: is nu(G) = tau(G) for
+      every graph? It was Question 2 of Allred-Mudrock and Question 1 of Chi et al. 2026, both
+      tracing it to this paper. The chi = 2 case is true, by Allred-Mudrock's Theorem 10, but the
+      general case is false: Zhang and Dong, Non-persistence of equality between chromatic
+      polynomials and list-color functions, arXiv:2608.19773 (20 August 2026), Theorem 6, give
+      for every k >= 3 infinitely many k-colourable graphs that are ECC at k and not at k+1. That
+      theorem is proved in NonPersistence/ and ListColoring.OpenProblem.not_question2 is the
+      corollary. The mathematics is Zhang and Dong's; this repository contributes only the
+      mechanization.
 
 # Results this development proves that the paper does not state. Formalizing a known theorem is
 # not a mathematical contribution and none of these is presented as one; they are here so the

@@ -182,9 +182,15 @@ result strengthens Kirov–Naimi's Theorem 2 from `ν` to `τ`, settling the `χ
 question below. For a general fixed `n` the literature gives the pointwise property **no name at
 all**; `n`-monophilic remains the only one anyone has proposed.
 
-**The open question.** Whether `ν(G) = τ(G)` for every graph — equivalently, whether
-`P_ℓ(G,m) = P(G,m)` propagates from `m` to `m+1` — is **open**. It is Question 2 of Allred–Mudrock
-and Question 1 of Chi et al. 2026, and both trace it to Kirov–Naimi.
+**The question, and its answer.** Whether `ν(G) = τ(G)` for every graph — equivalently, whether
+`P_ℓ(G,m) = P(G,m)` propagates from `m` to `m+1` — was Question 2 of Allred–Mudrock and Question 1
+of Chi et al. 2026, and both trace it to Kirov–Naimi. It is **false**. Zhang and Dong,
+*Non-persistence of equality between chromatic polynomials and list-color functions*
+([arXiv:2608.19773](https://arxiv.org/abs/2608.19773), 20 August 2026), Theorem 6, construct for
+every `k ≥ 3` infinitely many `k`-colourable graphs that agree at `k` and fail at `k+1`. That
+theorem is formalized here in `NonPersistence/`, and it is what discharges
+`ListColoring.OpenProblem.not_question2`. The mathematics is entirely theirs; see §2 of this file
+for how credit is kept.
 
 **This repository's naming.** The pointwise predicate is the workhorse (Theorem 1 is "for every
 `n`", Theorem 2 is at `n = 2`), so it is **`SimpleGraph.ECCAt G n`**, with
@@ -201,5 +207,5 @@ Two caveats about the fit, both recorded above. First, `ECC` quantifies over eve
 `n < χ(G)` where the property is vacuous (`SimpleGraph.ecc_of_not_colorable`), so it agrees with
 `τ(G) = χ(G)`; `SimpleGraph.ecc_iff_forall_two_le` is the reformulation that drops the free cases.
 Second, at `χ(G) = 2` the paper's Theorem 2 characterizes `ν(G) = 2`, the *weak* notion, so
-`ListColoring.ecc_two_iff` is a statement about `ECCAt _ 2` and **not** about `ECC`; whether the two
-coincide is the open question above.
+`ListColoring.ecc_two_iff` is a statement about `ECCAt _ 2` and **not** about `ECC`; the two do not
+coincide in general, by the Zhang–Dong theorem above.

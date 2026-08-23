@@ -27,6 +27,19 @@ Compiled 2026-08-08.
 
 ---
 
+## The paper that closes Kirov–Naimi's Question 2
+
+- **M. Zhang and F. Dong**, "Non-persistence of equality between chromatic polynomials and
+  list-color functions," arXiv:[2608.19773](https://arxiv.org/abs/2608.19773) (20 Aug 2026).
+  math.CO; MSC 05C15, 05C30, 05C31.
+  — *Answers negatively the question, open since Kirov–Naimi 2016 §6, of whether
+  $P(G,k) = P_\ell(G,k) > 0$ forces $P(G,k+1) = P_\ell(G,k+1)$: Theorem 6 gives, for each
+  $k \ge 3$, infinitely many graphs where it fails. Equivalently $\nu(G) \ne \tau(G)$ in
+  general. Their Theorem 6 is formalized in this repository in `NonPersistence/`, and it is what
+  discharges `ListColoring.OpenProblem.not_question2`. Retrieved and read 2026-08-23.*
+
+---
+
 ## Foundations of list coloring
 
 - **P. Erdős, A. L. Rubin, and H. Taylor**, "Choosability in graphs," in *Proceedings of the

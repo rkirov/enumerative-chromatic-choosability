@@ -33,7 +33,7 @@ choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything
 |---|---|
 | `ListColoring/` | the formalization |
 | `Cacti/` | the cactus classification — beyond the paper, see below |
-| `OpenProblems.lean` | Kirov–Naimi §6's two open questions, stated in Lean and asserted with `sorry` |
+| `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
 | `formalization.yaml` | machine-readable map: every numbered result of the paper → its Lean name, file, and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
 | `plan.md` | milestones, design decisions, progress log, and findings |
@@ -158,7 +158,7 @@ by it.
 ## Standard of proof
 
 * No `sorry`, `admit`, or `native_decide` anywhere in `ListColoring/` or `Cacti/`, checked by CI.
-  The three `sorry`s in the repository are all in `OpenProblems.lean`, which is a **separate
+  The two `sorry`s in the repository are both in `OpenProblems.lean`, which is a **separate
   `lean_lib`** for exactly that reason: it imports `ListColoring` and nothing imports it, so no
   theorem can rest on an unproved statement. A `sorry` there means *nobody knows* — those are
   §6's open questions, not gaps in the formalization of the paper.
@@ -168,8 +168,9 @@ by it.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`.
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirteen keystone theorems** — ten from the paper
-  and three of the cactus classification — and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
+  `comparator/Challenge.lean`, which claims **fifteen keystone theorems** — ten from the paper,
+  three of the cactus classification, and two of Zhang–Dong's non-persistence theorem, which
+  answers the paper's own §6 Question 2 — and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through two independent
   kernels (Lean's, via `lean4export`, and `nanoda`). It is CI-only — it builds four external tools.

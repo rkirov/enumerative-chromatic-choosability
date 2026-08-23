@@ -398,3 +398,40 @@ theorem isCactus_ecc_iff {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph
     G.ECC ↔ HasAtMostOneCycle G ∨ SimpleGraph.HasOddCycle G := sorry
 
 end ListColoring
+
+/-! ### 10. Non-persistence
+
+Not from the paper, and not from this repository either.  Meiqiao Zhang and Fengming Dong,
+*Non-persistence of equality between chromatic polynomials and list-color functions*,
+arXiv:2608.19773 (20 August 2026), Theorem 6; formalized in `NonPersistence/`.
+
+It answers, negatively, the question §6 of the source paper leaves open — *does
+`col(G,k) = col(G,L)` for every `k`-list `L`, with `col(G,k) > 0`, force the same at `k+1`?*  In
+the modern vocabulary, `ν(G) = τ(G)` is false in general.  The two claims below are Theorem 6
+itself and the refutation it yields.
+-/
+
+namespace ZhangDong
+
+open SimpleGraph
+
+/-- **Kirov–Naimi 2016, §6, Question 2**, verbatim: *if a graph is `n`-colourable and
+`n`-monophilic, is it necessarily `(n+1)`-monophilic?*  Stated as a proposition so that its
+refutation is a theorem rather than a schema. -/
+def Persistence : Prop :=
+  ∀ (n : ℕ) {α : Type} [Fintype α] [DecidableEq α] (G : SimpleGraph α) [DecidableRel G.Adj],
+    G.Colorable n → G.ECCAt n → G.ECCAt (n + 1)
+
+/-- **Zhang–Dong, Theorem 6.**  For every `k ≥ 3` and every bound `N` there is a graph on more
+than `N` vertices that is `k`-colourable and enumeratively chromatic-choosable at `k`, but not at
+`k + 1`.  Unboundedly many vertices, so infinitely many graphs — stated that way to avoid
+quantifying over isomorphism classes. -/
+theorem exists_ecc_not_ecc_succ (k : ℕ) (hk : 3 ≤ k) (N : ℕ) :
+    ∃ (V : Type) (_ : Fintype V) (_ : DecidableEq V) (G : SimpleGraph V) (_ : DecidableRel G.Adj),
+      N < Fintype.card V ∧ G.Colorable k ∧ G.ECCAt k ∧ ¬ G.ECCAt (k + 1) := sorry
+
+/-- **The answer to Question 2: no.**  Enumerative chromatic-choosability does not propagate from
+`n` to `n + 1`, even for `n`-colourable graphs. -/
+theorem not_persistence : ¬ Persistence := sorry
+
+end ZhangDong

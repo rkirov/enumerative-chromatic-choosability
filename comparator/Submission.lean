@@ -1,12 +1,13 @@
 import ListColoring
 import Cacti
+import NonPersistence
 /-!
 # Submission: the real development
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the
-`ListColoring` library of this repository (and, for §9, in `Cacti/`), under exactly those names,
-so importing the libraries is the whole submission — no re-export shim is needed, and none is
+`ListColoring` library of this repository (and, for §9, in `Cacti/`; for §10, in
+`NonPersistence/`), under exactly those names, so importing the libraries is the whole submission — no re-export shim is needed, and none is
 wanted: a shim would put a second declaration between the comparator and the thing that was
 actually proved.
 

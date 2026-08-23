@@ -1,7 +1,7 @@
 name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
-defaultTargets = ["ListColoring", "OpenProblems", "Cacti"]
+defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -29,3 +29,9 @@ name = "OpenProblems"
 # and the full spectrum -- are claimed in comparator/config.json.
 [[lean_lib]]
 name = "Cacti"
+
+# Zhang-Dong 2026 (arXiv:2608.19773): equality between the chromatic polynomial and the list-color
+# function does not persist from k to k+1. This refutes Kirov-Naimi section 6 Question 2, which
+# `OpenProblems.lean` had carried as open. Imports ListColoring, imported by nothing.
+[[lean_lib]]
+name = "NonPersistence"

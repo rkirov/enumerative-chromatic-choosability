@@ -38,7 +38,8 @@
     "SimpleGraph.HasOddCycle",
     "SimpleGraph.ECC",
     "ListColoring.IsCactus",
-    "ListColoring.HasAtMostOneCycle"
+    "ListColoring.HasAtMostOneCycle",
+    "ZhangDong.Persistence"
   ],
   "theorem_names": [
     "SimpleGraph.eval_chromaticPolynomial",
@@ -53,7 +54,9 @@
     "SimpleGraph.exists_ecc_forall_ge",
     "ListColoring.isCactus_ecc_of_three_le",
     "ListColoring.isCactus_ecc_two_iff",
-    "ListColoring.isCactus_ecc_iff"
+    "ListColoring.isCactus_ecc_iff",
+    "ZhangDong.exists_ecc_not_ecc_succ",
+    "ZhangDong.not_persistence"
   ],
   "permitted_axioms": [
     "propext",

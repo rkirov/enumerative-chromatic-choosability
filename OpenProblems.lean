@@ -3,13 +3,15 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import ListColoring
+import NonPersistence.Statements
 
 /-!
 # The questions Kirov–Naimi leave open
 
-Section 6 of **Kirov–Naimi 2016** poses two questions. Both are still open. This file states them
-in Lean and asserts them with `sorry`, so that the statements are elaborated and type-checked on
-every build even though nothing here is proved.
+Section 6 of **Kirov–Naimi 2016** poses two questions. Question 1 is still open. **Question 2 was
+answered — negatively — in August 2026**, by Zhang and Dong; see `not_question2` below, which is
+proved, not assumed. This file states both in Lean, and asserts the still-open one with `sorry`,
+so that the statements are elaborated and type-checked on every build.
 
 ## Read the `sorry`s correctly
 
@@ -28,10 +30,11 @@ reason these live in their own library rather than beside the theorems they are 
 * `Question1` / `question1` — is the Cartesian product of two `n`-monophilic graphs `n`-monophilic,
   for `n ≥ 3`? The paper's "product" is `V(G) × V(H)` with `(g,h)` adjacent to `(g',h')` when
   `g = g'` and `h ~ h'`, or `h = h'` and `g ~ g'` — Mathlib's `SimpleGraph.boxProd`, `G □ H`.
-* `Question2` / `question2` — does `n`-monophilic propagate from `n` to `n+1` for an `n`-colourable
-  graph? In modern language this asks whether `ν(G) = τ(G)` for every graph; it is Question 2 of
-  Allred–Mudrock and Question 1 of Chi et al. 2026, both of which trace it to this paper. See
-  `provenance.md` §4.
+* `Question2` / `not_question2` — does `n`-monophilic propagate from `n` to `n+1` for an
+  `n`-colourable graph? In modern language this asks whether `ν(G) = τ(G)` for every graph; it was
+  Question 2 of Allred–Mudrock and Question 1 of Chi et al. 2026, both of which trace it to this
+  paper. **Refuted** by Zhang–Dong 2026 (arXiv:2608.19773), Theorem 6, formalized in
+  `NonPersistence/`. See `provenance.md` §4.
 * `not_ecc_two_boxProd_path_two_three` — **not open**, merely unformalized: the paper's own
   negative answer to Question 1 at `n = 2`.
 
@@ -108,14 +111,21 @@ def Question2 : Prop :=
   ∀ (n : ℕ) {α : Type} [Fintype α] [DecidableEq α] (G : SimpleGraph α) [DecidableRel G.Adj],
     G.Colorable n → G.ECCAt n → G.ECCAt (n + 1)
 
-/-- **Open.** Question 2 of Kirov–Naimi §6, in the direction the paper conjectures. Equivalently:
-`ν(G) = τ(G)` for every graph. Unproved and unrefuted. -/
-theorem question2 : Question2 := sorry
+/-- **Refuted**, and so no longer a `sorry`: Zhang and Dong,
+*Non-persistence of equality between chromatic polynomials and list-color functions*
+([arXiv:2608.19773](https://arxiv.org/abs/2608.19773), 20 August 2026), Theorem 6, produce for
+every `k ≥ 3` infinitely many `k`-colourable graphs that are enumeratively chromatic-choosable at
+`k` and not at `k + 1`.
+
+Their construction and this proof are `NonPersistence/`; `ZhangDong.Persistence` there is a
+verbatim copy of `Question2`, restated rather than imported so that the new library never depends
+on this file. Equivalently: `ν(G) = τ(G)` is **false** in general. -/
+theorem not_question2 : ¬ Question2 := ZhangDong.not_persistence
 
 /-- What Kirov–Naimi's Theorem 2 settles is `ν(G) = 2`, the *pointwise* property at `n = 2`.
 Allred–Mudrock's Theorem 10 obtains the same classification for `τ(G) = 2`, so the `χ = 2` case of
-Question 2 is known; the general case is not. This is why `ListColoring.ecc_two_iff` is a statement
-about `ECCAt _ 2` and not about `SimpleGraph.ECC`. -/
+Question 2 is true; `not_question2` shows the general case is not. This is why
+`ListColoring.ecc_two_iff` is a statement about `ECCAt _ 2` and not about `SimpleGraph.ECC`. -/
 example {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
     (hG : G.Connected) :
     G.ECCAt 2 ↔ CoreIsVertex G ∨ CoreIsCycle G ∨ CoreIsK23 G ∨ HasOddCycle G :=
