@@ -21,7 +21,8 @@ section Final
 
 variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
 
-/-- **UM-104**: the full tensor capacity of an even cycle, from its three cases. -/
+/-- **UM-104**: the natural-weight tensor-capacity inequality for an even cycle, from its three
+cases. -/
 theorem cycle_gm_bound_even {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
     (hadj : ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1))
     (hpar : Even (m + 1))
@@ -33,7 +34,8 @@ theorem cycle_gm_bound_even {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
 
 /-- **The cycle block at `k = 3`** (UM-104 for even cycles, UM-025 for odd): on a cycle with
 GM-dominant weights the rooted profile clears the cube of the uniform normalizer. This is the
-full tensor capacity of a cycle — handoff §5.2–§5.6 — and the one mathematical input of the
+natural-weight tensor-capacity inequality for a cycle — handoff §5.2–§5.6 — and the one
+mathematical input of the
 `k = 3` classification that the `k ≥ 4` route does not already supply. -/
 theorem cycle_gm_bound {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
     (hadj : ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1))

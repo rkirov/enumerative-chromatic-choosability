@@ -634,7 +634,7 @@ theorem resOrd_bound (h : IsPathPattern Z A B) (σ : Equiv.Perm (Fin 3)) :
           Nat.mul_le_mul (Nat.mul_le_mul (Nat.mul_le_mul b1 b2) (Nat.mul_le_mul b3 b4))
             (Nat.mul_le_mul b5 b6)
       _ = _ := by ring
-  · push_neg at hbad
+  · push Not at hbad
     have hm : ∏ z ∈ Z, x z ≤ ∏ q : Fin 3, pathN Z x (A (σ q)) (B q) := by
       refine path_route h.cardZ x (u := fun q => A (σ q)) (v := B)
         (h.injA.comp σ.injective) h.injB ?_
@@ -828,11 +828,11 @@ variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRe
 /-- A nontrivial holonomy forces an **ordinary** internal vertex with unequal terminal
 enumerations: if every ordinary step were constant the seam bijection would be the identity. -/
 theorem exists_unequal_ordinary {M : ℕ} (σ : Fin (M + 1) → Fin 3 → ℕ) (P : Equiv.Perm (Fin 3))
-    (hinj : Function.Injective (σ 0))
+    (_hinj : Function.Injective (σ 0))
     (hclose : ∀ x y : Fin 3, σ (Fin.last M) x = σ 0 y → y = P x) (hP : P ≠ 1) :
     ∃ (i : Fin (M + 1)) (h : i.val + 1 < M + 1), σ ⟨i.val + 1, h⟩ ≠ σ i := by
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   have hall : ∀ k : ℕ, ∀ hk : k < M + 1, σ ⟨k, hk⟩ = σ 0 := by
     intro k
     induction k with
@@ -889,11 +889,12 @@ open Finset SimpleGraph RefTensor
 
 variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
 
+omit [DecidableEq V] in
 /-- **The master mass-weighted bound at a non-identity holonomy** (handoff (5.19)).  `K` is the
 seam slack (`1` for a three-cycle seam, `2^6` for a repaired transposition seam) and `hbudget`
 is the §5.5 comparison: the entropy denominator against `M` ordinary blocks `2^{6T}`, one strict
 block `729^T/4^T` at the unequal vertex `i₀`, and the seam slack. -/
-theorem master_bound_nonidentity {M : ℕ} (hM : 1 ≤ M) (jx : CycIx M ≃ V)
+theorem master_bound_nonidentity {M : ℕ} (_hM : 1 ≤ M) (jx : CycIx M ≃ V)
     (L : ListAssignment V) (hL : IsNListAssignment L 3) (w : V → ℕ → ℕ) (W : V → ℕ)
     (hdom : ∀ v, (W v) ^ 3 ≤ ∏ c ∈ L v, w v c)
     (σ : Fin (M + 1) → Fin 3 → ℕ) (P : Equiv.Perm (Fin 3))
@@ -1089,7 +1090,7 @@ theorem fin3_fun_dichotomy : ∀ f : Fin 3 → Fin 3, Function.Injective f → (
 /-- `P ≠ 1` in the form the dichotomy consumes. -/
 theorem exists_moved_of_ne_one {P : Equiv.Perm (Fin 3)} (hP : P ≠ 1) : ∃ c, P c ≠ c := by
   by_contra hc
-  push_neg at hc
+  push Not at hc
   exact hP (Equiv.ext fun c => by simpa using hc c)
 
 /-- **The three-cycle budget** (`f = 0`, seam slack `K = 1`). -/

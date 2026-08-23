@@ -313,7 +313,7 @@ theorem transferProd_apply_eq_pathCount (Ts : List (Finset (Fin k))) (a b : Fin 
         (fun h => Fin.cons a h) ?_ ?_ ?_ ?_
       · -- forward membership
         intro g hg
-        simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_filter,
+        simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_filter,
           Finset.mem_univ, true_and] at hg ⊢
         obtain ⟨⟨h0, hlast, hcomp⟩, h1⟩ := hg
         refine ⟨h1, ?_, ?_⟩
@@ -323,7 +323,7 @@ theorem transferProd_apply_eq_pathCount (Ts : List (Finset (Fin k))) (a b : Fin 
           exact hcomp i.succ
       · -- backward membership
         intro h hh
-        simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_filter,
+        simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_filter,
           Finset.mem_univ, true_and] at hh ⊢
         obtain ⟨h0, hlast, hcomp⟩ := hh
         refine ⟨⟨rfl, ?_, ?_⟩, ?_⟩
@@ -346,7 +346,7 @@ theorem transferProd_apply_eq_pathCount (Ts : List (Finset (Fin k))) (a b : Fin 
           exact h0
       · -- left inverse
         intro g hg
-        simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_filter,
+        simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_filter,
           Finset.mem_univ, true_and] at hg
         funext i
         refine Fin.cases ?_ ?_ i

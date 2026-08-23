@@ -314,6 +314,11 @@ end PendantPrereqs
 
 section MainInduction
 
+/-- A cyclic indexing rooted at `r`, including the lower bound that rules out degenerate cycles. -/
+abbrev CactusCyclicIndex (G : SimpleGraph V) (r : V) : Prop :=
+  ∃ (m : ℕ) (ix : Fin (m + 1) ≃ V), 2 ≤ m ∧ ix 0 = r ∧
+    ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1)
+
 /-- **The structural dichotomy for cacti** (handoff §6.5): a cactus in which no vertex is
 pendant either splits at a cut vertex into two smaller cacti, or is a single cycle — indexed
 from any prescribed root.
@@ -323,16 +328,7 @@ With every degree at least two, a graph all of whose degrees are exactly two is 
 has degree at least three and `exists_cut_split_of_three_le_degree` splits the graph. -/
 theorem exists_cut_split_or_cyclic_index {V : Type} [Fintype V] [DecidableEq V]
     {G : SimpleGraph V} [DecidableRel G.Adj] (hG : IsCactus G) (hdeg : ∀ v : V, 2 ≤ G.degree v)
-    (r : V) :
-    (∃ (u : V) (A B : Set V) (dA : DecidablePred (· ∈ A)) (dB : DecidablePred (· ∈ B)),
-        letI := dA; letI := dB;
-        (r ∈ A ∧ u ∈ A ∧ u ∈ B ∧
-          (∀ v : V, v ∈ A ∨ v ∈ B) ∧ (∀ v : V, v ∈ A → v ∈ B → v = u) ∧
-          (∀ x y : V, G.Adj x y → (x ∈ A ∧ y ∈ A) ∨ (x ∈ B ∧ y ∈ B)) ∧
-          (∃ a ∈ A, a ≠ u) ∧ (∃ b ∈ B, b ≠ u) ∧
-          IsCactus (G.induce A) ∧ IsCactus (G.induce B))) ∨
-      (∃ (m : ℕ) (ix : Fin (m + 1) ≃ V), 2 ≤ m ∧ ix 0 = r ∧
-        ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1)) := by
+    (r : V) : CactusCutSplit G r ∨ CactusCyclicIndex G r := by
   by_cases h3 : ∃ u : V, 3 ≤ G.degree u
   · obtain ⟨u, hu⟩ := h3
     exact Or.inl (exists_cut_split_of_three_le_degree hG hu r)
@@ -352,16 +348,7 @@ indexed from any prescribed root. This is the form the induction consumes when i
 separate the pendant cases by hand. -/
 theorem exists_cut_split_or_cyclic_index_of_three_le {V : Type} [Fintype V] [DecidableEq V]
     {G : SimpleGraph V} [DecidableRel G.Adj] (hG : IsCactus G) (hcard : 3 ≤ Fintype.card V)
-    (r : V) :
-    (∃ (u : V) (A B : Set V) (dA : DecidablePred (· ∈ A)) (dB : DecidablePred (· ∈ B)),
-        letI := dA; letI := dB;
-        (r ∈ A ∧ u ∈ A ∧ u ∈ B ∧
-          (∀ v : V, v ∈ A ∨ v ∈ B) ∧ (∀ v : V, v ∈ A → v ∈ B → v = u) ∧
-          (∀ x y : V, G.Adj x y → (x ∈ A ∧ y ∈ A) ∨ (x ∈ B ∧ y ∈ B)) ∧
-          (∃ a ∈ A, a ≠ u) ∧ (∃ b ∈ B, b ≠ u) ∧
-          IsCactus (G.induce A) ∧ IsCactus (G.induce B))) ∨
-      (∃ (m : ℕ) (ix : Fin (m + 1) ≃ V), 2 ≤ m ∧ ix 0 = r ∧
-        ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1)) := by
+    (r : V) : CactusCutSplit G r ∨ CactusCyclicIndex G r := by
   by_cases hleaf : ∃ x : V, G.degree x = 1
   · obtain ⟨x, hx⟩ := hleaf
     exact Or.inl (exists_leaf_cut_split hG hx hcard r)

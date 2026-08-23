@@ -88,8 +88,8 @@ and closes with `card_mul_le_sum_of_pow_le_prod`, which asks only for the produc
 split is `exists_cut_split_or_cyclic_index_of_three_le`: the one-vertex and single-edge bases (the
 latter is `(a+b)(b+c)(c+a) ≥ 8abc`), the cut-vertex step — `rootedWcol_absorb` and two uses of the
 induction hypothesis, exactly as `pair_bound_of_cut` does it at `k ≥ 4` — and the cycle blocks.
-The cycle blocks are the real work: UM-104, the full tensor capacity of every even cycle
-(handoff §5.2–§5.6), and the balanced core UM-025 for the odd ones. -/
+The cycle blocks are the real work: UM-104, the natural-weight tensor-capacity inequality for every
+even cycle (handoff §5.2–§5.6), and the balanced core UM-025 for the odd ones. -/
 theorem isCactus_ecc_three (hG : IsCactus G) : G.ECCAt 3 := by
   classical
   intro L hL

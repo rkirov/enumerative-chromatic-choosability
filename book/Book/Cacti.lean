@@ -238,11 +238,11 @@ example {s : Finset ℕ} (hs : s.card = 3) (w : ℕ → ℕ) :
 ```
 
 Equality holds exactly when `a = b = c`. Every step of the `k = 3` argument is like this: true, with
-equality at the uniform configuration, and with no room anywhere. It is worth recording the
-numerical fact that makes this concrete. For a cycle, the unweighted form of the invariant —
-$`A^3 \le \prod_c x_c` — has minimum ratio exactly `1.0000` over the cycles of length four through
-seven, attained precisely at the constant assignment. The bound is not merely tight in the limit;
-it is *achieved*. Nothing in the argument may throw anything away.
+equality at the uniform configuration, and with no room anywhere. In particular, for every cycle
+the constant assignment makes the unweighted invariant $`A^3 \le \prod_c x_c` an equality. Thus
+the bound is not merely tight in the limit; it is *achieved*. The stronger assertion that constant
+assignments are the only equality cases is not needed here and is not claimed by the formalization.
+Nothing in the argument may throw anything away.
 
 # The skeleton of the induction
 
@@ -350,8 +350,9 @@ is determined by the fixed-point count alone.
 *A reference tensor, compared by weighted AM–GM.* The bound is proved by comparing the true
 weighted sum against an explicit reference distribution of integer masses over words, chosen to have
 uniform one-coordinate marginals and prescribed pair marginals. The comparison is a weighted
-arithmetic-geometric mean inequality with integral masses, stated and proved over $`\mathbb{N}` so
-that no real analysis enters the development:
+arithmetic-geometric mean inequality with integral masses whose statement is over $`\mathbb{N}`.
+Its Lean proof invokes Mathlib's real AM–GM theorem and then clears denominators and casts the result
+back to the natural numbers:
 
 ```lean
 open ListColoring in

@@ -12,7 +12,8 @@ import Cacti.RootedProfile
 The transfer arithmetic of UM-104 (handoff §5.2, §5.5), below everything that consumes it:
 `onesPlus = J + I` on three colours with `(J+I)^s = γ_s · J + I`, the closed form `3γ_s + 1 = 4^s`
 and the (5.2) counts; then the scalar step, where `Δ(2q) - Δ(q) < log 2` is cleared of
-denominators into a statement of `ℕ`, so no real analysis enters the `k = 3` route at all.
+denominators into a statement of `ℕ`. The exported mass inequality is therefore discrete, although
+its proof uses Mathlib's real AM–GM theorem internally before casting the result back to `ℕ`.
 -/
 
 namespace ListColoring

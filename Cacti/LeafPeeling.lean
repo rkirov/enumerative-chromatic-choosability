@@ -85,7 +85,7 @@ theorem notMem_support_of_isPath_of_degree_eq_one {x a b : V} (hdeg : G.degree x
     rw [← he1]
     exact (W.takeUntil x hmem).getVert_mem_support _
   have hmem2 : w ∈ (W.dropUntil x hmem).support.tail := by
-    have hs := (W.dropUntil x hmem).support_eq_cons
+    have hs := (W.dropUntil x hmem).cons_tail_support.symm
     have hsnd : (W.dropUntil x hmem).snd ∈ (W.dropUntil x hmem).support :=
       (W.dropUntil x hmem).getVert_mem_support _
     rw [hs] at hsnd
@@ -205,7 +205,7 @@ theorem isCycle_append_of_isPath {a b : V} {p : G.Walk a b} {q : G.Walk b a}
     omega
   · have hsupp : (p.append q).support = p.support ++ q.support.tail :=
       Walk.support_append p q
-    have hps : p.support = a :: p.support.tail := p.support_eq_cons
+    have hps : p.support = a :: p.support.tail := p.cons_tail_support.symm
     have htail : (p.append q).support.tail = p.support.tail ++ q.support.tail := by
       rw [hsupp, hps]
       rfl
@@ -224,7 +224,7 @@ theorem isCycle_append_of_isPath {a b : V} {p : G.Walk a b} {q : G.Walk b a}
       exact this hx
     · have : x ∉ q.support.tail := by
         have hnodup := hq.support_nodup
-        rw [q.support_eq_cons] at hnodup
+        rw [← q.cons_tail_support] at hnodup
         exact (List.nodup_cons.mp hnodup).1
       exact this hy
 
@@ -242,7 +242,7 @@ theorem forall_edge_mem_of_hasAtMostOneCycle (hconn : G.Connected)
     {v₀ : V} {c : G.Walk v₀ v₀} (hc : c.IsCycle) :
     ∀ x y, G.Adj x y → s(x, y) ∈ c.edges := by
   by_contra hcon
-  push_neg at hcon
+  push Not at hcon
   obtain ⟨x, y, hxy, hnot⟩ := hcon
   have hcycmeet : ∀ (z : V) (d : G.Walk z z), d.IsCycle →
       ∃ s ∈ d.support, ∃ t ∈ d.support, s ∈ c.support ∧ t ∈ c.support ∧ s ≠ t := by
@@ -275,7 +275,7 @@ theorem forall_edge_mem_of_hasAtMostOneCycle (hconn : G.Connected)
   have harc_path : arc.IsPath := (hc.rotate hbc).isPath_takeUntil hamem
   have harc_supp : ∀ z, z ∈ arc.support → z ∈ c.support := fun z hz =>
     (c.mem_support_rotate_iff b hbc).mp
-      ((c.rotate b hbc).support_takeUntil_subset hamem hz)
+      ((c.rotate b hbc).support_takeUntil_subset_support hamem hz)
   have harc_edges : ∀ e, e ∈ arc.edges → e ∈ c.edges := fun e he =>
     (c.rotate_edges b hbc).perm.mem_iff.mp
       ((c.rotate b hbc).edges_takeUntil_subset_edges hamem he)
@@ -283,7 +283,7 @@ theorem forall_edge_mem_of_hasAtMostOneCycle (hconn : G.Connected)
     apply isCycle_append_of_isPath hp harc_path hab
     · intro z hz hz'
       by_contra hcontra
-      push_neg at hcontra
+      push Not at hcontra
       exact (hint z hz hcontra.1 hcontra.2) (harc_supp z hz')
     · intro e he he'
       exact hpedges e he (harc_edges e he')
@@ -491,7 +491,7 @@ theorem coreIsVertex_or_coreIsCycle :
       · exact Or.inl (coreIs_addPendant e h)
       · obtain ⟨k, hk, hcore⟩ := h
         exact Or.inr ⟨k, hk, coreIs_addPendant e hcore⟩
-    · push_neg at hleaf
+    · push Not at hleaf
       by_cases hone : Fintype.card V = 1
       · exact Or.inl (coreIsVertex_of_card_eq_one hone)
       · -- no leaves, at least two vertices: minimum degree two, and `G` is its one cycle

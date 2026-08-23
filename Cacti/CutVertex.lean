@@ -30,6 +30,18 @@ open SimpleGraph
 
 variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
 
+/-- The data and guarantees carried by a rooted cut-vertex split. The explicit decidability
+witnesses are part of the interface because the two induced finite graphs are used computationally
+by the weighted induction. -/
+abbrev CactusCutSplit (G : SimpleGraph V) (r : V) : Prop :=
+  ∃ (u : V) (A B : Set V) (dA : DecidablePred (· ∈ A)) (dB : DecidablePred (· ∈ B)),
+    letI := dA; letI := dB;
+    (r ∈ A ∧ u ∈ A ∧ u ∈ B ∧
+      (∀ v : V, v ∈ A ∨ v ∈ B) ∧ (∀ v : V, v ∈ A → v ∈ B → v = u) ∧
+      (∀ x y : V, G.Adj x y → (x ∈ A ∧ y ∈ A) ∨ (x ∈ B ∧ y ∈ B)) ∧
+      (∃ a ∈ A, a ≠ u) ∧ (∃ b ∈ B, b ≠ u) ∧
+      IsCactus (G.induce A) ∧ IsCactus (G.induce B))
+
 /-- Three distinct neighbours of a vertex of degree at least three. -/
 theorem exists_three_adj {u : V} (hu : 3 ≤ G.degree u) :
     ∃ x y z : V, G.Adj u x ∧ G.Adj u y ∧ G.Adj u z ∧ x ≠ y ∧ x ≠ z ∧ y ≠ z := by
@@ -164,14 +176,7 @@ membership of `S` across it. Both sides are connected: inside `S` a walk of `G -
 `S`, and `u` hangs on it through that neighbour; outside, a walk towards `u` can never enter `S`,
 one edge at a time. Both inherit the cycle condition along `induceVal`. -/
 theorem exists_cut_split_of_three_le_degree (hG : IsCactus G) {u : V} (hu : 3 ≤ G.degree u)
-    (r : V) :
-    ∃ (u : V) (A B : Set V) (dA : DecidablePred (· ∈ A)) (dB : DecidablePred (· ∈ B)),
-      letI := dA; letI := dB;
-      (r ∈ A ∧ u ∈ A ∧ u ∈ B ∧
-        (∀ v : V, v ∈ A ∨ v ∈ B) ∧ (∀ v : V, v ∈ A → v ∈ B → v = u) ∧
-        (∀ x y : V, G.Adj x y → (x ∈ A ∧ y ∈ A) ∨ (x ∈ B ∧ y ∈ B)) ∧
-        (∃ a ∈ A, a ≠ u) ∧ (∃ b ∈ B, b ≠ u) ∧
-        IsCactus (G.induce A) ∧ IsCactus (G.induce B)) := by
+    (r : V) : CactusCutSplit G r := by
   classical
   obtain ⟨x, y, hxu, hyu, hax, hay, hnr⟩ := exists_nonreachable_adj_of_three_le_degree hG hu
   -- `S` is the component of `x` once `u` is deleted
@@ -285,14 +290,7 @@ theorem exists_cut_split_of_three_le_degree (hG : IsCactus G) {u : V} (hu : 3 �
 
 /-- **A pendant vertex splits a cactus**: its edge on one side, everything else on the other. -/
 theorem exists_leaf_cut_split (hG : IsCactus G) {x : V} (hdeg : G.degree x = 1)
-    (hcard : 3 ≤ Fintype.card V) (r : V) :
-    ∃ (u : V) (A B : Set V) (dA : DecidablePred (· ∈ A)) (dB : DecidablePred (· ∈ B)),
-      letI := dA; letI := dB;
-      (r ∈ A ∧ u ∈ A ∧ u ∈ B ∧
-        (∀ v : V, v ∈ A ∨ v ∈ B) ∧ (∀ v : V, v ∈ A → v ∈ B → v = u) ∧
-        (∀ p q : V, G.Adj p q → (p ∈ A ∧ q ∈ A) ∨ (p ∈ B ∧ q ∈ B)) ∧
-        (∃ a ∈ A, a ≠ u) ∧ (∃ b ∈ B, b ≠ u) ∧
-        IsCactus (G.induce A) ∧ IsCactus (G.induce B)) := by
+    (hcard : 3 ≤ Fintype.card V) (r : V) : CactusCutSplit G r := by
   classical
   obtain ⟨u, hxu, huniq⟩ := SimpleGraph.degree_eq_one_iff_existsUnique_adj.mp hdeg
   have hux : u ≠ x := hxu.ne'

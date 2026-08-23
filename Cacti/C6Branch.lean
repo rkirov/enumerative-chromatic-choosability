@@ -4,10 +4,6 @@ Released under Apache 2.0 license.
 -/
 import Cacti.EvenSplit
 
-set_option maxRecDepth 100000
-set_option linter.unusedVariables false
-set_option linter.unusedSectionVars false
-
 /-!
 # The strict `(2,1)` cone point on an unequal-list two-edge path
 
@@ -300,7 +296,7 @@ theorem strict_caseA (h : IsPathPattern Z a b) (x : ℕ → ℕ)
   by_cases hb : ∃ i, b i ∉ Z
   · obtain ⟨i2, hi2⟩ := hb
     exact strict_caseA_of_bhole h x hψinj hψZ hpa hpb i2 hi2
-  · push_neg at hb
+  · push Not at hb
     by_cases ha : ∃ i, a i ∉ Z
     · obtain ⟨i2, hi2⟩ := ha
       have hswap : IsPathPattern Z b a :=
@@ -308,7 +304,7 @@ theorem strict_caseA (h : IsPathPattern Z a b) (x : ℕ → ℕ)
       have hkey := strict_caseA_of_bhole (a := b) (b := a) (ψ := ψ) hswap x hψinj hψZ hpb hpa
         i2 hi2
       rwa [pathDiag_swap, pathOff_swap] at hkey
-    · push_neg at ha
+    · push Not at ha
       exact absurd (funext fun i => (hpa i (ha i)).trans (hpb i (hb i)).symm) hne
 
 /-! ## Case B: one cell carries two different middle colours -/
@@ -633,7 +629,7 @@ theorem uniformA_three_even (M : ℕ) : uniformA 3 (2 * M + 2) = 4 * gammaPlus M
 
 section Model
 
-variable {V : Type} [Fintype V] [DecidableEq V]
+variable {V : Type}
 
 /-! ## S1.  The terminal closing model. -/
 
@@ -1185,6 +1181,7 @@ theorem one_le_gammaPlus {M : ℕ} (hM : 1 ≤ M) : 1 ≤ gammaPlus M := by
 
 variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
 
+omit [Fintype V] [DecidableEq V] in
 /-- The path pattern at every internal vertex of the terminal cycle, ordinary and closing
 alike, under a trivial holonomy. -/
 theorem isPathPattern_edge {M : ℕ} (jx : CycIx M ≃ V) (L : ListAssignment V)
@@ -1205,6 +1202,7 @@ theorem isPathPattern_edge {M : ℕ} (jx : CycIx M ≃ V) (L : ListAssignment V)
       omega
     exact isPathPattern_ordinary jx L hL σ hmem hinj hchain i hi
 
+omit [DecidableEq V] in
 /-- **The master mass-weighted bound at the identity holonomy** (handoff (5.19)): the
 mass-weighted product of the word weights dominates `(∏ W)^{3E}` times the entropy denominator
 `∏ U^U`, with *equality of the two-powers* — the terminal half is `terminal_exponent` and
@@ -1431,11 +1429,18 @@ open Finset SimpleGraph RefTensor
 
 section Tables
 
-/-- **The two `C₆` mass tables of UM-096**, laid out as one lookup indexed by the two values
-`t 0, t 1` that determine the holonomy permutation `t`.  For a transposition seam the multiset of
+-- The deeply nested table literal and its kernel checks need a larger elaborator recursion budget;
+-- keep that implementation detail local to the certificate section.
+set_option maxRecDepth 100000
+
+/-- **The two conjugacy classes of `C₆` mass certificates from UM-096**, materialized for the five
+nonidentity holonomies as one lookup indexed by the two values `t 0, t 1` that determine `t`.
+For a transposition seam the multiset of
 entries is `1^6 2^10 3^6 4^4 6^1` (entropy `2^58·3^24`), for a three-cycle seam `1^8 2^6 3^6 4^7`
 (entropy `2^68·3^18`).  Every one-coordinate marginal is `E = 22`, the total mass is `P = 66`, and
-all three pair marginals are exactly the `(M,S) = (10,6)` base composed with the holonomy. -/
+all three pair marginals are exactly the `(M,S) = (10,6)` base composed with the holonomy. The
+theorems below check this specification by kernel reduction; the table itself is data, not a
+trusted oracle. -/
 def c6tbl : Fin 3 → Fin 3 → Fin 3 → Fin 3 → Fin 3 → ℕ :=
   ![
     ![
@@ -1523,6 +1528,37 @@ budget `2^50·3^30` of two plain `(10,6)` cone points and one strict one. -/
 theorem c6mass_entropy (t : Fin 3 → Fin 3) (ht : Function.Injective t) (hne : ∃ x, t x ≠ x) :
     (∏ g : Fin 3 → Fin 3, c6mass t g ^ c6mass t g) ≤ 2 ^ 50 * 3 ^ 30 := by
   revert t; decide +kernel
+
+/-- The complete property package required of a `C₆` reference-mass certificate. Bundling the
+properties keeps the tensor proof independent of how a particular table was found. -/
+structure C6MassCertificate (t : Fin 3 → Fin 3) (U : (Fin 3 → Fin 3) → ℕ) : Prop where
+  positive : ∀ g, 0 < U g
+  marginal : ∀ (i c : Fin 3),
+    (∑ g ∈ (univ : Finset (Fin 3 → Fin 3)).filter (fun g => g i = c), U g) = 22
+  pair0 : ∀ pr : Fin 3 × Fin 3,
+    (∑ g ∈ (univ : Finset (Fin 3 → Fin 3)).filter
+      (fun g => (g (0 : Fin 3), g ((0 : Fin 3) + 1)) = pr), U g) =
+        if pr.1 = pr.2 then 10 else 6
+  pair1 : ∀ pr : Fin 3 × Fin 3,
+    (∑ g ∈ (univ : Finset (Fin 3 → Fin 3)).filter
+      (fun g => (g (1 : Fin 3), g ((1 : Fin 3) + 1)) = pr), U g) =
+        if pr.1 = pr.2 then 10 else 6
+  pair2 : ∀ pr : Fin 3 × Fin 3,
+    (∑ g ∈ (univ : Finset (Fin 3 → Fin 3)).filter
+      (fun g => (g (2 : Fin 3), g ((2 : Fin 3) + 1)) = pr), U g) =
+        if pr.2 = t pr.1 then 10 else 6
+  entropy : (∏ g, U g ^ U g) ≤ 2 ^ 50 * 3 ^ 30
+
+/-- The literal lookup above satisfies the complete certificate interface for every nonidentity
+permutation of three colours. -/
+theorem c6mass_certificate (t : Fin 3 → Fin 3) (ht : Function.Injective t)
+    (hne : ∃ x, t x ≠ x) : C6MassCertificate t (c6mass t) where
+  positive := c6mass_pos t
+  marginal := c6mass_marg t ht hne
+  pair0 := c6mass_pair0 t ht hne
+  pair1 := c6mass_pair1 t ht hne
+  pair2 := c6mass_pair2 t ht hne
+  entropy := c6mass_entropy t ht hne
 
 end Tables
 
@@ -1709,7 +1745,7 @@ theorem c6_unequal (σ : Fin 3 → Fin 3 → ℕ) (P : Equiv.Perm (Fin 3))
     (hinj : Function.Injective (σ 0)) (hP : P ≠ 1) :
     σ 0 ≠ σ 1 ∨ σ 1 ≠ σ 2 ∨ σ 2 ≠ (fun q => σ 0 (P q)) := by
   by_contra hc
-  push_neg at hc
+  push Not at hc
   obtain ⟨h01, h12, h20⟩ := hc
   refine hP (Equiv.ext fun q => ?_)
   have hq : σ 0 (P q) = σ 0 q := by
@@ -1739,12 +1775,13 @@ theorem c6_core (jx : CycIx 2 ≃ V)
   have hti : Function.Injective (fun i => P i) := P.injective
   have htn : ∃ i, (fun i => P i) i ≠ i := by
     by_contra hcon
-    push_neg at hcon
+    push Not at hcon
     exact hP (Equiv.ext fun q => by simpa using hcon q)
-  have hUpos : ∀ g, 0 < c6mass (fun i => P i) g := fun g => c6mass_pos _ g
+  have hcert := c6mass_certificate (fun i => P i) hti htn
+  have hUpos : ∀ g, 0 < c6mass (fun i => P i) g := hcert.positive
   have hUmarg : ∀ (i c : Fin 3),
       (∑ a ∈ univ.filter (fun a : Fin 3 → Fin 3 => a i = c), c6mass (fun i => P i) a) = 22 :=
-    fun i c => c6mass_marg _ hti htn i c
+    hcert.marginal
   -- the rooted counts, in tensor coordinates
   have hR : ∀ c : Fin 3, rootedWcol G L w (tv jx 0) (σ 0 c)
       = ∑ g ∈ (univ : Finset (Fin 3 → Fin 3)).filter (fun g => g 0 = c),
@@ -1791,7 +1828,7 @@ theorem c6_core (jx : CycIx 2 ≃ V)
             c6mass (fun i => P i) a))
       = pathDiag (L (iv jx 0)) (w (iv jx 0)) (σ 0) (σ ((0 : Fin 3) + 1)) ^ 10 *
         pathOff (L (iv jx 0)) (w (iv jx 0)) (σ 0) (σ ((0 : Fin 3) + 1)) ^ 6 := by
-    rw [Finset.prod_congr rfl (fun pr _ => by rw [c6mass_pair0 _ hti htn pr])]
+    rw [Finset.prod_congr rfl (fun pr _ => by rw [hcert.pair0 pr])]
     exact prod_pair_base _ _ _ _ 10 6
   have hedge1 : (∏ pr : Fin 3 × Fin 3,
         (pathN (L (iv jx 1)) (w (iv jx 1)) (σ 1 pr.1) (σ ((1 : Fin 3) + 1) pr.2)) ^
@@ -1799,7 +1836,7 @@ theorem c6_core (jx : CycIx 2 ≃ V)
             c6mass (fun i => P i) a))
       = pathDiag (L (iv jx 1)) (w (iv jx 1)) (σ 1) (σ ((1 : Fin 3) + 1)) ^ 10 *
         pathOff (L (iv jx 1)) (w (iv jx 1)) (σ 1) (σ ((1 : Fin 3) + 1)) ^ 6 := by
-    rw [Finset.prod_congr rfl (fun pr _ => by rw [c6mass_pair1 _ hti htn pr])]
+    rw [Finset.prod_congr rfl (fun pr _ => by rw [hcert.pair1 pr])]
     exact prod_pair_base _ _ _ _ 10 6
   have hedge2 : (∏ pr : Fin 3 × Fin 3,
         (pathN (L (iv jx 2)) (w (iv jx 2)) (σ 2 pr.1) (σ ((2 : Fin 3) + 1) pr.2)) ^
@@ -1807,7 +1844,7 @@ theorem c6_core (jx : CycIx 2 ≃ V)
             c6mass (fun i => P i) a))
       = pathDiag (L (iv jx 2)) (w (iv jx 2)) (σ 2) (fun q => σ 0 (P q)) ^ 10 *
         pathOff (L (iv jx 2)) (w (iv jx 2)) (σ 2) (fun q => σ 0 (P q)) ^ 6 := by
-    rw [Finset.prod_congr rfl (fun pr _ => by rw [c6mass_pair2 _ hti htn pr]), he20]
+    rw [Finset.prod_congr rfl (fun pr _ => by rw [hcert.pair2 pr]), he20]
     exact prod_pair_close _ _ _ _ P 10 6
   -- the master mass-weighted bound
   have hmaster : (∏ v, W v) ^ 66 * (∏ g : Fin 3 → Fin 3,
@@ -1898,7 +1935,7 @@ theorem c6_core (jx : CycIx 2 ≃ V)
     have hWsplit : (∏ v, W v) = (∏ i : Fin 3, W (tv jx i)) * (∏ i : Fin 3, W (iv jx i)) := by
       rw [← Equiv.prod_comp jx (fun v => W v), Fintype.prod_sum_type]
       rfl
-    have hent := c6mass_entropy (fun i => P i) hti htn
+    have hent := hcert.entropy
     refine Nat.le_of_mul_le_mul_left ?_ (show 0 < 2 ^ 10 by norm_num)
     calc 2 ^ 10 * ((∏ v, W v) ^ 66 * ∏ g : Fin 3 → Fin 3,
             c6mass (fun i => P i) g ^ c6mass (fun i => P i) g)
@@ -2007,6 +2044,7 @@ end Audit
 end ListColoring
 
 #print axioms ListColoring.c6mass_entropy
+#print axioms ListColoring.c6mass_certificate
 #print axioms ListColoring.c6_edge_strict
 #print axioms ListColoring.c6_core
 #print axioms ListColoring.branch_six

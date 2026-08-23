@@ -27,7 +27,7 @@ theorem rootedCol_constList_eq (k : ℕ) (r : V) {c d : ℕ} (hc : c ∈ range k
   refine Finset.card_nbij' (fun f => fun v => Equiv.swap c d (f v))
     (fun f => fun v => Equiv.swap c d (f v)) ?_ ?_ ?_ ?_
   · intro f hf
-    simp only [Finset.coe_filter, Set.mem_setOf_eq, SimpleGraph.mem_colorings_iff] at hf ⊢
+    simp only [Finset.coe_filter, Set.mem_ofPred_eq, SimpleGraph.mem_colorings_iff] at hf ⊢
     obtain ⟨⟨hmem, hprop⟩, hr⟩ := hf
     refine ⟨⟨?_, ?_⟩, ?_⟩
     · intro v
@@ -44,7 +44,7 @@ theorem rootedCol_constList_eq (k : ℕ) (r : V) {c d : ℕ} (hc : c ∈ range k
       exact fun h => hprop v u hadj ((Equiv.swap c d).injective h)
     · rw [hr, Equiv.swap_apply_left]
   · intro f hf
-    simp only [Finset.coe_filter, Set.mem_setOf_eq, SimpleGraph.mem_colorings_iff] at hf ⊢
+    simp only [Finset.coe_filter, Set.mem_ofPred_eq, SimpleGraph.mem_colorings_iff] at hf ⊢
     obtain ⟨⟨hmem, hprop⟩, hr⟩ := hf
     refine ⟨⟨?_, ?_⟩, ?_⟩
     · intro v
