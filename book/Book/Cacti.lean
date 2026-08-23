@@ -264,7 +264,9 @@ about cycles carrying weights.
 
 # Cycle blocks above three: the transfer matrix
 
-For `k ≥ 4` a cycle is handled by the classical device. Colourings of a cycle with prescribed lists
+For `k ≥ 4` an even cycle is handled by the classical device; odd cycles need nothing so heavy at
+any size, because their balanced core (below) exists at every list size, not only at three.
+Colourings of an even cycle with prescribed lists
 are counted by a product of transfer matrices, one per edge, closed up by a permutation; the uniform
 case has the closed form
 
@@ -284,10 +286,12 @@ being compared — whether each is fixed, moved, or outside the domain — and e
 inequality between products of `alpha` and `beta`. This is the comfortable half of the whole
 development: the margin is wide enough that no step needs to be exact.
 
-# Odd cycles at three: the balanced core
+# Odd cycles: the balanced core
 
 At `k = 3` the transfer-matrix route no longer closes, and the two parities of the cycle part
-company. Odd cycles have a genuinely pretty argument.
+company. Odd cycles have a genuinely pretty argument — and it is the argument they get at every
+list size, not only at three, which is why the transfer matrix above is only ever asked about
+even cycles.
 
 The claim to prove is that the profile of a cycle has product at least $`A^3`. For an odd cycle one
 can do better than estimate it: one can exhibit, inside the set of all colourings, a subfamily that
@@ -364,8 +368,9 @@ computation of those two numbers.
 
 The even case splits into three, by the length of the cycle:
 
-* *The four-cycle.* One terminal pair forces the holonomy to be the identity, so no tensor argument
-  is needed at all; the four-cycle is a direct computation.
+* *The four-cycle.* One terminal pair forces the holonomy to be the identity, so no case analysis
+  over the holonomy is needed; the four-cycle is a direct computation against a single
+  three-by-three reference table.
 * *The six-cycle.* Here the tensor argument is unavoidable and the tables are explicit: five
   27-entry mass tables, one per non-identity holonomy, each of total mass `66`, with all nine
   one-coordinate marginals equal to `22` — which is the six-cycle's own uniform normalizer — and all
@@ -417,8 +422,8 @@ a weight at the cut vertex, check by the induction hypothesis that the absorbed 
 satisfies the dominance condition, and apply the hypothesis again to the other side — which is why
 the induction is on the number of vertices, and why the weights had to be carried from the start.
 A cactus with no cut vertex is a single cycle, and that is where the three cycle arguments live: the
-transfer matrix above three, the balanced core for odd cycles at three, and the tensor bound for
-even ones.
+transfer matrix for even cycles above three, the balanced core for odd cycles at every size, and
+the tensor bound for even cycles at three.
 
 Nothing else is needed. The `k = 2` case joins on through Theorem 2, and the spectrum theorem is
 those two facts together with the observation that below `2` there is nothing to prove:

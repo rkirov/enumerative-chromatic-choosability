@@ -64,19 +64,6 @@ theorem onesPlus_pow_apply : ∀ (s : ℕ) (i j : Fin 3),
     fin_cases i <;> fin_cases j <;>
       simp [onesPlus_apply, ih, gammaPlus_succ] <;> omega
 
-/-- **The counts of (5.2)**: with `q = 2 ^ m`, `T = γ_m = (q ^ 2 - 1) / 3`, the uniform cycle
-count on `2(m+1)` vertices is `P = 4 ^ (m+1) + 2 = 12 T + 6`. -/
-theorem umP_eq_twelve_mul_gammaPlus (m : ℕ) : 4 ^ (m + 1) + 2 = 12 * gammaPlus m + 6 := by
-  have h := three_mul_gammaPlus_add_one m
-  rw [pow_succ]
-  omega
-
-/-- **The marginal of (5.2)**: every one-coordinate marginal `E = 4 T + 2` is exactly `P / 3`. -/
-theorem three_mul_umE (m : ℕ) : 3 * (4 * gammaPlus m + 2) = 4 ^ (m + 1) + 2 := by
-  have h := three_mul_gammaPlus_add_one m
-  rw [pow_succ]
-  omega
-
 end ReferenceTensor
 
 section ScalarStep

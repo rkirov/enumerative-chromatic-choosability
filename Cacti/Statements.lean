@@ -68,10 +68,9 @@ theorem isCactus_ecc_of_four_le {k : ℕ} (hk : 4 ≤ k) (hG : IsCactus G) : G.E
     exact_mod_cast h
   have hsum := PairBound.card_mul_le_sum (by omega : 2 ≤ k) (by positivity) hx hpb
   -- summing over indices is summing over the root's list
-  have hre : ∑ i : Fin k, (rootedCol G L r (σ i) : ℝ)
-      = ((∑ c ∈ L r, rootedCol G L r c : ℕ) : ℝ) := by
-    rw [Nat.cast_sum, ← enum_image (hL r) hσmem hσinj,
-      Finset.sum_image (fun i _ j _ h => hσinj h)]
+  have hre : (∑ i : Fin k, ((rootedCol G L r (σ i) : ℕ) : ℝ))
+      = ((∑ c ∈ L r, rootedCol G L r c : ℕ) : ℝ) :=
+    cast_sum_enum (hL r) hσmem hσinj (fun c => rootedCol G L r c)
   rw [hre] at hsum
   have hnat : k * rootedCol G (constList V k) r 0 ≤ ∑ c ∈ L r, rootedCol G L r c := by
     exact_mod_cast hsum
@@ -106,17 +105,13 @@ theorem isCactus_ecc_three (hG : IsCactus G) : G.ECCAt 3 := by
   have hx : ∀ i : Fin 3, (0 : ℝ) ≤ (rootedCol G L r (σ i) : ℝ) := fun _ => by positivity
   have hprod : ((rootedCol G (constList V 3) r 0 : ℕ) : ℝ) ^ 3
       ≤ ∏ i : Fin 3, ((rootedCol G L r (σ i) : ℕ) : ℝ) := by
-    have hre : ∏ i : Fin 3, ((rootedCol G L r (σ i) : ℕ) : ℝ)
-        = ((∏ c ∈ L r, rootedCol G L r c : ℕ) : ℝ) := by
-      rw [Nat.cast_prod, ← enum_image (hL r) hσmem hσinj,
-        Finset.prod_image (fun i _ j _ h => hσinj h)]
-    rw [hre]
+    rw [cast_prod_enum (hL r) hσmem hσinj
+      (fun c => rootedCol G L r c) (β := ℝ)]
     exact_mod_cast hgm
   have hsum := card_mul_le_sum_of_pow_le_prod (by norm_num : 0 < 3) (by positivity) hx hprod
-  have hre : ∑ i : Fin 3, ((rootedCol G L r (σ i) : ℕ) : ℝ)
-      = ((∑ c ∈ L r, rootedCol G L r c : ℕ) : ℝ) := by
-    rw [Nat.cast_sum, ← enum_image (hL r) hσmem hσinj,
-      Finset.sum_image (fun i _ j _ h => hσinj h)]
+  have hre : (∑ i : Fin 3, ((rootedCol G L r (σ i) : ℕ) : ℝ))
+      = ((∑ c ∈ L r, rootedCol G L r c : ℕ) : ℝ) :=
+    cast_sum_enum (hL r) hσmem hσinj (fun c => rootedCol G L r c)
   rw [hre] at hsum
   have hnat : 3 * rootedCol G (constList V 3) r 0 ≤ ∑ c ∈ L r, rootedCol G L r c := by
     exact_mod_cast hsum

@@ -17,7 +17,7 @@ The heart is pure algebra: for `a ≤ b` with `B·B' ≤ C·C'`,
 `(b - a)(b·C·C' - a·B·B')`, a product of nonnegatives.
 
 * `peel_algebra` — that inequality, in `ℕ`;
-* `rootedWcol_eq_sum_slices` — the fibrewise decomposition over a chosen vertex's colour;
+* `rootedWcol_eq_sum_rootedWcol2` — the fibrewise decomposition over a chosen vertex's colour;
 * the extension-count bounds and the peel induction follow.
 -/
 

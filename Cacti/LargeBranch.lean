@@ -19,12 +19,6 @@ harvested at an ordinary internal vertex whose two terminal enumerations differ.
 namespace ListColoring
 
 open Finset
-
-/-! ## §5.5 — the two scalar comparisons -/
-
-theorem two_gammaPlus_succ (N : ℕ) : 2 * gammaPlus (N + 1) = 8 * gammaPlus N + 2 := by
-  rw [gammaPlus_succ]; ring
-
 /-- `16 · 256^k ≤ 729^k` for `k ≥ 4`: four `(2,1)` blocks of the strict factor `C = 729/256`
 already clear `2^4`. -/
 theorem sixteen_mul_pow_le : ∀ k : ℕ, 4 ≤ k → 16 * 256 ^ k ≤ 729 ^ k := by
@@ -704,29 +698,6 @@ theorem internal_exponent_of_residual_repaired (h : IsPathPattern Z A B) (S : �
     _ ≤ ((pathDiag Z x A B ^ 2 * pathOff Z x A B) ^ S * pathOff Z x A B ^ 1)
           * pairProd Z x A B res := Nat.mul_le_mul hbase hres
     _ = _ := by rw [mul_pow, ← pow_mul]; ring
-
-/-- **Ordinary internal edge, every holonomy.** -/
-theorem internal_exponent_ordinary_res (h : IsPathPattern Z A B) (σ : Equiv.Perm (Fin 3))
-    (T : ℕ) :
-    2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      ≤ pairProd Z x A B (fun p q => (if p = q then 2 * T else T) + resOrd σ p q) :=
-  internal_exponent_of_residual h T _ (resOrd_bound h σ)
-
-/-- **Closing internal edge, naive base, holonomy without a 2-cycle.** -/
-theorem internal_exponent_closing_res (h : IsPathPattern Z A B) (σ : Equiv.Perm (Fin 3))
-    (hσ : ∀ c : Fin 3, σ (σ c) = c → σ c = c) (T : ℕ) :
-    2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      ≤ pairProd Z x A B (fun p q => (if p = q then 2 * T else T) + resClose σ p q) :=
-  internal_exponent_of_residual h T _ (resClose_bound h σ hσ)
-
-/-- **Closing internal edge, repaired base, every holonomy.** -/
-theorem internal_exponent_closing_repaired_res (h : IsPathPattern Z A B)
-    (σ : Equiv.Perm (Fin 3)) (S : ℕ) :
-    2 ^ (6 * S) * (∏ z ∈ Z, x z) ^ (4 * S + 6)
-      ≤ pairProd Z x A B (fun p q => (if p = q then 2 * S else S + 1) + resCloseRepaired σ p q) :=
-  internal_exponent_of_residual_repaired h S _ (resCloseRepaired_bound h σ)
-
-
 
 end ListColoring
 

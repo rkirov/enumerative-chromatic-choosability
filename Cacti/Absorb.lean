@@ -139,6 +139,43 @@ theorem rootedWcol_absorb {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
   ring
 
 
+/-- The normalizer identity behind both cut-vertex steps (`pair_bound_of_cut`,
+`gm_bound_of_cut`): absorbing the `B` side into the weight at the cut vertex multiplies the
+`A` side by exactly the `B`-side uniform count times the `B`-normalizer product, so the global
+normalizer product reassembles around the two rooted counts. -/
+theorem cut_normalizer_eq {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePred (· ∈ B)]
+    {u : V} (huA : u ∈ A) (huB : u ∈ B) (hcover : ∀ v, v ∈ A ∨ v ∈ B)
+    (hmeet : ∀ v, v ∈ A → v ∈ B → v = u)
+    (W : V → ℕ) (MA MB : ℕ) :
+    MB * MA * ∏ v, W v
+      = MA * ∏ v : A, (if v.val = u then W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))
+          else W v.val) := by
+  have hsplit := prod_split_of_cut huA huB hcover hmeet W
+  have hAu : W u * ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val
+      = (∏ v : A, W v.val) :=
+    Finset.mul_prod_erase Finset.univ (fun v : A => W v.val)
+      (Finset.mem_univ (⟨u, huA⟩ : A))
+  have hmod : (∏ v : A, (if v.val = u then W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))
+        else W v.val))
+      = (W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))) *
+        ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val := by
+    rw [← Finset.mul_prod_erase Finset.univ
+      (fun v : A => if v.val = u then W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))
+        else W v.val) (Finset.mem_univ (⟨u, huA⟩ : A)), if_pos rfl]
+    congr 1
+    exact Finset.prod_congr rfl fun v hv =>
+      if_neg (fun h => Finset.ne_of_mem_erase hv (Subtype.ext h))
+  calc MB * MA * ∏ v, W v
+      = MA * (MB * ((∏ v : A, W v.val) * ∏ x : B, (if x.val = u then 1 else W x.val))) := by
+        rw [hsplit]; ring
+    _ = MA * ((W u * ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val)
+          * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))) := by
+        rw [hAu]; ring
+    _ = MA * ((W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val)))
+          * ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val) := by ring
+    _ = MA * ∏ v : A, (if v.val = u then W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))
+          else W v.val) := by rw [hmod]
+
 section Pendant
 
 variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
@@ -150,151 +187,6 @@ theorem rootedWcol_weight_congr {L : ListAssignment V} {w w' : V → ℕ → ℕ
   refine Finset.sum_congr rfl fun f hf => ?_
   refine Finset.prod_congr rfl fun v _ => ?_
   exact h v (f v) (G.mem_list_of_mem_colorings (Finset.mem_filter.mp hf).1 v)
-
-/-- The rooted weighted count of an edge `u—x`, rooted at `u` with colour `d ∈ L u` and the
-`u`-weight trivial: the sum of the `x`-weights over the colours of `L x` other than `d`. -/
-theorem rootedWcol_edge {u x : V} (hux : G.Adj u x)
-    (hBedge : ∀ a b, G.Adj a b → a ∈ ({u, x} : Set V) → b ∈ ({u, x} : Set V) →
-      (a = u ∧ b = x) ∨ (a = x ∧ b = u))
-    (L : ListAssignment V) (w : V → ℕ → ℕ) {d : ℕ} (hd : d ∈ L u)
-    {instF : Fintype (({u, x} : Set V) : Type _)}
-    {instD : DecidableRel (G.induce ({u, x} : Set V)).Adj} :
-    rootedWcol (G.induce ({u, x} : Set V)) (fun v => L v)
-        (fun v e => if v.val = u then 1 else w v.val e)
-        ⟨u, Or.inl rfl⟩ d
-      = ∑ e ∈ (L x).filter (· ≠ d), w x e := by
-  have hne : u ≠ x := hux.ne
-  have huniv : (Finset.univ : Finset ({u, x} : Set V)) =
-      {⟨u, Or.inl rfl⟩, ⟨x, Or.inr rfl⟩} := by
-    ext v
-    simp only [Finset.mem_univ, true_iff, Finset.mem_insert, Finset.mem_singleton]
-    rcases v.property with h | h
-    · exact Or.inl (Subtype.ext h)
-    · exact Or.inr (Subtype.ext h)
-  rw [rootedWcol]
-  refine Finset.sum_nbij' (fun f => f ⟨x, Or.inr rfl⟩)
-    (fun e => fun v => if v.val = u then d else e) ?_ ?_ ?_ ?_ ?_
-  · -- forward membership
-    intro f hf
-    rw [Finset.mem_filter] at hf
-    obtain ⟨hfc, hfu⟩ := hf
-    rw [SimpleGraph.mem_colorings_iff] at hfc
-    rw [Finset.mem_filter]
-    refine ⟨hfc.1 _, ?_⟩
-    intro hcontra
-    exact hfc.2 ⟨u, Or.inl rfl⟩ ⟨x, Or.inr rfl⟩ hux (by rw [hfu, hcontra])
-  · -- backward membership
-    intro e he
-    rw [Finset.mem_filter] at he
-    obtain ⟨hemem, hene⟩ := he
-    rw [Finset.mem_filter, SimpleGraph.mem_colorings_iff]
-    refine ⟨⟨?_, ?_⟩, ?_⟩
-    · intro v
-      rcases v.property with h | h
-      · have : v.val = u := h
-        rw [if_pos this]
-        show d ∈ L v.val
-        rw [this]
-        exact hd
-      · have hvx : v.val = x := h
-        by_cases hvu : v.val = u
-        · rw [if_pos hvu]
-          show d ∈ L v.val
-          rw [hvu]
-          exact hd
-        · rw [if_neg hvu]
-          show e ∈ L v.val
-          rw [hvx]
-          exact hemem
-    · intro a b hadj
-      rcases hBedge a.val b.val hadj a.property b.property with ⟨ha, hb⟩ | ⟨ha, hb⟩
-      · rw [if_pos ha, if_neg (fun h => hne.symm (hb.symm.trans h))]
-        exact fun h => hene h.symm
-      · rw [if_neg (fun h => hne.symm (ha.symm.trans h)), if_pos hb]
-        exact hene
-    · show (if (u : V) = u then d else e) = d
-      rw [if_pos rfl]
-  · -- left inverse
-    intro f hf
-    rw [Finset.mem_filter] at hf
-    funext v
-    by_cases hvu : v.val = u
-    · show (if v.val = u then d else _) = f v
-      rw [if_pos hvu, ← hf.2]
-      congr 1
-      exact Subtype.ext hvu.symm
-    · show (if v.val = u then d else f ⟨x, Or.inr rfl⟩) = f v
-      rw [if_neg hvu]
-      congr 1
-      exact Subtype.ext (by
-        rcases v.property with h | h
-        · exact absurd h hvu
-        · exact h.symm)
-  · -- right inverse
-    intro e he
-    show (if (x : V) = u then d else e) = e
-    rw [if_neg hne.symm]
-  · -- summand
-    intro f hf
-    rw [Finset.mem_filter] at hf
-    rw [huniv, Finset.prod_insert (by
-      simp only [Finset.mem_singleton]
-      intro h
-      exact hne (congrArg Subtype.val h)), Finset.prod_singleton]
-    show (if (u : V) = u then 1 else w u _) * (if (x : V) = u then 1 else w x _) = w x _
-    rw [if_pos rfl, if_neg hne.symm, one_mul]
-
-
-set_option maxHeartbeats 1600000 in
-/-- **Pendant absorption**: a degree-one vertex `x` with unique neighbour `u` is absorbed into
-the weight at `u` — the new weight of colour `d` is the old one times the total `x`-weight of
-the colours of `L x` other than `d`. -/
-theorem rootedWcol_pendant {x u : V} (hxu : G.Adj x u) (huniq : ∀ y, G.Adj x y → y = u)
-    {r : V} (hrx : r ≠ x) (L : ListAssignment V) (w : V → ℕ → ℕ) (c : ℕ) :
-    rootedWcol G L w r c =
-      rootedWcol (G.induce {y | y ≠ x}) (fun v => L v)
-        (fun v d => if v.val = u then w u d * ∑ e ∈ (L x).filter (· ≠ d), w x e
-          else w v.val d) ⟨r, hrx⟩ c := by
-  letI : DecidablePred (· ∈ {y : V | y ≠ x}) := fun v => inferInstanceAs (Decidable (v ≠ x))
-  letI : DecidablePred (· ∈ ({u, x} : Set V)) :=
-    fun v => inferInstanceAs (Decidable (v = u ∨ v = x))
-  have hux : u ≠ x := hxu.ne'
-  have habs := rootedWcol_absorb (A := {y | y ≠ x}) (B := ({u, x} : Set V))
-    (u := u) hux (Or.inl rfl)
-    (fun v => by
-      by_cases hvx : v = x
-      · exact Or.inr (Or.inr hvx)
-      · exact Or.inl hvx)
-    (fun v hvA hvB => by
-      rcases hvB with h | h
-      · exact h
-      · exact absurd h hvA)
-    (fun a b hadj => by
-      by_cases hax : a = x
-      · subst hax
-        exact Or.inr ⟨Or.inr rfl, Or.inl (huniq b hadj)⟩
-      · by_cases hbx : b = x
-        · subst hbx
-          exact Or.inr ⟨Or.inl (huniq a hadj.symm), Or.inr rfl⟩
-        · exact Or.inl ⟨hax, hbx⟩)
-    hrx L w c
-  rw [habs]
-  refine rootedWcol_weight_congr (fun v d hd => ?_) _ _
-  by_cases hvu : v.val = u
-  · rw [if_pos hvu, if_pos hvu]
-    congr 1
-    have hdu : d ∈ L u := by rw [← hvu]; exact hd
-    have hBedge : ∀ a b, G.Adj a b → a ∈ ({u, x} : Set V) → b ∈ ({u, x} : Set V) →
-        (a = u ∧ b = x) ∨ (a = x ∧ b = u) := by
-      intro a b hadj ha hb
-      rcases ha with ha | ha <;> rcases hb with hb | hb
-      · exact absurd (ha.symm ▸ hb.symm ▸ hadj) (G.irrefl)
-      · exact Or.inl ⟨ha, hb⟩
-      · exact Or.inr ⟨ha, hb⟩
-      · exact absurd (ha.symm ▸ hb.symm ▸ hadj) (G.irrefl)
-    exact rootedWcol_edge hxu.symm hBedge L w hdu
-  · rw [if_neg hvu, if_neg hvu]
-
 
 /-- The rooted weighted count of an edge `u—x` with **full weights**, the weight given
 directly on the subtype: the root's weight times the complementary weighted sum at the other
@@ -384,6 +276,77 @@ theorem rootedWcol_edge_full {u x : V} (hux : G.Adj u x)
       intro h
       exact hne (congrArg Subtype.val h)
     rw [huniv, Finset.prod_insert hnesub, Finset.prod_singleton, hf.2]
+
+/-- The rooted weighted count of an edge `u—x`, rooted at `u` with colour `d ∈ L u` and the
+`u`-weight trivial: the sum of the `x`-weights over the colours of `L x` other than `d`.
+This is `rootedWcol_edge_full` at the weight that is trivial at `u`. -/
+theorem rootedWcol_edge {u x : V} (hux : G.Adj u x)
+    (hBedge : ∀ a b, G.Adj a b → a ∈ ({u, x} : Set V) → b ∈ ({u, x} : Set V) →
+      (a = u ∧ b = x) ∨ (a = x ∧ b = u))
+    (L : ListAssignment V) (w : V → ℕ → ℕ) {d : ℕ} (hd : d ∈ L u)
+    {instF : Fintype (({u, x} : Set V) : Type _)}
+    {instD : DecidableRel (G.induce ({u, x} : Set V)).Adj} :
+    rootedWcol (G.induce ({u, x} : Set V)) (fun v => L v)
+        (fun v e => if v.val = u then 1 else w v.val e)
+        ⟨u, Or.inl rfl⟩ d
+      = ∑ e ∈ (L x).filter (· ≠ d), w x e := by
+  have h := rootedWcol_edge_full (u := u) (x := x) hux hBedge L hd
+    (instF := instF) (instD := instD)
+    (fun v e => if v.val = u then 1 else w v.val e) (Or.inl rfl) (Or.inr rfl)
+  simpa [show ((⟨u, Or.inl rfl⟩ : ({u, x} : Set V)) : V) = u from rfl,
+    show ((⟨x, Or.inr rfl⟩ : ({u, x} : Set V)) : V) = x from rfl,
+    Ne.symm hux.ne] using h
+
+set_option maxHeartbeats 1600000 in
+/-- **Pendant absorption**: a degree-one vertex `x` with unique neighbour `u` is absorbed into
+the weight at `u` — the new weight of colour `d` is the old one times the total `x`-weight of
+the colours of `L x` other than `d`. -/
+theorem rootedWcol_pendant {x u : V} (hxu : G.Adj x u) (huniq : ∀ y, G.Adj x y → y = u)
+    {r : V} (hrx : r ≠ x) (L : ListAssignment V) (w : V → ℕ → ℕ) (c : ℕ) :
+    rootedWcol G L w r c =
+      rootedWcol (G.induce {y | y ≠ x}) (fun v => L v)
+        (fun v d => if v.val = u then w u d * ∑ e ∈ (L x).filter (· ≠ d), w x e
+          else w v.val d) ⟨r, hrx⟩ c := by
+  letI : DecidablePred (· ∈ {y : V | y ≠ x}) := fun v => inferInstanceAs (Decidable (v ≠ x))
+  letI : DecidablePred (· ∈ ({u, x} : Set V)) :=
+    fun v => inferInstanceAs (Decidable (v = u ∨ v = x))
+  have hux : u ≠ x := hxu.ne'
+  have habs := rootedWcol_absorb (A := {y | y ≠ x}) (B := ({u, x} : Set V))
+    (u := u) hux (Or.inl rfl)
+    (fun v => by
+      by_cases hvx : v = x
+      · exact Or.inr (Or.inr hvx)
+      · exact Or.inl hvx)
+    (fun v hvA hvB => by
+      rcases hvB with h | h
+      · exact h
+      · exact absurd h hvA)
+    (fun a b hadj => by
+      by_cases hax : a = x
+      · subst hax
+        exact Or.inr ⟨Or.inr rfl, Or.inl (huniq b hadj)⟩
+      · by_cases hbx : b = x
+        · subst hbx
+          exact Or.inr ⟨Or.inl (huniq a hadj.symm), Or.inr rfl⟩
+        · exact Or.inl ⟨hax, hbx⟩)
+    hrx L w c
+  rw [habs]
+  refine rootedWcol_weight_congr (fun v d hd => ?_) _ _
+  by_cases hvu : v.val = u
+  · rw [if_pos hvu, if_pos hvu]
+    congr 1
+    have hdu : d ∈ L u := by rw [← hvu]; exact hd
+    have hBedge : ∀ a b, G.Adj a b → a ∈ ({u, x} : Set V) → b ∈ ({u, x} : Set V) →
+        (a = u ∧ b = x) ∨ (a = x ∧ b = u) := by
+      intro a b hadj ha hb
+      rcases ha with ha | ha <;> rcases hb with hb | hb
+      · exact absurd (ha.symm ▸ hb.symm ▸ hadj) (G.irrefl)
+      · exact Or.inl ⟨ha, hb⟩
+      · exact Or.inr ⟨ha, hb⟩
+      · exact absurd (ha.symm ▸ hb.symm ▸ hadj) (G.irrefl)
+    exact rootedWcol_edge hxu.symm hBedge L w hdu
+  · rw [if_neg hvu, if_neg hvu]
+
 
 end Pendant
 

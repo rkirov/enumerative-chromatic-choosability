@@ -45,9 +45,10 @@ The classification is complete: every step is proved, nothing is assumed. Three 
 
 * `k = 2` — `isCactus_ecc_two_iff`, through the formalized Kirov–Naimi Theorem 2 and Rubin's
   theorem in `ListColoring/`, plus the cactus core analysis (handoff §3).
-* `k ≥ 4` — `isCactus_ecc_of_four_le` (UM-106 through UM-108): the transfer-matrix cycle bound,
-  weighted peeling, and the block induction over the cut-vertex decomposition. The invariant is
-  the pair bound `A² ≤ x_c · x_d`, and the slack `k - 3 ≥ 1` is what pays for the peeling.
+* `k ≥ 4` — `isCactus_ecc_of_four_le` (UM-106 through UM-108): the transfer-matrix bound for
+  even cycle blocks, the balanced core for odd ones, weighted peeling, and the block induction
+  over the cut-vertex decomposition. The invariant is the pair bound `A² ≤ x_c · x_d`, and the
+  slack `k - 3 ≥ 1` is what pays for the peeling.
 * `k = 3` — `isCactus_ecc_three` (UM-105). The pair bound is false here, so the induction carries
   GM dominance instead (`cactus_gm_bound`, `Cacti/GMFinal.lean`). Its cycle blocks are the whole
   difficulty: odd cycles by the balanced core (UM-025, `Cacti/BalancedCore.lean`), even cycles by

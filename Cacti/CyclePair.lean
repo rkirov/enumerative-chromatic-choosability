@@ -2,6 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
+import Cacti.BalancedCore
 import Cacti.Relabel
 import Cacti.Peel
 
@@ -17,10 +18,11 @@ handoff §6.2–6.3) combined with UM-107's peeling (`pair_bound_of_bare`). The 
 
 * `exists_cyclic_index` — a graph isomorphic to `closePath m` enumerates as `Fin (m+1)` with
   cyclic adjacency, rotated to start at the root;
-* `cycle_bare_pair` — the matrix model (`exists_matrix_model`) carries the root counts, and the
-  case analysis closes them: `cycle_cases_pair` for even cycles, `cycle_cases_pair_odd` for odd
-  ones, where the alternation runs the favourable way;
-* `cycle_pair_bound` — the weights peel off against the bare bound.
+* `cycle_bare_pair` — for an EVEN cycle, the matrix model (`exists_matrix_model`) carries the
+  root counts and the thread-split case analysis closes them (`cycle_cases_pair`); for an ODD
+  cycle no model is needed, because the balanced core (UM-025, which exists at every `k ≥ 2`)
+  makes every rooted count clear the uniform normalizer on its own;
+* `cycle_pair_bound_index` — the weights peel off against that bare bound.
 -/
 
 namespace ListColoring
@@ -76,18 +78,30 @@ theorem cycle_bare_pair {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
       (rootedCol G (constList V k) (ix 0) 0) ^ 2 ≤
         rootedCol G L (ix 0) c * rootedCol G L (ix 0) d := by
   intro c hc d hd hcd
-  obtain ⟨Ts, P, dom, σ₀, hlen, hmem, hinj, hcount, hthread⟩ :=
-    exists_matrix_model ix hadj L hL
-  obtain ⟨c', rfl⟩ := enum_surj (hL (ix 0)) hmem hinj hc
-  obtain ⟨d', rfl⟩ := enum_surj (hL (ix 0)) hmem hinj hd
-  have hne : c' ≠ d' := fun h => hcd (by rw [h])
-  have hlen' : Ts.length = m + 1 - 1 := by rw [hlen, Nat.add_sub_cancel]
-  rw [hcount c', hcount d', rootedCol_constList_cycle (by omega) ix hadj]
   rcases Nat.even_or_odd (m + 1) with hpar | hpar
   · -- an even cycle has at least four vertices; the thread splits close the twisted roots
+    obtain ⟨Ts, P, dom, σ₀, hlen, hmem, hinj, hcount, hthread⟩ :=
+      exists_matrix_model ix hadj L hL
+    obtain ⟨c', rfl⟩ := enum_surj (hL (ix 0)) hmem hinj hc
+    obtain ⟨d', rfl⟩ := enum_surj (hL (ix 0)) hmem hinj hd
+    have hne : c' ≠ d' := fun h => hcd (by rw [h])
+    have hlen' : Ts.length = m + 1 - 1 := by rw [hlen, Nat.add_sub_cancel]
+    rw [hcount c', hcount d', rootedCol_constList_cycle (by omega) ix hadj]
     obtain ⟨t, ht⟩ := hpar
     exact cycle_cases_pair hk (by omega) ⟨t, ht⟩ hlen' hthread hne
-  · exact cycle_cases_pair_odd hk (by omega) hpar hlen' c' d'
+  · -- odd: the balanced core hits every vertex-colour pair exactly `A` times, so every rooted
+    -- count clears `A` on its own and the pair bound is immediate
+    obtain ⟨S, hS, hbal⟩ := exists_balanced_core_odd_gen (by omega) (by omega) ix hadj hpar L hL
+    have hge : ∀ e ∈ L (ix 0),
+        rootedCol G (constList V k) (ix 0) 0 ≤ rootedCol G L (ix 0) e := by
+      intro e he
+      have hcard : (S.filter (fun f => f (ix 0) = e)).card ≤ rootedCol G L (ix 0) e :=
+        (Finset.card_le_card fun f hf => by
+          rw [Finset.mem_filter] at hf ⊢
+          exact ⟨hS hf.1, hf.2⟩)
+      rwa [hbal (ix 0) e he] at hcard
+    rw [pow_two]
+    exact Nat.mul_le_mul (hge c hc) (hge d hd)
 
 /-- **The weighted cycle pair theorem from a cyclic index** (UM-106 + UM-107, `k ≥ 4`): the
 form the cactus induction consumes, where a cycle arrives as an indexing of its vertices
@@ -111,19 +125,6 @@ theorem cycle_pair_bound_index {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
     · exact Or.inl (by rw [← h, Equiv.apply_symm_apply])
     · exact Or.inr (by rw [← eq_sub_of_add_eq h.symm, Equiv.apply_symm_apply])
   exact pair_bound_of_bare hk L hL hnbr w W hdom (cycle_bare_pair hm ix hadj hk L hL)
-
-/-- **The weighted cycle pair theorem** (UM-106 + UM-107, `k ≥ 4`): stated for any graph
-isomorphic to `closePath m`, `m ≥ 2`, since that is how cycles arise as blocks. -/
-theorem cycle_pair_bound {m : ℕ} (hm : 2 ≤ m) (e : G ≃g closePath m)
-    {k : ℕ} (hk : 4 ≤ k) (L : ListAssignment V) (hL : IsNListAssignment L k)
-    (w : V → ℕ → ℕ) (W : V → ℕ)
-    (hdom : ∀ v, ∀ c ∈ L v, ∀ d ∈ L v, c ≠ d → (W v) ^ 2 ≤ w v c * w v d)
-    (r : V) : ∀ c ∈ L r, ∀ d ∈ L r, c ≠ d →
-      (rootedCol G (constList V k) r 0 * ∏ v, W v) ^ 2 ≤
-        (rootedWcol G L w r c) * (rootedWcol G L w r d) := by
-  obtain ⟨ix, hix0, hadj⟩ := exists_cyclic_index hm e r
-  rw [← hix0]
-  exact cycle_pair_bound_index hm ix hadj hk L hL w W hdom
 
 end Pair
 

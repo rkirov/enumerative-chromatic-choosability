@@ -118,63 +118,12 @@ theorem gm_bound_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePred 
           _ = _ := (Finset.prod_mul_distrib).symm
       · simp only [if_neg hvu]
         exact hdom v.val)
-  -- rewrite the goal through absorption, then match the normalizer products
   rw [Finset.prod_congr rfl (fun c _ =>
       rootedWcol_absorb huA huB hcover hmeet hedge hrA L w c),
-    rootedCol_absorb_uniform huA huB hcover hmeet hedge hrA hk 0]
-  have hWA : (∏ v : A, (if v.val = u then
-        W u * (rootedCol (G.induce B) (constList B k) ⟨u, huB⟩ 0 *
-          ∏ x : B, (if x.val = u then 1 else W x.val))
-      else W v.val))
-      = (W u * (rootedCol (G.induce B) (constList B k) ⟨u, huB⟩ 0 *
-          ∏ x : B, (if x.val = u then 1 else W x.val))) *
-        ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val := by
-    rw [← Finset.mul_prod_erase Finset.univ _ (Finset.mem_univ (⟨u, huA⟩ : A)), if_pos rfl]
-    congr 1
-    exact Finset.prod_congr rfl fun v hv =>
-      if_neg (fun h => Finset.ne_of_mem_erase hv (Subtype.ext h))
-  have hWAu : W u * ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val = ∏ v : A, W v.val :=
-    Finset.mul_prod_erase Finset.univ (fun v : A => W v.val)
-      (Finset.mem_univ (⟨u, huA⟩ : A))
-  have hAB : (∏ v, W v) = (∏ v : A, W v.val) * ∏ x : B, (if x.val = u then 1 else W x.val) := by
-    have hA' : (∏ v : A, W v.val) = ∏ v ∈ A.toFinset, W v :=
-      (Finset.prod_subtype A.toFinset (fun _ => Set.mem_toFinset) W).symm
-    have hB' : (∏ x : B, (if x.val = u then 1 else W x.val))
-        = ∏ x ∈ B.toFinset, (if x = u then 1 else W x) :=
-      (Finset.prod_subtype B.toFinset (fun _ => Set.mem_toFinset)
-        (fun x => if x = u then 1 else W x)).symm
-    have huBF : u ∈ B.toFinset := Set.mem_toFinset.mpr huB
-    have hBerase : (∏ x ∈ B.toFinset, (if x = u then 1 else W x))
-        = ∏ x ∈ B.toFinset.erase u, W x := by
-      rw [← Finset.mul_prod_erase B.toFinset (fun x => if x = u then 1 else W x) huBF,
-        if_pos rfl, one_mul]
-      exact Finset.prod_congr rfl fun x hx => if_neg (Finset.ne_of_mem_erase hx)
-    have hdisj : Disjoint A.toFinset (B.toFinset.erase u) := by
-      rw [Finset.disjoint_left]
-      intro x hxA hxB
-      exact Finset.ne_of_mem_erase hxB
-        (hmeet x (Set.mem_toFinset.mp hxA)
-          (Set.mem_toFinset.mp (Finset.mem_of_mem_erase hxB)))
-    have huniv : (Finset.univ : Finset V) = A.toFinset ∪ B.toFinset.erase u := by
-      refine (Finset.eq_univ_of_forall fun v => ?_).symm
-      rcases hcover v with h | h
-      · exact Finset.mem_union_left _ (Set.mem_toFinset.mpr h)
-      · by_cases hvu : v = u
-        · exact Finset.mem_union_left _ (Set.mem_toFinset.mpr (hvu ▸ huA))
-        · exact Finset.mem_union_right _
-            (Finset.mem_erase.mpr ⟨hvu, Set.mem_toFinset.mpr h⟩)
-    rw [hA', hB', hBerase, ← Finset.prod_union hdisj]
-    exact Finset.prod_congr huniv fun _ _ => rfl
-  have hprod : rootedCol (G.induce B) (constList B k) ⟨u, huB⟩ 0 *
-        rootedCol (G.induce A) (constList A k) ⟨r, hrA⟩ 0 * ∏ v, W v
-      = rootedCol (G.induce A) (constList A k) ⟨r, hrA⟩ 0 *
-        ∏ v : A, (if v.val = u then
-            W u * (rootedCol (G.induce B) (constList B k) ⟨u, huB⟩ 0 *
-              ∏ x : B, (if x.val = u then 1 else W x.val))
-          else W v.val) := by
-    rw [hWA, hAB, ← hWAu]
-    ring
-  rw [hprod]
+    rootedCol_absorb_uniform huA huB hcover hmeet hedge hrA hk 0,
+    cut_normalizer_eq huA huB hcover hmeet W
+      (rootedCol (G.induce A) (constList A k) ⟨r, hrA⟩ 0)
+      (rootedCol (G.induce B) (constList B k) ⟨u, huB⟩ 0)]
   exact hA
 
 end Cut
@@ -184,28 +133,6 @@ section Balanced
 open SimpleGraph
 
 variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
-
-/-- **The uniform normalizer of a cycle does not depend on the vertex**: rotating the indexing
-keeps the cyclic adjacency, so every vertex sees the same uniform rooted count `A`. The balanced
-core has to hit this same `A` at every vertex, which is why it is worth recording. -/
-theorem rootedCol_constList_cycle_vertex {m k : ℕ} (hk : 1 ≤ k) (ix : Fin (m + 1) ≃ V)
-    (hadj : ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1)) (i : Fin (m + 1)) :
-    rootedCol G (constList V k) (ix i) 0 = rootedCol G (constList V k) (ix 0) 0 := by
-  have hrot : ∀ a b : Fin (m + 1),
-      G.Adj (((Equiv.addRight i).trans ix) a) (((Equiv.addRight i).trans ix) b) ↔
-        (b = a + 1 ∨ a = b + 1) := by
-    intro a b
-    show G.Adj (ix (a + i)) (ix (b + i)) ↔ _
-    rw [hadj]
-    have hcancel : ∀ p q : Fin (m + 1), (p + i = q + i + 1) ↔ p = q + 1 := by
-      intro p q
-      rw [add_right_comm q i 1, add_left_inj]
-    rw [hcancel, hcancel]
-  have h0 : ((Equiv.addRight i).trans ix) 0 = ix i := by
-    show ix (0 + i) = ix i
-    rw [zero_add]
-  rw [← h0, rootedCol_constList_cycle hk _ hrot, rootedCol_constList_cycle hk ix hadj]
-
 /-- **The balanced fibre product**: if a family `S` of proper colourings uses every colour of
 `L v` exactly `F` times at `v`, then the weights it accumulates at `v` are exactly the list
 product raised to `F`. This is the combinatorial half of the balanced-core route (UM-025 ⟹

@@ -59,38 +59,7 @@ theorem cycle_gm_bound_even_of_branches
   · exact h5 ix hadj L hL w W hdom
   · exact h7 hlarge ix hadj hpar L hL w W hdom
 
-/-- The same assembly, with the branches presented in the *literal* shape of the repo statement
-(the mirror of `cycle_gm_bound_even_at_three`: every hypothesis of `cycle_gm_bound_even`
-specialized at `m = 5`, resp. carried along at `7 ≤ m`).  A branch lemma proved in that shape
-applies here with no massaging at all. -/
-theorem cycle_gm_bound_even_of_branches'
-    (h5 : ∀ (_hm : 2 ≤ 5) (ix : Fin (5 + 1) ≃ V),
-      (∀ i j : Fin (5 + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1)) →
-      Even (5 + 1) → ∀ (L : ListAssignment V), IsNListAssignment L 3 →
-      ∀ (w : V → ℕ → ℕ) (W : V → ℕ), (∀ v, (W v) ^ 3 ≤ ∏ c ∈ L v, w v c) →
-      (rootedCol G (constList V 3) (ix 0) 0 * ∏ v, W v) ^ 3 ≤
-        ∏ c ∈ L (ix 0), rootedWcol G L w (ix 0) c)
-    (h7 : ∀ {m : ℕ}, 7 ≤ m → ∀ (_hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V),
-      (∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1)) →
-      Even (m + 1) → ∀ (L : ListAssignment V), IsNListAssignment L 3 →
-      ∀ (w : V → ℕ → ℕ) (W : V → ℕ), (∀ v, (W v) ^ 3 ≤ ∏ c ∈ L v, w v c) →
-      (rootedCol G (constList V 3) (ix 0) 0 * ∏ v, W v) ^ 3 ≤
-        ∏ c ∈ L (ix 0), rootedWcol G L w (ix 0) c)
-    {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
-    (hadj : ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1))
-    (hpar : Even (m + 1))
-    (L : ListAssignment V) (hL : IsNListAssignment L 3) (w : V → ℕ → ℕ) (W : V → ℕ)
-    (hdom : ∀ v, (W v) ^ 3 ≤ ∏ c ∈ L v, w v c) :
-    (rootedCol G (constList V 3) (ix 0) 0 * ∏ v, W v) ^ 3 ≤
-      ∏ c ∈ L (ix 0), rootedWcol G L w (ix 0) c := by
-  refine cycle_gm_bound_even_of_branches ?_ ?_ hm ix hadj hpar L hL w W hdom
-  · intro ix hadj L hL w W hdom
-    exact h5 (by omega) ix hadj (by decide) L hL w W hdom
-  · intro m hlarge ix hadj hpar L hL w W hdom
-    exact h7 hlarge (by omega) ix hadj hpar L hL w W hdom
-
 #print axioms cycle_gm_bound_even_of_branches
-#print axioms cycle_gm_bound_even_of_branches'
 
 end Split
 

@@ -237,6 +237,7 @@ end Chain
 
 
 
+
 section TransferCount
 
 open Matrix
@@ -423,6 +424,7 @@ end TransferCount
 
 
 
+
 section BridgeLemmas
 
 variable {k : ℕ}
@@ -445,6 +447,23 @@ theorem enum_surj {A : Finset ℕ} (hA : A.card = k) {σ : Fin k → ℕ}
   rw [← enum_image hA hmem hinj, Finset.mem_image] at hy
   obtain ⟨x, -, hx⟩ := hy
   exact ⟨x, hx⟩
+
+/-- Summing (resp. multiplying) a function over an enumeration of a list equals summing
+(resp. multiplying) it over the list. This is the transport both terminal closures of the
+cactus induction use to move between `Fin k` and the root's list. -/
+theorem cast_sum_enum {A : Finset ℕ} (hA : A.card = k) {σ : Fin k → ℕ}
+    (hmem : ∀ i, σ i ∈ A) (hinj : Function.Injective σ) {β : Type*}
+    [AddCommMonoidWithOne β] (f : ℕ → ℕ) :
+    (∑ i : Fin k, ((f (σ i) : ℕ) : β)) = ((∑ c ∈ A, f c : ℕ) : β) := by
+  rw [Nat.cast_sum, ← enum_image hA hmem hinj,
+    Finset.sum_image (fun i _ j _ h => hinj h)]
+
+theorem cast_prod_enum {A : Finset ℕ} (hA : A.card = k) {σ : Fin k → ℕ}
+    (hmem : ∀ i, σ i ∈ A) (hinj : Function.Injective σ) {β : Type*}
+    [CommSemiring β] (f : ℕ → ℕ) :
+    (∏ i : Fin k, ((f (σ i) : ℕ) : β)) = ((∏ c ∈ A, f c : ℕ) : β) := by
+  rw [Nat.cast_prod, ← enum_image hA hmem hinj,
+    Finset.prod_image (fun i _ j _ h => hinj h)]
 
 /-- **The factor characterizes colour compatibility** across an equality-extending step: the
 entry is one exactly when the colours differ. -/
@@ -516,6 +535,7 @@ theorem exists_two_split {α : Type _} (l : List α) (i j : ℕ) (hij : i < j)
   exact hy
 
 end Surgery
+
 
 
 

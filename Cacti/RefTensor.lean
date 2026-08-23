@@ -293,7 +293,7 @@ theorem marginal_corr {N : ℕ} (σ : Equiv.Perm (Fin 3)) (p : Fin (N + 1)) (c :
         exact ⟨rfl, fun i => rfl, hc⟩
     rw [hset, Finset.card_singleton]
 
-/-! ### The two headline statements -/
+/-! ### The headline statement: the one-coordinate marginal -/
 
 /-- **Every one-coordinate marginal of `U` is exactly `E = 4T + 2 = P/3`**, for every position
 `p`, every colour `c` and every holonomy `σ` (handoff (5.2)). -/
@@ -304,57 +304,14 @@ theorem marginal_Uw {N : ℕ} (σ : Equiv.Perm (Fin 3)) (p : Fin (N + 1)) (c : F
   rw [Finset.sum_add_distrib, marginal_two_pow_hw, marginal_corr]
   by_cases hc : σ c = c <;> simp [hc]
 
-/-- **The total mass `∑_a U(a) = P = 12 T + 6`**, uniformly in the holonomy `σ`. -/
-theorem sum_Uw_eq_twelve_T (N : ℕ) (σ : Equiv.Perm (Fin 3)) :
-    ∑ a : Fin (N + 1) → Fin 3, Uw σ a = 12 * gammaPlus N + 6 := by
-  rw [← Finset.sum_fiberwise (univ : Finset (Fin (N + 1) → Fin 3)) (fun a => a 0) (Uw σ)]
-  rw [Finset.sum_congr rfl (fun c _ => marginal_Uw σ (0 : Fin (N + 1)) c)]
-  rw [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul]
-  ring
-
-/-- **The total mass `∑_a U(a) = P = 4^M + 2`** (handoff (5.2)/(5.4)). -/
-theorem sum_Uw (N : ℕ) (σ : Equiv.Perm (Fin 3)) :
-    ∑ a : Fin (N + 1) → Fin 3, Uw σ a = 4 ^ (N + 1) + 2 := by
-  rw [sum_Uw_eq_twelve_T, umP_eq_twelve_mul_gammaPlus]
-
-/-- Division-free form of "the marginal is `P / 3`" (handoff (5.2)). -/
-theorem three_mul_marginal_Uw {N : ℕ} (σ : Equiv.Perm (Fin 3)) (p : Fin (N + 1)) (c : Fin 3) :
-    3 * (∑ a ∈ univ.filter (fun a : Fin (N + 1) → Fin 3 => a p = c), Uw σ a)
-      = 4 ^ (N + 1) + 2 := by
-  rw [marginal_Uw, three_mul_umE]
-
-/-! ### The bare `2 ^ h` layer: (5.4) -/
+/-! ### The closing transfer matrix -/
 
 /-- The closing transfer matrix `B = J + P_σ` (the `z = 2` companion of `onesPlus = J + I`). -/
 def closeMat (σ : Equiv.Perm (Fin 3)) : Matrix (Fin 3) (Fin 3) ℕ :=
   Matrix.of fun i j => if j = σ i then 2 else 1
 
-theorem closeMat_apply (σ : Equiv.Perm (Fin 3)) (i j : Fin 3) :
-    closeMat σ i j = if j = σ i then 2 else 1 := rfl
-
-/-- **The transfer-matrix form of (5.4)**: `∑_a 2^{h(a)} = tr((J+I)^{M-1} · B)`. -/
-theorem sum_two_pow_hw_eq_trace (N : ℕ) (σ : Equiv.Perm (Fin 3)) :
-    ∑ a : Fin (N + 1) → Fin 3, 2 ^ hw σ a
-      = ∑ i : Fin 3, ∑ j : Fin 3, (onesPlus ^ N) i j * closeMat σ j i := by
-  rw [Finset.sum_congr rfl (fun a _ => two_pow_hw σ a)]
-  exact sum_pathWeight N (fun i j => closeMat σ j i)
-
 theorem fixCount_eq_sum (σ : Equiv.Perm (Fin 3)) :
     fixCount σ = ∑ c : Fin 3, (if σ c = c then 1 else 0) := Finset.card_filter _ _
-
-/-- **(5.4) at `z = 2`**, subtraction-free in `ℕ`: `∑_a 2^{h(a)} = 4^M + f - 1`. -/
-theorem sum_two_pow_hw (N : ℕ) (σ : Equiv.Perm (Fin 3)) :
-    (∑ a : Fin (N + 1) → Fin 3, 2 ^ hw σ a) + 1 = 4 ^ (N + 1) + fixCount σ := by
-  have hf :
-      (∑ a : Fin (N + 1) → Fin 3, 2 ^ hw σ a) = 3 * (4 * gammaPlus N + 1) + fixCount σ := by
-    rw [← Finset.sum_fiberwise (univ : Finset (Fin (N + 1) → Fin 3)) (fun a => a 0)
-      (fun a => 2 ^ hw σ a)]
-    rw [Finset.sum_congr rfl (fun c _ => marginal_two_pow_hw σ (0 : Fin (N + 1)) c)]
-    rw [Finset.sum_add_distrib, Finset.sum_const, Finset.card_univ, Fintype.card_fin,
-      smul_eq_mul, ← fixCount_eq_sum]
-  have hg := three_mul_gammaPlus_add_one N
-  rw [hf, pow_succ]
-  omega
 
 end RefTensor
 
@@ -506,8 +463,5 @@ private def sAll : List (Equiv.Perm (Fin 3)) :=
 
 end
 
-#print axioms ListColoring.RefTensor.sum_Uw
 #print axioms ListColoring.RefTensor.marginal_Uw
-#print axioms ListColoring.RefTensor.three_mul_marginal_Uw
-#print axioms ListColoring.RefTensor.sum_two_pow_hw
 #print axioms ListColoring.RefTensor.sum_pathWeight_pin

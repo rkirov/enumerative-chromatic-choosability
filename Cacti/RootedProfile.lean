@@ -20,7 +20,6 @@ simplification, subset products are never needed with roots: the terminal closur
 (`PairBound.card_mul_le_sum`), which is Mathlib's weighted AM–GM.
 
 * `PairBound A x`   — `∀ c ≠ d, A² ≤ x c * x d`
-* `PairBound.mul`   — cut-vertex composition: profiles multiply, normalizers multiply
 * `PairBound.pow_card_le_prod` — `A ^ k ≤ ∏ x` (cyclic pairing; no roots)
 * `PairBound.card_mul_le_sum`  — `k * A ≤ ∑ x` (terminal AM–GM closure)
 * `card_mul_le_sum_of_pow_le_prod` — that closure from the product bound alone, the form the
@@ -40,19 +39,6 @@ def PairBound {k : ℕ} (A : ℝ) (x : Fin k → ℝ) : Prop :=
 namespace PairBound
 
 variable {k : ℕ} {A B : ℝ} {x y : Fin k → ℝ}
-
-/-- Cut-vertex composition: pointwise products of `P'` profiles satisfy `P'` with the product
-normalizer. No nonnegativity hypotheses: the pair bounds themselves supply what is needed. -/
-theorem mul (hxp : PairBound A x) (hyp : PairBound B y) :
-    PairBound (A * B) (fun c => x c * y c) := by
-  intro c d hcd
-  have hx2 : A ^ 2 ≤ x c * x d := hxp hcd
-  have hy2 : B ^ 2 ≤ y c * y d := hyp hcd
-  calc (A * B) ^ 2 = A ^ 2 * B ^ 2 := by ring
-    _ ≤ (x c * x d) * (y c * y d) :=
-        mul_le_mul hx2 hy2 (sq_nonneg B) (le_trans (sq_nonneg A) hx2)
-    _ = (x c * y c) * (x d * y d) := by ring
-
 /-- The cyclic pairing bound: pair bounds alone give `A ^ k ≤ ∏ x`, with no `|S|`-th roots.
 Squares both sides and pairs coordinate `c` with `c + 1` around `Fin k`. -/
 theorem pow_card_le_prod (hk : 2 ≤ k) (hA : 0 ≤ A) (hx : ∀ c, 0 ≤ x c)

@@ -579,42 +579,6 @@ chain would be constant and `P` would be the identity.  So a nontrivial holonomy
 one internal vertex whose two terminal enumerations differ — exactly the input of
 `path_cone_two_one_strict`. -/
 
-section Holonomy
-
-/-- A trivial pattern at every internal vertex forces a trivial holonomy. -/
-theorem holonomy_one_of_chain_const {M : ℕ} (σ : Fin (M + 1) → Fin 3 → ℕ)
-    (P : Equiv.Perm (Fin 3)) (hinj : Function.Injective (σ 0))
-    (hord : ∀ (i : Fin (M + 1)) (h : i.val + 1 < M + 1), σ ⟨i.val + 1, h⟩ = σ i)
-    (hcl : (fun q => σ 0 (P q)) = σ (Fin.last M)) : P = 1 := by
-  have hall : ∀ k : ℕ, ∀ hk : k < M + 1, σ ⟨k, hk⟩ = σ 0 := by
-    intro k
-    induction k with
-    | zero => intro hk; rfl
-    | succ k ih =>
-      intro hk
-      have hk' : k < M + 1 := by omega
-      have hstep := hord ⟨k, hk'⟩ (by simpa using hk)
-      calc σ ⟨k + 1, hk⟩ = σ ⟨(⟨k, hk'⟩ : Fin (M + 1)).val + 1, by simpa using hk⟩ := rfl
-        _ = σ ⟨k, hk'⟩ := hstep
-        _ = σ 0 := ih hk'
-  have hlast : σ (Fin.last M) = σ 0 := hall M (by omega)
-  rw [hlast] at hcl
-  refine Equiv.ext fun q => ?_
-  have hq : σ 0 (P q) = σ 0 q := congrFun hcl q
-  simpa using hinj hq
-
-/-- **A nontrivial holonomy exposes an unequal internal vertex.** -/
-theorem exists_unequal_pattern {M : ℕ} (σ : Fin (M + 1) → Fin 3 → ℕ) (P : Equiv.Perm (Fin 3))
-    (hinj : Function.Injective (σ 0)) (hP : P ≠ 1) :
-    (∃ (i : Fin (M + 1)) (h : i.val + 1 < M + 1), σ ⟨i.val + 1, h⟩ ≠ σ i) ∨
-      (fun q => σ 0 (P q)) ≠ σ (Fin.last M) := by
-  by_contra hcon
-  push_neg at hcon
-  obtain ⟨h1, h2⟩ := hcon
-  exact hP (holonomy_one_of_chain_const σ P hinj (fun i h => h1 i h) h2)
-
-end Holonomy
-
 end ListColoring
 
 
@@ -692,27 +656,6 @@ theorem exists_terminal_closing_model {M : ℕ} (jx : CycIx M ≃ V) (L : ListAs
   have h1 : σ (Fin.last M) (P.symm y) = σ 0 y := hclose y hy
   have h2 : P.symm y = x := hinj (Fin.last M) (h1.trans hxy.symm)
   rw [← h2, Equiv.apply_symm_apply]
-
-/-- At `M = 1` the holonomy is forced to be trivial: there is only one terminal pair and the
-chain's own bijection already closes it.  Hence `C_4` lands in the identity branch. -/
-theorem terminal_closing_model_trivial {M : ℕ} (hM : M = 1) (jx : CycIx M ≃ V)
-    (L : ListAssignment V)
-    (σ : Fin (M + 1) → Fin 3 → ℕ) (hmem : ∀ i x, σ i x ∈ L (tv jx i))
-    (hinj : ∀ i, Function.Injective (σ i))
-    (hchain : ∀ (i : Fin (M + 1)) (h : i.val + 1 < M + 1) (x : Fin 3),
-        σ i x ∈ L (tv jx ⟨i.val + 1, h⟩) → σ ⟨i.val + 1, h⟩ x = σ i x) :
-    ∀ x y : Fin 3, σ (Fin.last M) x = σ 0 y → y = (1 : Equiv.Perm (Fin 3)) x := by
-  subst hM
-  intro x y hxy
-  have h0 : (0 : Fin 2).val + 1 < 2 := by decide
-  have hlast : (⟨(0 : Fin 2).val + 1, h0⟩ : Fin 2) = Fin.last 1 := rfl
-  have hy : σ 0 y ∈ L (tv jx ⟨(0 : Fin 2).val + 1, h0⟩) := by
-    rw [← hxy, hlast]; exact hmem (Fin.last 1) x
-  have h1 := hchain 0 h0 y hy
-  rw [hlast] at h1
-  have h2 : σ (Fin.last 1) y = σ (Fin.last 1) x := by rw [h1, ← hxy]
-  have := hinj (Fin.last 1) h2
-  simpa using this
 
 /-! ## S2.  The two path patterns. -/
 
@@ -1473,136 +1416,9 @@ theorem cycle_gm_bound_even_identity {M : ℕ} (hM : 1 ≤ M)
   rw [hA, ← hroot]
   exact cycle_core_identity hM jx hjx L hL w W hdom σ hmem hinj hchain hclose
 
-/-- **`cycle_gm_bound_even` for the four-cycle** (handoff UM-090), unconditionally: at `M = 1`
-there is only one terminal pair, so the chain's own bijection closes the seam and the holonomy
-is forced to be trivial (`terminal_closing_model_trivial`).  `C_4` therefore lands in the
-identity branch, where the budget closes with equality. -/
-theorem cycle_gm_bound_even_four' (ix : Fin (2 * 1 + 1 + 1) ≃ V)
-    (hadj : ∀ i j : Fin (2 * 1 + 1 + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1))
-    (L : ListAssignment V) (hL : IsNListAssignment L 3) (w : V → ℕ → ℕ) (W : V → ℕ)
-    (hdom : ∀ v, (W v) ^ 3 ≤ ∏ c ∈ L v, w v c) :
-    (rootedCol G (constList V 3) (ix 0) 0 * ∏ v, W v) ^ 3
-      ≤ ∏ c ∈ L (ix 0), rootedWcol G L w (ix 0) c := by
-  obtain ⟨jx, hjx, hroot⟩ := exists_cyc_model (M := 1) ix hadj
-  obtain ⟨σ, P, hmem, hinj, hchain, -⟩ := exists_terminal_closing_model jx L hL
-  have hclose := terminal_closing_model_trivial (M := 1) rfl jx L σ hmem hinj hchain
-  exact cycle_gm_bound_even_identity (by omega) ix hadj L hL w W hdom jx hjx hroot σ hmem hinj
-    hchain (fun x y h => by simpa using hclose x y h)
-
 end Final
 
-/-! ## Wrappers and remaining table arithmetic -/
-
-section Extra
-
-open Finset SimpleGraph RefTensor
-
-variable {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGraph V} [DecidableRel G.Adj]
-
-/-- `cycle_gm_bound_even` (`Cacti/GMFinal.lean`) at `m = 3`, i.e. for the four-cycle. -/
-theorem cycle_gm_bound_even_three {m : ℕ} (hm : m = 3) (ix : Fin (m + 1) ≃ V)
-    (hadj : ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1))
-    (L : ListAssignment V) (hL : IsNListAssignment L 3) (w : V → ℕ → ℕ) (W : V → ℕ)
-    (hdom : ∀ v, (W v) ^ 3 ≤ ∏ c ∈ L v, w v c) :
-    (rootedCol G (constList V 3) (ix 0) 0 * ∏ v, W v) ^ 3
-      ≤ ∏ c ∈ L (ix 0), rootedWcol G L w (ix 0) c := by
-  subst hm
-  exact cycle_gm_bound_even_four' ix hadj L hL w W hdom
-
-/-- The closing repair, as a pure re-split of the same integer. -/
-theorem close_repair_resplit {N : ℕ} (hN : 1 ≤ N) (σ : Equiv.Perm (Fin 3)) (p q : Fin 3) :
-    (if p = q then 2 * gammaPlus N else gammaPlus N) + resClose σ p q
-      = (if p = q then 2 * (gammaPlus N - 1) else gammaPlus N) + resCloseRepaired σ p q := by
-  have hT : 1 ≤ gammaPlus N := one_le_gammaPlus hN
-  simp only [resClose, resCloseRepaired, Matrix.of_apply]
-  by_cases h : p = q
-  · subst h; simp; omega
-  · simp [h]
-
-end Extra
-
-/-! ## The non-identity residual assemblies (available for the σ ≠ 1 branch) -/
-
-section Residuals
-
-open Finset
-
-variable {Z : Finset ℕ} {x : ℕ → ℕ} {a b : Fin 3 → ℕ}
-
-theorem path_ordinary_threeCycle (h : IsPathPattern Z a b) (T : ℕ) :
-    2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      ≤ (pathDiag Z x a b ^ (2 * T) * pathOff Z x a b ^ T) *
-          (pathN Z x (a 0) (b 0) * pathN Z x (a 0) (b 2) *
-            (pathN Z x (a 1) (b 0) * pathN Z x (a 1) (b 1)) *
-              (pathN Z x (a 2) (b 1) * pathN Z x (a 2) (b 2))) := by
-  have hbase := path_cone_pow (D := pathDiag Z x a b) (O := pathOff Z x a b)
-    (X := ∏ z ∈ Z, x z) (path_cone_two_one h) (path_ray_off h) T 0
-  have hres := path_residual_three_cycle_ordinary (x := x) h
-  calc 2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      = (2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2 * 0)) * (∏ z ∈ Z, x z) ^ 2 := by ring
-    _ ≤ ((pathDiag Z x a b ^ 2 * pathOff Z x a b) ^ T * pathOff Z x a b ^ 0) * _ :=
-        Nat.mul_le_mul hbase hres
-    _ = _ := by rw [mul_pow, ← pow_mul]; ring
-
-
-
-
-/-- Transposition seam, **repaired** base `(2T-2, T)` with `T = S+1`: `(T-1)·(2,1) + 1·(0,1)`
-from `path_cone_pow`, times the `d = 4` residual `path_residual_trans_closing`. -/
-theorem path_closing_trans_repaired (h : IsPathPattern Z a b) (S : ℕ) :
-    2 ^ (6 * S) * (∏ z ∈ Z, x z) ^ (4 * S + 6)
-      ≤ (pathDiag Z x a b ^ (2 * S) * pathOff Z x a b ^ (S + 1)) *
-          (pathN Z x (a 0) (b 0) * pathN Z x (a 0) (b 1) *
-            (pathN Z x (a 1) (b 0) * pathN Z x (a 1) (b 1)) *
-              pathN Z x (a 2) (b 2) ^ 2) ^ 2 := by
-  have hbase := path_cone_pow (D := pathDiag Z x a b) (O := pathOff Z x a b)
-    (X := ∏ z ∈ Z, x z) (path_cone_two_one h) (path_ray_off h) S 1
-  have hres := path_residual_trans_closing (x := x) h
-  calc 2 ^ (6 * S) * (∏ z ∈ Z, x z) ^ (4 * S + 6)
-      = (2 ^ (6 * S) * (∏ z ∈ Z, x z) ^ (4 * S + 2 * 1)) * (∏ z ∈ Z, x z) ^ 4 := by ring
-    _ ≤ ((pathDiag Z x a b ^ 2 * pathOff Z x a b) ^ S * pathOff Z x a b ^ 1) * _ :=
-        Nat.mul_le_mul hbase hres
-    _ = _ := by rw [mul_pow, ← pow_mul]; ring
-
-/-- Transposition, ordinary edge. -/
-theorem path_ordinary_trans (h : IsPathPattern Z a b) (T : ℕ) :
-    2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      ≤ (pathDiag Z x a b ^ (2 * T) * pathOff Z x a b ^ T) *
-          (pathN Z x (a 0) (b 0) * pathN Z x (a 0) (b 1) *
-            (pathN Z x (a 1) (b 0) * pathN Z x (a 1) (b 1)) *
-              pathN Z x (a 2) (b 2) ^ 2) := by
-  have hbase := path_cone_pow (D := pathDiag Z x a b) (O := pathOff Z x a b)
-    (X := ∏ z ∈ Z, x z) (path_cone_two_one h) (path_ray_off h) T 0
-  have hres := path_residual_trans_ordinary (x := x) h
-  calc 2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      = (2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2 * 0)) * (∏ z ∈ Z, x z) ^ 2 := by ring
-    _ ≤ ((pathDiag Z x a b ^ 2 * pathOff Z x a b) ^ T * pathOff Z x a b ^ 0) * _ :=
-        Nat.mul_le_mul hbase hres
-    _ = _ := by rw [mul_pow, ← pow_mul]; ring
-
-/-- Three-cycle seam (no repair needed), `d = 2` residual stated halved. -/
-theorem path_closing_threeCycle (h : IsPathPattern Z a b) (T : ℕ) :
-    2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      ≤ (pathDiag Z x a b ^ (2 * T) * pathOff Z x a b ^ T) *
-          (pathN Z x (a 0) (b 2) * pathN Z x (a 1) (b 0) * pathN Z x (a 2) (b 1)) ^ 2 := by
-  have hbase := path_cone_pow (D := pathDiag Z x a b) (O := pathOff Z x a b)
-    (X := ∏ z ∈ Z, x z) (path_cone_two_one h) (path_ray_off h) T 0
-  have hres := path_residual_three_cycle_closing (x := x) h
-  have hres2 : (∏ z ∈ Z, x z) ^ 2
-      ≤ (pathN Z x (a 0) (b 2) * pathN Z x (a 1) (b 0) * pathN Z x (a 2) (b 1)) ^ 2 :=
-    Nat.pow_le_pow_left hres 2
-  calc 2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2)
-      = (2 ^ (6 * T) * (∏ z ∈ Z, x z) ^ (4 * T + 2 * 0)) * (∏ z ∈ Z, x z) ^ 2 := by ring
-    _ ≤ ((pathDiag Z x a b ^ 2 * pathOff Z x a b) ^ T * pathOff Z x a b ^ 0) * _ :=
-        Nat.mul_le_mul hbase hres2
-    _ = _ := by rw [mul_pow, ← pow_mul]; ring
-
-
-end Residuals
-
 end ListColoring
-
-
 
 
 namespace ListColoring

@@ -224,7 +224,7 @@ theorem pathOff_eq (Z : Finset ℕ) (x : ℕ → ℕ) (a b : Fin 3 → ℕ) :
   have e2 : (univ : Finset (Fin 3)).erase 2 = {0, 1} := by decide
   simp [pathOff, Fin.prod_univ_three, e0, e1, e2]
 
-/-! ## The residual layer -/
+/-! ## Routing the diagonal and the off-diagonal ray -/
 
 /-- The identity system `(a i, b i)` always routes. -/
 theorem route_id (h : IsPathPattern Z a b) (x : ℕ → ℕ) :
@@ -276,123 +276,12 @@ theorem path_ray_off (h : IsPathPattern Z a b) :
           Nat.mul_le_mul h1 h2
     _ = _ := by rw [pathOff_eq]; ring
 
-/-- Three-cycle / ordinary edge, `D = [[1,0,1],[1,1,0],[0,1,1]]`, `d = 2`. -/
-theorem path_residual_three_cycle_ordinary (h : IsPathPattern Z a b) :
-    (∏ z ∈ Z, x z) ^ 2 ≤
-      pathN Z x (a 0) (b 0) * pathN Z x (a 0) (b 2) *
-        (pathN Z x (a 1) (b 0) * pathN Z x (a 1) (b 1)) *
-          (pathN Z x (a 2) (b 1) * pathN Z x (a 2) (b 2)) := by
-  have h1 := route_id h x
-  have h2 := route_cycle h x
-  calc (∏ z ∈ Z, x z) ^ 2 = (∏ z ∈ Z, x z) * (∏ z ∈ Z, x z) := sq _
-    _ ≤ (pathN Z x (a 0) (b 0) * pathN Z x (a 1) (b 1) * pathN Z x (a 2) (b 2)) *
-        (pathN Z x (a 0) (b 2) * pathN Z x (a 1) (b 0) * pathN Z x (a 2) (b 1)) :=
-          Nat.mul_le_mul h1 h2
-    _ = _ := by ring
-
-/-- Three-cycle / closing edge, `D = [[0,0,2],[2,0,0],[0,2,0]]`, `d = 2`, stated halved. -/
-theorem path_residual_three_cycle_closing (h : IsPathPattern Z a b) :
-    ∏ z ∈ Z, x z ≤
-      pathN Z x (a 0) (b 2) * pathN Z x (a 1) (b 0) * pathN Z x (a 2) (b 1) :=
-  route_cycle h x
-
-/-- Transposition / ordinary edge, `D = [[1,1,0],[1,1,0],[0,0,2]]`, `d = 2`. -/
-theorem path_residual_trans_ordinary (h : IsPathPattern Z a b) :
-    (∏ z ∈ Z, x z) ^ 2 ≤
-      pathN Z x (a 0) (b 0) * pathN Z x (a 0) (b 1) *
-        (pathN Z x (a 1) (b 0) * pathN Z x (a 1) (b 1)) * pathN Z x (a 2) (b 2) ^ 2 := by
-  classical
-  have hid := route_id h x
-  by_cases hfail : a 0 = b 0 ∧ a 1 = b 1 ∧ a 0 ∈ Z ∧ a 1 ∈ Z
-  · -- the seam configuration: route by hand
-    obtain ⟨hb0, hb1, hp, hq⟩ := hfail
-    have hpq : a 0 ≠ a 1 := fun hh => absurd (h.injA hh) (by decide)
-    have hqmem : a 1 ∈ Z.erase (a 0) := Finset.mem_erase.mpr ⟨Ne.symm hpq, hq⟩
-    have hcard1 : ((Z.erase (a 0)).erase (a 1)).card = 1 := by
-      rw [Finset.card_erase_of_mem hqmem, Finset.card_erase_of_mem hp, h.cardZ]
-    obtain ⟨w, hw⟩ := Finset.card_eq_one.mp hcard1
-    have hwmem : w ∈ (Z.erase (a 0)).erase (a 1) := by
-      rw [hw]; exact Finset.mem_singleton_self w
-    have hwZ : w ∈ Z := Finset.mem_of_mem_erase (Finset.mem_of_mem_erase hwmem)
-    have hwq : w ≠ a 1 := Finset.ne_of_mem_erase hwmem
-    have hwp : w ≠ a 0 := Finset.ne_of_mem_erase (Finset.mem_of_mem_erase hwmem)
-    have hZeq : Z = insert (a 0) (insert (a 1) {w}) := by
-      have e1 : Z.erase (a 0) = insert (a 1) {w} := by
-        rw [← hw, Finset.insert_erase hqmem]
-      rw [← Finset.insert_erase hp, e1]
-    have hXeq : ∏ z ∈ Z, x z = x (a 0) * (x (a 1) * x w) := by
-      rw [hZeq, Finset.prod_insert (by simp [hpq, Ne.symm hwp]),
-        Finset.prod_insert (by simp [Ne.symm hwq]), Finset.prod_singleton]
-    -- the six bounds
-    have b1 : x (a 1) ≤ pathN Z x (a 0) (b 0) := by
-      rw [← hb0]; exact single_le_pathN hq (Ne.symm hpq) (Ne.symm hpq)
-    have b2 : x w ≤ pathN Z x (a 0) (b 1) := by
-      rw [← hb1]; exact single_le_pathN hwZ hwp hwq
-    have b3 : x w ≤ pathN Z x (a 1) (b 0) := by
-      rw [← hb0]; exact single_le_pathN hwZ hwq hwp
-    have b4 : x (a 0) ≤ pathN Z x (a 1) (b 1) := by
-      rw [← hb1]; exact single_le_pathN hp hpq hpq
-    have hb02 : a 0 ≠ b 2 := fun hh =>
-      absurd (h.injB (show b 0 = b 2 from hb0.symm.trans hh)) (by decide)
-    have hb12 : a 1 ≠ b 2 := fun hh =>
-      absurd (h.injB (show b 1 = b 2 from hb1.symm.trans hh)) (by decide)
-    have b5 : x (a 0) ≤ pathN Z x (a 2) (b 2) :=
-      single_le_pathN hp (fun hh => absurd (h.injA hh) (by decide)) hb02
-    have b6 : x (a 1) ≤ pathN Z x (a 2) (b 2) :=
-      single_le_pathN hq (fun hh => absurd (h.injA hh) (by decide)) hb12
-    have b56 : x (a 0) * x (a 1) ≤ pathN Z x (a 2) (b 2) ^ 2 := by
-      rw [sq]; exact Nat.mul_le_mul b5 b6
-    calc (∏ z ∈ Z, x z) ^ 2
-        = x (a 1) * x w * (x w * x (a 0)) * (x (a 0) * x (a 1)) := by rw [hXeq]; ring
-      _ ≤ _ := Nat.mul_le_mul (Nat.mul_le_mul (Nat.mul_le_mul b1 b2) (Nat.mul_le_mul b3 b4)) b56
-  · -- the generic case: the transposition system routes
-    have hswap : ∏ z ∈ Z, x z ≤
-        pathN Z x (a 0) (b 1) * pathN Z x (a 1) (b 0) * pathN Z x (a 2) (b 2) := by
-      refine path_route3 h.cardZ x _ _ _ _ _ _
-        (fun hh => absurd (h.injA hh) (by decide)) (fun hh => absurd (h.injA hh) (by decide))
-        (fun hh => absurd (h.injA hh) (by decide)) (fun hh => absurd (h.injB hh) (by decide))
-        (fun hh => absurd (h.injB hh) (by decide)) (fun hh => absurd (h.injB hh) (by decide))
-        ?_ ?_ ?_
-      · exact fun hh => hfail ⟨hh.2.1.symm, hh.1.symm, hh.2.2.1, hh.2.2.2⟩
-      · exact fun hh => absurd (h.extEq 2 1 hh.1.symm) (by decide)
-      · exact fun hh => absurd (h.extEq 2 0 hh.1.symm) (by decide)
-    calc (∏ z ∈ Z, x z) ^ 2 = (∏ z ∈ Z, x z) * (∏ z ∈ Z, x z) := sq _
-      _ ≤ (pathN Z x (a 0) (b 0) * pathN Z x (a 1) (b 1) * pathN Z x (a 2) (b 2)) *
-          (pathN Z x (a 0) (b 1) * pathN Z x (a 1) (b 0) * pathN Z x (a 2) (b 2)) :=
-            Nat.mul_le_mul hid hswap
-      _ = _ := by ring
-
-/-- Transposition / closing edge, `D = [[2,2,0],[2,2,0],[0,0,4]]`, `d = 4`: the square. -/
-theorem path_residual_trans_closing (h : IsPathPattern Z a b) :
-    (∏ z ∈ Z, x z) ^ 4 ≤
-      (pathN Z x (a 0) (b 0) * pathN Z x (a 0) (b 1) *
-        (pathN Z x (a 1) (b 0) * pathN Z x (a 1) (b 1)) * pathN Z x (a 2) (b 2) ^ 2) ^ 2 := by
-  have hh := path_residual_trans_ordinary (x := x) h
-  calc (∏ z ∈ Z, x z) ^ 4 = ((∏ z ∈ Z, x z) ^ 2) ^ 2 := by ring
-    _ ≤ _ := Nat.pow_le_pow_left hh 2
-
 /-! ## The scalar algebra of the cone -/
 
 /-- Uniform AM–GM on a pair. -/
 theorem amgm_two (u v : ℕ) : 2 ^ 2 * (u * v) ≤ (u + v) ^ 2 := by
   zify
   nlinarith [sq_nonneg ((u : ℤ) - v)]
-
-/-- Uniform AM–GM on a triple, from `card_pow_mul_prod_le_sum_pow_nat`. -/
-theorem amgm_three (u v w : ℕ) : 3 ^ 3 * (u * v * w) ≤ (u + v + w) ^ 3 := by
-  have hh := card_pow_mul_prod_le_sum_pow_nat ({0, 1, 2} : Finset ℕ)
-    (fun i => if i = 0 then u else if i = 1 then v else w)
-  simp [Finset.sum_insert, Finset.prod_insert, Finset.mem_insert] at hh
-  convert hh using 2 <;> ring
-
-/-- `P2'` is the `ℕ`-square-root of `P1 · P2`. -/
-theorem path_cone_two_one_of {D O X : ℕ}
-    (h1 : 2 ^ 12 * X ^ 6 ≤ D ^ 4 * O) (h2 : X ^ 2 ≤ O) :
-    2 ^ 6 * X ^ 4 ≤ D ^ 2 * O := by
-  refine (Nat.pow_le_pow_iff_left (two_ne_zero)).mp ?_
-  calc (2 ^ 6 * X ^ 4) ^ 2 = (2 ^ 12 * X ^ 6) * X ^ 2 := by ring
-    _ ≤ (D ^ 4 * O) * O := Nat.mul_le_mul h1 h2
-    _ = (D ^ 2 * O) ^ 2 := by ring
 
 /-- Non-strict cone point `(M,S) = (2n, n+s)`. -/
 theorem path_cone_pow {D O X : ℕ}

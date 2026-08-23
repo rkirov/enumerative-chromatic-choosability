@@ -139,11 +139,12 @@ Which pointwise bound depends on the list size, and that is the whole difficulty
 | `k = 3` | the slack is exactly zero and the pair bound is **false**. GM dominance `A³ ≤ ∏_c x_c` replaces it, with every step tight — equality at the uniform configuration — so nothing anywhere may be discarded |
 | `k = 2` | not a counting argument at all: an odd cycle makes both counts zero, and a cactus with two even cycles has none of the cores Theorem 2 allows |
 
-The cycle blocks are where the three cases differ. Above `3` a transfer matrix suffices. At `3` an
-odd cycle admits a *balanced core* — a subfamily of colourings hitting every vertex-colour pair
-exactly `A` times — and an even cycle admits none, which is why `Cacti/RefTensor.lean` through
-`Cacti/LargeBranch.lean` exist: a tensor capacity argument over the cycle's word model, split into
-`C₄`, `C₆` and every longer cycle.
+The cycle blocks are where the three cases differ, and they split by parity. An odd cycle admits a
+*balanced core* — a subfamily of colourings hitting every vertex-colour pair exactly `A` times —
+at every list size, so odd cycles never need anything heavier. An even cycle admits none. Above `3`
+a transfer matrix handles it; at `3` nothing so cheap works, which is why `Cacti/RefTensor.lean`
+through `Cacti/LargeBranch.lean` exist: a tensor capacity argument over the cycle's word model,
+split into `C₄`, `C₆` and every longer cycle.
 
 The book's [*Beyond the Paper: Cacti*](https://rkirov.github.io/enumerative-chromatic-choosability/) chapter is a
 guide to all of this that assumes only the chapters before it. `Cacti/Examples.lean` pins the definition down on three

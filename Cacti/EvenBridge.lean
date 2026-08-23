@@ -157,34 +157,6 @@ theorem sum_colorings_eq_sum_sigma (jx : CycIx M ≃ V)
   · intro f _
     rw [glue_restrict]
 
-/-- **The graph → tensor bridge for even cycles** (the analogue of `exists_cover_model` on the
-even side): the weighted count of an even cycle is the sum, over terminal words, of the product
-of the terminal weights times the two-edge path sums `pathN` at the internal vertices. -/
-theorem wcol_eq_sum_words (jx : CycIx M ≃ V)
-    (hadj : ∀ x y : CycIx M, G.Adj (jx x) (jx y) ↔ CycAdj x y)
-    (L : ListAssignment V) (w : V → ℕ → ℕ) :
-    wcol G L w = ∑ a ∈ wordSet jx L,
-      (∏ i, w (tv jx i) (a i)) *
-        ∏ i, pathN (L (iv jx i)) (w (iv jx i)) (a i) (a (i + 1)) := by
-  classical
-  have hfilter : (G.colorings L).filter (fun _ => True) = G.colorings L :=
-    Finset.filter_true_of_mem (fun _ _ => trivial)
-  have hwfilter : (wordSet jx L).filter (fun _ => True) = wordSet jx L :=
-    Finset.filter_true_of_mem (fun _ _ => trivial)
-  rw [wcol, ← hfilter,
-    sum_colorings_eq_sum_sigma jx hadj L (fun f => ∏ v, w v (f v)) (fun _ => True), hwfilter,
-    Finset.sum_sigma]
-  refine Finset.sum_congr rfl fun a ha => ?_
-  have hsplit : ∀ b : Fin (M + 1) → ℕ, (∏ v, w v (glue jx a b v))
-      = (∏ i, w (tv jx i) (a i)) * ∏ i, w (iv jx i) (b i) := by
-    intro b
-    rw [← Equiv.prod_comp jx (fun v => w v (glue jx a b v)), Fintype.prod_sum_type]
-    congr 1 <;> exact Finset.prod_congr rfl fun i _ => by simp [glue, tv, iv]
-  rw [Finset.sum_congr rfl (fun b _ => hsplit b), ← Finset.mul_sum]
-  congr 1
-  rw [innerSet, ← Finset.prod_univ_sum]
-  rfl
-
 /-- The rooted form of the bridge: the rooted weighted count at terminal `0` is the sum of the
 same word weights over the terminal words taking the value `c` at position `0`. -/
 theorem rootedWcol_eq_sum_words (jx : CycIx M ≃ V)
@@ -307,39 +279,6 @@ theorem exists_cyc_model {M : ℕ} (ix : Fin (2 * M + 1 + 1) ≃ V)
     exact cycIdx_adj M x y
   · show ix (cycIdx M (Sum.inl 0)) = ix 0
     congr 1
-
-/-- **The bridge in the coordinates of `cycle_gm_bound_even`**: an even cycle indexed by
-`Fin (m+1)` with the repo's cyclic adjacency hypothesis carries a terminal/internal model with
-the same root `ix 0`, in which the rooted weighted count is the word sum of the tensor model.
-`M + 1` is the number of terminals, i.e. the handoff's `m` for `C_{2m}`. -/
-theorem exists_even_cycle_word_model {m : ℕ} (hm : 2 ≤ m) (ix : Fin (m + 1) ≃ V)
-    (hadj : ∀ i j : Fin (m + 1), G.Adj (ix i) (ix j) ↔ (j = i + 1 ∨ i = j + 1))
-    (hpar : Even (m + 1)) (L : ListAssignment V) (w : V → ℕ → ℕ) :
-    ∃ (M : ℕ) (jx : CycIx M ≃ V), 1 ≤ M ∧ tv jx 0 = ix 0 ∧
-      (∀ x y, G.Adj (jx x) (jx y) ↔ CycAdj x y) ∧
-      ∀ c, rootedWcol G L w (ix 0) c
-        = ∑ a ∈ (wordSet jx L).filter (fun a => a 0 = c),
-            (∏ i, w (tv jx i) (a i)) *
-              ∏ i, pathN (L (iv jx i)) (w (iv jx i)) (a i) (a (i + 1)) := by
-  obtain ⟨r, hr⟩ := hpar
-  obtain ⟨M, rfl⟩ : ∃ M, m = 2 * M + 1 := ⟨r - 1, by omega⟩
-  obtain ⟨jx, hjx, hroot⟩ := exists_cyc_model ix hadj
-  refine ⟨M, jx, by omega, hroot, hjx, fun c => ?_⟩
-  rw [← hroot]
-  exact rootedWcol_eq_sum_words jx hjx L w c
-
-/-- **The capacity form consumed by the weighted AM–GM step**: any family of terminal words
-taking the root colour `c` contributes at most the rooted weighted count.  This is the direction
-§5.6 uses, and it needs no completeness of the family. -/
-theorem sum_words_le_rootedWcol {M : ℕ} (jx : CycIx M ≃ V)
-    (hadj : ∀ x y : CycIx M, G.Adj (jx x) (jx y) ↔ CycAdj x y)
-    (L : ListAssignment V) (w : V → ℕ → ℕ) (c : ℕ) (S : Finset (Fin (M + 1) → ℕ))
-    (hS : S ⊆ (wordSet jx L).filter (fun a => a 0 = c)) :
-    ∑ a ∈ S, (∏ i, w (tv jx i) (a i)) *
-        ∏ i, pathN (L (iv jx i)) (w (iv jx i)) (a i) (a (i + 1))
-      ≤ rootedWcol G L w (tv jx 0) c := by
-  rw [rootedWcol_eq_sum_words jx hadj L w c]
-  exact Finset.sum_le_sum_of_subset hS
 
 end Reindex
 

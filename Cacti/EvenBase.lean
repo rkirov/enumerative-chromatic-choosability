@@ -9,9 +9,9 @@ import Cacti.Three
 
 The first instance of `cycle_gm_bound_even` (UM-104) to fall: `C₄`, i.e. `m = 3`. It carries the
 crux cone point `path_cone_four_one` — the `(M,S) = (4,1)` inequality
-`2^12 · (∏ x)^6 ≤ pathDiag^4 · pathOff`, which is verbatim the hypothesis `h1` of the existing
-`path_cone_two_one_of` and was the one genuinely missing ingredient of the identity-holonomy
-branch. `cycle_gm_bound_even_at_three` then discharges the sorried statement at `m = 3`.
+`2^12 · (∏ x)^6 ≤ pathDiag^4 · pathOff`, which was the one genuinely missing ingredient of the
+identity-holonomy branch. `cycle_gm_bound_even_at_three` then proves the even tensor capacity
+at `m = 3`.
 -/
 
 
@@ -225,7 +225,7 @@ theorem clean_index (h : IsPathPattern Z a b) (i j k : Fin 3)
 
 /-- **The `(4,1)` cone point at `k = 3`.**  Sharp at `a = b = Z` with constant weights
 (`2 ^ 12 = 4096 = 8 ^ 4 · 1`).  This is the inequality the identity-holonomy branch of the even
-cycle needs, and hypothesis `h1` of `path_cone_two_one_of`. -/
+cycle needs. -/
 theorem path_cone_four_one (h : IsPathPattern Z a b) (x : ℕ → ℕ) :
     2 ^ 12 * (∏ z ∈ Z, x z) ^ 6 ≤ pathDiag Z x a b ^ 4 * pathOff Z x a b := by
   classical

@@ -107,11 +107,6 @@ theorem exists_map_of_isCycle_addPendant {u : Option V} {c : (G.addPendant v).Wa
   rw [hc'] at hcopy
   exact (Walk.isCycle_map_iff_of_injective somePendantHom_injective).mp hcopy
 
-/-- Cycles of `G` lift to cycles of `G.addPendant v` along the canonical embedding. -/
-theorem isCycle_map_addPendant {a : V} {c : G.Walk a a} (hc : c.IsCycle) :
-    (c.map (somePendantHom G v)).IsCycle :=
-  (Walk.isCycle_map_iff_of_injective somePendantHom_injective).mpr hc
-
 end Pendant
 
 section EdgesToFinset
@@ -207,12 +202,6 @@ theorem towerHom_injective :
   | 0, _ => fun _ _ h => h
   | k + 1, ⟨d, w⟩ => fun a b h =>
       towerHom_injective k d (Option.some_injective _ h)
-
-/-- **Cycles of the base lift to a pendant tower**, preserving cyclehood; edge sets map along
-`towerInj`. -/
-theorem isCycle_map_towerHom {k : ℕ} {d : TowerData V k} {a : V} {c : H.Walk a a}
-    (hc : c.IsCycle) : (c.map (towerHom H k d)).IsCycle :=
-  (Walk.isCycle_map_iff_of_injective (towerHom_injective k d)).mpr hc
 
 end Tower
 
