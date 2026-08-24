@@ -1150,3 +1150,40 @@ local instance : DecidableRel (cliqueTower (⊥ : SimpleGraph (Fin 1)) 3
 end Guards
 
 end SimpleGraph
+
+/-! ## Paths
+
+A path has no cycle at all, so it is chordal for free — but the shortest route to that here is the
+one the library already has: each step of a path attaches a pendant vertex,
+`SimpleGraph.addPendant_eq_coneOn` says that is a cone over a singleton, and a singleton is a
+clique, so `SimpleGraph.IsChordal.coneOn` applies.
+
+`ecc_pathG` is the fact every statement about grids needs and the library did not have: *every path
+is enumeratively chromatic-choosable at every list size.* It is what discharges both hypotheses of
+Kirov–Naimi's §6 Question 1 when the two factors are paths, which is why the rectangular-grid
+conjecture is an instance of that question — see `ListColoring.OpenProblem.grid_of_question1`.
+-/
+
+namespace ListColoring
+
+open SimpleGraph
+
+/-- **Every path is chordal.** Induction on the length: `pathG 0` is a single vertex, and each
+step is a cone over a singleton. -/
+theorem isChordal_pathG : ∀ k : ℕ, (pathG k).IsChordal
+  | 0 => isChordal_bot
+  | k + 1 => by
+      have h : ((pathG k).addPendant (pathEnd k)).IsChordal := by
+        rw [addPendant_eq_coneOn]
+        exact SimpleGraph.IsChordal.coneOn (isChordal_pathG k)
+          (by rw [Finset.coe_singleton]; exact isClique_singleton _)
+      exact h
+
+/-- **Every path is enumeratively chromatic-choosable at every list size.** -/
+theorem ecc_pathG (k n : ℕ) : (pathG k).ECCAt n :=
+  ecc_of_isChordal _ (isChordal_pathG k) n
+
+#print axioms isChordal_pathG
+#print axioms ecc_pathG
+
+end ListColoring
