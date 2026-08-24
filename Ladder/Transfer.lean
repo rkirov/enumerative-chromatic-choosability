@@ -516,7 +516,7 @@ theorem floor_succ_mul_total_le {t : ℕ} (ht : 2 ≤ t) {S : Finset (ℕ × ℕ
           rw [mul_comm]
           exact Nat.mul_le_mul_left _ (hall p hp)
   · -- there is a deficient state; by the floor it is short by exactly one, and it is unique
-    push_neg at hall
+    push Not at hall
     obtain ⟨q, hqS, hq⟩ := hall
     have hdef : ext T B q.1 q.2 = F := by
       have := ext_ge_of_card ht hT hB q.1 q.2
@@ -664,6 +664,47 @@ theorem total_step {S : Finset (ℕ × ℕ)} {N : ℕ × ℕ → ℕ} (T B : Fin
     simp only [total, step, Finset.sum_filter]
   rw [h1, Finset.sum_comm]
   exact Finset.sum_congr rfl fun p _ => h2 p
+
+/-! ### Reading the invariant off a function that only agrees on the state set -/
+
+/-- `total` only looks at `S`. -/
+theorem total_congr {S : Finset (ℕ × ℕ)} {N N' : ℕ × ℕ → ℕ} (h : ∀ p ∈ S, N p = N' p) :
+    total S N = total S N' := Finset.sum_congr rfl h
+
+/-- `Inv` only looks at `S`. -/
+theorem inv_congr {S : Finset (ℕ × ℕ)} {N N' : ℕ × ℕ → ℕ} (h : ∀ p ∈ S, N p = N' p)
+    (hI : Inv S N) : Inv S N' := by
+  classical
+  have hrow : ∀ a, rowMass S N a = rowMass S N' a := fun a =>
+    Finset.sum_congr rfl fun p hp => h p (Finset.mem_filter.mp hp).1
+  have hcol : ∀ b, colMass S N b = colMass S N' b := fun b =>
+    Finset.sum_congr rfl fun p hp => h p (Finset.mem_filter.mp hp).1
+  intro p hp
+  rw [← hrow, ← hcol, ← total_congr h]
+  exact hI p hp
+
+/-- At uniform lists every state offers exactly `lam k` successors. This is what makes the bound
+of `total_vec_ge` tight, and it is the source of the value `lam k = k² - 3k + 3`. -/
+theorem ext_const {k a b : ℕ} (ha : a ∈ Finset.range k) (hb : b ∈ Finset.range k) (hab : a ≠ b) :
+    ext (Finset.range k) (Finset.range k) a b = lam k := by
+  classical
+  have hak : a < k := Finset.mem_range.mp ha
+  have hbk : b < k := Finset.mem_range.mp hb
+  have hk : 2 ≤ k := by omega
+  obtain ⟨m, rfl⟩ : ∃ m, k = m + 2 := ⟨k - 2, by omega⟩
+  have hform := ext_add_card_inter (T := Finset.range (m + 2)) (B := Finset.range (m + 2)) hab
+  have hself : Finset.range (m + 2) ∩ Finset.range (m + 2) = Finset.range (m + 2) :=
+    Finset.inter_self _
+  have hTe := card_erase_add (T := Finset.range (m + 2)) (a := a)
+  have hBe := card_erase_add (T := Finset.range (m + 2)) (a := b)
+  rw [Finset.card_range, if_pos ha] at hTe
+  rw [Finset.card_range, if_pos hb] at hBe
+  have hTc : ((Finset.range (m + 2)).erase a).card = m + 1 := by omega
+  have hBc : ((Finset.range (m + 2)).erase b).card = m + 1 := by omega
+  rw [hTc, hBc, hself, Finset.card_range, if_pos ha, if_pos hb] at hform
+  have hp : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
+  have hlam : lam (m + 2) = (m + 1) * m + 1 := by simp [lam]
+  omega
 
 /-! ### The theorem -/
 
