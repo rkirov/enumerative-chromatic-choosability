@@ -161,23 +161,31 @@ The names match `ai_research_notes/GRID_LADDER_ALL_K_2026-08-24.md`. -/
 
 Erasing one colour from each list leaves at least `k-1` in each; the only pairs lost are diagonal,
 and there are at most `min` of the two sizes of those. -/
-theorem lam_le_ext_succ {k : ℕ} (hk : 3 ≤ k) {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k)
-    (a b : ℕ) : lam k ≤ ext T B a b + 1 := by
+theorem ext_ge_of_card {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.card = t) (hB : B.card = t)
+    (a b : ℕ) : (t - 1) * (t - 2) ≤ ext T B a b := by
   classical
-  have hTc : k - 1 ≤ (T.erase a).card := by
+  have hk : 2 ≤ t := ht
+  have hTc : t - 1 ≤ (T.erase a).card := by
     have := Finset.pred_card_le_card_erase (s := T) (a := a); omega
-  have hBc : k - 1 ≤ (B.erase b).card := by
+  have hBc : t - 1 ≤ (B.erase b).card := by
     have := Finset.pred_card_le_card_erase (s := B) (a := b); omega
   have hadd := card_states_add (T.erase a) (B.erase b)
   have hi : ((T.erase a) ∩ (B.erase b)).card ≤ (T.erase a).card :=
     Finset.card_le_card Finset.inter_subset_left
+  have hB1 : 1 ≤ (B.erase b).card := by omega
   have hsplit : (T.erase a).card * (B.erase b).card
       = (T.erase a).card * ((B.erase b).card - 1) + (T.erase a).card := by
     obtain ⟨m, hm⟩ : ∃ m, (B.erase b).card = m + 1 := ⟨(B.erase b).card - 1, by omega⟩
     rw [hm]; simp only [Nat.add_sub_cancel]; ring
-  have hprod : (k - 1) * (k - 2) ≤ (T.erase a).card * ((B.erase b).card - 1) :=
+  have hprod : (t - 1) * (t - 2) ≤ (T.erase a).card * ((B.erase b).card - 1) :=
     Nat.mul_le_mul hTc (by omega)
-  rw [ext_eq_card_states, lam]
+  rw [ext_eq_card_states]
+  omega
+
+theorem lam_le_ext_succ {k : ℕ} (hk : 3 ≤ k) {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k)
+    (a b : ℕ) : lam k ≤ ext T B a b + 1 := by
+  have := ext_ge_of_card (by omega : 2 ≤ k) hT hB a b
+  rw [lam]
   omega
 
 /-! ### An exact formula for `ext`
@@ -242,78 +250,77 @@ completely: `T \ B = {x}`, `B \ T = {y}`, and `|T ∩ B| = k - 1`. -/
 
 /-- The shape forced by a deficient state: the two lists differ in exactly one element each,
 namely `x` and `y`, and share the remaining `k - 1`. -/
-theorem deficient_structure {k : ℕ} (hk : 3 ≤ k) {T B : Finset ℕ} (hT : T.card = k)
-    (hB : B.card = k) {x y : ℕ} (hxy : x ≠ y) (hdef : ext T B x y + 1 = lam k) :
-    x ∈ T ∧ x ∉ B ∧ y ∈ B ∧ y ∉ T ∧ (T ∩ B).card = k - 1 := by
+theorem deficient_structure {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.card = t)
+    (hB : B.card = t) {x y : ℕ} (hxy : x ≠ y) (hdef : ext T B x y = (t - 1) * (t - 2)) :
+    x ∈ T ∧ x ∉ B ∧ y ∈ B ∧ y ∉ T ∧ (T ∩ B).card = t - 1 := by
   classical
-  obtain ⟨m, rfl⟩ : ∃ m, k = m + 3 := ⟨k - 3, by omega⟩
+  obtain ⟨m, rfl⟩ : ∃ m, t = m + 2 := ⟨t - 2, by omega⟩
   have hform := ext_add_card_inter (T := T) (B := B) hxy
   have hTe := card_erase_add (T := T) (a := x)
   have hBe := card_erase_add (T := B) (a := y)
   rw [hT] at hTe
   rw [hB] at hBe
-  have hmT : (T ∩ B).card ≤ m + 3 := by
+  have hmT : (T ∩ B).card ≤ m + 2 := by
     rw [← hT]; exact Finset.card_le_card Finset.inter_subset_left
-  have hlam : lam (m + 3) = (m + 2) * (m + 1) + 1 := by simp [lam]
-  have hdef' : ext T B x y = (m + 2) * (m + 1) := by omega
-  -- the four possible products, linearised against the atom `(m+2)*(m+1)`
-  have hp1 : (m + 2) * (m + 2) = (m + 2) * (m + 1) + (m + 2) := by ring
-  have hp2 : (m + 2) * (m + 3) = (m + 2) * (m + 1) + 2 * (m + 2) := by ring
-  have hp3 : (m + 3) * (m + 2) = (m + 2) * (m + 1) + 2 * (m + 2) := by ring
-  have hp4 : (m + 3) * (m + 3) = (m + 2) * (m + 1) + (3 * m + 7) := by ring
-  -- Step 1: both erasures must drop an element, i.e. `x ∈ T` and `y ∈ B`.
-  have hxT : x ∈ T := by
-    by_contra hxT
-    rw [if_neg hxT] at hTe
-    have hTc : (T.erase x).card = m + 3 := by omega
-    by_cases hyB : y ∈ B
-    · rw [if_pos hyB] at hBe
-      have hBc : (B.erase y).card = m + 2 := by omega
-      rw [hTc, hBc, hdef', hp3] at hform
-      have hix : (if x ∈ T ∩ B then 1 else 0) = 0 :=
-        if_neg fun h => hxT (Finset.mem_inter.mp h).1
-      rw [hix] at hform
-      have : (if y ∈ T ∩ B then 1 else 0) ≤ 1 := by split <;> omega
-      omega
-    · rw [if_neg hyB] at hBe
-      have hBc : (B.erase y).card = m + 3 := by omega
-      rw [hTc, hBc, hdef', hp4] at hform
-      have h1 : (if x ∈ T ∩ B then 1 else 0) ≤ 1 := by split <;> omega
-      have h2 : (if y ∈ T ∩ B then 1 else 0) ≤ 1 := by split <;> omega
-      omega
-  have hyB : y ∈ B := by
-    by_contra hyB
-    rw [if_neg hyB] at hBe
-    have hBc : (B.erase y).card = m + 3 := by omega
-    rw [if_pos hxT] at hTe
-    have hTc : (T.erase x).card = m + 2 := by omega
-    rw [hTc, hBc, hdef', hp2] at hform
-    have hiy : (if y ∈ T ∩ B then 1 else 0) = 0 :=
-      if_neg fun h => hyB (Finset.mem_inter.mp h).2
-    rw [hiy] at hform
-    have : (if x ∈ T ∩ B then 1 else 0) ≤ 1 := by split <;> omega
-    omega
-  -- Step 2: with both erasures dropping, the intersection is pinned.
-  rw [if_pos hxT] at hTe
-  rw [if_pos hyB] at hBe
-  have hTc : (T.erase x).card = m + 2 := by omega
-  have hBc : (B.erase y).card = m + 2 := by omega
-  rw [hTc, hBc, hdef', hp1] at hform
-  -- Step 3: neither `x ∈ B` nor `y ∈ T`, else the intersection is everything and `T = B`.
-  have hTB_of_full : (T ∩ B).card = m + 3 → T = B := by
+  have hdef' : ext T B x y = (m + 1) * m := by simpa using hdef
+  -- the four possible products, linearised against the atom `(m+1)*m`
+  have hp1 : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
+  have hp2 : (m + 1) * (m + 2) = (m + 1) * m + 2 * (m + 1) := by ring
+  have hp3 : (m + 2) * (m + 1) = (m + 1) * m + 2 * (m + 1) := by ring
+  have hp4 : (m + 2) * (m + 2) = (m + 1) * m + (3 * m + 4) := by ring
+  -- a full intersection would force `T = B`; at `t = 2` this is the only thing separating cases
+  have hTB_of_full : (T ∩ B).card = m + 2 → T = B := by
     intro hfull
     have h1 : T ∩ B = T := Finset.eq_of_subset_of_card_le Finset.inter_subset_left (by omega)
     have h2 : T ∩ B = B := Finset.eq_of_subset_of_card_le Finset.inter_subset_right (by omega)
     exact h1.symm.trans h2
+  -- Step 1: both erasures must drop an element, i.e. `x ∈ T` and `y ∈ B`.
+  have hxT : x ∈ T := by
+    by_contra hxT
+    rw [if_neg hxT] at hTe
+    have hTc : (T.erase x).card = m + 2 := by omega
+    have hix : (if x ∈ T ∩ B then 1 else 0) = 0 :=
+      if_neg fun h => hxT (Finset.mem_inter.mp h).1
+    by_cases hyB : y ∈ B
+    · rw [if_pos hyB] at hBe
+      have hBc : (B.erase y).card = m + 1 := by omega
+      rw [hTc, hBc, hdef', hp3, hix] at hform
+      by_cases hyT : y ∈ T
+      · rw [if_pos (Finset.mem_inter.mpr ⟨hyT, hyB⟩)] at hform; omega
+      · rw [if_neg (fun h => hyT (Finset.mem_inter.mp h).1)] at hform
+        -- `mI = 2m + 2` and `mI ≤ m + 2` force `m = 0` and a full intersection, so `T = B`
+        exact hyT (by rw [hTB_of_full (by omega : (T ∩ B).card = m + 2)]; exact hyB)
+    · rw [if_neg hyB] at hBe
+      have hBc : (B.erase y).card = m + 2 := by omega
+      rw [hTc, hBc, hdef', hp4, hix,
+        if_neg (fun h => hyB (Finset.mem_inter.mp h).2)] at hform
+      omega
+  have hyB : y ∈ B := by
+    by_contra hyB
+    rw [if_neg hyB] at hBe
+    have hBc : (B.erase y).card = m + 2 := by omega
+    rw [if_pos hxT] at hTe
+    have hTc : (T.erase x).card = m + 1 := by omega
+    rw [hTc, hBc, hdef', hp2, if_neg (fun h => hyB (Finset.mem_inter.mp h).2)] at hform
+    by_cases hxB : x ∈ B
+    · rw [if_pos (Finset.mem_inter.mpr ⟨hxT, hxB⟩)] at hform; omega
+    · rw [if_neg (fun h => hxB (Finset.mem_inter.mp h).2)] at hform
+      exact hxB (by rw [← hTB_of_full (by omega : (T ∩ B).card = m + 2)]; exact hxT)
+  -- Step 2: with both erasures dropping, the intersection is pinned.
+  rw [if_pos hxT] at hTe
+  rw [if_pos hyB] at hBe
+  have hTc : (T.erase x).card = m + 1 := by omega
+  have hBc : (B.erase y).card = m + 1 := by omega
+  rw [hTc, hBc, hdef', hp1] at hform
+  -- Step 3: neither `x ∈ B` nor `y ∈ T`, else the intersection is everything and `T = B`.
   have hxB : x ∉ B := by
     intro hxB
     have hix : (if x ∈ T ∩ B then 1 else 0) = 1 := if_pos (Finset.mem_inter.mpr ⟨hxT, hxB⟩)
     have hiy1 : (if y ∈ T ∩ B then 1 else 0) ≤ 1 := by split <;> omega
     rw [hix] at hform
-    have hfull : (T ∩ B).card = m + 3 := by omega
+    have hfull : (T ∩ B).card = m + 2 := by omega
     have hyT : y ∈ T := by rw [hTB_of_full hfull]; exact hyB
-    have hiy : (if y ∈ T ∩ B then 1 else 0) = 1 := if_pos (Finset.mem_inter.mpr ⟨hyT, hyB⟩)
-    rw [hiy] at hform
+    rw [if_pos (Finset.mem_inter.mpr ⟨hyT, hyB⟩)] at hform
     omega
   have hyT : y ∉ T := by
     intro hyT
@@ -321,7 +328,7 @@ theorem deficient_structure {k : ℕ} (hk : 3 ≤ k) {T B : Finset ℕ} (hT : T.
     have hix : (if x ∈ T ∩ B then 1 else 0) = 0 :=
       if_neg fun h => hxB (Finset.mem_inter.mp h).2
     rw [hix, hiy] at hform
-    have hfull : (T ∩ B).card = m + 3 := by omega
+    have hfull : (T ∩ B).card = m + 2 := by omega
     exact hxB (by rw [← hTB_of_full hfull]; exact hxT)
   have hix : (if x ∈ T ∩ B then 1 else 0) = 0 := if_neg fun h => hxB (Finset.mem_inter.mp h).2
   have hiy : (if y ∈ T ∩ B then 1 else 0) = 0 := if_neg fun h => hyT (Finset.mem_inter.mp h).1
@@ -348,124 +355,114 @@ theorem mem_of_ne_of_card {k : ℕ} {T B : Finset ℕ} (hT : T.card = k) {x : �
       Finset.card_singleton] at this
   omega
 
-/-- **The slack off the deficient row and column.** -/
-theorem lam_succ_le_ext {k : ℕ} (hk : 3 ≤ k) {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k)
+/-- **The slack off the deficient row and column:** two more than the floor, at any common card. -/
+theorem ext_ge_succ_of_ne {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.card = t) (hB : B.card = t)
     {x y : ℕ} (hxT : x ∈ T) (hxB : x ∉ B) (hyB : y ∈ B) (hyT : y ∉ T)
-    (hm : (T ∩ B).card = k - 1) {a b : ℕ} (hab : a ≠ b) (hax : a ≠ x) (hby : b ≠ y) :
-    lam k + 1 ≤ ext T B a b := by
+    (hm : (T ∩ B).card = t - 1) {a b : ℕ} (hab : a ≠ b) (hax : a ≠ x) (hby : b ≠ y) :
+    (t - 1) * (t - 2) + 2 ≤ ext T B a b := by
   classical
-  obtain ⟨m, rfl⟩ : ∃ m, k = m + 3 := ⟨k - 3, by omega⟩
+  obtain ⟨m, rfl⟩ : ∃ m, t = m + 2 := ⟨t - 2, by omega⟩
+  simp only [Nat.add_sub_cancel, show m + 2 - 1 = m + 1 from rfl] at hm ⊢
   have hform := ext_add_card_inter (T := T) (B := B) hab
   have hTe := card_erase_add (T := T) (a := a)
   have hBe := card_erase_add (T := B) (a := b)
   rw [hT] at hTe
   rw [hB] at hBe
-  have hlam : lam (m + 3) = (m + 2) * (m + 1) + 1 := by simp [lam]
-  have hp1 : (m + 2) * (m + 2) = (m + 2) * (m + 1) + (m + 2) := by ring
-  have hp2 : (m + 3) * (m + 2) = (m + 2) * (m + 1) + 2 * (m + 2) := by ring
-  have hp3 : (m + 2) * (m + 3) = (m + 2) * (m + 1) + 2 * (m + 2) := by ring
-  have hp4 : (m + 3) * (m + 3) = (m + 2) * (m + 1) + (3 * m + 7) := by ring
+  have hp1 : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
+  have hp2 : (m + 1) * (m + 2) = (m + 1) * m + 2 * (m + 1) := by ring
+  have hp3 : (m + 2) * (m + 1) = (m + 1) * m + 2 * (m + 1) := by ring
+  have hp4 : (m + 2) * (m + 2) = (m + 1) * m + (3 * m + 4) := by ring
   by_cases haT : a ∈ T <;> by_cases hbB : b ∈ B
-  · -- both present: both indicators fire, and the bound is met with equality
-    have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB hm (by omega) haT hax
+  · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB (by omega) (by omega) haT hax
     have hbT : b ∈ T := by
       refine mem_of_ne_of_card hB hyB hyT ?_ (by omega) hbB hby
-      rwa [Finset.inter_comm]
+      rw [Finset.inter_comm]; omega
     rw [if_pos haT] at hTe
     rw [if_pos hbB] at hBe
-    have hTc : (T.erase a).card = m + 2 := by omega
-    have hBc : (B.erase b).card = m + 2 := by omega
-    rw [hTc, hBc, hp1, if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩),
-      if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
+    rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 1 by omega, hp1,
+      if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩), if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
     omega
-  · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB hm (by omega) haT hax
+  · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB (by omega) (by omega) haT hax
     rw [if_pos haT] at hTe
     rw [if_neg hbB] at hBe
-    have hTc : (T.erase a).card = m + 2 := by omega
-    have hBc : (B.erase b).card = m + 3 := by omega
-    rw [hTc, hBc, hp3, if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩),
+    rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 2 by omega, hp2,
+      if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩),
       if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
     omega
   · have hbT : b ∈ T := by
       refine mem_of_ne_of_card hB hyB hyT ?_ (by omega) hbB hby
-      rwa [Finset.inter_comm]
+      rw [Finset.inter_comm]; omega
     rw [if_neg haT] at hTe
     rw [if_pos hbB] at hBe
-    have hTc : (T.erase a).card = m + 3 := by omega
-    have hBc : (B.erase b).card = m + 2 := by omega
-    rw [hTc, hBc, hp2, if_neg (fun h => haT (Finset.mem_inter.mp h).1),
+    rw [show (T.erase a).card = m + 2 by omega, show (B.erase b).card = m + 1 by omega, hp3,
+      if_neg (fun h => haT (Finset.mem_inter.mp h).1),
       if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
     omega
   · rw [if_neg haT] at hTe
     rw [if_neg hbB] at hBe
-    have hTc : (T.erase a).card = m + 3 := by omega
-    have hBc : (B.erase b).card = m + 3 := by omega
-    rw [hTc, hBc, hp4, if_neg (fun h => haT (Finset.mem_inter.mp h).1),
+    rw [show (T.erase a).card = m + 2 by omega, show (B.erase b).card = m + 2 by omega, hp4,
+      if_neg (fun h => haT (Finset.mem_inter.mp h).1),
       if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
     omega
 
-/-- Every state other than the deficient one already reaches `lam k`. -/
-theorem lam_le_ext_of_ne {k : ℕ} (hk : 3 ≤ k) {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k)
+/-- Every state other than the deficient one already clears the floor. -/
+theorem ext_ge_of_ne {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.card = t) (hB : B.card = t)
     {x y : ℕ} (hxT : x ∈ T) (hxB : x ∉ B) (hyB : y ∈ B) (hyT : y ∉ T)
-    (hm : (T ∩ B).card = k - 1) {a b : ℕ} (hab : a ≠ b) (hne : ¬ (a = x ∧ b = y)) :
-    lam k ≤ ext T B a b := by
+    (hm : (T ∩ B).card = t - 1) {a b : ℕ} (hab : a ≠ b) (hne : ¬ (a = x ∧ b = y)) :
+    (t - 1) * (t - 2) + 1 ≤ ext T B a b := by
   classical
   by_cases hax : a = x
-  · -- then `b ≠ y`; the `x` row still has no slack lost, because `x ∉ B`
-    have hby : b ≠ y := fun h => hne ⟨hax, h⟩
+  · have hby : b ≠ y := fun h => hne ⟨hax, h⟩
     subst hax
-    obtain ⟨m, rfl⟩ : ∃ m, k = m + 3 := ⟨k - 3, by omega⟩
+    obtain ⟨m, rfl⟩ : ∃ m, t = m + 2 := ⟨t - 2, by omega⟩
+    simp only [Nat.add_sub_cancel, show m + 2 - 1 = m + 1 from rfl] at hm ⊢
     have hform := ext_add_card_inter (T := T) (B := B) hab
     have hTe := card_erase_add (T := T) (a := a)
     have hBe := card_erase_add (T := B) (a := b)
     rw [hT] at hTe
     rw [hB] at hBe
-    have hlam : lam (m + 3) = (m + 2) * (m + 1) + 1 := by simp [lam]
-    have hp1 : (m + 2) * (m + 2) = (m + 2) * (m + 1) + (m + 2) := by ring
-    have hp3 : (m + 2) * (m + 3) = (m + 2) * (m + 1) + 2 * (m + 2) := by ring
+    have hp1 : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
+    have hp2 : (m + 1) * (m + 2) = (m + 1) * m + 2 * (m + 1) := by ring
+    rw [if_pos hxT] at hTe
     have hia : (if a ∈ T ∩ B then 1 else 0) = 0 :=
       if_neg fun h => hxB (Finset.mem_inter.mp h).2
-    rw [if_pos hxT] at hTe
-    have hTc : (T.erase a).card = m + 2 := by omega
     by_cases hbB : b ∈ B
     · have hbT : b ∈ T := by
         refine mem_of_ne_of_card hB hyB hyT ?_ (by omega) hbB hby
-        rwa [Finset.inter_comm]
+        rw [Finset.inter_comm]; omega
       rw [if_pos hbB] at hBe
-      have hBc : (B.erase b).card = m + 2 := by omega
-      rw [hTc, hBc, hp1, hia, if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
+      rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 1 by omega, hp1,
+        hia, if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
       omega
     · rw [if_neg hbB] at hBe
-      have hBc : (B.erase b).card = m + 3 := by omega
-      rw [hTc, hBc, hp3, hia, if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
+      rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 2 by omega, hp2,
+        hia, if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
       omega
   · by_cases hby : b = y
-    · -- symmetric, using `y ∉ T`
-      subst hby
-      obtain ⟨m, rfl⟩ : ∃ m, k = m + 3 := ⟨k - 3, by omega⟩
+    · subst hby
+      obtain ⟨m, rfl⟩ : ∃ m, t = m + 2 := ⟨t - 2, by omega⟩
+      simp only [Nat.add_sub_cancel, show m + 2 - 1 = m + 1 from rfl] at hm ⊢
       have hform := ext_add_card_inter (T := T) (B := B) hab
       have hTe := card_erase_add (T := T) (a := a)
       have hBe := card_erase_add (T := B) (a := b)
       rw [hT] at hTe
       rw [hB] at hBe
-      have hlam : lam (m + 3) = (m + 2) * (m + 1) + 1 := by simp [lam]
-      have hp1 : (m + 2) * (m + 2) = (m + 2) * (m + 1) + (m + 2) := by ring
-      have hp2 : (m + 3) * (m + 2) = (m + 2) * (m + 1) + 2 * (m + 2) := by ring
+      have hp1 : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
+      have hp3 : (m + 2) * (m + 1) = (m + 1) * m + 2 * (m + 1) := by ring
+      rw [if_pos hyB] at hBe
       have hib : (if b ∈ T ∩ B then 1 else 0) = 0 :=
         if_neg fun h => hyT (Finset.mem_inter.mp h).1
-      rw [if_pos hyB] at hBe
-      have hBc : (B.erase b).card = m + 2 := by omega
       by_cases haT : a ∈ T
-      · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB hm (by omega) haT hax
+      · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB (by omega) (by omega) haT hax
         rw [if_pos haT] at hTe
-        have hTc : (T.erase a).card = m + 2 := by omega
-        rw [hTc, hBc, hp1, hib, if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩)] at hform
+        rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 1 by omega, hp1,
+          hib, if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩)] at hform
         omega
       · rw [if_neg haT] at hTe
-        have hTc : (T.erase a).card = m + 3 := by omega
-        rw [hTc, hBc, hp2, hib, if_neg (fun h => haT (Finset.mem_inter.mp h).1)] at hform
+        rw [show (T.erase a).card = m + 2 by omega, show (B.erase b).card = m + 1 by omega, hp3,
+          hib, if_neg (fun h => haT (Finset.mem_inter.mp h).1)] at hform
         omega
-    · exact le_trans (Nat.le_succ _) (lam_succ_le_ext hk hT hB hxT hxB hyB hyT hm hab hax hby)
+    · exact le_trans (by omega) (ext_ge_succ_of_ne ht hT hB hxT hxB hyB hyT hm hab hax hby)
 
 /-- The mass off a state's row and column, by inclusion-exclusion. -/
 theorem sum_off_add {S : Finset (ℕ × ℕ)} {N : ℕ × ℕ → ℕ} {x y : ℕ} (hxy : (x, y) ∈ S) :
@@ -506,42 +503,46 @@ If no state is deficient the bound is pointwise. Otherwise the unique deficient 
 short by exactly one, and by `deficient_structure` every state off its row and column is long by
 at least one; the invariant says there is at least as much mass off the row and column as at
 `(x,y)` itself. -/
-theorem lam_mul_total_le {k : ℕ} (hk : 3 ≤ k) {S : Finset (ℕ × ℕ)} {N : ℕ × ℕ → ℕ}
-    {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k) (hSsub : ∀ p ∈ S, p.1 ≠ p.2)
+theorem floor_succ_mul_total_le {t : ℕ} (ht : 2 ≤ t) {S : Finset (ℕ × ℕ)} {N : ℕ × ℕ → ℕ}
+    {T B : Finset ℕ} (hT : T.card = t) (hB : B.card = t) (hSsub : ∀ p ∈ S, p.1 ≠ p.2)
     (hI : Inv S N) :
-    lam k * total S N ≤ ∑ p ∈ S, N p * ext T B p.1 p.2 := by
+    ((t - 1) * (t - 2) + 1) * total S N ≤ ∑ p ∈ S, N p * ext T B p.1 p.2 := by
   classical
-  by_cases hall : ∀ p ∈ S, lam k ≤ ext T B p.1 p.2
-  · calc lam k * total S N = ∑ p ∈ S, lam k * N p := by rw [total, Finset.mul_sum]
+  set F := (t - 1) * (t - 2) with hF
+  by_cases hall : ∀ p ∈ S, F + 1 ≤ ext T B p.1 p.2
+  · calc (F + 1) * total S N = ∑ p ∈ S, (F + 1) * N p := by rw [total, Finset.mul_sum]
       _ ≤ ∑ p ∈ S, N p * ext T B p.1 p.2 := by
           refine Finset.sum_le_sum fun p hp => ?_
           rw [mul_comm]
           exact Nat.mul_le_mul_left _ (hall p hp)
-  · push_neg at hall
+  · -- there is a deficient state; by the floor it is short by exactly one, and it is unique
+    push_neg at hall
     obtain ⟨q, hqS, hq⟩ := hall
-    have hdef : ext T B q.1 q.2 + 1 = lam k := by
-      have := lam_le_ext_succ hk hT hB q.1 q.2
+    have hdef : ext T B q.1 q.2 = F := by
+      have := ext_ge_of_card ht hT hB q.1 q.2
       omega
     obtain ⟨hxT, hxB, hyB, hyT, hm⟩ :=
-      deficient_structure hk hT hB (hSsub q hqS) hdef
+      deficient_structure ht hT hB (hSsub q hqS) (by rw [hdef, hF])
     -- pointwise: the deficit at `q` is charged against the surplus off its row and column
-    have hpoint : ∀ p ∈ S, lam k * N p + (if ¬ p.1 = q.1 ∧ ¬ p.2 = q.2 then N p else 0)
+    have hpoint : ∀ p ∈ S, (F + 1) * N p + (if ¬ p.1 = q.1 ∧ ¬ p.2 = q.2 then N p else 0)
         ≤ N p * ext T B p.1 p.2 + (if p = q then N p else 0) := by
       intro p hp
       by_cases hoff : ¬ p.1 = q.1 ∧ ¬ p.2 = q.2
       · have hpq : p ≠ q := fun h => hoff.1 (by rw [h])
         rw [if_pos hoff, if_neg hpq]
-        have hge := lam_succ_le_ext hk hT hB hxT hxB hyB hyT hm (hSsub p hp) hoff.1 hoff.2
+        have hge : F + 2 ≤ ext T B p.1 p.2 :=
+          ext_ge_succ_of_ne ht hT hB hxT hxB hyB hyT hm (hSsub p hp) hoff.1 hoff.2
         have hmul := Nat.mul_le_mul_left (N p) hge
         nlinarith [hmul]
       · rw [if_neg hoff, Nat.add_zero]
         by_cases hpq : p = q
         · subst hpq
-          rw [if_pos rfl, ← hdef]
+          rw [if_pos rfl, hdef]
           nlinarith []
         · rw [if_neg hpq]
           have hnp : ¬ (p.1 = q.1 ∧ p.2 = q.2) := fun h => hpq (Prod.ext h.1 h.2)
-          have hge := lam_le_ext_of_ne hk hT hB hxT hxB hyB hyT hm (hSsub p hp) hnp
+          have hge : F + 1 ≤ ext T B p.1 p.2 :=
+            ext_ge_of_ne ht hT hB hxT hxB hyB hyT hm (hSsub p hp) hnp
           have hmul := Nat.mul_le_mul_left (N p) hge
           nlinarith [hmul]
     have hsum := Finset.sum_le_sum hpoint
@@ -556,7 +557,13 @@ theorem lam_mul_total_le {k : ℕ} (hk : 3 ≤ k) {S : Finset (ℕ × ℕ)} {N :
       omega
     omega
 
-
+/-- **Lemma 2′**, in the form the ladder uses: at a common list size `k ≥ 3` the floor plus one is
+exactly `lam k`. -/
+theorem lam_mul_total_le {k : ℕ} (hk : 3 ≤ k) {S : Finset (ℕ × ℕ)} {N : ℕ × ℕ → ℕ}
+    {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k) (hSsub : ∀ p ∈ S, p.1 ≠ p.2)
+    (hI : Inv S N) :
+    lam k * total S N ≤ ∑ p ∈ S, N p * ext T B p.1 p.2 :=
+  floor_succ_mul_total_le (by omega) hT hB hSsub hI
 
 /-- **Lemma 3′.** The all-ones vector on a rung satisfies the invariant, exactly when `k ≥ 3`:
 the two masses are at most `k` each, the total is at least `k² - k`, and `2k ≤ k² - k` iff
@@ -577,12 +584,58 @@ theorem inv_ones {k : ℕ} (hk : 3 ≤ k) {A B : Finset ℕ} (hA : A.card = k) (
   rw [htot]
   nlinarith [hrow, hcol, hcard, hint, hk]
 
-/-- **Lemma 4′.** The transfer preserves the invariant. For `k ≥ 4` this needs no hypothesis on
-`N` at all; at `k = 3` it is where (I) is spent. -/
+/-- Double counting the mass off a state's row and column: erasing the state's own colours from
+the two lists turns the count into an `ext` one list size down. -/
+theorem sum_step_filter (S : Finset (ℕ × ℕ)) (N : ℕ × ℕ → ℕ) (T B : Finset ℕ) (c d : ℕ) :
+    (∑ q ∈ (states T B).filter fun q => ¬ q.1 = c ∧ ¬ q.2 = d, step S N q)
+      = ∑ p ∈ S, N p * ext (T.erase c) (B.erase d) p.1 p.2 := by
+  classical
+  have hset : ∀ p : ℕ × ℕ,
+      (((states T B).filter fun q => ¬ q.1 = c ∧ ¬ q.2 = d).filter
+          fun q => p.1 ≠ q.1 ∧ p.2 ≠ q.2)
+        = states ((T.erase c).erase p.1) ((B.erase d).erase p.2) := by
+    intro p
+    ext q
+    simp only [Finset.mem_filter, mem_states, Finset.mem_erase]
+    constructor
+    · rintro ⟨⟨⟨h1, h2, hne⟩, hc, hd⟩, ha, hb⟩
+      exact ⟨⟨Ne.symm ha, hc, h1⟩, ⟨Ne.symm hb, hd, h2⟩, hne⟩
+    · rintro ⟨⟨ha, hc, h1⟩, ⟨hb, hd, h2⟩, hne⟩
+      exact ⟨⟨⟨h1, h2, hne⟩, hc, hd⟩, Ne.symm ha, Ne.symm hb⟩
+  have h1 : (∑ q ∈ (states T B).filter fun q => ¬ q.1 = c ∧ ¬ q.2 = d, step S N q)
+      = ∑ q ∈ (states T B).filter fun q => ¬ q.1 = c ∧ ¬ q.2 = d,
+          ∑ p ∈ S, (if p.1 ≠ q.1 ∧ p.2 ≠ q.2 then N p else 0) := by
+    simp only [step, Finset.sum_filter]
+  rw [h1, Finset.sum_comm]
+  refine Finset.sum_congr rfl fun p _ => ?_
+  rw [← Finset.sum_filter, Finset.sum_const, smul_eq_mul, hset p, ← ext_eq_card_states, mul_comm]
+
+/-- **Lemma 4′.** The transfer preserves the invariant, uniformly in `k ≥ 3`.
+
+The published `k = 3` argument needs a separate treatment here, established by exhausting
+1,200,000 configurations. It is not needed: the mass off a state's row and column is itself an
+`ext`-weighted sum one list size down, so `floor_succ_mul_total_le` applies to it verbatim, and
+even the trivial floor `F + 1 ≥ 1` is enough. -/
 theorem inv_step {k : ℕ} (hk : 3 ≤ k) {S : Finset (ℕ × ℕ)} {N : ℕ × ℕ → ℕ}
-    {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k) (hI : Inv S N) :
+    {T B : Finset ℕ} (hT : T.card = k) (hB : B.card = k) (hSsub : ∀ p ∈ S, p.1 ≠ p.2)
+    (hI : Inv S N) :
     Inv (states T B) (step S N) := by
-  sorry
+  classical
+  intro q hq
+  obtain ⟨hqT, hqB, hqne⟩ := mem_states.mp hq
+  have hTc : (T.erase q.1).card = k - 1 := by rw [Finset.card_erase_of_mem hqT, hT]
+  have hBc : (B.erase q.2).card = k - 1 := by rw [Finset.card_erase_of_mem hqB, hB]
+  -- the transfer's own floor, one list size down
+  have hkey := floor_succ_mul_total_le (t := k - 1) (by omega) hTc hBc hSsub hI
+  have h1 : total S N ≤ ∑ p ∈ S, N p * ext (T.erase q.1) (B.erase q.2) p.1 p.2 :=
+    le_trans (Nat.le_mul_of_pos_left _ (by omega)) hkey
+  -- and no state's successor mass exceeds the old total
+  have h2 : step S N (q.1, q.2) ≤ total S N :=
+    Finset.sum_le_sum_of_subset (Finset.filter_subset _ _)
+  have hq' : (q.1, q.2) ∈ states T B := by simpa using hq
+  have hoff := sum_off_add (S := states T B) (N := step S N) hq'
+  have hg := sum_step_filter S N T B q.1 q.2
+  omega
 
 /-- The transfer's total is the `ext`-weighted sum of the old one: double counting the pairs
 (old state, compatible new state). -/
@@ -621,7 +674,8 @@ theorem inv_vec {k : ℕ} (hk : 3 ≤ k) {L : ℕ → Finset ℕ × Finset ℕ}
   intro j
   induction j with
   | zero => exact inv_ones hk (hL 0).1 (hL 0).2
-  | succ j ih => exact inv_step hk (hL (j + 1)).1 (hL (j + 1)).2 ih
+  | succ j ih =>
+      exact inv_step hk (hL (j + 1)).1 (hL (j + 1)).2 (fun p hp => states_ne hp) ih
 
 /-- **The transfer theorem.** After `n` rungs the total mass is at least `k(k-1)·lam k ^ n`, which
 is exactly the uniform count. -/
