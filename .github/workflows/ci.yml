@@ -37,10 +37,10 @@ jobs:
       # is the comparator workflow. Note comparator/Challenge.lean contains placeholders by
       # design, so it is deliberately outside this grep.
       #
-      # Cacti/ and NonPersistence/ are inside it: the cactus classification and Zhang-Dong's
-      # non-persistence theorem are both complete, and the grep is what keeps them that way. The
-      # word `sorry` therefore does not appear in those directories at all, prose included --
-      # reword rather than weaken the grep.
+      # Cacti/, NonPersistence/ and Ladder/ are inside it: the cactus classification,
+      # Zhang-Dong's non-persistence theorem and the ladder theorem are all complete, and the grep
+      # is what keeps them that way. The word `sorry` therefore does not appear in those
+      # directories at all, prose included -- reword rather than weaken the grep.
       #
       # OpenProblems.lean is outside it, and deliberately so: it states Kirov-Naimi's Question 1
       # and asserts it with `sorry`. (Question 2 was answered in 2026 and is now a theorem there,
@@ -59,7 +59,7 @@ jobs:
       - name: No sorry, admit, or native_decide
         run: |
           if grep -rnwE 'sorry|admit|native_decide' ListColoring/ ListColoring.lean Cacti/ Cacti.lean \
-               NonPersistence/ NonPersistence.lean; then
+               NonPersistence/ NonPersistence.lean Ladder/ Ladder.lean; then
             echo "::error::found sorry/admit/native_decide in the formalization"
             exit 1
           fi

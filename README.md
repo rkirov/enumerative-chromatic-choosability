@@ -33,6 +33,8 @@ choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything
 |---|---|
 | `ListColoring/` | the formalization |
 | `Cacti/` | the cactus classification — beyond the paper, see below |
+| `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
+| `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
 | `formalization.yaml` | machine-readable map: every numbered result of the paper → its Lean name, file, and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
@@ -155,9 +157,51 @@ This is the result of a 2026 AI research collaboration on this repository, not o
 working notes are in `ai_research_notes/`. `Cacti/` imports `ListColoring/` and is never imported
 by it.
 
+## Beyond the paper: ladders
+
+`Ladder/` settles the height-two case of Kirov–Naimi §6's **Question 1** — *is a Cartesian product
+of two enumeratively chromatic-choosable graphs one?* — for paths, which is the case the
+`ai_research_notes/` grid conjecture is about:
+
+> Every `2 × (n+1)` grid is enumeratively chromatic-choosable at every list size `k ≥ 3`
+> (`ListColoring.ecc_boxProd_pathG_one`), and the count it is tight against is
+> `k(k-1)(k² - 3k + 3)ⁿ` (`ListColoring.colConst_boxProd_pathG_one`).
+
+Question 1 has been open since 2016, and paths are chordal, hence qualify at every list size, so a
+positive answer would give every rectangular grid outright. Only height two is settled here;
+`OpenProblems.lean` records the reduction and the fact that refuting the grid statement would
+refute Question 1.
+
+The proof is a transfer matrix on rungs. Grade the colourings of the first `j` columns by the
+colours `(a,b)` of the last rung; adding a column replaces that vector by
+`N'(c,d) = ∑_{a ≠ c, b ≠ d} N(a,b)`. What has to be shown is that each column multiplies the total
+by at least `λ_k = k² - 3k + 3`, the number of successors a rung has under uniform lists. It does
+not, pointwise: one state can be short by exactly one. The invariant
+
+> **(I)** for every state `(a,b)`: `rowMass(a) + colMass(b) ≤ total`
+
+pays for that deficit, and the work is showing the transfer preserves it.
+
+`k ≥ 3` is sharp and enters at exactly one place, `Ladder.inv_ones`: the first rung's all-ones
+vector satisfies (I) iff `2k ≤ k² - k`. At `2` the `2 × 3` grid really does fail.
+
+Two things make the formal proof shorter than the pen-and-paper argument it started from. The
+count of successors is itself a count of *states of two shortened lists*, which turns the whole
+analysis into arithmetic and replaces a 1,200,000-configuration finite check by
+`Ladder.deficient_structure`. And the mass off a state's row and column is an instance of the same
+`ext`-weighted sum one list size down, so the lemma that buys the factor `λ_k` also proves the
+transfer preserves (I) — no separate argument, and no `k = 3` / `k ≥ 4` split. The bridge needs no
+ladder graph of its own: the induced subgraph of `pathG 1 □ pathG (n+1)` on the older columns *is*
+`pathG 1 □ pathG n`.
+
+Also a 2026 AI research collaboration result, not the paper's; notes in `ai_research_notes/`.
+`Ladder/` imports `ListColoring/` and is imported by nothing — in particular not by
+`OpenProblems.lean`, which stays imported by nothing at all.
+
 ## Standard of proof
 
-* No `sorry`, `admit`, or `native_decide` anywhere in `ListColoring/` or `Cacti/`, checked by CI.
+* No `sorry`, `admit`, or `native_decide` anywhere in `ListColoring/`, `Cacti/`,
+  `NonPersistence/` or `Ladder/`, checked by CI.
   The two `sorry`s in the repository are both in `OpenProblems.lean`, which is a **separate
   `lean_lib`** for exactly that reason: it imports `ListColoring` and nothing imports it, so no
   theorem can rest on an unproved statement. A `sorry` there means *nobody knows* — those are

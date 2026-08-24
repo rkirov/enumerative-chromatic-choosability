@@ -201,6 +201,16 @@ def addPendant {V : Type*} (G : SimpleGraph V) (v : V) : SimpleGraph (Option V) 
   symm := ⟨by rintro (_ | a) (_ | b) h <;> simp_all [addPendantAdj, G.adj_comm]⟩
   loopless := ⟨by rintro (_ | a) h <;> simp_all [addPendantAdj]⟩
 
+/-- Unlisted: only so that `pathG` of §11 has decidable adjacency. Verbatim from the library, so
+that the auto-generated name matches. -/
+instance {V : Type*} [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj] (v : V) :
+    DecidableRel (G.addPendant v).Adj := fun a b =>
+  match a, b with
+  | none, none => inferInstanceAs (Decidable False)
+  | none, some b => inferInstanceAs (Decidable (b = v))
+  | some a, none => inferInstanceAs (Decidable (a = v))
+  | some a, some b => inferInstanceAs (Decidable (G.Adj a b))
+
 /-- Adjacency for `G` with a new vertex `none` joined to both `u` and `v` (and nothing else). -/
 def addPendantPairAdj {V : Type*} (G : SimpleGraph V) (u v : V) : Option V → Option V → Prop
   | none, none => False
@@ -435,3 +445,75 @@ theorem exists_ecc_not_ecc_succ (k : ℕ) (hk : 3 ≤ k) (N : ℕ) :
 theorem not_persistence : ¬ Persistence := sorry
 
 end ZhangDong
+
+namespace SimpleGraph
+
+/-- Adjacency in a Cartesian product is decidable when it is decidable in both factors and both
+vertex types have decidable equality.  Mathlib does not supply this instance at the pinned
+revision, and `ECCAt` cannot be stated for `G □ H` without it. -/
+instance instDecidableRelBoxProd {α β : Type*} [DecidableEq α] [DecidableEq β]
+    (G : SimpleGraph α) [DecidableRel G.Adj] (H : SimpleGraph β) [DecidableRel H.Adj] :
+    DecidableRel (G □ H).Adj :=
+  fun _ _ => decidable_of_iff' _ boxProd_adj
+
+end SimpleGraph
+
+/-! ### 11. Ladders
+
+Not from the paper: a new theorem, proved in `Ladder/` of this repository.
+
+`pathG m` is the path of *length* `m`, on `m + 1` vertices, so `pathG 1 □ pathG n` is the
+`2 × (n+1)` grid — the ladder `P₂ □ P_{n+1}`.  Kirov–Naimi §6 Question 1 asks whether a Cartesian
+product of two `n`-monophilic graphs is `n`-monophilic; paths are chordal, hence monophilic at
+every list size, so a positive answer would give every rectangular grid.  The claims below settle
+the height-two case unconditionally, and evaluate the count they are tight against.
+
+`k ≥ 3` is sharp: the `2 × 3` grid is not `2`-monophilic.
+-/
+
+namespace ListColoring
+
+open SimpleGraph
+
+/-- The vertex type of the path of length `k`: `Unit` with `k` extra points. -/
+def PathV : ℕ → Type
+  | 0 => Unit
+  | k + 1 => Option (PathV k)
+
+instance instDecidableEqPathV : (k : ℕ) → DecidableEq (PathV k)
+  | 0 => inferInstanceAs (DecidableEq Unit)
+  | k + 1 => letI := instDecidableEqPathV k; inferInstanceAs (DecidableEq (Option (PathV k)))
+
+instance instFintypePathV : (k : ℕ) → Fintype (PathV k)
+  | 0 => inferInstanceAs (Fintype Unit)
+  | k + 1 => letI := instFintypePathV k; inferInstanceAs (Fintype (Option (PathV k)))
+
+/-- The terminal vertex of `pathG k` that was attached last. -/
+def pathEnd : (k : ℕ) → PathV k
+  | 0 => ()
+  | _ + 1 => none
+
+/-- The path of length `k`: `k + 1` vertices in a row. -/
+def pathG : (k : ℕ) → SimpleGraph (PathV k)
+  | 0 => ⊥
+  | k + 1 => (pathG k).addPendant (pathEnd k)
+
+instance instDecidableRelPathG : (k : ℕ) → DecidableRel (pathG k).Adj
+  | 0 => fun _ _ => inferInstanceAs (Decidable False)
+  | k + 1 =>
+      letI := instDecidableEqPathV k
+      letI := instDecidableRelPathG k
+      inferInstanceAs (DecidableRel ((pathG k).addPendant (pathEnd k)).Adj)
+
+/-- **Ladders are `k`-monophilic for every `k ≥ 3`.**  No assignment of `k`-element lists to the
+`2 × (n+1)` grid admits fewer colourings than the constant assignment does.  The height-two case
+of Kirov–Naimi §6 Question 1 for paths, proved rather than assumed. -/
+theorem ecc_boxProd_pathG_one {k : ℕ} (hk : 3 ≤ k) (n : ℕ) : (pathG 1 □ pathG n).ECCAt k := sorry
+
+/-- **The count the previous claim is tight against:**
+`P(P₂ □ P_{n+1}, k) = k(k-1)(k² - 3k + 3)ⁿ`.  The transfer eigenvalue `k² - 3k + 3` is the number
+of ways to extend a rung `(a,b)` with `a ≠ b` to the next one. -/
+theorem colConst_boxProd_pathG_one {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :
+    (pathG 1 □ pathG n).colConst k = k * (k - 1) * (k * k - 3 * k + 3) ^ n := sorry
+
+end ListColoring

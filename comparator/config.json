@@ -39,7 +39,12 @@
     "SimpleGraph.ECC",
     "ListColoring.IsCactus",
     "ListColoring.HasAtMostOneCycle",
-    "ZhangDong.Persistence"
+    "ZhangDong.Persistence",
+    "ListColoring.PathV",
+    "ListColoring.pathEnd",
+    "ListColoring.pathG",
+    "ListColoring.instDecidableRelPathG",
+    "SimpleGraph.instDecidableRelBoxProd"
   ],
   "theorem_names": [
     "SimpleGraph.eval_chromaticPolynomial",
@@ -56,7 +61,9 @@
     "ListColoring.isCactus_ecc_two_iff",
     "ListColoring.isCactus_ecc_iff",
     "ZhangDong.exists_ecc_not_ecc_succ",
-    "ZhangDong.not_persistence"
+    "ZhangDong.not_persistence",
+    "ListColoring.ecc_boxProd_pathG_one",
+    "ListColoring.colConst_boxProd_pathG_one"
   ],
   "permitted_axioms": [
     "propext",

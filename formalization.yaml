@@ -54,8 +54,17 @@ project:
     even-cycle blocks at list size 3 are the substance of the proof and are handled by a
     tensor capacity argument.
 
-    There is no sorry, admit or native_decide in ListColoring/, Cacti/ or NonPersistence/. Every
-    claimed result depends on exactly propext, Classical.choice and Quot.sound.
+    A second original result, in Ladder/, settles the height-two case of Kirov and Naimi's
+    Question 1 for paths: every 2 x (n+1) grid is enumeratively chromatic-choosable at every
+    list size k >= 3, with the count k(k-1)(k^2-3k+3)^n it is tight against. The question -
+    whether a Cartesian product of two enumeratively chromatic-choosable graphs is one - has
+    been open since 2016, and paths are chordal, hence qualify at every list size, so a
+    positive answer would give every rectangular grid. Only the height-two case is settled
+    here. The proof is a transfer-matrix argument carrying a combinatorial invariant across
+    the rungs; k >= 3 is sharp, and enters at exactly one place.
+
+    There is no sorry, admit or native_decide in ListColoring/, Cacti/, NonPersistence/ or
+    Ladder/. Every claimed result depends on exactly propext, Classical.choice and Quot.sound.
   authors: ["Radoslav Kirov"]
   responsible_maintainers: ["Radoslav Kirov"]
   license: Apache-2.0
@@ -67,13 +76,18 @@ project:
   # Imports ListColoring; imported only by OpenProblems.lean, to discharge that question.
   further_library: NonPersistence
   further_entry_point: NonPersistence.lean
+  # The ladder theorem: the height-two case of Kirov-Naimi section 6 Question 1 for paths.
+  # Original to this repository. Imports ListColoring; imported by nothing.
+  ladder_library: Ladder
+  ladder_entry_point: Ladder.lean
   open_problems_library: OpenProblems
   open_problems_entry_point: OpenProblems.lean
   lean_toolchain: "leanprover/lean4:v4.33.0"
   mathlib_rev: "db584cd6d46c92f209a44c0f1c829460d327499d"
   permitted_axioms: [propext, Classical.choice, Quot.sound]
   standard_of_proof: >-
-    No sorry, admit or native_decide anywhere in ListColoring/, Cacti/ or NonPersistence/. Every
+    No sorry, admit or native_decide anywhere in ListColoring/, Cacti/, NonPersistence/ or
+    Ladder/. Every
     headline result depends on exactly the three permitted axioms, asserted by #print axioms at
     the foot of each file and enforced in CI by leanprover/comparator against
     comparator/Challenge.lean. The only sorries in the repository are the two in
@@ -88,9 +102,9 @@ classification:
     - "05C38"   # paths and cycles
     - "68V20"   # formalization of mathematics in connection with theorem provers
 
-# What was formalized. The cactus classification of Cacti/ is original to this repository, but
-# ten of the fifteen compared theorems formalize prior work, so the submitted result is
-# source-based and no original-proof entry is claimed here.
+# What was formalized. The cactus classification of Cacti/ and the ladder theorem of Ladder/ are
+# original to this repository, but ten of the seventeen compared theorems formalize prior work, so
+# the submitted result is source-based and no original-proof entry is claimed here.
 sources:
   - title: "List coloring and n-monophilic graphs"
     authors: ["Radoslav Kirov", "Ramin Naimi"]
@@ -176,7 +190,8 @@ review:
 status:
   scope: >-
     ListColoring/ formalizes the source paper and the results it quotes; Cacti/ proves the
-    cactus classification and imports ListColoring/, never the reverse. OpenProblems.lean is a
+    cactus classification and Ladder/ the ladder theorem, both importing ListColoring/, never
+    the reverse. OpenProblems.lean is a
     separate library, imported by nothing, that states the source paper's two open questions
     and asserts them with sorry: there a sorry records that the question is open, not that a
     proof is missing. The three sorries counted below are exactly those.
@@ -262,6 +277,18 @@ status:
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
       note: "the full cactus spectrum (original to this repository)"
+    - declaration: ListColoring.ecc_boxProd_pathG_one
+      file: Ladder/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+      note: "every 2 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3, the height-two case of Kirov-Naimi section 6 Question 1 for paths (original to this repository)"
+    - declaration: ListColoring.colConst_boxProd_pathG_one
+      file: Ladder/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+      note: "the uniform count k(k-1)(k^2-3k+3)^n the previous entry is tight against (original to this repository)"
 
 fidelity:
   divergences: >-

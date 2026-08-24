@@ -1,5 +1,5 @@
 import Ladder.Transfer
-import OpenProblems
+import ListColoring
 
 /-!
 # The ladder as a graph, and its colouring transfer

@@ -1,4 +1,5 @@
 import ListColoring.Defs
+import ListColoring.BoxProd
 import ListColoring.Rename
 import ListColoring.Basic
 import ListColoring.Iso
