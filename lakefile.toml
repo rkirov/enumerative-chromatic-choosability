@@ -1,7 +1,7 @@
 name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
-defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence"]
+defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "Ladder"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -35,3 +35,9 @@ name = "Cacti"
 # `OpenProblems.lean` had carried as open. Imports ListColoring, imported by nothing.
 [[lean_lib]]
 name = "NonPersistence"
+
+# Ladders P_2 box P_n are k-ECC for every k >= 3 -- the first grid family proved at every list
+# size. Source of record: ai_research_notes/GRID_LADDER_ALL_K_2026-08-24.md, which extends the
+# k = 3 argument of ladder_three_um_complete_proof.md. Imports ListColoring, imported by nothing.
+[[lean_lib]]
+name = "Ladder"
