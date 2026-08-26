@@ -517,3 +517,52 @@ theorem colConst_boxProd_pathG_one {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :
     (pathG 1 □ pathG n).colConst k = k * (k - 1) * (k * k - 3 * k + 3) ^ n := sorry
 
 end ListColoring
+
+namespace Grid3
+
+/-- Uniform successors of a height-three state with distinct top and bottom colours. -/
+def ene (k : ℕ) : ℕ := (k - 1) * (k - 2) ^ 2 + 2 * (k - 2)
+
+/-- Uniform `eq` successors of such a state. -/
+def gam (k : ℕ) : ℕ := (k - 2) ^ 2 + 1
+
+/-- The extra `eq` successors of an `eq` state. -/
+def del (k : ℕ) : ℕ := k - 2
+
+mutual
+/-- The uniform `i`-column future count of a state with distinct top and bottom colours. -/
+def Fne (k : ℕ) : ℕ → ℕ
+  | 0 => 1
+  | i + 1 => ene k * Fne k i + gam k * Dp k i
+/-- The excess future count of a state with equal top and bottom colours. -/
+def Dp (k : ℕ) : ℕ → ℕ
+  | 0 => 0
+  | i + 1 => Fne k i + del k * Dp k i
+end
+
+end Grid3
+
+namespace ListColoring
+
+open SimpleGraph
+
+/-- **Height-three grids are `k`-monophilic for every `k ≥ 5`.**  No assignment of `k`-element
+lists to the `3 × (n+1)` grid admits fewer colourings than the constant assignment does.  The
+height-three case of Kirov–Naimi §6 Question 1 for paths at list sizes `≥ 5`, proved rather than
+assumed. -/
+theorem ecc_boxProd_pathG_two {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 2 □ pathG n).ECCAt k := sorry
+
+/-- **The count the previous claim is tight against:**
+`P(P₃ □ P_{n+1}, k) = Fne k n · k(k-1)² + Dp k n · k(k-1)` — `12, 54, 246, 1122, 5118, …` at
+`k = 3`. -/
+theorem colConst_boxProd_pathG_two {k : ℕ} (hk : 2 ≤ k) (n : ℕ) :
+    (pathG 2 □ pathG n).colConst k
+      = Grid3.Fne k n * (k * (k - 1) ^ 2) + Grid3.Dp k n * (k * (k - 1)) := sorry
+
+/-- **Height-three grids are `k`-monophilic for every `k ≥ 4`.**  The `k = 4` case needs two
+columns of lookback and a family of LP certificates over the Venn atoms of five lists; `k ≥ 5` is
+the claim two above. -/
+theorem ecc_boxProd_pathG_two_of_four {k : ℕ} (hk : 4 ≤ k) (n : ℕ) :
+    (pathG 2 □ pathG n).ECCAt k := sorry
+
+end ListColoring

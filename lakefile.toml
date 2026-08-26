@@ -1,7 +1,8 @@
 name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
-defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "Ladder"]
+defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "Ladder", "Grid3",
+  "TwoDegenerate"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -41,3 +42,17 @@ name = "NonPersistence"
 # k = 3 argument of ladder_three_um_complete_proof.md. Imports ListColoring, imported by nothing.
 [[lean_lib]]
 name = "Ladder"
+
+# Height-three grids P_3 box P_n are k-ECC for every k >= 4 -- the eigenfunctional telescoping
+# of ai_research_notes/GRID_HEIGHT3_EIGENFUNCTIONAL_2026-08-25.md. For k >= 5 its two seam
+# inequalities are proved one column back through a pair lemma whose threshold is
+# (k-2)(k-3) >= k+1; for k = 4 they need two columns of lookback and the LP certificates of
+# Grid3/Four/. Complete and sorry-free; k = 3 is not claimed. Imports ListColoring, imported by
+# nothing.
+[[lean_lib]]
+name = "Grid3"
+
+# A formal counterexample to the proposed uniform theorem for 2-degenerate graphs. K_{2,26} is
+# 2-degenerate but is not ECC at list size four. Imports ListColoring, imported by nothing.
+[[lean_lib]]
+name = "TwoDegenerate"

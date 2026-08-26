@@ -44,7 +44,12 @@
     "ListColoring.pathEnd",
     "ListColoring.pathG",
     "ListColoring.instDecidableRelPathG",
-    "SimpleGraph.instDecidableRelBoxProd"
+    "SimpleGraph.instDecidableRelBoxProd",
+    "Grid3.ene",
+    "Grid3.gam",
+    "Grid3.del",
+    "Grid3.Fne",
+    "Grid3.Dp"
   ],
   "theorem_names": [
     "SimpleGraph.eval_chromaticPolynomial",
@@ -63,7 +68,10 @@
     "ZhangDong.exists_ecc_not_ecc_succ",
     "ZhangDong.not_persistence",
     "ListColoring.ecc_boxProd_pathG_one",
-    "ListColoring.colConst_boxProd_pathG_one"
+    "ListColoring.colConst_boxProd_pathG_one",
+    "ListColoring.ecc_boxProd_pathG_two",
+    "ListColoring.colConst_boxProd_pathG_two",
+    "ListColoring.ecc_boxProd_pathG_two_of_four"
   ],
   "permitted_axioms": [
     "propext",
