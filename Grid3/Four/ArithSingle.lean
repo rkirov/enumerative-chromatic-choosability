@@ -23,6 +23,8 @@ that pin the configuration down.
 
 namespace Grid3.Four.Arith
 
+set_option linter.unusedVariables false
+
 set_option maxRecDepth 10000 in
 set_option maxHeartbeats 0 in
 theorem single_all (a1 a2 a3 a4 a5 a6 a7 a8 a9 a10 a11 a12 a13 a14 a15 a16 a17 a18 a19 a20 a21 a22 a23 a24 a25 a26 a27 a28 a29 a30 a31 nX nZ yX yZ yT yM yB yW rxT rxM rxW rxWM rzB rzM rzW rzWM rmT rmB rmW rmXT rmZB rxz rxzM rxzW rxzWM rom rzT rxB : ℤ)

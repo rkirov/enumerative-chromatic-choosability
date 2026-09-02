@@ -12,6 +12,8 @@ Same as `Grid3.Four.Expand`, for a single marked colour (atoms relative to `{y}`
 
 open Finset
 
+set_option linter.unusedSimpArgs false
+
 namespace Grid3
 namespace Four
 

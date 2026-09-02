@@ -34,9 +34,6 @@ theorem sum_pair_eq (q : ℕ → ℤ) {Y : Finset ℕ} {y₀ : ℕ} (h : y₀ �
   push_cast [Nat.cast_sub hpos]
   ring
 
-theorem card_three_or_four {Y : Finset ℕ} (hY : NearK 4 Y) : (Y.card : ℤ) = 3 ∨ (Y.card : ℤ) = 4 := by
-  rcases hY with h | h <;> simp [h]
-
 section
 variable {X Y Z T M B : Finset ℕ} (hX : NearK 4 X) (hY : NearK 4 Y) (hZ : NearK 4 Z)
   (hT : T.card = 4) (hM : M.card = 4) (hB : B.card = 4)
@@ -55,8 +52,11 @@ theorem irregular_of_negH {y : ℕ} (h : QH 4 X Z T M B y < 0) : y ∈ M ∧ ¬ 
     unfold Regular; tauto
   exact absurd (single_main hX hZ hT hM hB hreg).1 (not_le.mpr h)
 
+end
+
 /-- The two Bad configurations exclude every other irregular colour. -/
-theorem irregular_unique {y₀ y₁ : ℕ} (h0 : y₀ ∈ M ∧ ¬ (y₀ ∈ T ∧ y₀ ∈ B))
+theorem irregular_unique {X Z T M B : Finset ℕ} {y₀ y₁ : ℕ}
+    (h0 : y₀ ∈ M ∧ ¬ (y₀ ∈ T ∧ y₀ ∈ B))
     (h1 : BadU X Z T M B y₁ ∨ BadF X Z T M B y₁) (hne : y₀ ≠ y₁) : False := by
   obtain ⟨h0M, h0irr⟩ := h0
   rcases h1 with ⟨h1M, h1T, h1B, -, -, -, -, -, -, hMT, hMB, -⟩ | ⟨h1M, h1T, h1B, -, -, -, -, -, -, hMB, hMT, -⟩
@@ -90,8 +90,6 @@ theorem irregular_unique {y₀ y₁ : ℕ} (h0 : y₀ ∈ M ∧ ¬ (y₀ ∈ T �
       rw [Finset.card_pair hne] at this
       omega
 
-end
-
 /-- Pairs at a fixed colour, summed over its partners: if every pair sum is at least `c`, then
 `(|Y| - 1) c ≤ (|Y| - 3) q y + 2 ∑ q`. -/
 theorem sum_ge_of_pairs (q : ℕ → ℤ) {Y : Finset ℕ} {y : ℕ} (hy : y ∈ Y) {c : ℤ}
@@ -113,14 +111,15 @@ include hX hY hZ hT hM hB
 theorem colH_four : 0 ≤ ∑ y ∈ Y, QH 4 X Z T M B y := by
   by_cases hall : ∀ y ∈ Y, 0 ≤ QH 4 X Z T M B y
   · exact Finset.sum_nonneg hall
-  · push_neg at hall
+  · push Not at hall
     obtain ⟨y, hy, hneg⟩ := hall
     have hirr := irregular_of_negH hX hZ hT hM hB hneg
     have hp : ∀ y' ∈ Y.erase y, (0 : ℤ) ≤ QH 4 X Z T M B y + 2 * QH 4 X Z T M B y' :=
       fun y' hy' => (pair_main hX hZ hT hM hB hirr.1 hirr.2 (Finset.ne_of_mem_erase hy').symm).1
     have := sum_ge_of_pairs (QH 4 X Z T M B) hy hp
-    rcases card_three_or_four hY with h | h <;> rw [h] at this <;> linarith
+    rcases nearK_card hY with h | h <;> rw [h] at this <;> linarith
 
+omit hY in
 /-- At an irregular colour that is not Bad, every pair sum is at least `1`. -/
 theorem pairs_irregular_noBad {y : ℕ} (hy : y ∈ Y) (hirr : y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B))
     (hnb : ¬ (BadU X Z T M B y ∨ BadF X Z T M B y)) :
@@ -133,6 +132,7 @@ theorem pairs_irregular_noBad {y : ℕ} (hy : y ∈ Y) (hirr : y ∈ M ∧ ¬ (y
   · exact absurd (Or.inl hb) hnb
   · exact absurd (Or.inr hb) hnb
 
+omit hY in
 /-- At any irregular colour, every pair sum is at least `-1`. -/
 theorem pairs_irregular_neg {y : ℕ} (hy : y ∈ Y) (hirr : y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B)) :
     ((Y.card : ℤ) - 1) * (-1)
@@ -154,10 +154,10 @@ theorem sum_QC_of_noBad
   classical
   have hreg : ∀ y ∈ Y, ¬ (y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B)) → 0 ≤ QC 4 X Z T M B y := fun y _ h =>
     (single_main hX hZ hT hM hB (by unfold Regular; tauto)).2
-  rcases card_three_or_four hY with h3 | h4
+  rcases nearK_card hY with h3 | h4
   · by_cases hex : ∃ y ∈ Y, y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B)
     · obtain ⟨y, hy, hirr⟩ := hex
-      have := pairs_irregular_noBad hX hY hZ hT hM hB hy hirr (hnb y hy hirr)
+      have := pairs_irregular_noBad hX hZ hT hM hB hy hirr (hnb y hy hirr)
       rw [h3] at this
       exact ⟨by linarith, fun _ => by linarith⟩
     · have h0 : 0 ≤ ∑ y ∈ Y, QC 4 X Z T M B y :=
@@ -167,7 +167,7 @@ theorem sum_QC_of_noBad
         3 - 2 * ∑ y' ∈ Y, QC 4 X Z T M B y' ≤ QC 4 X Z T M B y := by
       intro y hy
       obtain ⟨hyY, hirr⟩ := Finset.mem_filter.mp hy
-      have := pairs_irregular_noBad hX hY hZ hT hM hB hyY hirr (hnb y hyY hirr)
+      have := pairs_irregular_noBad hX hZ hT hM hB hyY hirr (hnb y hyY hirr)
       rw [h4] at this
       linarith
     have hRb : 0 ≤ ∑ y ∈ Y.filter (fun y => ¬ (y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B))), QC 4 X Z T M B y :=
@@ -182,14 +182,14 @@ theorem sum_QC_of_noBad
     have key : 3 * k ≤ (1 + 2 * k) * s := by linarith
     refine ⟨?_, fun hex => ?_⟩
     · by_contra hneg
-      push_neg at hneg
+      push Not at hneg
       nlinarith [mul_nonneg hk0 (by linarith : (0 : ℤ) ≤ -1 - s)]
     · obtain ⟨y, hy, hirr⟩ := hex
       have hk1 : (1 : ℤ) ≤ k := by
         rw [hk]
         exact_mod_cast Finset.card_pos.mpr ⟨y, Finset.mem_filter.mpr ⟨hy, hirr⟩⟩
       by_contra hneg
-      push_neg at hneg
+      push Not at hneg
       nlinarith [mul_nonneg (by linarith : (0 : ℤ) ≤ k - 1) (by linarith : (0 : ℤ) ≤ -s)]
 
 /-- **The `(C1_r)` column sum is at least `-1`.** -/
@@ -203,13 +203,13 @@ theorem colC_neg : -1 ≤ ∑ y ∈ Y, QC 4 X Z T M B y := by
       refine (single_main hX hZ hT hM hB ?_).2
       by_contra hr
       have hirr : y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B) := by unfold Regular at hr; tauto
-      exact irregular_unique hX hZ hT hM hB hirr hb₀ (Finset.ne_of_mem_erase hy)
-    have hp := pairs_irregular_neg hX hY hZ hT hM hB hy₀ ⟨hM₀, hirr₀⟩
+      exact irregular_unique hirr hb₀ (Finset.ne_of_mem_erase hy)
+    have hp := pairs_irregular_neg hX hZ hT hM hB hy₀ ⟨hM₀, hirr₀⟩
     have hsum : ∑ y ∈ Y, QC 4 X Z T M B y
         = QC 4 X Z T M B y₀ + ∑ y ∈ Y.erase y₀, QC 4 X Z T M B y :=
       (Finset.add_sum_erase Y _ hy₀).symm
     have hR := Finset.sum_nonneg hreg
-    rcases card_three_or_four hY with h | h <;> rw [h] at hp <;> linarith
+    rcases nearK_card hY with h | h <;> rw [h] at hp <;> linarith
   · have hnb : ∀ y ∈ Y, y ∈ M ∧ ¬ (y ∈ T ∧ y ∈ B) → ¬ (BadU X Z T M B y ∨ BadF X Z T M B y) :=
       fun y hy hirr hb => hbad ⟨y, hy, hirr.1, hirr.2, hb⟩
     have := (sum_QC_of_noBad hX hY hZ hT hM hB hnb).1
@@ -231,7 +231,7 @@ theorem colC_gap {y₀ : ℕ} (hy₀ : y₀ ∈ Y) (hM₀ : y₀ ∈ M) (hirr₀
     intro y hy hirr hb
     by_cases hne : y₀ = y
     · subst hne; exact hnb₀ hb
-    · exact irregular_unique hX hZ hT hM hB ⟨hM₀, hirr₀⟩ hb hne
+    · exact irregular_unique ⟨hM₀, hirr₀⟩ hb hne
   exact (sum_QC_of_noBad hX hY hZ hT hM hB hnb).2 ⟨y₀, hy₀, hM₀, hirr₀⟩
 
 end column

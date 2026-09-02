@@ -17,37 +17,38 @@ open Finset
 namespace Grid3
 namespace Four
 
-theorem nearK_of_four {X : Finset ℕ} (h : X.card = 4) : NearK 4 X := Or.inr h
-
 /-- **The depth-two local condition at `k = 4`.** -/
 theorem depthTwoLocalOK_four : DepthTwoLocalOK 4 := by
   intro C₀ C₁ C₂ C₃ _ h1 h2 h3 s₀ _
   refine localSeamOK_of_sums (twoStepVec_eq C₁ C₂ s₀) ?_ ?_
-  · exact sum_GH_nonneg (nearK_erase h1.1 _) (nearK_erase h1.2.1 _) (nearK_erase h1.2.2 _) h2 h3
-  · exact sum_GC_nonneg (nearK_erase h1.1 _) (nearK_erase h1.2.1 _) (nearK_erase h1.2.2 _) h2 h3
+  · exact sum_GH_nonneg h2 h3
+  · exact sum_GC_nonneg (nearK_erase h1.1 _) (nearK_erase h1.2.2 _) h2 h3
 
 /-- **The first two seams at `k = 4`.** -/
 theorem initialTwoSeamsOK_four : InitialTwoSeamsOK 4 := by
   intro C₀ C₁ C₂ h0 h1 h2
+  obtain ⟨hT0, hM0, hB0⟩ := h0
   refine ⟨?_, ?_⟩
   · -- the first seam: the all-ones vector on `C₀`
     unfold LocalSeamOK columnStates
     refine ⟨(H1_ones_iff _ _ _ _ _ _ _).mpr ?_, (C1r_ones_iff _ _ _ _ _ _ _).mpr ?_⟩
-    · exact colH1_of_sum (colH_four (nearK_of_four h0.1) (nearK_of_four h0.2.1)
-        (nearK_of_four h0.2.2) h1.1 h1.2.1 h1.2.2)
+    · exact colH1_of_sum (colH_four (nearK_of_card hT0) (nearK_of_card hM0)
+        (nearK_of_card hB0) h1.1 h1.2.1 h1.2.2)
     · refine colC1r_of_sum ?_
-      rcases colC_or (nearK_of_four h0.1) (nearK_of_four h0.2.1) (nearK_of_four h0.2.2) h1.1
+      rcases colC_or (nearK_of_card hT0) (nearK_of_card hM0) (nearK_of_card hB0) h1.1
           h1.2.1 h1.2.2 with h | ⟨y₀, hy₀, hyM, hirr, hb⟩
       · exact h
       · -- a full column of `4`-lists cannot be Bad: a punctured list would have three colours
         exfalso
         rcases hb with hb | hb
-        · have := hb.2.2.2.2.2.2.1; have := h0.2.2; omega
-        · have := hb.2.2.2.2.2.1; have := h0.1; omega
+        · rcases hb with ⟨_, _, _, _, _, _, hZ3, _, _, _, _, _⟩
+          omega
+        · rcases hb with ⟨_, _, _, _, _, hX3, _, _, _, _, _, _⟩
+          omega
   · -- the second seam: the vector after one transfer
     exact localSeamOK_of_sums (stepOnes_eq C₀ C₁)
-      (sum_GH_nonneg (nearK_of_four h0.1) (nearK_of_four h0.2.1) (nearK_of_four h0.2.2) h1 h2)
-      (sum_GC_nonneg (nearK_of_four h0.1) (nearK_of_four h0.2.1) (nearK_of_four h0.2.2) h1 h2)
+      (sum_GH_nonneg h1 h2)
+      (sum_GC_nonneg (nearK_of_card hT0) (nearK_of_card hB0) h1 h2)
 
 /-- **Height-three grids are `4`-ECC.** -/
 theorem ecc_grid3_four (n : ℕ) : (ListColoring.pathG 2 □ ListColoring.pathG n).ECCAt 4 :=

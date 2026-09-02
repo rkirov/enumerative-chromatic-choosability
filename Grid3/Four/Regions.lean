@@ -13,6 +13,8 @@ sum of its atoms plus its marked colours.
 
 open Finset
 
+set_option linter.unusedSimpArgs false
+
 namespace Grid3
 namespace Four
 

@@ -157,9 +157,9 @@ theorem localSeamOK_of_sums {X Y Z : Finset ℕ} {C₂ C₃ : ColumnLists} {N : 
 /-! ### The core: the sums of column sums are nonnegative -/
 
 section core
-variable {X Y Z : Finset ℕ} (hX : NearK 4 X) (hY : NearK 4 Y) (hZ : NearK 4 Z)
-  {C₂ C₃ : ColumnLists} (h2 : IsKColumn 4 C₂) (h3 : IsKColumn 4 C₃)
-include hX hY hZ h2 h3
+variable {X Y Z : Finset ℕ} {C₂ C₃ : ColumnLists}
+  (h2 : IsKColumn 4 C₂) (h3 : IsKColumn 4 C₃)
+include h2 h3
 
 theorem sum_GH_nonneg : 0 ≤ ∑ u ∈ states X Y Z, GH C₂ C₃ u := by
   refine Finset.sum_nonneg fun u _ => ?_
@@ -219,7 +219,7 @@ theorem mem_of_card_erase {B : Finset ℕ} (hB : B.card = 4) {c : ℕ} (h : (B.e
   omega
 
 /-- Two punctures of a `4`-list giving the same `3`-list are the same puncture. -/
-theorem erase_eq_erase {B : Finset ℕ} (hB : B.card = 4) {c c' : ℕ} (hc : c ∈ B)
+theorem erase_eq_erase {B : Finset ℕ} {c c' : ℕ} (hc : c ∈ B)
     (h : B.erase c = B.erase c') : c = c' := by
   by_contra hne
   have : c ∈ B.erase c' := Finset.mem_erase.mpr ⟨hne, hc⟩
@@ -257,9 +257,10 @@ variable {X Y Z : Finset ℕ} (hX : NearK 4 X) (hY : NearK 4 Y) (hZ : NearK 4 Z)
   {C₂ C₃ : ColumnLists} (h2 : IsKColumn 4 C₂) (h3 : IsKColumn 4 C₃)
 include hX hY hZ h2 h3
 
+omit hX hY in
 /-- **The core inequality, unflipped case.** If some Bad state is of the `BadU` kind, every Bad
 state is, and the bottom-colour replacement compensates. -/
-theorem sum_GC_nonneg_U {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : ℕ}
+theorem sum_GC_nonneg_U {u₀ : State} {y₀ : ℕ}
     (hb₀ : BadU (C₂.1.erase u₀.1) (C₂.2.2.erase u₀.2.2) C₃.1 C₃.2.1 C₃.2.2 y₀) :
     0 ≤ ∑ u ∈ states X Y Z, GC C₂ C₃ u := by
   classical
@@ -304,7 +305,7 @@ theorem sum_GC_nonneg_U {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
     have hr := repl_mem hZ u.2.2 u.2.1
     rw [Finset.mem_erase, Finset.mem_erase] at hr
     by_cases hrB : repl Z u.2.2 u.2.1 ∈ C₂.2.2
-    · exact hr.2.1 (erase_eq_erase hB2 hrB (heq.trans hZu.symm))
+    · exact hr.2.1 (erase_eq_erase hrB (heq.trans hZu.symm))
     · rw [Finset.erase_eq_of_notMem hrB] at heq
       have := congrArg Finset.card heq
       omega
@@ -334,14 +335,14 @@ theorem sum_GC_nonneg_U {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
     obtain ⟨hZu', hmem'⟩ := hZeq u' hu'S y' hb'
     simp only [φ, Prod.mk.injEq] at heq
     obtain ⟨h1, h2, -⟩ := heq
-    have h3 : u.2.2 = u'.2.2 := erase_eq_erase hB2 hmem (hZu.trans hZu'.symm)
+    have h3 : u.2.2 = u'.2.2 := erase_eq_erase hmem (hZu.trans hZu'.symm)
     exact Prod.ext h1 (Prod.ext h2 h3)
   -- the sum
   have hsplit := Finset.sum_filter_add_sum_filter_not S
     (fun u => BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2) (GC C₂ C₃)
   rw [← hbad] at hsplit
   have hbad_ge : -(bad.card : ℤ) ≤ ∑ u ∈ bad, GC C₂ C₃ u := by
-    have := Finset.sum_le_sum fun u (_ : u ∈ bad) => GC_neg hX hY hZ ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u
+    have := Finset.sum_le_sum fun u (_ : u ∈ bad) => GC_neg ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u
     simp only [Finset.sum_const, nsmul_eq_mul, mul_neg, mul_one] at this
     exact this
   have himage : bad.image φ ⊆ S.filter (fun u => ¬ BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2) := by
@@ -354,7 +355,7 @@ theorem sum_GC_nonneg_U {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
       ≤ ∑ u ∈ S.filter (fun u => ¬ BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2), GC C₂ C₃ u := by
     refine Finset.sum_le_sum_of_subset_of_nonneg himage fun u hu _ => ?_
     obtain ⟨huS, hnot⟩ := Finset.mem_filter.mp hu
-    rcases GC_or hX hY hZ ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u with h | h
+    rcases GC_or ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u with h | h
     · exact h
     · exact absurd h hnot
   have himage_ge : (bad.card : ℤ) ≤ ∑ u ∈ bad.image φ, GC C₂ C₃ u := by
@@ -379,8 +380,9 @@ variable {X Y Z : Finset ℕ} (hX : NearK 4 X) (hY : NearK 4 Y) (hZ : NearK 4 Z)
   {C₂ C₃ : ColumnLists} (h2 : IsKColumn 4 C₂) (h3 : IsKColumn 4 C₃)
 include hX hY hZ h2 h3
 
+omit hY hZ in
 /-- **The core inequality, flipped case.** -/
-theorem sum_GC_nonneg_F {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : ℕ}
+theorem sum_GC_nonneg_F {u₀ : State} {y₀ : ℕ}
     (hb₀ : BadF (C₂.1.erase u₀.1) (C₂.2.2.erase u₀.2.2) C₃.1 C₃.2.1 C₃.2.2 y₀) :
     0 ≤ ∑ u ∈ states X Y Z, GC C₂ C₃ u := by
   classical
@@ -422,7 +424,7 @@ theorem sum_GC_nonneg_F {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
     have hr := repl_mem hX u.1 u.2.1
     rw [Finset.mem_erase, Finset.mem_erase] at hr
     by_cases hrT : repl X u.1 u.2.1 ∈ C₂.1
-    · exact hr.2.1 (erase_eq_erase hT2 hrT (heq.trans hXu.symm))
+    · exact hr.2.1 (erase_eq_erase hrT (heq.trans hXu.symm))
     · rw [Finset.erase_eq_of_notMem hrT] at heq
       have := congrArg Finset.card heq
       omega
@@ -452,13 +454,13 @@ theorem sum_GC_nonneg_F {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
     obtain ⟨hXu', hmem'⟩ := hXeq u' hu'S y' hb'
     simp only [φ, Prod.mk.injEq] at heq
     obtain ⟨-, h2, h3⟩ := heq
-    have h1 : u.1 = u'.1 := erase_eq_erase hT2 hmem (hXu.trans hXu'.symm)
+    have h1 : u.1 = u'.1 := erase_eq_erase hmem (hXu.trans hXu'.symm)
     exact Prod.ext h1 (Prod.ext h2 h3)
   have hsplit := Finset.sum_filter_add_sum_filter_not S
     (fun u => BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2) (GC C₂ C₃)
   rw [← hbad] at hsplit
   have hbad_ge : -(bad.card : ℤ) ≤ ∑ u ∈ bad, GC C₂ C₃ u := by
-    have := Finset.sum_le_sum fun u (_ : u ∈ bad) => GC_neg hX hY hZ ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u
+    have := Finset.sum_le_sum fun u (_ : u ∈ bad) => GC_neg ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u
     simp only [Finset.sum_const, nsmul_eq_mul, mul_neg, mul_one] at this
     exact this
   have himage : bad.image φ ⊆ S.filter (fun u => ¬ BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2) := by
@@ -471,7 +473,7 @@ theorem sum_GC_nonneg_F {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
       ≤ ∑ u ∈ S.filter (fun u => ¬ BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2), GC C₂ C₃ u := by
     refine Finset.sum_le_sum_of_subset_of_nonneg himage fun u hu _ => ?_
     obtain ⟨huS, hnot⟩ := Finset.mem_filter.mp hu
-    rcases GC_or hX hY hZ ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u with h | h
+    rcases GC_or ⟨hT2, hM2, hB2⟩ ⟨hT3, hM3, hB3⟩ u with h | h
     · exact h
     · exact absurd h hnot
   have himage_ge : (bad.card : ℤ) ≤ ∑ u ∈ bad.image φ, GC C₂ C₃ u := by
@@ -481,17 +483,18 @@ theorem sum_GC_nonneg_F {u₀ : State} (hu₀ : u₀ ∈ states X Y Z) {y₀ : �
     exact this
   linarith
 
+omit hY in
 /-- **The core inequality.** -/
 theorem sum_GC_nonneg : 0 ≤ ∑ u ∈ states X Y Z, GC C₂ C₃ u := by
   classical
   by_cases hbad : ∃ u ∈ states X Y Z, BadCol (C₂.1.erase u.1) (C₂.2.1.erase u.2.1) (C₂.2.2.erase u.2.2) C₃.1 C₃.2.1 C₃.2.2
-  · obtain ⟨u₀, hu₀, y₀, -, -, -, hb⟩ := hbad
+  · obtain ⟨u₀, -, y₀, -, -, -, hb⟩ := hbad
     rcases hb with hb | hb
-    · exact sum_GC_nonneg_U hX hY hZ h2 h3 hu₀ hb
-    · exact sum_GC_nonneg_F hX hY hZ h2 h3 hu₀ hb
-  · push_neg at hbad
+    · exact sum_GC_nonneg_U hZ h2 h3 hb
+    · exact sum_GC_nonneg_F hX h2 h3 hb
+  · push Not at hbad
     refine Finset.sum_nonneg fun u hu => ?_
-    rcases GC_or hX hY hZ h2 h3 u with h | h
+    rcases GC_or h2 h3 u with h | h
     · exact h
     · exact absurd h (hbad u hu)
 

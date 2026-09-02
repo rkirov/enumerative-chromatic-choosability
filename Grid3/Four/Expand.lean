@@ -15,6 +15,8 @@ decomposition of every region into atoms. The right-hand sides are exactly the e
 
 open Finset
 
+set_option linter.unusedSimpArgs false
+
 namespace Grid3
 namespace Four
 
