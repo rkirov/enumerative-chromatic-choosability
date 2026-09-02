@@ -60,13 +60,14 @@ chosen seam couplings concatenate.
   the real law `lawR m pats` (signature formula, Parry on `U`), a kernel `K` (nonnegative rows
   summing to one), `∑_c lawR_L c · K c s = lawR_R s`, support inside `compat` and the state lists,
   and `(∑ law·K²)·ρ < 1` (plus the `(18/17)ρ` bound when the left column is uniform). Axioms:
-  `[propext, Classical.choice, Quot.sound]`. The fourth-root records (formats 2/3, 50 seams)
-  still need `bridge_two`/`bridge_three` (an `r`-witness package instead of the collision bound).
+  `[propext, Classical.choice, Quot.sound]`. `bridge_two`/`bridge_three` cover the fourth-root
+  records (formats 2/3) with an `r`-witness package; `SeamOK.entropy` is the disjunction
+  `EntropyCert` (collision bound, or witnesses with `law·K ≤ r⁴·law` and `(Σ law·K·r)⁴·ρ < 1`).
+  So every one of the 43,736 records yields a seam package. Branch `k3-three`.
 
 ## What is left, precisely (2026-09-02, end of session)
 
-1. `bridge_two` / `bridge_three`: the fourth-root seam package (witness `r = k/10⁶` per cell,
-   `law·K ≤ r⁴·law`, `(∑ law·K·r)⁴·ρ < 1`), same reindexing as `lawK_sq_sum`.
+1. (done) `bridge_two` / `bridge_three`.
 2. Enumerator + completeness: a verified enumeration of the valid maximal keys `(mL, mR, M)`
    (types from `Fin 7 → Fin 4` with row sums 3; count matrices row by row with capacities),
    and the theorem that every record key of `Data/C*.lean` is listed and every listed key has a
