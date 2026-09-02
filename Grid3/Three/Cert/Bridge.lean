@@ -1193,4 +1193,114 @@ theorem bridge_two (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M ne blob = 
     rw [hNR]
     exact fourth_lt_one_rat _ _ (by unfold D0 E; positivity) hq.1 hq.2
 
+/-- the `ℚ(√17)` fourth-root bound in reals -/
+lemma fourth_lt_one_q17 (R0 R1 : Int) (Dr : Nat) (hDr : 0 < Dr)
+    (h : let S0 := R0 * R0 + 17 * R1 * R1
+         let S1 := 2 * R0 * R1
+         let T0 := S0 * S0 + 17 * S1 * S1
+         let T1 := 2 * S0 * S1
+         negQ17 (5 * T0 + 17 * T1 - 2 * ((Dr : Nat) : Int) ^ 4) (T0 + 5 * T1) = true) :
+    (((R0 : ℝ) + (R1 : ℝ) * s17) / Dr) ^ 4 * rhoR < 1 := by
+  simp only at h
+  have hden : 0 < Dr ^ 4 := by positivity
+  have hc := collision_lt_one ((R0 * R0 + 17 * R1 * R1) * (R0 * R0 + 17 * R1 * R1) + 17 * (2 * R0 * R1) * (2 * R0 * R1))
+    (2 * (R0 * R0 + 17 * R1 * R1) * (2 * R0 * R1)) (Dr ^ 4) hden (by push_cast; exact h)
+  have h17 := s17_sq
+  have h1 : ((R0 : ℝ) + (R1 : ℝ) * s17) ^ 2 = ((R0 : ℝ) * R0 + 17 * R1 * R1) + (2 * (R0 : ℝ) * R1) * s17 := by
+    linear_combination ((R1 : ℝ) ^ 2) * h17
+  have h2 : (((R0 : ℝ) * R0 + 17 * R1 * R1) + (2 * (R0 : ℝ) * R1) * s17) ^ 2
+      = (((R0 : ℝ) * R0 + 17 * R1 * R1) * ((R0 : ℝ) * R0 + 17 * R1 * R1) + 17 * (2 * (R0 : ℝ) * R1) * (2 * (R0 : ℝ) * R1))
+        + (2 * ((R0 : ℝ) * R0 + 17 * R1 * R1) * (2 * (R0 : ℝ) * R1)) * s17 := by
+    linear_combination ((2 * (R0 : ℝ) * R1) ^ 2) * h17
+  have hpow : (((R0 : ℝ) + (R1 : ℝ) * s17) / Dr) ^ 4
+      = ((((R0 : ℝ) * R0 + 17 * R1 * R1) * ((R0 : ℝ) * R0 + 17 * R1 * R1) + 17 * (2 * (R0 : ℝ) * R1) * (2 * (R0 : ℝ) * R1))
+        + (2 * ((R0 : ℝ) * R0 + 17 * R1 * R1) * (2 * (R0 : ℝ) * R1)) * s17) / ((Dr ^ 4 : Nat) : ℝ) := by
+    rw [div_pow, show (4 : ℕ) = 2 * 2 from rfl, pow_mul, h1, h2]; push_cast; ring
+  rw [hpow, mul_comm]
+  push_cast at hc ⊢
+  exact hc
+
+/-- a `ℚ(√17)` fourth-root record (non-uniform left column) yields a seam package -/
+theorem bridge_three (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR M ne blob = true) :
+    let cols := colours mL mR M
+    let pL := cols.map Prod.fst
+    let pR := cols.map Prod.snd
+    ∃ K, SeamOK mL pL mR pR K := by
+  intro cols pL pR
+  obtain ⟨-, -, h32, hLn27, hRn27, -, -, hnd, hent, hrow0, hrow1, hcol0, hcol1, hcLf, -, hLU, hwit, hfin⟩ :=
+    checkRecord_three_spec mL mR M ne blob h
+  set es := entriesQ true ne blob with hes
+  have hpL32 : pL.length ≤ 32 := by simpa [pL] using h32
+  have hpR32 : pR.length ≤ 32 := by simpa [pR] using h32
+  have hSL := states_lt_of_cols pL hpL32
+  have hSR := states_lt_of_cols pR hpR32
+  have hndL := stsOf_nodup pL hpL32
+  have hndR := stsOf_nodup pR hpR32
+  have hL : ∀ e ∈ es, e.1 < (stsOf pL).length := fun e he => (hent e he).1
+  have hR : ∀ e ∈ es, e.2.1 < (stsOf pR).length := fun e he => (hent e he).2.1
+  have hnn : ∀ e ∈ es, nonnegQ17 (17 * e.2.2.1) (9 * e.2.2.2.1) = true := fun e he => (hent e he).2.2.2.2.2
+  have hcomp : ∀ e ∈ es, compat ((stsOf pL).getD e.1 0) ((stsOf pR).getD e.2.1 0) = true :=
+    fun e he => (hent e he).2.2.2.2.1
+  obtain ⟨hrowX, hcolX⟩ := Xof_marginals mL mR pL pR es hpL32 hpR32 hL hR hrow0 hrow1 hcol0 hcol1
+  have hX := Xof_nonneg es (stsOf pL) (stsOf pR) hnn
+  have hlawL := lawR_nonneg mL pL
+  set X := Xof es (stsOf pL) (stsOf pR) with hXdef
+  set law := lawR mL pL with hlawdef
+  set r := rOf es (stsOf pL) (stsOf pR) with hrdef
+  refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inr ⟨r, rOf_nonneg _ _ _, ?_, ?_⟩⟩⟩
+  · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
+  · unfold Kof at hk
+    rw [if_pos hl] at hk
+    have hXpos : 0 < X c s := by
+      by_contra hcon; push Not at hcon
+      have : X c s = 0 := le_antisymm hcon (hX c s)
+      rw [this, zero_div] at hk; exact lt_irrefl _ hk
+    exact Xof_pos_support es (stsOf pL) (stsOf pR) hnn hcomp hL hR c s hXpos
+  · intro c s
+    unfold Kof
+    by_cases hl : 0 < law c
+    · simp only [hl, if_true]
+      rw [mul_div_cancel₀ _ (ne_of_gt hl)]
+      rw [hrdef, hXdef, Xof_eq_cell]
+      unfold rOf
+      rw [pow4_cell_sum (stsOf pL) (stsOf pR) hndL hndR _ es hnd (fun e he => ⟨hL e he, hR e he⟩) c s]
+      rw [← List.sum_map_mul_right]
+      apply List.sum_le_sum
+      intro e he
+      by_cases hc : cellIs (stsOf pL) (stsOf pR) e c s
+      · rw [if_pos hc, if_pos hc]
+        have hw := (hwit e he).2
+        have hrow_c : lawR mL pL c = (cntOf mL pL ((stsOf pL).getD e.1 0) : ℝ) / 108 := by
+          unfold lawR
+          have hcv : c.val = (stsOf pL).getD e.1 0 := hc.1.symm
+          rw [hcv, if_pos (by rw [getD_of_lt (hL e he)]; exact List.getElem_mem _)]
+          unfold lawE0 lawE1; rw [hLU]; simp only [Bool.false_eq_true, ↓reduceIte]
+          push_cast; ring
+        rw [hrow_c, entryVal_eq]
+        have hs := nonnegQ17_sound _ _ hw
+        push_cast at hs
+        have hLD : ((LD : ℕ) : ℝ) = 1836 := by unfold LD; norm_num
+        have hE : ((E : ℕ) : ℝ) = 1000000 := by unfold E; norm_num
+        have hXD : ((XD : ℕ) : ℝ) = 1836000 := by unfold XD; norm_num
+        rw [hLD, hE, hXD] at hs
+        rw [hE, div_pow]
+        rw [div_le_iff₀ (by norm_num : (0 : ℝ) < 1836000)]
+        have key : ((e.2.2.2.2 : ℝ) ^ 4 / (1000000 : ℝ) ^ 4) * ((cntOf mL pL ((stsOf pL).getD e.1 0) : ℝ) / 108) * 1836000
+            = ((e.2.2.2.2 : ℝ) ^ 4 * (cntOf mL pL ((stsOf pL).getD e.1 0) : ℝ) * 1836000) / (108 * (1000000 : ℝ) ^ 4) := by
+          field_simp
+        rw [key, le_div_iff₀ (by positivity)]
+        push_cast at hs ⊢
+        nlinarith [hs]
+      · rw [if_neg hc, if_neg hc, zero_mul]
+    · simp only [hl, if_false]
+      have hl0 : lawR mL pL c = 0 := le_antisymm (not_lt.mp hl) (hlawL c)
+      rw [hl0]; simp
+  · rw [lawKr_sum law (stsOf pL) (stsOf pR) hndL hndR hSL hSR es hnd (fun e he => ⟨hL e he, hR e he⟩) hlawL hrowX hnn]
+    rw [sum_entryVal_k]
+    have hDr : 0 < XD * E := by unfold XD E; positivity
+    have := fourth_lt_one_q17 (17 * sumR (fun e => e.2.2.1 * e.2.2.2) (es.map toR))
+      (9 * sumInt (fun e => e.2.2.2.1 * e.2.2.2.2) es) (XD * E) hDr hfin
+    push_cast at this ⊢
+    exact this
+
 end Grid3.Three.Cert
