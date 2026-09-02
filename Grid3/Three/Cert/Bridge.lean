@@ -515,12 +515,13 @@ lemma cell_inj (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (e e' : En
   have e2 : e.2.1 = e'.2.1 := hndR.getElem_inj_iff.mp (h2.trans h2'.symm)
   unfold idxQ; rw [e1, e2]
 
-/-- with at most one entry per cell, the square of a cell sum is the sum of squares -/
-lemma sq_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g : EntQ → ℝ) :
+/-- with at most one entry per cell, a product of two cell sums is the cell sum of products -/
+lemma prod_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g h : EntQ → ℝ) :
     ∀ (es : List EntQ), (es.map idxQ).Nodup → (∀ e ∈ es, e.1 < sL.length ∧ e.2.1 < sR.length) →
       ∀ c s : Fin SB,
-      ((es.map fun e => if cellIs sL sR e c s then g e else 0).sum) ^ 2
-        = (es.map fun e => if cellIs sL sR e c s then g e ^ 2 else 0).sum := by
+      ((es.map fun e => if cellIs sL sR e c s then g e else 0).sum)
+        * ((es.map fun e => if cellIs sL sR e c s then h e else 0).sum)
+        = (es.map fun e => if cellIs sL sR e c s then g e * h e else 0).sum := by
   intro es
   induction es with
   | nil => intro _ _ c s; simp
@@ -531,8 +532,9 @@ lemma sq_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g : En
     have hb' := fun e' he' => hb e' (List.mem_cons_of_mem e he')
     simp only [List.map_cons, List.sum_cons]
     by_cases hc : cellIs sL sR e c s
-    · rw [if_pos hc, if_pos hc]
-      have hz : (es.map fun e' => if cellIs sL sR e' c s then g e' else 0).sum = 0 := by
+    · rw [if_pos hc, if_pos hc, if_pos hc]
+      have hz : ∀ f : EntQ → ℝ, (es.map fun e' => if cellIs sL sR e' c s then f e' else 0).sum = 0 := by
+        intro f
         apply List.sum_eq_zero
         intro x hx
         obtain ⟨e', he', rfl⟩ := List.mem_map.mp hx
@@ -542,19 +544,18 @@ lemma sq_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g : En
         rw [cell_inj sL sR hndL hndR e e' (hb e (List.mem_cons_self ..)).1 (hb' e' he').1
           (hb e (List.mem_cons_self ..)).2 (hb' e' he').2 c s hc hc']
         exact List.mem_map.mpr ⟨e', he', rfl⟩
-      have hz2 : (es.map fun e' => if cellIs sL sR e' c s then g e' ^ 2 else 0).sum = 0 := by
-        apply List.sum_eq_zero
-        intro x hx
-        obtain ⟨e', he', rfl⟩ := List.mem_map.mp hx
-        rw [if_neg]
-        intro hc'
-        apply hnot
-        rw [cell_inj sL sR hndL hndR e e' (hb e (List.mem_cons_self ..)).1 (hb' e' he').1
-          (hb e (List.mem_cons_self ..)).2 (hb' e' he').2 c s hc hc']
-        exact List.mem_map.mpr ⟨e', he', rfl⟩
-      rw [hz, hz2]; ring
-    · rw [if_neg hc, if_neg hc, zero_add, zero_add]
+      rw [hz, hz, hz]; ring
+    · rw [if_neg hc, if_neg hc, if_neg hc, zero_add, zero_add, zero_add]
       exact ih hnd' hb' c s
+
+/-- with at most one entry per cell, the square of a cell sum is the sum of squares -/
+lemma sq_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g : EntQ → ℝ)
+    (es : List EntQ) (hnd : (es.map idxQ).Nodup) (hb : ∀ e ∈ es, e.1 < sL.length ∧ e.2.1 < sR.length)
+    (c s : Fin SB) :
+    ((es.map fun e => if cellIs sL sR e c s then g e else 0).sum) ^ 2
+      = (es.map fun e => if cellIs sL sR e c s then g e ^ 2 else 0).sum := by
+  rw [sq, prod_cell_sum sL sR hndL hndR g g es hnd hb c s]
+  congr 1; apply List.map_congr_left; intro e _; split <;> ring
 
 /-- summing a cell-indicator sum over all cells picks each entry exactly once -/
 lemma sum_cells (sL sR : List Nat) (g : EntQ → ℝ) (es : List EntQ)
@@ -760,13 +761,19 @@ lemma collision_strong_lt_one (q0 q1 : Int) (den : Nat) (hden : 0 < den)
 
 /-! ### The seam package -/
 
+/-- an entropy certificate for a seam: the collision bound, or fourth-root witnesses -/
+def EntropyCert (law : Fin SB → ℝ) (K : Fin SB → Fin SB → ℝ) : Prop :=
+  (∑ c, ∑ s, law c * K c s ^ 2) * rhoR < 1
+    ∨ ∃ r : Fin SB → Fin SB → ℝ, (∀ c s, 0 ≤ r c s) ∧ (∀ c s, law c * K c s ≤ r c s ^ 4 * law c)
+        ∧ (∑ c, ∑ s, law c * K c s * r c s) ^ 4 * rhoR < 1
+
 /-- the per-seam properties consumed by the entropy capstone, at packed states -/
 structure SeamOK (mL : Nat) (pL : List Nat) (mR : Nat) (pR : List Nat) (K : Fin SB → Fin SB → ℝ) : Prop where
   nonneg : ∀ c s, 0 ≤ K c s
   rowsum : ∀ c, ∑ s, K c s = 1
   step : ∀ s, ∑ c, lawR mL pL c * K c s = lawR mR pR s
   support : ∀ c s, 0 < lawR mL pL c → 0 < K c s → compat c.val s.val = true ∧ c.val ∈ stsOf pL ∧ s.val ∈ stsOf pR
-  collision : (∑ c, ∑ s, lawR mL pL c * K c s ^ 2) * rhoR < 1
+  entropy : EntropyCert (lawR mL pL) K
 
 /-- a `ℚ(√17)` collision record yields a seam package (and the strong bound if the left column is uniform) -/
 theorem bridge_one (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M ne blob = true) :
@@ -817,7 +824,7 @@ theorem bridge_one (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M ne blob = 
       exact denOf_pos mL lc (hcLf hu').2.2.2
   have hdenI : ((denOf mL lc : Nat) : Int) = ((if mL == UTYPE then 12 else lc : Nat) : Int) * (XD : Int) * (XD : Int) := by
     unfold denOf; push_cast; rfl
-  refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, ?_⟩, fun hu => ?_⟩
+  refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inl ?_⟩, fun hu => ?_⟩
   · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
   · unfold Kof at hk
     rw [if_pos hl] at hk
@@ -977,7 +984,7 @@ theorem bridge_zero (mL mR M ne blob : Nat) (h : checkRecord 0 mL mR M ne blob =
         push_cast; ring
     rw [this es0]; exact Int.cast_natCast _
   have hdenR : denOf mL lc = lc * XD * XD := by unfold denOf; rw [hLU]; rfl
-  refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, ?_⟩⟩
+  refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inl ?_⟩⟩
   · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
   · unfold Kof at hk
     rw [if_pos hl] at hk
@@ -992,5 +999,198 @@ theorem bridge_zero (mL mR M ne blob : Nat) (h : checkRecord 0 mL mR M ne blob =
     have := collision_lt_one_rat _ _ hd hq.1 hq.2
     push_cast at this ⊢
     exact this
+
+/-! ### Fourth-root records (formats 2 and 3) -/
+
+/-- the real fourth-root witness of a record at packed states: `k/10⁶` at the entry's cell -/
+noncomputable def rOf (es : List EntQ) (sL sR : List Nat) (c s : Fin SB) : ℝ :=
+  (es.map fun e => if cellIs sL sR e c s then (e.2.2.2.2 : ℝ) / E else 0).sum
+
+lemma rOf_nonneg (es : List EntQ) (sL sR : List Nat) (c s : Fin SB) : 0 ≤ rOf es sL sR c s := by
+  unfold rOf
+  apply List.sum_nonneg
+  intro x hx
+  obtain ⟨e, he, rfl⟩ := List.mem_map.mp hx
+  split
+  · positivity
+  · exact le_refl 0
+
+/-- `Xof` as a cell sum (definitional restatement) -/
+lemma Xof_eq_cell (es : List EntQ) (sL sR : List Nat) (c s : Fin SB) :
+    Xof es sL sR c s = (es.map fun e => if cellIs sL sR e c s then entryVal e.2.2.1 e.2.2.2.1 else 0).sum := rfl
+
+/-- the fourth power of a cell sum is the cell sum of fourth powers -/
+lemma pow4_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g : EntQ → ℝ)
+    (es : List EntQ) (hnd : (es.map idxQ).Nodup) (hb : ∀ e ∈ es, e.1 < sL.length ∧ e.2.1 < sR.length)
+    (c s : Fin SB) :
+    ((es.map fun e => if cellIs sL sR e c s then g e else 0).sum) ^ 4
+      = (es.map fun e => if cellIs sL sR e c s then g e ^ 4 else 0).sum := by
+  have h2 := sq_cell_sum sL sR hndL hndR g es hnd hb c s
+  have h4 := sq_cell_sum sL sR hndL hndR (fun e => g e ^ 2) es hnd hb c s
+  rw [show (4 : ℕ) = 2 * 2 from rfl, pow_mul, h2, h4]
+  congr 1; apply List.map_congr_left; intro e _; split <;> ring
+
+/-- the weighted entry sum `Σ val_e · k_e/E` in closed form -/
+lemma sum_entryVal_k (es : List EntQ) :
+    (es.map fun e => entryVal e.2.2.1 e.2.2.2.1 * ((e.2.2.2.2 : ℝ) / E)).sum
+      = ((17 * sumR (fun e => e.2.2.1 * e.2.2.2) (es.map toR) : ℝ) + (9 * sumInt (fun e => e.2.2.2.1 * e.2.2.2.2) es : ℝ) * s17)
+          / (XD * E) := by
+  induction es with
+  | nil => simp [sumR, sumInt]
+  | cons e es ih =>
+    simp only [List.map_cons, List.sum_cons, sumR, sumInt, ih, toR]
+    unfold entryVal XD E
+    push_cast
+    field_simp
+    ring
+
+/-- `Σ_c Σ_s law·K·r` is the weighted entry sum -/
+lemma lawKr_sum (law : Fin SB → ℝ) (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup)
+    (hSL : ∀ st ∈ sL, st < SB) (hSR : ∀ st ∈ sR, st < SB)
+    (es : List EntQ) (hnd : (es.map idxQ).Nodup)
+    (hb : ∀ e ∈ es, e.1 < sL.length ∧ e.2.1 < sR.length)
+    (hlaw : ∀ c, 0 ≤ law c)
+    (hrow : ∀ c, ∑ s, Xof es sL sR c s = law c)
+    (hnn : ∀ e ∈ es, nonnegQ17 (17 * e.2.2.1) (9 * e.2.2.2.1) = true) :
+    ∑ c, ∑ s, law c * Kof law (Xof es sL sR) c s * rOf es sL sR c s
+      = (es.map fun e => entryVal e.2.2.1 e.2.2.2.1 * ((e.2.2.2.2 : ℝ) / E)).sum := by
+  have hX := Xof_nonneg es sL sR hnn
+  have hgL : ∀ e ∈ es, sL.getD e.1 0 < SB := fun e he => by rw [getD_of_lt (hb e he).1]; exact hSL _ (List.getElem_mem _)
+  have hgR : ∀ e ∈ es, sR.getD e.2.1 0 < SB := fun e he => by rw [getD_of_lt (hb e he).2]; exact hSR _ (List.getElem_mem _)
+  have step1 : ∀ c s, law c * Kof law (Xof es sL sR) c s * rOf es sL sR c s
+      = (es.map fun e => if cellIs sL sR e c s then entryVal e.2.2.1 e.2.2.2.1 * ((e.2.2.2.2 : ℝ) / E) else 0).sum := by
+    intro c s
+    have hK : law c * Kof law (Xof es sL sR) c s = Xof es sL sR c s := by
+      unfold Kof
+      by_cases h : 0 < law c
+      · simp only [h, if_true]; field_simp
+      · simp only [h, if_false]
+        have hl : law c = 0 := le_antisymm (not_lt.mp h) (hlaw c)
+        have hz : Xof es sL sR c s = 0 := by
+          have := hrow c
+          rw [hl] at this
+          exact (Finset.sum_eq_zero_iff_of_nonneg (fun s _ => hX c s)).mp this s (Finset.mem_univ _)
+        rw [hl, hz]; simp
+    rw [hK, Xof_eq_cell]
+    unfold rOf
+    exact prod_cell_sum sL sR hndL hndR _ _ es hnd hb c s
+  rw [Finset.sum_congr rfl (fun c _ => Finset.sum_congr rfl (fun s _ => step1 c s))]
+  exact sum_cells sL sR _ es hgL hgR
+
+/-- the rational fourth-root inequality in reals -/
+lemma fourth_lt_one_rat (NR Dr : Nat) (hDr : 0 < Dr) (h1 : 5 * NR ^ 4 < 2 * Dr ^ 4)
+    (h2 : 17 * NR ^ 8 < (2 * Dr ^ 4 - 5 * NR ^ 4) ^ 2) :
+    ((NR : ℝ) / Dr) ^ 4 * rhoR < 1 := by
+  have := collision_lt_one_rat (NR ^ 4) (Dr ^ 4) (by positivity) h1 (by
+    have : 17 * NR ^ 4 * NR ^ 4 = 17 * NR ^ 8 := by ring
+    rw [this, ← sq]; exact h2)
+  push_cast at this
+  rw [div_pow]; exact this
+
+/-- a rational fourth-root record yields a seam package -/
+theorem bridge_two (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M ne blob = true) :
+    let cols := colours mL mR M
+    let pL := cols.map Prod.fst
+    let pR := cols.map Prod.snd
+    ∃ K, SeamOK mL pL mR pR K := by
+  intro cols pL pR
+  obtain ⟨-, -, h32, hLn27, hRn27, hLU, hRU, -, -, hnd0, hent0, hrow, hcol, -, -, -, -, -, -, hwit, hq⟩ :=
+    checkRecord_two_spec mL mR M ne blob h
+  set es0 := entriesR true ne blob with hes0
+  set es := es0.map toQ with hes
+  have hpL32 : pL.length ≤ 32 := by simpa [pL] using h32
+  have hpR32 : pR.length ≤ 32 := by simpa [pR] using h32
+  have hSL := states_lt_of_cols pL hpL32
+  have hSR := states_lt_of_cols pR hpR32
+  have hndL := stsOf_nodup pL hpL32
+  have hndR := stsOf_nodup pR hpR32
+  have hmem : ∀ e ∈ es, ∃ e0 ∈ es0, e = toQ e0 := fun e he => by
+    obtain ⟨e0, he0, rfl⟩ := List.mem_map.mp he; exact ⟨e0, he0, rfl⟩
+  have hL : ∀ e ∈ es, e.1 < (stsOf pL).length := fun e he => by
+    obtain ⟨e0, he0, rfl⟩ := hmem e he; exact (hent0 e0 he0).1
+  have hR : ∀ e ∈ es, e.2.1 < (stsOf pR).length := fun e he => by
+    obtain ⟨e0, he0, rfl⟩ := hmem e he; exact (hent0 e0 he0).2.1
+  have hnn : ∀ e ∈ es, nonnegQ17 (17 * e.2.2.1) (9 * e.2.2.2.1) = true := fun e he => by
+    obtain ⟨e0, he0, rfl⟩ := hmem e he
+    show nonnegQ17 (17 * e0.2.2.1) (9 * 0) = true
+    rw [Int.mul_zero]; exact nonnegQ17_zero _ (by positivity)
+  have hcomp : ∀ e ∈ es, compat ((stsOf pL).getD e.1 0) ((stsOf pR).getD e.2.1 0) = true := fun e he => by
+    obtain ⟨e0, he0, rfl⟩ := hmem e he; exact (hent0 e0 he0).2.2.2
+  have hnd : (es.map idxQ).Nodup := by rw [hes, map_idxQ_toQ]; exact hnd0
+  have hrow0 : ∀ i (hi : i < (stsOf pL).length), rowSumR (es.map toR) i = lawE0 mL pL (stsOf pL)[i] := by
+    intro i hi; rw [hes, map_toR_toQ, hrow i hi]; unfold lawE0; rw [hLU]; rfl
+  have hrow1 : ∀ i (hi : i < (stsOf pL).length), rowSum1 es i = lawE1 mL (stsOf pL)[i] := by
+    intro i hi; unfold rowSum1; rw [hes, rowSum1_toQ]; unfold lawE1; rw [hLU]; rfl
+  have hcol0 : ∀ j (hj : j < (stsOf pR).length), colSumR (es.map toR) j = lawE0 mR pR (stsOf pR)[j] := by
+    intro j hj; rw [hes, map_toR_toQ, hcol j hj]; unfold lawE0; rw [hRU]; rfl
+  have hcol1 : ∀ j (hj : j < (stsOf pR).length), colSum1 es j = lawE1 mR (stsOf pR)[j] := by
+    intro j hj; unfold colSum1; rw [hes, rowSum1_toQ]; unfold lawE1; rw [hRU]; rfl
+  obtain ⟨hrowX, hcolX⟩ := Xof_marginals mL mR pL pR es hpL32 hpR32 hL hR hrow0 hrow1 hcol0 hcol1
+  have hX := Xof_nonneg es (stsOf pL) (stsOf pR) hnn
+  have hlawL := lawR_nonneg mL pL
+  set X := Xof es (stsOf pL) (stsOf pR) with hXdef
+  set law := lawR mL pL with hlawdef
+  set r := rOf es (stsOf pL) (stsOf pR) with hrdef
+  refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inr ⟨r, rOf_nonneg _ _ _, ?_, ?_⟩⟩⟩
+  · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
+  · unfold Kof at hk
+    rw [if_pos hl] at hk
+    have hXpos : 0 < X c s := by
+      by_contra hcon; push Not at hcon
+      have : X c s = 0 := le_antisymm hcon (hX c s)
+      rw [this, zero_div] at hk; exact lt_irrefl _ hk
+    exact Xof_pos_support es (stsOf pL) (stsOf pR) hnn hcomp hL hR c s hXpos
+  · -- the entry witness, cell by cell
+    intro c s
+    unfold Kof
+    by_cases hl : 0 < law c
+    · simp only [hl, if_true]
+      rw [mul_div_cancel₀ _ (ne_of_gt hl)]
+      rw [hrdef, hXdef, Xof_eq_cell]
+      unfold rOf
+      rw [pow4_cell_sum (stsOf pL) (stsOf pR) hndL hndR _ es hnd (fun e he => ⟨hL e he, hR e he⟩) c s]
+      rw [← List.sum_map_mul_right]
+      apply List.sum_le_sum
+      intro e he
+      by_cases hc : cellIs (stsOf pL) (stsOf pR) e c s
+      · rw [if_pos hc, if_pos hc]
+        obtain ⟨e0, he0, rfl⟩ := hmem e he
+        have hw := (hwit e0 he0).2
+        have hrow_c : lawR mL pL c = (cntOf mL pL ((stsOf pL).getD e0.1 0) : ℝ) / 108 := by
+          unfold lawR
+          have hcv : c.val = (stsOf pL).getD e0.1 0 := hc.1.symm
+          rw [hcv, if_pos (by rw [getD_of_lt (hent0 e0 he0).1]; exact List.getElem_mem _)]
+          unfold lawE0 lawE1; rw [hLU]; simp only [Bool.false_eq_true, ↓reduceIte]
+          push_cast; ring
+        rw [hrow_c]
+        show entryVal e0.2.2.1 0 ≤ ((e0.2.2.2 : ℝ) / E) ^ 4 * ((cntOf mL pL ((stsOf pL).getD e0.1 0) : ℝ) / 108)
+        unfold entryVal E
+        have hwR : ((LD * E ^ 4 * e0.2.2.1 : Nat) : ℝ) ≤ ((e0.2.2.2 ^ 4 * cntOf mL pL ((stsOf pL).getD e0.1 0) * XD : Nat) : ℝ) := by
+          exact_mod_cast hw
+        unfold LD E XD at hwR
+        push_cast at hwR ⊢
+        simp only [Int.cast_zero, zero_div, zero_mul, add_zero]
+        nlinarith
+      · rw [if_neg hc, if_neg hc, zero_mul]
+    · simp only [hl, if_false]
+      have hl0 : lawR mL pL c = 0 := le_antisymm (not_lt.mp hl) (hlawL c)
+      rw [hl0]; simp
+  · -- the fourth-root bound
+    rw [lawKr_sum law (stsOf pL) (stsOf pR) hndL hndR hSL hSR es hnd (fun e he => ⟨hL e he, hR e he⟩) hlawL hrowX hnn]
+    rw [sum_entryVal_k]
+    have hk1 : sumInt (fun e => e.2.2.2.1 * e.2.2.2.2) es = 0 := by
+      rw [hes]
+      have : ∀ l : List EntR, sumInt (fun e => e.2.2.2.1 * e.2.2.2.2) (l.map toQ) = 0 := by
+        intro l; induction l with
+        | nil => rfl
+        | cons e0 l ih => simp only [List.map_cons, sumInt, ih]; unfold toQ; simp
+      exact this es0
+    rw [hk1, hes, map_toR_toQ]
+    simp only [Int.cast_zero, mul_zero, zero_mul, add_zero]
+    have hNR : (17 * (sumR (fun e => e.2.2.1 * e.2.2.2) es0 : ℝ)) / ((XD : ℝ) * E)
+        = (sumR (fun e => e.2.2.1 * e.2.2.2) es0 : ℝ) / (D0 * E : Nat) := by
+      unfold XD E D0; push_cast; field_simp; ring
+    rw [hNR]
+    exact fourth_lt_one_rat _ _ (by unfold D0 E; positivity) hq.1 hq.2
 
 end Grid3.Three.Cert
