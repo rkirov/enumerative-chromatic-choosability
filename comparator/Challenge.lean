@@ -480,13 +480,19 @@ def PathV : ℕ → Type
   | 0 => Unit
   | k + 1 => Option (PathV k)
 
-instance instDecidableEqPathV : (k : ℕ) → DecidableEq (PathV k)
-  | 0 => inferInstanceAs (DecidableEq Unit)
-  | k + 1 => letI := instDecidableEqPathV k; inferInstanceAs (DecidableEq (Option (PathV k)))
+/-- Written as an explicit `Nat.rec` term rather than by pattern matching: pattern matching would
+compile to `Nat.brecOn` with an auxiliary matcher that Lean deduplicates across a module by shape,
+so its name (and hence the instance's compiled body) would depend on which `ℕ`-recursive definition
+came first in the file. The comparator (`comparator/Challenge.lean`) compares this body byte for
+byte with the library's, and there `SimpleGraph.TowerV` precedes `PathV`. -/
+instance instDecidableEqPathV : (k : ℕ) → DecidableEq (PathV k) := fun k =>
+  Nat.rec (motive := fun k => DecidableEq (PathV k)) (inferInstanceAs (DecidableEq Unit))
+    (fun k ih => letI := ih; inferInstanceAs (DecidableEq (Option (PathV k)))) k
 
-instance instFintypePathV : (k : ℕ) → Fintype (PathV k)
-  | 0 => inferInstanceAs (Fintype Unit)
-  | k + 1 => letI := instFintypePathV k; inferInstanceAs (Fintype (Option (PathV k)))
+/-- Explicit `Nat.rec` for the same reason as `instDecidableEqPathV`. -/
+instance instFintypePathV : (k : ℕ) → Fintype (PathV k) := fun k =>
+  Nat.rec (motive := fun k => Fintype (PathV k)) (inferInstanceAs (Fintype Unit))
+    (fun k ih => letI := ih; inferInstanceAs (Fintype (Option (PathV k)))) k
 
 /-- The terminal vertex of `pathG k` that was attached last. -/
 def pathEnd : (k : ℕ) → PathV k
