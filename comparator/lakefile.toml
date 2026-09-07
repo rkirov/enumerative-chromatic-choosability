@@ -18,7 +18,6 @@
 # github.com/rkirov/jacobian-fable (branch `lean-eval`), which in turn follows lean-eval's own
 # workspaces.
 name = "graph_coloring_comparator"
-testDriver = "workspace_test"
 defaultTargets = ["Challenge", "Submission"]
 
 [leanOptions]
@@ -36,8 +35,6 @@ name = "Challenge"
 [[lean_lib]]
 name = "Submission"
 
-# lean-eval's own harness (verbatim `WorkspaceTest.lean`): invokes comparator with
-# `enable_nanoda := true` forced on, regardless of what `config.json` says.
-[[lean_exe]]
-name = "workspace_test"
-root = "WorkspaceTest"
+# lean-eval's own harness (`WorkspaceTest.lean`, `lake test`) is not used: it forces
+# `enable_nanoda := true`, and the second kernel replay does not fit CI for this development.
+# `verify.sh` invokes the comparator binary directly on `config.json` (`enable_nanoda: false`).

@@ -87,8 +87,16 @@ Listed so no reader mistakes an absence for a claim.
 
 ## 3. Not from the literature
 
-Nothing here is a mathematical advance. These are artifacts of mechanization, recorded because they
-are the parts a reader could not get from the papers.
+Most items here are artifacts of mechanization, recorded because they are the parts a reader could
+not get from the papers. The first item is a small mathematical improvement found while auditing a
+published construction.
+
+* **`K₂,₂₆` is not ECC at four.** Kaul–Kumar–Liu–Mudrock–Rewers–Shin–Tanahara–To,
+  *Bounding the List Color Function Threshold from Above* (2023), Theorem 7(ii), proves
+  `Pℓ(K₂,n,4) = P(K₂,n,4)` for `n ≤ 24`, strict inequality for `n ≥ 27`, and explicitly leaves
+  `n = 25,26` open. Re-evaluating their balanced four-list construction at `n = 26` gives
+  `9,925,029,789,650 < 10,168,268,619,684`. The exact list, independent checker, and kernel proof
+  are in `TwoDegenerate/`. This closes `n = 26` negatively; it does not settle `n = 25`.
 
 * **The formalization itself.** As far as we can determine, list coloring and choosability had not
   been formalized in any proof assistant before this project.

@@ -67,6 +67,14 @@ result. Deferred to an optional milestone.
 
 ## Progress log
 
+**2026-09-07 — comparator without nanoda.** With the k = 3 height-three certificate in the
+submission the export is 957 MB, and the comparator replays it sequentially through each kernel;
+nanoda plus Lean's kernel plus the 66-minute build exceeded GitHub's six-hour job limit (run
+34082945506). `verify.sh` now invokes the comparator binary directly on `comparator/config.json`
+(`enable_nanoda: false`) instead of through lean-eval's `WorkspaceTest` harness, which forced nanoda
+on; the harness and the nanoda pin are removed. Lean's kernel replay, the statement match and the
+axiom check are unchanged.
+
 **2026-08-11 — Lean 4.33.0.** Toolchain `v4.32.2 → v4.33.0`, Mathlib `905b9581 → db584cd6`
 (*chore: bump toolchain to v4.33.0*), all eight transitive packages to their matching revisions, in
 the root, `comparator/` and `book/`. `verify.sh`'s `lean4export` pin moves to the real `v4.33.0`

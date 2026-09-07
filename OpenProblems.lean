@@ -58,14 +58,6 @@ open SimpleGraph
 namespace ListColoring
 namespace OpenProblem
 
-/-- Adjacency in a Cartesian product is decidable when it is decidable in both factors and both
-vertex types have decidable equality. Mathlib does not supply this instance at the pinned revision,
-and `ECCAt` cannot be stated for `G □ H` without it. -/
-instance instDecidableRelBoxProd {α β : Type*} [DecidableEq α] [DecidableEq β]
-    (G : SimpleGraph α) [DecidableRel G.Adj] (H : SimpleGraph β) [DecidableRel H.Adj] :
-    DecidableRel (G □ H).Adj :=
-  fun _ _ => decidable_of_iff' _ boxProd_adj
-
 /-! ### Question 1 -/
 
 /-- **Kirov–Naimi 2016, §6, Question 1.** *Is the product of two `n`-monophilic graphs
