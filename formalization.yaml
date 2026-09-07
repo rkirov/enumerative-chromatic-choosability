@@ -206,8 +206,9 @@ review:
     orientation errors that do not surface as type errors; those checks are #guard commands in
     the library. In addition, leanprover/comparator runs in CI on every commit against
     comparator/Challenge.lean, checking statement identity, the permitted axioms, and replay
-    through both Lean's kernel and the independent NanoDa kernel. No independent human review
-    has been performed.
+    of the exported proofs through Lean's kernel (the independent NanoDa kernel is not run: a
+    second sequential replay of the k = 3 certificate does not fit CI's time limit). No
+    independent human review has been performed.
 
 status:
   scope: >-

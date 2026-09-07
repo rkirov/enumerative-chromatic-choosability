@@ -296,8 +296,10 @@ integer checker and the remaining corrected research direction are in
   three of the cactus classification, and two of Zhang–Dong's non-persistence theorem, which
   answers the paper's own §6 Question 2 — and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
-  that only the permitted axioms are used, and that every proof replays through two independent
-  kernels (Lean's, via `lean4export`, and `nanoda`). It is CI-only — it builds four external tools.
+  that only the permitted axioms are used, and that every proof replays through Lean's kernel
+  from a `lean4export` export. (lean-eval's second, independent `nanoda` replay is not run: with
+  the k = 3 certificate the export is close to 1 GB and a second sequential replay does not fit
+  CI's six-hour limit.) It is CI-only — it builds three external tools.
 * Every displayed statement in the companion book is an `example` discharged against the real
   theorem, so the prose cannot drift from the proofs.
 

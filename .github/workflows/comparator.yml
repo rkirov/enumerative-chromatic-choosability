@@ -2,18 +2,21 @@ name: comparator
 
 # Runs the real leanprover/comparator against this repository: statement match between
 # comparator/Challenge.lean and the library, the permitted-axiom check, and kernel replay
-# via lean4export in a landrun sandbox, plus the independent nanoda kernel that the
-# harness forces on.
+# via lean4export in a landrun sandbox. The second, independent nanoda kernel that
+# lean-eval's harness forces on is deliberately not run: with the k = 3 height-three
+# certificate the export is close to 1 GB and each sequential kernel replay takes hours, so
+# two replays plus the build exceed GitHub's six-hour job limit (see verify.sh).
 #
 # This REPLACES the hand-rolled axiom audit that used to live in ci.yml. The comparator
 # subsumes it: `permitted_axioms` in comparator/config.json is exactly the old allow-list
 # {propext, Quot.sound, Classical.choice}, and on top of that the comparator checks that
-# the statements really are the ones claimed and replays the proofs through two independent
-# kernels. An axiom audit only ever checked the third of those.
+# the statements really are the ones claimed and replays the proofs through Lean's kernel
+# from the export. An axiom audit only ever checked the third of those.
 #
-# CI ONLY, deliberately. It clones and builds comparator, lean4export, nanoda (Rust) and
-# landrun (Go); that is far too heavy for the development machine, which is also short on
-# disk. Local development uses `lake build` and the cheap no-placeholder grep in ci.yml.
+# CI ONLY, deliberately. It clones and builds comparator, lean4export and landrun (Go), and
+# the export alone needs about 6 GB of memory; that is far too heavy for the development
+# machine, which is also short on disk. Local development uses `lake build` and the cheap
+# no-placeholder grep in ci.yml.
 # Workflow pattern and tool pins follow github.com/rkirov/jacobian-fable.
 
 on:
@@ -43,7 +46,7 @@ jobs:
           test: "false"
           lint: "false"
 
-      # comparator + lean4export + nanoda are pinned and change rarely; cache their clones
+      # comparator + lean4export + landrun are pinned and change rarely; cache their clones
       # and builds. verify.sh namespaces the cache directory by toolchain tag.
       - name: Cache comparator tooling
         uses: actions/cache@v4
@@ -51,10 +54,10 @@ jobs:
           path: ~/.cache/graph-coloring-comparator
           key: comparator-${{ runner.os }}-${{ hashFiles('comparator/lean-toolchain', 'verify.sh') }}
 
-      # nanoda is a Rust build; ubuntu-latest ships cargo, but be explicit so a missing
+      # landrun is a Go build; ubuntu-latest ships go, but be explicit so a missing
       # toolchain fails here with a clear message rather than deep inside verify.sh.
-      - name: Check cargo and go are available
-        run: cargo --version && go version
+      - name: Check go is available
+        run: go version
 
       # On CI there is room for comparator's own pinned toolchain, so use the upstream
       # recipe exactly rather than the disk-saving deviation verify.sh allows locally.

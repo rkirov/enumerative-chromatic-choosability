@@ -215,8 +215,8 @@ The authoritative check is stronger than an axiom audit and is a separate script
 
 This runs `leanprover/comparator` against the `comparator/` workspace: it checks that the
 statements in `comparator/Challenge.lean` really are the ones the library proves, that the
-permitted axioms are exactly the three above, and it replays the proofs through two independent
-kernels — `lean4export` in a sandbox, and the `nanoda` kernel. Continuous integration runs it on
+permitted axioms are exactly the three above, and it replays the proofs through Lean's kernel
+from a `lean4export` export made in a sandbox. Continuous integration runs it on
 every push, alongside a grep that fails if `sorry`, `admit` or `native_decide` ever appears in the
 library sources. {ref "readingchallenge"}[Reading `Challenge.lean`] is a guide to the ten
 statements that check covers.
