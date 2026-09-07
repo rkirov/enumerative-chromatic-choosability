@@ -8,14 +8,16 @@ import Grid3.Obstructions
 import Grid3.Four.Main
 
 /-!
-# Height-three grids are enumeratively chromatic-choosable at every list size `k ≥ 4`
+# Height-three grids are enumeratively chromatic-choosable at every list size `k ≥ 3`
 
-The headline results of `Grid3/`, in the vocabulary of the rest of the repository.
+The headline results of `Grid3/`, in the vocabulary of the rest of the repository: `k ≥ 4` is
+proved in this file, `k = 3` in `Grid3/Three/Main.lean` (see the last section), and together
+they settle `P₃ □ P_{n+1}` at every list size `k ≥ 3`.
 
 `pathG m` is the path of *length* `m`, on `m + 1` vertices, so `pathG 2 □ pathG n` is the
 `3 × (n+1)` grid — `P₃ □ P_{n+1}`. The theorem is the height-three case of the conclusion of
-`ListColoring.OpenProblem.grid_of_question1`, proved here unconditionally for `k ≥ 4` instead of
-from Kirov–Naimi's Question 1.
+`ListColoring.OpenProblem.grid_of_question1`, proved unconditionally instead of from
+Kirov–Naimi's Question 1.
 
 ## The proof, in one paragraph
 
