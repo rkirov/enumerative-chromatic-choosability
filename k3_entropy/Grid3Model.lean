@@ -1,4 +1,4 @@
-import Mathlib
+import k3_entropy.Grid3Entropy
 
 /-!
 # Grid model, part 2: the grid fact for `hf_mem`.
@@ -12,9 +12,8 @@ namespace Grid3.Three.Model
 
 abbrev Vtx (W : ℕ) := Fin 3 × Fin W
 
-def PState (S : Type*) : ℕ → Type _
-  | 0 => S
-  | (k + 1) => PState S k × S
+/-- Use the entropy engine's path type, so the support-card theorem applies directly. -/
+abbrev PState (S : Type*) := Grid3.Three.PState S
 
 variable {S : Type*}
 
@@ -66,7 +65,8 @@ theorem toColouring_injective (n : ℕ) : Function.Injective (toColouring (C := 
 theorem toColouring_mem_properC (n : ℕ) (L' : Vtx (n + 1) → Finset ℕ)
     (p : PState (Fin 3 → Fin C) n)
     (hval : ∀ (j : Fin (n + 1)) (i : Fin 3), (colAt n p j i).val ∈ L' (i, j))
-    (hvert : ∀ (j : Fin (n + 1)) (i i' : Fin 3), i ≠ i' → colAt n p j i ≠ colAt n p j i')
+    (hvert : ∀ (j : Fin (n + 1)) (i i' : Fin 3), i.val + 1 = i'.val →
+      colAt n p j i ≠ colAt n p j i')
     (hcompat : ∀ (i : Fin 3) (j j' : Fin (n + 1)), j.val + 1 = j'.val →
       colAt n p j i ≠ colAt n p j' i) :
     toColouring n p ∈ properC (gridAdj (n + 1)) L' := by
@@ -76,9 +76,10 @@ theorem toColouring_mem_properC (n : ℕ) (L' : Vtx (n + 1) → Finset ℕ)
   have hcolne : colAt n p u.2 u.1 ≠ colAt n p v.2 v.1 := by
     rcases huv with ⟨hcol, hrow⟩ | ⟨hrow, hcol⟩
     · -- same column, adjacent rows
-      have hine : u.1 ≠ v.1 := by
-        rcases hrow with h | h <;> · intro he; rw [he] at h; omega
-      rw [hcol]; exact hvert v.2 u.1 v.1 hine
+      rw [hcol]
+      rcases hrow with h | h
+      · exact hvert v.2 u.1 v.1 h
+      · exact (hvert v.2 v.1 u.1 h).symm
     · -- same row, adjacent columns
       rw [hrow]
       rcases hcol with h | h
@@ -87,17 +88,14 @@ theorem toColouring_mem_properC (n : ℕ) (L' : Vtx (n + 1) → Finset ℕ)
   exact fun he => hcolne (Fin.val_injective he)
 
 /-! ### Markov measure trace (from ModelTrace) -/
-def lastCol : ∀ k, PState S k → S
-  | 0, s => s
-  | (_ + 1), p => p.2
+abbrev lastCol (k : ℕ) (p : PState S k) : S := Grid3.Three.lastCol S k p
 
-noncomputable def mu (alpha : S → ℝ) (K : ℕ → S → S → ℝ) : ∀ k, PState S k → ℝ
-  | 0, s => alpha s
-  | (k + 1), p => mu alpha K k p.1 * K k (lastCol k p.1) p.2
+noncomputable abbrev mu (alpha : S → ℝ) (K : ℕ → S → S → ℝ) :=
+  Grid3.Three.mu alpha K
 
 lemma lastCol_eq_colAt_last : ∀ (k) (p : PState S k), lastCol k p = colAt k p (Fin.last k)
   | 0, _ => rfl
-  | (k + 1), p => by simp [colAt, lastCol, Fin.snoc_last]
+  | (k + 1), p => by simp [colAt, lastCol, Grid3.Three.lastCol, Fin.snoc_last]
 
 lemma colAt_castSucc (k : ℕ) (q : PState S (k + 1)) (i : Fin (k + 1)) :
     colAt (k + 1) q i.castSucc = colAt k q.1 i := by
@@ -121,7 +119,7 @@ theorem mu_pos_trace (alpha : S → ℝ) (K : ℕ → S → S → ℝ)
   | zero => intro p hp; exact ⟨hp, fun k => k.elim0⟩
   | succ k ih =>
       intro p hp
-      rw [mu] at hp
+      change 0 < mu alpha K k p.1 * K k (lastCol k p.1) p.2 at hp
       have ha : 0 < mu alpha K k p.1 := by
         rcases mul_pos_iff.mp hp with ⟨h, _⟩ | ⟨h, _⟩
         · exact h
@@ -151,6 +149,6 @@ theorem mu_pos_trace (alpha : S → ℝ) (K : ℕ → S → S → ℝ)
             rw [Fin.succ_castSucc]; exact colAt_castSucc k p i.succ
           show 0 < K (i.castSucc).val (colAt (k + 1) p (i.castSucc).castSucc)
             (colAt (k + 1) p (i.castSucc).succ)
-          rw [e1, e2, Fin.coe_castSucc]; exact ihk i
+          rw [e1, e2, Fin.val_castSucc]; exact ihk i
 
 end Grid3.Three.Model

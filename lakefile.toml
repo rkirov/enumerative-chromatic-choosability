@@ -56,3 +56,10 @@ name = "Grid3"
 # 2-degenerate but is not ECC at list size four. Imports ListColoring, imported by nothing.
 [[lean_lib]]
 name = "TwoDegenerate"
+
+# The analytic engine and model bridges of the k = 3 height-three entropy proof (all sorry-free);
+# imported by `Grid3/Three/Main.lean`. Not a default target, because that module rests on the
+# 43,736 kernel-checked seam records of `Grid3/Three/Cert/Data/`, which CI does not rebuild.
+[[lean_lib]]
+name = "k3_entropy"
+globs = ["k3_entropy.+"]

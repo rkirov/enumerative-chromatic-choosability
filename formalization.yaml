@@ -64,14 +64,19 @@ project:
     exactly one place.
 
     A third original result, in Grid3/, settles the height-three case for every list size
-    k >= 4: every 3 x (n+1) grid is enumeratively chromatic-choosable at k >= 4, with its
+    k >= 3: every 3 x (n+1) grid is enumeratively chromatic-choosable at k >= 3, with its
     uniform count in closed form. The uniform height-three count is not geometric, so no
     scalar per-column invariant can be tight; instead an exact telescoping identity writes the
     list count minus the uniform count as a sum of per-seam terms against the uniform future
     counts, every horizon reduces to two integer seam inequalities, and those are proved
     pointwise one column back through a pair lemma whose threshold is (k-2)(k-3) >= k+1 for
     k >= 5, and at k = 4 two columns back, through a conditional pair lemma and a family of
-    LP certificates over the Venn atoms of five lists. List size 3 is not claimed.
+    LP certificates over the Venn atoms of five lists. List size 3 (Grid3/Three/) is the
+    entropy route: a Markov chain on column states whose per-seam couplings are 43,736
+    kernel-checked records (decide +kernel on packed literals), their enumeration completeness,
+    the canonicalization of an arbitrary three-list assignment onto those records, the symbolic
+    uniform-to-uniform seam with the exact Parry entropy, and the entropy bound that turns the
+    chain into the count inequality.
 
     There is no sorry, admit or native_decide in ListColoring/, Cacti/, NonPersistence/,
     Ladder/ or Grid3/. Every claimed result depends on exactly propext, Classical.choice and
@@ -91,8 +96,10 @@ project:
   # Original to this repository. Imports ListColoring; imported by nothing.
   ladder_library: Ladder
   ladder_entry_point: Ladder.lean
-  # The height-three grid theorem: every 3 x (n+1) grid is k-ECC for every k >= 4.
-  # Original to this repository. Imports ListColoring; imported by nothing.
+  # The height-three grid theorem: every 3 x (n+1) grid is k-ECC for every k >= 3. The k >= 4
+  # cases are in the Grid3 entry point; the k = 3 case is Grid3/Three/Main.lean, which the entry
+  # point does not import (it rests on the 43,736 seam records of Grid3/Three/Cert/Data/) and the
+  # comparator submission imports directly. Original to this repository. Imports ListColoring.
   grid3_library: Grid3
   grid3_entry_point: Grid3.lean
   open_problems_library: OpenProblems
@@ -118,7 +125,7 @@ classification:
     - "68V20"   # formalization of mathematics in connection with theorem provers
 
 # What was formalized. The cactus classification of Cacti/, the ladder theorem of Ladder/ and the
-# height-three grid theorem of Grid3/ are original to this repository, but ten of the twenty compared theorems formalize prior work, so
+# height-three grid theorem of Grid3/ are original to this repository, but ten of the twenty-one compared theorems formalize prior work, so
 # the submitted result is source-based and no original-proof entry is claimed here.
 sources:
   - title: "List coloring and n-monophilic graphs"
@@ -309,7 +316,7 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 5, the height-three case of Kirov-Naimi section 6 Question 1 for paths at list sizes >= 5 (original to this repository); list size 4 is the entry after next, list size 3 is not claimed"
+      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 5, the height-three case of Kirov-Naimi section 6 Question 1 for paths at list sizes >= 5 (original to this repository); list size 4 is the entry after next, list size 3 the one after that"
     - declaration: ListColoring.colConst_boxProd_pathG_two
       file: Grid3/Statements.lean
       sorry_count: 0
@@ -321,7 +328,13 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 4; the k = 4 case is the two-column-lookback proof of Grid3/Four/, whose arithmetic core is a family of LP certificates over the Venn atoms of five lists, checked by linear_combination (original to this repository); list size 3 is not claimed"
+      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 4; the k = 4 case is the two-column-lookback proof of Grid3/Four/, whose arithmetic core is a family of LP certificates over the Venn atoms of five lists, checked by linear_combination (original to this repository); list size 3 is the next entry"
+    - declaration: ListColoring.ecc_boxProd_pathG_two_of_three
+      file: Grid3/Three/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3; the k = 3 case is the entropy (Parry-Renyi) certificate route of Grid3/Three/: 43,736 seam records checked by decide +kernel on packed literals (Grid3/Three/Cert/Data/), their enumeration completeness (Grid3/Three/Cert/Keys/), the canonicalization of an arbitrary three-list assignment (Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean), the symbolic uniform-to-uniform seam (Cert/Parry.lean) and the Markov-chain entropy bound (k3_entropy/); k >= 4 is the previous entry (original to this repository)"
 
 fidelity:
   divergences: >-

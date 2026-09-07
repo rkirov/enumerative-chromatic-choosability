@@ -71,7 +71,8 @@
     "ListColoring.colConst_boxProd_pathG_one",
     "ListColoring.ecc_boxProd_pathG_two",
     "ListColoring.colConst_boxProd_pathG_two",
-    "ListColoring.ecc_boxProd_pathG_two_of_four"
+    "ListColoring.ecc_boxProd_pathG_two_of_four",
+    "ListColoring.ecc_boxProd_pathG_two_of_three"
   ],
   "permitted_axioms": [
     "propext",
