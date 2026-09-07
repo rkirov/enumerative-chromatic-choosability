@@ -1,4 +1,4 @@
-import k3_entropy.Grid3Entropy
+import Grid3.Three.Entropy
 
 /-!
 # Grid model, part 2: the grid fact for `hf_mem`.

@@ -67,7 +67,7 @@ theorem exists_glued [Inhabited α] [Inhabited β] (A : ι → Finset α) (B : �
     rw [hg i b hb, hf i _ ((e i).symm ⟨b, hb⟩).2]
     simp
 
-/-- **Index-fiber card = count** (as in `k3_entropy/FiberCard.lean`). -/
+/-- **Index-fiber card = count** (as in `the retired staging module FiberCard.lean`). -/
 theorem count_eq_fiber {γ : Type*} [BEq γ] [LawfulBEq γ] [DecidableEq γ] (l : List γ) (a : γ) :
     (Finset.univ.filter (fun i : Fin l.length => l[i] = a)).card = l.count a := by
   induction l with

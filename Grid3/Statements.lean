@@ -54,7 +54,7 @@ There the inequality `(C1_r)` is false on actual chains, so this route cannot wo
 entropy (Parry–Rényi) certificate route in `Grid3/Three/Main.lean`
 (`Grid3.Three.ecc_grid3_three`, and `ecc_boxProd_pathG_two_of_three` for every `k ≥ 3`). That
 module is not imported here because it depends on the 43,736 kernel-checked seam records of
-`Grid3/Three/Cert/Data/`, which are built separately (see `k3_entropy/REMAINING.md`).
+`Grid3/Three/Cert/Data/`, which are built separately (see `Grid3/Three/README.md`).
 -/
 
 namespace ListColoring

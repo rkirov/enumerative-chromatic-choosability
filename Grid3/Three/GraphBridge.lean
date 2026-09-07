@@ -1,4 +1,4 @@
-import k3_entropy.ModelAssembly
+import Grid3.Three.ModelAssembly
 import Grid3.Main
 import ListColoring.Iso
 

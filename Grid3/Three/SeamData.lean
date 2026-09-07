@@ -1,6 +1,6 @@
 import Grid3.Three.UCol
 import Grid3.Three.Package
-import k3_entropy.CertifiedEntropy
+import Grid3.Three.CertifiedEntropy
 
 /-!
 # One seam of the Markov chain

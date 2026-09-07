@@ -1,7 +1,7 @@
 import Grid3.Three.SeamData
 import Grid3.AllU
 import Grid3.Statements
-import k3_entropy.FinalModel
+import Grid3.Three.FinalModel
 
 /-!
 # Height-three grids are `3`-ECC
@@ -12,7 +12,7 @@ lists to the `3 × (n+1)` grid admits fewer proper colourings than the constant 
 The proof is the three-way split of Kirov–Naimi's argument. If every column is uniform (its
 three lists agree), the gauge injection of `Grid3/AllU.lean` applies. Otherwise the concrete
 columns carry the laws `lawC` and the seams the kernels of `seam_exists`, and the entropy
-capstone `colConst_le_col_of_model` (`k3_entropy/FinalModel.lean`) turns the chain into the
+capstone `colConst_le_col_of_model` (`Grid3/Three/FinalModel.lean`) turns the chain into the
 count inequality: a nonuniform first column has root entropy at least `log 12` (collision mass at
 most `1/12`), while a uniform first column has `log 12 - log (18/17)` (collision mass `3/34`) and
 the first seam into a nonuniform column repays the deficit. A single column (`n = 0`) is the

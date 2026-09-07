@@ -1,4 +1,4 @@
-import k3_entropy.GraphBridge
+import Grid3.Three.GraphBridge
 
 /-!
 # Final count inequality from an actual-colour entropy model

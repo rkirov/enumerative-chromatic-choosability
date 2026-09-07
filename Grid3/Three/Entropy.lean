@@ -6,7 +6,7 @@ import Mathlib
 `entropy_bound_conditional`: given a Markov model `(α, K)` of a saturated `3×W` grid — kernels
 normalized and nonnegative — together with the **certificate** (`log 12 ≤ H(root)` and
 `log ρ ≤ seamterm k` for every seam) and the max-entropy/support fact `H(μ_{W-1}) ≤ log N`, the
-count dominates the uniform count: `a (W-1) ≤ N`.  Everything here is proved sorry-free from the
+count dominates the uniform count: `a (W-1) ≤ N`.  Everything here is proved in full from the
 path chain rule and the telescoping bridge; the only inputs left abstract are exactly the
 computationally-verified finite certificate and the grid→measure modeling.
 -/
@@ -742,7 +742,7 @@ theorem seamterm_ge_logrho_collision [DecidableEq S]
     entropy is at least `log 12` (`hroot`), and the measure's support is bounded by `N` (`hsupp`),
     then the colouring count dominates the uniform count: `a (W-1) ≤ N`.
 
-    Everything here is PROVED sorry-free from `entropy_bound_conditional`, `seamterm_ge_logrho`
+    Everything here is PROVED in full from `entropy_bound_conditional`, `seamterm_ge_logrho`
     (= `seam_bound` + `R_bound` + `seam_to_logrho` + `seamterm_marginal`), and `lastMarg_eq_law`.
     Closing `grid3_three_ecc` now needs only: instantiate `S`/`K`/`law` from the saturated grid,
     supply the seam data `r` (the 43,364-seam ℚ certificate, via `Classical.choose`), and prove

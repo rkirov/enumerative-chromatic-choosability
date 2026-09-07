@@ -5,7 +5,7 @@ import Grid3.Three.Cert.Keys
 
 `exists_maximal`: for a valid packed key `(mL, mR, M)` there is a valid *maximal* key
 `(mL, mR, M')` with `M ≤ M'` entrywise (`keyLE`). This is the key-level half of the maximal
-extension step of `k3_entropy/REMAINING.md` (milestone 4): a concrete seam's partial block
+extension step described in `Grid3/Three/README.md`: a concrete seam's partial block
 matching gives a valid key; extending it to a maximal one only adds prohibitions, so the
 certified coupling of the maximal key (`Complete.lean`) applies to the concrete seam.
 

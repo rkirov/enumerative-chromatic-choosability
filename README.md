@@ -34,7 +34,7 @@ choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything
 | `ListColoring/` | the formalization |
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
-| `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 4` (`Grid3/Four/` is the `k = 4` case) — beyond the paper, see below |
+| `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | the formal `K₂,₂₆` counterexample to a uniform 2-degenerate-graph conjecture |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
@@ -202,11 +202,11 @@ Also a 2026 AI research collaboration result, not the paper's; notes in `ai_rese
 
 ## Beyond the paper: height three
 
-`Grid3/` settles the height-three case of Question 1 for paths at every list size `k ≥ 4`:
+`Grid3/` settles the height-three case of Question 1 for paths at every list size `k ≥ 3`:
 
-> Every `3 × (n+1)` grid is enumeratively chromatic-choosable at every list size `k ≥ 4`
-> (`ListColoring.ecc_boxProd_pathG_two_of_four`; `ListColoring.ecc_boxProd_pathG_two` is the
-> `k ≥ 5` case), and the count it is tight against is
+> Every `3 × (n+1)` grid is enumeratively chromatic-choosable at every list size `k ≥ 3`
+> (`ListColoring.ecc_boxProd_pathG_two_of_three`; `ecc_boxProd_pathG_two_of_four` is the `k ≥ 4`
+> case and `ecc_boxProd_pathG_two` the `k ≥ 5` case), and the count it is tight against is
 > `Fne k n · k(k-1)² + Dp k n · k(k-1)` (`ListColoring.colConst_boxProd_pathG_two`), where
 > `Fne`, `Dp` are the integer sequences `Fne (i+1) = ene·Fne i + gam·Dp i`,
 > `Dp (i+1) = Fne i + del·Dp i` of `Grid3/Transfer.lean` — `12, 54, 246, 1122, 5118, …` at `k = 3`.
@@ -243,8 +243,18 @@ McCormick product facts). Over a column a Bad colour costs exactly one, and the 
 accounting (`Grid3/Four/Depth.lean`) injects each Bad state two columns back into a state with
 surplus at least one, so the seam slack stays nonnegative.
 
-`k = 3` is not claimed: there the Perron-growth inequality is false on actual chains, so this
-route cannot work. The research record is `ai_research_notes/GRID_HEIGHT3_EIGENFUNCTIONAL_2026-08-25.md`.
+`k = 3` cannot use this route: the Perron-growth inequality is false on actual chains. `Grid3/Three/`
+proves it by an entropy argument instead. A list assignment with at least one nonuniform column
+carries a Markov chain on column states whose column laws are the *signature laws* of the 39
+column types and whose seam kernels are certified couplings; the chain's entropy is at least
+`log 12 + n·log ρ` with `ρ = (5 + √17)/2`, and at most the log of the number of list colourings,
+which is the inequality. The couplings are 43,736 records, one per maximal seam key, each checked
+by `decide +kernel` on a packed big-`Nat` literal (`Grid3/Three/Cert/Data/`), with a kernel-checked
+enumeration proving that every valid maximal key has a record (`Grid3/Three/Cert/Keys/`); an
+arbitrary assignment is canonicalized onto those records column by column
+(`Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean`), the uniform-to-uniform seam is the Parry
+kernel with entropy exactly `log ρ` (`Grid3/Three/Cert/Parry.lean`), and the all-uniform
+assignment is handled by a direct injection (`Grid3/AllU.lean`). See `Grid3/Three/README.md`.
 
 Also a 2026 AI research collaboration result. `Grid3/` imports `ListColoring/` and is imported by
 nothing.

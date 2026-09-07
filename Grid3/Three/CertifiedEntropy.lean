@@ -1,4 +1,4 @@
-import k3_entropy.Grid3Entropy
+import Grid3.Three.Entropy
 import Grid3.Three.Cert.Parry
 
 /-!

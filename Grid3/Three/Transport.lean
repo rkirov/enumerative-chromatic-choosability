@@ -1,5 +1,5 @@
 import Grid3.Three.ColourMaps
-import k3_entropy.KernelTransport
+import Grid3.Three.KernelTransport
 
 /-!
 # From colour maps to state maps

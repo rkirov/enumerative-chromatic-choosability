@@ -334,7 +334,7 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3; the k = 3 case is the entropy (Parry-Renyi) certificate route of Grid3/Three/: 43,736 seam records checked by decide +kernel on packed literals (Grid3/Three/Cert/Data/), their enumeration completeness (Grid3/Three/Cert/Keys/), the canonicalization of an arbitrary three-list assignment (Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean), the symbolic uniform-to-uniform seam (Cert/Parry.lean) and the Markov-chain entropy bound (k3_entropy/); k >= 4 is the previous entry (original to this repository)"
+      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3; the k = 3 case is the entropy (Parry-Renyi) certificate route of Grid3/Three/: 43,736 seam records checked by decide +kernel on packed literals (Grid3/Three/Cert/Data/), their enumeration completeness (Grid3/Three/Cert/Keys/), the canonicalization of an arbitrary three-list assignment (Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean), the symbolic uniform-to-uniform seam (Cert/Parry.lean) and the Markov-chain entropy bound (Grid3/Three/Entropy.lean, FinalModel.lean); k >= 4 is the previous entry (original to this repository)"
 
 fidelity:
   divergences: >-

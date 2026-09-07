@@ -1,5 +1,5 @@
-import k3_entropy.CertifiedEntropy
-import k3_entropy.Grid3Model
+import Grid3.Three.CertifiedEntropy
+import Grid3.Three.Model
 
 /-!
 # The entropy bound for actual finite-colour grid states
