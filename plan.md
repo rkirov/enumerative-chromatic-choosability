@@ -67,6 +67,16 @@ result. Deferred to an optional milestone.
 
 ## Progress log
 
+**2026-09-10 — the `k = 3` certificate halved by row reflection.** The seam keys are closed under
+swapping rows `0` and `2` (578 of 43,736 are self-symmetric), so one record per orbit suffices:
+22,157 records in 554 modules of forty (`Cert/Data/`, 46 MB instead of 100). The proof needs the
+column laws to be reflection-equivariant; nine of the 39 laws were off by one count on a few
+states (rounding in the generator), so they were symmetrized per state orbit and the whole record
+set was regenerated against the symmetric table — every seam still certifies. New: `Cert/Mirror.lean`
+(`rtype`, `rM`, `rsig`, `validKey_rM`, `table_rsig`), `Reflect.lean` (`lawC_mirror`,
+`seam_transport`), the three-way `cert_complete`/`seam_package`, and `seam_exists` split into
+`seam_of_package` and the case analysis.
+
 **2026-09-09 — build times.** Profiled with `lean --json -Dprofiler=true -Dprofiler.threshold=2000`
 per module and Mathlib's `#min_imports`. Four fixes: (1) `NonPersistence/Tower.lean` stated a
 `have` with a type the unifier could only reach by unfolding `colorings` — 168 s for one line; the

@@ -72,8 +72,10 @@ project:
     pointwise one column back through a pair lemma whose threshold is (k-2)(k-3) >= k+1 for
     k >= 5, and at k = 4 two columns back, through a conditional pair lemma and a family of
     LP certificates over the Venn atoms of five lists. List size 3 (Grid3/Three/) is the
-    entropy route: a Markov chain on column states whose per-seam couplings are 43,736
-    kernel-checked records (decide +kernel on packed literals), their enumeration completeness,
+    entropy route: a Markov chain on column states whose per-seam couplings are 22,157
+    kernel-checked records (decide +kernel on packed literals; one per row-reflection orbit of
+    the 43,736 maximal seam keys, the other orbit member reached by reflecting the seam), their
+    enumeration completeness,
     the canonicalization of an arbitrary three-list assignment onto those records, the symbolic
     uniform-to-uniform seam with the exact Parry entropy, and the entropy bound that turns the
     chain into the count inequality.
@@ -98,7 +100,7 @@ project:
   ladder_entry_point: Ladder.lean
   # The height-three grid theorem: every 3 x (n+1) grid is k-ECC for every k >= 3. The k >= 4
   # cases are in the Grid3 entry point; the k = 3 case is Grid3/Three/Main.lean, which the entry
-  # point does not import (it rests on the 43,736 seam records of Grid3/Three/Cert/Data/) and the
+  # point does not import (it rests on the 22,157 seam records of Grid3/Three/Cert/Data/) and the
   # comparator submission imports directly. Original to this repository. Imports ListColoring.
   grid3_library: Grid3
   grid3_entry_point: Grid3.lean
@@ -335,7 +337,7 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3; the k = 3 case is the entropy (Parry-Renyi) certificate route of Grid3/Three/: 43,736 seam records checked by decide +kernel on packed literals (Grid3/Three/Cert/Data/), their enumeration completeness (Grid3/Three/Cert/Keys/), the canonicalization of an arbitrary three-list assignment (Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean), the symbolic uniform-to-uniform seam (Cert/Parry.lean) and the Markov-chain entropy bound (Grid3/Three/Entropy.lean, FinalModel.lean); k >= 4 is the previous entry (original to this repository)"
+      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3; the k = 3 case is the entropy (Parry-Renyi) certificate route of Grid3/Three/: 22,157 seam records checked by decide +kernel on packed literals (Grid3/Three/Cert/Data/), one per row-reflection orbit of the 43,736 maximal seam keys (Grid3/Three/Reflect.lean transports the other member), their enumeration completeness (Grid3/Three/Cert/Keys/), the canonicalization of an arbitrary three-list assignment (Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean), the symbolic uniform-to-uniform seam (Cert/Parry.lean) and the Markov-chain entropy bound (Grid3/Three/Entropy.lean, FinalModel.lean); k >= 4 is the previous entry (original to this repository)"
 
 fidelity:
   divergences: >-

@@ -1,175 +1,50 @@
-import Grid3.Three.Cert.Types
-import Grid3.Three.Cert.Data.C3771
-import Grid3.Three.Cert.Data.C3772
-import Grid3.Three.Cert.Data.C3773
-import Grid3.Three.Cert.Data.C3774
-import Grid3.Three.Cert.Data.C3775
-import Grid3.Three.Cert.Data.C3776
-import Grid3.Three.Cert.Data.C3777
-import Grid3.Three.Cert.Data.C3778
-import Grid3.Three.Cert.Data.C3779
-import Grid3.Three.Cert.Data.C3780
-import Grid3.Three.Cert.Data.C3781
-import Grid3.Three.Cert.Data.C3782
-import Grid3.Three.Cert.Data.C3783
-import Grid3.Three.Cert.Data.C3784
-import Grid3.Three.Cert.Data.C3785
-import Grid3.Three.Cert.Data.C3786
-import Grid3.Three.Cert.Data.C3787
-import Grid3.Three.Cert.Data.C3788
-import Grid3.Three.Cert.Data.C3789
-import Grid3.Three.Cert.Data.C3790
-import Grid3.Three.Cert.Data.C3791
-import Grid3.Three.Cert.Data.C3792
-import Grid3.Three.Cert.Data.C3793
-import Grid3.Three.Cert.Data.C3794
-import Grid3.Three.Cert.Data.C3795
-import Grid3.Three.Cert.Data.C3796
-import Grid3.Three.Cert.Data.C3797
-import Grid3.Three.Cert.Data.C3798
-import Grid3.Three.Cert.Data.C3799
-import Grid3.Three.Cert.Data.C3800
-import Grid3.Three.Cert.Data.C3801
-import Grid3.Three.Cert.Data.C3802
-import Grid3.Three.Cert.Data.C3803
-import Grid3.Three.Cert.Data.C3804
-import Grid3.Three.Cert.Data.C3805
-import Grid3.Three.Cert.Data.C3806
-import Grid3.Three.Cert.Data.C3807
-import Grid3.Three.Cert.Data.C3808
-import Grid3.Three.Cert.Data.C3809
-import Grid3.Three.Cert.Data.C3810
-import Grid3.Three.Cert.Data.C3811
-import Grid3.Three.Cert.Data.C3812
-import Grid3.Three.Cert.Data.C3813
-import Grid3.Three.Cert.Data.C3814
-import Grid3.Three.Cert.Data.C3815
-import Grid3.Three.Cert.Data.C3816
-import Grid3.Three.Cert.Data.C3817
-import Grid3.Three.Cert.Data.C3818
-import Grid3.Three.Cert.Data.C3819
-import Grid3.Three.Cert.Data.C3820
-import Grid3.Three.Cert.Data.C3821
-import Grid3.Three.Cert.Data.C3822
-import Grid3.Three.Cert.Data.C3823
-import Grid3.Three.Cert.Data.C3824
-import Grid3.Three.Cert.Data.C3825
-import Grid3.Three.Cert.Data.C3826
-import Grid3.Three.Cert.Data.C3827
-import Grid3.Three.Cert.Data.C3828
-import Grid3.Three.Cert.Data.C3829
-import Grid3.Three.Cert.Data.C3830
-import Grid3.Three.Cert.Data.C3831
-import Grid3.Three.Cert.Data.C3832
-import Grid3.Three.Cert.Data.C3833
-import Grid3.Three.Cert.Data.C3834
-import Grid3.Three.Cert.Data.C3835
-import Grid3.Three.Cert.Data.C3836
-import Grid3.Three.Cert.Data.C3837
-import Grid3.Three.Cert.Data.C3838
-import Grid3.Three.Cert.Data.C3839
-import Grid3.Three.Cert.Data.C3840
-import Grid3.Three.Cert.Data.C3841
-import Grid3.Three.Cert.Data.C3842
-import Grid3.Three.Cert.Data.C3843
-import Grid3.Three.Cert.Data.C3844
-import Grid3.Three.Cert.Data.C3845
-import Grid3.Three.Cert.Data.C3846
-import Grid3.Three.Cert.Data.C3847
-import Grid3.Three.Cert.Data.C3848
-import Grid3.Three.Cert.Data.C3849
-import Grid3.Three.Cert.Data.C3850
-import Grid3.Three.Cert.Data.C3851
-import Grid3.Three.Cert.Data.C3852
-import Grid3.Three.Cert.Data.C3853
-import Grid3.Three.Cert.Data.C3854
-import Grid3.Three.Cert.Data.C3855
-import Grid3.Three.Cert.Data.C3856
-import Grid3.Three.Cert.Data.C3857
-import Grid3.Three.Cert.Data.C3858
-import Grid3.Three.Cert.Data.C3859
-import Grid3.Three.Cert.Data.C3860
-import Grid3.Three.Cert.Data.C3861
-import Grid3.Three.Cert.Data.C3862
-import Grid3.Three.Cert.Data.C3863
-import Grid3.Three.Cert.Data.C3864
-import Grid3.Three.Cert.Data.C3865
-import Grid3.Three.Cert.Data.C3866
-import Grid3.Three.Cert.Data.C3867
-import Grid3.Three.Cert.Data.C3868
-import Grid3.Three.Cert.Data.C3869
-import Grid3.Three.Cert.Data.C3870
-import Grid3.Three.Cert.Data.C3871
-import Grid3.Three.Cert.Data.C3872
-import Grid3.Three.Cert.Data.C3873
-import Grid3.Three.Cert.Data.C3874
-import Grid3.Three.Cert.Data.C3875
-import Grid3.Three.Cert.Data.C3876
-import Grid3.Three.Cert.Data.C3877
-import Grid3.Three.Cert.Data.C3878
-import Grid3.Three.Cert.Data.C3879
-import Grid3.Three.Cert.Data.C3880
-import Grid3.Three.Cert.Data.C3881
-import Grid3.Three.Cert.Data.C3882
-import Grid3.Three.Cert.Data.C3883
-import Grid3.Three.Cert.Data.C3884
-import Grid3.Three.Cert.Data.C3885
-import Grid3.Three.Cert.Data.C3886
-import Grid3.Three.Cert.Data.C3887
-import Grid3.Three.Cert.Data.C3888
-import Grid3.Three.Cert.Data.C3889
-import Grid3.Three.Cert.Data.C3890
-import Grid3.Three.Cert.Data.C3891
-import Grid3.Three.Cert.Data.C3892
-import Grid3.Three.Cert.Data.C3893
-import Grid3.Three.Cert.Data.C3894
-import Grid3.Three.Cert.Data.C3895
-import Grid3.Three.Cert.Data.C3896
-import Grid3.Three.Cert.Data.C3897
-import Grid3.Three.Cert.Data.C3898
-import Grid3.Three.Cert.Data.C3899
-import Grid3.Three.Cert.Data.C3900
-import Grid3.Three.Cert.Data.C3901
-import Grid3.Three.Cert.Data.C3902
-import Grid3.Three.Cert.Data.C3903
-import Grid3.Three.Cert.Data.C3904
-import Grid3.Three.Cert.Data.C3905
-import Grid3.Three.Cert.Data.C3906
-import Grid3.Three.Cert.Data.C3907
-import Grid3.Three.Cert.Data.C3908
-import Grid3.Three.Cert.Data.C3909
-import Grid3.Three.Cert.Data.C3910
-import Grid3.Three.Cert.Data.C3911
-import Grid3.Three.Cert.Data.C3912
-import Grid3.Three.Cert.Data.C3913
-import Grid3.Three.Cert.Data.C3914
-import Grid3.Three.Cert.Data.C3915
-import Grid3.Three.Cert.Data.C3916
-import Grid3.Three.Cert.Data.C3917
-import Grid3.Three.Cert.Data.C3918
-import Grid3.Three.Cert.Data.C3919
-import Grid3.Three.Cert.Data.C3920
-import Grid3.Three.Cert.Data.C3921
-import Grid3.Three.Cert.Data.C3922
-import Grid3.Three.Cert.Data.C3923
-import Grid3.Three.Cert.Data.C3924
-import Grid3.Three.Cert.Data.C3925
-import Grid3.Three.Cert.Data.C3926
-import Grid3.Three.Cert.Data.C3927
-import Grid3.Three.Cert.Data.C3928
-import Grid3.Three.Cert.Data.C3929
-import Grid3.Three.Cert.Data.C3930
-import Grid3.Three.Cert.Data.C3931
-import Grid3.Three.Cert.Data.C3932
-import Grid3.Three.Cert.Data.C3933
-import Grid3.Three.Cert.Data.C3934
-import Grid3.Three.Cert.Data.C3935
-import Grid3.Three.Cert.Data.C3936
-import Grid3.Three.Cert.Data.C3937
-import Grid3.Three.Cert.Data.C3938
+import Grid3.Three.Cert.Mirror
+import Grid3.Three.Cert.Data.C0438
+import Grid3.Three.Cert.Data.C0439
+import Grid3.Three.Cert.Data.C0440
+import Grid3.Three.Cert.Data.C0441
+import Grid3.Three.Cert.Data.C0442
+import Grid3.Three.Cert.Data.C0443
+import Grid3.Three.Cert.Data.C0444
+import Grid3.Three.Cert.Data.C0445
+import Grid3.Three.Cert.Data.C0446
+import Grid3.Three.Cert.Data.C0447
+import Grid3.Three.Cert.Data.C0448
+import Grid3.Three.Cert.Data.C0449
+import Grid3.Three.Cert.Data.C0450
+import Grid3.Three.Cert.Data.C0451
+import Grid3.Three.Cert.Data.C0452
+import Grid3.Three.Cert.Data.C0453
+import Grid3.Three.Cert.Data.C0454
+import Grid3.Three.Cert.Data.C0455
+import Grid3.Three.Cert.Data.C0456
+import Grid3.Three.Cert.Data.C0457
+import Grid3.Three.Cert.Data.C0458
+import Grid3.Three.Cert.Data.C0459
+import Grid3.Three.Cert.Data.C0460
+import Grid3.Three.Cert.Data.C0461
+import Grid3.Three.Cert.Data.C0462
+import Grid3.Three.Cert.Data.C0463
+import Grid3.Three.Cert.Data.C0464
+import Grid3.Three.Cert.Data.C0465
+import Grid3.Three.Cert.Data.C0466
+import Grid3.Three.Cert.Data.C0467
+import Grid3.Three.Cert.Data.C0468
+import Grid3.Three.Cert.Data.C0469
+import Grid3.Three.Cert.Data.C0470
+import Grid3.Three.Cert.Data.C0471
+import Grid3.Three.Cert.Data.C0472
+import Grid3.Three.Cert.Data.C0473
+import Grid3.Three.Cert.Data.C0474
+import Grid3.Three.Cert.Data.C0475
+import Grid3.Three.Cert.Data.C0476
+import Grid3.Three.Cert.Data.C0477
+import Grid3.Three.Cert.Data.C0478
+import Grid3.Three.Cert.Data.C0479
 
 /-! Seam keys with left type `1354` (type index 31): the enumeration equals the stored keys, and
-every stored key has a kernel-checked record. Generated by `Grid3/Three/Cert/scripts/gen_keys.py`. -/
+every stored key, or its row reflection, has a kernel-checked record. Generated by
+`Grid3/Three/Cert/scripts/gen_keys.py`. -/
 
 set_option maxHeartbeats 0
 set_option maxRecDepth 100000
@@ -177,1909 +52,1991 @@ set_option maxRecDepth 100000
 namespace Grid3.Three.Cert
 namespace K31
 
+theorem tL : rtype 1354 = 409 := by decide
+
 def s00 : List Nat := [4835998444378094561132544, 4835998426363696118759424, 4835703296472915275415552, 295165919577929416704, 4835703278458516833042432, 295147905179487043584, 18014398643699712, 4835998426363696051654656, 4835703296472915208310784, 295165919577862311936, 4835703278458516765937664, 295147905179419938816, 18014398576594944, 134221824, 4835703278458516698832896, 295147905179352834048, 18014398509490176, 67117056]
 theorem e00 : enumKeys 1354 12288 = s00 := by decide +kernel
-theorem r00 : ∀ M ∈ s00, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 12288 M ne blob = true := by
+theorem t00 : rtype 12288 = 12288 := by decide
+theorem r00 : ∀ M ∈ s00, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 12288 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 12288) (rM M) ne blob = true) := by
   unfold s00
-  refine List.forall_mem_cons.2 ⟨⟨1, 161, c3771_b6, by decide, c3771_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 169, c3771_b7, by decide, c3771_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 186, c3771_b8, by decide, c3771_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 173, c3771_b9, by decide, c3771_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 180, c3772_b0, by decide, c3772_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 176, c3772_b1, by decide, c3772_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 192, c3772_b2, by decide, c3772_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 165, c3772_b3, by decide, c3772_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 186, c3772_b4, by decide, c3772_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 167, c3772_b5, by decide, c3772_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 189, c3772_b6, by decide, c3772_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 177, c3772_b7, by decide, c3772_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 198, c3772_b8, by decide, c3772_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 196, c3772_b9, by decide, c3772_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 188, c3773_b0, by decide, c3773_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 168, c3773_b1, by decide, c3773_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 194, c3773_b2, by decide, c3773_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨1, 200, c3773_b3, by decide, c3773_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 161, c0438_b14, by decide, by rw [tL, t00, show rM 4835998444378094561132544 = 295147906278864457728 by decide]; exact c0438_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 169, c0438_b15, by decide, by rw [tL, t00, show rM 4835998426363696118759424 = 295147906278931562496 by decide]; exact c0438_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 186, c0438_b3, by decide, by rw [tL, t00, show rM 4835703296472915275415552 = 1099578740736 by decide]; exact c0438_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 173, c0438_b12, by decide, by rw [tL, t00, show rM 295165919577929416704 = 295147905179419938816 by decide]; exact c0438_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 180, c0438_b4, by decide, by rw [tL, t00, show rM 4835703278458516833042432 = 1099645845504 by decide]; exact c0438_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 176, c0438_b13, by decide, by rw [tL, t00, show rM 295147905179487043584 = 295147905179487043584 by decide]; exact c0438_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 192, c0438_b2, by decide, by rw [tL, t00, show rM 18014398643699712 = 134221824 by decide]; exact c0438_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 165, c0438_b18, by decide, by rw [tL, t00, show rM 4835998426363696051654656 = 295165920677373935616 by decide]; exact c0438_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 186, c0438_b7, by decide, by rw [tL, t00, show rM 4835703296472915208310784 = 18015498021113856 by decide]; exact c0438_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 167, c0438_b16, by decide, by rw [tL, t00, show rM 295165919577862311936 = 295165919577862311936 by decide]; exact c0438_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 189, c0438_b8, by decide, by rw [tL, t00, show rM 4835703278458516765937664 = 18015498088218624 by decide]; exact c0438_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 177, c0438_b17, by decide, by rw [tL, t00, show rM 295147905179419938816 = 295165919577929416704 by decide]; exact c0438_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 198, c0438_b5, by decide, by rw [tL, t00, show rM 18014398576594944 = 18014398576594944 by decide]; exact c0438_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 196, c0438_b6, by decide, by rw [tL, t00, show rM 134221824 = 18014398643699712 by decide]; exact c0438_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 188, c0438_b11, by decide, by rw [tL, t00, show rM 4835703278458516698832896 = 36029896530591744 by decide]; exact c0438_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 168, c0438_b19, by decide, by rw [tL, t00, show rM 295147905179352834048 = 295183933976371789824 by decide]; exact c0438_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 194, c0438_b9, by decide, by rw [tL, t00, show rM 18014398509490176 = 36028797018968064 by decide]; exact c0438_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨1, 200, c0438_b10, by decide, by rw [tL, t00, show rM 67117056 = 36028797086072832 by decide]; exact c0438_ok10⟩, ?_⟩
   simp
 
 def s01 : List Nat := [4835777066560711444135936, 1209220968645708434636800, 4835721729706190036008960, 302526607312436274135040, 1208944284373101394001920, 302305259894350641627136, 4835704432505921229291520, 19184614962557857300480, 302232625839560426782720, 18907930689950816665600, 4835721725202590425415680, 302526602808836663541760, 4835703279584416622706688, 295149031079276707840, 302231472918055820197888, 18464758472236072960, 1208926973662033755504640, 18963254033673393012736, 302232612328761595002880, 18907917179151984885760, 1208944266358702951628800, 302305241879952199254016, 1208925820740529148919808, 73788102194812420096, 302231459407256988418048, 18451247673404293120, 302232607825161984409600, 18907912675552374292480, 18889467057378571583488, 1154047404597575680, 4835777066560711443873808, 1209220968645708434374672, 4835721729706190035746832, 302526607312436273872912, 1208944284373101393739792, 302305259894350641365008, 4835721725202590425153552, 302526602808836663279632, 4835703279584416622444560, 295149031079276445712, 302231472918055819935760, 18464758472235810832, 1208944266358702951366672, 302305241879952198991888, 1208925820740529148657680, 73788102194812157968, 302231459407256988155920, 18451247673404030992, 302231454903657377562640, 18446744073793437712, 1125899990728720, 4835704435883620933042432, 19184618340257561051392, 1208926990550532291035392, 18963270922171928543488, 4835777065434811537293568, 1209220967519808527794432, 4835703282962116326457600, 295152408778980458752, 1208925837629027684450560, 73804990693347950848, 4835704431380021322449152, 19184613836657950458112, 18889483945877107114240, 1170935903133106432, 4835703278458516715864320, 295147905179369865472, 18014398526521600, 1208926972536133848662272, 18963252907773486170368, 18889470435078275334400, 1157425104301326592, 1208925819614629242077440, 73786976294905577728, 4503599694741760, 18889465931478664741120, 1152921504690733312, 4835777065434811537031440, 1209220967519808527532304, 4835703282962116326195472, 295152408778980196624, 1208925837629027684188432, 73804990693347688720, 4835703278458516715602192, 295147905179369603344, 18014398526259472, 1208925819614629241815312, 73786976294905315600, 4503599694479632, 83886352, 1208926973662033688399872, 18963254033673325907968, 302232612328761527898112, 18907917179151917780992, 1208944266358702884524032, 302305241879952132149248, 1208925820740529081815040, 73788102194745315328, 302231459407256921313280, 18451247673337188352, 302232607825161917304832, 18907912675552307187712, 18889467057378504478720, 1154047404530470912, 302231454903657310720000, 18446744073726595072, 1125899923886080, 1208944266358702884261904, 302305241879952131887120, 1208925820740529081552912, 73788102194745053200, 302231459407256921051152, 18451247673336926224, 302231454903657310457872, 18446744073726332944, 1125899923623952, 1208926972536133781557504, 18963252907773419065600, 18889470435078208229632, 1157425104234221824, 1208925819614629174972672, 73786976294838472960, 4503599627636992, 18889465931478597636352, 1152921504623628544, 17043712]
 theorem e01 : enumKeys 1354 5392 = s01 := by decide +kernel
-theorem r01 : ∀ M ∈ s01, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5392 M ne blob = true := by
+theorem t01 : rtype 5392 = 5392 := by decide
+theorem r01 : ∀ M ∈ s01, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5392 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 5392) (rM M) ne blob = true) := by
   unfold s01
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3775_b1, by decide, c3775_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3775_b0, by decide, c3775_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3774_b9, by decide, c3774_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3774_b8, by decide, c3774_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 169, c3774_b7, by decide, c3774_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3774_b6, by decide, c3774_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3774_b1, by decide, c3774_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3774_b0, by decide, c3774_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3773_b9, by decide, c3773_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3773_b8, by decide, c3773_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3775_b9, by decide, c3775_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3775_b8, by decide, c3775_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3776_b2, by decide, c3776_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3776_b3, by decide, c3776_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3776_b0, by decide, c3776_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3776_b1, by decide, c3776_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3773_b7, by decide, c3773_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3773_b6, by decide, c3773_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 261, c3773_b5, by decide, c3773_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3773_b4, by decide, c3773_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3775_b3, by decide, c3775_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3775_b2, by decide, c3775_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3775_b6, by decide, c3775_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3775_b7, by decide, c3775_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3775_b4, by decide, c3775_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3775_b5, by decide, c3775_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3774_b3, by decide, c3774_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3774_b2, by decide, c3774_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3774_b4, by decide, c3774_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3774_b5, by decide, c3774_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3782_b2, by decide, c3782_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 191, c3782_b1, by decide, c3782_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3782_b0, by decide, c3782_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3781_b9, by decide, c3781_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3781_b8, by decide, c3781_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3781_b7, by decide, c3781_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3783_b0, by decide, c3783_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3782_b9, by decide, c3782_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3783_b3, by decide, c3783_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3783_b4, by decide, c3783_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3783_b1, by decide, c3783_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3783_b2, by decide, c3783_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3782_b4, by decide, c3782_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 261, c3782_b3, by decide, c3782_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3782_b7, by decide, c3782_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3782_b8, by decide, c3782_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 261, c3782_b5, by decide, c3782_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 205, c3782_b6, by decide, c3782_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3783_b5, by decide, c3783_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3783_b6, by decide, c3783_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3783_b7, by decide, c3783_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3778_b4, by decide, c3778_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3778_b3, by decide, c3778_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3778_b2, by decide, c3778_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3778_b1, by decide, c3778_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3779_b6, by decide, c3779_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3779_b5, by decide, c3779_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3779_b9, by decide, c3779_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3780_b0, by decide, c3780_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3779_b7, by decide, c3779_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3779_b8, by decide, c3779_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3779_b0, by decide, c3779_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3778_b9, by decide, c3778_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3779_b1, by decide, c3779_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3779_b2, by decide, c3779_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3780_b4, by decide, c3780_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3780_b5, by decide, c3780_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3780_b6, by decide, c3780_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3778_b6, by decide, c3778_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3778_b5, by decide, c3778_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3778_b7, by decide, c3778_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3778_b8, by decide, c3778_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3780_b1, by decide, c3780_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3780_b2, by decide, c3780_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3780_b3, by decide, c3780_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3779_b3, by decide, c3779_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3779_b4, by decide, c3779_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3784_b8, by decide, c3784_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3784_b7, by decide, c3784_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3785_b1, by decide, c3785_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3785_b2, by decide, c3785_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3784_b9, by decide, c3784_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3785_b0, by decide, c3785_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3785_b6, by decide, c3785_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3785_b7, by decide, c3785_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3785_b8, by decide, c3785_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3785_b3, by decide, c3785_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3785_b4, by decide, c3785_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3785_b5, by decide, c3785_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3785_b9, by decide, c3785_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3776_b7, by decide, c3776_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3776_b6, by decide, c3776_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3776_b5, by decide, c3776_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3776_b4, by decide, c3776_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3777_b3, by decide, c3777_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3777_b2, by decide, c3777_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3777_b6, by decide, c3777_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3777_b7, by decide, c3777_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3777_b4, by decide, c3777_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3777_b5, by decide, c3777_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 243, c3776_b9, by decide, c3776_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3776_b8, by decide, c3776_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3777_b0, by decide, c3777_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3777_b1, by decide, c3777_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3777_b8, by decide, c3777_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3777_b9, by decide, c3777_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3778_b0, by decide, c3778_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3783_b9, by decide, c3783_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3783_b8, by decide, c3783_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3784_b2, by decide, c3784_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3784_b3, by decide, c3784_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3784_b0, by decide, c3784_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3784_b1, by decide, c3784_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 243, c3784_b4, by decide, c3784_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3784_b5, by decide, c3784_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3784_b6, by decide, c3784_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3780_b8, by decide, c3780_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3780_b7, by decide, c3780_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3780_b9, by decide, c3780_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3781_b0, by decide, c3781_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3781_b3, by decide, c3781_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3781_b4, by decide, c3781_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3781_b5, by decide, c3781_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3781_b1, by decide, c3781_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3781_b2, by decide, c3781_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3781_b6, by decide, c3781_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0439_b25, by decide, by rw [tL, t01, show rM 4835777066560711444135936 = 1152922604135252224 by decide]; exact c0439_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0441_b10, by decide, by rw [tL, t01, show rM 1209220968645708434636800 = 295147905183664570624 by decide]; exact c0441_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0440_b12, by decide, by rw [tL, t01, show rM 4835721729706190036008960 = 18446745173237956624 by decide]; exact c0440_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0441_b11, by decide, by rw [tL, t01, show rM 302526607312436274135040 = 295147905248089079824 by decide]; exact c0441_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 169, c0440_b7, by decide, by rw [tL, t01, show rM 1208944284373101394001920 = 18446744078021300224 by decide]; exact c0440_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0439_b22, by decide, by rw [tL, t01, show rM 302305259894350641627136 = 1152921573343105024 by decide]; exact c0439_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0440_b34, by decide, by rw [tL, t01, show rM 4835704432505921229291520 = 73786977394350096640 by decide]; exact c0440_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0441_b13, by decide, by rw [tL, t01, show rM 19184614962557857300480 = 295147905454230995200 by decide]; exact c0441_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0440_b31, by decide, by rw [tL, t01, show rM 302232625839560426782720 = 73786976363557949440 by decide]; exact c0440_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0440_b9, by decide, by rw [tL, t01, show rM 18907930689950816665600 = 18446744348587724800 by decide]; exact c0440_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0440_b13, by decide, by rw [tL, t01, show rM 4835721725202590425415680 = 18446745173238218752 by decide]; exact c0440_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0441_b12, by decide, by rw [tL, t01, show rM 302526602808836663541760 = 295147905248089341952 by decide]; exact c0441_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0438_b24, by decide, by rw [tL, t01, show rM 4835703279584416622706688 = 1099528667392 by decide]; exact c0438_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0441_b9, by decide, by rw [tL, t01, show rM 295149031079276707840 = 295147905179369865472 by decide]; exact c0441_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0438_b21, by decide, by rw [tL, t01, show rM 302231472918055820197888 = 68736520192 by decide]; exact c0438_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0440_b5, by decide, by rw [tL, t01, show rM 18464758472236072960 = 18446744073726595072 by decide]; exact c0440_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0440_b30, by decide, by rw [tL, t01, show rM 1208926973662033755504640 = 73786976299200282880 by decide]; exact c0440_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0439_b24, by decide, by rw [tL, t01, show rM 18963254033673393012736 = 1152921779551863040 by decide]; exact c0439_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 261, c0440_b32, by decide, by rw [tL, t01, show rM 302232612328761595002880 = 73786976363624792080 by decide]; exact c0440_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0440_b10, by decide, by rw [tL, t01, show rM 18907917179151984885760 = 18446744348654567440 by decide]; exact c0440_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0440_b8, by decide, by rw [tL, t01, show rM 1208944266358702951628800 = 18446744078088404992 by decide]; exact c0440_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0439_b23, by decide, by rw [tL, t01, show rM 302305241879952199254016 = 1152921573410209792 by decide]; exact c0439_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0438_b20, by decide, by rw [tL, t01, show rM 1208925820740529148919808 = 4378853632 by decide]; exact c0438_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0439_b21, by decide, by rw [tL, t01, show rM 73788102194812420096 = 1152921504690733312 by decide]; exact c0439_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0438_b22, by decide, by rw [tL, t01, show rM 302231459407256988418048 = 68803362832 by decide]; exact c0438_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0440_b6, by decide, by rw [tL, t01, show rM 18451247673404293120 = 18446744073793437712 by decide]; exact c0440_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0440_b33, by decide, by rw [tL, t01, show rM 302232607825161984409600 = 73786976363625054208 by decide]; exact c0440_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0440_b11, by decide, by rw [tL, t01, show rM 18907912675552374292480 = 18446744348654829568 by decide]; exact c0440_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0438_b23, by decide, by rw [tL, t01, show rM 18889467057378571583488 = 274945278208 by decide]; exact c0438_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0440_b29, by decide, by rw [tL, t01, show rM 1154047404597575680 = 73786976294905577728 by decide]; exact c0440_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0439_b34, by decide, by rw [tL, t01, show rM 4835777066560711443873808 = 1157426203745845504 by decide]; exact c0439_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 191, c0441_b20, by decide, by rw [tL, t01, show rM 1209220968645708434374672 = 295152408783275163904 by decide]; exact c0441_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0440_b19, by decide, by rw [tL, t01, show rM 4835721729706190035746832 = 18451248772848549904 by decide]; exact c0440_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0441_b21, by decide, by rw [tL, t01, show rM 302526607312436273872912 = 295152408847699673104 by decide]; exact c0441_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0440_b17, by decide, by rw [tL, t01, show rM 1208944284373101393739792 = 18451247677631893504 by decide]; exact c0440_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0439_b32, by decide, by rw [tL, t01, show rM 302305259894350641365008 = 1157425172953698304 by decide]; exact c0439_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0440_b20, by decide, by rw [tL, t01, show rM 4835721725202590425153552 = 18451248772848812032 by decide]; exact c0440_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0441_b22, by decide, by rw [tL, t01, show rM 302526602808836663279632 = 295152408847699935232 by decide]; exact c0441_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0438_b39, by decide, by rw [tL, t01, show rM 4835703279584416622444560 = 4504699139260672 by decide]; exact c0438_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0441_b19, by decide, by rw [tL, t01, show rM 295149031079276445712 = 295152408778980458752 by decide]; exact c0441_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0438_b36, by decide, by rw [tL, t01, show rM 302231472918055819935760 = 4503668347113472 by decide]; exact c0438_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0440_b14, by decide, by rw [tL, t01, show rM 18464758472235810832 = 18451247673337188352 by decide]; exact c0440_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0440_b18, by decide, by rw [tL, t01, show rM 1208944266358702951366672 = 18451247677698998272 by decide]; exact c0440_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 261, c0439_b33, by decide, by rw [tL, t01, show rM 302305241879952198991888 = 1157425173020803072 by decide]; exact c0439_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0438_b35, by decide, by rw [tL, t01, show rM 1208925820740529148657680 = 4503603989446912 by decide]; exact c0438_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0439_b31, by decide, by rw [tL, t01, show rM 73788102194812157968 = 1157425104301326592 by decide]; exact c0439_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 261, c0438_b37, by decide, by rw [tL, t01, show rM 302231459407256988155920 = 4503668413956112 by decide]; exact c0438_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 205, c0440_b15, by decide, by rw [tL, t01, show rM 18451247673404030992 = 18451247673404030992 by decide]; exact c0440_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0438_b38, by decide, by rw [tL, t01, show rM 302231454903657377562640 = 4503668414218240 by decide]; exact c0438_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0440_b16, by decide, by rw [tL, t01, show rM 18446744073793437712 = 18451247673404293120 by decide]; exact c0440_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0438_b34, by decide, by rw [tL, t01, show rM 1125899990728720 = 4503599694741760 by decide]; exact c0438_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0441_b0, by decide, by rw [tL, t01, show rM 4835704435883620933042432 = 73788103294256676880 by decide]; exact c0441_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0441_b17, by decide, by rw [tL, t01, show rM 19184618340257561051392 = 295149031354137575440 by decide]; exact c0441_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0440_b38, by decide, by rw [tL, t01, show rM 1208926990550532291035392 = 73788102199040020480 by decide]; exact c0440_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0439_b28, by decide, by rw [tL, t01, show rM 18963270922171928543488 = 1154047679391600640 by decide]; exact c0439_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0439_b30, by decide, by rw [tL, t01, show rM 4835777065434811537293568 = 1154048504042094592 by decide]; exact c0439_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0441_b16, by decide, by rw [tL, t01, show rM 1209220967519808527794432 = 295149031083571412992 by decide]; exact c0441_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0438_b32, by decide, by rw [tL, t01, show rM 4835703282962116326457600 = 1126999435247632 by decide]; exact c0438_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0441_b14, by decide, by rw [tL, t01, show rM 295152408778980458752 = 295149031079276445712 by decide]; exact c0441_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0438_b27, by decide, by rw [tL, t01, show rM 1208925837629027684450560 = 1125904218591232 by decide]; exact c0438_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0439_b26, by decide, by rw [tL, t01, show rM 73804990693347950848 = 1154047404530470912 by decide]; exact c0439_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0441_b1, by decide, by rw [tL, t01, show rM 4835704431380021322449152 = 73788103294256939008 by decide]; exact c0441_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0441_b18, by decide, by rw [tL, t01, show rM 19184613836657950458112 = 295149031354137837568 by decide]; exact c0441_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0438_b29, by decide, by rw [tL, t01, show rM 18889483945877107114240 = 1126174785015808 by decide]; exact c0438_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0440_b35, by decide, by rw [tL, t01, show rM 1170935903133106432 = 73788102194745315328 by decide]; exact c0440_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0438_b33, by decide, by rw [tL, t01, show rM 4835703278458516715864320 = 1126999435509760 by decide]; exact c0438_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0441_b15, by decide, by rw [tL, t01, show rM 295147905179369865472 = 295149031079276707840 by decide]; exact c0441_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0438_b25, by decide, by rw [tL, t01, show rM 18014398526521600 = 1125899923886080 by decide]; exact c0438_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0440_b39, by decide, by rw [tL, t01, show rM 1208926972536133848662272 = 73788102199107125248 by decide]; exact c0440_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0439_b29, by decide, by rw [tL, t01, show rM 18963252907773486170368 = 1154047679458705408 by decide]; exact c0439_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0438_b30, by decide, by rw [tL, t01, show rM 18889470435078275334400 = 1126174851858448 by decide]; exact c0438_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0440_b36, by decide, by rw [tL, t01, show rM 1157425104301326592 = 73788102194812157968 by decide]; exact c0440_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0438_b28, by decide, by rw [tL, t01, show rM 1208925819614629242077440 = 1125904285696000 by decide]; exact c0438_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0439_b27, by decide, by rw [tL, t01, show rM 73786976294905577728 = 1154047404597575680 by decide]; exact c0439_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0438_b26, by decide, by rw [tL, t01, show rM 4503599694741760 = 1125899990728720 by decide]; exact c0438_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0438_b31, by decide, by rw [tL, t01, show rM 18889465931478664741120 = 1126174852120576 by decide]; exact c0438_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0440_b37, by decide, by rw [tL, t01, show rM 1152921504690733312 = 73788102194812420096 by decide]; exact c0440_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0439_b37, by decide, by rw [tL, t01, show rM 4835777065434811537031440 = 1158552103652687872 by decide]; exact c0439_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0441_b25, by decide, by rw [tL, t01, show rM 1209220967519808527532304 = 295153534683182006272 by decide]; exact c0441_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0439_b5, by decide, by rw [tL, t01, show rM 4835703282962116326195472 = 5630599045840912 by decide]; exact c0439_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0441_b23, by decide, by rw [tL, t01, show rM 295152408778980196624 = 295153534678887038992 by decide]; exact c0441_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0439_b3, by decide, by rw [tL, t01, show rM 1208925837629027684188432 = 5629503829184512 by decide]; exact c0439_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0439_b35, by decide, by rw [tL, t01, show rM 73804990693347688720 = 1158551004141064192 by decide]; exact c0439_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0439_b6, by decide, by rw [tL, t01, show rM 4835703278458516715602192 = 5630599046103040 by decide]; exact c0439_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0441_b24, by decide, by rw [tL, t01, show rM 295147905179369603344 = 295153534678887301120 by decide]; exact c0441_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0439_b0, by decide, by rw [tL, t01, show rM 18014398526259472 = 5629499534479360 by decide]; exact c0439_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0439_b4, by decide, by rw [tL, t01, show rM 1208925819614629241815312 = 5629503896289280 by decide]; exact c0439_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0439_b36, by decide, by rw [tL, t01, show rM 73786976294905315600 = 1158551004208168960 by decide]; exact c0439_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0439_b1, by decide, by rw [tL, t01, show rM 4503599694479632 = 5629499601322000 by decide]; exact c0439_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0439_b2, by decide, by rw [tL, t01, show rM 83886352 = 5629499601584128 by decide]; exact c0439_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0441_b3, by decide, by rw [tL, t01, show rM 1208926973662033688399872 = 73804990697642656000 by decide]; exact c0441_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0440_b0, by decide, by rw [tL, t01, show rM 18963254033673325907968 = 1170936177994236160 by decide]; exact c0440_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0441_b4, by decide, by rw [tL, t01, show rM 302232612328761527898112 = 73804990762067165200 by decide]; exact c0441_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0440_b24, by decide, by rw [tL, t01, show rM 18907917179151917780992 = 18464758747096940560 by decide]; exact c0440_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0440_b23, by decide, by rw [tL, t01, show rM 1208944266358702884524032 = 18464758476530778112 by decide]; exact c0440_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0439_b39, by decide, by rw [tL, t01, show rM 302305241879952132149248 = 1170935971852582912 by decide]; exact c0439_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0439_b8, by decide, by rw [tL, t01, show rM 1208925820740529081815040 = 18014402821226752 by decide]; exact c0439_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0439_b38, by decide, by rw [tL, t01, show rM 73788102194745315328 = 1170935903133106432 by decide]; exact c0439_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0439_b9, by decide, by rw [tL, t01, show rM 302231459407256921313280 = 18014467245735952 by decide]; exact c0439_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0440_b21, by decide, by rw [tL, t01, show rM 18451247673337188352 = 18464758472235810832 by decide]; exact c0440_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 243, c0441_b5, by decide, by rw [tL, t01, show rM 302232607825161917304832 = 73804990762067427328 by decide]; exact c0441_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0440_b25, by decide, by rw [tL, t01, show rM 18907912675552307187712 = 18464758747097202688 by decide]; exact c0440_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0439_b11, by decide, by rw [tL, t01, show rM 18889467057378504478720 = 18014673387651328 by decide]; exact c0439_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0441_b2, by decide, by rw [tL, t01, show rM 1154047404530470912 = 73804990693347950848 by decide]; exact c0441_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0439_b10, by decide, by rw [tL, t01, show rM 302231454903657310720000 = 18014467245998080 by decide]; exact c0439_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0440_b22, by decide, by rw [tL, t01, show rM 18446744073726595072 = 18464758472236072960 by decide]; exact c0440_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0439_b7, by decide, by rw [tL, t01, show rM 1125899923886080 = 18014398526521600 by decide]; exact c0439_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0440_b28, by decide, by rw [tL, t01, show rM 1208944266358702884261904 = 18469262076141371392 by decide]; exact c0440_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0440_b4, by decide, by rw [tL, t01, show rM 302305241879952131887120 = 1175439571463176192 by decide]; exact c0440_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0439_b18, by decide, by rw [tL, t01, show rM 1208925820740529081552912 = 22518002431820032 by decide]; exact c0439_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0440_b3, by decide, by rw [tL, t01, show rM 73788102194745053200 = 1175439502743699712 by decide]; exact c0440_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0439_b19, by decide, by rw [tL, t01, show rM 302231459407256921051152 = 22518066856329232 by decide]; exact c0439_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0440_b26, by decide, by rw [tL, t01, show rM 18451247673336926224 = 18469262071846404112 by decide]; exact c0440_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 243, c0439_b20, by decide, by rw [tL, t01, show rM 302231454903657310457872 = 22518066856591360 by decide]; exact c0439_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0440_b27, by decide, by rw [tL, t01, show rM 18446744073726332944 = 18469262071846666240 by decide]; exact c0440_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0439_b17, by decide, by rw [tL, t01, show rM 1125899923623952 = 22517998137114880 by decide]; exact c0439_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0441_b8, by decide, by rw [tL, t01, show rM 1208926972536133781557504 = 73806116597549498368 by decide]; exact c0441_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0440_b2, by decide, by rw [tL, t01, show rM 18963252907773419065600 = 1172062077901078528 by decide]; exact c0440_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0439_b15, by decide, by rw [tL, t01, show rM 18889470435078208229632 = 19140573294231568 by decide]; exact c0439_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0441_b6, by decide, by rw [tL, t01, show rM 1157425104234221824 = 73806116593254531088 by decide]; exact c0441_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0439_b14, by decide, by rw [tL, t01, show rM 1208925819614629174972672 = 19140302728069120 by decide]; exact c0439_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0440_b1, by decide, by rw [tL, t01, show rM 73786976294838472960 = 1172061803039948800 by decide]; exact c0440_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0439_b12, by decide, by rw [tL, t01, show rM 4503599627636992 = 19140298433101840 by decide]; exact c0439_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0439_b16, by decide, by rw [tL, t01, show rM 18889465931478597636352 = 19140573294493696 by decide]; exact c0439_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0441_b7, by decide, by rw [tL, t01, show rM 1152921504623628544 = 73806116593254793216 by decide]; exact c0441_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0439_b13, by decide, by rw [tL, t01, show rM 17043712 = 19140298433363968 by decide]; exact c0439_ok13⟩, ?_⟩
   simp
 
 def s02 : List Nat := [4835704449394419815153664, 19184631851056443162624, 4835998426645171028623360, 4835707908158933635956736, 75853029645492185989120, 4835704431661496349491200, 19184614118132977500160, 75559034661817506856960, 18894095631895584833536, 4835707890144535193583616, 75853011631093743616000, 4835703278739991742906368, 295148186654396907520, 75557881740312900272128, 4629700417004240896, 75559016647419064483840, 18894077617497142460416, 18889466212953691783168, 1153202979717775360, 4835998426645171028361232, 4835707908158933635694608, 75853029645492185726992, 4835707890144535193321488, 75853011631093743353872, 4835703278739991742644240, 295148186654396645392, 75557881740312900010000, 4629700417003978768, 75557863725914457636880, 4611686018561605648, 281475110928400, 4835704431661496282386432, 19184614118132910395392, 75559034661817439752192, 18894095631895517728768, 4835707890144535126478848, 75853011631093676511232, 4835703278739991675801600, 295148186654329802752, 75557881740312833167360, 4629700416937136128, 75559016647418997379072, 18894077617497075355648, 18889466212953624678400, 1153202979650670592, 75557863725914390794240, 4611686018494763008, 281475044085760, 4835707890144535126216720, 75853011631093676249104, 4835703278739991675539472, 295148186654329540624, 75557881740312832905232, 4629700416936874000, 75557863725914390532112, 4611686018494500880, 281475043823632, 75559016647418930274304, 18894077617497008250880, 18889466212953557573632, 1153202979583565824, 75557863725914323689472, 4611686018427658240, 281474976980992]
 theorem e02 : enumKeys 1354 8272 = s02 := by decide +kernel
-theorem r02 : ∀ M ∈ s02, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 8272 M ne blob = true := by
+theorem t02 : rtype 8272 = 9217 := by decide
+theorem r02 : ∀ M ∈ s02, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 8272 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 8272) (rM M) ne blob = true) := by
   unfold s02
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3786_b1, by decide, c3786_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3786_b0, by decide, c3786_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 156, c3787_b2, by decide, c3787_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3787_b1, by decide, c3787_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 171, c3787_b0, by decide, c3787_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3786_b5, by decide, c3786_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3786_b4, by decide, c3786_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3786_b3, by decide, c3786_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3786_b2, by decide, c3786_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3787_b4, by decide, c3787_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3787_b3, by decide, c3787_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3787_b7, by decide, c3787_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 163, c3787_b8, by decide, c3787_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3787_b5, by decide, c3787_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3787_b6, by decide, c3787_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3786_b7, by decide, c3786_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3786_b6, by decide, c3786_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3786_b8, by decide, c3786_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3786_b9, by decide, c3786_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 167, c3790_b5, by decide, c3790_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 191, c3790_b4, by decide, c3790_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3790_b3, by decide, c3790_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3790_b7, by decide, c3790_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3790_b6, by decide, c3790_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3791_b0, by decide, c3791_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3791_b1, by decide, c3791_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3790_b8, by decide, c3790_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3790_b9, by decide, c3790_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3791_b2, by decide, c3791_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3791_b3, by decide, c3791_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3791_b4, by decide, c3791_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3788_b2, by decide, c3788_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 171, c3788_b1, by decide, c3788_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3788_b0, by decide, c3788_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3787_b9, by decide, c3787_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3788_b8, by decide, c3788_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3788_b7, by decide, c3788_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3789_b1, by decide, c3789_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 159, c3789_b2, by decide, c3789_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3788_b9, by decide, c3788_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3789_b0, by decide, c3789_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3788_b4, by decide, c3788_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3788_b3, by decide, c3788_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3788_b5, by decide, c3788_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3788_b6, by decide, c3788_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3789_b3, by decide, c3789_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3789_b4, by decide, c3789_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3789_b5, by decide, c3789_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3791_b6, by decide, c3791_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3791_b5, by decide, c3791_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3791_b9, by decide, c3791_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3792_b0, by decide, c3792_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3791_b7, by decide, c3791_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3791_b8, by decide, c3791_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3792_b1, by decide, c3792_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3792_b2, by decide, c3792_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3792_b3, by decide, c3792_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3789_b7, by decide, c3789_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3789_b6, by decide, c3789_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3789_b8, by decide, c3789_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3789_b9, by decide, c3789_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3790_b0, by decide, c3790_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3790_b1, by decide, c3790_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3790_b2, by decide, c3790_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0453_b29, by decide, by rw [tL, t02, show rM 4835704449394419815153664 = 73786977394349838336 by decide]; exact c0453_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0454_b0, by decide, by rw [tL, t02, show rM 19184631851056443162624 = 295147905454230736896 by decide]; exact c0454_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 156, c0454_b2, by decide, by rw [tL, t02, show rM 4835998426645171028623360 = 295147906278881230849 by decide]; exact c0454_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0453_b10, by decide, by rw [tL, t02, show rM 4835707908158933635956736 = 72058693566337024 by decide]; exact c0453_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 171, c0453_b38, by decide, by rw [tL, t02, show rM 75853029645492185989120 = 295147905179638042624 by decide]; exact c0453_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0453_b30, by decide, by rw [tL, t02, show rM 4835704431661496349491200 = 73786977394416943105 by decide]; exact c0453_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0454_b1, by decide, by rw [tL, t02, show rM 19184614118132977500160 = 295147905454297841665 by decide]; exact c0454_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0453_b27, by decide, by rw [tL, t02, show rM 75559034661817506856960 = 73786976295173754880 by decide]; exact c0453_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0453_b8, by decide, by rw [tL, t02, show rM 18894095631895584833536 = 72057868982947840 by decide]; exact c0453_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0453_b11, by decide, by rw [tL, t02, show rM 4835707890144535193583616 = 72058693633441792 by decide]; exact c0453_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0453_b39, by decide, by rw [tL, t02, show rM 75853011631093743616000 = 295147905179705147392 by decide]; exact c0453_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0452_b30, by decide, by rw [tL, t02, show rM 4835703278739991742906368 = 1099595513857 by decide]; exact c0452_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 163, c0453_b37, by decide, by rw [tL, t02, show rM 295148186654396907520 = 295147905179436711937 by decide]; exact c0453_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0452_b28, by decide, by rw [tL, t02, show rM 75557881740312900272128 = 352325632 by decide]; exact c0452_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0453_b7, by decide, by rw [tL, t02, show rM 4629700417004240896 = 72057594121818112 by decide]; exact c0453_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0453_b28, by decide, by rw [tL, t02, show rM 75559016647419064483840 = 73786976295240859648 by decide]; exact c0453_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0453_b9, by decide, by rw [tL, t02, show rM 18894077617497142460416 = 72057869050052608 by decide]; exact c0453_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0452_b29, by decide, by rw [tL, t02, show rM 18889466212953691783168 = 275012124673 by decide]; exact c0452_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0453_b26, by decide, by rw [tL, t02, show rM 1153202979717775360 = 73786976294972424193 by decide]; exact c0453_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 167, c0454_b6, by decide, by rw [tL, t02, show rM 4835998426645171028361232 = 295152409878491824129 by decide]; exact c0454_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 191, c0453_b14, by decide, by rw [tL, t02, show rM 4835707908158933635694608 = 76562293176930304 by decide]; exact c0453_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0454_b4, by decide, by rw [tL, t02, show rM 75853029645492185726992 = 295152408779248635904 by decide]; exact c0454_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0453_b15, by decide, by rw [tL, t02, show rM 4835707890144535193321488 = 76562293244035072 by decide]; exact c0453_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0454_b5, by decide, by rw [tL, t02, show rM 75853011631093743353872 = 295152408779315740672 by decide]; exact c0454_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0452_b34, by decide, by rw [tL, t02, show rM 4835703278739991742644240 = 4504699206107137 by decide]; exact c0452_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0454_b3, by decide, by rw [tL, t02, show rM 295148186654396645392 = 295152408779047305217 by decide]; exact c0454_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0452_b32, by decide, by rw [tL, t02, show rM 75557881740312900010000 = 4503599962918912 by decide]; exact c0452_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0453_b12, by decide, by rw [tL, t02, show rM 4629700417003978768 = 76561193732411392 by decide]; exact c0453_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0452_b33, by decide, by rw [tL, t02, show rM 75557863725914457636880 = 4503600030023680 by decide]; exact c0452_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0453_b13, by decide, by rw [tL, t02, show rM 4611686018561605648 = 76561193799516160 by decide]; exact c0453_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0452_b31, by decide, by rw [tL, t02, show rM 281475110928400 = 4503599761588225 by decide]; exact c0452_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0453_b34, by decide, by rw [tL, t02, show rM 4835704431661496282386432 = 73804991792859316225 by decide]; exact c0453_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 171, c0454_b9, by decide, by rw [tL, t02, show rM 19184614118132910395392 = 295165919852740214785 by decide]; exact c0454_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0453_b32, by decide, by rw [tL, t02, show rM 75559034661817439752192 = 73804990693616128000 by decide]; exact c0453_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0453_b18, by decide, by rw [tL, t02, show rM 18894095631895517728768 = 90072267425320960 by decide]; exact c0453_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0453_b20, by decide, by rw [tL, t02, show rM 4835707890144535126478848 = 90073092075814912 by decide]; exact c0453_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0454_b8, by decide, by rw [tL, t02, show rM 75853011631093676511232 = 295165919578147520512 by decide]; exact c0454_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0452_b39, by decide, by rw [tL, t02, show rM 4835703278739991675801600 = 18015498037886977 by decide]; exact c0452_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 159, c0454_b7, by decide, by rw [tL, t02, show rM 295148186654329802752 = 295165919577879085057 by decide]; exact c0454_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0452_b36, by decide, by rw [tL, t02, show rM 75557881740312833167360 = 18014398794698752 by decide]; exact c0452_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0453_b16, by decide, by rw [tL, t02, show rM 4629700416937136128 = 90071992564191232 by decide]; exact c0453_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0453_b33, by decide, by rw [tL, t02, show rM 75559016647418997379072 = 73804990693683232768 by decide]; exact c0453_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0453_b19, by decide, by rw [tL, t02, show rM 18894077617497075355648 = 90072267492425728 by decide]; exact c0453_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0452_b38, by decide, by rw [tL, t02, show rM 18889466212953624678400 = 18014673454497793 by decide]; exact c0452_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0453_b31, by decide, by rw [tL, t02, show rM 1153202979650670592 = 73804990693414797313 by decide]; exact c0453_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0452_b37, by decide, by rw [tL, t02, show rM 75557863725914390794240 = 18014398861803520 by decide]; exact c0452_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0453_b17, by decide, by rw [tL, t02, show rM 4611686018494763008 = 90071992631296000 by decide]; exact c0453_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0452_b35, by decide, by rw [tL, t02, show rM 281475044085760 = 18014398593368065 by decide]; exact c0452_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0453_b23, by decide, by rw [tL, t02, show rM 4835707890144535126216720 = 94576691686408192 by decide]; exact c0453_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0454_b11, by decide, by rw [tL, t02, show rM 75853011631093676249104 = 295170423177758113792 by decide]; exact c0454_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0453_b3, by decide, by rw [tL, t02, show rM 4835703278739991675539472 = 22519097648480257 by decide]; exact c0453_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0454_b10, by decide, by rw [tL, t02, show rM 295148186654329540624 = 295170423177489678337 by decide]; exact c0454_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0453_b1, by decide, by rw [tL, t02, show rM 75557881740312832905232 = 22517998405292032 by decide]; exact c0453_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0453_b21, by decide, by rw [tL, t02, show rM 4629700416936874000 = 94575592174784512 by decide]; exact c0453_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0453_b2, by decide, by rw [tL, t02, show rM 75557863725914390532112 = 22517998472396800 by decide]; exact c0453_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0453_b22, by decide, by rw [tL, t02, show rM 4611686018494500880 = 94575592241889280 by decide]; exact c0453_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0453_b0, by decide, by rw [tL, t02, show rM 281475043823632 = 22517998203961345 by decide]; exact c0453_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0453_b36, by decide, by rw [tL, t02, show rM 75559016647418930274304 = 73823005092125605888 by decide]; exact c0453_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0453_b25, by decide, by rw [tL, t02, show rM 18894077617497008250880 = 108086665934798848 by decide]; exact c0453_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0453_b6, by decide, by rw [tL, t02, show rM 18889466212953557573632 = 36029071896870913 by decide]; exact c0453_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0453_b35, by decide, by rw [tL, t02, show rM 1153202979583565824 = 73823005091857170433 by decide]; exact c0453_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0453_b5, by decide, by rw [tL, t02, show rM 75557863725914323689472 = 36028797304176640 by decide]; exact c0453_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0453_b24, by decide, by rw [tL, t02, show rM 4611686018427658240 = 108086391073669120 by decide]; exact c0453_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0453_b4, by decide, by rw [tL, t02, show rM 281474976980992 = 36028797035741185 by decide]; exact c0453_ok4⟩, ?_⟩
   simp
 
 def s03 : List Nat := [1208926973662033688657920, 18963254033673326166016, 302232612328761528156160, 18907917179151918039040, 1208944266640177861492736, 302305242161427109117952, 1208930432426547509460992, 75631651828109068992512, 302236071093275348959232, 75576314973587660865536, 18890619978883111321600, 302232608106636894273536, 18907912957027284156416, 75559017773318854148096, 18894078743396932124672, 1208926973662033688395792, 18963254033673325903888, 302232612328761527894032, 18907917179151917776912, 1208944266640177861230608, 302305242161427108855824, 1208930432426547509198864, 75631651828109068730384, 302236071093275348697104, 75576314973587660603408, 302232608106636894011408, 18907912957027283894288, 75559017773318853885968, 18894078743396931862544, 302236066589675738103824, 75576310469988050010128, 302231455185132287426576, 18447025548703301648, 75557864851814247301136, 4612811918351269904, 1208944266640177860968480, 302305242161427108593696, 1208930432426547508936736, 75631651828109068468256, 302236071093275348434976, 75576314973587660341280, 302236066589675737841696, 75576310469988049748000, 302231455185132287164448, 18447025548703039520, 75557864851814247039008, 4612811918351007776, 18890623356582815072512, 1208926972817608758526208, 18963253189248396034304, 75559021151018557899008, 18894082121096635875584, 1208930431300647602618624, 75631650702209162150144, 1208925819896104151941376, 73787257769815441664, 75557868229513951314176, 4616189618055282944, 18890619134458181189888, 75559016647418947305728, 18894077617497025282304, 18889466212953574605056, 1153202979600597248, 1208926972817608758264080, 18963253189248395772176, 75559021151018557636880, 18894082121096635613456, 1208930431300647602356496, 75631650702209161888016, 1208925819896104151679248, 73787257769815179536, 75557868229513951052048, 4616189618055020816, 75559016647418947043600, 18894077617497025020176, 18889466212953574342928, 1153202979600335120, 75557863725914340458768, 4611686018444427536, 281474993750288]
 theorem e03 : enumKeys 1354 1376 = s03 := by decide +kernel
-theorem r03 : ∀ M ∈ s03, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1376 M ne blob = true := by
+theorem t03 : rtype 1376 = 2321 := by decide
+theorem r03 : ∀ M ∈ s03, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1376 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1376) (rM M) ne blob = true) := by
   unfold s03
-  refine List.forall_mem_cons.2 ⟨⟨0, 254, c3792_b8, by decide, c3792_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3792_b7, by decide, c3792_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 286, c3792_b6, by decide, c3792_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3792_b5, by decide, c3792_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3793_b8, by decide, c3793_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3793_b7, by decide, c3793_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3793_b6, by decide, c3793_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3793_b5, by decide, c3793_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3793_b4, by decide, c3793_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3793_b3, by decide, c3793_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3792_b4, by decide, c3792_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3793_b2, by decide, c3793_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3793_b1, by decide, c3793_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3793_b0, by decide, c3793_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3792_b9, by decide, c3792_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 260, c3795_b8, by decide, c3795_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 282, c3795_b7, by decide, c3795_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 288, c3795_b6, by decide, c3795_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3795_b5, by decide, c3795_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3796_b8, by decide, c3796_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3796_b7, by decide, c3796_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3796_b6, by decide, c3796_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3796_b5, by decide, c3796_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3796_b4, by decide, c3796_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3796_b3, by decide, c3796_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3796_b2, by decide, c3796_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3796_b1, by decide, c3796_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3796_b0, by decide, c3796_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3795_b9, by decide, c3795_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3797_b0, by decide, c3797_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3796_b9, by decide, c3796_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3797_b3, by decide, c3797_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3797_b4, by decide, c3797_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3797_b1, by decide, c3797_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3797_b2, by decide, c3797_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3799_b7, by decide, c3799_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3799_b6, by decide, c3799_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3799_b5, by decide, c3799_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3799_b4, by decide, c3799_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3799_b3, by decide, c3799_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3799_b2, by decide, c3799_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3799_b9, by decide, c3799_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3799_b8, by decide, c3799_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3800_b2, by decide, c3800_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3800_b3, by decide, c3800_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3800_b0, by decide, c3800_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3800_b1, by decide, c3800_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 281, c3793_b9, by decide, c3793_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3794_b4, by decide, c3794_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3794_b3, by decide, c3794_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3794_b2, by decide, c3794_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3794_b1, by decide, c3794_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3795_b0, by decide, c3795_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3794_b9, by decide, c3794_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3795_b3, by decide, c3795_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3795_b4, by decide, c3795_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3795_b1, by decide, c3795_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3795_b2, by decide, c3795_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3794_b0, by decide, c3794_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3794_b6, by decide, c3794_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3794_b5, by decide, c3794_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3794_b7, by decide, c3794_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3794_b8, by decide, c3794_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3797_b8, by decide, c3797_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3797_b7, by decide, c3797_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3797_b6, by decide, c3797_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3797_b5, by decide, c3797_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3798_b4, by decide, c3798_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3798_b3, by decide, c3798_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3798_b7, by decide, c3798_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3798_b8, by decide, c3798_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3798_b5, by decide, c3798_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3798_b6, by decide, c3798_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3798_b0, by decide, c3798_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3797_b9, by decide, c3797_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3798_b1, by decide, c3798_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3798_b2, by decide, c3798_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3798_b9, by decide, c3798_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3799_b0, by decide, c3799_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3799_b1, by decide, c3799_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 254, c0455_b34, by decide, by rw [tL, t03, show rM 1208926973662033688657920 = 73786976299149951232 by decide]; exact c0455_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0455_b7, by decide, by rw [tL, t03, show rM 18963254033673326166016 = 1152921779501531392 by decide]; exact c0455_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 286, c0455_b35, by decide, by rw [tL, t03, show rM 302232612328761528156160 = 73786976363574460432 by decide]; exact c0455_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0455_b21, by decide, by rw [tL, t03, show rM 18907917179151918039040 = 18446744348604235792 by decide]; exact c0455_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0455_b20, by decide, by rw [tL, t03, show rM 1208944266640177861492736 = 18446744078038073345 by decide]; exact c0455_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0455_b6, by decide, by rw [tL, t03, show rM 302305242161427109117952 = 1152921573359878145 by decide]; exact c0455_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0454_b24, by decide, by rw [tL, t03, show rM 1208930432426547509460992 = 72057598366449920 by decide]; exact c0454_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0455_b5, by decide, by rw [tL, t03, show rM 75631651828109068992512 = 1152921504908837120 by decide]; exact c0455_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0454_b25, by decide, by rw [tL, t03, show rM 302236071093275348959232 = 72057662790959120 by decide]; exact c0454_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0455_b19, by decide, by rw [tL, t03, show rM 75576314973587660865536 = 18446744074011541520 by decide]; exact c0455_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0455_b37, by decide, by rw [tL, t03, show rM 18890619978883111321600 = 73786976569716375808 by decide]; exact c0455_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0455_b36, by decide, by rw [tL, t03, show rM 302232608106636894273536 = 73786976363574722561 by decide]; exact c0455_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0455_b22, by decide, by rw [tL, t03, show rM 18907912957027284156416 = 18446744348604497921 by decide]; exact c0455_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0455_b33, by decide, by rw [tL, t03, show rM 75559017773318854148096 = 73786976295123681536 by decide]; exact c0455_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0454_b26, by decide, by rw [tL, t03, show rM 18894078743396932124672 = 72057868932874496 by decide]; exact c0454_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 260, c0456_b5, by decide, by rw [tL, t03, show rM 1208926973662033688395792 = 73791479898760544512 by decide]; exact c0456_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 282, c0455_b13, by decide, by rw [tL, t03, show rM 18963254033673325903888 = 1157425379112124672 by decide]; exact c0455_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 288, c0456_b6, by decide, by rw [tL, t03, show rM 302232612328761527894032 = 73791479963185053712 by decide]; exact c0456_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0455_b27, by decide, by rw [tL, t03, show rM 18907917179151917776912 = 18451247948214829072 by decide]; exact c0455_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0455_b26, by decide, by rw [tL, t03, show rM 1208944266640177861230608 = 18451247677648666625 by decide]; exact c0455_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0455_b12, by decide, by rw [tL, t03, show rM 302305242161427108855824 = 1157425172970471425 by decide]; exact c0455_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0454_b32, by decide, by rw [tL, t03, show rM 1208930432426547509198864 = 76561197977043200 by decide]; exact c0454_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0455_b11, by decide, by rw [tL, t03, show rM 75631651828109068730384 = 1157425104519430400 by decide]; exact c0455_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0454_b33, by decide, by rw [tL, t03, show rM 302236071093275348697104 = 76561262401552400 by decide]; exact c0454_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0455_b24, by decide, by rw [tL, t03, show rM 75576314973587660603408 = 18451247673622134800 by decide]; exact c0455_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0456_b7, by decide, by rw [tL, t03, show rM 302232608106636894011408 = 73791479963185315841 by decide]; exact c0456_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0455_b28, by decide, by rw [tL, t03, show rM 18907912957027283894288 = 18451247948215091201 by decide]; exact c0455_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0456_b4, by decide, by rw [tL, t03, show rM 75559017773318853885968 = 73791479894734274816 by decide]; exact c0456_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0454_b35, by decide, by rw [tL, t03, show rM 18894078743396931862544 = 76561468543467776 by decide]; exact c0454_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0454_b34, by decide, by rw [tL, t03, show rM 302236066589675738103824 = 76561262401814528 by decide]; exact c0454_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0455_b25, by decide, by rw [tL, t03, show rM 75576310469988050010128 = 18451247673622396928 by decide]; exact c0455_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0454_b16, by decide, by rw [tL, t03, show rM 302231455185132287426576 = 4503668363886593 by decide]; exact c0454_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0455_b23, by decide, by rw [tL, t03, show rM 18447025548703301648 = 18451247673353961473 by decide]; exact c0455_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0454_b15, by decide, by rw [tL, t03, show rM 75557864851814247301136 = 4503599912845568 by decide]; exact c0454_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0454_b31, by decide, by rw [tL, t03, show rM 4612811918351269904 = 76561193682338048 by decide]; exact c0454_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0455_b32, by decide, by rw [tL, t03, show rM 1208944266640177860968480 = 18455751277259259905 by decide]; exact c0455_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0455_b18, by decide, by rw [tL, t03, show rM 302305242161427108593696 = 1161928772581064705 by decide]; exact c0455_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0455_b2, by decide, by rw [tL, t03, show rM 1208930432426547508936736 = 81064797587636480 by decide]; exact c0455_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0455_b17, by decide, by rw [tL, t03, show rM 75631651828109068468256 = 1161928704130023680 by decide]; exact c0455_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0455_b3, by decide, by rw [tL, t03, show rM 302236071093275348434976 = 81064862012145680 by decide]; exact c0455_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0455_b30, by decide, by rw [tL, t03, show rM 75576314973587660341280 = 18455751273232728080 by decide]; exact c0455_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0455_b4, by decide, by rw [tL, t03, show rM 302236066589675737841696 = 81064862012407808 by decide]; exact c0455_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0455_b31, by decide, by rw [tL, t03, show rM 75576310469988049748000 = 18455751273232990208 by decide]; exact c0455_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0454_b23, by decide, by rw [tL, t03, show rM 302231455185132287164448 = 9007267974479873 by decide]; exact c0454_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0455_b29, by decide, by rw [tL, t03, show rM 18447025548703039520 = 18455751272964554753 by decide]; exact c0455_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0454_b22, by decide, by rw [tL, t03, show rM 75557864851814247039008 = 9007199523438848 by decide]; exact c0454_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0455_b1, by decide, by rw [tL, t03, show rM 4612811918351007776 = 81064793292931328 by decide]; exact c0455_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 281, c0456_b2, by decide, by rw [tL, t03, show rM 18890623356582815072512 = 73788102469622956048 by decide]; exact c0456_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0456_b1, by decide, by rw [tL, t03, show rM 1208926972817608758526208 = 73788102199056793601 by decide]; exact c0456_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0455_b10, by decide, by rw [tL, t03, show rM 18963253189248396034304 = 1154047679408373761 by decide]; exact c0455_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0455_b39, by decide, by rw [tL, t03, show rM 75559021151018557899008 = 73788102195030261776 by decide]; exact c0455_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0454_b29, by decide, by rw [tL, t03, show rM 18894082121096635875584 = 73183768839454736 by decide]; exact c0454_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0454_b28, by decide, by rw [tL, t03, show rM 1208930431300647602618624 = 73183498273292288 by decide]; exact c0454_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0455_b9, by decide, by rw [tL, t03, show rM 75631650702209162150144 = 1154047404815679488 by decide]; exact c0455_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0454_b13, by decide, by rw [tL, t03, show rM 1208925819896104151941376 = 1125904235364353 by decide]; exact c0454_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0455_b8, by decide, by rw [tL, t03, show rM 73787257769815441664 = 1154047404547244033 by decide]; exact c0455_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0454_b12, by decide, by rw [tL, t03, show rM 75557868229513951314176 = 1125900208832528 by decide]; exact c0454_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0454_b27, by decide, by rw [tL, t03, show rM 4616189618055282944 = 73183493978325008 by decide]; exact c0454_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0456_b3, by decide, by rw [tL, t03, show rM 18890619134458181189888 = 73788102469623218177 by decide]; exact c0456_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0456_b0, by decide, by rw [tL, t03, show rM 75559016647418947305728 = 73788102195030523904 by decide]; exact c0456_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0454_b30, by decide, by rw [tL, t03, show rM 18894077617497025282304 = 73183768839716864 by decide]; exact c0454_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0454_b14, by decide, by rw [tL, t03, show rM 18889466212953574605056 = 1126174801788929 by decide]; exact c0454_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0455_b38, by decide, by rw [tL, t03, show rM 1153202979600597248 = 73788102194762088449 by decide]; exact c0455_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0456_b11, by decide, by rw [tL, t03, show rM 1208926972817608758264080 = 73792605798667386881 by decide]; exact c0456_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0455_b16, by decide, by rw [tL, t03, show rM 18963253189248395772176 = 1158551279018967041 by decide]; exact c0455_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0456_b9, by decide, by rw [tL, t03, show rM 75559021151018557636880 = 73792605794640855056 by decide]; exact c0456_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0454_b39, by decide, by rw [tL, t03, show rM 18894082121096635613456 = 77687368450048016 by decide]; exact c0454_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0454_b38, by decide, by rw [tL, t03, show rM 1208930431300647602356496 = 77687097883885568 by decide]; exact c0454_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0455_b15, by decide, by rw [tL, t03, show rM 75631650702209161888016 = 1158551004426272768 by decide]; exact c0455_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0454_b20, by decide, by rw [tL, t03, show rM 1208925819896104151679248 = 5629503845957633 by decide]; exact c0454_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0455_b14, by decide, by rw [tL, t03, show rM 73787257769815179536 = 1158551004157837313 by decide]; exact c0455_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0454_b18, by decide, by rw [tL, t03, show rM 75557868229513951052048 = 5629499819425808 by decide]; exact c0454_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0454_b36, by decide, by rw [tL, t03, show rM 4616189618055020816 = 77687093588918288 by decide]; exact c0454_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0456_b10, by decide, by rw [tL, t03, show rM 75559016647418947043600 = 73792605794641117184 by decide]; exact c0456_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0455_b0, by decide, by rw [tL, t03, show rM 18894077617497025020176 = 77687368450310144 by decide]; exact c0455_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0454_b21, by decide, by rw [tL, t03, show rM 18889466212953574342928 = 5629774412382209 by decide]; exact c0454_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0456_b8, by decide, by rw [tL, t03, show rM 1153202979600335120 = 73792605794372681729 by decide]; exact c0456_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0454_b19, by decide, by rw [tL, t03, show rM 75557863725914340458768 = 5629499819687936 by decide]; exact c0454_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0454_b37, by decide, by rw [tL, t03, show rM 4611686018444427536 = 77687093589180416 by decide]; exact c0454_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0454_b17, by decide, by rw [tL, t03, show rM 281474993750288 = 5629499551252481 by decide]; exact c0454_ok17⟩, ?_⟩
   simp
 
 def s04 : List Nat := [18890636867381697183744, 4835704431661496282644480, 19184614118132910653440, 75559034661817440010240, 18894095631895517986816, 4835707890426010103447552, 75853011912568653479936, 75562493426331260813312, 18890619134458231521280, 75559016928893974347776, 18894077898972052324352, 4835704431661496282382352, 19184614118132910391312, 75559034661817439748112, 18894095631895517724688, 4835707890426010103185424, 75853011912568653217808, 75562493426331260551184, 75559016928893974085648, 18894077898972052062224, 75562475411932818178064, 75557864007389367500816, 4611967493471469584, 4835707890426010102923296, 75853011912568652955680, 75562493426331260289056, 75562475411932817915936, 75557864007389367238688, 4611967493471207456, 18890619134458164416512, 75559016928893907243008, 18894077898971985219584, 75562475411932751335424, 75557864007389300658176, 4611967493404626944, 75559016928893906980880, 18894077898971984957456, 75562475411932751073296, 75557864007389300396048, 4611967493404364816]
 theorem e04 : enumKeys 1354 4256 = s04 := by decide +kernel
-theorem r04 : ∀ M ∈ s04, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4256 M ne blob = true := by
+theorem t04 : rtype 4256 = 6146 := by decide
+theorem r04 : ∀ M ∈ s04, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4256 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 4256) (rM M) ne blob = true) := by
   unfold s04
-  refine List.forall_mem_cons.2 ⟨⟨0, 286, c3800_b4, by decide, c3800_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3800_b9, by decide, c3800_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3800_b8, by decide, c3800_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3800_b7, by decide, c3800_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3800_b6, by decide, c3800_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3801_b4, by decide, c3801_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3801_b3, by decide, c3801_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3801_b2, by decide, c3801_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3800_b5, by decide, c3800_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3801_b1, by decide, c3801_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3801_b0, by decide, c3801_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3802_b4, by decide, c3802_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3802_b3, by decide, c3802_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3802_b2, by decide, c3802_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 243, c3802_b1, by decide, c3802_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3802_b9, by decide, c3802_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3802_b8, by decide, c3802_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3802_b7, by decide, c3802_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3802_b6, by decide, c3802_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3802_b5, by decide, c3802_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3803_b0, by decide, c3803_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3803_b1, by decide, c3803_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3803_b2, by decide, c3803_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3804_b0, by decide, c3804_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3803_b9, by decide, c3803_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3803_b8, by decide, c3803_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3804_b1, by decide, c3804_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3804_b2, by decide, c3804_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3804_b3, by decide, c3804_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3801_b5, by decide, c3801_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3801_b7, by decide, c3801_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3801_b6, by decide, c3801_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3801_b8, by decide, c3801_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3801_b9, by decide, c3801_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3802_b0, by decide, c3802_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3803_b4, by decide, c3803_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3803_b3, by decide, c3803_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3803_b5, by decide, c3803_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3803_b6, by decide, c3803_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3803_b7, by decide, c3803_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 286, c0471_b32, by decide, by rw [tL, t04, show rM 18890636867381697183744 = 73786976569716117504 by decide]; exact c0471_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0471_b34, by decide, by rw [tL, t04, show rM 4835704431661496282644480 = 73786977394366611457 by decide]; exact c0471_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0472_b2, by decide, by rw [tL, t04, show rM 19184614118132910653440 = 295147905454247510017 by decide]; exact c0472_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0471_b30, by decide, by rw [tL, t04, show rM 75559034661817440010240 = 73786976295123423232 by decide]; exact c0471_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0471_b11, by decide, by rw [tL, t04, show rM 18894095631895517986816 = 72057868932616192 by decide]; exact c0471_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0471_b13, by decide, by rw [tL, t04, show rM 4835707890426010103447552 = 72058693583110145 by decide]; exact c0471_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0472_b1, by decide, by rw [tL, t04, show rM 75853011912568653479936 = 295147905179654815745 by decide]; exact c0472_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0471_b10, by decide, by rw [tL, t04, show rM 75562493426331260813312 = 72057594339921920 by decide]; exact c0471_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0471_b33, by decide, by rw [tL, t04, show rM 18890619134458231521280 = 73786976569783222273 by decide]; exact c0471_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0471_b31, by decide, by rw [tL, t04, show rM 75559016928893974347776 = 73786976295190528001 by decide]; exact c0471_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0471_b12, by decide, by rw [tL, t04, show rM 18894077898972052324352 = 72057868999720961 by decide]; exact c0471_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0471_b37, by decide, by rw [tL, t04, show rM 4835704431661496282382352 = 73791480993977204737 by decide]; exact c0471_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0472_b4, by decide, by rw [tL, t04, show rM 19184614118132910391312 = 295152409053858103297 by decide]; exact c0472_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0471_b35, by decide, by rw [tL, t04, show rM 75559034661817439748112 = 73791479894734016512 by decide]; exact c0471_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 243, c0471_b17, by decide, by rw [tL, t04, show rM 18894095631895517724688 = 76561468543209472 by decide]; exact c0471_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0471_b19, by decide, by rw [tL, t04, show rM 4835707890426010103185424 = 76562293193703425 by decide]; exact c0471_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0472_b3, by decide, by rw [tL, t04, show rM 75853011912568653217808 = 295152408779265409025 by decide]; exact c0472_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0471_b15, by decide, by rw [tL, t04, show rM 75562493426331260551184 = 76561193950515200 by decide]; exact c0471_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0471_b36, by decide, by rw [tL, t04, show rM 75559016928893974085648 = 73791479894801121281 by decide]; exact c0471_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0471_b18, by decide, by rw [tL, t04, show rM 18894077898972052062224 = 76561468610314241 by decide]; exact c0471_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0471_b16, by decide, by rw [tL, t04, show rM 75562475411932818178064 = 76561194017619968 by decide]; exact c0471_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0471_b6, by decide, by rw [tL, t04, show rM 75557864007389367500816 = 4503599979692033 by decide]; exact c0471_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0471_b14, by decide, by rw [tL, t04, show rM 4611967493471469584 = 76561193749184513 by decide]; exact c0471_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0471_b23, by decide, by rw [tL, t04, show rM 4835707890426010102923296 = 81065892804296705 by decide]; exact c0471_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0472_b5, by decide, by rw [tL, t04, show rM 75853011912568652955680 = 295156912378876002305 by decide]; exact c0472_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0471_b21, by decide, by rw [tL, t04, show rM 75562493426331260289056 = 81064793561108480 by decide]; exact c0471_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0471_b22, by decide, by rw [tL, t04, show rM 75562475411932817915936 = 81064793628213248 by decide]; exact c0471_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0471_b7, by decide, by rw [tL, t04, show rM 75557864007389367238688 = 9007199590285313 by decide]; exact c0471_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0471_b20, by decide, by rw [tL, t04, show rM 4611967493471207456 = 81064793359777793 by decide]; exact c0471_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0471_b39, by decide, by rw [tL, t04, show rM 18890619134458164416512 = 73804990968225595393 by decide]; exact c0471_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0471_b38, by decide, by rw [tL, t04, show rM 75559016928893907243008 = 73804990693632901121 by decide]; exact c0471_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0471_b26, by decide, by rw [tL, t04, show rM 18894077898971985219584 = 90072267442094081 by decide]; exact c0471_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0471_b25, by decide, by rw [tL, t04, show rM 75562475411932751335424 = 90071992849399808 by decide]; exact c0471_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0471_b8, by decide, by rw [tL, t04, show rM 75557864007389300658176 = 18014398811471873 by decide]; exact c0471_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0471_b24, by decide, by rw [tL, t04, show rM 4611967493404626944 = 90071992580964353 by decide]; exact c0471_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0472_b0, by decide, by rw [tL, t04, show rM 75559016928893906980880 = 73809494293243494401 by decide]; exact c0472_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0471_b29, by decide, by rw [tL, t04, show rM 18894077898971984957456 = 94575867052687361 by decide]; exact c0471_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0471_b28, by decide, by rw [tL, t04, show rM 75562475411932751073296 = 94575592459993088 by decide]; exact c0471_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0471_b9, by decide, by rw [tL, t04, show rM 75557864007389300396048 = 22517998422065153 by decide]; exact c0471_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0471_b27, by decide, by rw [tL, t04, show rM 4611967493404364816 = 94575592191557633 by decide]; exact c0471_ok27⟩, ?_⟩
   simp
 
 def s05 : List Nat := [18890619134458164674560, 75559016928893907501056, 18894077898971985477632, 18890619134458164412432, 75559016928893907238928, 18894077898971985215504, 75562475693407728042000, 75559016928893906976800, 18894077898971984953376, 75562475693407727779872]
 theorem e05 : enumKeys 1354 240 = s05 := by decide +kernel
-theorem r05 : ∀ M ∈ s05, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 240 M ne blob = true := by
+theorem t05 : rtype 240 = 3075 := by decide
+theorem r05 : ∀ M ∈ s05, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 240 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 240) (rM M) ne blob = true) := by
   unfold s05
-  refine List.forall_mem_cons.2 ⟨⟨0, 271, c3804_b4, by decide, c3804_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3804_b6, by decide, c3804_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3804_b5, by decide, c3804_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 274, c3804_b7, by decide, c3804_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3804_b9, by decide, c3804_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3804_b8, by decide, c3804_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3805_b0, by decide, c3805_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3805_b2, by decide, c3805_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3805_b1, by decide, c3805_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3805_b3, by decide, c3805_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 271, c0478_b26, by decide, by rw [tL, t05, show rM 18890619134458164674560 = 73786976569732890625 by decide]; exact c0478_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0478_b25, by decide, by rw [tL, t05, show rM 75559016928893907501056 = 73786976295140196353 by decide]; exact c0478_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0478_b20, by decide, by rw [tL, t05, show rM 18894077898971985477632 = 72057868949389313 by decide]; exact c0478_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 274, c0478_b28, by decide, by rw [tL, t05, show rM 18890619134458164412432 = 73791480169343483905 by decide]; exact c0478_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0478_b27, by decide, by rw [tL, t05, show rM 75559016928893907238928 = 73791479894750789633 by decide]; exact c0478_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0478_b22, by decide, by rw [tL, t05, show rM 18894077898971985215504 = 76561468559982593 by decide]; exact c0478_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0478_b21, by decide, by rw [tL, t05, show rM 75562475693407728042000 = 76561193967288321 by decide]; exact c0478_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0478_b29, by decide, by rw [tL, t05, show rM 75559016928893906976800 = 73795983494361382913 by decide]; exact c0478_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0478_b24, by decide, by rw [tL, t05, show rM 18894077898971984953376 = 81065068170575873 by decide]; exact c0478_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0478_b23, by decide, by rw [tL, t05, show rM 75562475693407727779872 = 81064793577881601 by decide]; exact c0478_ok23⟩, ?_⟩
   simp
 
 def s06 : List Nat := [4835998427489595958558720, 4835721743216988917923840, 302526620823235156049920, 5017515513948971991040, 4740831241341931356160, 4835721725202590475550720, 302526602808836713676800, 4835703279584416672841728, 295149031079326842880, 302231472918055870332928, 18464758472286208000, 302231454903657427894272, 4740813226943488983040, 4722367608769686274048, 5017532402447507521792, 4835998426363696051716352, 4835703296472915208372480, 295165919577862373632, 5017514388049065148672, 4722384497268221804800, 4835703278458516765999360, 295147905179420000512, 18014398576656640, 4722366482869779431680, 5017515513948904886272, 4740831241341864251392, 4835721725202590408445952, 302526602808836646572032, 4835703279584416605736960, 295149031079259738112, 302231472918055803228160, 18464758472219103232, 4740813226943421878272, 4722367608769619169280, 302231454903657360855040, 18446744073776730112, 1125899974021120, 5017514388048998043904, 4722384497268154700032, 4835703278458516698894592, 295147905179352895744, 18014398509551872, 4722366482869712326912, 67178752, 4740813226943354773504, 4722367608769552064512, 302231454903657293750272, 18446744073709625344, 1125899906916352]
 theorem e06 : enumKeys 1354 8452 = s06 := by decide +kernel
-theorem r06 : ∀ M ∈ s06, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 8452 M ne blob = true := by
+theorem t06 : rtype 8452 = 8452 := by decide
+theorem r06 : ∀ M ∈ s06, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 8452 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 8452) (rM M) ne blob = true) := by
   unfold s06
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3806_b1, by decide, c3806_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3806_b0, by decide, c3806_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3805_b9, by decide, c3805_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3805_b5, by decide, c3805_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3805_b4, by decide, c3805_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3806_b3, by decide, c3806_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3806_b2, by decide, c3806_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3806_b6, by decide, c3806_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3806_b7, by decide, c3806_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3806_b4, by decide, c3806_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3806_b5, by decide, c3806_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 306, c3805_b6, by decide, c3805_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3805_b7, by decide, c3805_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3805_b8, by decide, c3805_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3808_b6, by decide, c3808_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3809_b0, by decide, c3809_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3809_b1, by decide, c3809_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3809_b2, by decide, c3809_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3808_b7, by decide, c3808_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3808_b8, by decide, c3808_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3809_b3, by decide, c3809_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3809_b4, by decide, c3809_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3809_b5, by decide, c3809_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3808_b9, by decide, c3808_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3806_b9, by decide, c3806_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3806_b8, by decide, c3806_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3807_b3, by decide, c3807_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3807_b2, by decide, c3807_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3807_b6, by decide, c3807_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3807_b7, by decide, c3807_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3807_b4, by decide, c3807_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3807_b5, by decide, c3807_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3807_b0, by decide, c3807_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3807_b1, by decide, c3807_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3807_b8, by decide, c3807_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3807_b9, by decide, c3807_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3808_b0, by decide, c3808_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3809_b6, by decide, c3809_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3809_b7, by decide, c3809_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3809_b9, by decide, c3809_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3810_b0, by decide, c3810_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3810_b1, by decide, c3810_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3809_b8, by decide, c3809_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3810_b2, by decide, c3810_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3808_b1, by decide, c3808_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3808_b2, by decide, c3808_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3808_b3, by decide, c3808_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3808_b4, by decide, c3808_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3808_b5, by decide, c3808_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0446_b14, by decide, by rw [tL, t06, show rM 4835998427489595958558720 = 295147906278864519424 by decide]; exact c0446_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0446_b1, by decide, by rw [tL, t06, show rM 4835721743216988917923840 = 18446745173221249024 by decide]; exact c0446_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0446_b12, by decide, by rw [tL, t06, show rM 302526620823235156049920 = 295147905248072372224 by decide]; exact c0446_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0446_b11, by decide, by rw [tL, t06, show rM 5017515513948971991040 = 295147905180493676800 by decide]; exact c0446_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0445_b39, by decide, by rw [tL, t06, show rM 4740831241341931356160 = 18446744074850406400 by decide]; exact c0445_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0446_b2, by decide, by rw [tL, t06, show rM 4835721725202590475550720 = 18446745173288353792 by decide]; exact c0446_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0446_b13, by decide, by rw [tL, t06, show rM 302526602808836713676800 = 295147905248139476992 by decide]; exact c0446_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0445_b19, by decide, by rw [tL, t06, show rM 4835703279584416672841728 = 1099578802432 by decide]; exact c0445_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0446_b10, by decide, by rw [tL, t06, show rM 295149031079326842880 = 295147905179420000512 by decide]; exact c0446_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0445_b17, by decide, by rw [tL, t06, show rM 302231472918055870332928 = 68786655232 by decide]; exact c0445_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0445_b38, by decide, by rw [tL, t06, show rM 18464758472286208000 = 18446744073776730112 by decide]; exact c0445_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 306, c0445_b18, by decide, by rw [tL, t06, show rM 302231454903657427894272 = 68853694464 by decide]; exact c0445_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0446_b0, by decide, by rw [tL, t06, show rM 4740813226943488983040 = 18446744074917511168 by decide]; exact c0446_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0445_b16, by decide, by rw [tL, t06, show rM 4722367608769686274048 = 1207959808 by decide]; exact c0445_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0446_b17, by decide, by rw [tL, t06, show rM 5017532402447507521792 = 295149031080333414400 by decide]; exact c0446_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0446_b19, by decide, by rw [tL, t06, show rM 4835998426363696051716352 = 295149032178771361792 by decide]; exact c0446_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0445_b23, by decide, by rw [tL, t06, show rM 4835703296472915208372480 = 1126999418540032 by decide]; exact c0445_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0446_b15, by decide, by rw [tL, t06, show rM 295165919577862373632 = 295149031079259738112 by decide]; exact c0446_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0446_b18, by decide, by rw [tL, t06, show rM 5017514388049065148672 = 295149031080400519168 by decide]; exact c0446_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0445_b21, by decide, by rw [tL, t06, show rM 4722384497268221804800 = 1125901047697408 by decide]; exact c0445_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0445_b24, by decide, by rw [tL, t06, show rM 4835703278458516765999360 = 1126999485644800 by decide]; exact c0445_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0446_b16, by decide, by rw [tL, t06, show rM 295147905179420000512 = 295149031079326842880 by decide]; exact c0446_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0445_b20, by decide, by rw [tL, t06, show rM 18014398576656640 = 1125899974021120 by decide]; exact c0445_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0445_b22, by decide, by rw [tL, t06, show rM 4722366482869779431680 = 1125901114802176 by decide]; exact c0445_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0446_b21, by decide, by rw [tL, t06, show rM 5017515513948904886272 = 295165919578936049920 by decide]; exact c0446_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0446_b5, by decide, by rw [tL, t06, show rM 4740831241341864251392 = 18464758473292779520 by decide]; exact c0446_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0446_b7, by decide, by rw [tL, t06, show rM 4835721725202590408445952 = 18464759571730726912 by decide]; exact c0446_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0446_b22, by decide, by rw [tL, t06, show rM 302526602808836646572032 = 295165919646581850112 by decide]; exact c0446_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0445_b29, by decide, by rw [tL, t06, show rM 4835703279584416605736960 = 18015498021175552 by decide]; exact c0445_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0446_b20, by decide, by rw [tL, t06, show rM 295149031079259738112 = 295165919577862373632 by decide]; exact c0446_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0445_b27, by decide, by rw [tL, t06, show rM 302231472918055803228160 = 18014467229028352 by decide]; exact c0445_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0446_b3, by decide, by rw [tL, t06, show rM 18464758472219103232 = 18464758472219103232 by decide]; exact c0446_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0446_b6, by decide, by rw [tL, t06, show rM 4740813226943421878272 = 18464758473359884288 by decide]; exact c0446_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0445_b26, by decide, by rw [tL, t06, show rM 4722367608769619169280 = 18014399650332928 by decide]; exact c0445_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0445_b28, by decide, by rw [tL, t06, show rM 302231454903657360855040 = 18014467296133120 by decide]; exact c0445_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0446_b4, by decide, by rw [tL, t06, show rM 18446744073776730112 = 18464758472286208000 by decide]; exact c0446_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0445_b25, by decide, by rw [tL, t06, show rM 1125899974021120 = 18014398576656640 by decide]; exact c0445_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0446_b24, by decide, by rw [tL, t06, show rM 5017514388048998043904 = 295167045478842892288 by decide]; exact c0446_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0445_b32, by decide, by rw [tL, t06, show rM 4722384497268154700032 = 19140299490070528 by decide]; exact c0445_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0445_b34, by decide, by rw [tL, t06, show rM 4835703278458516698894592 = 19141397928017920 by decide]; exact c0445_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0446_b23, by decide, by rw [tL, t06, show rM 295147905179352895744 = 295167045477769216000 by decide]; exact c0446_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0445_b30, by decide, by rw [tL, t06, show rM 18014398509551872 = 19140298416394240 by decide]; exact c0445_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0445_b33, by decide, by rw [tL, t06, show rM 4722366482869712326912 = 19140299557175296 by decide]; exact c0445_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0445_b31, by decide, by rw [tL, t06, show rM 67178752 = 19140298483499008 by decide]; exact c0445_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0446_b9, by decide, by rw [tL, t06, show rM 4740813226943354773504 = 18482772871802257408 by decide]; exact c0446_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0445_b36, by decide, by rw [tL, t06, show rM 4722367608769552064512 = 36028798092706048 by decide]; exact c0445_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0445_b37, by decide, by rw [tL, t06, show rM 302231454903657293750272 = 36028865738506240 by decide]; exact c0445_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0446_b8, by decide, by rw [tL, t06, show rM 18446744073709625344 = 18482772870728581120 by decide]; exact c0446_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0445_b35, by decide, by rw [tL, t06, show rM 1125899906916352 = 36028797019029760 by decide]; exact c0445_ok35⟩, ?_⟩
   simp
 
 def s07 : List Nat := [1208944267484602791428096, 302305243005852039053312, 302249906151330630926336, 302232608951061824208896, 18907913801452214091776, 302249901647731020267520, 302231456029557217558528, 4740814352843278647296, 1208944267484602791165968, 302305243005852038791184, 302249906151330630664208, 4740814352843278385168, 302249901647731020070928, 302231456029557217361936, 18447869973633237008, 1208926973662033688461568, 18963254033673325969664, 302232612328761527959808, 18907917179151917842688, 4796154585064390525184, 4740817730542982398208, 1208944266358702884585728, 302305241879952132210944, 1208925820740529081876736, 73788102194745377024, 302231459407256921374976, 18451247673337250048, 4723520530274175680768, 302232607825161917366528, 18907912675552307249408, 18889467057378504540416, 1154047404530532608, 302231454903657310716160, 4740813226943371804928, 4722367608769569095936, 4796154585064390263056, 4740817730542982136080, 1208944266358702884323600, 302305241879952131948816, 1208925820740529081614608, 73788102194745114896, 302231459407256921112848, 18451247673336987920, 4740813226943371542800, 4722367608769568833808, 302231454903657310519568, 18446744073726394640, 1125899923685648, 4723523907973879431680, 1208926972536133781619200, 18963252907773419127296, 18889470435078208291328, 1157425104234283520, 4796153459164483682816, 4722370986469272846848, 1208925819614629175034368, 73786976294838534656, 4503599627698688, 4723519404374268838400, 18889465931478597698048, 1152921504623690240, 4722366482869662253568]
 theorem e07 : enumKeys 1354 1556 = s07 := by decide +kernel
-theorem r07 : ∀ M ∈ s07, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1556 M ne blob = true := by
+theorem t07 : rtype 1556 = 1556 := by decide
+theorem r07 : ∀ M ∈ s07, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1556 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1556) (rM M) ne blob = true) := by
   unfold s07
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3811_b0, by decide, c3811_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3810_b9, by decide, c3810_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3810_b8, by decide, c3810_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3810_b7, by decide, c3810_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3810_b6, by decide, c3810_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3810_b3, by decide, c3810_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 306, c3810_b4, by decide, c3810_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3810_b5, by decide, c3810_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3814_b8, by decide, c3814_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3814_b7, by decide, c3814_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3814_b6, by decide, c3814_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3814_b5, by decide, c3814_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3814_b9, by decide, c3814_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3815_b0, by decide, c3815_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3815_b1, by decide, c3815_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3812_b0, by decide, c3812_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 262, c3811_b9, by decide, c3811_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 277, c3811_b8, by decide, c3811_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3811_b7, by decide, c3811_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 271, c3811_b3, by decide, c3811_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3811_b2, by decide, c3811_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3812_b6, by decide, c3812_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3812_b5, by decide, c3812_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3812_b9, by decide, c3812_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3813_b0, by decide, c3813_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3812_b7, by decide, c3812_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3812_b8, by decide, c3812_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3811_b1, by decide, c3811_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 271, c3812_b2, by decide, c3812_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3812_b1, by decide, c3812_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3812_b3, by decide, c3812_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3812_b4, by decide, c3812_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 318, c3811_b4, by decide, c3811_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3811_b5, by decide, c3811_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 257, c3811_b6, by decide, c3811_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3815_b3, by decide, c3815_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3815_b2, by decide, c3815_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3815_b7, by decide, c3815_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 277, c3815_b6, by decide, c3815_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3816_b0, by decide, c3816_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3816_b1, by decide, c3816_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 277, c3815_b8, by decide, c3815_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3815_b9, by decide, c3815_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3815_b4, by decide, c3815_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3815_b5, by decide, c3815_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 271, c3816_b2, by decide, c3816_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3816_b3, by decide, c3816_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3816_b4, by decide, c3816_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3813_b1, by decide, c3813_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3813_b7, by decide, c3813_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3813_b6, by decide, c3813_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3813_b8, by decide, c3813_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3813_b9, by decide, c3813_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3813_b3, by decide, c3813_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3813_b4, by decide, c3813_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3814_b2, by decide, c3814_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3814_b3, by decide, c3814_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3814_b4, by decide, c3814_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3813_b2, by decide, c3813_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3814_b0, by decide, c3814_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3814_b1, by decide, c3814_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3813_b5, by decide, c3813_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0447_b16, by decide, by rw [tL, t07, show rM 1208944267484602791428096 = 18446744078021361920 by decide]; exact c0447_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0447_b3, by decide, by rw [tL, t07, show rM 302305243005852039053312 = 1152921573343166720 by decide]; exact c0447_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0447_b17, by decide, by rw [tL, t07, show rM 302249906151330630926336 = 18446744142445871120 by decide]; exact c0447_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0447_b36, by decide, by rw [tL, t07, show rM 302232608951061824208896 = 73786976363558011136 by decide]; exact c0447_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0447_b19, by decide, by rw [tL, t07, show rM 18907913801452214091776 = 18446744348587786496 by decide]; exact c0447_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0447_b18, by decide, by rw [tL, t07, show rM 302249901647731020267520 = 18446744142446067712 by decide]; exact c0447_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 306, c0446_b25, by decide, by rw [tL, t07, show rM 302231456029557217558528 = 68736516352 by decide]; exact c0446_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0447_b15, by decide, by rw [tL, t07, show rM 4740814352843278647296 = 18446744074800333056 by decide]; exact c0447_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0447_b28, by decide, by rw [tL, t07, show rM 1208944267484602791165968 = 18451247677631955200 by decide]; exact c0447_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0447_b11, by decide, by rw [tL, t07, show rM 302305243005852038791184 = 1157425172953760000 by decide]; exact c0447_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0447_b29, by decide, by rw [tL, t07, show rM 302249906151330630664208 = 18451247742056464400 by decide]; exact c0447_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0447_b27, by decide, by rw [tL, t07, show rM 4740814352843278385168 = 18451247674410926336 by decide]; exact c0447_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0447_b30, by decide, by rw [tL, t07, show rM 302249901647731020070928 = 18451247742056726528 by decide]; exact c0447_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0446_b37, by decide, by rw [tL, t07, show rM 302231456029557217361936 = 4503668347175168 by decide]; exact c0446_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0447_b26, by decide, by rw [tL, t07, show rM 18447869973633237008 = 18451247673337250048 by decide]; exact c0447_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0447_b39, by decide, by rw [tL, t07, show rM 1208926973662033688461568 = 73788102199040082176 by decide]; exact c0447_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 262, c0447_b7, by decide, by rw [tL, t07, show rM 18963254033673325969664 = 1154047679391662336 by decide]; exact c0447_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 277, c0448_b0, by decide, by rw [tL, t07, show rM 302232612328761527959808 = 73788102263464591376 by decide]; exact c0448_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0447_b24, by decide, by rw [tL, t07, show rM 18907917179151917842688 = 18447870248494366736 by decide]; exact c0447_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 271, c0447_b5, by decide, by rw [tL, t07, show rM 4796154585064390525184 = 1154047405604208896 by decide]; exact c0447_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0447_b21, by decide, by rw [tL, t07, show rM 4740817730542982398208 = 18447869974706913296 by decide]; exact c0447_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0447_b23, by decide, by rw [tL, t07, show rM 1208944266358702884585728 = 18447869977928204288 by decide]; exact c0447_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0447_b6, by decide, by rw [tL, t07, show rM 302305241879952132210944 = 1154047473250009088 by decide]; exact c0447_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0446_b27, by decide, by rw [tL, t07, show rM 1208925820740529081876736 = 1125904218652928 by decide]; exact c0446_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0447_b4, by decide, by rw [tL, t07, show rM 73788102194745377024 = 1154047404530532608 by decide]; exact c0447_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0446_b28, by decide, by rw [tL, t07, show rM 302231459407256921374976 = 1125968643162128 by decide]; exact c0446_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0447_b20, by decide, by rw [tL, t07, show rM 18451247673337250048 = 18447869973633237008 by decide]; exact c0447_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0447_b38, by decide, by rw [tL, t07, show rM 4723520530274175680768 = 73788102195819053312 by decide]; exact c0447_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 271, c0448_b1, by decide, by rw [tL, t07, show rM 302232607825161917366528 = 73788102263464853504 by decide]; exact c0448_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0447_b25, by decide, by rw [tL, t07, show rM 18907912675552307249408 = 18447870248494628864 by decide]; exact c0447_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0446_b30, by decide, by rw [tL, t07, show rM 18889467057378504540416 = 1126174785077504 by decide]; exact c0446_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0447_b37, by decide, by rw [tL, t07, show rM 1154047404530532608 = 73788102194745377024 by decide]; exact c0447_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 318, c0446_b29, by decide, by rw [tL, t07, show rM 302231454903657310716160 = 1125968643358720 by decide]; exact c0446_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0447_b22, by decide, by rw [tL, t07, show rM 4740813226943371804928 = 18447869974707175424 by decide]; exact c0447_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 257, c0446_b26, by decide, by rw [tL, t07, show rM 4722367608769569095936 = 1125900997624064 by decide]; exact c0446_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0447_b13, by decide, by rw [tL, t07, show rM 4796154585064390263056 = 1158551005214802176 by decide]; exact c0447_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0447_b33, by decide, by rw [tL, t07, show rM 4740817730542982136080 = 18452373574317506576 by decide]; exact c0447_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0447_b35, by decide, by rw [tL, t07, show rM 1208944266358702884323600 = 18452373577538797568 by decide]; exact c0447_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 277, c0447_b14, by decide, by rw [tL, t07, show rM 302305241879952131948816 = 1158551072860602368 by decide]; exact c0447_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0447_b0, by decide, by rw [tL, t07, show rM 1208925820740529081614608 = 5629503829246208 by decide]; exact c0447_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0447_b12, by decide, by rw [tL, t07, show rM 73788102194745114896 = 1158551004141125888 by decide]; exact c0447_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 277, c0447_b1, by decide, by rw [tL, t07, show rM 302231459407256921112848 = 5629568253755408 by decide]; exact c0447_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0447_b31, by decide, by rw [tL, t07, show rM 18451247673336987920 = 18452373573243830288 by decide]; exact c0447_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0447_b34, by decide, by rw [tL, t07, show rM 4740813226943371542800 = 18452373574317768704 by decide]; exact c0447_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0446_b39, by decide, by rw [tL, t07, show rM 4722367608769568833808 = 5629500608217344 by decide]; exact c0446_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 271, c0447_b2, by decide, by rw [tL, t07, show rM 302231454903657310519568 = 5629568254017536 by decide]; exact c0447_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0447_b32, by decide, by rw [tL, t07, show rM 18446744073726394640 = 18452373573244092416 by decide]; exact c0447_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0446_b38, by decide, by rw [tL, t07, show rM 1125899923685648 = 5629499534541056 by decide]; exact c0446_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0448_b4, by decide, by rw [tL, t07, show rM 4723523907973879431680 = 73789228095725633552 by decide]; exact c0448_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0448_b6, by decide, by rw [tL, t07, show rM 1208926972536133781619200 = 73789228098946924544 by decide]; exact c0448_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0447_b10, by decide, by rw [tL, t07, show rM 18963252907773419127296 = 1155173579298504704 by decide]; exact c0447_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0446_b35, by decide, by rw [tL, t07, show rM 18889470435078208291328 = 2252074691657744 by decide]; exact c0446_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0448_b2, by decide, by rw [tL, t07, show rM 1157425104234283520 = 73789228094651957264 by decide]; exact c0448_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0447_b9, by decide, by rw [tL, t07, show rM 4796153459164483682816 = 1155173305511051264 by decide]; exact c0447_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0446_b32, by decide, by rw [tL, t07, show rM 4722370986469272846848 = 2251800904204304 by decide]; exact c0446_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0446_b34, by decide, by rw [tL, t07, show rM 1208925819614629175034368 = 2251804125495296 by decide]; exact c0446_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0447_b8, by decide, by rw [tL, t07, show rM 73786976294838534656 = 1155173304437374976 by decide]; exact c0447_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0446_b31, by decide, by rw [tL, t07, show rM 4503599627698688 = 2251799830528016 by decide]; exact c0446_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0448_b5, by decide, by rw [tL, t07, show rM 4723519404374268838400 = 73789228095725895680 by decide]; exact c0448_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0446_b36, by decide, by rw [tL, t07, show rM 18889465931478597698048 = 2252074691919872 by decide]; exact c0446_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0448_b3, by decide, by rw [tL, t07, show rM 1152921504623690240 = 73789228094652219392 by decide]; exact c0448_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0446_b33, by decide, by rw [tL, t07, show rM 4722366482869662253568 = 2251800904466432 by decide]; exact c0446_ok33⟩, ?_⟩
   simp
 
 def s08 : List Nat := [4835704432505921212579840, 19184614962557840588800, 302232625839560410071040, 18907930689950799953920, 5017515513948905144320, 4740831241341864509440, 4835721725484065385414656, 302526603090311623540736, 4835707891270435033382912, 75853012756993583415296, 302236084604074230874112, 75576328484386542780416, 4723520530274226012160, 302232608106636944408576, 18907912957027334291456, 75559017773318904283136, 18894078743396982259712, 302236066589675788435456, 75576310469988100341760, 302231455185132337758208, 4740813508418398846976, 75557864851814297632768, 4726979294788046815232, 5017515513948904882192, 4740831241341864247312, 4835721725484065385152528, 302526603090311623278608, 4835707891270435033120784, 75853012756993583153168, 302236084604074230611984, 75576328484386542518288, 4740813508418398584848, 4726979294788046553104, 302236066589675788238864, 75576310469988100145168, 302231455185132337561616, 18447025548753436688, 75557864851814297436176, 4612811918401404944, 4723537418772761542912, 4835704431661496282448128, 19184614118132910457088, 75559034661817439813888, 18894095631895517790464, 5017514669523975012608, 4726996183286582345984, 4835707890144535126540544, 75853011631093676572928, 4835703278739991675863296, 295148186654329864448, 75557881740312833229056, 4629700416937197824, 4723519685849295880448, 75559016647418997440768, 18894077617497075417344, 18889466212953624740096, 1153202979650732288, 75557863725914390790400, 4726978168888139972864, 4722366764344689295616, 5017514669523974750480, 4726996183286582083856, 4835707890144535126278416, 75853011631093676310800, 4835703278739991675601168, 295148186654329602320, 75557881740312832966928, 4629700416936935696, 4726978168888139710736, 4722366764344689033488, 75557863725914390593808, 4611686018494562576, 281475043885328, 4723520530274158907392, 302232608106636877303808, 18907912957027267186688, 75559017773318837178368, 18894078743396915154944, 4740813508418331742208, 4726979294787979710464, 302236066589675721396224, 75576310469988033302528, 302231455185132270718976, 18447025548686594048, 75557864851814230593536, 4612811918334562304, 4740813508418331480080, 4726979294787979448336, 302236066589675721134096, 75576310469988033040400, 302231455185132270456848, 18447025548686331920, 75557864851814230331408, 4612811918334300176, 4723519685849228775680, 75559016647418930336000, 18894077617497008312576, 18889466212953557635328, 1153202979583627520, 4726978168888072868096, 4722366764344622190848, 75557863725914323751168, 4611686018427719936, 281474977042688]
 theorem e08 : enumKeys 1354 4436 = s08 := by decide +kernel
-theorem r08 : ∀ M ∈ s08, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4436 M ne blob = true := by
+theorem t08 : rtype 4436 = 5381 := by decide
+theorem r08 : ∀ M ∈ s08, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4436 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 4436) (rM M) ne blob = true) := by
   unfold s08
-  refine List.forall_mem_cons.2 ⟨⟨0, 260, c3817_b7, by decide, c3817_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3817_b6, by decide, c3817_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3817_b5, by decide, c3817_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3817_b4, by decide, c3817_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3816_b7, by decide, c3816_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3816_b6, by decide, c3816_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3818_b7, by decide, c3818_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3818_b6, by decide, c3818_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3818_b5, by decide, c3818_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3818_b4, by decide, c3818_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3818_b3, by decide, c3818_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3818_b2, by decide, c3818_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3816_b5, by decide, c3816_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3818_b1, by decide, c3818_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3818_b0, by decide, c3818_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3817_b9, by decide, c3817_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3817_b8, by decide, c3817_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 285, c3816_b9, by decide, c3816_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3816_b8, by decide, c3816_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 285, c3817_b2, by decide, c3817_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3817_b3, by decide, c3817_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 285, c3817_b0, by decide, c3817_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3817_b1, by decide, c3817_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 253, c3823_b3, by decide, c3823_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3823_b2, by decide, c3823_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3824_b1, by decide, c3824_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 205, c3824_b0, by decide, c3824_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3823_b9, by decide, c3823_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 205, c3823_b8, by decide, c3823_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3823_b7, by decide, c3823_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3823_b6, by decide, c3823_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3823_b5, by decide, c3823_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 250, c3823_b4, by decide, c3823_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3824_b3, by decide, c3824_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3824_b2, by decide, c3824_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3824_b6, by decide, c3824_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 191, c3824_b7, by decide, c3824_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3824_b4, by decide, c3824_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3824_b5, by decide, c3824_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 281, c3820_b1, by decide, c3820_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3821_b1, by decide, c3821_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3821_b0, by decide, c3821_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3820_b9, by decide, c3820_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3820_b8, by decide, c3820_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3820_b4, by decide, c3820_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3820_b3, by decide, c3820_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3821_b7, by decide, c3821_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3821_b6, by decide, c3821_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3822_b0, by decide, c3822_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3822_b1, by decide, c3822_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3821_b8, by decide, c3821_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3821_b9, by decide, c3821_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3820_b2, by decide, c3820_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3821_b3, by decide, c3821_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3821_b2, by decide, c3821_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3821_b4, by decide, c3821_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3821_b5, by decide, c3821_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 291, c3820_b5, by decide, c3820_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3820_b6, by decide, c3820_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3820_b7, by decide, c3820_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3825_b7, by decide, c3825_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3825_b6, by decide, c3825_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3826_b1, by decide, c3826_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3826_b0, by decide, c3826_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3826_b4, by decide, c3826_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3826_b5, by decide, c3826_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3826_b2, by decide, c3826_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3826_b3, by decide, c3826_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3825_b8, by decide, c3825_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3825_b9, by decide, c3825_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3826_b6, by decide, c3826_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3826_b7, by decide, c3826_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3826_b8, by decide, c3826_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 282, c3818_b8, by decide, c3818_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3819_b4, by decide, c3819_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3819_b3, by decide, c3819_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3819_b2, by decide, c3819_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3819_b1, by decide, c3819_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3819_b0, by decide, c3819_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3818_b9, by decide, c3818_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3819_b6, by decide, c3819_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3819_b5, by decide, c3819_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3819_b9, by decide, c3819_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 171, c3820_b0, by decide, c3820_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3819_b7, by decide, c3819_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3819_b8, by decide, c3819_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3824_b9, by decide, c3824_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3824_b8, by decide, c3824_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3825_b1, by decide, c3825_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3825_b0, by decide, c3825_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3825_b4, by decide, c3825_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3825_b5, by decide, c3825_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3825_b2, by decide, c3825_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3825_b3, by decide, c3825_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3822_b2, by decide, c3822_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3822_b6, by decide, c3822_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3822_b5, by decide, c3822_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3822_b7, by decide, c3822_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3822_b8, by decide, c3822_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3822_b3, by decide, c3822_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3822_b4, by decide, c3822_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3822_b9, by decide, c3822_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3823_b0, by decide, c3823_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3823_b1, by decide, c3823_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 260, c0461_b30, by decide, by rw [tL, t08, show rM 4835704432505921212579840 = 73786977394349900032 by decide]; exact c0461_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0462_b6, by decide, by rw [tL, t08, show rM 19184614962557840588800 = 295147905454230798592 by decide]; exact c0462_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0461_b28, by decide, by rw [tL, t08, show rM 302232625839560410071040 = 73786976363557752832 by decide]; exact c0461_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0461_b10, by decide, by rw [tL, t08, show rM 18907930689950799953920 = 18446744348587528192 by decide]; exact c0461_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0462_b4, by decide, by rw [tL, t08, show rM 5017515513948905144320 = 295147905180443345152 by decide]; exact c0462_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0461_b8, by decide, by rw [tL, t08, show rM 4740831241341864509440 = 18446744074800074752 by decide]; exact c0461_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0461_b12, by decide, by rw [tL, t08, show rM 4835721725484065385414656 = 18446745173238022145 by decide]; exact c0461_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0462_b5, by decide, by rw [tL, t08, show rM 302526603090311623540736 = 295147905248089145345 by decide]; exact c0462_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0460_b19, by decide, by rw [tL, t08, show rM 4835707891270435033382912 = 72058693566398720 by decide]; exact c0460_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0462_b3, by decide, by rw [tL, t08, show rM 75853012756993583415296 = 295147905179638104320 by decide]; exact c0462_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0460_b16, by decide, by rw [tL, t08, show rM 302236084604074230874112 = 72057662774251520 by decide]; exact c0460_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0461_b6, by decide, by rw [tL, t08, show rM 75576328484386542780416 = 18446744073994833920 by decide]; exact c0461_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0461_b27, by decide, by rw [tL, t08, show rM 4723520530274226012160 = 73786976295979057408 by decide]; exact c0461_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0461_b29, by decide, by rw [tL, t08, show rM 302232608106636944408576 = 73786976363624857601 by decide]; exact c0461_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0461_b11, by decide, by rw [tL, t08, show rM 18907912957027334291456 = 18446744348654632961 by decide]; exact c0461_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0461_b26, by decide, by rw [tL, t08, show rM 75559017773318904283136 = 73786976295173816576 by decide]; exact c0461_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0460_b18, by decide, by rw [tL, t08, show rM 18894078743396982259712 = 72057868983009536 by decide]; exact c0460_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 285, c0460_b17, by decide, by rw [tL, t08, show rM 302236066589675788435456 = 72057662841290752 by decide]; exact c0460_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0461_b7, by decide, by rw [tL, t08, show rM 75576310469988100341760 = 18446744074061873152 by decide]; exact c0461_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 285, c0459_b34, by decide, by rw [tL, t08, show rM 302231455185132337758208 = 68803362817 by decide]; exact c0459_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0461_b9, by decide, by rw [tL, t08, show rM 4740813508418398846976 = 18446744074867179521 by decide]; exact c0461_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 285, c0459_b33, by decide, by rw [tL, t08, show rM 75557864851814297632768 = 352321792 by decide]; exact c0459_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0460_b15, by decide, by rw [tL, t08, show rM 4726979294788046815232 = 72057595195556096 by decide]; exact c0460_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 253, c0462_b12, by decide, by rw [tL, t08, show rM 5017515513948904882192 = 295152408780053938432 by decide]; exact c0462_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0461_b16, by decide, by rw [tL, t08, show rM 4740831241341864247312 = 18451247674410668032 by decide]; exact c0461_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0461_b18, by decide, by rw [tL, t08, show rM 4835721725484065385152528 = 18451248772848615425 by decide]; exact c0461_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 205, c0462_b13, by decide, by rw [tL, t08, show rM 302526603090311623278608 = 295152408847699738625 by decide]; exact c0462_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0460_b30, by decide, by rw [tL, t08, show rM 4835707891270435033120784 = 76562293176992000 by decide]; exact c0460_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 205, c0462_b11, by decide, by rw [tL, t08, show rM 75853012756993583153168 = 295152408779248697600 by decide]; exact c0462_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0460_b28, by decide, by rw [tL, t08, show rM 302236084604074230611984 = 76561262384844800 by decide]; exact c0460_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0461_b14, by decide, by rw [tL, t08, show rM 75576328484386542518288 = 18451247673605427200 by decide]; exact c0461_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0461_b17, by decide, by rw [tL, t08, show rM 4740813508418398584848 = 18451247674477772801 by decide]; exact c0461_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 250, c0460_b27, by decide, by rw [tL, t08, show rM 4726979294788046553104 = 76561194806149376 by decide]; exact c0460_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0460_b29, by decide, by rw [tL, t08, show rM 302236066589675788238864 = 76561262451949568 by decide]; exact c0460_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0461_b15, by decide, by rw [tL, t08, show rM 75576310469988100145168 = 18451247673672531968 by decide]; exact c0461_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0460_b1, by decide, by rw [tL, t08, show rM 302231455185132337561616 = 4503668414021633 by decide]; exact c0460_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 191, c0461_b13, by decide, by rw [tL, t08, show rM 18447025548753436688 = 18451247673404096513 by decide]; exact c0461_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0460_b0, by decide, by rw [tL, t08, show rM 75557864851814297436176 = 4503599962980608 by decide]; exact c0460_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0460_b26, by decide, by rw [tL, t08, show rM 4612811918401404944 = 76561193732473088 by decide]; exact c0460_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 281, c0461_b34, by decide, by rw [tL, t08, show rM 4723537418772761542912 = 73788102195818795008 by decide]; exact c0461_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0461_b36, by decide, by rw [tL, t08, show rM 4835704431661496282448128 = 73788103294256742401 by decide]; exact c0461_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0462_b10, by decide, by rw [tL, t08, show rM 19184614118132910457088 = 295149031354137640961 by decide]; exact c0462_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0461_b32, by decide, by rw [tL, t08, show rM 75559034661817439813888 = 73788102195013554176 by decide]; exact c0461_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0460_b23, by decide, by rw [tL, t08, show rM 18894095631895517790464 = 73183768822747136 by decide]; exact c0460_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0462_b9, by decide, by rw [tL, t08, show rM 5017514669523975012608 = 295149031080350187521 by decide]; exact c0462_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0460_b21, by decide, by rw [tL, t08, show rM 4726996183286582345984 = 73183495035293696 by decide]; exact c0460_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0460_b25, by decide, by rw [tL, t08, show rM 4835707890144535126540544 = 73184593473241088 by decide]; exact c0460_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0462_b8, by decide, by rw [tL, t08, show rM 75853011631093676572928 = 295149031079544946688 by decide]; exact c0462_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0459_b39, by decide, by rw [tL, t08, show rM 4835703278739991675863296 = 1126999435313153 by decide]; exact c0459_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0462_b7, by decide, by rw [tL, t08, show rM 295148186654329864448 = 295149031079276511233 by decide]; exact c0462_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0459_b35, by decide, by rw [tL, t08, show rM 75557881740312833229056 = 1125900192124928 by decide]; exact c0459_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0460_b20, by decide, by rw [tL, t08, show rM 4629700416937197824 = 73183493961617408 by decide]; exact c0460_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0461_b35, by decide, by rw [tL, t08, show rM 4723519685849295880448 = 73788102195885899777 by decide]; exact c0461_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0461_b33, by decide, by rw [tL, t08, show rM 75559016647418997440768 = 73788102195080658944 by decide]; exact c0461_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0460_b24, by decide, by rw [tL, t08, show rM 18894077617497075417344 = 73183768889851904 by decide]; exact c0460_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0459_b38, by decide, by rw [tL, t08, show rM 18889466212953624740096 = 1126174851923969 by decide]; exact c0459_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0461_b31, by decide, by rw [tL, t08, show rM 1153202979650732288 = 73788102194812223489 by decide]; exact c0461_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 291, c0459_b36, by decide, by rw [tL, t08, show rM 75557863725914390790400 = 1125900259164160 by decide]; exact c0459_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0460_b22, by decide, by rw [tL, t08, show rM 4726978168888139972864 = 73183495102398464 by decide]; exact c0460_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0459_b37, by decide, by rw [tL, t08, show rM 4722366764344689295616 = 1125901064470529 by decide]; exact c0459_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0462_b16, by decide, by rw [tL, t08, show rM 5017514669523974750480 = 295153534679960780801 by decide]; exact c0462_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0460_b33, by decide, by rw [tL, t08, show rM 4726996183286582083856 = 77687094645886976 by decide]; exact c0460_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0460_b35, by decide, by rw [tL, t08, show rM 4835707890144535126278416 = 77688193083834368 by decide]; exact c0460_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0462_b15, by decide, by rw [tL, t08, show rM 75853011631093676310800 = 295153534679155539968 by decide]; exact c0462_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0460_b6, by decide, by rw [tL, t08, show rM 4835703278739991675601168 = 5630599045906433 by decide]; exact c0460_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0462_b14, by decide, by rw [tL, t08, show rM 295148186654329602320 = 295153534678887104513 by decide]; exact c0462_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0460_b3, by decide, by rw [tL, t08, show rM 75557881740312832966928 = 5629499802718208 by decide]; exact c0460_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0460_b31, by decide, by rw [tL, t08, show rM 4629700416936935696 = 77687093572210688 by decide]; exact c0460_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0460_b34, by decide, by rw [tL, t08, show rM 4726978168888139710736 = 77687094712991744 by decide]; exact c0460_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0460_b5, by decide, by rw [tL, t08, show rM 4722366764344689033488 = 5629500675063809 by decide]; exact c0460_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0460_b4, by decide, by rw [tL, t08, show rM 75557863725914390593808 = 5629499869822976 by decide]; exact c0460_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0460_b32, by decide, by rw [tL, t08, show rM 4611686018494562576 = 77687093639315456 by decide]; exact c0460_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0460_b2, by decide, by rw [tL, t08, show rM 281475043885328 = 5629499601387521 by decide]; exact c0460_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 282, c0461_b38, by decide, by rw [tL, t08, show rM 4723520530274158907392 = 73804990694421430528 by decide]; exact c0461_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0461_b39, by decide, by rw [tL, t08, show rM 302232608106636877303808 = 73804990762067230721 by decide]; exact c0461_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0461_b22, by decide, by rw [tL, t08, show rM 18907912957027267186688 = 18464758747097006081 by decide]; exact c0461_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0461_b37, by decide, by rw [tL, t08, show rM 75559017773318837178368 = 73804990693616189696 by decide]; exact c0461_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0460_b39, by decide, by rw [tL, t08, show rM 18894078743396915154944 = 90072267425382656 by decide]; exact c0460_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0461_b21, by decide, by rw [tL, t08, show rM 4740813508418331742208 = 18464758473309552641 by decide]; exact c0461_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0460_b37, by decide, by rw [tL, t08, show rM 4726979294787979710464 = 90071993637929216 by decide]; exact c0460_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0460_b38, by decide, by rw [tL, t08, show rM 302236066589675721396224 = 90072061283729408 by decide]; exact c0460_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0461_b20, by decide, by rw [tL, t08, show rM 75576310469988033302528 = 18464758472504311808 by decide]; exact c0461_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0460_b8, by decide, by rw [tL, t08, show rM 302231455185132270718976 = 18014467245801473 by decide]; exact c0460_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 171, c0461_b19, by decide, by rw [tL, t08, show rM 18447025548686594048 = 18464758472235876353 by decide]; exact c0461_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0460_b7, by decide, by rw [tL, t08, show rM 75557864851814230593536 = 18014398794760448 by decide]; exact c0460_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0460_b36, by decide, by rw [tL, t08, show rM 4612811918334562304 = 90071992564252928 by decide]; exact c0460_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0461_b25, by decide, by rw [tL, t08, show rM 4740813508418331480080 = 18469262072920145921 by decide]; exact c0461_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0461_b4, by decide, by rw [tL, t08, show rM 4726979294787979448336 = 94575593248522496 by decide]; exact c0461_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0461_b5, by decide, by rw [tL, t08, show rM 302236066589675721134096 = 94575660894322688 by decide]; exact c0461_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0461_b24, by decide, by rw [tL, t08, show rM 75576310469988033040400 = 18469262072114905088 by decide]; exact c0461_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0460_b14, by decide, by rw [tL, t08, show rM 302231455185132270456848 = 22518066856394753 by decide]; exact c0460_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0461_b23, by decide, by rw [tL, t08, show rM 18447025548686331920 = 18469262071846469633 by decide]; exact c0461_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0460_b13, by decide, by rw [tL, t08, show rM 75557864851814230331408 = 22517998405353728 by decide]; exact c0460_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0461_b3, by decide, by rw [tL, t08, show rM 4612811918334300176 = 94575592174846208 by decide]; exact c0461_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0462_b2, by decide, by rw [tL, t08, show rM 4723519685849228775680 = 73806116594328272897 by decide]; exact c0462_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0462_b1, by decide, by rw [tL, t08, show rM 75559016647418930336000 = 73806116593523032064 by decide]; exact c0462_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0461_b2, by decide, by rw [tL, t08, show rM 18894077617497008312576 = 91198167332225024 by decide]; exact c0461_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0460_b12, by decide, by rw [tL, t08, show rM 18889466212953557635328 = 19140573294297089 by decide]; exact c0460_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0462_b0, by decide, by rw [tL, t08, show rM 1153202979583627520 = 73806116593254596609 by decide]; exact c0462_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0461_b1, by decide, by rw [tL, t08, show rM 4726978168888072868096 = 91197893544771584 by decide]; exact c0461_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0460_b11, by decide, by rw [tL, t08, show rM 4722366764344622190848 = 19140299506843649 by decide]; exact c0460_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0460_b10, by decide, by rw [tL, t08, show rM 75557863725914323751168 = 19140298701602816 by decide]; exact c0460_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0461_b0, by decide, by rw [tL, t08, show rM 4611686018427719936 = 91197892471095296 by decide]; exact c0461_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0460_b9, by decide, by rw [tL, t08, show rM 281474977042688 = 19140298433167361 by decide]; exact c0460_ok9⟩, ?_⟩
   simp
 
 def s09 : List Nat := [18890619978883094609920, 4723520530274159165440, 302232608106636877561856, 18907912957027267444736, 75559017773318837436416, 18894078743396915412992, 302236066871150698299392, 4740813508418332000256, 75576310751463010205696, 4726979294787979968512, 75562476537832658173952, 4723520530274158903312, 302232608106636877299728, 18907912957027267182608, 75559017773318837174288, 18894078743396915150864, 4740813508418331738128, 4726979294787979706384, 302236066871150698102800, 75576310751463010009104, 75562476537832657977360, 4726978450363049312288, 4740813508418331476000, 4726979294787979444256, 302236066871150697840672, 75576310751463009746976, 75562476537832657715232, 18890619134458164478208, 4723519685849229033728, 75559016928893907304704, 18894077898971985281280, 75562475411932751331584, 75557864007389300654336, 4726978450363049836800, 4723519685849228771600, 75559016928893907042576, 18894077898971985019152, 4726978450363049574672, 75562475411932751134992, 75557864007389300457744, 4611967493404426512]
 theorem e09 : enumKeys 1354 420 = s09 := by decide +kernel
-theorem r09 : ∀ M ∈ s09, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 420 M ne blob = true := by
+theorem t09 : rtype 420 = 2310 := by decide
+theorem r09 : ∀ M ∈ s09, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 420 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 420) (rM M) ne blob = true) := by
   unfold s09
-  refine List.forall_mem_cons.2 ⟨⟨0, 310, c3827_b5, by decide, c3827_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 319, c3826_b9, by decide, c3826_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3827_b9, by decide, c3827_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3827_b8, by decide, c3827_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3827_b7, by decide, c3827_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3827_b6, by decide, c3827_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3827_b4, by decide, c3827_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3827_b3, by decide, c3827_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3827_b2, by decide, c3827_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3827_b1, by decide, c3827_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3827_b0, by decide, c3827_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 322, c3828_b7, by decide, c3828_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 274, c3829_b3, by decide, c3829_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3829_b2, by decide, c3829_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 274, c3829_b1, by decide, c3829_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3829_b0, by decide, c3829_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3828_b9, by decide, c3828_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 275, c3828_b8, by decide, c3828_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3829_b6, by decide, c3829_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3829_b5, by decide, c3829_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3829_b4, by decide, c3829_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 278, c3830_b6, by decide, c3830_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3830_b5, by decide, c3830_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 278, c3830_b4, by decide, c3830_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3830_b9, by decide, c3830_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3830_b8, by decide, c3830_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3830_b7, by decide, c3830_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 260, c3828_b4, by decide, c3828_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 269, c3828_b0, by decide, c3828_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3828_b6, by decide, c3828_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3828_b5, by decide, c3828_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 272, c3828_b1, by decide, c3828_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 272, c3828_b2, by decide, c3828_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3828_b3, by decide, c3828_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3829_b7, by decide, c3829_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3830_b0, by decide, c3830_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3829_b9, by decide, c3829_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3829_b8, by decide, c3829_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3830_b1, by decide, c3830_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3830_b2, by decide, c3830_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3830_b3, by decide, c3830_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 310, c0473_b39, by decide, by rw [tL, t09, show rM 18890619978883094609920 = 73786976569716179200 by decide]; exact c0473_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 319, c0473_b37, by decide, by rw [tL, t09, show rM 4723520530274159165440 = 73786976295928725760 by decide]; exact c0473_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0473_b38, by decide, by rw [tL, t09, show rM 302232608106636877561856 = 73786976363574525953 by decide]; exact c0473_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0473_b30, by decide, by rw [tL, t09, show rM 18907912957027267444736 = 18446744348604301313 by decide]; exact c0473_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0473_b36, by decide, by rw [tL, t09, show rM 75559017773318837436416 = 73786976295123484928 by decide]; exact c0473_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0473_b12, by decide, by rw [tL, t09, show rM 18894078743396915412992 = 72057868932677888 by decide]; exact c0473_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0473_b11, by decide, by rw [tL, t09, show rM 302236066871150698299392 = 72057662790959105 by decide]; exact c0473_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0473_b29, by decide, by rw [tL, t09, show rM 4740813508418332000256 = 18446744074816847873 by decide]; exact c0473_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0473_b28, by decide, by rw [tL, t09, show rM 75576310751463010205696 = 18446744074011541505 by decide]; exact c0473_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0473_b10, by decide, by rw [tL, t09, show rM 4726979294787979968512 = 72057595145224448 by decide]; exact c0473_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0473_b9, by decide, by rw [tL, t09, show rM 75562476537832658173952 = 72057594339918080 by decide]; exact c0473_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 322, c0474_b4, by decide, by rw [tL, t09, show rM 4723520530274158903312 = 73791479895539319040 by decide]; exact c0474_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 274, c0474_b5, by decide, by rw [tL, t09, show rM 302232608106636877299728 = 73791479963185119233 by decide]; exact c0474_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0473_b33, by decide, by rw [tL, t09, show rM 18907912957027267182608 = 18451247948214894593 by decide]; exact c0473_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 274, c0474_b3, by decide, by rw [tL, t09, show rM 75559017773318837174288 = 73791479894734078208 by decide]; exact c0474_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0473_b19, by decide, by rw [tL, t09, show rM 18894078743396915150864 = 76561468543271168 by decide]; exact c0473_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0473_b32, by decide, by rw [tL, t09, show rM 4740813508418331738128 = 18451247674427441153 by decide]; exact c0473_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 275, c0473_b17, by decide, by rw [tL, t09, show rM 4726979294787979706384 = 76561194755817728 by decide]; exact c0473_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0473_b18, by decide, by rw [tL, t09, show rM 302236066871150698102800 = 76561262401617921 by decide]; exact c0473_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0473_b31, by decide, by rw [tL, t09, show rM 75576310751463010009104 = 18451247673622200321 by decide]; exact c0473_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0473_b16, by decide, by rw [tL, t09, show rM 75562476537832657977360 = 76561193950576896 by decide]; exact c0473_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 278, c0473_b25, by decide, by rw [tL, t09, show rM 4726978450363049312288 = 81064794366410753 by decide]; exact c0473_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0473_b35, by decide, by rw [tL, t09, show rM 4740813508418331476000 = 18455751274038034433 by decide]; exact c0473_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 278, c0473_b26, by decide, by rw [tL, t09, show rM 4726979294787979444256 = 81064794366411008 by decide]; exact c0473_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0473_b27, by decide, by rw [tL, t09, show rM 302236066871150697840672 = 81064862012211201 by decide]; exact c0473_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0473_b34, by decide, by rw [tL, t09, show rM 75576310751463009746976 = 18455751273232793601 by decide]; exact c0473_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0473_b24, by decide, by rw [tL, t09, show rM 75562476537832657715232 = 81064793561170176 by decide]; exact c0473_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 260, c0474_b2, by decide, by rw [tL, t09, show rM 18890619134458164478208 = 73788102469623021569 by decide]; exact c0474_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 269, c0474_b1, by decide, by rw [tL, t09, show rM 4723519685849229033728 = 73788102195835568129 by decide]; exact c0474_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0474_b0, by decide, by rw [tL, t09, show rM 75559016928893907304704 = 73788102195030327297 by decide]; exact c0474_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0473_b15, by decide, by rw [tL, t09, show rM 18894077898971985281280 = 73183768839520257 by decide]; exact c0473_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 272, c0473_b13, by decide, by rw [tL, t09, show rM 75562475411932751331584 = 73183494246760448 by decide]; exact c0473_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 272, c0473_b7, by decide, by rw [tL, t09, show rM 75557864007389300654336 = 1125900208832513 by decide]; exact c0473_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0473_b14, by decide, by rw [tL, t09, show rM 4726978450363049836800 = 73183495052066817 by decide]; exact c0473_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0474_b7, by decide, by rw [tL, t09, show rM 4723519685849228771600 = 73792605795446161409 by decide]; exact c0474_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0474_b6, by decide, by rw [tL, t09, show rM 75559016928893907042576 = 73792605794640920577 by decide]; exact c0474_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0473_b23, by decide, by rw [tL, t09, show rM 18894077898971985019152 = 77687368450113537 by decide]; exact c0473_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0473_b22, by decide, by rw [tL, t09, show rM 4726978450363049574672 = 77687094662660097 by decide]; exact c0473_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0473_b21, by decide, by rw [tL, t09, show rM 75562475411932751134992 = 77687093857419264 by decide]; exact c0473_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0473_b8, by decide, by rw [tL, t09, show rM 75557864007389300457744 = 5629499819491329 by decide]; exact c0473_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0473_b20, by decide, by rw [tL, t09, show rM 4611967493404426512 = 77687093588983809 by decide]; exact c0473_ok20⟩, ?_⟩
   simp
 
 def s10 : List Nat := [4835721726328490315350016, 302526603934736553476096, 302249919662129512841216, 302249901647731070402560, 302231456029557267693568, 4740814352843328782336, 5017515513948904947968, 4740831241341864313088, 4835721725202590408507648, 302526602808836646633728, 4835703279584416605798656, 295149031079259799808, 302231472918055803289856, 18464758472219164928, 302231454903657360851200, 4740813226943421939968, 4722367608769619230976, 5017514388048998105600, 4722384497268154761728, 4835703278458516698956288, 295147905179352957440, 18014398509613568, 4722366482869712388608, 4740814352843261677568, 302249901647731003363328, 302231456029557200654336, 18447869973616529408, 4740813226943354835200, 4722367608769552126208, 302231454903657293811968, 18446744073709687040, 1125899906978048]
 theorem e10 : enumKeys 1354 4616 = s10 := by decide +kernel
-theorem r10 : ∀ M ∈ s10, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4616 M ne blob = true := by
+theorem t10 : rtype 4616 = 4616 := by decide
+theorem r10 : ∀ M ∈ s10, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4616 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 4616) (rM M) ne blob = true) := by
   unfold s10
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3831_b5, by decide, c3831_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3831_b4, by decide, c3831_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3831_b3, by decide, c3831_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 283, c3831_b0, by decide, c3831_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 321, c3831_b1, by decide, c3831_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3831_b2, by decide, c3831_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3832_b1, by decide, c3832_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3832_b0, by decide, c3832_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3832_b6, by decide, c3832_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3832_b5, by decide, c3832_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3832_b9, by decide, c3832_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3833_b0, by decide, c3833_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 262, c3832_b7, by decide, c3832_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3832_b8, by decide, c3832_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 333, c3832_b2, by decide, c3832_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3832_b3, by decide, c3832_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 272, c3832_b4, by decide, c3832_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3833_b6, by decide, c3833_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3833_b7, by decide, c3833_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3833_b9, by decide, c3833_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3834_b0, by decide, c3834_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3834_b1, by decide, c3834_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 271, c3833_b8, by decide, c3833_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3831_b6, by decide, c3831_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3831_b7, by decide, c3831_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3831_b8, by decide, c3831_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3831_b9, by decide, c3831_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3833_b1, by decide, c3833_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3833_b2, by decide, c3833_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3833_b3, by decide, c3833_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3833_b4, by decide, c3833_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3833_b5, by decide, c3833_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0451_b16, by decide, by rw [tL, t10, show rM 4835721726328490315350016 = 18446745173221310720 by decide]; exact c0451_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0451_b26, by decide, by rw [tL, t10, show rM 302526603934736553476096 = 295147905248072433920 by decide]; exact c0451_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0451_b14, by decide, by rw [tL, t10, show rM 302249919662129512841216 = 18446744142429163520 by decide]; exact c0451_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 283, c0451_b15, by decide, by rw [tL, t10, show rM 302249901647731070402560 = 18446744142496202752 by decide]; exact c0451_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 321, c0451_b0, by decide, by rw [tL, t10, show rM 302231456029557267693568 = 68786651392 by decide]; exact c0451_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0451_b13, by decide, by rw [tL, t10, show rM 4740814352843328782336 = 18446744074850468096 by decide]; exact c0451_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0451_b28, by decide, by rw [tL, t10, show rM 5017515513948904947968 = 295149031080333476096 by decide]; exact c0451_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0451_b18, by decide, by rw [tL, t10, show rM 4740831241341864313088 = 18447869974690205696 by decide]; exact c0451_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0451_b20, by decide, by rw [tL, t10, show rM 4835721725202590408507648 = 18447871073128153088 by decide]; exact c0451_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0451_b29, by decide, by rw [tL, t10, show rM 302526602808836646633728 = 295149031147979276288 by decide]; exact c0451_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0451_b4, by decide, by rw [tL, t10, show rM 4835703279584416605798656 = 1126999418601728 by decide]; exact c0451_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0451_b27, by decide, by rw [tL, t10, show rM 295149031079259799808 = 295149031079259799808 by decide]; exact c0451_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 262, c0451_b2, by decide, by rw [tL, t10, show rM 302231472918055803289856 = 1125968626454528 by decide]; exact c0451_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0451_b17, by decide, by rw [tL, t10, show rM 18464758472219164928 = 18447869973616529408 by decide]; exact c0451_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 333, c0451_b3, by decide, by rw [tL, t10, show rM 302231454903657360851200 = 1125968693493760 by decide]; exact c0451_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0451_b19, by decide, by rw [tL, t10, show rM 4740813226943421939968 = 18447869974757310464 by decide]; exact c0451_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 272, c0451_b1, by decide, by rw [tL, t10, show rM 4722367608769619230976 = 1125901047759104 by decide]; exact c0451_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0451_b31, by decide, by rw [tL, t10, show rM 5017514388048998105600 = 295150156980240318464 by decide]; exact c0451_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0451_b6, by decide, by rw [tL, t10, show rM 4722384497268154761728 = 2251800887496704 by decide]; exact c0451_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0451_b8, by decide, by rw [tL, t10, show rM 4835703278458516698956288 = 2252899325444096 by decide]; exact c0451_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0451_b30, by decide, by rw [tL, t10, show rM 295147905179352957440 = 295150156979166642176 by decide]; exact c0451_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0451_b5, by decide, by rw [tL, t10, show rM 18014398509613568 = 2251799813820416 by decide]; exact c0451_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 271, c0451_b7, by decide, by rw [tL, t10, show rM 4722366482869712388608 = 2251800954601472 by decide]; exact c0451_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0451_b22, by decide, by rw [tL, t10, show rM 4740814352843261677568 = 18464758473292841216 by decide]; exact c0451_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0451_b23, by decide, by rw [tL, t10, show rM 302249901647731003363328 = 18464758540938641408 by decide]; exact c0451_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0451_b9, by decide, by rw [tL, t10, show rM 302231456029557200654336 = 18014467229090048 by decide]; exact c0451_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0451_b21, by decide, by rw [tL, t10, show rM 18447869973616529408 = 18464758472219164928 by decide]; exact c0451_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0451_b25, by decide, by rw [tL, t10, show rM 4740813226943354835200 = 18465884373199683584 by decide]; exact c0451_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0451_b11, by decide, by rw [tL, t10, show rM 4722367608769552126208 = 19140299490132224 by decide]; exact c0451_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0451_b12, by decide, by rw [tL, t10, show rM 302231454903657293811968 = 19140367135932416 by decide]; exact c0451_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0451_b24, by decide, by rw [tL, t10, show rM 18446744073709687040 = 18465884372126007296 by decide]; exact c0451_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0451_b10, by decide, by rw [tL, t10, show rM 1125899906978048 = 19140298416455936 by decide]; exact c0451_ok10⟩, ?_⟩
   simp
 
 def s11 : List Nat := [302232608951061807497216, 18907913801452197380096, 302249901929205980266496, 302236067715575628234752, 4740814352843261935616, 75576311595887940141056, 4740814352843261673488, 302249901929205980069904, 302236067715575628038160, 75576311595887939944464, 4723520530274158969088, 302232608106636877365504, 18907912957027267248384, 75559017773318837240064, 18894078743396915216640, 302236066589675721392384, 75576310469988033298688, 302231455185132270715136, 4740813508418331803904, 75557864851814230589696, 4726979294787979772160, 4740813508418331541776, 4726979294787979510032, 302236066589675721195792, 75576310469988033102096, 302231455185132270518544, 18447025548686393616, 75557864851814230393104, 4612811918334361872, 4723519685849228837376, 75559016647418930397696, 18894077617497008374272, 18889466212953557697024, 1153202979583689216, 75557863725914323747328, 4726978168888072929792, 4722366764344622252544]
 theorem e11 : enumKeys 1354 600 = s11 := by decide +kernel
-theorem r11 : ∀ M ∈ s11, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 600 M ne blob = true := by
+theorem t11 : rtype 600 = 1545 := by decide
+theorem r11 : ∀ M ∈ s11, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 600 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 600) (rM M) ne blob = true) := by
   unfold s11
-  refine List.forall_mem_cons.2 ⟨⟨0, 306, c3834_b7, by decide, c3834_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3834_b6, by decide, c3834_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3834_b5, by decide, c3834_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3834_b4, by decide, c3834_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3834_b3, by decide, c3834_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3834_b2, by decide, c3834_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3836_b7, by decide, c3836_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3837_b0, by decide, c3837_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3836_b9, by decide, c3836_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3836_b8, by decide, c3836_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3834_b8, by decide, c3834_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3835_b8, by decide, c3835_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3835_b7, by decide, c3835_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3835_b6, by decide, c3835_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3835_b5, by decide, c3835_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3835_b0, by decide, c3835_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3834_b9, by decide, c3834_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3835_b3, by decide, c3835_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3835_b4, by decide, c3835_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3835_b1, by decide, c3835_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3835_b2, by decide, c3835_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3837_b2, by decide, c3837_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3837_b1, by decide, c3837_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3837_b4, by decide, c3837_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3837_b3, by decide, c3837_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3837_b7, by decide, c3837_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3837_b8, by decide, c3837_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3837_b5, by decide, c3837_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3837_b6, by decide, c3837_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3835_b9, by decide, c3835_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3836_b4, by decide, c3836_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3836_b3, by decide, c3836_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3836_b5, by decide, c3836_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3836_b6, by decide, c3836_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3836_b0, by decide, c3836_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3836_b1, by decide, c3836_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3836_b2, by decide, c3836_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 306, c0468_b16, by decide, by rw [tL, t11, show rM 302232608951061807497216 = 73786976363557814528 by decide]; exact c0468_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0468_b6, by decide, by rw [tL, t11, show rM 18907913801452197380096 = 18446744348587589888 by decide]; exact c0468_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0468_b5, by decide, by rw [tL, t11, show rM 302249901929205980266496 = 18446744142445871105 by decide]; exact c0468_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0467_b33, by decide, by rw [tL, t11, show rM 302236067715575628234752 = 72057662774247680 by decide]; exact c0467_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0468_b4, by decide, by rw [tL, t11, show rM 4740814352843261935616 = 18446744074800136448 by decide]; exact c0468_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0468_b3, by decide, by rw [tL, t11, show rM 75576311595887940141056 = 18446744073994830080 by decide]; exact c0468_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0468_b11, by decide, by rw [tL, t11, show rM 4740814352843261673488 = 18451247674410729728 by decide]; exact c0468_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0468_b12, by decide, by rw [tL, t11, show rM 302249901929205980069904 = 18451247742056529921 by decide]; exact c0468_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0467_b39, by decide, by rw [tL, t11, show rM 302236067715575628038160 = 76561262384906496 by decide]; exact c0467_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0468_b10, by decide, by rw [tL, t11, show rM 75576311595887939944464 = 18451247673605488896 by decide]; exact c0468_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0468_b18, by decide, by rw [tL, t11, show rM 4723520530274158969088 = 73788102195818856704 by decide]; exact c0468_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0468_b19, by decide, by rw [tL, t11, show rM 302232608106636877365504 = 73788102263464656897 by decide]; exact c0468_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0468_b9, by decide, by rw [tL, t11, show rM 18907912957027267248384 = 18447870248494432257 by decide]; exact c0468_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0468_b17, by decide, by rw [tL, t11, show rM 75559017773318837240064 = 73788102195013615872 by decide]; exact c0468_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0467_b36, by decide, by rw [tL, t11, show rM 18894078743396915216640 = 73183768822808832 by decide]; exact c0467_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0467_b35, by decide, by rw [tL, t11, show rM 302236066589675721392384 = 73183562681090048 by decide]; exact c0467_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0468_b7, by decide, by rw [tL, t11, show rM 75576310469988033298688 = 18447869973901672448 by decide]; exact c0468_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0467_b27, by decide, by rw [tL, t11, show rM 302231455185132270715136 = 1125968643162113 by decide]; exact c0467_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0468_b8, by decide, by rw [tL, t11, show rM 4740813508418331803904 = 18447869974706978817 by decide]; exact c0468_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0467_b26, by decide, by rw [tL, t11, show rM 75557864851814230589696 = 1125900192121088 by decide]; exact c0467_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0467_b34, by decide, by rw [tL, t11, show rM 4726979294787979772160 = 73183495035355392 by decide]; exact c0467_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0468_b15, by decide, by rw [tL, t11, show rM 4740813508418331541776 = 18452373574317572097 by decide]; exact c0468_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0468_b1, by decide, by rw [tL, t11, show rM 4726979294787979510032 = 77687094645948672 by decide]; exact c0468_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0468_b2, by decide, by rw [tL, t11, show rM 302236066589675721195792 = 77687162291748864 by decide]; exact c0468_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0468_b14, by decide, by rw [tL, t11, show rM 75576310469988033102096 = 18452373573512331264 by decide]; exact c0468_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0467_b32, by decide, by rw [tL, t11, show rM 302231455185132270518544 = 5629568253820929 by decide]; exact c0467_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0468_b13, by decide, by rw [tL, t11, show rM 18447025548686393616 = 18452373573243895809 by decide]; exact c0468_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0467_b31, by decide, by rw [tL, t11, show rM 75557864851814230393104 = 5629499802779904 by decide]; exact c0467_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0468_b0, by decide, by rw [tL, t11, show rM 4612811918334361872 = 77687093572272384 by decide]; exact c0468_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0468_b22, by decide, by rw [tL, t11, show rM 4723519685849228837376 = 73789228095725699073 by decide]; exact c0468_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0468_b21, by decide, by rw [tL, t11, show rM 75559016647418930397696 = 73789228094920458240 by decide]; exact c0468_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0467_b38, by decide, by rw [tL, t11, show rM 18894077617497008374272 = 74309668729651200 by decide]; exact c0467_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0467_b30, by decide, by rw [tL, t11, show rM 18889466212953557697024 = 2252074691723265 by decide]; exact c0467_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0468_b20, by decide, by rw [tL, t11, show rM 1153202979583689216 = 73789228094652022785 by decide]; exact c0468_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0467_b28, by decide, by rw [tL, t11, show rM 75557863725914323747328 = 2251800098963456 by decide]; exact c0467_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0467_b37, by decide, by rw [tL, t11, show rM 4726978168888072929792 = 74309394942197760 by decide]; exact c0467_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0467_b29, by decide, by rw [tL, t11, show rM 4722366764344622252544 = 2251800904269825 by decide]; exact c0467_ok29⟩, ?_⟩
   simp
 
 def s12 : List Nat := [302249902773630910201856, 302249901647731003359488, 302231456029557200650496, 4740814352843261739264, 302231454903657293808128, 4740813226943354896896, 4722367608769552187904]
 theorem e12 : enumKeys 1354 780 = s12 := by decide +kernel
-theorem r12 : ∀ M ∈ s12, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 780 M ne blob = true := by
+theorem t12 : rtype 780 = 780 := by decide
+theorem r12 : ∀ M ∈ s12, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 780 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 780) (rM M) ne blob = true) := by
   unfold s12
-  refine List.forall_mem_cons.2 ⟨⟨0, 288, c3837_b9, by decide, c3837_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3838_b0, by decide, c3838_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 344, c3838_b1, by decide, c3838_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3838_b2, by decide, c3838_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 350, c3838_b3, by decide, c3838_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3838_b4, by decide, c3838_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3838_b5, by decide, c3838_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 288, c0452_b24, by decide, by rw [tL, t12, show rM 302249902773630910201856 = 18446744142429159680 by decide]; exact c0452_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0452_b26, by decide, by rw [tL, t12, show rM 302249901647731003359488 = 18447870042336002048 by decide]; exact c0452_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 344, c0452_b21, by decide, by rw [tL, t12, show rM 302231456029557200650496 = 1125968626450688 by decide]; exact c0452_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0452_b25, by decide, by rw [tL, t12, show rM 4740814352843261739264 = 18447869974690267392 by decide]; exact c0452_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 350, c0452_b23, by decide, by rw [tL, t12, show rM 302231454903657293808128 = 2251868533293056 by decide]; exact c0452_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0452_b27, by decide, by rw [tL, t12, show rM 4740813226943354896896 = 18448995874597109760 by decide]; exact c0452_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0452_b22, by decide, by rw [tL, t12, show rM 4722367608769552187904 = 2251800887558400 by decide]; exact c0452_ok22⟩, ?_⟩
   simp
 
 def s13 : List Nat := [4835703368530509263011840, 4835703355019710431232000, 1208925909686621789224960, 4835703350516110820638720, 90071992631296000, 1208925891672223346851840, 76561193799516160, 4835998430867295679021057, 4835777083449210046513153, 1209220985534207037014017, 4835998426363696068427777, 4835703296472915225083905, 295165919577879085057, 4835777065434811604140033, 1209220967519808594640897, 4835703282962116393304065, 295152408779047305217, 1208925837629027751297025, 73804990693414797313, 4835703278458516782710785, 295147905179436711937, 18014398593368065, 1208925819614629308923905, 73786976294972424193, 4503599761588225, 4835703355019710364127232, 1208925909686621722120192, 4835703350516110753533952, 90071992564191232, 1208925891672223279747072, 76561193732411392, 72057594121818112, 4835777065434811537035265, 1209220967519808527536129, 4835703282962116326199297, 295152408778980200449, 1208925837629027684192257, 73804990693347692545, 4835703278458516715606017, 295147905179369607169, 18014398526263297, 1208925819614629241819137, 73786976294905319425, 4503599694483457, 83890177, 1208925891672223212642304, 73786976294838214656, 76561193665306624, 72057594054713344]
 theorem e13 : enumKeys 1354 9217 = s13 := by decide +kernel
-theorem r13 : ∀ M ∈ s13, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 9217 M ne blob = true := by
+theorem t13 : rtype 9217 = 8272 := by decide
+theorem r13 : ∀ M ∈ s13, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 9217 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 9217) (rM M) ne blob = true) := by
   unfold s13
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3839_b0, by decide, c3839_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3838_b7, by decide, c3838_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3838_b6, by decide, c3838_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 177, c3839_b1, by decide, c3839_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3839_b2, by decide, c3839_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3838_b8, by decide, c3838_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3838_b9, by decide, c3838_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3840_b6, by decide, c3840_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3840_b5, by decide, c3840_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 155, c3840_b4, by decide, c3840_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 159, c3841_b6, by decide, c3841_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3841_b7, by decide, c3841_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 159, c3841_b8, by decide, c3841_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3840_b8, by decide, c3840_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3840_b7, by decide, c3840_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3841_b1, by decide, c3841_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3841_b2, by decide, c3841_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3840_b9, by decide, c3840_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3841_b0, by decide, c3841_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 177, c3841_b9, by decide, c3841_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3842_b0, by decide, c3842_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3842_b1, by decide, c3842_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3841_b3, by decide, c3841_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3841_b4, by decide, c3841_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3841_b5, by decide, c3841_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3839_b4, by decide, c3839_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3839_b3, by decide, c3839_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3839_b7, by decide, c3839_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3839_b8, by decide, c3839_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3839_b5, by decide, c3839_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3839_b6, by decide, c3839_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3839_b9, by decide, c3839_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3842_b3, by decide, c3842_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 160, c3842_b2, by decide, c3842_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3842_b6, by decide, c3842_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3842_b7, by decide, c3842_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3842_b4, by decide, c3842_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3842_b5, by decide, c3842_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3843_b1, by decide, c3843_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3843_b2, by decide, c3843_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3843_b3, by decide, c3843_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3842_b8, by decide, c3842_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3842_b9, by decide, c3842_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3843_b0, by decide, c3843_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3843_b4, by decide, c3843_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3840_b1, by decide, c3840_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3840_b0, by decide, c3840_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3840_b2, by decide, c3840_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3840_b3, by decide, c3840_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0442_b12, by decide, by rw [tL, t13, show rM 4835703368530509263011840 = 4611687117939281920 by decide]; exact c0442_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0442_b13, by decide, by rw [tL, t13, show rM 4835703355019710431232000 = 4611687118006124560 by decide]; exact c0442_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0442_b10, by decide, by rw [tL, t13, show rM 1208925909686621789224960 = 4611686022789468160 by decide]; exact c0442_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 177, c0442_b14, by decide, by rw [tL, t13, show rM 4835703350516110820638720 = 4611687118006386688 by decide]; exact c0442_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0442_b8, by decide, by rw [tL, t13, show rM 90071992631296000 = 4611686018494763008 by decide]; exact c0442_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0442_b11, by decide, by rw [tL, t13, show rM 1208925891672223346851840 = 4611686022856572928 by decide]; exact c0442_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0442_b9, by decide, by rw [tL, t13, show rM 76561193799516160 = 4611686018561605648 by decide]; exact c0442_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0442_b30, by decide, by rw [tL, t13, show rM 4835998430867295679021057 = 295148187753841164304 by decide]; exact c0442_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0442_b2, by decide, by rw [tL, t13, show rM 4835777083449210046513153 = 1153204079095189504 by decide]; exact c0442_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 155, c0442_b28, by decide, by rw [tL, t13, show rM 1209220985534207037014017 = 295148186658624507904 by decide]; exact c0442_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 159, c0442_b31, by decide, by rw [tL, t13, show rM 4835998426363696068427777 = 295148187753841426432 by decide]; exact c0442_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0441_b30, by decide, by rw [tL, t13, show rM 4835703296472915225083905 = 282574488604672 by decide]; exact c0441_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 159, c0442_b25, by decide, by rw [tL, t13, show rM 295165919577879085057 = 295148186654329802752 by decide]; exact c0442_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0442_b3, by decide, by rw [tL, t13, show rM 4835777065434811604140033 = 1153204079162294272 by decide]; exact c0442_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0442_b29, by decide, by rw [tL, t13, show rM 1209220967519808594640897 = 295148186658691612672 by decide]; exact c0442_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0441_b31, by decide, by rw [tL, t13, show rM 4835703282962116393304065 = 282574555447312 by decide]; exact c0441_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0442_b26, by decide, by rw [tL, t13, show rM 295152408779047305217 = 295148186654396645392 by decide]; exact c0442_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0441_b28, by decide, by rw [tL, t13, show rM 1208925837629027751297025 = 281479338790912 by decide]; exact c0441_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0442_b0, by decide, by rw [tL, t13, show rM 73804990693414797313 = 1153202979650670592 by decide]; exact c0442_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 177, c0441_b32, by decide, by rw [tL, t13, show rM 4835703278458516782710785 = 282574555709440 by decide]; exact c0441_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0442_b27, by decide, by rw [tL, t13, show rM 295147905179436711937 = 295148186654396907520 by decide]; exact c0442_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0441_b26, by decide, by rw [tL, t13, show rM 18014398593368065 = 281475044085760 by decide]; exact c0441_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0441_b29, by decide, by rw [tL, t13, show rM 1208925819614629308923905 = 281479405895680 by decide]; exact c0441_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0442_b1, by decide, by rw [tL, t13, show rM 73786976294972424193 = 1153202979717775360 by decide]; exact c0442_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0441_b27, by decide, by rw [tL, t13, show rM 4503599761588225 = 281475110928400 by decide]; exact c0441_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0442_b20, by decide, by rw [tL, t13, show rM 4835703355019710364127232 = 4629701516448497680 by decide]; exact c0442_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0442_b18, by decide, by rw [tL, t13, show rM 1208925909686621722120192 = 4629700421231841280 by decide]; exact c0442_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0442_b21, by decide, by rw [tL, t13, show rM 4835703350516110753533952 = 4629701516448759808 by decide]; exact c0442_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0442_b15, by decide, by rw [tL, t13, show rM 90071992564191232 = 4629700416937136128 by decide]; exact c0442_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0442_b19, by decide, by rw [tL, t13, show rM 1208925891672223279747072 = 4629700421298946048 by decide]; exact c0442_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0442_b16, by decide, by rw [tL, t13, show rM 76561193732411392 = 4629700417003978768 by decide]; exact c0442_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0442_b17, by decide, by rw [tL, t13, show rM 72057594121818112 = 4629700417004240896 by decide]; exact c0442_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0442_b6, by decide, by rw [tL, t13, show rM 4835777065434811537035265 = 1171218477604667392 by decide]; exact c0442_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 160, c0442_b34, by decide, by rw [tL, t13, show rM 1209220967519808527536129 = 295166201057133985792 by decide]; exact c0442_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0441_b38, by decide, by rw [tL, t13, show rM 4835703282962116326199297 = 18296972997820432 by decide]; exact c0441_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0442_b32, by decide, by rw [tL, t13, show rM 295152408778980200449 = 295166201052839018512 by decide]; exact c0442_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0441_b36, by decide, by rw [tL, t13, show rM 1208925837629027684192257 = 18295877781164032 by decide]; exact c0441_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0442_b4, by decide, by rw [tL, t13, show rM 73804990693347692545 = 1171217378093043712 by decide]; exact c0442_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0441_b39, by decide, by rw [tL, t13, show rM 4835703278458516715606017 = 18296972998082560 by decide]; exact c0441_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0442_b33, by decide, by rw [tL, t13, show rM 295147905179369607169 = 295166201052839280640 by decide]; exact c0442_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0441_b33, by decide, by rw [tL, t13, show rM 18014398526263297 = 18295873486458880 by decide]; exact c0441_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0441_b37, by decide, by rw [tL, t13, show rM 1208925819614629241819137 = 18295877848268800 by decide]; exact c0441_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0442_b5, by decide, by rw [tL, t13, show rM 73786976294905319425 = 1171217378160148480 by decide]; exact c0442_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0441_b34, by decide, by rw [tL, t13, show rM 4503599694483457 = 18295873553301520 by decide]; exact c0441_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0441_b35, by decide, by rw [tL, t13, show rM 83890177 = 18295873553563648 by decide]; exact c0441_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0442_b24, by decide, by rw [tL, t13, show rM 1208925891672223212642304 = 4647714819741319168 by decide]; exact c0442_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0442_b7, by decide, by rw [tL, t13, show rM 73786976294838214656 = 1188950301625810944 by decide]; exact c0442_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0442_b22, by decide, by rw [tL, t13, show rM 76561193665306624 = 4647714815446351888 by decide]; exact c0442_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0442_b23, by decide, by rw [tL, t13, show rM 72057594054713344 = 4647714815446614016 by decide]; exact c0442_ok23⟩, ?_⟩
   simp
 
 def s14 : List Nat := [1208925892798123136516096, 302231531464850976014336, 18889539114972559179776, 1208999607716823920017409, 1208944270862302511890433, 302305246383551759515649, 1208926973662033705172993, 18963254033673342681089, 302232612328761544671233, 18907917179151934554113, 1208944266358702901297153, 302305241879952148922369, 1208925820740529098588161, 73788102194762088449, 302231459407256938086401, 18451247673353961473, 302232607825161934077953, 18907912675552323960833, 18889467057378521251841, 1154047404547244033, 1208925892798123136253968, 302231531464850975752208, 302231526961251365158928, 73183493978325008, 1208999607716823919755281, 1208944270862302511628305, 302305246383551759253521, 1208944266358702901035025, 302305241879952148660241, 1208925820740529098326033, 73788102194761826321, 302231459407256937824273, 18451247673353699345, 302231454903657327230993, 18446744073743106065, 1125899940397073, 1208925896175822840267008, 18889542492672262930688, 1208925891672223229673728, 76561193682338048, 18889537989072652337408, 1208926977039733408923905, 18963257411373046432001, 1208999606590924013175041, 1208925824118228802339073, 73791479894465839361, 1208926972536133798330625, 18963252907773435838721, 18889470435078225002753, 1157425104250994945, 1208925819614629191745793, 73786976294855246081, 4503599644410113, 18889465931478614409473, 1152921504640401665, 1208999606590924012912912, 1208925896175822840004880, 73791479894465577232, 1208925891672223229411600, 73786976294854983952, 76561193682075920, 72057594071482640]
 theorem e14 : enumKeys 1354 2321 = s14 := by decide +kernel
-theorem r14 : ∀ M ∈ s14, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2321 M ne blob = true := by
+theorem t14 : rtype 2321 = 1376 := by decide
+theorem r14 : ∀ M ∈ s14, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2321 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 2321) (rM M) ne blob = true) := by
   unfold s14
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3843_b7, by decide, c3843_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3843_b6, by decide, c3843_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3843_b5, by decide, c3843_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3846_b4, by decide, c3846_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3846_b3, by decide, c3846_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3846_b2, by decide, c3846_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3845_b7, by decide, c3845_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3845_b6, by decide, c3845_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3845_b5, by decide, c3845_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3845_b4, by decide, c3845_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 167, c3846_b6, by decide, c3846_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3846_b5, by decide, c3846_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3846_b9, by decide, c3846_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3847_b0, by decide, c3847_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3846_b7, by decide, c3846_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 177, c3846_b8, by decide, c3846_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3845_b9, by decide, c3845_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3845_b8, by decide, c3845_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3846_b0, by decide, c3846_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3846_b1, by decide, c3846_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3844_b4, by decide, c3844_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3844_b3, by decide, c3844_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3844_b5, by decide, c3844_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3844_b6, by decide, c3844_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3848_b7, by decide, c3848_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3848_b6, by decide, c3848_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3848_b5, by decide, c3848_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3848_b9, by decide, c3848_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3848_b8, by decide, c3848_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3849_b2, by decide, c3849_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3849_b3, by decide, c3849_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3849_b0, by decide, c3849_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3849_b1, by decide, c3849_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3849_b4, by decide, c3849_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3849_b5, by decide, c3849_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3849_b6, by decide, c3849_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3844_b0, by decide, c3844_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3843_b8, by decide, c3843_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3844_b1, by decide, c3844_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3844_b2, by decide, c3844_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3843_b9, by decide, c3843_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3847_b2, by decide, c3847_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3847_b1, by decide, c3847_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3847_b9, by decide, c3847_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3848_b0, by decide, c3848_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3848_b1, by decide, c3848_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3847_b4, by decide, c3847_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3847_b3, by decide, c3847_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3847_b5, by decide, c3847_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3847_b6, by decide, c3847_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3848_b2, by decide, c3848_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3848_b3, by decide, c3848_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3848_b4, by decide, c3848_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3847_b7, by decide, c3847_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3847_b8, by decide, c3847_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3844_b7, by decide, c3844_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3844_b9, by decide, c3844_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 272, c3844_b8, by decide, c3844_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3845_b1, by decide, c3845_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3845_b0, by decide, c3845_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3845_b2, by decide, c3845_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3845_b3, by decide, c3845_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0443_b24, by decide, by rw [tL, t14, show rM 1208925892798123136516096 = 4611686022739394816 by decide]; exact c0443_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0443_b25, by decide, by rw [tL, t14, show rM 302231531464850976014336 = 4611686087163904016 by decide]; exact c0443_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0443_b26, by decide, by rw [tL, t14, show rM 18889539114972559179776 = 4611686293305819392 by decide]; exact c0443_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0443_b8, by decide, by rw [tL, t14, show rM 1208999607716823920017409 = 1153202983895302400 by decide]; exact c0443_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0444_b1, by decide, by rw [tL, t14, show rM 1208944270862302511890433 = 18447025552998006800 by decide]; exact c0444_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0443_b9, by decide, by rw [tL, t14, show rM 302305246383551759515649 = 1153203048319811600 by decide]; exact c0443_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0444_b10, by decide, by rw [tL, t14, show rM 1208926973662033705172993 = 73787257774110146816 by decide]; exact c0444_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0443_b11, by decide, by rw [tL, t14, show rM 18963254033673342681089 = 1153203254461726976 by decide]; exact c0443_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0444_b11, by decide, by rw [tL, t14, show rM 302232612328761544671233 = 73787257838534656016 by decide]; exact c0444_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0444_b3, by decide, by rw [tL, t14, show rM 18907917179151934554113 = 18447025823564431376 by decide]; exact c0444_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 167, c0444_b2, by decide, by rw [tL, t14, show rM 1208944266358702901297153 = 18447025552998268928 by decide]; exact c0444_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0443_b10, by decide, by rw [tL, t14, show rM 302305241879952148922369 = 1153203048320073728 by decide]; exact c0443_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0442_b35, by decide, by rw [tL, t14, show rM 1208925820740529098588161 = 281479288717568 by decide]; exact c0442_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0443_b7, by decide, by rw [tL, t14, show rM 73788102194762088449 = 1153202979600597248 by decide]; exact c0443_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0442_b36, by decide, by rw [tL, t14, show rM 302231459407256938086401 = 281543713226768 by decide]; exact c0442_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 177, c0444_b0, by decide, by rw [tL, t14, show rM 18451247673353961473 = 18447025548703301648 by decide]; exact c0444_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0444_b12, by decide, by rw [tL, t14, show rM 302232607825161934077953 = 73787257838534918144 by decide]; exact c0444_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0444_b4, by decide, by rw [tL, t14, show rM 18907912675552323960833 = 18447025823564693504 by decide]; exact c0444_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0442_b37, by decide, by rw [tL, t14, show rM 18889467057378521251841 = 281749855142144 by decide]; exact c0442_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0444_b9, by decide, by rw [tL, t14, show rM 1154047404547244033 = 73787257769815441664 by decide]; exact c0444_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0443_b33, by decide, by rw [tL, t14, show rM 1208925892798123136253968 = 4616189622349988096 by decide]; exact c0443_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0443_b34, by decide, by rw [tL, t14, show rM 302231531464850975752208 = 4616189686774497296 by decide]; exact c0443_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0443_b35, by decide, by rw [tL, t14, show rM 302231526961251365158928 = 4616189686774759424 by decide]; exact c0443_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0443_b32, by decide, by rw [tL, t14, show rM 73183493978325008 = 4616189618055282944 by decide]; exact c0443_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0443_b18, by decide, by rw [tL, t14, show rM 1208999607716823919755281 = 1157706583505895680 by decide]; exact c0443_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0444_b7, by decide, by rw [tL, t14, show rM 1208944270862302511628305 = 18451529152608600080 by decide]; exact c0444_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0443_b19, by decide, by rw [tL, t14, show rM 302305246383551759253521 = 1157706647930404880 by decide]; exact c0443_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0444_b8, by decide, by rw [tL, t14, show rM 1208944266358702901035025 = 18451529152608862208 by decide]; exact c0444_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0443_b20, by decide, by rw [tL, t14, show rM 302305241879952148660241 = 1157706647930667008 by decide]; exact c0443_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0443_b4, by decide, by rw [tL, t14, show rM 1208925820740529098326033 = 4785078899310848 by decide]; exact c0443_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0443_b17, by decide, by rw [tL, t14, show rM 73788102194761826321 = 1157706579211190528 by decide]; exact c0443_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0443_b5, by decide, by rw [tL, t14, show rM 302231459407256937824273 = 4785143323820048 by decide]; exact c0443_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0444_b5, by decide, by rw [tL, t14, show rM 18451247673353699345 = 18451529148313894928 by decide]; exact c0444_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0443_b6, by decide, by rw [tL, t14, show rM 302231454903657327230993 = 4785143324082176 by decide]; exact c0443_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0444_b6, by decide, by rw [tL, t14, show rM 18446744073743106065 = 18451529148314157056 by decide]; exact c0444_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0443_b3, by decide, by rw [tL, t14, show rM 1125899940397073 = 4785074604605696 by decide]; exact c0443_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0443_b28, by decide, by rw [tL, t14, show rM 1208925896175822840267008 = 4612811922645975056 by decide]; exact c0443_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0443_b30, by decide, by rw [tL, t14, show rM 18889542492672262930688 = 4612812193212399632 by decide]; exact c0443_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0443_b29, by decide, by rw [tL, t14, show rM 1208925891672223229673728 = 4612811922646237184 by decide]; exact c0443_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0443_b27, by decide, by rw [tL, t14, show rM 76561193682338048 = 4612811918351269904 by decide]; exact c0443_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0443_b31, by decide, by rw [tL, t14, show rM 18889537989072652337408 = 4612812193212661760 by decide]; exact c0443_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0444_b15, by decide, by rw [tL, t14, show rM 1208926977039733408923905 = 73788383674016727056 by decide]; exact c0444_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0443_b15, by decide, by rw [tL, t14, show rM 18963257411373046432001 = 1154329154368307216 by decide]; exact c0443_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0443_b14, by decide, by rw [tL, t14, show rM 1208999606590924013175041 = 1154328883802144768 by decide]; exact c0443_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0442_b39, by decide, by rw [tL, t14, show rM 1208925824118228802339073 = 1407379195297808 by decide]; exact c0442_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0443_b12, by decide, by rw [tL, t14, show rM 73791479894465839361 = 1154328879507177488 by decide]; exact c0443_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0444_b16, by decide, by rw [tL, t14, show rM 1208926972536133798330625 = 73788383674016989184 by decide]; exact c0444_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0443_b16, by decide, by rw [tL, t14, show rM 18963252907773435838721 = 1154329154368569344 by decide]; exact c0443_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0443_b1, by decide, by rw [tL, t14, show rM 18889470435078225002753 = 1407649761722384 by decide]; exact c0443_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0444_b13, by decide, by rw [tL, t14, show rM 1157425104250994945 = 73788383669722021904 by decide]; exact c0444_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0443_b0, by decide, by rw [tL, t14, show rM 1208925819614629191745793 = 1407379195559936 by decide]; exact c0443_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0443_b13, by decide, by rw [tL, t14, show rM 73786976294855246081 = 1154328879507439616 by decide]; exact c0443_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0442_b38, by decide, by rw [tL, t14, show rM 4503599644410113 = 1407374900592656 by decide]; exact c0442_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0443_b2, by decide, by rw [tL, t14, show rM 18889465931478614409473 = 1407649761984512 by decide]; exact c0443_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0444_b14, by decide, by rw [tL, t14, show rM 1152921504640401665 = 73788383669722284032 by decide]; exact c0444_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0443_b23, by decide, by rw [tL, t14, show rM 1208999606590924012912912 = 1158551008436027392 by decide]; exact c0443_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0443_b38, by decide, by rw [tL, t14, show rM 1208925896175822840004880 = 4617315522256568336 by decide]; exact c0443_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 272, c0443_b21, by decide, by rw [tL, t14, show rM 73791479894465577232 = 1158551004141060112 by decide]; exact c0443_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0443_b39, by decide, by rw [tL, t14, show rM 1208925891672223229411600 = 4617315522256830464 by decide]; exact c0443_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0443_b22, by decide, by rw [tL, t14, show rM 73786976294854983952 = 1158551004141322240 by decide]; exact c0443_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0443_b36, by decide, by rw [tL, t14, show rM 76561193682075920 = 4617315517961863184 by decide]; exact c0443_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0443_b37, by decide, by rw [tL, t14, show rM 72057594071482640 = 4617315517962125312 by decide]; exact c0443_ok37⟩, ?_⟩
   simp
 
 def s15 : List Nat := [4835703355019710364385280, 1208925909686621722378240, 18889556003471145041920, 4835703350797585730502656, 75557953797906887868416, 18889542492672313262080, 1208925891953698256715776, 75557940287108056088576, 18889538270547679379456, 4835704435883620933042177, 19184618340257561051137, 1208926990550532291035137, 18963270922171928543233, 4835777065716286514003969, 1209220967801283504504833, 4835707894648134753845249, 75853016134693303877633, 1208930449315046111838209, 75631668716607671369729, 4835704431661496299159553, 19184614118132927168513, 75559034661817456525313, 18894095631895534501889, 4835707890144535143251969, 75853011631093693284353, 4835703278739991692574721, 295148186654346575873, 75557881740312849940481, 4629700416953909249, 1208926972817608825372673, 18963253189248462880769, 75559021151018624745473, 18894082121096702722049, 1208930431300647669465089, 75631650702209228996609, 1208925819896104218787841, 73787257769882288129, 75557868229514018160641, 4616189618122129409, 75559016647419014152193, 18894077617497092128769, 18889466212953641451521, 1153202979667443713, 4835703355019710364123152, 1208925909686621722116112, 4835703350797585730240528, 75557953797906887606288, 1208925891953698256453648, 75557940287108055826448, 75557935783508445233168, 72339069098524688, 4835777065716286513741841, 1209220967801283504242705, 4835707894648134753583121, 75853016134693303615505, 1208930449315046111576081, 75631668716607671107601, 4835707890144535142989841, 75853011631093693022225, 4835703278739991692312593, 295148186654346313745, 75557881740312849678353, 4629700416953647121, 1208930431300647669202961, 75631650702209228734481, 1208925819896104218525713, 73787257769882026001, 75557868229514017898513, 4616189618121867281, 75557863725914407305233, 4611686018511274001, 281475060596753, 18889542492672246157312, 1208925891953698189611008, 75557940287107988983808, 18889538270547612274688, 75557935783508378390528, 72339069031682048, 1208926972817608758267905, 18963253189248395776001, 75559021151018557640705, 18894082121096635617281, 1208930431300647602360321, 75631650702209161891841, 1208925819896104151683073, 73787257769815183361, 75557868229513951055873, 4616189618055024641, 75559016647418947047425, 18894077617497025024001, 18889466212953574346753, 1153202979600338945, 75557863725914340462593, 4611686018444431361, 281474993754113, 1208930431300647602098192, 75631650702209161629712, 1208925891953698189348880, 73787257769814921232, 75557940287107988721680, 4616189618054762512, 75557935783508378128400, 4611686018444169232, 72339069031419920]
 theorem e15 : enumKeys 1354 5201 = s15 := by decide +kernel
-theorem r15 : ∀ M ∈ s15, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5201 M ne blob = true := by
+theorem t15 : rtype 5201 = 5201 := by decide
+theorem r15 : ∀ M ∈ s15, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5201 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 5201) (rM M) ne blob = true) := by
   unfold s15
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3850_b1, by decide, c3850_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3850_b0, by decide, c3850_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3849_b8, by decide, c3849_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3850_b5, by decide, c3850_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3850_b4, by decide, c3850_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3849_b7, by decide, c3849_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3850_b3, by decide, c3850_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3850_b2, by decide, c3850_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3849_b9, by decide, c3849_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3853_b2, by decide, c3853_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3853_b1, by decide, c3853_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3853_b0, by decide, c3853_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3852_b9, by decide, c3852_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3855_b0, by decide, c3855_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 151, c3854_b9, by decide, c3854_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3854_b8, by decide, c3854_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3854_b7, by decide, c3854_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 169, c3854_b6, by decide, c3854_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3854_b5, by decide, c3854_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3854_b0, by decide, c3854_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 163, c3853_b9, by decide, c3853_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3853_b8, by decide, c3853_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3853_b7, by decide, c3853_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3855_b8, by decide, c3855_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 167, c3855_b7, by decide, c3855_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3856_b1, by decide, c3856_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 151, c3856_b2, by decide, c3856_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3855_b9, by decide, c3855_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3856_b0, by decide, c3856_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3853_b6, by decide, c3853_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3853_b5, by decide, c3853_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3853_b4, by decide, c3853_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3853_b3, by decide, c3853_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3855_b2, by decide, c3855_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3855_b1, by decide, c3855_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3855_b5, by decide, c3855_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3855_b6, by decide, c3855_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3855_b3, by decide, c3855_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3855_b4, by decide, c3855_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3854_b2, by decide, c3854_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3854_b1, by decide, c3854_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3854_b3, by decide, c3854_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3854_b4, by decide, c3854_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3851_b3, by decide, c3851_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3851_b2, by decide, c3851_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3851_b7, by decide, c3851_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3851_b6, by decide, c3851_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3851_b5, by decide, c3851_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3851_b4, by decide, c3851_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3851_b8, by decide, c3851_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3851_b9, by decide, c3851_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3858_b5, by decide, c3858_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 156, c3858_b4, by decide, c3858_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3858_b3, by decide, c3858_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3858_b2, by decide, c3858_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3858_b1, by decide, c3858_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3858_b0, by decide, c3858_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3859_b3, by decide, c3859_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3859_b2, by decide, c3859_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3859_b6, by decide, c3859_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 160, c3859_b7, by decide, c3859_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3859_b4, by decide, c3859_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3859_b5, by decide, c3859_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3858_b7, by decide, c3858_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3858_b6, by decide, c3858_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3859_b0, by decide, c3859_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 205, c3859_b1, by decide, c3859_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3858_b8, by decide, c3858_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 205, c3858_b9, by decide, c3858_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3859_b8, by decide, c3859_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3859_b9, by decide, c3859_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 193, c3860_b0, by decide, c3860_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3850_b6, by decide, c3850_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3850_b9, by decide, c3850_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3850_b8, by decide, c3850_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3850_b7, by decide, c3850_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3851_b0, by decide, c3851_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3851_b1, by decide, c3851_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3856_b6, by decide, c3856_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3856_b5, by decide, c3856_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3856_b4, by decide, c3856_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3856_b3, by decide, c3856_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3857_b2, by decide, c3857_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3857_b1, by decide, c3857_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3857_b5, by decide, c3857_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3857_b6, by decide, c3857_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3857_b3, by decide, c3857_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3857_b4, by decide, c3857_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3856_b8, by decide, c3856_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3856_b7, by decide, c3856_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3856_b9, by decide, c3856_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3857_b0, by decide, c3857_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3857_b7, by decide, c3857_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3857_b8, by decide, c3857_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3857_b9, by decide, c3857_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3852_b1, by decide, c3852_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3852_b0, by decide, c3852_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3852_b5, by decide, c3852_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3852_b4, by decide, c3852_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3852_b3, by decide, c3852_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3852_b2, by decide, c3852_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3852_b7, by decide, c3852_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3852_b6, by decide, c3852_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3852_b8, by decide, c3852_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0457_b34, by decide, by rw [tL, t15, show rM 4835703355019710364385280 = 4611687117955792912 by decide]; exact c0457_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0457_b29, by decide, by rw [tL, t15, show rM 1208925909686621722378240 = 4611686022739136512 by decide]; exact c0457_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0457_b31, by decide, by rw [tL, t15, show rM 18889556003471145041920 = 4611686293305561088 by decide]; exact c0457_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0457_b35, by decide, by rw [tL, t15, show rM 4835703350797585730502656 = 4611687117956055041 by decide]; exact c0457_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0457_b27, by decide, by rw [tL, t15, show rM 75557953797906887868416 = 4611686018712866816 by decide]; exact c0457_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0457_b32, by decide, by rw [tL, t15, show rM 18889542492672313262080 = 4611686293372403728 by decide]; exact c0457_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0457_b30, by decide, by rw [tL, t15, show rM 1208925891953698256715776 = 4611686022806241281 by decide]; exact c0457_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0457_b28, by decide, by rw [tL, t15, show rM 75557940287108056088576 = 4611686018779709456 by decide]; exact c0457_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0457_b33, by decide, by rw [tL, t15, show rM 18889538270547679379456 = 4611686293372665857 by decide]; exact c0457_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0458_b20, by decide, by rw [tL, t15, show rM 4835704435883620933042177 = 73787258869326544912 by decide]; exact c0458_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0458_b30, by decide, by rw [tL, t15, show rM 19184618340257561051137 = 295148186929207443472 by decide]; exact c0458_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0458_b18, by decide, by rw [tL, t15, show rM 1208926990550532291035137 = 73787257774109888512 by decide]; exact c0458_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0457_b15, by decide, by rw [tL, t15, show rM 18963270922171928543233 = 1153203254461468672 by decide]; exact c0457_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0457_b17, by decide, by rw [tL, t15, show rM 4835777065716286514003969 = 1153204079111962625 by decide]; exact c0457_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 151, c0458_b29, by decide, by rw [tL, t15, show rM 1209220967801283504504833 = 295148186658641281025 by decide]; exact c0458_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0456_b35, by decide, by rw [tL, t15, show rM 4835707894648134753845249 = 72340168543043600 by decide]; exact c0456_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0458_b27, by decide, by rw [tL, t15, show rM 75853016134693303877633 = 295148186654614749200 by decide]; exact c0458_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 169, c0456_b30, by decide, by rw [tL, t15, show rM 1208930449315046111838209 = 72339073326387200 by decide]; exact c0456_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0457_b13, by decide, by rw [tL, t15, show rM 75631668716607671369729 = 1153202979868774400 by decide]; exact c0457_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0458_b21, by decide, by rw [tL, t15, show rM 4835704431661496299159553 = 73787258869326807041 by decide]; exact c0458_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 163, c0458_b31, by decide, by rw [tL, t15, show rM 19184614118132927168513 = 295148186929207705601 by decide]; exact c0458_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0458_b15, by decide, by rw [tL, t15, show rM 75559034661817456525313 = 73787257770083618816 by decide]; exact c0458_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0456_b32, by decide, by rw [tL, t15, show rM 18894095631895534501889 = 72339343892811776 by decide]; exact c0456_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0456_b36, by decide, by rw [tL, t15, show rM 4835707890144535143251969 = 72340168543305728 by decide]; exact c0456_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 167, c0458_b28, by decide, by rw [tL, t15, show rM 75853011631093693284353 = 295148186654615011328 by decide]; exact c0458_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0456_b16, by decide, by rw [tL, t15, show rM 4835703278739991692574721 = 282574505377793 by decide]; exact c0456_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 151, c0458_b26, by decide, by rw [tL, t15, show rM 295148186654346575873 = 295148186654346575873 by decide]; exact c0458_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0456_b12, by decide, by rw [tL, t15, show rM 75557881740312849940481 = 281475262189568 by decide]; exact c0456_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0456_b28, by decide, by rw [tL, t15, show rM 4629700416953909249 = 72339069031682048 by decide]; exact c0456_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0458_b19, by decide, by rw [tL, t15, show rM 1208926972817608825372673 = 73787257774176993281 by decide]; exact c0458_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0457_b16, by decide, by rw [tL, t15, show rM 18963253189248462880769 = 1153203254528573441 by decide]; exact c0457_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0458_b16, by decide, by rw [tL, t15, show rM 75559021151018624745473 = 73787257770150461456 by decide]; exact c0458_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0456_b33, by decide, by rw [tL, t15, show rM 18894082121096702722049 = 72339343959654416 by decide]; exact c0456_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0456_b31, by decide, by rw [tL, t15, show rM 1208930431300647669465089 = 72339073393491968 by decide]; exact c0456_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0457_b14, by decide, by rw [tL, t15, show rM 75631650702209228996609 = 1153202979935879168 by decide]; exact c0457_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0456_b14, by decide, by rw [tL, t15, show rM 1208925819896104218787841 = 281479355564033 by decide]; exact c0456_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0457_b12, by decide, by rw [tL, t15, show rM 73787257769882288129 = 1153202979667443713 by decide]; exact c0457_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0456_b13, by decide, by rw [tL, t15, show rM 75557868229514018160641 = 281475329032208 by decide]; exact c0456_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0456_b29, by decide, by rw [tL, t15, show rM 4616189618122129409 = 72339069098524688 by decide]; exact c0456_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0458_b17, by decide, by rw [tL, t15, show rM 75559016647419014152193 = 73787257770150723584 by decide]; exact c0458_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0456_b34, by decide, by rw [tL, t15, show rM 18894077617497092128769 = 72339343959916544 by decide]; exact c0456_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0456_b15, by decide, by rw [tL, t15, show rM 18889466212953641451521 = 281749921988609 by decide]; exact c0456_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0458_b14, by decide, by rw [tL, t15, show rM 1153202979667443713 = 73787257769882288129 by decide]; exact c0458_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0458_b2, by decide, by rw [tL, t15, show rM 4835703355019710364123152 = 4616190717566386192 by decide]; exact c0458_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0458_b0, by decide, by rw [tL, t15, show rM 1208925909686621722116112 = 4616189622349729792 by decide]; exact c0458_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0458_b3, by decide, by rw [tL, t15, show rM 4835703350797585730240528 = 4616190717566648321 by decide]; exact c0458_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0457_b37, by decide, by rw [tL, t15, show rM 75557953797906887606288 = 4616189618323460096 by decide]; exact c0457_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0458_b1, by decide, by rw [tL, t15, show rM 1208925891953698256453648 = 4616189622416834561 by decide]; exact c0458_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0457_b38, by decide, by rw [tL, t15, show rM 75557940287108055826448 = 4616189618390302736 by decide]; exact c0457_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0457_b39, by decide, by rw [tL, t15, show rM 75557935783508445233168 = 4616189618390564864 by decide]; exact c0457_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0457_b36, by decide, by rw [tL, t15, show rM 72339069098524688 = 4616189618122129409 by decide]; exact c0457_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0457_b21, by decide, by rw [tL, t15, show rM 4835777065716286513741841 = 1157707678722555905 by decide]; exact c0457_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 156, c0458_b35, by decide, by rw [tL, t15, show rM 1209220967801283504242705 = 295152690258251874305 by decide]; exact c0458_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0457_b2, by decide, by rw [tL, t15, show rM 4835707894648134753583121 = 76843768153636880 by decide]; exact c0457_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0458_b33, by decide, by rw [tL, t15, show rM 75853016134693303615505 = 295152690254225342480 by decide]; exact c0458_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0457_b0, by decide, by rw [tL, t15, show rM 1208930449315046111576081 = 76842672936980480 by decide]; exact c0457_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0457_b19, by decide, by rw [tL, t15, show rM 75631668716607671107601 = 1157706579479367680 by decide]; exact c0457_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0457_b3, by decide, by rw [tL, t15, show rM 4835707890144535142989841 = 76843768153899008 by decide]; exact c0457_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0458_b34, by decide, by rw [tL, t15, show rM 75853011631093693022225 = 295152690254225604608 by decide]; exact c0458_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0456_b22, by decide, by rw [tL, t15, show rM 4835703278739991692312593 = 4786174115971073 by decide]; exact c0456_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 160, c0458_b32, by decide, by rw [tL, t15, show rM 295148186654346313745 = 295152690253957169153 by decide]; exact c0458_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0456_b18, by decide, by rw [tL, t15, show rM 75557881740312849678353 = 4785074872782848 by decide]; exact c0456_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0456_b37, by decide, by rw [tL, t15, show rM 4629700416953647121 = 76842668642275328 by decide]; exact c0456_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0457_b1, by decide, by rw [tL, t15, show rM 1208930431300647669202961 = 76842673004085248 by decide]; exact c0457_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨2, 221, c0457_b20, by decide, by rw [tL, t15, show rM 75631650702209228734481 = 1157706579546472448 by decide]; exact c0457_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0456_b21, by decide, by rw [tL, t15, show rM 1208925819896104218525713 = 4785078966157313 by decide]; exact c0456_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨2, 205, c0457_b18, by decide, by rw [tL, t15, show rM 73787257769882026001 = 1157706579278036993 by decide]; exact c0457_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0456_b19, by decide, by rw [tL, t15, show rM 75557868229514017898513 = 4785074939625488 by decide]; exact c0456_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0456_b38, by decide, by rw [tL, t15, show rM 4616189618121867281 = 76842668709117968 by decide]; exact c0456_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0456_b20, by decide, by rw [tL, t15, show rM 75557863725914407305233 = 4785074939887616 by decide]; exact c0456_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0456_b39, by decide, by rw [tL, t15, show rM 4611686018511274001 = 76842668709380096 by decide]; exact c0456_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 193, c0456_b17, by decide, by rw [tL, t15, show rM 281475060596753 = 4785074671452161 by decide]; exact c0456_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0458_b8, by decide, by rw [tL, t15, show rM 18889542492672246157312 = 4629700691814776848 by decide]; exact c0458_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0458_b7, by decide, by rw [tL, t15, show rM 1208925891953698189611008 = 4629700421248614401 by decide]; exact c0458_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0458_b5, by decide, by rw [tL, t15, show rM 75557940287107988983808 = 4629700417222082576 by decide]; exact c0458_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0458_b9, by decide, by rw [tL, t15, show rM 18889538270547612274688 = 4629700691815038977 by decide]; exact c0458_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0458_b6, by decide, by rw [tL, t15, show rM 75557935783508378390528 = 4629700417222344704 by decide]; exact c0458_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0458_b4, by decide, by rw [tL, t15, show rM 72339069031682048 = 4629700416953909249 by decide]; exact c0458_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0458_b25, by decide, by rw [tL, t15, show rM 1208926972817608758267905 = 73805272172619366401 by decide]; exact c0458_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0457_b24, by decide, by rw [tL, t15, show rM 18963253189248395776001 = 1171217652970946561 by decide]; exact c0457_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0458_b23, by decide, by rw [tL, t15, show rM 75559021151018557640705 = 73805272168592834576 by decide]; exact c0458_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0457_b7, by decide, by rw [tL, t15, show rM 18894082121096635617281 = 90353742402027536 by decide]; exact c0457_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0457_b6, by decide, by rw [tL, t15, show rM 1208930431300647602360321 = 90353471835865088 by decide]; exact c0457_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0457_b23, by decide, by rw [tL, t15, show rM 75631650702209161891841 = 1171217378378252288 by decide]; exact c0457_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0456_b26, by decide, by rw [tL, t15, show rM 1208925819896104151683073 = 18295877797937153 by decide]; exact c0456_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0457_b22, by decide, by rw [tL, t15, show rM 73787257769815183361 = 1171217378109816833 by decide]; exact c0457_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0456_b24, by decide, by rw [tL, t15, show rM 75557868229513951055873 = 18295873771405328 by decide]; exact c0456_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0457_b4, by decide, by rw [tL, t15, show rM 4616189618055024641 = 90353467540897808 by decide]; exact c0457_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0458_b24, by decide, by rw [tL, t15, show rM 75559016647418947047425 = 73805272168593096704 by decide]; exact c0458_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0457_b8, by decide, by rw [tL, t15, show rM 18894077617497025024001 = 90353742402289664 by decide]; exact c0457_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0456_b27, by decide, by rw [tL, t15, show rM 18889466212953574346753 = 18296148364361729 by decide]; exact c0456_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0458_b22, by decide, by rw [tL, t15, show rM 1153202979600338945 = 73805272168324661249 by decide]; exact c0458_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0456_b25, by decide, by rw [tL, t15, show rM 75557863725914340462593 = 18295873771667456 by decide]; exact c0456_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0457_b5, by decide, by rw [tL, t15, show rM 4611686018444431361 = 90353467541159936 by decide]; exact c0457_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0456_b23, by decide, by rw [tL, t15, show rM 281474993754113 = 18295873503232001 by decide]; exact c0456_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0457_b11, by decide, by rw [tL, t15, show rM 1208930431300647602098192 = 94575596469747712 by decide]; exact c0457_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0457_b26, by decide, by rw [tL, t15, show rM 75631650702209161629712 = 1175439503012134912 by decide]; exact c0457_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0458_b13, by decide, by rw [tL, t15, show rM 1208925891953698189348880 = 4634204020859207681 by decide]; exact c0458_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0457_b25, by decide, by rw [tL, t15, show rM 73787257769814921232 = 1175439502743699457 by decide]; exact c0457_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0458_b11, by decide, by rw [tL, t15, show rM 75557940287107988721680 = 4634204016832675856 by decide]; exact c0458_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0457_b9, by decide, by rw [tL, t15, show rM 4616189618054762512 = 94575592174780432 by decide]; exact c0457_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0458_b12, by decide, by rw [tL, t15, show rM 75557935783508378128400 = 4634204016832937984 by decide]; exact c0458_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0457_b10, by decide, by rw [tL, t15, show rM 4611686018444169232 = 94575592175042560 by decide]; exact c0457_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0458_b10, by decide, by rw [tL, t15, show rM 72339069031419920 = 4634204016564502529 by decide]; exact c0458_ok10⟩, ?_⟩
   simp
 
 def s16 : List Nat := [18889542492672246415360, 75557936064983338582016, 1208925891953698189869056, 75557940287107989241856, 18889538270547612532736, 18890623356582815072257, 1208926972817608758525953, 18963253189248396034049, 75559021151018557898753, 18894082121096635875329, 1208930431582122579329025, 75631650983684138860545, 75562479915532378701825, 18890619134458181189633, 75559016928893924016129, 18894077898972001992705, 18889542492672246153232, 1208925891953698189606928, 75557940287107988979728, 18889538270547612270608, 75557936064983355097104, 1208926972817608758263825, 18963253189248395771921, 75559021151018557636625, 18894082121096635613201, 1208930431582122579066897, 75631650983684138598417, 75562479915532378439697, 75559016928893923754001, 18894077898972001730577, 75562475411932767846417, 75557864007389317169169, 4611967493421137937, 1208925891953698189344800, 1208930431582122578804768, 75631650983684138336288, 75557940287107988717600, 75562479915532378177568, 75562475411932767584288, 75557936064983354834976, 4611967493420875808]
 theorem e16 : enumKeys 1354 1185 = s16 := by decide +kernel
-theorem r16 : ∀ M ∈ s16, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1185 M ne blob = true := by
+theorem t16 : rtype 1185 = 2130 := by decide
+theorem r16 : ∀ M ∈ s16, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1185 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1185) (rM M) ne blob = true) := by
   unfold s16
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3860_b1, by decide, c3860_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3860_b5, by decide, c3860_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3860_b4, by decide, c3860_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3860_b3, by decide, c3860_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3860_b2, by decide, c3860_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 281, c3861_b9, by decide, c3861_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3862_b4, by decide, c3862_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3862_b3, by decide, c3862_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3862_b2, by decide, c3862_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3862_b1, by decide, c3862_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3862_b9, by decide, c3862_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3862_b8, by decide, c3862_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3862_b7, by decide, c3862_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3862_b0, by decide, c3862_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3862_b6, by decide, c3862_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3862_b5, by decide, c3862_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 281, c3860_b6, by decide, c3860_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3860_b9, by decide, c3860_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3860_b8, by decide, c3860_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3860_b7, by decide, c3860_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3861_b0, by decide, c3861_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3863_b3, by decide, c3863_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3863_b2, by decide, c3863_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3863_b1, by decide, c3863_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3863_b0, by decide, c3863_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3863_b8, by decide, c3863_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3863_b7, by decide, c3863_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3863_b6, by decide, c3863_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3863_b5, by decide, c3863_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3863_b4, by decide, c3863_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3863_b9, by decide, c3863_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3864_b0, by decide, c3864_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3864_b1, by decide, c3864_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3861_b5, by decide, c3861_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3861_b4, by decide, c3861_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3861_b3, by decide, c3861_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3861_b2, by decide, c3861_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3861_b1, by decide, c3861_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3861_b6, by decide, c3861_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3861_b8, by decide, c3861_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3861_b7, by decide, c3861_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0472_b29, by decide, by rw [tL, t16, show rM 18889542492672246415360 = 4611686293322072080 by decide]; exact c0472_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0472_b26, by decide, by rw [tL, t16, show rM 75557936064983338582016 = 4611686018729377793 by decide]; exact c0472_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0472_b28, by decide, by rw [tL, t16, show rM 1208925891953698189869056 = 4611686022755909633 by decide]; exact c0472_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0472_b27, by decide, by rw [tL, t16, show rM 75557940287107989241856 = 4611686018729377808 by decide]; exact c0472_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0472_b30, by decide, by rw [tL, t16, show rM 18889538270547612532736 = 4611686293322334209 by decide]; exact c0472_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 281, c0473_b2, by decide, by rw [tL, t16, show rM 18890623356582815072257 = 73787258044692824080 by decide]; exact c0473_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0473_b1, by decide, by rw [tL, t16, show rM 1208926972817608758525953 = 73787257774126661633 by decide]; exact c0473_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0472_b22, by decide, by rw [tL, t16, show rM 18963253189248396034049 = 1153203254478241793 by decide]; exact c0472_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0472_b39, by decide, by rw [tL, t16, show rM 75559021151018557898753 = 73787257770100129808 by decide]; exact c0472_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0472_b9, by decide, by rw [tL, t16, show rM 18894082121096635875329 = 72339343909322768 by decide]; exact c0472_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0472_b8, by decide, by rw [tL, t16, show rM 1208930431582122579329025 = 72339073343160321 by decide]; exact c0472_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0472_b21, by decide, by rw [tL, t16, show rM 75631650983684138860545 = 1153202979885547521 by decide]; exact c0472_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0472_b7, by decide, by rw [tL, t16, show rM 75562479915532378701825 = 72339069316628496 by decide]; exact c0472_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0473_b3, by decide, by rw [tL, t16, show rM 18890619134458181189633 = 73787258044693086209 by decide]; exact c0473_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0473_b0, by decide, by rw [tL, t16, show rM 75559016928893924016129 = 73787257770100391937 by decide]; exact c0473_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0472_b10, by decide, by rw [tL, t16, show rM 18894077898972001992705 = 72339343909584897 by decide]; exact c0472_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 281, c0472_b34, by decide, by rw [tL, t16, show rM 18889542492672246153232 = 4616189892932665360 by decide]; exact c0472_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0472_b33, by decide, by rw [tL, t16, show rM 1208925891953698189606928 = 4616189622366502913 by decide]; exact c0472_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0472_b31, by decide, by rw [tL, t16, show rM 75557940287107988979728 = 4616189618339971088 by decide]; exact c0472_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0472_b35, by decide, by rw [tL, t16, show rM 18889538270547612270608 = 4616189892932927489 by decide]; exact c0472_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0472_b32, by decide, by rw [tL, t16, show rM 75557936064983355097104 = 4616189618340233217 by decide]; exact c0472_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0473_b6, by decide, by rw [tL, t16, show rM 1208926972817608758263825 = 73791761373737254913 by decide]; exact c0473_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0472_b24, by decide, by rw [tL, t16, show rM 18963253189248395771921 = 1157706854088835073 by decide]; exact c0472_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0473_b4, by decide, by rw [tL, t16, show rM 75559021151018557636625 = 73791761369710723088 by decide]; exact c0473_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0472_b15, by decide, by rw [tL, t16, show rM 18894082121096635613201 = 76842943519916048 by decide]; exact c0472_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0472_b14, by decide, by rw [tL, t16, show rM 1208930431582122579066897 = 76842672953753601 by decide]; exact c0472_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0472_b23, by decide, by rw [tL, t16, show rM 75631650983684138598417 = 1157706579496140801 by decide]; exact c0472_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0472_b12, by decide, by rw [tL, t16, show rM 75562479915532378439697 = 76842668927221776 by decide]; exact c0472_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0473_b5, by decide, by rw [tL, t16, show rM 75559016928893923754001 = 73791761369710985217 by decide]; exact c0473_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0472_b16, by decide, by rw [tL, t16, show rM 18894077898972001730577 = 76842943520178177 by decide]; exact c0472_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0472_b13, by decide, by rw [tL, t16, show rM 75562475411932767846417 = 76842668927483904 by decide]; exact c0472_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0472_b6, by decide, by rw [tL, t16, show rM 75557864007389317169169 = 4785074889555969 by decide]; exact c0472_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0472_b11, by decide, by rw [tL, t16, show rM 4611967493421137937 = 76842668659048449 by decide]; exact c0472_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0472_b38, by decide, by rw [tL, t16, show rM 1208925891953698189344800 = 4620693221977096193 by decide]; exact c0472_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0472_b20, by decide, by rw [tL, t16, show rM 1208930431582122578804768 = 81064797587636225 by decide]; exact c0472_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0472_b25, by decide, by rw [tL, t16, show rM 75631650983684138336288 = 1161928704130023425 by decide]; exact c0472_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0472_b36, by decide, by rw [tL, t16, show rM 75557940287107988717600 = 4620693217950564368 by decide]; exact c0472_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0472_b18, by decide, by rw [tL, t16, show rM 75562479915532378177568 = 81064793561104400 by decide]; exact c0472_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0472_b19, by decide, by rw [tL, t16, show rM 75562475411932767584288 = 81064793561366528 by decide]; exact c0472_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0472_b37, by decide, by rw [tL, t16, show rM 75557936064983354834976 = 4620693217950826497 by decide]; exact c0472_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0472_b17, by decide, by rw [tL, t16, show rM 4611967493420875808 = 81064793292931073 by decide]; exact c0472_ok17⟩, ?_⟩
   simp
 
 def s17 : List Nat := [4835703351642010660438016, 302231544975649857929216, 1208925892798123186651136, 302231531464851026149376, 302231526961251415490560, 4722439666363673870336, 4835777066560711443939329, 1209220968645708434440193, 4835721729706190035812353, 302526607312436273938433, 1208944284373101393805313, 302305259894350641430529, 5017515513948921659393, 4740831241341881024513, 4835721725202590425219073, 302526602808836663345153, 4835703279584416622510081, 295149031079276511233, 302231472918055820001281, 18464758472235876353, 4796154585064457371649, 4740817730543049244673, 1208944266358702951432193, 302305241879952199057409, 1208925820740529148723201, 73788102194812223489, 302231459407256988221441, 18451247673404096513, 302231454903657377562625, 4740813226943438651393, 4722367608769635942401, 4835703355019710364188928, 1208925909686621722181888, 4722456554862209401088, 4835703350516110753595648, 90071992564252928, 4722443044063377621248, 1208925891672223279808768, 76561193732473088, 4722438540463767027968, 5017518891648625410305, 4796171473562992902401, 4835777065434811537096961, 1209220967519808527597825, 4835703282962116326260993, 295152408778980262145, 1208925837629027684253953, 73804990693347754241, 5017514388049014817025, 4722384497268171473153, 4835703278458516715667713, 295147905179369668865, 18014398526324993, 4796153459164550529281, 4722370986469339693313, 1208925819614629241880833, 73786976294905381121, 4503599694545153, 4722366482869729100033, 1208925892798123119546368, 302231531464850959044608, 4722439666363606765568, 302231526961251348451328, 73183493961617408, 4796154585064390266881, 4740817730542982139905, 1208944266358702884327425, 302305241879952131952641, 1208925820740529081618433, 73788102194745118721, 302231459407256921116673, 18451247673336991745, 4740813226943371546625, 4722367608769568837633, 302231454903657310523393, 18446744073726398465, 1125899923689473, 4796153459164483424512, 4722443044063310516480, 1208925891672223212704000, 73786976294838276352, 76561193665368320, 4722438540463699923200, 72057594054775040]
 theorem e17 : enumKeys 1354 5381 = s17 := by decide +kernel
-theorem r17 : ∀ M ∈ s17, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5381 M ne blob = true := by
+theorem t17 : rtype 5381 = 4436 := by decide
+theorem r17 : ∀ M ∈ s17, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5381 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 5381) (rM M) ne blob = true) := by
   unfold s17
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3864_b7, by decide, c3864_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3864_b6, by decide, c3864_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3864_b5, by decide, c3864_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 243, c3864_b4, by decide, c3864_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 293, c3864_b2, by decide, c3864_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3864_b3, by decide, c3864_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3868_b1, by decide, c3868_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3868_b0, by decide, c3868_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3867_b9, by decide, c3867_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3867_b8, by decide, c3867_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3867_b7, by decide, c3867_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3867_b6, by decide, c3867_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 205, c3867_b2, by decide, c3867_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3867_b1, by decide, c3867_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3868_b9, by decide, c3868_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3868_b8, by decide, c3868_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3869_b2, by decide, c3869_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3869_b3, by decide, c3869_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3869_b0, by decide, c3869_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 171, c3869_b1, by decide, c3869_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3867_b0, by decide, c3867_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3866_b9, by decide, c3866_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3868_b3, by decide, c3868_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 243, c3868_b2, by decide, c3868_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3868_b6, by decide, c3868_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3868_b7, by decide, c3868_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 243, c3868_b4, by decide, c3868_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3868_b5, by decide, c3868_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 293, c3867_b3, by decide, c3867_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3867_b4, by decide, c3867_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3867_b5, by decide, c3867_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3865_b7, by decide, c3865_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3865_b6, by decide, c3865_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3865_b4, by decide, c3865_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3866_b0, by decide, c3866_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3866_b1, by decide, c3866_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3865_b3, by decide, c3865_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3865_b8, by decide, c3865_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3865_b9, by decide, c3865_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3865_b5, by decide, c3865_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3870_b8, by decide, c3870_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3870_b7, by decide, c3870_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3871_b5, by decide, c3871_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3871_b4, by decide, c3871_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3871_b8, by decide, c3871_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3871_b9, by decide, c3871_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3871_b6, by decide, c3871_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3871_b7, by decide, c3871_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3871_b1, by decide, c3871_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3871_b2, by decide, c3871_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3872_b3, by decide, c3872_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3872_b4, by decide, c3872_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3872_b5, by decide, c3872_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3870_b9, by decide, c3870_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3871_b0, by decide, c3871_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3872_b0, by decide, c3872_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3872_b1, by decide, c3872_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3872_b2, by decide, c3872_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3871_b3, by decide, c3871_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3865_b0, by decide, c3865_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3864_b9, by decide, c3864_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3864_b8, by decide, c3864_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3865_b1, by decide, c3865_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3865_b2, by decide, c3865_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3869_b5, by decide, c3869_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3869_b4, by decide, c3869_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3869_b9, by decide, c3869_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3869_b8, by decide, c3869_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3870_b2, by decide, c3870_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3870_b3, by decide, c3870_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3870_b0, by decide, c3870_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3870_b1, by decide, c3870_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3869_b6, by decide, c3869_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3869_b7, by decide, c3869_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3870_b4, by decide, c3870_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3870_b5, by decide, c3870_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3870_b6, by decide, c3870_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 289, c3866_b2, by decide, c3866_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3866_b3, by decide, c3866_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3866_b6, by decide, c3866_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3866_b5, by decide, c3866_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3866_b7, by decide, c3866_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3866_b4, by decide, c3866_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3866_b8, by decide, c3866_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0449_b7, by decide, by rw [tL, t17, show rM 4835703351642010660438016 = 4611687117939343616 by decide]; exact c0449_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0449_b4, by decide, by rw [tL, t17, show rM 302231544975649857929216 = 4611686087147196416 by decide]; exact c0449_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0449_b3, by decide, by rw [tL, t17, show rM 1208925892798123186651136 = 4611686022789529856 by decide]; exact c0449_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 243, c0449_b5, by decide, by rw [tL, t17, show rM 302231531464851026149376 = 4611686087214039056 by decide]; exact c0449_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 293, c0449_b6, by decide, by rw [tL, t17, show rM 302231526961251415490560 = 4611686087214235648 by decide]; exact c0449_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0449_b2, by decide, by rw [tL, t17, show rM 4722439666363673870336 = 4611686019568500992 by decide]; exact c0449_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0448_b31, by decide, by rw [tL, t17, show rM 4835777066560711443939329 = 1153204079095251200 by decide]; exact c0448_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0450_b3, by decide, by rw [tL, t17, show rM 1209220968645708434440193 = 295148186658624569600 by decide]; exact c0450_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0449_b34, by decide, by rw [tL, t17, show rM 4835721729706190035812353 = 18447026648197955600 by decide]; exact c0449_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0450_b4, by decide, by rw [tL, t17, show rM 302526607312436273938433 = 295148186723049078800 by decide]; exact c0450_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0449_b32, by decide, by rw [tL, t17, show rM 1208944284373101393805313 = 18447025552981299200 by decide]; exact c0449_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0448_b29, by decide, by rw [tL, t17, show rM 302305259894350641430529 = 1153203048303104000 by decide]; exact c0448_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 205, c0450_b2, by decide, by rw [tL, t17, show rM 5017515513948921659393 = 295148186655403540736 by decide]; exact c0450_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0449_b29, by decide, by rw [tL, t17, show rM 4740831241341881024513 = 18447025549760270336 by decide]; exact c0449_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0449_b35, by decide, by rw [tL, t17, show rM 4835721725202590425219073 = 18447026648198217728 by decide]; exact c0449_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0450_b5, by decide, by rw [tL, t17, show rM 302526602808836663345153 = 295148186723049340928 by decide]; exact c0450_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0448_b12, by decide, by rw [tL, t17, show rM 4835703279584416622510081 = 282574488666368 by decide]; exact c0448_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0450_b1, by decide, by rw [tL, t17, show rM 295149031079276511233 = 295148186654329864448 by decide]; exact c0450_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0448_b9, by decide, by rw [tL, t17, show rM 302231472918055820001281 = 281543696519168 by decide]; exact c0448_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 171, c0449_b27, by decide, by rw [tL, t17, show rM 18464758472235876353 = 18447025548686594048 by decide]; exact c0449_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0448_b28, by decide, by rw [tL, t17, show rM 4796154585064457371649 = 1153202980724408576 by decide]; exact c0448_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0449_b30, by decide, by rw [tL, t17, show rM 4740817730543049244673 = 18447025549827112976 by decide]; exact c0449_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0449_b33, by decide, by rw [tL, t17, show rM 1208944266358702951432193 = 18447025553048403968 by decide]; exact c0449_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 243, c0448_b30, by decide, by rw [tL, t17, show rM 302305241879952199057409 = 1153203048370208768 by decide]; exact c0448_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0448_b8, by decide, by rw [tL, t17, show rM 1208925820740529148723201 = 281479338852608 by decide]; exact c0448_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0448_b27, by decide, by rw [tL, t17, show rM 73788102194812223489 = 1153202979650732288 by decide]; exact c0448_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 243, c0448_b10, by decide, by rw [tL, t17, show rM 302231459407256988221441 = 281543763361808 by decide]; exact c0448_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0449_b28, by decide, by rw [tL, t17, show rM 18451247673404096513 = 18447025548753436688 by decide]; exact c0449_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 293, c0448_b11, by decide, by rw [tL, t17, show rM 302231454903657377562625 = 281543763558400 by decide]; exact c0448_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0449_b31, by decide, by rw [tL, t17, show rM 4740813226943438651393 = 18447025549827375104 by decide]; exact c0449_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0448_b7, by decide, by rw [tL, t17, show rM 4722367608769635942401 = 281476117823744 by decide]; exact c0448_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0449_b15, by decide, by rw [tL, t17, show rM 4835703355019710364188928 = 4612813017845923856 by decide]; exact c0449_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0449_b13, by decide, by rw [tL, t17, show rM 1208925909686621722181888 = 4612811922629267456 by decide]; exact c0449_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0449_b10, by decide, by rw [tL, t17, show rM 4722456554862209401088 = 4612811919408238592 by decide]; exact c0449_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0449_b16, by decide, by rw [tL, t17, show rM 4835703350516110753595648 = 4612813017846185984 by decide]; exact c0449_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0449_b8, by decide, by rw [tL, t17, show rM 90071992564252928 = 4612811918334562304 by decide]; exact c0449_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0449_b11, by decide, by rw [tL, t17, show rM 4722443044063377621248 = 4612811919475081232 by decide]; exact c0449_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0449_b14, by decide, by rw [tL, t17, show rM 1208925891672223279808768 = 4612811922696372224 by decide]; exact c0449_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0449_b9, by decide, by rw [tL, t17, show rM 76561193732473088 = 4612811918401404944 by decide]; exact c0449_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0449_b12, by decide, by rw [tL, t17, show rM 4722438540463767027968 = 4612811919475343360 by decide]; exact c0449_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0450_b8, by decide, by rw [tL, t17, show rM 5017518891648625410305 = 295149312555310120976 by decide]; exact c0450_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0448_b34, by decide, by rw [tL, t17, show rM 4796171473562992902401 = 1154328880564146176 by decide]; exact c0448_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0448_b36, by decide, by rw [tL, t17, show rM 4835777065434811537096961 = 1154329979002093568 by decide]; exact c0448_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0450_b10, by decide, by rw [tL, t17, show rM 1209220967519808527597825 = 295149312558531411968 by decide]; exact c0450_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0448_b20, by decide, by rw [tL, t17, show rM 4835703282962116326260993 = 1408474395246608 by decide]; exact c0448_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0450_b6, by decide, by rw [tL, t17, show rM 295152408778980262145 = 295149312554236444688 by decide]; exact c0450_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0448_b18, by decide, by rw [tL, t17, show rM 1208925837629027684253953 = 1407379178590208 by decide]; exact c0448_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0448_b32, by decide, by rw [tL, t17, show rM 73804990693347754241 = 1154328879490469888 by decide]; exact c0448_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0450_b9, by decide, by rw [tL, t17, show rM 5017514388049014817025 = 295149312555310383104 by decide]; exact c0450_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0448_b15, by decide, by rw [tL, t17, show rM 4722384497268171473153 = 1407375957561344 by decide]; exact c0448_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0448_b21, by decide, by rw [tL, t17, show rM 4835703278458516715667713 = 1408474395508736 by decide]; exact c0448_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0450_b7, by decide, by rw [tL, t17, show rM 295147905179369668865 = 295149312554236706816 by decide]; exact c0450_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0448_b13, by decide, by rw [tL, t17, show rM 18014398526324993 = 1407374883885056 by decide]; exact c0448_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0448_b35, by decide, by rw [tL, t17, show rM 4796153459164550529281 = 1154328880631250944 by decide]; exact c0448_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0448_b16, by decide, by rw [tL, t17, show rM 4722370986469339693313 = 1407376024403984 by decide]; exact c0448_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0448_b19, by decide, by rw [tL, t17, show rM 1208925819614629241880833 = 1407379245694976 by decide]; exact c0448_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0448_b33, by decide, by rw [tL, t17, show rM 73786976294905381121 = 1154328879557574656 by decide]; exact c0448_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0448_b14, by decide, by rw [tL, t17, show rM 4503599694545153 = 1407374950727696 by decide]; exact c0448_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0448_b17, by decide, by rw [tL, t17, show rM 4722366482869729100033 = 1407376024666112 by decide]; exact c0448_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0449_b19, by decide, by rw [tL, t17, show rM 1208925892798123119546368 = 4629700421231902976 by decide]; exact c0449_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0449_b20, by decide, by rw [tL, t17, show rM 302231531464850959044608 = 4629700485656412176 by decide]; exact c0449_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0449_b18, by decide, by rw [tL, t17, show rM 4722439666363606765568 = 4629700418010874112 by decide]; exact c0449_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0449_b21, by decide, by rw [tL, t17, show rM 302231526961251348451328 = 4629700485656674304 by decide]; exact c0449_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0449_b17, by decide, by rw [tL, t17, show rM 73183493961617408 = 4629700416937197824 by decide]; exact c0449_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0448_b38, by decide, by rw [tL, t17, show rM 4796154585064390266881 = 1171217379166781696 by decide]; exact c0448_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0449_b38, by decide, by rw [tL, t17, show rM 4740817730542982139905 = 18465039948269486096 by decide]; exact c0449_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0450_b0, by decide, by rw [tL, t17, show rM 1208944266358702884327425 = 18465039951490777088 by decide]; exact c0450_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0448_b39, by decide, by rw [tL, t17, show rM 302305241879952131952641 = 1171217446812581888 by decide]; exact c0448_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0448_b24, by decide, by rw [tL, t17, show rM 1208925820740529081618433 = 18295877781225728 by decide]; exact c0448_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0448_b37, by decide, by rw [tL, t17, show rM 73788102194745118721 = 1171217378093105408 by decide]; exact c0448_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0448_b25, by decide, by rw [tL, t17, show rM 302231459407256921116673 = 18295942205734928 by decide]; exact c0448_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0449_b36, by decide, by rw [tL, t17, show rM 18451247673336991745 = 18465039947195809808 by decide]; exact c0449_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0449_b39, by decide, by rw [tL, t17, show rM 4740813226943371546625 = 18465039948269748224 by decide]; exact c0449_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0448_b23, by decide, by rw [tL, t17, show rM 4722367608769568837633 = 18295874560196864 by decide]; exact c0448_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0448_b26, by decide, by rw [tL, t17, show rM 302231454903657310523393 = 18295942205997056 by decide]; exact c0448_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0449_b37, by decide, by rw [tL, t17, show rM 18446744073726398465 = 18465039947196071936 by decide]; exact c0449_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0448_b22, by decide, by rw [tL, t17, show rM 1125899923689473 = 18295873486520576 by decide]; exact c0448_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 289, c0449_b1, by decide, by rw [tL, t17, show rM 4796153459164483424512 = 1172061804096913408 by decide]; exact c0449_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0449_b24, by decide, by rw [tL, t17, show rM 4722443044063310516480 = 4630826317917454352 by decide]; exact c0449_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0449_b26, by decide, by rw [tL, t17, show rM 1208925891672223212704000 = 4630826321138745344 by decide]; exact c0449_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0449_b0, by decide, by rw [tL, t17, show rM 73786976294838276352 = 1172061803023237120 by decide]; exact c0449_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0449_b22, by decide, by rw [tL, t17, show rM 76561193665368320 = 4630826316843778064 by decide]; exact c0449_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0449_b25, by decide, by rw [tL, t17, show rM 4722438540463699923200 = 4630826317917716480 by decide]; exact c0449_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0449_b23, by decide, by rw [tL, t17, show rM 72057594054775040 = 4630826316844040192 by decide]; exact c0449_ok23⟩, ?_⟩
   simp
 
 def s18 : List Nat := [4835703368530509246300160, 4722456554862259732480, 4835703350797585780637696, 75557953797906938003456, 75557935783508495564800, 4722438821938794070016, 5017532402447507521537, 4835998426645171028426753, 4835707908158933635760129, 75853029645492185792513, 5017514669524041859073, 4726996183286649192449, 4835707890144535193387009, 75853011631093743419393, 4835703278739991742709761, 295148186654396710913, 75557881740312900075521, 4629700417004044289, 75557863725914457636865, 4726978168888206819329, 4722366764344756142081, 4722456554862192627712, 4835703350797585713532928, 75557953797906870898688, 4722438821938726965248, 75557935783508428525568, 72339069081817088, 5017514669523974754305, 4726996183286582087681, 4835707890144535126282241, 75853011631093676314625, 4835703278739991675604993, 295148186654329606145, 75557881740312832970753, 4629700416936939521, 4726978168888139714561, 4722366764344689037313, 75557863725914390597633, 4611686018494566401, 281475043889153, 4726978168888072609792, 4722438821938659860480, 75557935783508361420800, 4611686018427461632, 72339069014712320]
 theorem e18 : enumKeys 1354 8261 = s18 := by decide +kernel
-theorem r18 : ∀ M ∈ s18, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 8261 M ne blob = true := by
+theorem t18 : rtype 8261 = 8261 := by decide
+theorem r18 : ∀ M ∈ s18, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 8261 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 8261) (rM M) ne blob = true) := by
   unfold s18
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3872_b9, by decide, c3872_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3872_b6, by decide, c3872_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3873_b1, by decide, c3873_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3873_b0, by decide, c3873_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3872_b7, by decide, c3872_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3872_b8, by decide, c3872_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3874_b3, by decide, c3874_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 157, c3875_b1, by decide, c3875_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3875_b0, by decide, c3875_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 169, c3874_b9, by decide, c3874_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨2, 187, c3874_b5, by decide, c3874_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3874_b4, by decide, c3874_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3875_b3, by decide, c3875_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨2, 182, c3875_b2, by decide, c3875_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 181, c3875_b6, by decide, c3875_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3875_b7, by decide, c3875_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 201, c3875_b4, by decide, c3875_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3875_b5, by decide, c3875_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3874_b6, by decide, c3874_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3874_b7, by decide, c3874_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3874_b8, by decide, c3874_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3873_b2, by decide, c3873_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3873_b5, by decide, c3873_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3873_b4, by decide, c3873_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3873_b3, by decide, c3873_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3873_b6, by decide, c3873_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3873_b7, by decide, c3873_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3875_b9, by decide, c3875_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3875_b8, by decide, c3875_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3876_b3, by decide, c3876_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3876_b2, by decide, c3876_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3876_b6, by decide, c3876_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 158, c3876_b7, by decide, c3876_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3876_b4, by decide, c3876_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3876_b5, by decide, c3876_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3876_b0, by decide, c3876_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3876_b1, by decide, c3876_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3876_b8, by decide, c3876_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3876_b9, by decide, c3876_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3877_b0, by decide, c3877_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3873_b8, by decide, c3873_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3873_b9, by decide, c3873_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3874_b1, by decide, c3874_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 221, c3874_b0, by decide, c3874_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3874_b2, by decide, c3874_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0463_b2, by decide, by rw [tL, t18, show rM 4835703368530509246300160 = 4611687117939085312 by decide]; exact c0463_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0463_b0, by decide, by rw [tL, t18, show rM 4722456554862259732480 = 4611686019568242688 by decide]; exact c0463_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0463_b3, by decide, by rw [tL, t18, show rM 4835703350797585780637696 = 4611687118006190081 by decide]; exact c0463_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0462_b38, by decide, by rw [tL, t18, show rM 75557953797906938003456 = 4611686018763001856 by decide]; exact c0462_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0462_b39, by decide, by rw [tL, t18, show rM 75557935783508495564800 = 4611686018830041088 by decide]; exact c0462_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0463_b1, by decide, by rw [tL, t18, show rM 4722438821938794070016 = 4611686019635347457 by decide]; exact c0463_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0463_b16, by decide, by rw [tL, t18, show rM 5017532402447507521537 = 295148186655403282432 by decide]; exact c0463_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 157, c0463_b18, by decide, by rw [tL, t18, show rM 4835998426645171028426753 = 295148187753841229825 by decide]; exact c0463_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0462_b29, by decide, by rw [tL, t18, show rM 4835707908158933635760129 = 72340168526336000 by decide]; exact c0462_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 169, c0463_b14, by decide, by rw [tL, t18, show rM 75853029645492185792513 = 295148186654598041600 by decide]; exact c0463_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨2, 187, c0463_b17, by decide, by rw [tL, t18, show rM 5017514669524041859073 = 295148186655470387201 by decide]; exact c0463_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0462_b27, by decide, by rw [tL, t18, show rM 4726996183286649192449 = 72339070155493376 by decide]; exact c0462_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0462_b30, by decide, by rw [tL, t18, show rM 4835707890144535193387009 = 72340168593440768 by decide]; exact c0462_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨2, 182, c0463_b15, by decide, by rw [tL, t18, show rM 75853011631093743419393 = 295148186654665146368 by decide]; exact c0463_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 181, c0462_b20, by decide, by rw [tL, t18, show rM 4835703278739991742709761 = 282574555512833 by decide]; exact c0462_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0463_b13, by decide, by rw [tL, t18, show rM 295148186654396710913 = 295148186654396710913 by decide]; exact c0463_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 201, c0462_b17, by decide, by rw [tL, t18, show rM 75557881740312900075521 = 281475312324608 by decide]; exact c0462_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0462_b26, by decide, by rw [tL, t18, show rM 4629700417004044289 = 72339069081817088 by decide]; exact c0462_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0462_b18, by decide, by rw [tL, t18, show rM 75557863725914457636865 = 281475379363840 by decide]; exact c0462_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0462_b28, by decide, by rw [tL, t18, show rM 4726978168888206819329 = 72339070222598144 by decide]; exact c0462_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0462_b19, by decide, by rw [tL, t18, show rM 4722366764344756142081 = 281476184670209 by decide]; exact c0462_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0463_b7, by decide, by rw [tL, t18, show rM 4722456554862192627712 = 4629700418010615808 by decide]; exact c0463_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0463_b9, by decide, by rw [tL, t18, show rM 4835703350797585713532928 = 4629701516448563201 by decide]; exact c0463_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0463_b5, by decide, by rw [tL, t18, show rM 75557953797906870898688 = 4629700417205374976 by decide]; exact c0463_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0463_b8, by decide, by rw [tL, t18, show rM 4722438821938726965248 = 4629700418077720577 by decide]; exact c0463_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0463_b6, by decide, by rw [tL, t18, show rM 75557935783508428525568 = 4629700417272479744 by decide]; exact c0463_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0463_b4, by decide, by rw [tL, t18, show rM 72339069081817088 = 4629700417004044289 by decide]; exact c0463_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0463_b21, by decide, by rw [tL, t18, show rM 5017514669523974754305 = 295166201053912760321 by decide]; exact c0463_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0462_b33, by decide, by rw [tL, t18, show rM 4726996183286582087681 = 90353468597866496 by decide]; exact c0462_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0462_b35, by decide, by rw [tL, t18, show rM 4835707890144535126282241 = 90354567035813888 by decide]; exact c0462_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0463_b20, by decide, by rw [tL, t18, show rM 75853011631093676314625 = 295166201053107519488 by decide]; exact c0463_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0462_b25, by decide, by rw [tL, t18, show rM 4835703278739991675604993 = 18296972997885953 by decide]; exact c0462_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 158, c0463_b19, by decide, by rw [tL, t18, show rM 295148186654329606145 = 295166201052839084033 by decide]; exact c0463_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0462_b22, by decide, by rw [tL, t18, show rM 75557881740312832970753 = 18295873754697728 by decide]; exact c0462_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0462_b31, by decide, by rw [tL, t18, show rM 4629700416936939521 = 90353467524190208 by decide]; exact c0462_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0462_b34, by decide, by rw [tL, t18, show rM 4726978168888139714561 = 90353468664971264 by decide]; exact c0462_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0462_b24, by decide, by rw [tL, t18, show rM 4722366764344689037313 = 18295874627043329 by decide]; exact c0462_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0462_b23, by decide, by rw [tL, t18, show rM 75557863725914390597633 = 18295873821802496 by decide]; exact c0462_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0462_b32, by decide, by rw [tL, t18, show rM 4611686018494566401 = 90353467591294976 by decide]; exact c0462_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0462_b21, by decide, by rw [tL, t18, show rM 281475043889153 = 18295873553367041 by decide]; exact c0462_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0462_b37, by decide, by rw [tL, t18, show rM 4726978168888072609792 = 108086392130633728 by decide]; exact c0462_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0463_b12, by decide, by rw [tL, t18, show rM 4722438821938659860480 = 4647714816520093697 by decide]; exact c0463_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0463_b11, by decide, by rw [tL, t18, show rM 75557935783508361420800 = 4647714815714852864 by decide]; exact c0463_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 221, c0462_b36, by decide, by rw [tL, t18, show rM 4611686018427461632 = 108086391056957440 by decide]; exact c0462_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0463_b10, by decide, by rw [tL, t18, show rM 72339069014712320 = 4647714815446417409 by decide]; exact c0463_ok10⟩, ?_⟩
   simp
 
 def s19 : List Nat := [302231527242726308642816, 75557936909408268517376, 1208925892798123119804416, 302231531464850959302656, 18889539114972542468096, 302231527242726325354496, 4722439666363607023616, 75557936909408285229056, 1208926973662033688461313, 18963254033673325969409, 302232612328761527959553, 18907917179151917842433, 4796154585064390524929, 4740817730542982397953, 1208944266640177861296129, 302305242161427108921345, 1208930432426547509264385, 75631651828109068795905, 302236071093275348762625, 75576314973587660668929, 4723520530274175680513, 302232608106636894076929, 18907912957027283959809, 75559017773318853951489, 18894078743396931928065, 302236066589675738103809, 75576310469988050010113, 302231455185132287426561, 4740813508418348515329, 75557864851814247301121, 4726979294787996483585, 1208925892798123119542288, 302231531464850959040528, 4722439666363606761488, 302231527242726325157904, 75557936909408285032464, 4796153740639460130833, 4796154585064390262801, 4726982672487699972113, 4740817730542982135825, 1208944266640177861034001, 302305242161427108659217, 1208930432426547509002257, 75631651828109068533777, 302236071093275348500497, 75576314973587660406801, 4740813508418348253201, 4726979294787996221457, 302236066589675737907217, 75576310469988049813521, 302231455185132287229969, 18447025548703105041, 75557864851814247104529, 4612811918351073297, 18889542492672246219008, 4722443044063310774528, 1208925891953698189672704, 75557940287107989045504, 18889538270547612336384, 75557935783508378386688, 4722438821938676891904, 4723523907973879431425, 1208926972817608758329601, 18963253189248395837697, 75559021151018557702401, 18894082121096635678977, 4796153740639460393217, 4726982672487700234497, 1208930431300647602422017, 75631650702209161953537, 1208925819896104151744769, 73787257769815245057, 75557868229513951117569, 4616189618055086337, 4723519685849245548801, 75559016647418947109121, 18894077617497025085697, 18889466212953574408449, 1153202979600400641, 75557863725914340458753, 4726978168888089641217, 4722366764344638963969, 4796153740639460131088, 4722443044063310512400, 4726982672487699972368, 1208930431300647602159888, 75631650702209161691408, 1208925891953698189410576, 73787257769814982928, 75557940287107988783376, 4616189618054824208, 4726978168888089379088, 4722438821938676629776, 75557935783508378190096, 4611686018444230928, 72339069031481616]
 theorem e19 : enumKeys 1354 1365 = s19 := by decide +kernel
-theorem r19 : ∀ M ∈ s19, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1365 M ne blob = true := by
+theorem t19 : rtype 1365 = 1365 := by decide
+theorem r19 : ∀ M ∈ s19, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1365 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1365) (rM M) ne blob = true) := by
   unfold s19
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3877_b8, by decide, c3877_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3877_b7, by decide, c3877_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 236, c3877_b6, by decide, c3877_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3877_b5, by decide, c3877_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3877_b4, by decide, c3877_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3877_b3, by decide, c3877_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 257, c3877_b2, by decide, c3877_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3877_b1, by decide, c3877_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3881_b7, by decide, c3881_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 262, c3881_b6, by decide, c3881_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 277, c3881_b5, by decide, c3881_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3881_b4, by decide, c3881_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 271, c3880_b7, by decide, c3880_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3880_b6, by decide, c3880_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3882_b7, by decide, c3882_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3882_b6, by decide, c3882_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3882_b5, by decide, c3882_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3882_b4, by decide, c3882_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3882_b3, by decide, c3882_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3882_b2, by decide, c3882_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3880_b5, by decide, c3880_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3882_b1, by decide, c3882_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3882_b0, by decide, c3882_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3881_b9, by decide, c3881_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3881_b8, by decide, c3881_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3880_b9, by decide, c3880_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3880_b8, by decide, c3880_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3881_b2, by decide, c3881_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3881_b3, by decide, c3881_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3881_b0, by decide, c3881_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3881_b1, by decide, c3881_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3878_b8, by decide, c3878_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 277, c3878_b7, by decide, c3878_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3878_b6, by decide, c3878_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3879_b0, by decide, c3879_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3878_b9, by decide, c3878_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3885_b2, by decide, c3885_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3885_b1, by decide, c3885_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3885_b0, by decide, c3885_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3884_b9, by decide, c3884_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3886_b0, by decide, c3886_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3885_b9, by decide, c3885_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3885_b8, by decide, c3885_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3885_b7, by decide, c3885_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3885_b6, by decide, c3885_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3885_b5, by decide, c3885_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3885_b4, by decide, c3885_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3885_b3, by decide, c3885_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3886_b2, by decide, c3886_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3886_b1, by decide, c3886_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3886_b5, by decide, c3886_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3886_b6, by decide, c3886_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3886_b3, by decide, c3886_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3886_b4, by decide, c3886_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3878_b2, by decide, c3878_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3877_b9, by decide, c3877_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3878_b5, by decide, c3878_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3878_b4, by decide, c3878_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3878_b3, by decide, c3878_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3878_b0, by decide, c3878_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3878_b1, by decide, c3878_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3882_b8, by decide, c3882_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3883_b8, by decide, c3883_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3883_b7, by decide, c3883_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3883_b6, by decide, c3883_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3883_b5, by decide, c3883_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3883_b1, by decide, c3883_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3883_b0, by decide, c3883_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3884_b4, by decide, c3884_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3884_b3, by decide, c3884_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3884_b7, by decide, c3884_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3884_b8, by decide, c3884_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3884_b5, by decide, c3884_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3884_b6, by decide, c3884_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3882_b9, by decide, c3882_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3884_b0, by decide, c3884_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3883_b9, by decide, c3883_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3884_b1, by decide, c3884_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3884_b2, by decide, c3884_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3883_b2, by decide, c3883_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3883_b3, by decide, c3883_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3883_b4, by decide, c3883_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3879_b3, by decide, c3879_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3879_b2, by decide, c3879_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3879_b1, by decide, c3879_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3879_b7, by decide, c3879_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 277, c3879_b6, by decide, c3879_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3880_b1, by decide, c3880_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3880_b0, by decide, c3880_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3879_b9, by decide, c3879_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3879_b8, by decide, c3879_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3879_b4, by decide, c3879_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3879_b5, by decide, c3879_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3880_b3, by decide, c3880_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3880_b2, by decide, c3880_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3880_b4, by decide, c3880_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0464_b32, by decide, by rw [tL, t19, show rM 302231527242726308642816 = 4611686087163707393 by decide]; exact c0464_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0464_b28, by decide, by rw [tL, t19, show rM 75557936909408268517376 = 4611686018712666368 by decide]; exact c0464_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 236, c0464_b31, by decide, by rw [tL, t19, show rM 1208925892798123119804416 = 4611686022739198208 by decide]; exact c0464_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0464_b33, by decide, by rw [tL, t19, show rM 302231531464850959302656 = 4611686087163707408 by decide]; exact c0464_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0464_b35, by decide, by rw [tL, t19, show rM 18889539114972542468096 = 4611686293305622784 by decide]; exact c0464_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0464_b34, by decide, by rw [tL, t19, show rM 302231527242726325354496 = 4611686087163904001 by decide]; exact c0464_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 257, c0464_b30, by decide, by rw [tL, t19, show rM 4722439666363607023616 = 4611686019518169344 by decide]; exact c0464_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0464_b29, by decide, by rw [tL, t19, show rM 75557936909408285229056 = 4611686018712862976 by decide]; exact c0464_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0465_b29, by decide, by rw [tL, t19, show rM 1208926973662033688461313 = 73787257774109950208 by decide]; exact c0465_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 262, c0464_b16, by decide, by rw [tL, t19, show rM 18963254033673325969409 = 1153203254461530368 by decide]; exact c0464_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 277, c0465_b30, by decide, by rw [tL, t19, show rM 302232612328761527959553 = 73787257838534459408 by decide]; exact c0465_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0465_b19, by decide, by rw [tL, t19, show rM 18907917179151917842433 = 18447025823564234768 by decide]; exact c0465_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 271, c0464_b14, by decide, by rw [tL, t19, show rM 4796154585064390524929 = 1153202980674076928 by decide]; exact c0464_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0465_b16, by decide, by rw [tL, t19, show rM 4740817730542982397953 = 18447025549776781328 by decide]; exact c0465_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0465_b18, by decide, by rw [tL, t19, show rM 1208944266640177861296129 = 18447025552998072321 by decide]; exact c0465_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0464_b15, by decide, by rw [tL, t19, show rM 302305242161427108921345 = 1153203048319877121 by decide]; exact c0464_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0463_b32, by decide, by rw [tL, t19, show rM 1208930432426547509264385 = 72339073326448896 by decide]; exact c0463_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0464_b13, by decide, by rw [tL, t19, show rM 75631651828109068795905 = 1153202979868836096 by decide]; exact c0464_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0463_b33, by decide, by rw [tL, t19, show rM 302236071093275348762625 = 72339137750958096 by decide]; exact c0463_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0465_b14, by decide, by rw [tL, t19, show rM 75576314973587660668929 = 18447025548971540496 by decide]; exact c0465_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0465_b28, by decide, by rw [tL, t19, show rM 4723520530274175680513 = 73787257770888921344 by decide]; exact c0465_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0465_b31, by decide, by rw [tL, t19, show rM 302232608106636894076929 = 73787257838534721537 by decide]; exact c0465_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0465_b20, by decide, by rw [tL, t19, show rM 18907912957027283959809 = 18447025823564496897 by decide]; exact c0465_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0465_b27, by decide, by rw [tL, t19, show rM 75559017773318853951489 = 73787257770083680512 by decide]; exact c0465_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0463_b35, by decide, by rw [tL, t19, show rM 18894078743396931928065 = 72339343892873472 by decide]; exact c0463_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0463_b34, by decide, by rw [tL, t19, show rM 302236066589675738103809 = 72339137751154688 by decide]; exact c0463_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0465_b15, by decide, by rw [tL, t19, show rM 75576310469988050010113 = 18447025548971737088 by decide]; exact c0465_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0463_b23, by decide, by rw [tL, t19, show rM 302231455185132287426561 = 281543713226753 by decide]; exact c0463_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0465_b17, by decide, by rw [tL, t19, show rM 4740813508418348515329 = 18447025549777043457 by decide]; exact c0465_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0463_b22, by decide, by rw [tL, t19, show rM 75557864851814247301121 = 281475262185728 by decide]; exact c0463_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0463_b31, by decide, by rw [tL, t19, show rM 4726979294787996483585 = 72339070105420032 by decide]; exact c0463_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0465_b5, by decide, by rw [tL, t19, show rM 1208925892798123119542288 = 4616189622349791488 by decide]; exact c0465_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 277, c0465_b6, by decide, by rw [tL, t19, show rM 302231531464850959040528 = 4616189686774300688 by decide]; exact c0465_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0465_b4, by decide, by rw [tL, t19, show rM 4722439666363606761488 = 4616189619128762624 by decide]; exact c0465_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0465_b7, by decide, by rw [tL, t19, show rM 302231527242726325157904 = 4616189686774562817 by decide]; exact c0465_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0465_b3, by decide, by rw [tL, t19, show rM 75557936909408285032464 = 4616189618323521792 by decide]; exact c0465_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0464_b22, by decide, by rw [tL, t19, show rM 4796153740639460130833 = 1157706580284669953 by decide]; exact c0464_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0464_b23, by decide, by rw [tL, t19, show rM 4796154585064390262801 = 1157706580284670208 by decide]; exact c0464_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0464_b3, by decide, by rw [tL, t19, show rM 4726982672487699972113 = 76842669715750928 by decide]; exact c0464_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0465_b24, by decide, by rw [tL, t19, show rM 4740817730542982135825 = 18451529149387374608 by decide]; exact c0465_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0465_b26, by decide, by rw [tL, t19, show rM 1208944266640177861034001 = 18451529152608665601 by decide]; exact c0465_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0464_b24, by decide, by rw [tL, t19, show rM 302305242161427108659217 = 1157706647930470401 by decide]; exact c0464_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0464_b5, by decide, by rw [tL, t19, show rM 1208930432426547509002257 = 76842672937042176 by decide]; exact c0464_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0464_b21, by decide, by rw [tL, t19, show rM 75631651828109068533777 = 1157706579479429376 by decide]; exact c0464_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0464_b6, by decide, by rw [tL, t19, show rM 302236071093275348500497 = 76842737361551376 by decide]; exact c0464_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0465_b22, by decide, by rw [tL, t19, show rM 75576314973587660406801 = 18451529148582133776 by decide]; exact c0465_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0465_b25, by decide, by rw [tL, t19, show rM 4740813508418348253201 = 18451529149387636737 by decide]; exact c0465_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0464_b4, by decide, by rw [tL, t19, show rM 4726979294787996221457 = 76842669716013312 by decide]; exact c0464_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0464_b7, by decide, by rw [tL, t19, show rM 302236066589675737907217 = 76842737361813504 by decide]; exact c0464_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0465_b23, by decide, by rw [tL, t19, show rM 75576310469988049813521 = 18451529148582395904 by decide]; exact c0465_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0463_b30, by decide, by rw [tL, t19, show rM 302231455185132287229969 = 4785143323885569 by decide]; exact c0463_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0465_b21, by decide, by rw [tL, t19, show rM 18447025548703105041 = 18451529148313960449 by decide]; exact c0465_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0463_b29, by decide, by rw [tL, t19, show rM 75557864851814247104529 = 4785074872844544 by decide]; exact c0463_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0464_b2, by decide, by rw [tL, t19, show rM 4612811918351073297 = 76842668642337024 by decide]; exact c0464_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0465_b1, by decide, by rw [tL, t19, show rM 18889542492672246219008 = 4612812193212203024 by decide]; exact c0465_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0464_b38, by decide, by rw [tL, t19, show rM 4722443044063310774528 = 4612811919424749584 by decide]; exact c0464_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0465_b0, by decide, by rw [tL, t19, show rM 1208925891953698189672704 = 4612811922646040577 by decide]; exact c0465_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0464_b36, by decide, by rw [tL, t19, show rM 75557940287107989045504 = 4612811918619508752 by decide]; exact c0464_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0465_b2, by decide, by rw [tL, t19, show rM 18889538270547612336384 = 4612812193212465153 by decide]; exact c0465_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0464_b37, by decide, by rw [tL, t19, show rM 75557935783508378386688 = 4612811918619705344 by decide]; exact c0464_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0464_b39, by decide, by rw [tL, t19, show rM 4722438821938676891904 = 4612811919425011713 by decide]; exact c0464_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0465_b35, by decide, by rw [tL, t19, show rM 4723523907973879431425 = 73788383670795501584 by decide]; exact c0465_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0465_b37, by decide, by rw [tL, t19, show rM 1208926972817608758329601 = 73788383674016792577 by decide]; exact c0465_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0464_b20, by decide, by rw [tL, t19, show rM 18963253189248395837697 = 1154329154368372737 by decide]; exact c0464_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0465_b33, by decide, by rw [tL, t19, show rM 75559021151018557702401 = 73788383669990260752 by decide]; exact c0465_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0464_b0, by decide, by rw [tL, t19, show rM 18894082121096635678977 = 73465243799453712 by decide]; exact c0464_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0464_b19, by decide, by rw [tL, t19, show rM 4796153740639460393217 = 1154328880580919297 by decide]; exact c0464_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0463_b37, by decide, by rw [tL, t19, show rM 4726982672487700234497 = 73464970012000272 by decide]; exact c0463_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0463_b39, by decide, by rw [tL, t19, show rM 1208930431300647602422017 = 73464973233291264 by decide]; exact c0463_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0464_b18, by decide, by rw [tL, t19, show rM 75631650702209161953537 = 1154328879775678464 by decide]; exact c0464_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0463_b27, by decide, by rw [tL, t19, show rM 1208925819896104151744769 = 1407379195363329 by decide]; exact c0463_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0464_b17, by decide, by rw [tL, t19, show rM 73787257769815245057 = 1154328879507243009 by decide]; exact c0464_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0463_b24, by decide, by rw [tL, t19, show rM 75557868229513951117569 = 1407375168831504 by decide]; exact c0463_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0463_b36, by decide, by rw [tL, t19, show rM 4616189618055086337 = 73464968938323984 by decide]; exact c0463_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0465_b36, by decide, by rw [tL, t19, show rM 4723519685849245548801 = 73788383670795763713 by decide]; exact c0465_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0465_b34, by decide, by rw [tL, t19, show rM 75559016647418947109121 = 73788383669990522880 by decide]; exact c0465_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0464_b1, by decide, by rw [tL, t19, show rM 18894077617497025085697 = 73465243799715840 by decide]; exact c0464_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0463_b28, by decide, by rw [tL, t19, show rM 18889466212953574408449 = 1407649761787905 by decide]; exact c0463_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0465_b32, by decide, by rw [tL, t19, show rM 1153202979600400641 = 73788383669722087425 by decide]; exact c0465_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0463_b25, by decide, by rw [tL, t19, show rM 75557863725914340458753 = 1407375169028096 by decide]; exact c0463_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0463_b38, by decide, by rw [tL, t19, show rM 4726978168888089641217 = 73464970012262400 by decide]; exact c0463_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0463_b26, by decide, by rw [tL, t19, show rM 4722366764344638963969 = 1407375974334465 by decide]; exact c0463_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0464_b27, by decide, by rw [tL, t19, show rM 4796153740639460131088 = 1158551005214801921 by decide]; exact c0464_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0465_b11, by decide, by rw [tL, t19, show rM 4722443044063310512400 = 4617315519035342864 by decide]; exact c0465_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0464_b10, by decide, by rw [tL, t19, show rM 4726982672487699972368 = 77687094645882896 by decide]; exact c0464_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0464_b12, by decide, by rw [tL, t19, show rM 1208930431300647602159888 = 77687097867173888 by decide]; exact c0464_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 277, c0464_b26, by decide, by rw [tL, t19, show rM 75631650702209161691408 = 1158551004409561088 by decide]; exact c0464_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0465_b13, by decide, by rw [tL, t19, show rM 1208925891953698189410576 = 4617315522256633857 by decide]; exact c0465_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0464_b25, by decide, by rw [tL, t19, show rM 73787257769814982928 = 1158551004141125633 by decide]; exact c0464_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0465_b9, by decide, by rw [tL, t19, show rM 75557940287107988783376 = 4617315518230102032 by decide]; exact c0465_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0464_b8, by decide, by rw [tL, t19, show rM 4616189618054824208 = 77687093572206608 by decide]; exact c0464_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0464_b11, by decide, by rw [tL, t19, show rM 4726978168888089379088 = 77687094646145024 by decide]; exact c0464_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0465_b12, by decide, by rw [tL, t19, show rM 4722438821938676629776 = 4617315519035604993 by decide]; exact c0465_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0465_b10, by decide, by rw [tL, t19, show rM 75557935783508378190096 = 4617315518230364160 by decide]; exact c0465_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0464_b9, by decide, by rw [tL, t19, show rM 4611686018444230928 = 77687093572468736 by decide]; exact c0464_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0465_b8, by decide, by rw [tL, t19, show rM 72339069031481616 = 4617315517961928705 by decide]; exact c0465_ok8⟩, ?_⟩
   simp
 
 def s20 : List Nat := [18889556003471128330240, 4722456554862192885760, 4835703350797585713790976, 75557953797906871156736, 18889538270547662667776, 4722438821938727223296, 75557936064983405428736, 4723537418772761542657, 4835704431661496282447873, 19184614118132910456833, 75559034661817439813633, 18894095631895517790209, 5017514669523975012353, 4726996183286582345729, 4835707890426010103250945, 75853011912568653283329, 75562493426331260616705, 4723519685849295880193, 75559016928893974151169, 18894077898972052127745, 75562475411932818178049, 75557864007389367500801, 4726978450363116683265, 4722456554862192623632, 4835703350797585713528848, 75557953797906870894608, 4722438821938726961168, 75557936064983405232144, 5017514669523974750225, 4726996183286582083601, 4835707890426010102988817, 75853011912568653021201, 75562493426331260354577, 4726978450363116421137, 75562475411932817981457, 75557864007389367304209, 4611967493471272977, 18889538270547595563008, 4722438821938660118528, 75557936064983338389504, 4723519685849228775425, 75559016928893907046401, 18894077898971985022977, 4726978450363049578497, 75562475411932751138817, 75557864007389300461569, 4611967493404430337, 4722438821938659856400, 4726978450363049316368, 75562475411932750876688, 75557936064983338127376, 4611967493404168208]
 theorem e20 : enumKeys 1354 4245 = s20 := by decide +kernel
-theorem r20 : ∀ M ∈ s20, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4245 M ne blob = true := by
+theorem t20 : rtype 4245 = 5190 := by decide
+theorem r20 : ∀ M ∈ s20, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4245 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 4245) (rM M) ne blob = true) := by
   unfold s20
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3887_b0, by decide, c3887_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 273, c3886_b7, by decide, c3886_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3887_b3, by decide, c3887_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3887_b2, by decide, c3887_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3887_b1, by decide, c3887_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3886_b9, by decide, c3886_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3886_b8, by decide, c3886_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 281, c3888_b7, by decide, c3888_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3889_b7, by decide, c3889_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3889_b6, by decide, c3889_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3889_b5, by decide, c3889_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3889_b4, by decide, c3889_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3889_b0, by decide, c3889_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3888_b9, by decide, c3888_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3890_b2, by decide, c3890_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 165, c3890_b1, by decide, c3890_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3890_b0, by decide, c3890_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3888_b8, by decide, c3888_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3889_b9, by decide, c3889_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3889_b8, by decide, c3889_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3889_b1, by decide, c3889_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3889_b2, by decide, c3889_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 197, c3889_b3, by decide, c3889_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 281, c3887_b7, by decide, c3887_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3888_b0, by decide, c3888_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3887_b9, by decide, c3887_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3887_b8, by decide, c3887_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3888_b1, by decide, c3888_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3891_b1, by decide, c3891_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3891_b0, by decide, c3891_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3891_b5, by decide, c3891_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3891_b4, by decide, c3891_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3891_b3, by decide, c3891_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3891_b2, by decide, c3891_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3891_b6, by decide, c3891_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 207, c3891_b7, by decide, c3891_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 191, c3891_b8, by decide, c3891_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3887_b5, by decide, c3887_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 229, c3887_b4, by decide, c3887_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3887_b6, by decide, c3887_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3890_b3, by decide, c3890_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3890_b6, by decide, c3890_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3890_b5, by decide, c3890_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3890_b4, by decide, c3890_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3890_b7, by decide, c3890_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3890_b8, by decide, c3890_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 171, c3890_b9, by decide, c3890_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3888_b3, by decide, c3888_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3888_b2, by decide, c3888_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3888_b4, by decide, c3888_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3888_b6, by decide, c3888_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3888_b5, by decide, c3888_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0474_b35, by decide, by rw [tL, t20, show rM 18889556003471128330240 = 4611686293305364480 by decide]; exact c0474_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 273, c0474_b33, by decide, by rw [tL, t20, show rM 4722456554862192885760 = 4611686019517911040 by decide]; exact c0474_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0474_b37, by decide, by rw [tL, t20, show rM 4835703350797585713790976 = 4611687117955858433 by decide]; exact c0474_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0474_b31, by decide, by rw [tL, t20, show rM 75557953797906871156736 = 4611686018712670208 by decide]; exact c0474_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0474_b36, by decide, by rw [tL, t20, show rM 18889538270547662667776 = 4611686293372469249 by decide]; exact c0474_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0474_b34, by decide, by rw [tL, t20, show rM 4722438821938727223296 = 4611686019585015809 by decide]; exact c0474_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0474_b32, by decide, by rw [tL, t20, show rM 75557936064983405428736 = 4611686018779709441 by decide]; exact c0474_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 281, c0475_b10, by decide, by rw [tL, t20, show rM 4723537418772761542657 = 73787257770888663040 by decide]; exact c0475_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0475_b12, by decide, by rw [tL, t20, show rM 4835704431661496282447873 = 73787258869326610433 by decide]; exact c0475_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0475_b17, by decide, by rw [tL, t20, show rM 19184614118132910456833 = 295148186929207508993 by decide]; exact c0475_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0475_b8, by decide, by rw [tL, t20, show rM 75559034661817439813633 = 73787257770083422208 by decide]; exact c0475_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0474_b15, by decide, by rw [tL, t20, show rM 18894095631895517790209 = 72339343892615168 by decide]; exact c0474_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0475_b16, by decide, by rw [tL, t20, show rM 5017514669523975012353 = 295148186655420055553 by decide]; exact c0475_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0474_b13, by decide, by rw [tL, t20, show rM 4726996183286582345729 = 72339070105161728 by decide]; exact c0474_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0474_b17, by decide, by rw [tL, t20, show rM 4835707890426010103250945 = 72340168543109121 by decide]; exact c0474_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 165, c0475_b15, by decide, by rw [tL, t20, show rM 75853011912568653283329 = 295148186654614814721 by decide]; exact c0475_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0474_b11, by decide, by rw [tL, t20, show rM 75562493426331260616705 = 72339069299920896 by decide]; exact c0474_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0475_b11, by decide, by rw [tL, t20, show rM 4723519685849295880193 = 73787257770955767809 by decide]; exact c0475_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0475_b9, by decide, by rw [tL, t20, show rM 75559016928893974151169 = 73787257770150526977 by decide]; exact c0475_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0474_b16, by decide, by rw [tL, t20, show rM 18894077898972052127745 = 72339343959719937 by decide]; exact c0474_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0474_b12, by decide, by rw [tL, t20, show rM 75562475411932818178049 = 72339069366960128 by decide]; exact c0474_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0474_b8, by decide, by rw [tL, t20, show rM 75557864007389367500801 = 281475329032193 by decide]; exact c0474_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 197, c0474_b14, by decide, by rw [tL, t20, show rM 4726978450363116683265 = 72339070172266497 by decide]; exact c0474_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 281, c0475_b0, by decide, by rw [tL, t20, show rM 4722456554862192623632 = 4616189619128504320 by decide]; exact c0475_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0475_b2, by decide, by rw [tL, t20, show rM 4835703350797585713528848 = 4616190717566451713 by decide]; exact c0475_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0474_b38, by decide, by rw [tL, t20, show rM 75557953797906870894608 = 4616189618323263488 by decide]; exact c0474_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0475_b1, by decide, by rw [tL, t20, show rM 4722438821938726961168 = 4616189619195609089 by decide]; exact c0475_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0474_b39, by decide, by rw [tL, t20, show rM 75557936064983405232144 = 4616189618390368257 by decide]; exact c0474_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0475_b19, by decide, by rw [tL, t20, show rM 5017514669523974750225 = 295152690255030648833 by decide]; exact c0475_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0474_b21, by decide, by rw [tL, t20, show rM 4726996183286582083601 = 76842669715755008 by decide]; exact c0474_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0474_b23, by decide, by rw [tL, t20, show rM 4835707890426010102988817 = 76843768153702401 by decide]; exact c0474_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0475_b18, by decide, by rw [tL, t20, show rM 75853011912568653021201 = 295152690254225408001 by decide]; exact c0475_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0474_b19, by decide, by rw [tL, t20, show rM 75562493426331260354577 = 76842668910514176 by decide]; exact c0474_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0474_b22, by decide, by rw [tL, t20, show rM 4726978450363116421137 = 76842669782859777 by decide]; exact c0474_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0474_b20, by decide, by rw [tL, t20, show rM 75562475411932817981457 = 76842668977618944 by decide]; exact c0474_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 207, c0474_b9, by decide, by rw [tL, t20, show rM 75557864007389367304209 = 4785074939691009 by decide]; exact c0474_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 191, c0474_b18, by decide, by rw [tL, t20, show rM 4611967493471272977 = 76842668709183489 by decide]; exact c0474_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0475_b5, by decide, by rw [tL, t20, show rM 18889538270547595563008 = 4629700691814842369 by decide]; exact c0475_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 229, c0475_b4, by decide, by rw [tL, t20, show rM 4722438821938660118528 = 4629700418027388929 by decide]; exact c0475_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0475_b3, by decide, by rw [tL, t20, show rM 75557936064983338389504 = 4629700417222148097 by decide]; exact c0475_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0475_b14, by decide, by rw [tL, t20, show rM 4723519685849228775425 = 73805272169398140929 by decide]; exact c0475_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0475_b13, by decide, by rw [tL, t20, show rM 75559016928893907046401 = 73805272168592900097 by decide]; exact c0475_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0474_b27, by decide, by rw [tL, t20, show rM 18894077898971985022977 = 90353742402093057 by decide]; exact c0474_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0474_b26, by decide, by rw [tL, t20, show rM 4726978450363049578497 = 90353468614639617 by decide]; exact c0474_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0474_b25, by decide, by rw [tL, t20, show rM 75562475411932751138817 = 90353467809398784 by decide]; exact c0474_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0474_b10, by decide, by rw [tL, t20, show rM 75557864007389300461569 = 18295873771470849 by decide]; exact c0474_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 171, c0474_b24, by decide, by rw [tL, t20, show rM 4611967493404430337 = 90353467540963329 by decide]; exact c0474_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0475_b7, by decide, by rw [tL, t20, show rM 4722438821938659856400 = 4634204017637982209 by decide]; exact c0475_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0474_b30, by decide, by rw [tL, t20, show rM 4726978450363049316368 = 94575593248522241 by decide]; exact c0474_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0474_b29, by decide, by rw [tL, t20, show rM 75562475411932750876688 = 94575592443281408 by decide]; exact c0474_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0475_b6, by decide, by rw [tL, t20, show rM 75557936064983338127376 = 4634204016832741377 by decide]; exact c0475_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0474_b28, by decide, by rw [tL, t20, show rM 4611967493404168208 = 94575592174845953 by decide]; exact c0474_ok28⟩, ?_⟩
   simp
 
 def s21 : List Nat := [18889538270547595821056, 4722438821938660376576, 75557936064983338582016, 18890619134458164477953, 4723519685849229033473, 75559016928893907304449, 18894077898971985281025, 4726978450363049836545, 75562475693407728041985, 18889538270547595558928, 4722438821938660114448, 75557936064983338385424, 4723519685849228771345, 75559016928893907042321, 18894077898971985018897, 4726978450363049574417, 75562475693407727845393, 4722438821938659852320, 4726978450363049312288, 75557936064983338123296, 75562475693407727583264]
 theorem e21 : enumKeys 1354 229 = s21 := by decide +kernel
-theorem r21 : ∀ M ∈ s21, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 229 M ne blob = true := by
+theorem t21 : rtype 229 = 2119 := by decide
+theorem r21 : ∀ M ∈ s21, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 229 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 229) (rM M) ne blob = true) := by
   unfold s21
-  refine List.forall_mem_cons.2 ⟨⟨0, 249, c3892_b1, by decide, c3892_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3892_b0, by decide, c3892_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 272, c3891_b9, by decide, c3891_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 260, c3893_b2, by decide, c3893_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 269, c3892_b9, by decide, c3892_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3893_b4, by decide, c3893_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3893_b3, by decide, c3893_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3893_b1, by decide, c3893_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3893_b0, by decide, c3893_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 260, c3892_b3, by decide, c3892_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 269, c3892_b2, by decide, c3892_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3892_b4, by decide, c3892_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3893_b5, by decide, c3893_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3893_b8, by decide, c3893_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3893_b7, by decide, c3893_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3893_b6, by decide, c3893_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3893_b9, by decide, c3893_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 264, c3892_b6, by decide, c3892_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 278, c3892_b5, by decide, c3892_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3892_b8, by decide, c3892_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3892_b7, by decide, c3892_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 249, c0479_b0, by decide, by rw [tL, t21, show rM 18889538270547595821056 = 4611686293322137601 by decide]; exact c0479_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0478_b39, by decide, by rw [tL, t21, show rM 4722438821938660376576 = 4611686019534684161 by decide]; exact c0478_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 272, c0478_b38, by decide, by rw [tL, t21, show rM 75557936064983338582016 = 4611686018729377793 by decide]; exact c0478_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 260, c0479_b8, by decide, by rw [tL, t21, show rM 18890619134458164477953 = 73787258044692889601 by decide]; exact c0479_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 269, c0479_b7, by decide, by rw [tL, t21, show rM 4723519685849229033473 = 73787257770905436161 by decide]; exact c0479_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0479_b6, by decide, by rw [tL, t21, show rM 75559016928893907304449 = 73787257770100195329 by decide]; exact c0479_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0478_b32, by decide, by rw [tL, t21, show rM 18894077898971985281025 = 72339343909388289 by decide]; exact c0478_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0478_b31, by decide, by rw [tL, t21, show rM 4726978450363049836545 = 72339070121934849 by decide]; exact c0478_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0478_b30, by decide, by rw [tL, t21, show rM 75562475693407728041985 = 72339069316628481 by decide]; exact c0478_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 260, c0479_b3, by decide, by rw [tL, t21, show rM 18889538270547595558928 = 4616189892932730881 by decide]; exact c0479_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 269, c0479_b2, by decide, by rw [tL, t21, show rM 4722438821938660114448 = 4616189619145277441 by decide]; exact c0479_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0479_b1, by decide, by rw [tL, t21, show rM 75557936064983338385424 = 4616189618340036609 by decide]; exact c0479_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0479_b10, by decide, by rw [tL, t21, show rM 4723519685849228771345 = 73791761370516029441 by decide]; exact c0479_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0479_b9, by decide, by rw [tL, t21, show rM 75559016928893907042321 = 73791761369710788609 by decide]; exact c0479_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0478_b35, by decide, by rw [tL, t21, show rM 18894077898971985018897 = 76842943519981569 by decide]; exact c0478_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0478_b34, by decide, by rw [tL, t21, show rM 4726978450363049574417 = 76842669732528129 by decide]; exact c0478_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0478_b33, by decide, by rw [tL, t21, show rM 75562475693407727845393 = 76842668927287297 by decide]; exact c0478_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 264, c0479_b5, by decide, by rw [tL, t21, show rM 4722438821938659852320 = 4620693218755870721 by decide]; exact c0479_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 278, c0478_b37, by decide, by rw [tL, t21, show rM 4726978450363049312288 = 81064794366410753 by decide]; exact c0478_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0479_b4, by decide, by rw [tL, t21, show rM 75557936064983338123296 = 4620693217950629889 by decide]; exact c0479_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0478_b36, by decide, by rw [tL, t21, show rM 75562475693407727583264 = 81064793561169921 by decide]; exact c0478_ok36⟩, ?_⟩
   simp
 
 def s22 : List Nat := [302231528087151238578176, 302231528087151255289856, 1208944267484602791231489, 302305243005852038856705, 302249906151330630729729, 302249901647731020070913, 302231456029557217361921, 4740814352843278450689, 1208925892798123119608064, 302231531464850959106304, 302231526961251348447488, 4722439666363606827264, 4796154585064390328577, 4740817730542982201601, 1208944266358702884389121, 302305241879952132014337, 1208925820740529081680129, 73788102194745180417, 302231459407256921178369, 18451247673337053441, 302231454903657310519553, 4740813226943371608321, 4722367608769568899329, 4796153459164483486208, 4722443044063310578176, 1208925891672223212765696, 73786976294838338048, 76561193665430016, 4722438540463699984896]
 theorem e22 : enumKeys 1354 1545 = s22 := by decide +kernel
-theorem r22 : ∀ M ∈ s22, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1545 M ne blob = true := by
+theorem t22 : rtype 1545 = 600 := by decide
+theorem r22 : ∀ M ∈ s22, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1545 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1545) (rM M) ne blob = true) := by
   unfold s22
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3894_b1, by decide, c3894_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 304, c3894_b0, by decide, c3894_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3895_b7, by decide, c3895_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 248, c3895_b6, by decide, c3895_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3895_b5, by decide, c3895_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3895_b2, by decide, c3895_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 304, c3895_b3, by decide, c3895_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3895_b4, by decide, c3895_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3894_b5, by decide, c3894_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3894_b4, by decide, c3894_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 315, c3894_b2, by decide, c3894_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 259, c3894_b3, by decide, c3894_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3895_b9, by decide, c3895_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3895_b8, by decide, c3895_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3896_b4, by decide, c3896_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3896_b3, by decide, c3896_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3896_b7, by decide, c3896_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3896_b8, by decide, c3896_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3896_b5, by decide, c3896_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3896_b6, by decide, c3896_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 315, c3896_b0, by decide, c3896_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3896_b1, by decide, c3896_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 259, c3896_b2, by decide, c3896_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 315, c3894_b6, by decide, c3894_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3894_b7, by decide, c3894_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3895_b0, by decide, c3895_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3894_b9, by decide, c3894_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3895_b1, by decide, c3895_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3894_b8, by decide, c3894_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0452_b3, by decide, by rw [tL, t22, show rM 302231528087151238578176 = 4611686087146995968 by decide]; exact c0452_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 304, c0452_b4, by decide, by rw [tL, t22, show rM 302231528087151255289856 = 4611686087147192576 by decide]; exact c0452_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0452_b14, by decide, by rw [tL, t22, show rM 1208944267484602791231489 = 18447025552981360896 by decide]; exact c0452_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 248, c0451_b37, by decide, by rw [tL, t22, show rM 302305243005852038856705 = 1153203048303165696 by decide]; exact c0451_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0452_b15, by decide, by rw [tL, t22, show rM 302249906151330630729729 = 18447025617405870096 by decide]; exact c0452_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0452_b16, by decide, by rw [tL, t22, show rM 302249901647731020070913 = 18447025617406066688 by decide]; exact c0452_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 304, c0451_b32, by decide, by rw [tL, t22, show rM 302231456029557217361921 = 281543696515328 by decide]; exact c0451_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0452_b13, by decide, by rw [tL, t22, show rM 4740814352843278450689 = 18447025549760332032 by decide]; exact c0452_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0452_b6, by decide, by rw [tL, t22, show rM 1208925892798123119608064 = 4612811922629329152 by decide]; exact c0452_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0452_b7, by decide, by rw [tL, t22, show rM 302231531464850959106304 = 4612811987053838352 by decide]; exact c0452_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 315, c0452_b8, by decide, by rw [tL, t22, show rM 302231526961251348447488 = 4612811987054034944 by decide]; exact c0452_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 259, c0452_b5, by decide, by rw [tL, t22, show rM 4722439666363606827264 = 4612811919408300288 by decide]; exact c0452_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0451_b39, by decide, by rw [tL, t22, show rM 4796154585064390328577 = 1154328880564207872 by decide]; exact c0451_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0452_b18, by decide, by rw [tL, t22, show rM 4740817730542982201601 = 18448151449666912272 by decide]; exact c0452_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0452_b20, by decide, by rw [tL, t22, show rM 1208944266358702884389121 = 18448151452888203264 by decide]; exact c0452_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0452_b0, by decide, by rw [tL, t22, show rM 302305241879952132014337 = 1154328948210008064 by decide]; exact c0452_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0451_b34, by decide, by rw [tL, t22, show rM 1208925820740529081680129 = 1407379178651904 by decide]; exact c0451_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0451_b38, by decide, by rw [tL, t22, show rM 73788102194745180417 = 1154328879490531584 by decide]; exact c0451_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0451_b35, by decide, by rw [tL, t22, show rM 302231459407256921178369 = 1407443603161104 by decide]; exact c0451_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0452_b17, by decide, by rw [tL, t22, show rM 18451247673337053441 = 18448151448593235984 by decide]; exact c0452_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 315, c0451_b36, by decide, by rw [tL, t22, show rM 302231454903657310519553 = 1407443603357696 by decide]; exact c0451_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0452_b19, by decide, by rw [tL, t22, show rM 4740813226943371608321 = 18448151449667174400 by decide]; exact c0452_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 259, c0451_b33, by decide, by rw [tL, t22, show rM 4722367608769568899329 = 1407375957623040 by decide]; exact c0451_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 315, c0452_b2, by decide, by rw [tL, t22, show rM 4796153459164483486208 = 1155173305494339584 by decide]; exact c0452_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0452_b10, by decide, by rw [tL, t22, show rM 4722443044063310578176 = 4613937819314880528 by decide]; exact c0452_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0452_b12, by decide, by rw [tL, t22, show rM 1208925891672223212765696 = 4613937822536171520 by decide]; exact c0452_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0452_b1, by decide, by rw [tL, t22, show rM 73786976294838338048 = 1155173304420663296 by decide]; exact c0452_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0452_b9, by decide, by rw [tL, t22, show rM 76561193665430016 = 4613937818241204240 by decide]; exact c0452_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0452_b11, by decide, by rw [tL, t22, show rM 4722438540463699984896 = 4613937819315142656 by decide]; exact c0452_ok11⟩, ?_⟩
   simp
 
 def s23 : List Nat := [4835703351642010643726336, 302231544975649841217536, 302231527242726375489536, 4722439666363657158656, 75557936909408335364096, 5017515513948904947713, 4740831241341864312833, 4835721725484065385218049, 302526603090311623344129, 4835707891270435033186305, 75853012756993583218689, 302236084604074230677505, 75576328484386542583809, 302236066589675788238849, 75576310469988100145153, 302231455185132337561601, 4740813508418398650369, 75557864851814297436161, 4726979294788046618625, 4722456554862192689408, 4835703350797585713594624, 75557953797906870960384, 75557935783508428521728, 4722438821938727026944, 5017514669523974816001, 4726996183286582149377, 4835707890144535126343937, 75853011631093676376321, 4835703278739991675666689, 295148186654329667841, 75557881740312833032449, 4629700416937001217, 75557863725914390593793, 4726978168888139776257, 4722366764344689099009, 4722439666363590053888, 302231527242726308450304, 75557936909408268324864, 4740813508418331545601, 4726979294787979513857, 302236066589675721199617, 75576310469988033105921, 302231455185132270522369, 18447025548686397441, 75557864851814230396929, 4612811918334365697, 4726978168888072671488, 4722438821938659922176, 75557935783508361482496, 4611686018427523328, 72339069014774016]
 theorem e23 : enumKeys 1354 4425 = s23 := by decide +kernel
-theorem r23 : ∀ M ∈ s23, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4425 M ne blob = true := by
+theorem t23 : rtype 4425 = 4425 := by decide
+theorem r23 : ∀ M ∈ s23, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4425 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 4425) (rM M) ne blob = true) := by
   unfold s23
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3897_b3, by decide, c3897_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 262, c3897_b2, by decide, c3897_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 283, c3897_b1, by decide, c3897_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 272, c3897_b0, by decide, c3897_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 283, c3896_b9, by decide, c3896_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3898_b8, by decide, c3898_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3898_b7, by decide, c3898_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3900_b0, by decide, c3900_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3899_b9, by decide, c3899_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3899_b8, by decide, c3899_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3899_b7, by decide, c3899_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 215, c3899_b6, by decide, c3899_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3899_b5, by decide, c3899_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 283, c3899_b0, by decide, c3899_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3898_b9, by decide, c3898_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 283, c3899_b3, by decide, c3899_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3899_b4, by decide, c3899_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 283, c3899_b1, by decide, c3899_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3899_b2, by decide, c3899_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3897_b7, by decide, c3897_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3898_b1, by decide, c3898_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3898_b0, by decide, c3898_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 288, c3897_b8, by decide, c3897_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3897_b9, by decide, c3897_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3901_b0, by decide, c3901_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3900_b9, by decide, c3900_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3901_b5, by decide, c3901_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3901_b4, by decide, c3901_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3901_b8, by decide, c3901_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3901_b9, by decide, c3901_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3901_b6, by decide, c3901_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3901_b7, by decide, c3901_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 288, c3901_b1, by decide, c3901_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3901_b2, by decide, c3901_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3901_b3, by decide, c3901_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3897_b4, by decide, c3897_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3897_b6, by decide, c3897_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3897_b5, by decide, c3897_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3900_b2, by decide, c3900_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3900_b1, by decide, c3900_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3900_b4, by decide, c3900_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3900_b3, by decide, c3900_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3900_b7, by decide, c3900_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3900_b8, by decide, c3900_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3900_b5, by decide, c3900_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3900_b6, by decide, c3900_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 268, c3898_b2, by decide, c3898_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3898_b3, by decide, c3898_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3898_b5, by decide, c3898_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 247, c3898_b4, by decide, c3898_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3898_b6, by decide, c3898_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0469_b8, by decide, by rw [tL, t23, show rM 4835703351642010643726336 = 4611687117939147008 by decide]; exact c0469_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 262, c0469_b6, by decide, by rw [tL, t23, show rM 302231544975649841217536 = 4611686087146999808 by decide]; exact c0469_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 283, c0469_b7, by decide, by rw [tL, t23, show rM 302231527242726375489536 = 4611686087214039041 by decide]; exact c0469_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 272, c0469_b5, by decide, by rw [tL, t23, show rM 4722439666363657158656 = 4611686019568304384 by decide]; exact c0469_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 283, c0469_b4, by decide, by rw [tL, t23, show rM 75557936909408335364096 = 4611686018762998016 by decide]; exact c0469_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0469_b29, by decide, by rw [tL, t23, show rM 5017515513948904947713 = 295148186655403344128 by decide]; exact c0469_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0469_b22, by decide, by rw [tL, t23, show rM 4740831241341864312833 = 18447025549760073728 by decide]; exact c0469_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0469_b24, by decide, by rw [tL, t23, show rM 4835721725484065385218049 = 18447026648198021121 by decide]; exact c0469_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0469_b30, by decide, by rw [tL, t23, show rM 302526603090311623344129 = 295148186723049144321 by decide]; exact c0469_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0468_b34, by decide, by rw [tL, t23, show rM 4835707891270435033186305 = 72340168526397696 by decide]; exact c0468_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0469_b28, by decide, by rw [tL, t23, show rM 75853012756993583218689 = 295148186654598103296 by decide]; exact c0469_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 215, c0468_b32, by decide, by rw [tL, t23, show rM 302236084604074230677505 = 72339137734250496 by decide]; exact c0468_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0469_b20, by decide, by rw [tL, t23, show rM 75576328484386542583809 = 18447025548954832896 by decide]; exact c0469_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 283, c0468_b33, by decide, by rw [tL, t23, show rM 302236066589675788238849 = 72339137801289728 by decide]; exact c0468_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0469_b21, by decide, by rw [tL, t23, show rM 75576310469988100145153 = 18447025549021872128 by decide]; exact c0469_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 283, c0468_b24, by decide, by rw [tL, t23, show rM 302231455185132337561601 = 281543763361793 by decide]; exact c0468_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0469_b23, by decide, by rw [tL, t23, show rM 4740813508418398650369 = 18447025549827178497 by decide]; exact c0469_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 283, c0468_b23, by decide, by rw [tL, t23, show rM 75557864851814297436161 = 281475312320768 by decide]; exact c0468_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0468_b31, by decide, by rw [tL, t23, show rM 4726979294788046618625 = 72339070155555072 by decide]; exact c0468_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0469_b11, by decide, by rw [tL, t23, show rM 4722456554862192689408 = 4612811919408041984 by decide]; exact c0469_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0469_b13, by decide, by rw [tL, t23, show rM 4835703350797585713594624 = 4612813017845989377 by decide]; exact c0469_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0469_b9, by decide, by rw [tL, t23, show rM 75557953797906870960384 = 4612811918602801152 by decide]; exact c0469_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 288, c0469_b10, by decide, by rw [tL, t23, show rM 75557935783508428521728 = 4612811918669840384 by decide]; exact c0469_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0469_b12, by decide, by rw [tL, t23, show rM 4722438821938727026944 = 4612811919475146753 by decide]; exact c0469_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0469_b33, by decide, by rw [tL, t23, show rM 5017514669523974816001 = 295149312555310186497 by decide]; exact c0469_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0468_b36, by decide, by rw [tL, t23, show rM 4726996183286582149377 = 73464969995292672 by decide]; exact c0468_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0468_b38, by decide, by rw [tL, t23, show rM 4835707890144535126343937 = 73466068433240064 by decide]; exact c0468_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0469_b32, by decide, by rw [tL, t23, show rM 75853011631093676376321 = 295149312554504945664 by decide]; exact c0469_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0468_b28, by decide, by rw [tL, t23, show rM 4835703278739991675666689 = 1408474395312129 by decide]; exact c0468_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0469_b31, by decide, by rw [tL, t23, show rM 295148186654329667841 = 295149312554236510209 by decide]; exact c0469_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0468_b25, by decide, by rw [tL, t23, show rM 75557881740312833032449 = 1407375152123904 by decide]; exact c0468_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0468_b35, by decide, by rw [tL, t23, show rM 4629700416937001217 = 73464968921616384 by decide]; exact c0468_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 288, c0468_b26, by decide, by rw [tL, t23, show rM 75557863725914390593793 = 1407375219163136 by decide]; exact c0468_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0468_b37, by decide, by rw [tL, t23, show rM 4726978168888139776257 = 73464970062397440 by decide]; exact c0468_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0468_b27, by decide, by rw [tL, t23, show rM 4722366764344689099009 = 1407376024469505 by decide]; exact c0468_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0469_b15, by decide, by rw [tL, t23, show rM 4722439666363590053888 = 4629700418010677504 by decide]; exact c0469_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0469_b16, by decide, by rw [tL, t23, show rM 302231527242726308450304 = 4629700485656477697 by decide]; exact c0469_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0469_b14, by decide, by rw [tL, t23, show rM 75557936909408268324864 = 4629700417205436672 by decide]; exact c0469_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0469_b27, by decide, by rw [tL, t23, show rM 4740813508418331545601 = 18465039948269551617 by decide]; exact c0469_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0469_b0, by decide, by rw [tL, t23, show rM 4726979294787979513857 = 90353468597928192 by decide]; exact c0469_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0469_b1, by decide, by rw [tL, t23, show rM 302236066589675721199617 = 90353536243728384 by decide]; exact c0469_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0469_b26, by decide, by rw [tL, t23, show rM 75576310469988033105921 = 18465039947464310784 by decide]; exact c0469_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0468_b30, by decide, by rw [tL, t23, show rM 302231455185132270522369 = 18295942205800449 by decide]; exact c0468_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0469_b25, by decide, by rw [tL, t23, show rM 18447025548686397441 = 18465039947195875329 by decide]; exact c0469_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0468_b29, by decide, by rw [tL, t23, show rM 75557864851814230396929 = 18295873754759424 by decide]; exact c0468_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0468_b39, by decide, by rw [tL, t23, show rM 4612811918334365697 = 90353467524251904 by decide]; exact c0468_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 268, c0469_b3, by decide, by rw [tL, t23, show rM 4726978168888072671488 = 91197893528059904 by decide]; exact c0469_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0469_b19, by decide, by rw [tL, t23, show rM 4722438821938659922176 = 4630826317917519873 by decide]; exact c0469_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0469_b18, by decide, by rw [tL, t23, show rM 75557935783508361482496 = 4630826317112279040 by decide]; exact c0469_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 247, c0469_b2, by decide, by rw [tL, t23, show rM 4611686018427523328 = 91197892454383616 by decide]; exact c0469_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0469_b17, by decide, by rw [tL, t23, show rM 72339069014774016 = 4630826316843843585 by decide]; exact c0469_ok17⟩, ?_⟩
   simp
 
 def s24 : List Nat := [18889539114972525756416, 302231527242726308642816, 4722439666363590311936, 75557936909408268517376, 4723520530274158968833, 302232608106636877365249, 18907912957027267248129, 75559017773318837239809, 18894078743396915216385, 302236066871150698102785, 4740813508418331803649, 75576310751463010009089, 4726979294787979771905, 75562476537832657977345, 4722439666363590049808, 302231527242726308446224, 75557936909408268320784, 4726978450363049377809, 4740813508418331541521, 4726979294787979509777, 302236066871150697906193, 75576310751463009812497, 75562476537832657780753, 18889538270547595624704, 4722438821938660180224, 75557936064983338385664, 4723519685849228837121, 75562475411932750938369, 75559016928893907108097, 18894077898971985084673, 75562475411932751134977, 75557864007389300457729, 4726978450363049640193, 4722438821938659918096, 4726978450363049378064, 75562475411932750938384, 75557936064983338189072, 4611967493404229904]
 theorem e24 : enumKeys 1354 409 = s24 := by decide +kernel
-theorem r24 : ∀ M ∈ s24, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 409 M ne blob = true := by
+theorem t24 : rtype 409 = 1354 := by decide
+theorem r24 : ∀ M ∈ s24, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 409 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 409) (rM M) ne blob = true) := by
   unfold s24
-  refine List.forall_mem_cons.2 ⟨⟨0, 288, c3902_b3, by decide, c3902_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3902_b2, by decide, c3902_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 297, c3902_b1, by decide, c3902_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3902_b0, by decide, c3902_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3903_b5, by decide, c3903_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3904_b4, by decide, c3904_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3904_b3, by decide, c3904_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3904_b2, by decide, c3904_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3904_b1, by decide, c3904_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3904_b0, by decide, c3904_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3903_b9, by decide, c3903_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3903_b8, by decide, c3903_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3903_b7, by decide, c3903_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3903_b6, by decide, c3903_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 308, c3902_b7, by decide, c3902_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3902_b9, by decide, c3902_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3902_b8, by decide, c3902_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3905_b4, by decide, c3905_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3905_b3, by decide, c3905_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3905_b2, by decide, c3905_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3905_b7, by decide, c3905_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3905_b6, by decide, c3905_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3905_b5, by decide, c3905_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3902_b6, by decide, c3902_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3902_b5, by decide, c3902_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3902_b4, by decide, c3902_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3904_b5, by decide, c3904_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3904_b9, by decide, c3904_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3905_b1, by decide, c3905_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3905_b0, by decide, c3905_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3904_b6, by decide, c3904_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3904_b7, by decide, c3904_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3904_b8, by decide, c3904_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3903_b1, by decide, c3903_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3903_b0, by decide, c3903_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 263, c3903_b2, by decide, c3903_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3903_b4, by decide, c3903_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3903_b3, by decide, c3903_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 288, c0476_b37, by decide, by rw [tL, t24, show rM 18889539114972525756416 = 4611686293305426176 by decide]; exact c0476_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0476_b36, by decide, by rw [tL, t24, show rM 302231527242726308642816 = 4611686087163707393 by decide]; exact c0476_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 297, c0476_b35, by decide, by rw [tL, t24, show rM 4722439666363590311936 = 4611686019517972736 by decide]; exact c0476_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0476_b34, by decide, by rw [tL, t24, show rM 75557936909408268517376 = 4611686018712666368 by decide]; exact c0476_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0477_b12, by decide, by rw [tL, t24, show rM 4723520530274158968833 = 73787257770888724736 by decide]; exact c0477_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0477_b13, by decide, by rw [tL, t24, show rM 302232608106636877365249 = 73787257838534524929 by decide]; exact c0477_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0477_b8, by decide, by rw [tL, t24, show rM 18907912957027267248129 = 18447025823564300289 by decide]; exact c0477_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0477_b11, by decide, by rw [tL, t24, show rM 75559017773318837239809 = 73787257770083483904 by decide]; exact c0477_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0476_b22, by decide, by rw [tL, t24, show rM 18894078743396915216385 = 72339343892676864 by decide]; exact c0476_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0476_b21, by decide, by rw [tL, t24, show rM 302236066871150698102785 = 72339137750958081 by decide]; exact c0476_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0477_b7, by decide, by rw [tL, t24, show rM 4740813508418331803649 = 18447025549776846849 by decide]; exact c0477_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0477_b6, by decide, by rw [tL, t24, show rM 75576310751463010009089 = 18447025548971540481 by decide]; exact c0477_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0476_b20, by decide, by rw [tL, t24, show rM 4726979294787979771905 = 72339070105223424 by decide]; exact c0476_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0476_b19, by decide, by rw [tL, t24, show rM 75562476537832657977345 = 72339069299917056 by decide]; exact c0476_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 308, c0477_b2, by decide, by rw [tL, t24, show rM 4722439666363590049808 = 4616189619128566016 by decide]; exact c0477_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0477_b3, by decide, by rw [tL, t24, show rM 302231527242726308446224 = 4616189686774366209 by decide]; exact c0477_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0477_b1, by decide, by rw [tL, t24, show rM 75557936909408268320784 = 4616189618323325184 by decide]; exact c0477_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0476_b28, by decide, by rw [tL, t24, show rM 4726978450363049377809 = 76842669715816449 by decide]; exact c0476_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0477_b10, by decide, by rw [tL, t24, show rM 4740813508418331541521 = 18451529149387440129 by decide]; exact c0477_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0476_b29, by decide, by rw [tL, t24, show rM 4726979294787979509777 = 76842669715816704 by decide]; exact c0476_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0476_b30, by decide, by rw [tL, t24, show rM 302236066871150697906193 = 76842737361616897 by decide]; exact c0476_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0477_b9, by decide, by rw [tL, t24, show rM 75576310751463009812497 = 18451529148582199297 by decide]; exact c0477_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0476_b27, by decide, by rw [tL, t24, show rM 75562476537832657780753 = 76842668910575872 by decide]; exact c0476_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0477_b0, by decide, by rw [tL, t24, show rM 18889538270547595624704 = 4612812193212268545 by decide]; exact c0477_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0476_b39, by decide, by rw [tL, t24, show rM 4722438821938660180224 = 4612811919424815105 by decide]; exact c0476_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0476_b38, by decide, by rw [tL, t24, show rM 75557936064983338385664 = 4612811918619508737 by decide]; exact c0476_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0477_b15, by decide, by rw [tL, t24, show rM 4723519685849228837121 = 73788383670795567105 by decide]; exact c0477_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0476_b23, by decide, by rw [tL, t24, show rM 75562475411932750938369 = 73464969190047744 by decide]; exact c0476_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0477_b14, by decide, by rw [tL, t24, show rM 75559016928893907108097 = 73788383669990326273 by decide]; exact c0477_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0476_b26, by decide, by rw [tL, t24, show rM 18894077898971985084673 = 73465243799519233 by decide]; exact c0476_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0476_b24, by decide, by rw [tL, t24, show rM 75562475411932751134977 = 73464969206759424 by decide]; exact c0476_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0476_b18, by decide, by rw [tL, t24, show rM 75557864007389300457729 = 1407375168831489 by decide]; exact c0476_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0476_b25, by decide, by rw [tL, t24, show rM 4726978450363049640193 = 73464970012065793 by decide]; exact c0476_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0477_b5, by decide, by rw [tL, t24, show rM 4722438821938659918096 = 4617315519035408385 by decide]; exact c0477_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0476_b33, by decide, by rw [tL, t24, show rM 4726978450363049378064 = 77687094645948417 by decide]; exact c0476_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 263, c0476_b32, by decide, by rw [tL, t24, show rM 75562475411932750938384 = 77687093840707584 by decide]; exact c0476_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0477_b4, by decide, by rw [tL, t24, show rM 75557936064983338189072 = 4617315518230167553 by decide]; exact c0477_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0476_b31, by decide, by rw [tL, t24, show rM 4611967493404229904 = 77687093572272129 by decide]; exact c0476_ok31⟩, ?_⟩
   simp
 
 def s25 : List Nat := [302231528087151238578176, 302249901929205980069889, 302236067715575628038145, 4740814352843261739009, 75576311595887939944449, 302231527242726308446464, 4722439666363590115584, 75557936909408268321024, 302236066589675721195777, 75576310469988033102081, 302231455185132270518529, 4740813508418331607297, 75557864851814230393089, 4726979294787979575553, 75557935783508361478656, 4726978168888072733184, 4722438821938659983872]
 theorem e25 : enumKeys 1354 589 = s25 := by decide +kernel
-theorem r25 : ∀ M ∈ s25, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 589 M ne blob = true := by
+theorem t25 : rtype 589 = 589 := by decide
+theorem r25 : ∀ M ∈ s25, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 589 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 589) (rM M) ne blob = true) := by
   unfold s25
-  refine List.forall_mem_cons.2 ⟨⟨0, 344, c3905_b8, by decide, c3905_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3906_b8, by decide, c3906_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 288, c3906_b7, by decide, c3906_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3906_b6, by decide, c3906_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3906_b5, by decide, c3906_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3906_b1, by decide, c3906_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3906_b0, by decide, c3906_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3905_b9, by decide, c3905_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3907_b0, by decide, c3907_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3906_b9, by decide, c3906_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3907_b3, by decide, c3907_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3907_b4, by decide, c3907_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3907_b1, by decide, c3907_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3907_b2, by decide, c3907_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 300, c3906_b3, by decide, c3906_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3906_b2, by decide, c3906_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3906_b4, by decide, c3906_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 344, c0470_b35, by decide, by rw [tL, t25, show rM 302231528087151238578176 = 4611686087146995968 by decide]; exact c0470_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0471_b3, by decide, by rw [tL, t25, show rM 302249901929205980069889 = 18447025617405870081 by decide]; exact c0471_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 288, c0470_b31, by decide, by rw [tL, t25, show rM 302236067715575628038145 = 72339137734246656 by decide]; exact c0470_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0471_b2, by decide, by rw [tL, t25, show rM 4740814352843261739009 = 18447025549760135424 by decide]; exact c0471_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0471_b1, by decide, by rw [tL, t25, show rM 75576311595887939944449 = 18447025548954829056 by decide]; exact c0471_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0470_b38, by decide, by rw [tL, t25, show rM 302231527242726308446464 = 4612811987053838337 by decide]; exact c0470_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0470_b37, by decide, by rw [tL, t25, show rM 4722439666363590115584 = 4612811919408103680 by decide]; exact c0470_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0470_b36, by decide, by rw [tL, t25, show rM 75557936909408268321024 = 4612811918602797312 by decide]; exact c0470_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0470_b33, by decide, by rw [tL, t25, show rM 302236066589675721195777 = 73465037641089024 by decide]; exact c0470_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0471_b4, by decide, by rw [tL, t25, show rM 75576310469988033102081 = 18448151448861671424 by decide]; exact c0471_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0470_b30, by decide, by rw [tL, t25, show rM 302231455185132270518529 = 1407443603161089 by decide]; exact c0470_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0471_b5, by decide, by rw [tL, t25, show rM 4740813508418331607297 = 18448151449666977793 by decide]; exact c0471_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0470_b29, by decide, by rw [tL, t25, show rM 75557864851814230393089 = 1407375152120064 by decide]; exact c0470_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0470_b32, by decide, by rw [tL, t25, show rM 4726979294787979575553 = 73464969995354368 by decide]; exact c0470_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 300, c0470_b39, by decide, by rw [tL, t25, show rM 75557935783508361478656 = 4613937818509639680 by decide]; exact c0470_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0470_b34, by decide, by rw [tL, t25, show rM 4726978168888072733184 = 74309394925486080 by decide]; exact c0470_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0471_b0, by decide, by rw [tL, t25, show rM 4722438821938659983872 = 4613937819314946049 by decide]; exact c0471_ok0⟩, ?_⟩
   simp
 
 def s26 : List Nat := [4835703355019710380900353, 1208925909686621738893313, 4835703350516110770307073, 90071992580964353, 1208925896175822907113473, 1208925891672223296520193, 76561193749184513, 4835777069938411164401666, 1209220972023408154902530, 1208999624605322522394626, 4835777065434811553808386, 1209220967519808544309250, 4835703282962116342972418, 295152408778996973570, 1208925837629027700965378, 73804990693364465666, 4835703278458516732379138, 295147905179386380290, 18014398543036418, 1208999606590924080021506, 1208925824118228869185538, 73791479894532685826, 1208925819614629258592258, 73786976294922092546, 4503599711256578, 1208999606590924012916737, 1208925896175822840008705, 73791479894465581057, 1208925891672223229415425, 73786976294854987777, 76561193682079745, 72057594071486465]
 theorem e26 : enumKeys 1354 6146 = s26 := by decide +kernel
-theorem r26 : ∀ M ∈ s26, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 6146 M ne blob = true := by
+theorem t26 : rtype 6146 = 4256 := by decide
+theorem r26 : ∀ M ∈ s26, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 6146 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 6146) (rM M) ne blob = true) := by
   unfold s26
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3907_b7, by decide, c3907_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3907_b6, by decide, c3907_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3908_b0, by decide, c3908_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3908_b1, by decide, c3908_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3907_b5, by decide, c3907_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3907_b8, by decide, c3907_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3907_b9, by decide, c3907_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3909_b1, by decide, c3909_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 158, c3909_b0, by decide, c3909_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 177, c3908_b9, by decide, c3908_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3909_b6, by decide, c3909_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 158, c3909_b5, by decide, c3909_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3909_b9, by decide, c3909_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3910_b0, by decide, c3910_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3909_b7, by decide, c3909_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 185, c3909_b8, by decide, c3909_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3910_b4, by decide, c3910_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 160, c3910_b5, by decide, c3910_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3910_b6, by decide, c3910_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3909_b2, by decide, c3909_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3909_b3, by decide, c3909_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3909_b4, by decide, c3909_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 183, c3910_b1, by decide, c3910_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3910_b2, by decide, c3910_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3910_b3, by decide, c3910_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3908_b2, by decide, c3908_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3908_b4, by decide, c3908_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3908_b3, by decide, c3908_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3908_b6, by decide, c3908_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3908_b5, by decide, c3908_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3908_b7, by decide, c3908_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3908_b8, by decide, c3908_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0444_b39, by decide, by rw [tL, t26, show rM 4835703355019710380900353 = 4611968592915988496 by decide]; exact c0444_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0444_b36, by decide, by rw [tL, t26, show rM 1208925909686621738893313 = 4611967497699332096 by decide]; exact c0444_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0445_b0, by decide, by rw [tL, t26, show rM 4835703350516110770307073 = 4611968592916250624 by decide]; exact c0445_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0444_b34, by decide, by rw [tL, t26, show rM 90071992580964353 = 4611967493404626944 by decide]; exact c0444_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0444_b37, by decide, by rw [tL, t26, show rM 1208925896175822907113473 = 4611967497766174736 by decide]; exact c0444_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0444_b38, by decide, by rw [tL, t26, show rM 1208925891672223296520193 = 4611967497766436864 by decide]; exact c0444_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0444_b35, by decide, by rw [tL, t26, show rM 76561193749184513 = 4611967493471469584 by decide]; exact c0444_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0444_b29, by decide, by rw [tL, t26, show rM 4835777069938411164401666 = 1153485554071896080 by decide]; exact c0444_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 158, c0445_b7, by decide, by rw [tL, t26, show rM 1209220972023408154902530 = 295148468133601214480 by decide]; exact c0445_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 177, c0444_b27, by decide, by rw [tL, t26, show rM 1208999624605322522394626 = 1153484458855239680 by decide]; exact c0444_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0444_b30, by decide, by rw [tL, t26, show rM 4835777065434811553808386 = 1153485554072158208 by decide]; exact c0444_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 158, c0445_b8, by decide, by rw [tL, t26, show rM 1209220967519808544309250 = 295148468133601476608 by decide]; exact c0445_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0444_b22, by decide, by rw [tL, t26, show rM 4835703282962116342972418 = 564049465311248 by decide]; exact c0444_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0445_b5, by decide, by rw [tL, t26, show rM 295152408778996973570 = 295148468129306509328 by decide]; exact c0445_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0444_b19, by decide, by rw [tL, t26, show rM 1208925837629027700965378 = 562954248654848 by decide]; exact c0444_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 185, c0444_b24, by decide, by rw [tL, t26, show rM 73804990693364465666 = 1153484454560534528 by decide]; exact c0444_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0444_b23, by decide, by rw [tL, t26, show rM 4835703278458516732379138 = 564049465573376 by decide]; exact c0444_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 160, c0445_b6, by decide, by rw [tL, t26, show rM 295147905179386380290 = 295148468129306771456 by decide]; exact c0445_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0444_b17, by decide, by rw [tL, t26, show rM 18014398543036418 = 562949953949696 by decide]; exact c0444_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0444_b28, by decide, by rw [tL, t26, show rM 1208999606590924080021506 = 1153484458922344448 by decide]; exact c0444_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0444_b20, by decide, by rw [tL, t26, show rM 1208925824118228869185538 = 562954315497488 by decide]; exact c0444_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0444_b25, by decide, by rw [tL, t26, show rM 73791479894532685826 = 1153484454627377168 by decide]; exact c0444_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 183, c0444_b21, by decide, by rw [tL, t26, show rM 1208925819614629258592258 = 562954315759616 by decide]; exact c0444_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0444_b26, by decide, by rw [tL, t26, show rM 73786976294922092546 = 1153484454627639296 by decide]; exact c0444_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0444_b18, by decide, by rw [tL, t26, show rM 4503599711256578 = 562950020792336 by decide]; exact c0444_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0444_b33, by decide, by rw [tL, t26, show rM 1208999606590924012916737 = 1171217382388006912 by decide]; exact c0444_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0445_b3, by decide, by rw [tL, t26, show rM 1208925896175822840008705 = 4629981896208547856 by decide]; exact c0445_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0444_b31, by decide, by rw [tL, t26, show rM 73791479894465581057 = 1171217378093039632 by decide]; exact c0444_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0445_b4, by decide, by rw [tL, t26, show rM 1208925891672223229415425 = 4629981896208809984 by decide]; exact c0445_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0444_b32, by decide, by rw [tL, t26, show rM 73786976294854987777 = 1171217378093301760 by decide]; exact c0444_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0445_b1, by decide, by rw [tL, t26, show rM 76561193682079745 = 4629981891913842704 by decide]; exact c0445_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0445_b2, by decide, by rw [tL, t26, show rM 72057594071486465 = 4629981891914104832 by decide]; exact c0445_ok2⟩, ?_⟩
   simp
 
 def s27 : List Nat := [1208925896175822840266753, 18889542492672262930433, 1208925891953698206384129, 75557940287108005756929, 18889538270547629047809, 1208926977039733408923650, 18963257411373046431746, 1208999606872398989885442, 1208930435804247229726722, 75631655205808789258242, 1208926972817608775041026, 18963253189248412549122, 75559021151018574413826, 18894082121096652390402, 1208930431300647619133442, 75631650702209178664962, 1208925819896104168456194, 73787257769831956482, 75557868229513967828994, 4616189618071797762, 75559016647418963820546, 18894077617497041797122, 18889466212953591119874, 1153202979617112066, 1208999606872398989623313, 1208925896175822840004625, 1208930435804247229464593, 75631655205808788996113, 1208930431300647618871313, 75631650702209178402833, 1208925891953698206122001, 73787257769831694353, 75557940287108005494801, 4616189618071535633, 75557935783508394901521, 4611686018460942353, 72339069048193041]
 theorem e27 : enumKeys 1354 2130 = s27 := by decide +kernel
-theorem r27 : ∀ M ∈ s27, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2130 M ne blob = true := by
+theorem t27 : rtype 2130 = 1185 := by decide
+theorem r27 : ∀ M ∈ s27, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2130 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 2130) (rM M) ne blob = true) := by
   unfold s27
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3910_b9, by decide, c3910_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3910_b7, by decide, c3910_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 167, c3911_b1, by decide, c3911_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3911_b0, by decide, c3911_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3910_b8, by decide, c3910_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3912_b6, by decide, c3912_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3912_b5, by decide, c3912_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3913_b7, by decide, c3913_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3913_b6, by decide, c3913_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3913_b5, by decide, c3913_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3913_b0, by decide, c3913_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3912_b9, by decide, c3912_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3912_b8, by decide, c3912_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3912_b7, by decide, c3912_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 167, c3913_b9, by decide, c3913_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3913_b8, by decide, c3913_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 167, c3914_b2, by decide, c3914_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 177, c3914_b3, by decide, c3914_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 195, c3914_b0, by decide, c3914_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 177, c3914_b1, by decide, c3914_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3913_b2, by decide, c3913_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3913_b1, by decide, c3913_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3913_b3, by decide, c3913_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3913_b4, by decide, c3913_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3911_b5, by decide, c3911_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3911_b4, by decide, c3911_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3911_b3, by decide, c3911_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 234, c3911_b2, by decide, c3911_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3911_b7, by decide, c3911_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 242, c3911_b6, by decide, c3911_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3912_b1, by decide, c3912_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3912_b0, by decide, c3912_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3911_b9, by decide, c3911_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3911_b8, by decide, c3911_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3912_b3, by decide, c3912_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3912_b2, by decide, c3912_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3912_b4, by decide, c3912_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0459_b19, by decide, by rw [tL, t27, show rM 1208925896175822840266753 = 4611967497715843088 by decide]; exact c0459_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0459_b21, by decide, by rw [tL, t27, show rM 18889542492672262930433 = 4611967768282267664 by decide]; exact c0459_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 167, c0459_b20, by decide, by rw [tL, t27, show rM 1208925891953698206384129 = 4611967497716105217 by decide]; exact c0459_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0459_b18, by decide, by rw [tL, t27, show rM 75557940287108005756929 = 4611967493689573392 by decide]; exact c0459_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0459_b22, by decide, by rw [tL, t27, show rM 18889538270547629047809 = 4611967768282529793 by decide]; exact c0459_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0459_b31, by decide, by rw [tL, t27, show rM 1208926977039733408923650 = 73787539249086595088 by decide]; exact c0459_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0459_b12, by decide, by rw [tL, t27, show rM 18963257411373046431746 = 1153484729438175248 by decide]; exact c0459_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0459_b11, by decide, by rw [tL, t27, show rM 1208999606872398989885442 = 1153484458872012801 by decide]; exact c0459_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0459_b0, by decide, by rw [tL, t27, show rM 1208930435804247229726722 = 72620548303093776 by decide]; exact c0459_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0459_b9, by decide, by rw [tL, t27, show rM 75631655205808789258242 = 1153484454845480976 by decide]; exact c0459_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0459_b32, by decide, by rw [tL, t27, show rM 1208926972817608775041026 = 73787539249086857217 by decide]; exact c0459_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0459_b13, by decide, by rw [tL, t27, show rM 18963253189248412549122 = 1153484729438437377 by decide]; exact c0459_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0459_b29, by decide, by rw [tL, t27, show rM 75559021151018574413826 = 73787539245060325392 by decide]; exact c0459_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0459_b2, by decide, by rw [tL, t27, show rM 18894082121096652390402 = 72620818869518352 by decide]; exact c0459_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 167, c0459_b1, by decide, by rw [tL, t27, show rM 1208930431300647619133442 = 72620548303355904 by decide]; exact c0459_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0459_b10, by decide, by rw [tL, t27, show rM 75631650702209178664962 = 1153484454845743104 by decide]; exact c0459_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 167, c0458_b37, by decide, by rw [tL, t27, show rM 1208925819896104168456194 = 562954265427969 by decide]; exact c0458_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 177, c0459_b8, by decide, by rw [tL, t27, show rM 73787257769831956482 = 1153484454577307649 by decide]; exact c0459_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 195, c0458_b36, by decide, by rw [tL, t27, show rM 75557868229513967828994 = 562950238896144 by decide]; exact c0458_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 177, c0458_b39, by decide, by rw [tL, t27, show rM 4616189618071797762 = 72620544008388624 by decide]; exact c0458_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0459_b30, by decide, by rw [tL, t27, show rM 75559016647418963820546 = 73787539245060587520 by decide]; exact c0459_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0459_b3, by decide, by rw [tL, t27, show rM 18894077617497041797122 = 72620818869780480 by decide]; exact c0459_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0458_b38, by decide, by rw [tL, t27, show rM 18889466212953591119874 = 563224831852545 by decide]; exact c0458_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0459_b28, by decide, by rw [tL, t27, show rM 1153202979617112066 = 73787539244792152065 by decide]; exact c0459_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0459_b17, by decide, by rw [tL, t27, show rM 1208999606872398989623313 = 1157706583505895425 by decide]; exact c0459_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0459_b26, by decide, by rw [tL, t27, show rM 1208925896175822840004625 = 4616471097326436368 by decide]; exact c0459_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0459_b6, by decide, by rw [tL, t27, show rM 1208930435804247229464593 = 76842672936976400 by decide]; exact c0459_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 234, c0459_b15, by decide, by rw [tL, t27, show rM 75631655205808788996113 = 1157706579479363600 by decide]; exact c0459_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0459_b7, by decide, by rw [tL, t27, show rM 1208930431300647618871313 = 76842672937238528 by decide]; exact c0459_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 242, c0459_b16, by decide, by rw [tL, t27, show rM 75631650702209178402833 = 1157706579479625728 by decide]; exact c0459_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0459_b27, by decide, by rw [tL, t27, show rM 1208925891953698206122001 = 4616471097326698497 by decide]; exact c0459_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0459_b14, by decide, by rw [tL, t27, show rM 73787257769831694353 = 1157706579211190273 by decide]; exact c0459_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0459_b24, by decide, by rw [tL, t27, show rM 75557940287108005494801 = 4616471093300166672 by decide]; exact c0459_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0459_b4, by decide, by rw [tL, t27, show rM 4616189618071535633 = 76842668642271248 by decide]; exact c0459_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0459_b25, by decide, by rw [tL, t27, show rM 75557935783508394901521 = 4616471093300428800 by decide]; exact c0459_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0459_b5, by decide, by rw [tL, t27, show rM 4611686018460942353 = 76842668642533376 by decide]; exact c0459_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0459_b23, by decide, by rw [tL, t27, show rM 72339069048193041 = 4616471093031993345 by decide]; exact c0459_ok23⟩, ?_⟩
   simp
 
 def s28 : List Nat := [1208925892798123136319489, 302231531464850975817729, 302231526961251365158913, 4722439666363623538689, 4796157962764110790658, 1208999607716823919820802, 1208944270862302511693826, 302305246383551759319042, 4796154585064407040002, 4740817730542998913026, 1208944266358702901100546, 302305241879952148725762, 1208925820740529098391554, 73788102194761891842, 302231459407256937889794, 18451247673353764866, 302231454903657327230978, 4740813226943388319746, 4722367608769585610754, 4796157962764110790913, 1208999606590924012978433, 1208925896175822840070401, 73791479894465642753, 4796153459164500197633, 4722443044063327289601, 1208925891672223229477121, 73786976294855049473, 76561193682141441, 4722438540463716696321]
 theorem e28 : enumKeys 1354 2310 = s28 := by decide +kernel
-theorem r28 : ∀ M ∈ s28, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2310 M ne blob = true := by
+theorem t28 : rtype 2310 = 420 := by decide
+theorem r28 : ∀ M ∈ s28, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2310 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 2310) (rM M) ne blob = true) := by
   unfold s28
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3914_b7, by decide, c3914_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3914_b6, by decide, c3914_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3914_b4, by decide, c3914_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3914_b5, by decide, c3914_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3915_b8, by decide, c3915_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3916_b6, by decide, c3916_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3916_b5, by decide, c3916_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3916_b4, by decide, c3916_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3916_b0, by decide, c3916_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3915_b9, by decide, c3915_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3916_b8, by decide, c3916_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3916_b7, by decide, c3916_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3917_b1, by decide, c3917_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3917_b2, by decide, c3917_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3916_b9, by decide, c3916_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3917_b0, by decide, c3917_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3916_b1, by decide, c3916_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3916_b2, by decide, c3916_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3916_b3, by decide, c3916_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3914_b8, by decide, c3914_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3915_b2, by decide, c3915_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3915_b4, by decide, c3915_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 259, c3915_b3, by decide, c3915_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3914_b9, by decide, c3914_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3915_b0, by decide, c3915_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3915_b6, by decide, c3915_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 259, c3915_b5, by decide, c3915_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3915_b7, by decide, c3915_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3915_b1, by decide, c3915_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0450_b27, by decide, by rw [tL, t28, show rM 1208925892798123136319489 = 4611967497699393792 by decide]; exact c0450_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0450_b28, by decide, by rw [tL, t28, show rM 302231531464850975817729 = 4611967562123902992 by decide]; exact c0450_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0450_b29, by decide, by rw [tL, t28, show rM 302231526961251365158913 = 4611967562124099584 by decide]; exact c0450_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0450_b26, by decide, by rw [tL, t28, show rM 4722439666363623538689 = 4611967494478364928 by decide]; exact c0450_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0450_b16, by decide, by rw [tL, t28, show rM 4796157962764110790658 = 1153484455634010128 by decide]; exact c0450_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0450_b18, by decide, by rw [tL, t28, show rM 1208999607716823919820802 = 1153484458855301376 by decide]; exact c0450_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0450_b38, by decide, by rw [tL, t28, show rM 1208944270862302511693826 = 18447307027958005776 by decide]; exact c0450_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0450_b19, by decide, by rw [tL, t28, show rM 302305246383551759319042 = 1153484523279810576 by decide]; exact c0450_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0450_b17, by decide, by rw [tL, t28, show rM 4796154585064407040002 = 1153484455634272512 by decide]; exact c0450_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0450_b36, by decide, by rw [tL, t28, show rM 4740817730542998913026 = 18447307024736976912 by decide]; exact c0450_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0450_b39, by decide, by rw [tL, t28, show rM 1208944266358702901100546 = 18447307027958267904 by decide]; exact c0450_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0450_b20, by decide, by rw [tL, t28, show rM 302305241879952148725762 = 1153484523280072704 by decide]; exact c0450_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0450_b12, by decide, by rw [tL, t28, show rM 1208925820740529098391554 = 562954248716544 by decide]; exact c0450_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0450_b15, by decide, by rw [tL, t28, show rM 73788102194761891842 = 1153484454560596224 by decide]; exact c0450_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0450_b13, by decide, by rw [tL, t28, show rM 302231459407256937889794 = 563018673225744 by decide]; exact c0450_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0450_b35, by decide, by rw [tL, t28, show rM 18451247673353764866 = 18447307023663300624 by decide]; exact c0450_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0450_b14, by decide, by rw [tL, t28, show rM 302231454903657327230978 = 563018673422336 by decide]; exact c0450_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0450_b37, by decide, by rw [tL, t28, show rM 4740813226943388319746 = 18447307024737239040 by decide]; exact c0450_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0450_b11, by decide, by rw [tL, t28, show rM 4722367608769585610754 = 562951027687680 by decide]; exact c0450_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0450_b23, by decide, by rw [tL, t28, show rM 4796157962764110790913 = 1154328880564142096 by decide]; exact c0450_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0450_b25, by decide, by rw [tL, t28, show rM 1208999606590924012978433 = 1154328883785433088 by decide]; exact c0450_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0450_b33, by decide, by rw [tL, t28, show rM 1208925896175822840070401 = 4613093397605974032 by decide]; exact c0450_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 259, c0450_b21, by decide, by rw [tL, t28, show rM 73791479894465642753 = 1154328879490465808 by decide]; exact c0450_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0450_b24, by decide, by rw [tL, t28, show rM 4796153459164500197633 = 1154328880564404224 by decide]; exact c0450_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0450_b31, by decide, by rw [tL, t28, show rM 4722443044063327289601 = 4613093394384945168 by decide]; exact c0450_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0450_b34, by decide, by rw [tL, t28, show rM 1208925891672223229477121 = 4613093397606236160 by decide]; exact c0450_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 259, c0450_b22, by decide, by rw [tL, t28, show rM 73786976294855049473 = 1154328879490727936 by decide]; exact c0450_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0450_b30, by decide, by rw [tL, t28, show rM 76561193682141441 = 4613093393311268880 by decide]; exact c0450_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0450_b32, by decide, by rw [tL, t28, show rM 4722438540463716696321 = 4613093394385207296 by decide]; exact c0450_ok32⟩, ?_⟩
   simp
 
 def s29 : List Nat := [4835703355019710364188673, 1208925909686621722181633, 4722456554862209400833, 4835703350797585730306049, 75557953797906887671809, 4722443044063377620993, 1208925891953698256519169, 75557940287108055891969, 75557935783508445233153, 4722438821938743738369, 5017518891648625410050, 4796171473562992902146, 4835777065716286513807362, 1209220967801283504308226, 4835707894648134753648642, 75853016134693303681026, 1208930449315046111641602, 75631668716607671173122, 5017514669523991527426, 4726996183286598860802, 4835707890144535143055362, 75853011631093693087746, 4835703278739991692378114, 295148186654346379266, 75557881740312849743874, 4629700416953712642, 4796153740639527239682, 4726982672487767080962, 1208930431300647669268482, 75631650702209228800002, 1208925819896104218591234, 73787257769882091522, 75557868229514017964034, 4616189618121932802, 75557863725914407305218, 4726978168888156487682, 4722366764344705810434, 4796153740639460134913, 4722443044063310516225, 4726982672487699976193, 1208930431300647602163713, 75631650702209161695233, 1208925891953698189414401, 73787257769814986753, 75557940287107988787201, 4616189618054828033, 4726978168888089382913, 4722438821938676633601, 75557935783508378193921, 4611686018444234753, 72339069031485441]
 theorem e29 : enumKeys 1354 5190 = s29 := by decide +kernel
-theorem r29 : ∀ M ∈ s29, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5190 M ne blob = true := by
+theorem t29 : rtype 5190 = 4245 := by decide
+theorem r29 : ∀ M ∈ s29, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 5190 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 5190) (rM M) ne blob = true) := by
   unfold s29
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3917_b8, by decide, c3917_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3917_b7, by decide, c3917_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3917_b4, by decide, c3917_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3918_b2, by decide, c3918_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3918_b1, by decide, c3918_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 256, c3917_b3, by decide, c3917_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3918_b0, by decide, c3918_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3917_b9, by decide, c3917_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 253, c3917_b5, by decide, c3917_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3917_b6, by decide, c3917_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 214, c3919_b8, by decide, c3919_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 241, c3919_b7, by decide, c3919_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3921_b1, by decide, c3921_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 152, c3921_b0, by decide, c3921_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 179, c3920_b9, by decide, c3920_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3920_b8, by decide, c3920_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3920_b7, by decide, c3920_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 191, c3920_b6, by decide, c3920_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3920_b2, by decide, c3920_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3920_b1, by decide, c3920_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3921_b9, by decide, c3921_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 170, c3921_b8, by decide, c3921_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 173, c3922_b2, by decide, c3922_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 154, c3922_b3, by decide, c3922_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 189, c3922_b0, by decide, c3922_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 171, c3922_b1, by decide, c3922_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3920_b0, by decide, c3920_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 213, c3919_b9, by decide, c3919_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3921_b3, by decide, c3921_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3921_b2, by decide, c3921_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 182, c3921_b6, by decide, c3921_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3921_b7, by decide, c3921_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3921_b4, by decide, c3921_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3921_b5, by decide, c3921_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 253, c3920_b3, by decide, c3920_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3920_b4, by decide, c3920_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3920_b5, by decide, c3920_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3918_b5, by decide, c3918_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 244, c3918_b4, by decide, c3918_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 239, c3918_b3, by decide, c3918_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3918_b9, by decide, c3918_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 237, c3918_b8, by decide, c3918_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 176, c3919_b3, by decide, c3919_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3919_b2, by decide, c3919_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 200, c3919_b1, by decide, c3919_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 218, c3919_b0, by decide, c3919_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3918_b6, by decide, c3918_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3918_b7, by decide, c3918_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 194, c3919_b5, by decide, c3919_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 212, c3919_b4, by decide, c3919_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 178, c3919_b6, by decide, c3919_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0466_b35, by decide, by rw [tL, t29, show rM 4835703355019710364188673 = 4611968592915791888 by decide]; exact c0466_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0466_b33, by decide, by rw [tL, t29, show rM 1208925909686621722181633 = 4611967497699135488 by decide]; exact c0466_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0466_b30, by decide, by rw [tL, t29, show rM 4722456554862209400833 = 4611967494478106624 by decide]; exact c0466_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0466_b36, by decide, by rw [tL, t29, show rM 4835703350797585730306049 = 4611968592916054017 by decide]; exact c0466_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0466_b27, by decide, by rw [tL, t29, show rM 75557953797906887671809 = 4611967493672865792 by decide]; exact c0466_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 256, c0466_b31, by decide, by rw [tL, t29, show rM 4722443044063377620993 = 4611967494544949264 by decide]; exact c0466_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0466_b34, by decide, by rw [tL, t29, show rM 1208925891953698256519169 = 4611967497766240257 by decide]; exact c0466_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0466_b28, by decide, by rw [tL, t29, show rM 75557940287108055891969 = 4611967493739708432 by decide]; exact c0466_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 253, c0466_b29, by decide, by rw [tL, t29, show rM 75557935783508445233153 = 4611967493739905024 by decide]; exact c0466_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0466_b32, by decide, by rw [tL, t29, show rM 4722438821938743738369 = 4611967494545211393 by decide]; exact c0466_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 214, c0467_b6, by decide, by rw [tL, t29, show rM 5017518891648625410050 = 295148468130379989008 by decide]; exact c0467_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 241, c0466_b21, by decide, by rw [tL, t29, show rM 4796171473562992902146 = 1153484455634014208 by decide]; exact c0466_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0466_b23, by decide, by rw [tL, t29, show rM 4835777065716286513807362 = 1153485554071961601 by decide]; exact c0466_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 152, c0467_b8, by decide, by rw [tL, t29, show rM 1209220967801283504308226 = 295148468133601280001 by decide]; exact c0467_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 179, c0466_b11, by decide, by rw [tL, t29, show rM 4835707894648134753648642 = 72621643503042576 by decide]; exact c0466_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0467_b4, by decide, by rw [tL, t29, show rM 75853016134693303681026 = 295148468129574748176 by decide]; exact c0467_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0466_b9, by decide, by rw [tL, t29, show rM 1208930449315046111641602 = 72620548286386176 by decide]; exact c0466_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 191, c0466_b19, by decide, by rw [tL, t29, show rM 75631668716607671173122 = 1153484454828773376 by decide]; exact c0466_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0467_b7, by decide, by rw [tL, t29, show rM 5017514669523991527426 = 295148468130380251137 by decide]; exact c0467_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0466_b6, by decide, by rw [tL, t29, show rM 4726996183286598860802 = 72620545065357312 by decide]; exact c0466_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0466_b12, by decide, by rw [tL, t29, show rM 4835707890144535143055362 = 72621643503304704 by decide]; exact c0466_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 170, c0467_b5, by decide, by rw [tL, t29, show rM 75853011631093693087746 = 295148468129575010304 by decide]; exact c0467_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 173, c0466_b3, by decide, by rw [tL, t29, show rM 4835703278739991692378114 = 564049465376769 by decide]; exact c0466_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 154, c0467_b3, by decide, by rw [tL, t29, show rM 295148186654346379266 = 295148468129306574849 by decide]; exact c0467_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 189, c0465_b38, by decide, by rw [tL, t29, show rM 75557881740312849743874 = 562950222188544 by decide]; exact c0465_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 171, c0466_b4, by decide, by rw [tL, t29, show rM 4629700416953712642 = 72620543991681024 by decide]; exact c0466_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0466_b22, by decide, by rw [tL, t29, show rM 4796153740639527239682 = 1153484455701118977 by decide]; exact c0466_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 213, c0466_b7, by decide, by rw [tL, t29, show rM 4726982672487767080962 = 72620545132199952 by decide]; exact c0466_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0466_b10, by decide, by rw [tL, t29, show rM 1208930431300647669268482 = 72620548353490944 by decide]; exact c0466_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0466_b20, by decide, by rw [tL, t29, show rM 75631650702209228800002 = 1153484454895878144 by decide]; exact c0466_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 182, c0466_b2, by decide, by rw [tL, t29, show rM 1208925819896104218591234 = 562954315563009 by decide]; exact c0466_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0466_b18, by decide, by rw [tL, t29, show rM 73787257769882091522 = 1153484454627442689 by decide]; exact c0466_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0465_b39, by decide, by rw [tL, t29, show rM 75557868229514017964034 = 562950289031184 by decide]; exact c0465_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0466_b5, by decide, by rw [tL, t29, show rM 4616189618121932802 = 72620544058523664 by decide]; exact c0466_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 253, c0466_b0, by decide, by rw [tL, t29, show rM 75557863725914407305218 = 562950289227776 by decide]; exact c0466_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0466_b8, by decide, by rw [tL, t29, show rM 4726978168888156487682 = 72620545132462080 by decide]; exact c0466_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0466_b1, by decide, by rw [tL, t29, show rM 4722366764344705810434 = 562951094534145 by decide]; exact c0466_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0466_b26, by decide, by rw [tL, t29, show rM 4796153740639460134913 = 1171217379166781441 by decide]; exact c0466_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 244, c0467_b0, by decide, by rw [tL, t29, show rM 4722443044063310516225 = 4629981892987322384 by decide]; exact c0467_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 239, c0466_b15, by decide, by rw [tL, t29, show rM 4726982672487699976193 = 90353468597862416 by decide]; exact c0466_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0466_b17, by decide, by rw [tL, t29, show rM 1208930431300647602163713 = 90353471819153408 by decide]; exact c0466_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 237, c0466_b25, by decide, by rw [tL, t29, show rM 75631650702209161695233 = 1171217378361540608 by decide]; exact c0466_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 176, c0467_b2, by decide, by rw [tL, t29, show rM 1208925891953698189414401 = 4629981896208613377 by decide]; exact c0467_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0466_b24, by decide, by rw [tL, t29, show rM 73787257769814986753 = 1171217378093105153 by decide]; exact c0466_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 200, c0466_b38, by decide, by rw [tL, t29, show rM 75557940287107988787201 = 4629981892182081552 by decide]; exact c0466_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 218, c0466_b13, by decide, by rw [tL, t29, show rM 4616189618054828033 = 90353467524186128 by decide]; exact c0466_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0466_b16, by decide, by rw [tL, t29, show rM 4726978168888089382913 = 90353468598124544 by decide]; exact c0466_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0467_b1, by decide, by rw [tL, t29, show rM 4722438821938676633601 = 4629981892987584513 by decide]; exact c0467_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 194, c0466_b39, by decide, by rw [tL, t29, show rM 75557935783508378193921 = 4629981892182343680 by decide]; exact c0466_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 212, c0466_b14, by decide, by rw [tL, t29, show rM 4611686018444234753 = 90353467524448256 by decide]; exact c0466_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 178, c0466_b37, by decide, by rw [tL, t29, show rM 72339069031485441 = 4629981891913908225 by decide]; exact c0466_ok37⟩, ?_⟩
   simp
 
 def s30 : List Nat := [18889542492672246218753, 4722443044063310774273, 75557936064983338385409, 1208925891953698189672449, 75557940287107989045249, 18889538270547612336129, 4722438821938676891649, 75557936064983355097089, 4723523907973879431170, 1208926972817608758329346, 18963253189248395837442, 75559021151018557702146, 18894082121096635678722, 4796153740639460392962, 4726982672487700234242, 1208930431582122579132418, 75631650983684138663938, 75562479915532378505218, 4723519685849245548546, 75562475411932767649794, 75559016928893923819522, 18894077898972001796098, 75562475411932767846402, 75557864007389317169154, 4726978450363066351618, 4796153740639460130833, 4722443044063310512145, 4726982672487699972113, 1208925891953698189410321, 1208930431582122578870289, 75631650983684138401809, 75557940287107988783121, 75562479915532378243089, 4722438821938676629521, 4726978450363066089489, 75562475411932767649809, 75557936064983354900497, 4611967493420941329]
 theorem e30 : enumKeys 1354 1174 = s30 := by decide +kernel
-theorem r30 : ∀ M ∈ s30, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1174 M ne blob = true := by
+theorem t30 : rtype 1174 = 1174 := by decide
+theorem r30 : ∀ M ∈ s30, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1174 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1174) (rM M) ne blob = true) := by
   unfold s30
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3922_b7, by decide, c3922_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3922_b4, by decide, c3922_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3923_b1, by decide, c3923_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3923_b0, by decide, c3923_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3922_b9, by decide, c3922_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 211, c3922_b8, by decide, c3922_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3922_b6, by decide, c3922_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3922_b5, by decide, c3922_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3924_b5, by decide, c3924_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3925_b5, by decide, c3925_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3925_b4, by decide, c3925_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3925_b3, by decide, c3925_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3925_b2, by decide, c3925_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3924_b8, by decide, c3924_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 233, c3924_b7, by decide, c3924_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 166, c3926_b1, by decide, c3926_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3926_b0, by decide, c3926_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 187, c3925_b9, by decide, c3925_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3924_b6, by decide, c3924_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3925_b6, by decide, c3925_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3925_b8, by decide, c3925_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 175, c3925_b7, by decide, c3925_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3924_b9, by decide, c3924_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3925_b0, by decide, c3925_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3925_b1, by decide, c3925_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3923_b4, by decide, c3923_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 276, c3923_b3, by decide, c3923_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 279, c3923_b2, by decide, c3923_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3924_b1, by decide, c3924_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 206, c3924_b0, by decide, c3924_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3923_b9, by decide, c3923_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 232, c3923_b8, by decide, c3923_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3923_b7, by decide, c3923_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3923_b6, by decide, c3923_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 230, c3923_b5, by decide, c3923_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3924_b2, by decide, c3924_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 190, c3924_b4, by decide, c3924_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 209, c3924_b3, by decide, c3924_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0476_b6, by decide, by rw [tL, t30, show rM 18889542492672246218753 = 4611967768282071056 by decide]; exact c0476_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0476_b3, by decide, by rw [tL, t30, show rM 4722443044063310774273 = 4611967494494617616 by decide]; exact c0476_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0476_b0, by decide, by rw [tL, t30, show rM 75557936064983338385409 = 4611967493689376769 by decide]; exact c0476_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0476_b5, by decide, by rw [tL, t30, show rM 1208925891953698189672449 = 4611967497715908609 by decide]; exact c0476_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0476_b1, by decide, by rw [tL, t30, show rM 75557940287107989045249 = 4611967493689376784 by decide]; exact c0476_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 211, c0476_b7, by decide, by rw [tL, t30, show rM 18889538270547612336129 = 4611967768282333185 by decide]; exact c0476_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0476_b4, by decide, by rw [tL, t30, show rM 4722438821938676891649 = 4611967494494879745 by decide]; exact c0476_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0476_b2, by decide, by rw [tL, t30, show rM 75557936064983355097089 = 4611967493689573377 by decide]; exact c0476_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0476_b15, by decide, by rw [tL, t30, show rM 4723523907973879431170 = 73787539245865369616 by decide]; exact c0476_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0476_b17, by decide, by rw [tL, t30, show rM 1208926972817608758329346 = 73787539249086660609 by decide]; exact c0476_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0475_b37, by decide, by rw [tL, t30, show rM 18963253189248395837442 = 1153484729438240769 by decide]; exact c0475_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0476_b13, by decide, by rw [tL, t30, show rM 75559021151018557702146 = 73787539245060128784 by decide]; exact c0476_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0475_b27, by decide, by rw [tL, t30, show rM 18894082121096635678722 = 72620818869321744 by decide]; exact c0475_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0475_b36, by decide, by rw [tL, t30, show rM 4796153740639460392962 = 1153484455650787329 by decide]; exact c0475_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 233, c0475_b24, by decide, by rw [tL, t30, show rM 4726982672487700234242 = 72620545081868304 by decide]; exact c0475_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 166, c0475_b26, by decide, by rw [tL, t30, show rM 1208930431582122579132418 = 72620548303159297 by decide]; exact c0475_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0475_b35, by decide, by rw [tL, t30, show rM 75631650983684138663938 = 1153484454845546497 by decide]; exact c0475_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 187, c0475_b22, by decide, by rw [tL, t30, show rM 75562479915532378505218 = 72620544276627472 by decide]; exact c0475_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0476_b16, by decide, by rw [tL, t30, show rM 4723519685849245548546 = 73787539245865631745 by decide]; exact c0476_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0475_b21, by decide, by rw [tL, t30, show rM 75562475411932767649794 = 72620544260112384 by decide]; exact c0475_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0476_b14, by decide, by rw [tL, t30, show rM 75559016928893923819522 = 73787539245060390913 by decide]; exact c0476_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 175, c0475_b28, by decide, by rw [tL, t30, show rM 18894077898972001796098 = 72620818869583873 by decide]; exact c0475_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0475_b23, by decide, by rw [tL, t30, show rM 75562475411932767846402 = 72620544276824064 by decide]; exact c0475_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0475_b20, by decide, by rw [tL, t30, show rM 75557864007389317169154 = 562950238896129 by decide]; exact c0475_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0475_b25, by decide, by rw [tL, t30, show rM 4726978450363066351618 = 72620545082130433 by decide]; exact c0475_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0475_b39, by decide, by rw [tL, t30, show rM 4796153740639460130833 = 1157706580284669953 by decide]; exact c0475_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 276, c0476_b10, by decide, by rw [tL, t30, show rM 4722443044063310512145 = 4616471094105210896 by decide]; exact c0476_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 279, c0475_b32, by decide, by rw [tL, t30, show rM 4726982672487699972113 = 76842669715750928 by decide]; exact c0475_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0476_b12, by decide, by rw [tL, t30, show rM 1208925891953698189410321 = 4616471097326501889 by decide]; exact c0476_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 206, c0475_b34, by decide, by rw [tL, t30, show rM 1208930431582122578870289 = 76842672937041921 by decide]; exact c0475_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0475_b38, by decide, by rw [tL, t30, show rM 75631650983684138401809 = 1157706579479429121 by decide]; exact c0475_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 232, c0476_b8, by decide, by rw [tL, t30, show rM 75557940287107988783121 = 4616471093299970064 by decide]; exact c0476_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0475_b30, by decide, by rw [tL, t30, show rM 75562479915532378243089 = 76842668910510096 by decide]; exact c0475_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0476_b11, by decide, by rw [tL, t30, show rM 4722438821938676629521 = 4616471094105473025 by decide]; exact c0476_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 230, c0475_b33, by decide, by rw [tL, t30, show rM 4726978450363066089489 = 76842669716013057 by decide]; exact c0475_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0475_b31, by decide, by rw [tL, t30, show rM 75562475411932767649809 = 76842668910772224 by decide]; exact c0475_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 190, c0476_b9, by decide, by rw [tL, t30, show rM 75557936064983354900497 = 4616471093300232193 by decide]; exact c0476_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 209, c0475_b29, by decide, by rw [tL, t30, show rM 4611967493420941329 = 76842668642336769 by decide]; exact c0475_ok29⟩, ?_⟩
   simp
 
 def s31 : List Nat := [302231527242726308446209, 75557936909408268320769, 1208925892798123119607809, 302231531464850959106049, 302231527242726325157889, 4722439666363606827009, 75557936909408285032449, 4796153740639460196354, 4796154585064390328322, 4726982672487700037634, 4740817730542982201346, 1208944266640177861099522, 302305242161427108724738, 1208930432426547509067778, 75631651828109068599298, 302236071093275348566018, 75576314973587660472322, 302236066589675737907202, 75576310469988049813506, 302231455185132287229954, 4740813508418348318722, 75557864851814247104514, 4726979294787996286978, 4796153740639460196609, 4722443044063310577921, 4726982672487700037889, 1208930431300647602225409, 75631650702209161756929, 1208925891953698189476097, 73787257769815048449, 75557940287107988848897, 4616189618054889729, 75557935783508378190081, 4726978168888089444609, 4722438821938676695297]
 theorem e31 : enumKeys 1354 1354 = s31 := by decide +kernel
-theorem r31 : ∀ M ∈ s31, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1354 M ne blob = true := by
+theorem t31 : rtype 1354 = 409 := by decide
+theorem r31 : ∀ M ∈ s31, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1354 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1354) (rM M) ne blob = true) := by
   unfold s31
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3926_b8, by decide, c3926_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3926_b7, by decide, c3926_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3926_b6, by decide, c3926_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3926_b5, by decide, c3926_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3926_b4, by decide, c3926_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 259, c3926_b3, by decide, c3926_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3926_b2, by decide, c3926_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3928_b4, by decide, c3928_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3928_b3, by decide, c3928_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3928_b2, by decide, c3928_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3928_b1, by decide, c3928_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 168, c3929_b6, by decide, c3929_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3929_b5, by decide, c3929_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3929_b4, by decide, c3929_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3929_b3, by decide, c3929_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3929_b2, by decide, c3929_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3929_b1, by decide, c3929_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3928_b6, by decide, c3928_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3928_b5, by decide, c3928_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3928_b9, by decide, c3928_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3929_b0, by decide, c3929_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3928_b7, by decide, c3928_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3928_b8, by decide, c3928_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3927_b1, by decide, c3927_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3927_b0, by decide, c3927_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3926_b9, by decide, c3926_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 238, c3927_b6, by decide, c3927_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3927_b5, by decide, c3927_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3928_b0, by decide, c3928_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3927_b9, by decide, c3927_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3927_b8, by decide, c3927_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3927_b7, by decide, c3927_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3927_b3, by decide, c3927_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 259, c3927_b2, by decide, c3927_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3927_b4, by decide, c3927_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0470_b16, by decide, by rw [tL, show rM 302231527242726308446209 = 4611967562123706369 by decide]; exact c0470_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0470_b12, by decide, by rw [tL, show rM 75557936909408268320769 = 4611967493672665344 by decide]; exact c0470_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0470_b15, by decide, by rw [tL, show rM 1208925892798123119607809 = 4611967497699197184 by decide]; exact c0470_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b17, by decide, by rw [tL, show rM 302231531464850959106049 = 4611967562123706384 by decide]; exact c0470_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b18, by decide, by rw [tL, show rM 302231527242726325157889 = 4611967562123902977 by decide]; exact c0470_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 259, c0470_b14, by decide, by rw [tL, show rM 4722439666363606827009 = 4611967494478168320 by decide]; exact c0470_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b13, by decide, by rw [tL, show rM 75557936909408285032449 = 4611967493672861952 by decide]; exact c0470_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b6, by decide, by rw [tL, show rM 4796153740639460196354 = 1153484455634075649 by decide]; exact c0470_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b7, by decide, by rw [tL, show rM 4796154585064390328322 = 1153484455634075904 by decide]; exact c0470_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0469_b36, by decide, by rw [tL, show rM 4726982672487700037634 = 72620545065156624 by decide]; exact c0469_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0470_b26, by decide, by rw [tL, show rM 4740817730542982201346 = 18447307024736780304 by decide]; exact c0470_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 168, c0470_b28, by decide, by rw [tL, show rM 1208944266640177861099522 = 18447307027958071297 by decide]; exact c0470_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0470_b8, by decide, by rw [tL, show rM 302305242161427108724738 = 1153484523279876097 by decide]; exact c0470_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0469_b38, by decide, by rw [tL, show rM 1208930432426547509067778 = 72620548286447872 by decide]; exact c0469_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0470_b5, by decide, by rw [tL, show rM 75631651828109068599298 = 1153484454828835072 by decide]; exact c0470_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0469_b39, by decide, by rw [tL, show rM 302236071093275348566018 = 72620612710957072 by decide]; exact c0469_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0470_b24, by decide, by rw [tL, show rM 75576314973587660472322 = 18447307023931539472 by decide]; exact c0470_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b0, by decide, by rw [tL, show rM 302236066589675737907202 = 72620612711153664 by decide]; exact c0470_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0470_b25, by decide, by rw [tL, show rM 75576310469988049813506 = 18447307023931736064 by decide]; exact c0470_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0469_b35, by decide, by rw [tL, show rM 302231455185132287229954 = 563018673225729 by decide]; exact c0469_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0470_b27, by decide, by rw [tL, show rM 4740813508418348318722 = 18447307024737042433 by decide]; exact c0470_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0469_b34, by decide, by rw [tL, show rM 75557864851814247104514 = 562950222184704 by decide]; exact c0469_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0469_b37, by decide, by rw [tL, show rM 4726979294787996286978 = 72620545065419008 by decide]; exact c0469_ok37⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b11, by decide, by rw [tL, show rM 4796153740639460196609 = 1154328880564207617 by decide]; exact c0470_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0470_b21, by decide, by rw [tL, show rM 4722443044063310577921 = 4613093394384748560 by decide]; exact c0470_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b2, by decide, by rw [tL, show rM 4726982672487700037889 = 73464969995288592 by decide]; exact c0470_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 238, c0470_b4, by decide, by rw [tL, show rM 1208930431300647602225409 = 73464973216579584 by decide]; exact c0470_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0470_b10, by decide, by rw [tL, show rM 75631650702209161756929 = 1154328879758966784 by decide]; exact c0470_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0470_b23, by decide, by rw [tL, show rM 1208925891953698189476097 = 4613093397606039553 by decide]; exact c0470_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0470_b9, by decide, by rw [tL, show rM 73787257769815048449 = 1154328879490531329 by decide]; exact c0470_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0470_b19, by decide, by rw [tL, show rM 75557940287107988848897 = 4613093393579507728 by decide]; exact c0470_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0470_b1, by decide, by rw [tL, show rM 4616189618054889729 = 73464968921612304 by decide]; exact c0470_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0470_b20, by decide, by rw [tL, show rM 75557935783508378190081 = 4613093393579704320 by decide]; exact c0470_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 259, c0470_b3, by decide, by rw [tL, show rM 4726978168888089444609 = 73464969995550720 by decide]; exact c0470_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0470_b22, by decide, by rw [tL, show rM 4722438821938676695297 = 4613093394385010689 by decide]; exact c0470_ok22⟩, ?_⟩
   simp
 
 def s32 : List Nat := [4722456554862192689153, 4835703350797585713594369, 75557953797906870960129, 4722438821938727026689, 75557936064983405232129, 5017514669523974815746, 4726996183286582149122, 4835707890426010103054338, 75853011912568653086722, 75562493426331260420098, 75562475411932817981442, 75557864007389367304194, 4726978450363116486658, 4722438821938659921921, 4726978450363049381889, 75562475411932750942209, 75557936064983338192897, 4611967493404233729]
 theorem e32 : enumKeys 1354 4234 = s32 := by decide +kernel
-theorem r32 : ∀ M ∈ s32, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4234 M ne blob = true := by
+theorem t32 : rtype 4234 = 4234 := by decide
+theorem r32 : ∀ M ∈ s32, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 4234 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 4234) (rM M) ne blob = true) := by
   unfold s32
-  refine List.forall_mem_cons.2 ⟨⟨0, 267, c3929_b7, by decide, c3929_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 208, c3930_b1, by decide, c3930_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3930_b0, by decide, c3930_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 235, c3929_b9, by decide, c3929_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3929_b8, by decide, c3929_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 202, c3930_b8, by decide, c3930_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 227, c3930_b7, by decide, c3930_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 172, c3931_b4, by decide, c3931_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 164, c3931_b3, by decide, c3931_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 184, c3931_b2, by decide, c3931_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3930_b9, by decide, c3930_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 245, c3931_b0, by decide, c3931_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 199, c3931_b1, by decide, c3931_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 226, c3930_b3, by decide, c3930_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 225, c3930_b2, by decide, c3930_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 223, c3930_b4, by decide, c3930_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 188, c3930_b6, by decide, c3930_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3930_b5, by decide, c3930_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 267, c0477_b27, by decide, by rw [tL, t32, show rM 4722456554862192689153 = 4611967494477910016 by decide]; exact c0477_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 208, c0477_b29, by decide, by rw [tL, t32, show rM 4835703350797585713594369 = 4611968592915857409 by decide]; exact c0477_ok29⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0477_b25, by decide, by rw [tL, t32, show rM 75557953797906870960129 = 4611967493672669184 by decide]; exact c0477_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 235, c0477_b28, by decide, by rw [tL, t32, show rM 4722438821938727026689 = 4611967494545014785 by decide]; exact c0477_ok28⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0477_b26, by decide, by rw [tL, t32, show rM 75557936064983405232129 = 4611967493739708417 by decide]; exact c0477_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 202, c0477_b33, by decide, by rw [tL, t32, show rM 5017514669523974815746 = 295148468130380054529 by decide]; exact c0477_ok33⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 227, c0477_b19, by decide, by rw [tL, t32, show rM 4726996183286582149122 = 72620545065160704 by decide]; exact c0477_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 172, c0477_b21, by decide, by rw [tL, t32, show rM 4835707890426010103054338 = 72621643503108097 by decide]; exact c0477_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 164, c0477_b32, by decide, by rw [tL, t32, show rM 75853011912568653086722 = 295148468129574813697 by decide]; exact c0477_ok32⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 184, c0477_b17, by decide, by rw [tL, t32, show rM 75562493426331260420098 = 72620544259919872 by decide]; exact c0477_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0477_b18, by decide, by rw [tL, t32, show rM 75562475411932817981442 = 72620544326959104 by decide]; exact c0477_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 245, c0477_b16, by decide, by rw [tL, t32, show rM 75557864007389367304194 = 562950289031169 by decide]; exact c0477_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 199, c0477_b20, by decide, by rw [tL, t32, show rM 4726978450363116486658 = 72620545132265473 by decide]; exact c0477_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 226, c0477_b31, by decide, by rw [tL, t32, show rM 4722438821938659921921 = 4629981892987387905 by decide]; exact c0477_ok31⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 225, c0477_b24, by decide, by rw [tL, t32, show rM 4726978450363049381889 = 90353468597927937 by decide]; exact c0477_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 223, c0477_b23, by decide, by rw [tL, t32, show rM 75562475411932750942209 = 90353467792687104 by decide]; exact c0477_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 188, c0477_b30, by decide, by rw [tL, t32, show rM 75557936064983338192897 = 4629981892182147073 by decide]; exact c0477_ok30⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0477_b22, by decide, by rw [tL, t32, show rM 4611967493404233729 = 90353467524251649 by decide]; exact c0477_ok22⟩, ?_⟩
   simp
 
 def s33 : List Nat := [18889538270547595624449, 4722438821938660179969, 75557936064983338385409, 4723519685849228836866, 75559016928893907107842, 18894077898971985084418, 75562475693407727648770, 4726978450363049639938, 75562475693407727845378, 4722438821938659917841, 4726978450363049377809, 75557936064983338188817, 75562475693407727648785]
 theorem e33 : enumKeys 1354 218 = s33 := by decide +kernel
-theorem r33 : ∀ M ∈ s33, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 218 M ne blob = true := by
+theorem t33 : rtype 218 = 1163 := by decide
+theorem r33 : ∀ M ∈ s33, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 218 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 218) (rM M) ne blob = true) := by
   unfold s33
-  refine List.forall_mem_cons.2 ⟨⟨0, 246, c3931_b7, by decide, c3931_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 255, c3931_b6, by decide, c3931_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3931_b5, by decide, c3931_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3932_b2, by decide, c3932_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3932_b7, by decide, c3932_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3932_b6, by decide, c3932_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3932_b5, by decide, c3932_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 219, c3932_b4, by decide, c3932_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3932_b3, by decide, c3932_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3931_b9, by decide, c3931_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 265, c3931_b8, by decide, c3931_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3932_b1, by decide, c3932_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 220, c3932_b0, by decide, c3932_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 246, c0479_b19, by decide, by rw [tL, t33, show rM 18889538270547595624449 = 4611967768282136577 by decide]; exact c0479_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 255, c0479_b18, by decide, by rw [tL, t33, show rM 4722438821938660179969 = 4611967494494683137 by decide]; exact c0479_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0479_b17, by decide, by rw [tL, t33, show rM 75557936064983338385409 = 4611967493689376769 by decide]; exact c0479_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0479_b23, by decide, by rw [tL, t33, show rM 4723519685849228836866 = 73787539245865435137 by decide]; exact c0479_ok23⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0479_b22, by decide, by rw [tL, t33, show rM 75559016928893907107842 = 73787539245060194305 by decide]; exact c0479_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0479_b14, by decide, by rw [tL, t33, show rM 18894077898971985084418 = 72620818869387265 by decide]; exact c0479_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0479_b11, by decide, by rw [tL, t33, show rM 75562475693407727648770 = 72620544259915777 by decide]; exact c0479_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 219, c0479_b13, by decide, by rw [tL, t33, show rM 4726978450363049639938 = 72620545081933825 by decide]; exact c0479_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0479_b12, by decide, by rw [tL, t33, show rM 75562475693407727845378 = 72620544276627457 by decide]; exact c0479_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0479_b21, by decide, by rw [tL, t33, show rM 4722438821938659917841 = 4616471094105276417 by decide]; exact c0479_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 265, c0479_b16, by decide, by rw [tL, t33, show rM 4726978450363049377809 = 76842669715816449 by decide]; exact c0479_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0479_b20, by decide, by rw [tL, t33, show rM 75557936064983338188817 = 4616471093300035585 by decide]; exact c0479_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 220, c0479_b15, by decide, by rw [tL, t33, show rM 75562475693407727648785 = 76842668910575617 by decide]; exact c0479_ok15⟩, ?_⟩
   simp
 
 def s34 : List Nat := [302231527242726308446209, 4722439666363590115329, 75557936909408268320769, 4726978450363049443330, 302236066871150697906178, 4740813508418331607042, 75576310751463009812482, 4726979294787979575298, 75562476537832657780738, 75562475411932750938369, 4722438821938659983617, 75557936064983338189057, 4726978450363049443585]
 theorem e34 : enumKeys 1354 398 = s34 := by decide +kernel
-theorem r34 : ∀ M ∈ s34, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 398 M ne blob = true := by
+theorem t34 : rtype 398 = 398 := by decide
+theorem r34 : ∀ M ∈ s34, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 398 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 398) (rM M) ne blob = true) := by
   unfold s34
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3933_b0, by decide, c3933_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 294, c3932_b9, by decide, c3932_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3932_b8, by decide, c3932_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3934_b0, by decide, c3934_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3933_b9, by decide, c3933_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3933_b8, by decide, c3933_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3933_b7, by decide, c3933_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3933_b6, by decide, c3933_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3933_b5, by decide, c3933_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 301, c3933_b1, by decide, c3933_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3933_b4, by decide, c3933_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3933_b3, by decide, c3933_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3933_b2, by decide, c3933_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0478_b15, by decide, by rw [tL, t34, show rM 302231527242726308446209 = 4611967562123706369 by decide]; exact c0478_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 294, c0478_b14, by decide, by rw [tL, t34, show rM 4722439666363590115329 = 4611967494477971712 by decide]; exact c0478_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0478_b13, by decide, by rw [tL, t34, show rM 75557936909408268320769 = 4611967493672665344 by decide]; exact c0478_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0478_b8, by decide, by rw [tL, t34, show rM 4726978450363049443330 = 72620545065222145 by decide]; exact c0478_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0478_b10, by decide, by rw [tL, t34, show rM 302236066871150697906178 = 72620612710957057 by decide]; exact c0478_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0478_b19, by decide, by rw [tL, t34, show rM 4740813508418331607042 = 18447307024736845825 by decide]; exact c0478_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0478_b18, by decide, by rw [tL, t34, show rM 75576310751463009812482 = 18447307023931539457 by decide]; exact c0478_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0478_b9, by decide, by rw [tL, t34, show rM 4726979294787979575298 = 72620545065222400 by decide]; exact c0478_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0478_b7, by decide, by rw [tL, t34, show rM 75562476537832657780738 = 72620544259916032 by decide]; exact c0478_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 301, c0478_b11, by decide, by rw [tL, t34, show rM 75562475411932750938369 = 73464969190047744 by decide]; exact c0478_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0478_b17, by decide, by rw [tL, t34, show rM 4722438821938659983617 = 4613093394384814081 by decide]; exact c0478_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0478_b16, by decide, by rw [tL, t34, show rM 75557936064983338189057 = 4613093393579507713 by decide]; exact c0478_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0478_b12, by decide, by rw [tL, t34, show rM 4726978450363049443585 = 73464969995354113 by decide]; exact c0478_ok12⟩, ?_⟩
   simp
 
 def s35 : List Nat := [1208999611094523640283138, 1208999606590924029689858, 1208925896175822856781826, 73791479894482354178, 1208925891672223246188546, 73786976294871760898, 76561193698852866]
 theorem e35 : enumKeys 1354 3075 = s35 := by decide +kernel
-theorem r35 : ∀ M ∈ s35, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 3075 M ne blob = true := by
+theorem t35 : rtype 3075 = 240 := by decide
+theorem r35 : ∀ M ∈ s35, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 3075 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 3075) (rM M) ne blob = true) := by
   unfold s35
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3934_b1, by decide, c3934_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3934_b2, by decide, c3934_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 186, c3934_b4, by decide, c3934_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3934_b3, by decide, c3934_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 180, c3934_b6, by decide, c3934_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3934_b5, by decide, c3934_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3934_b7, by decide, c3934_ok7⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0445_b11, by decide, by rw [tL, t35, show rM 1208999611094523640283138 = 1153484458855235600 by decide]; exact c0445_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0445_b12, by decide, by rw [tL, t35, show rM 1208999606590924029689858 = 1153484458855497728 by decide]; exact c0445_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 186, c0445_b14, by decide, by rw [tL, t35, show rM 1208925896175822856781826 = 4612248972676038672 by decide]; exact c0445_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0445_b9, by decide, by rw [tL, t35, show rM 73791479894482354178 = 1153484454560530448 by decide]; exact c0445_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 180, c0445_b15, by decide, by rw [tL, t35, show rM 1208925891672223246188546 = 4612248972676300800 by decide]; exact c0445_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0445_b10, by decide, by rw [tL, t35, show rM 73786976294871760898 = 1153484454560792576 by decide]; exact c0445_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0445_b13, by decide, by rw [tL, t35, show rM 76561193698852866 = 4612248968381333520 by decide]; exact c0445_ok13⟩, ?_⟩
   simp
 
 def s36 : List Nat := [4796157962764110790658, 1208999606872398989688834, 1208925896175822840070146, 1208930435804247229530114, 75631655205808789061634, 4796153740639476908034, 4722443044063327289346, 4726982672487716749314, 1208930431300647618936834, 75631650702209178468354, 1208925891953698206187522, 73787257769831759874, 75557940287108005560322, 4616189618071601154, 75557935783508394901506, 4726978168888106156034, 4722438821938693406722]
 theorem e36 : enumKeys 1354 2119 = s36 := by decide +kernel
-theorem r36 : ∀ M ∈ s36, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2119 M ne blob = true := by
+theorem t36 : rtype 2119 = 229 := by decide
+theorem r36 : ∀ M ∈ s36, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 2119 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 2119) (rM M) ne blob = true) := by
   unfold s36
-  refine List.forall_mem_cons.2 ⟨⟨0, 280, c3934_b8, by decide, c3934_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3935_b8, by decide, c3935_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 216, c3935_b7, by decide, c3935_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3935_b6, by decide, c3935_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3935_b5, by decide, c3935_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3935_b1, by decide, c3935_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3935_b0, by decide, c3935_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3934_b9, by decide, c3934_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 203, c3936_b0, by decide, c3936_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 231, c3935_b9, by decide, c3935_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 174, c3936_b4, by decide, c3936_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3936_b3, by decide, c3936_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 198, c3936_b2, by decide, c3936_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3936_b1, by decide, c3936_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 240, c3935_b3, by decide, c3935_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 224, c3935_b2, by decide, c3935_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 192, c3935_b4, by decide, c3935_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 280, c0467_b17, by decide, by rw [tL, t36, show rM 4796157962764110790658 = 1153484455634010128 by decide]; exact c0467_ok17⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0467_b19, by decide, by rw [tL, t36, show rM 1208999606872398989688834 = 1153484458855301121 by decide]; exact c0467_ok19⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 216, c0467_b24, by decide, by rw [tL, t36, show rM 1208925896175822840070146 = 4612248972675842064 by decide]; exact c0467_ok24⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0467_b12, by decide, by rw [tL, t36, show rM 1208930435804247229530114 = 72620548286382096 by decide]; exact c0467_ok12⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0467_b15, by decide, by rw [tL, t36, show rM 75631655205808789061634 = 1153484454828769296 by decide]; exact c0467_ok15⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0467_b18, by decide, by rw [tL, t36, show rM 4796153740639476908034 = 1153484455634272257 by decide]; exact c0467_ok18⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0467_b22, by decide, by rw [tL, t36, show rM 4722443044063327289346 = 4612248969454813200 by decide]; exact c0467_ok22⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0467_b10, by decide, by rw [tL, t36, show rM 4726982672487716749314 = 72620545065353232 by decide]; exact c0467_ok10⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 203, c0467_b13, by decide, by rw [tL, t36, show rM 1208930431300647618936834 = 72620548286644224 by decide]; exact c0467_ok13⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 231, c0467_b16, by decide, by rw [tL, t36, show rM 75631650702209178468354 = 1153484454829031424 by decide]; exact c0467_ok16⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 174, c0467_b25, by decide, by rw [tL, t36, show rM 1208925891953698206187522 = 4612248972676104193 by decide]; exact c0467_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0467_b14, by decide, by rw [tL, t36, show rM 73787257769831759874 = 1153484454560595969 by decide]; exact c0467_ok14⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 198, c0467_b20, by decide, by rw [tL, t36, show rM 75557940287108005560322 = 4612248968649572368 by decide]; exact c0467_ok20⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0467_b9, by decide, by rw [tL, t36, show rM 4616189618071601154 = 72620543991676944 by decide]; exact c0467_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 240, c0467_b21, by decide, by rw [tL, t36, show rM 75557935783508394901506 = 4612248968649768960 by decide]; exact c0467_ok21⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 224, c0467_b11, by decide, by rw [tL, t36, show rM 4726978168888106156034 = 72620545065615360 by decide]; exact c0467_ok11⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 192, c0467_b23, by decide, by rw [tL, t36, show rM 4722438821938693406722 = 4612248969455075329 by decide]; exact c0467_ok23⟩, ?_⟩
   simp
 
 def s37 : List Nat := [4796153740639460196354, 4722443044063310577666, 4726982672487700037634, 75557936064983338188802, 1208925891953698189475842, 1208930431582122578935810, 75631650983684138467330, 75557940287107988848642, 75562479915532378308610, 75562475411932767649794, 4722438821938676695042, 75557936064983354900482, 4726978450363066155010]
 theorem e37 : enumKeys 1354 1163 = s37 := by decide +kernel
-theorem r37 : ∀ M ∈ s37, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1163 M ne blob = true := by
+theorem t37 : rtype 1163 = 218 := by decide
+theorem r37 : ∀ M ∈ s37, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 1163 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 1163) (rM M) ne blob = true) := by
   unfold s37
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3936_b7, by decide, c3936_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 270, c3936_b6, by decide, c3936_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3936_b5, by decide, c3936_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 210, c3937_b7, by decide, c3937_ok7⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 204, c3937_b6, by decide, c3937_ok6⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 196, c3937_b5, by decide, c3937_ok5⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3937_b4, by decide, c3937_ok4⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3937_b3, by decide, c3937_ok3⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3937_b2, by decide, c3937_ok2⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 266, c3936_b8, by decide, c3936_ok8⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 222, c3937_b1, by decide, c3937_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 228, c3937_b0, by decide, c3937_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 217, c3936_b9, by decide, c3936_ok9⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0478_b0, by decide, by rw [tL, t37, show rM 4796153740639460196354 = 1153484455634075649 by decide]; exact c0478_ok0⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 270, c0478_b4, by decide, by rw [tL, t37, show rM 4722443044063310577666 = 4612248969454616592 by decide]; exact c0478_ok4⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0477_b36, by decide, by rw [tL, t37, show rM 4726982672487700037634 = 72620545065156624 by decide]; exact c0477_ok36⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 210, c0478_b1, by decide, by rw [tL, t37, show rM 75557936064983338188802 = 4612248968649375745 by decide]; exact c0478_ok1⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 204, c0478_b6, by decide, by rw [tL, t37, show rM 1208925891953698189475842 = 4612248972675907585 by decide]; exact c0478_ok6⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 196, c0477_b38, by decide, by rw [tL, t37, show rM 1208930431582122578935810 = 72620548286447617 by decide]; exact c0477_ok38⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0477_b39, by decide, by rw [tL, t37, show rM 75631650983684138467330 = 1153484454828834817 by decide]; exact c0477_ok39⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0478_b2, by decide, by rw [tL, t37, show rM 75557940287107988848642 = 4612248968649375760 by decide]; exact c0478_ok2⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0477_b34, by decide, by rw [tL, t37, show rM 75562479915532378308610 = 72620544259915792 by decide]; exact c0477_ok34⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 266, c0477_b35, by decide, by rw [tL, t37, show rM 75562475411932767649794 = 72620544260112384 by decide]; exact c0477_ok35⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 222, c0478_b5, by decide, by rw [tL, t37, show rM 4722438821938676695042 = 4612248969454878721 by decide]; exact c0478_ok5⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 228, c0478_b3, by decide, by rw [tL, t37, show rM 75557936064983354900482 = 4612248968649572353 by decide]; exact c0478_ok3⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 217, c0477_b37, by decide, by rw [tL, t37, show rM 4726978450363066155010 = 72620545065418753 by decide]; exact c0477_ok37⟩, ?_⟩
   simp
 
 def s38 : List Nat := [4722438821938659983362, 75557936064983338188802, 4726978450363049443330, 75562475693407727648770]
 theorem e38 : enumKeys 1354 207 = s38 := by decide +kernel
-theorem r38 : ∀ M ∈ s38, ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 207 M ne blob = true := by
+theorem t38 : rtype 207 = 207 := by decide
+theorem r38 : ∀ M ∈ s38, (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 207 M ne blob = true)
+    ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype 207) (rM M) ne blob = true) := by
   unfold s38
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3938_b1, by decide, c3938_ok1⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 258, c3938_b0, by decide, c3938_ok0⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3937_b9, by decide, c3937_ok9⟩, ?_⟩
-  refine List.forall_mem_cons.2 ⟨⟨0, 252, c3937_b8, by decide, c3937_ok8⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0479_b27, by decide, by rw [tL, t38, show rM 4722438821938659983362 = 4612248969454682113 by decide]; exact c0479_ok27⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 258, c0479_b26, by decide, by rw [tL, t38, show rM 75557936064983338188802 = 4612248968649375745 by decide]; exact c0479_ok26⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0479_b25, by decide, by rw [tL, t38, show rM 4726978450363049443330 = 72620545065222145 by decide]; exact c0479_ok25⟩, ?_⟩
+  refine List.forall_mem_cons.2 ⟨Or.inr ⟨0, 252, c0479_b24, by decide, by rw [tL, t38, show rM 75562475693407727648770 = 72620544259915777 by decide]; exact c0479_ok24⟩, ?_⟩
   simp
 
-/-- every enumerated key with left type `1354` is the symbolic `U → U` key or has a record -/
+/-- every enumerated key with left type `1354` is the symbolic `U → U` key, has a record, or
+its row reflection has one -/
 theorem cover : ∀ mR ∈ validTypes, ∀ M ∈ enumKeys 1354 mR,
-    (1354 = UTYPE ∧ mR = UTYPE) ∨ ∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 mR M ne blob = true := by
+    (1354 = UTYPE ∧ mR = UTYPE) ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt 1354 mR M ne blob = true)
+      ∨ (∃ fmt ne blob, fmt < 4 ∧ checkRecord fmt (rtype 1354) (rtype mR) (rM M) ne blob = true) := by
   rw [validTypes_eq]
   intro mR hmR
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hmR

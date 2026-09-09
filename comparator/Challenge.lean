@@ -572,7 +572,8 @@ theorem ecc_boxProd_pathG_two_of_four {k : ℕ} (hk : 4 ≤ k) (n : ℕ) :
     (pathG 2 □ pathG n).ECCAt k := sorry
 
 /-- **Height-three grids are `k`-monophilic for every `k ≥ 3`.**  The `k = 3` case is the entropy
-(Parry–Rényi) certificate: 43,736 kernel-checked seam records and their enumeration completeness,
+(Parry–Rényi) certificate: 22,157 kernel-checked seam records (one per row-reflection orbit of
+the 43,736 maximal seam keys) and their enumeration completeness,
 the canonicalization of an arbitrary three-list assignment onto those records, the symbolic
 uniform-to-uniform seam, and the Markov-chain entropy bound; `k ≥ 4` is the claim above. -/
 theorem ecc_boxProd_pathG_two_of_three {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :

@@ -55,7 +55,7 @@ There the inequality `(C1_r)` is false on actual chains, so this route cannot wo
 `ai_research_notes/GRID_HEIGHT3_EIGENFUNCTIONAL_2026-08-25.md`. The `k = 3` case is proved by the
 entropy (Parry–Rényi) certificate route in `Grid3/Three/Main.lean`
 (`Grid3.Three.ecc_grid3_three`, and `ecc_boxProd_pathG_two_of_three` for every `k ≥ 3`). That
-module is not imported here because it depends on the 43,736 kernel-checked seam records of
+module is not imported here because it depends on the 22,157 kernel-checked seam records of
 `Grid3/Three/Cert/Data/`, which are built separately (see `Grid3/Three/README.md`).
 -/
 

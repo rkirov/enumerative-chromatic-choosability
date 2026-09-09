@@ -248,11 +248,14 @@ proves it by an entropy argument instead. A list assignment with at least one no
 carries a Markov chain on column states whose column laws are the *signature laws* of the 39
 column types and whose seam kernels are certified couplings; the chain's entropy is at least
 `log 12 + n·log ρ` with `ρ = (5 + √17)/2`, and at most the log of the number of list colourings,
-which is the inequality. The couplings are 43,736 records, one per maximal seam key, each checked
-by `decide +kernel` on a packed big-`Nat` literal (`Grid3/Three/Cert/Data/`), with a kernel-checked
-enumeration proving that every valid maximal key has a record (`Grid3/Three/Cert/Keys/`); an
-arbitrary assignment is canonicalized onto those records column by column
-(`Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean`), the uniform-to-uniform seam is the Parry
+which is the inequality. The couplings are 22,157 records, one per row-reflection orbit of the
+43,736 maximal seam keys, each checked by `decide +kernel` on a packed big-`Nat` literal
+(`Grid3/Three/Cert/Data/`), with a kernel-checked enumeration proving that every valid maximal
+key, or its reflection, has a record (`Grid3/Three/Cert/Keys/`); an arbitrary assignment is
+canonicalized onto those records column by column
+(`Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean`), a seam whose record is the reflected
+one is built between the reflected columns and carried back (`Grid3/Three/Reflect.lean`, the
+column laws being reflection-equivariant), the uniform-to-uniform seam is the Parry
 kernel with entropy exactly `log ρ` (`Grid3/Three/Cert/Parry.lean`), and the all-uniform
 assignment is handled by a direct injection (`Grid3/AllU.lean`). See `Grid3/Three/README.md`.
 
