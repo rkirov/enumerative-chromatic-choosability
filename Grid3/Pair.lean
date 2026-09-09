@@ -227,7 +227,7 @@ theorem LamP_le_QH {k : ℕ} (hk : 5 ≤ k) {X Z T M B : Finset ℕ} (hX : NearK
     nlinarith [mul_le_mul hz1 hk2 (by norm_num) hz0]
   have P4 : (0 : ℤ) ≤ x * ((k : ℤ) - 2) * (μ - 1) * qB := by positivity
   have P5 : w ≤ rT + qT := le_trans hw hnX
-  nlinarith [P1, P2, P3, P4, P5]
+  linarith [P1, P2, P3, P4, P5]
 
 theorem Lam_le_LamP {k : ℕ} (hk : 5 ≤ k) {X Z T M B : Finset ℕ} (hX : NearK k X) (hZ : NearK k Z)
     (hM : M.card = k) (y : ℕ) :

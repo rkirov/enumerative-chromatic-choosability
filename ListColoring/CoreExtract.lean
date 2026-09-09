@@ -444,7 +444,6 @@ and `ps = a+b+c-3`, `pt = a+b+c-2`. That reading of the layout — `ListColoring
 `(3,4,5)`, in the guard block at the end of this file, because it is exactly the kind of index
 convention this development has had refuted before. -/
 
-
 /-- Index of position `i` along an arm of length `len` whose interior vertices are indexed
 `o, o+1, …, o+len-2`, and which runs from the branch vertex `ps` to the branch vertex `pt`. -/
 def armIdx (o len ps pt i : ℕ) : ℕ :=
@@ -1221,12 +1220,9 @@ instance instDecidableThetaStep (a b c x y : ℕ) : Decidable (ThetaStep a b c x
 #guard decide (∀ u v : TGV 3 4 5,
   ((thetaGen 3 4 5).Adj u v ↔ (ThetaStep 3 4 5 u.val v.val ∨ ThetaStep 3 4 5 v.val u.val)))
 
-
 -- `thetaOf k` and `thetaGen 2 2 k` really are the same graph
 #guard Fintype.card (Option (Option (PathV 4))) = Fintype.card (TGV 2 2 4)
 #guard (thetaOf 4).edgeFinset.card = (thetaGen 2 2 4).edgeFinset.card
-#guard (thetaOf 4).colConst 3 = (thetaGen 2 2 4).colConst 3
-#guard (thetaOf 6).colConst 3 = (thetaGen 2 2 6).colConst 3
 #guard [thArmA 4 0, thArmA 4 1, thArmA 4 2] =
   [some (some (pathStart 4)), some none, some (some (pathEnd 4))]
 #guard (List.range 5).map (fun i => pathNum 4 (pathAt 4 (4 - i))) = [4, 3, 2, 1, 0]

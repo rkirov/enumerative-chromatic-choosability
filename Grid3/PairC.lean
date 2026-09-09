@@ -252,7 +252,10 @@ theorem RLp_le_RC {k : ℕ} (hk : 5 ≤ k) {X Z T M B : Finset ℕ} (hX : NearK 
   have P4 : 0 ≤ (μ - 1) * z * qW := mul_nonneg (mul_nonneg (by linarith) (by linarith)) hqW0
   have P5 : 0 ≤ ((μ - 1) * x - ((k : ℤ) - 2)) * qW' := by
     apply mul_nonneg _ hqW0'
-    nlinarith [mul_le_mul (show (k:ℤ) - 2 ≤ μ - 1 by linarith) hx1 (by linarith) (by linarith)]
+    have h1 := mul_le_mul (show (k:ℤ) - 2 ≤ μ - 1 by linarith) hx1 (by linarith) (by linarith)
+    have h2 : ((k : ℤ) - 2) * 1 ≤ ((k : ℤ) - 2) * ((k : ℤ) - 2) :=
+      mul_le_mul_of_nonneg_left (by linarith) (by linarith)
+    linarith
   have P6 : 0 ≤ μ * x * z * (w - ((k : ℤ) - (M.filter (· ∉ T)).card - (M.filter (· ∉ B)).card)) :=
     mul_nonneg (mul_nonneg (mul_nonneg (by linarith) (by linarith)) (by linarith)) (by linarith)
   have P7 : 0 ≤ z * ((M.filter (· ∉ T)).card + ((X.erase y).filter (· ∉ T)).card - nX) :=
@@ -348,7 +351,8 @@ theorem pairC_of_five {k : ℕ} (hk : 5 ≤ k) {X Z T M B : Finset ℕ} (hX : Ne
       have h1 : 3 ≤ k - 2 := by omega
       have h2 : 13 ≤ (k - 1) * (k - 2) + 1 := by
         have : 4 ≤ k - 1 := by omega
-        nlinarith
+        have := Nat.mul_le_mul this h1
+        omega
       calc 13 = 1 * 13 := by norm_num
         _ ≤ (k - 2) * ((k - 1) * (k - 2) + 1) := Nat.mul_le_mul (by omega) h2
     exact_mod_cast h

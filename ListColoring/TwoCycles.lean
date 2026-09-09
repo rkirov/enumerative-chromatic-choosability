@@ -410,17 +410,17 @@ The last three checks are the reason the connecting path appears in the statemen
 *disjoint* `4`-cycles have four colourings from the constant list `{1, 2}` and so are not covered
 by any such witness. -/
 
-section Guards
+namespace Guards
 
 /-- A graph on `Fin N` from an explicit list of index pairs. -/
-private def mkG (N : ℕ) (es : List (ℕ × ℕ)) : SimpleGraph (Fin N) :=
+def mkG (N : ℕ) (es : List (ℕ × ℕ)) : SimpleGraph (Fin N) :=
   SimpleGraph.fromRel (fun i j => (i.val, j.val) ∈ es)
 
-private instance (N : ℕ) (es : List (ℕ × ℕ)) : DecidableRel (mkG N es).Adj := fun i j =>
+instance (N : ℕ) (es : List (ℕ × ℕ)) : DecidableRel (mkG N es).Adj := fun i j =>
   inferInstanceAs (Decidable (i ≠ j ∧ _))
 
 /-- Edges of the dumbbell with cycles of `m + 1` and `n + 1` vertices joined by `l` edges. -/
-private def dumbEdges (m n l : ℕ) : List (ℕ × ℕ) :=
+def dumbEdges (m n l : ℕ) : List (ℕ × ℕ) :=
   let P : ℕ → ℕ := fun j => if j = 0 then 0 else m + j
   let B : ℕ → ℕ := fun k => if k = 0 then P l else m + l + k
   ((List.range m).map fun i => (i, i + 1)) ++ [(m, 0)] ++
@@ -428,18 +428,18 @@ private def dumbEdges (m n l : ℕ) : List (ℕ × ℕ) :=
   ((List.range n).map fun k => (B k, B (k + 1))) ++ [(B n, B 0)]
 
 /-- The witness lists, read off the index of the vertex exactly as in the proof. -/
-private def dumbL (m n l : ℕ) : ℕ → Finset ℕ := fun v =>
+def dumbL (m n l : ℕ) : ℕ → Finset ℕ := fun v =>
   let g : ℕ := if l = 0 then 2 else 1
   if v = 0 then {1, 2}
   else if v ≤ m then {armCol 1 1 m (v - 1), armCol 1 1 m v}
   else if v ≤ m + l then ({armCol 2 g l (v - m - 1), armCol 2 g l (v - m)} : Finset ℕ)
   else {armCol g g n (v - m - l - 1), armCol g g n (v - m - l)}
 
-private abbrev dumbG (m n l : ℕ) : SimpleGraph (Fin (m + l + n + 1)) := mkG _ (dumbEdges m n l)
+abbrev dumbG (m n l : ℕ) : SimpleGraph (Fin (m + l + n + 1)) := mkG _ (dumbEdges m n l)
 
-private def dumbCol (m n l : ℕ) : ℕ := (dumbG m n l).col (fun v => dumbL m n l v.val)
+def dumbCol (m n l : ℕ) : ℕ := (dumbG m n l).col (fun v => dumbL m n l v.val)
 
-private def dumbDegs (m n l : ℕ) : List ℕ :=
+def dumbDegs (m n l : ℕ) : List ℕ :=
   (List.finRange (m + l + n + 1)).map fun v => (dumbG m n l).degree v
 
 -- the shapes are what we think they are
@@ -448,21 +448,13 @@ private def dumbDegs (m n l : ℕ) : List ℕ :=
 #guard dumbDegs 3 3 1 = [3, 2, 2, 2, 3, 2, 2, 2]     -- joined by an edge
 #guard dumbDegs 3 3 2 = [3, 2, 2, 2, 2, 3, 2, 2, 2]  -- joined by a path of length two
 
--- every list really has two colours
-#guard ((List.range 6).flatMap fun m => (List.range 6).flatMap fun n =>
-  (List.range 6).map fun l =>
-    ((List.range (m + 2 + l + n + 2 + 1)).map fun v =>
-      (dumbL (m + 2) (n + 2) l v).card)).all fun cs => cs.all (· == 2)
-
--- and there is no colouring at all, for every shape in the sweep
-#guard ((List.range 5).flatMap fun m => (List.range 5).flatMap fun n =>
-  (List.range 5).map fun l => dumbCol (m + 2) (n + 2) l).all (· == 0)
-
 -- sanity, and the reason the connecting path is part of the statement
 #guard (mkG 4 [(0, 1), (1, 2), (2, 3), (3, 0)]).col (fun _ => ({1, 2} : Finset ℕ)) = 2
 #guard (mkG 3 [(0, 1), (1, 2), (2, 0)]).col (fun _ => ({1, 2} : Finset ℕ)) = 0
 #guard (mkG 8 [(0, 1), (1, 2), (2, 3), (3, 0), (4, 5), (5, 6), (6, 7), (7, 4)]).col
   (fun _ => ({1, 2} : Finset ℕ)) = 4
+
+-- the brute-force sweeps over every dumbbell shape are in `Checks/TwoCycles.lean`
 
 end Guards
 

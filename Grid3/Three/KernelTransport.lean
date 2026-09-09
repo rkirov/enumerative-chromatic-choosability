@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
 
 /-!
 # Transport of a finite seam along two independent injections

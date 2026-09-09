@@ -67,6 +67,21 @@ result. Deferred to an optional milestone.
 
 ## Progress log
 
+**2026-09-09 — build times.** Profiled with `lean --json -Dprofiler=true -Dprofiler.threshold=2000`
+per module and Mathlib's `#min_imports`. Four fixes: (1) `NonPersistence/Tower.lean` stated a
+`have` with a type the unifier could only reach by unfolding `colorings` — 168 s for one line; the
+inferred type takes nothing, and the `maxHeartbeats` override that hid it is gone. (2) Four modules
+of the `k = 3` chain imported all of Mathlib (10 s and 5 GB per importing module on the development
+machine); they now import what `#min_imports` reports, and every module downstream of them, up to
+`Grid3/Three/Main.lean`, went from 60–100 s to under 10 s. (3) The brute-force `#guard` sweeps that
+cost minutes (`TwoCycles`, `RubinHard`, `ThetaGen`, `ThetaClass`, `CoreExtract`) moved to `Checks/`,
+a library that is not a default target; CI builds it as its own step. (4) Two `nlinarith` calls in
+`Grid3/PairC.lean` and one in `Grid3/Pair.lean` are now the explicit product facts plus `linarith`.
+Left as measured: `hasCore_aux`'s closing `exact` (23 s), the walk enumeration in `Cacti/Examples`
+(19 s), and the certificate itself — 43,736 records at 0.25–0.6 s of kernel time each, sequential
+in the comparator's replay; the key set is closed under row reflection with 578 fixed points, so a
+reflection-aware canonicalization would halve it to 22,157 records.
+
 **2026-09-07 — comparator without nanoda.** With the k = 3 height-three certificate in the
 submission the export is 957 MB, and the comparator replays it sequentially through each kernel;
 nanoda plus Lean's kernel plus the 66-minute build exceeded GitHub's six-hour job limit (run

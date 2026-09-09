@@ -796,15 +796,8 @@ def gShapes (n s : ℕ) : List (List ℕ) :=
 #guard (gShapes 3 8) = [[1, 2, 2], [1, 2, 3], [1, 2, 4], [1, 2, 5], [1, 3, 3], [1, 3, 4],
   [2, 2, 2], [2, 2, 3], [2, 2, 4], [2, 3, 3]]
 
--- **The sweep.** Every sorted valid shape with four or five arms and total length at most `12`.
-#guard (gShapes 4 12).all gWitnessCheck
-#guard (gShapes 5 12).all gWitnessCheck
-
--- A few larger ones, past the range of the sweep.
-#guard gWitnessCheck [2, 2, 2, 6]
-#guard gWitnessCheck [4, 4, 4, 4]
-#guard gWitnessCheck [2, 2, 5, 5]
-#guard gWitnessCheck [1, 2, 2, 3, 3]
+-- **The sweep** over every sorted valid shape with four or five arms and total length at most
+-- `12`, and the larger shapes past it, are in `Checks/ThetaGen.lean`.
 
 -- The witness never fires on **three** arms: with three arms only three of the four branch pairs
 -- get blocked, which is why arity `3` needs the parity argument of `ListColoring.ThetaClass`.

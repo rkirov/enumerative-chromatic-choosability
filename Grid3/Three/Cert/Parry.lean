@@ -1,3 +1,4 @@
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Grid3.Three.Cert.Bridge
 
 /-!

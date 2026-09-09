@@ -1,4 +1,6 @@
-import Mathlib
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Convex.SpecificFunctions.Basic
+import Mathlib.Analysis.SpecialFunctions.Log.NegMulLog
 
 /-!
 # The entropy half, fully assembled (conditional on the certificate).

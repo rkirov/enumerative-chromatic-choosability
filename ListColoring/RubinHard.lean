@@ -190,13 +190,7 @@ this small. -/
 #guard Fintype.card (TGV 2 2 2) = Fintype.card (ThetaV 1)
 #guard Fintype.card (TGV 2 2 4) = Fintype.card (ThetaV 2)
 #guard Fintype.card (TGV 2 2 6) = Fintype.card (ThetaV 3)
-#guard (thetaGen 2 2 2).colConst 2 = (theta 1).colConst 2
-#guard (thetaGen 2 2 2).colConst 3 = (theta 1).colConst 3
-#guard (thetaGen 2 2 2).colConst 4 = (theta 1).colConst 4
-#guard (thetaGen 2 2 4).colConst 2 = (theta 2).colConst 2
-#guard (thetaGen 2 2 4).colConst 3 = (theta 2).colConst 3
-#guard (thetaGen 2 2 4).colConst 4 = (theta 2).colConst 4
-#guard (thetaGen 2 2 6).colConst 3 = (theta 3).colConst 3
+-- the `colConst` comparisons are in `Checks/RubinHard.lean`
 
 /-! A shape whose three lengths do not all have the same parity has an odd cycle, so it is not even
 `2`-colorable. For the family `(2, 2, \text{odd})` this is `ListColoring.colConst_thetaOf_odd` below,

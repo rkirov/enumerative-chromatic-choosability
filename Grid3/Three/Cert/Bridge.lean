@@ -1,4 +1,10 @@
-import Mathlib
+import Mathlib.Algebra.BigOperators.Field
+import Mathlib.Algebra.CharP.Defs
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Real
+import Mathlib.Analysis.Normed.Field.Basic
+import Mathlib.Data.Int.Star
+import Mathlib.Tactic.LinearCombination
 import Grid3.Three.Cert.Decode
 
 /-!

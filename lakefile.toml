@@ -54,5 +54,9 @@ name = "Grid3"
 
 # A formal counterexample to the proposed uniform theorem for 2-degenerate graphs. K_{2,26} is
 # 2-degenerate but is not ECC at list size four. Imports ListColoring, imported by nothing.
+# Brute-force `#guard` sweeps that cost minutes of evaluation; not a default target (CI builds it).
+[[lean_lib]]
+name = "Checks"
+
 [[lean_lib]]
 name = "TwoDegenerate"

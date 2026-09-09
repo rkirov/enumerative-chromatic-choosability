@@ -58,6 +58,11 @@ jobs:
           python3 -m pip install --quiet pyyaml
           python3 check-submission.py
 
+      # The brute-force `#guard` sweeps live in `Checks/` (not a default target: they cost minutes
+      # of evaluation and nothing depends on them). Keep them running here.
+      - name: Brute-force sanity sweeps (Checks)
+        run: lake build Checks
+
       - name: No sorry, admit, or native_decide
         run: |
           if grep -rnwE 'sorry|admit|native_decide' ListColoring/ ListColoring.lean Cacti/ Cacti.lean \

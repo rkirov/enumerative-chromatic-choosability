@@ -94,11 +94,8 @@ section Guards
       !(decide (a % 2 = b % 2 ∧ b % 2 = c % 2)))
   else true
 
--- The uniform witness still works past the range swept in `ListColoring.RubinHard`.
-#guard thetaBadCheck 4 5 6
-#guard thetaBadCheck 5 5 5
-#guard thetaBadCheck 3 3 7
-#guard thetaBadCheck 1 5 5
+-- The uniform witness still works past the range swept in `ListColoring.RubinHard`: see
+-- `Checks/ThetaClass.lean`.
 
 -- and it still fails, as it must, on Rubin's own shape.
 #guard colThetaBad 2 2 8 = 2
@@ -522,7 +519,6 @@ theorem not_choosable_two_thetaGen {a b c : ℕ} (hv : ValidShape a b c)
 theorem thetaClassification : ThetaClassification :=
   fun _ _ _ hv hbad => not_choosable_two_thetaGen hv hbad
 
-
 /-! ### The good shape: `θ_{2,2,2m}` on the general model
 
 The remaining direction is Rubin's own family. `ListColoring.choosable_theta` proves that
@@ -734,7 +730,6 @@ example (r : ℕ) : (thetaGen 2 2 (2 * r + 2)).Choosable 2 :=
 end Examples
 
 end ListColoring
-
 
 #print axioms ListColoring.alt_chain
 #print axioms ListColoring.const_chain

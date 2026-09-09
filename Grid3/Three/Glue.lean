@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Algebra.BigOperators.Fin
 
 /-!
 # Gluing class-wise bijections

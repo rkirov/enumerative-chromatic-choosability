@@ -290,7 +290,7 @@ integer checker and the remaining corrected research direction are in
   `Classical.choice`, `Quot.sound` — enforced by the comparator's `permitted_axioms`.
 * Statements were checked by brute-force evaluation *before* being proved, which repeatedly caught
   indexing and orientation errors that would not have surfaced as type errors. See the
-  "Specs verified numerically" section of `plan.md`.
+  "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
   `comparator/Challenge.lean`, which claims **fifteen keystone theorems** — ten from the paper,
   three of the cactus classification, and two of Zhang–Dong's non-persistence theorem, which

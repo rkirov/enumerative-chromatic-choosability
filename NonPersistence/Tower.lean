@@ -195,14 +195,15 @@ theorem sum_col_iterCone (Lb : ListAssignment V) (A : ℕ → Finset ℕ) :
 
 /-! ### Constant lists -/
 
-set_option maxHeartbeats 1000000 in
 /-- One cone step preserves separation: the apex is not in the lifted set, and a coloring of the
 cone restricts to a coloring of the base. -/
 theorem separatedAt_coneOn {W : Type u} [Fintype W] [DecidableEq W] {H : SimpleGraph W}
     [DecidableRel H.Adj] {J J' : Finset W} {n : ℕ} (hsep : H.SeparatedAt J n) :
     (coneOn H J').SeparatedAt (J.image some) n := by
   intro F hF
-  have hF' : F ∘ some ∈ H.colorings (constList W n) := comp_some_mem_colorings hF
+  -- stated with an inferred type: unifying the lemma's `constList (Option W) n ∘ some` with
+  -- `constList W n` here unfolds `colorings` and costs minutes
+  have hF' := comp_some_mem_colorings hF
   rintro a ha b hb hab
   obtain ⟨a', ha', rfl⟩ := Finset.mem_image.mp (Finset.mem_coe.mp ha)
   obtain ⟨b', hb', rfl⟩ := Finset.mem_image.mp (Finset.mem_coe.mp hb)
