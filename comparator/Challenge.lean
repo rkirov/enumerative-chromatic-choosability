@@ -580,3 +580,63 @@ theorem ecc_boxProd_pathG_two_of_three {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :
     (pathG 2 □ pathG n).ECCAt k := sorry
 
 end ListColoring
+
+/-! ### 13. Maximum-degree-four graphs and arbitrary rectangles at list sizes at least twenty
+
+The proofs are in `GridGen/DegreeFourTwenty.lean`. The coefficient signs and
+parity-sensitive embedded-tree counts improve the previous threshold of 25.
+-/
+
+namespace SimpleGraph
+
+/-- Every finite simple graph of maximum degree at most four is ECC at every list size
+at least 20. -/
+theorem eccAt_of_degree_le_four_twenty {V : Type*} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj]
+    (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 20 ≤ k) : G.ECCAt k := sorry
+
+end SimpleGraph
+
+namespace ListColoring
+
+/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 20. -/
+theorem ecc_boxProd_pathG_of_twenty {k : ℕ} (hk : 20 ≤ k) (n m : ℕ) :
+    (pathG n □ pathG m).ECCAt k := sorry
+
+end ListColoring
+
+/-! ### 14. Uniform ECC threshold linear in maximum degree
+
+The proofs are in `GridGen/MaximumDegree.lean`, `GridGen/SmallDegree.lean` and
+`GridGen/PolymerStability.lean`; no restriction on graph order, connectedness (except in the
+equality case), or maximum degree is assumed. The integer inequality is exact.
+-/
+
+namespace SimpleGraph
+
+/-- Every finite simple graph of degree at most D is k-ECC when k ≥ ceil(5.67D). -/
+theorem eccAt_of_degree_bound {V : Type*} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] {D k : ℕ}
+    (hdeg : ∀ v, G.degree v ≤ D) (hk : 567 * D ≤ 100 * k) : G.ECCAt k := sorry
+
+/-- The bound in terms of the graph's actual maximum degree. -/
+theorem eccAt_of_maxDegree_bound {V : Type*} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] {k : ℕ}
+    (hk : 567 * G.maxDegree ≤ 100 * k) : G.ECCAt k := sorry
+
+/-- Every finite subcubic graph is ECC at every list size at least 15. The proof is in
+`GridGen/SmallDegree.lean`, from the same certificate theorem as the bounds above. -/
+theorem eccAt_of_degree_le_three {V : Type*} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] (hdeg : ∀ v, G.degree v ≤ 3) {k : ℕ}
+    (hk : 15 ≤ k) : G.ECCAt k := sorry
+
+/-- The equality case at the uniform threshold: on a connected graph, a `k`-list assignment
+attains the constant-list count exactly when all its lists are equal. The proof is in
+`GridGen/PolymerStability.lean`. -/
+theorem col_eq_colConst_iff_constant_of_degree_bound {V : Type*} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj] {D k : ℕ}
+    (hdeg : ∀ v, G.degree v ≤ D) (hk : 567 * D ≤ 100 * k)
+    (hG : G.Connected) {L : ListAssignment V} (hL : IsNListAssignment L k) :
+    G.col L = G.colConst k ↔ ∃ s : Finset ℕ, ∀ v, L v = s := sorry
+
+end SimpleGraph

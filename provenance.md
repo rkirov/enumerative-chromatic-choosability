@@ -80,10 +80,17 @@ Listed so no reader mistakes an absence for a claim.
 * **Kirov–Naimi §6, Question 1's negative answer at `n = 2`** — that `P₂ □ P₃` is not
   `2`-monophilic while every path is. A corollary of Theorem 2 rather than a separate argument.
   **Stated but not proved**, as `ListColoring.OpenProblem.not_ecc_two_boxProd_path_two_three`.
-* **Kirov–Naimi §6, Questions 1 and 2** — both **open**, and stated as such in `OpenProblems.lean`.
+* **Kirov–Naimi §6, Question 1** — **open**, and stated as such in `OpenProblems.lean`.
   A `sorry` there means nobody knows, not that a proof is missing here; the file is a separate
-  `lean_lib` precisely so that no theorem can rest on one. Question 2 is the modern `ν = τ`
-  question recorded in §4 below.
+  `lean_lib` precisely so that no theorem can rest on one. **Question 2** — the modern `ν = τ`
+  question recorded in §4 below — was answered negatively by Zhang–Dong (arXiv:2608.19773);
+  their theorem *is* formalized, in `NonPersistence/`, and `ListColoring.OpenProblem.not_question2` is proved.
+* **Dong–Koh 2008** (*Bounds for the real zeros of chromatic polynomials*, CPC 17) — real chromatic
+  roots lie below `5.664Δ` (below `4.765Δ` when `Δ = 3`). **Not formalized as such**; the positivity
+  half of `GridGen/`'s argument reaches the same constants and should be credited to them — see §3.
+* **Zhang–Dong, arXiv:2609.08540 (2026)** — `P_ℓ(G,k) = P(G,k)` for `k ≥ 23.41Δ`, with a
+  quantitative strictness estimate. **Not formalized as stated**; `GridGen/`'s theorems imply its
+  qualitative content at the smaller threshold `⌈5.67Δ⌉`, by the same interpolation method.
 
 ## 3. Not from the literature
 
@@ -97,6 +104,22 @@ published construction.
   `n = 25,26` open. Re-evaluating their balanced four-list construction at `n = 26` gives
   `9,925,029,789,650 < 10,168,268,619,684`. The exact list, independent checker, and kernel proof
   are in `TwoDegenerate/`. This closes `n = 26` negatively; it does not settle `n = 25`.
+
+* **Maximum-degree thresholds for the list colour function (`GridGen/`).** Every finite graph is
+  `k`-ECC once `567Δ ≤ 100k`; `Δ ≤ 3, 4, 5, 6, 7, 8` suffice at `k ≥ 15, 20, 26, 32, 37, 43`
+  (so every rectangular grid at `k ≥ 20`); and at each of these thresholds adjacent unequal lists
+  force `P(G,L) > P(G,k)`, so on a connected graph only constant assignments attain equality
+  (`SimpleGraph.eccAt_of_maxDegree_bound`, `SimpleGraph.eccAt_of_degree_le_three`,
+  `SimpleGraph.eccAt_of_degree_le_four_twenty`, `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt`).
+  **Mostly not new ideas, and credited in `GridGen/README.md`:** the connected-block expansion
+  and tree-graph bound (standard; Sokal 2001), the tree deficiency inequality (Wang–Qian–Yan
+  2017), the interpolation with tree-wise charging (Zhang–Dong 2026, who get `23.41Δ`), and — by
+  the exact agreement of constants — the sign-separated positivity recursion (Dong–Koh 2008,
+  real chromatic roots). What is ours is carrying Dong–Koh's constants over to the comparison with
+  arbitrary list assignments: charging only odd blocks, tree by tree, in the derivative, while
+  keeping the edge-deletion partition functions. The strictness statements were first proved at the
+  uniform threshold by a concurrent Codex review (2026-09-23). No optimality is claimed. A result
+  of the 2026 AI research collaboration, like `Cacti/`, `Ladder/` and `Grid3/`.
 
 * **The formalization itself.** As far as we can determine, list coloring and choosability had not
   been formalized in any proof assistant before this project.

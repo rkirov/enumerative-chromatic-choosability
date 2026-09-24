@@ -27,6 +27,24 @@ assistant before**, and Mathlib at the revision targeted here has no chromatic p
 choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything here is built from
 `SimpleGraph` and `Finset`.
 
+## Maximum-degree bounds and arbitrary grids
+
+Every finite simple graph is `k`-ECC whenever `567 * Δ ≤ 100 * k`, equivalently
+`k ≥ ceil(5.67Δ)`, where `Δ` is its maximum degree (`SimpleGraph.eccAt_of_maxDegree_bound`).
+Sharper certificates give `Δ ≤ 3` at `k ≥ 15`, `Δ ≤ 4` at `k ≥ 20`
+(`SimpleGraph.eccAt_of_degree_le_four_twenty`, and so **every rectangular grid** at `k ≥ 20`,
+`ListColoring.ecc_boxProd_pathG_of_twenty`), and `Δ ≤ 5, 6, 7, 8` at `k ≥ 26, 32, 37, 43`.
+At every one of these thresholds, two adjacent vertices with different lists force strictly more
+colourings, so on a connected graph only the constant assignments attain `P(G,k)`.
+
+All of these are instances of one theorem with its numbers abstracted into a rational certificate
+(`GridGen/PolymerCertificate.lean`). The method is a finite interpolation between `P(G,k)` and
+`P(G,L)`. Its positivity half coincides, constants included, with Dong–Koh's 2008 bound on real
+chromatic roots. The comparison with list assignments improves Zhang–Dong's `k ≥ 23.41Δ`
+(September 2026). [`GridGen/README.md`](GridGen/README.md) has the argument, the certificate
+table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 28 guarded axiom checks. None
+of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19` stays open.
+
 ## Layout
 
 | | |
@@ -35,6 +53,7 @@ choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
+| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 15, 20`, hence every rectangle at `k ≥ 20`), from one certificate theorem; also the separate conditional lookback route for general heights |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | the formal `K₂,₂₆` counterexample to a uniform 2-degenerate-graph conjecture |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
@@ -295,9 +314,12 @@ integer checker and the remaining corrected research direction are in
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **fifteen keystone theorems** — ten from the paper,
-  three of the cactus classification, and two of Zhang–Dong's non-persistence theorem, which
-  answers the paper's own §6 Question 2 — and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
+  `comparator/Challenge.lean`, which claims **twenty-seven keystone theorems** — ten from the paper,
+  three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
+  and height-three results, and six maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
+  subcubic graphs at `15`, maximum degree four at `20` with its arbitrary-grid corollary, and the
+  equality case) —
+  and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel
   from a `lean4export` export. (lean-eval's second, independent `nanoda` replay is not run: with

@@ -2,7 +2,7 @@ name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
 defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "Ladder", "Grid3",
-  "TwoDegenerate"]
+  "TwoDegenerate", "GridGen"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -60,3 +60,15 @@ name = "Checks"
 
 [[lean_lib]]
 name = "TwoDegenerate"
+
+# GridGen/PolymerCertificate.lean proves ECC (with strictness and the equality case) from a
+# rational parity certificate; MaximumDegree.lean (k >= ceil(5.67Δ)), DegreeFourTwenty.lean
+# (Δ <= 4, k >= 20, hence every rectangle) and SmallDegree.lean are its instances. This finite
+# polymer proof uses no seam enumeration. See GridGen/README.md.
+# The separate all-k >= 5 route remains the telescoping and lookback reduction of
+# ai_research_notes/GRID_REVIEW_2026-09-02.md section 5.6 for an arbitrary row graph H, so that
+# H box P_n is k-ECC once the two-step seam inequality and the initial inequality hold. Both are
+# explicit hypotheses (no sorry); the conjecture that they hold for all paths at k >= 5 is a
+# Prop. Imports ListColoring, imported by nothing.
+[[lean_lib]]
+name = "GridGen"

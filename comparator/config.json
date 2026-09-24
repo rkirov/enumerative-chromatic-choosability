@@ -72,7 +72,13 @@
     "ListColoring.ecc_boxProd_pathG_two",
     "ListColoring.colConst_boxProd_pathG_two",
     "ListColoring.ecc_boxProd_pathG_two_of_four",
-    "ListColoring.ecc_boxProd_pathG_two_of_three"
+    "ListColoring.ecc_boxProd_pathG_two_of_three",
+    "SimpleGraph.eccAt_of_degree_le_four_twenty",
+    "ListColoring.ecc_boxProd_pathG_of_twenty",
+    "SimpleGraph.eccAt_of_degree_bound",
+    "SimpleGraph.eccAt_of_maxDegree_bound",
+    "SimpleGraph.eccAt_of_degree_le_three",
+    "SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound"
   ],
   "permitted_axioms": [
     "propext",
