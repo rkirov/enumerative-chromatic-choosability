@@ -80,7 +80,10 @@
     "SimpleGraph.eccAt_of_degree_le_three",
     "SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound",
     "SimpleGraph.TwoDegenerate.K2_26.not_eccAt_four",
-    "SimpleGraph.TwoDegenerate.K2_25.eccAt_four"
+    "SimpleGraph.TwoDegenerate.K2_25.eccAt_four",
+    "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff",
+    "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff",
+    "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff"
   ],
   "permitted_axioms": [
     "propext",

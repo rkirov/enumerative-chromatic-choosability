@@ -36,17 +36,18 @@ open Finset
 def bit (κ : List Bool) (x : ℕ) : ℕ := if κ.getD x false then 1 else 0
 
 /-- Position of the `j`-th colour of `B` in the key: `A ∩ B` first, then `A \ B`, then `B \ A`. -/
-def posB (r j : ℕ) : ℕ := if j < r then j else j + 4 - r
+def posB (k r j : ℕ) : ℕ := if j < r then j else j + k - r
 
-/-- `|S \ {a_i, b_j}|` in terms of the key of `S`, for a four-set `S`. -/
-def pairVal (r : ℕ) (κ : List Bool) (i j : ℕ) : ℕ :=
-  4 + (if i = j ∧ j < r then bit κ i else 0) - bit κ i - bit κ (posB r j)
+/-- `|S \ {a_i, b_j}|` in terms of the key of `S`, for a `k`-set `S`. -/
+def pairVal (k r : ℕ) (κ : List Bool) (i j : ℕ) : ℕ :=
+  k + (if i = j ∧ j < r then bit κ i else 0) - bit κ i - bit κ (posB k r j)
 
-/-- The sixteen pairs `(i, j)`, `i, j < 4`, in the order `4 i + j`. -/
-def pairs16 : List (ℕ × ℕ) := (List.range 4).flatMap fun i => (List.range 4).map fun j => (i, j)
+/-- The `k²` pairs `(i, j)`, `i, j < k`, in the order `k i + j`. -/
+def pairsK (k : ℕ) : List (ℕ × ℕ) :=
+  (List.range k).flatMap fun i => (List.range k).map fun j => (i, j)
 
-/-- The row of a key: its sixteen pair values. -/
-def rowOf (r : ℕ) (κ : List Bool) : List ℕ := pairs16.map fun p => pairVal r κ p.1 p.2
+/-- The row of a key: its `k²` pair values. -/
+def rowOf (k r : ℕ) (κ : List Bool) : List ℕ := (pairsK k).map fun p => pairVal k r κ p.1 p.2
 
 theorem evalC_map {α β : Type*} (P : List β) (K : List α) (g : α → β → ℕ) (h : β → ℕ)
     (m : α → ℕ) :
@@ -59,10 +60,22 @@ theorem evalC_map {α β : Type*} (P : List β) (K : List α) (g : α → β →
     rw [ih (fun p => h p * g t p ^ m t)]
     simp [mul_assoc]
 
-theorem sum_pairs16 (f : ℕ × ℕ → ℕ) :
-    (pairs16.map f).sum = ∑ i ∈ range 4, ∑ j ∈ range 4, f (i, j) := by
-  simp [pairs16, Finset.sum_range_succ, List.range_succ]
-  ring
+theorem sum_range_list (k : ℕ) (g : ℕ → ℕ) :
+    ((List.range k).map g).sum = ∑ i ∈ range k, g i := by
+  induction k with
+  | zero => simp
+  | succ k ih => rw [List.range_succ, List.map_append, List.sum_append, ih, sum_range_succ]; simp
+
+theorem sum_pairsK (k : ℕ) (f : ℕ × ℕ → ℕ) :
+    ((pairsK k).map f).sum = ∑ i ∈ range k, ∑ j ∈ range k, f (i, j) := by
+  have h : ∀ l : List ℕ, ((l.flatMap fun i => (List.range k).map fun j => (i, j)).map f).sum =
+      (l.map fun i => ((List.range k).map fun j => f (i, j)).sum).sum := by
+    intro l
+    induction l with
+    | nil => simp
+    | cons i l ih => simp [List.flatMap_cons, ih, List.map_map, Function.comp_def]
+  rw [pairsK, h, sum_range_list]
+  exact sum_congr rfl fun i _ => sum_range_list k _
 
 /-! ### Encoding four-sets inside `A ∪ B` -/
 
@@ -82,7 +95,7 @@ def lU : List ℕ := lA A B ++ lQ A B
 /-- The membership bits of `S` along `lU A B`. -/
 def key (S : Finset ℕ) : List Bool := (lU A B).map fun x => decide (x ∈ S)
 
-variable {A B}
+variable {A B} {k : ℕ}
 
 theorem nodup_lA : (lA A B).Nodup := by
   refine List.nodup_append.mpr ⟨sort_nodup _ _, sort_nodup _ _, fun x hx y hy => ?_⟩
@@ -110,24 +123,24 @@ theorem nodup_lB : (lB A B).Nodup := by
 
 theorem length_lI : (lI A B).length = (A ∩ B).card := length_sort _
 
-theorem length_lA (hA : A.card = 4) : (lA A B).length = 4 := by
+theorem length_lA (hA : A.card = k) : (lA A B).length = k := by
   rw [← List.toFinset_card_of_nodup nodup_lA, ← hA]
   congr 1; ext x; simp [mem_lA]
 
-theorem length_lB (hB : B.card = 4) : (lB A B).length = 4 := by
+theorem length_lB (hB : B.card = k) : (lB A B).length = k := by
   rw [← List.toFinset_card_of_nodup nodup_lB, ← hB]
   congr 1; ext x; simp [mem_lB]
 
-theorem length_lQ (hB : B.card = 4) :
-    (lQ A B).length = 4 - (A ∩ B).card := by
+theorem length_lQ (hB : B.card = k) :
+    (lQ A B).length = k - (A ∩ B).card := by
   have := length_lB (A := A) hB
   rw [lB, List.length_append, length_lI] at this
   omega
 
-theorem length_lU (hA : A.card = 4) (hB : B.card = 4) :
-    (lU A B).length = 8 - (A ∩ B).card := by
+theorem length_lU (hA : A.card = k) (hB : B.card = k) :
+    (lU A B).length = 2 * k - (A ∩ B).card := by
   have h1 := length_lQ (A := A) hB
-  have h2 : (A ∩ B).card ≤ 4 := hA ▸ card_le_card inter_subset_left
+  have h2 : (A ∩ B).card ≤ k := hA ▸ card_le_card inter_subset_left
   rw [lU, List.length_append, length_lA hA]; omega
 
 /-- A sum over `A` is a sum over the positions of `lA`. -/
@@ -160,8 +173,8 @@ theorem getD_lU_left {i : ℕ} (hi : i < (lA A B).length) :
     (lU A B).getD i 0 = (lA A B).getD i 0 := by
   rw [lU, getD_app_left _ _ hi]
 
-theorem getD_lB_eq {j : ℕ} (hA : A.card = 4) (hB : B.card = 4) (hj : j < 4) :
-    (lB A B).getD j 0 = (lU A B).getD (posB (A ∩ B).card j) 0 := by
+theorem getD_lB_eq {j : ℕ} (hA : A.card = k) (hB : B.card = k) (hj : j < k) :
+    (lB A B).getD j 0 = (lU A B).getD (posB k (A ∩ B).card j) 0 := by
   have hI := length_lI (A := A) (B := B)
   have hQ := length_lQ (A := A) hB
   unfold posB
@@ -177,8 +190,8 @@ theorem getD_key (S : Finset ℕ) {x : ℕ} (hx : x < (lU A B).length) :
   simp [key, List.getD, List.getElem?_map, List.getElem?_eq_getElem hx]
 
 /-- `a_i = b_j` exactly when `i = j` falls inside `A ∩ B`. -/
-theorem getD_lA_eq_getD_lB_iff (hA : A.card = 4) (hB : B.card = 4) {i j : ℕ} (hi : i < 4)
-    (hj : j < 4) :
+theorem getD_lA_eq_getD_lB_iff (hA : A.card = k) (hB : B.card = k) {i j : ℕ} (hi : i < k)
+    (hj : j < k) :
     (lA A B).getD i 0 = (lB A B).getD j 0 ↔ i = j ∧ j < (A ∩ B).card := by
   have hI := length_lI (A := A) (B := B)
   have hlA := length_lA (A := A) (B := B) hA
@@ -200,18 +213,18 @@ theorem getD_lA_eq_getD_lB_iff (hA : A.card = 4) (hB : B.card = 4) {i j : ℕ} (
     rw [h] at ha
     exact (mem_sdiff.mp hb).2 ha
 
-theorem card_sdiff_pair_eq_pairVal (hA : A.card = 4) (hB : B.card = 4) {S : Finset ℕ}
-    (hS : S.card = 4) {i j : ℕ} (hi : i < 4) (hj : j < 4) :
+theorem card_sdiff_pair_eq_pairVal (hA : A.card = k) (hB : B.card = k) {S : Finset ℕ}
+    (hS : S.card = k) {i j : ℕ} (hi : i < k) (hj : j < k) :
     (S \ {(lA A B).getD i 0, (lB A B).getD j 0}).card =
-      pairVal (A ∩ B).card (key A B S) i j := by
+      pairVal k (A ∩ B).card (key A B S) i j := by
   have hU := length_lU (A := A) (B := B) hA hB
-  have hr : (A ∩ B).card ≤ 4 := hA ▸ card_le_card inter_subset_left
+  have hr : (A ∩ B).card ≤ k := hA ▸ card_le_card inter_subset_left
   have hbitA : bit (key A B S) i = if (lA A B).getD i 0 ∈ S then 1 else 0 := by
     rw [bit, getD_key S (by omega), getD_lU_left (by rw [length_lA hA]; omega)]
     simp
-  have hbitB : bit (key A B S) (posB (A ∩ B).card j) =
+  have hbitB : bit (key A B S) (posB k (A ∩ B).card j) =
       if (lB A B).getD j 0 ∈ S then 1 else 0 := by
-    have : posB (A ∩ B).card j < (lU A B).length := by unfold posB; split_ifs <;> omega
+    have : posB k (A ∩ B).card j < (lU A B).length := by unfold posB; split_ifs <;> omega
     rw [bit, getD_key S this, ← getD_lB_eq hA hB hj]
     simp
   rw [card_sdiff, hS, pairVal, hbitA, hbitB]
@@ -225,10 +238,10 @@ theorem card_sdiff_pair_eq_pairVal (hA : A.card = 4) (hB : B.card = 4) {S : Fins
   · have hc : ¬ (i = j ∧ j < (A ∩ B).card) := fun h => hab (heq.mpr h)
     rw [if_neg hc]
     by_cases haS : a ∈ S <;> by_cases hbS : b ∈ S <;>
-      simp [haS, hbS, insert_inter_of_mem, insert_inter_of_notMem, card_insert_of_notMem, hab]
+      simp [haS, hbS, insert_inter_of_mem, insert_inter_of_notMem, card_insert_of_notMem, hab] <;> omega
 
-theorem count_true_key {S : Finset ℕ} (hsub : S ⊆ A ∪ B) (hS : S.card = 4) :
-    (key A B S).count true = 4 := by
+theorem count_true_key {S : Finset ℕ} (hsub : S ⊆ A ∪ B) (hS : S.card = k) :
+    (key A B S).count true = k := by
   have h1 : ∀ l : List ℕ, (l.map fun x => decide (x ∈ S)).count true =
       (l.filter fun x => decide (x ∈ S)).length := by
     intro l; induction l with
@@ -246,15 +259,15 @@ end Encoding
 theorem card_sdiff_pair (S : Finset ℕ) (a b : ℕ) :
     (S \ {a, b}).card = S.card - ({a, b} ∩ S).card := card_sdiff
 
-theorem exists_push {A B : Finset ℕ} (hA : A.card = 4) {S : Finset ℕ} (hS : S.card = 4) :
-    ∃ S', S' ⊆ A ∪ B ∧ S'.card = 4 ∧
+theorem exists_push {k : ℕ} {A B : Finset ℕ} (hA : A.card = k) {S : Finset ℕ} (hS : S.card = k) :
+    ∃ S', S' ⊆ A ∪ B ∧ S'.card = k ∧
       ∀ a ∈ A, ∀ b ∈ B, (S' \ {a, b}).card ≤ (S \ {a, b}).card := by
   obtain ⟨u, hsu, hut, hu⟩ := exists_subsuperset_card_eq (s := S ∩ (A ∪ B)) (t := A ∪ B)
-    (n := 4) inter_subset_right (hS ▸ card_le_card inter_subset_left)
+    (n := k) inter_subset_right (hS ▸ card_le_card inter_subset_left)
     (hA ▸ card_le_card subset_union_left)
   refine ⟨u, hut, hu, fun a ha b hb => ?_⟩
   rw [card_sdiff_pair, card_sdiff_pair, hu, hS]
-  refine Nat.sub_le_sub_left (card_le_card fun x hx => ?_) 4
+  refine Nat.sub_le_sub_left (card_le_card fun x hx => ?_) k
   obtain ⟨hxab, hxS⟩ := mem_inter.mp hx
   refine mem_inter.mpr ⟨hxab, hsu (mem_inter.mpr ⟨hxS, ?_⟩)⟩
   rcases mem_insert.mp hxab with rfl | h
@@ -294,27 +307,27 @@ theorem sum_card_keys {n : ℕ} {K : List (List Bool)} (hK : K.Nodup)
     simpa using hf w), card_univ, Fintype.card_fin]
 
 /-- The constant list of partial products. -/
-def ones16 : List ℕ := pairs16.map fun _ => 1
+def onesK (k : ℕ) : List ℕ := (pairsK k).map fun _ => 1
 
 /-! ### Assembly -/
 
 /-- The numeric statement for overlap `r`: a complete, duplicate-free list of keys, and the
 checker's goal for their rows. -/
-def KeyGoal (T n r : ℕ) (K : List (List Bool)) : Prop :=
-  K.Nodup ∧ (∀ κ ∈ allBool (8 - r), κ.count true = 4 → κ ∈ K) ∧
-    Goal T (K.map (rowOf r)) ones16 n
+def KeyGoal (k T n r : ℕ) (K : List (List Bool)) : Prop :=
+  K.Nodup ∧ (∀ κ ∈ allBool (2 * k - r), κ.count true = k → κ ∈ K) ∧
+    Goal T (K.map (rowOf k r)) (onesK k) n
 
 /-- Given the numeric goal for every overlap, every four-list assignment on `K₂,ₙ` has at least
 `T` colourings. -/
-theorem le_col_of_keyGoals {n T : ℕ} (goals : ∀ r ≤ 4, ∃ K, KeyGoal T n r K)
-    (L : ListAssignment (Fin 2 ⊕ Fin n)) (hL : IsNListAssignment L 4) :
+theorem le_col_of_keyGoals {k n T : ℕ} (goals : ∀ r ≤ k, ∃ K, KeyGoal k T n r K)
+    (L : ListAssignment (Fin 2 ⊕ Fin n)) (hL : IsNListAssignment L k) :
     T ≤ (completeBipartiteGraph (Fin 2) (Fin n)).col L := by
   classical
   rw [col_completeBipartite_two_right]
   set A := L (Sum.inl 0)
   set B := L (Sum.inl 1)
-  have hA : A.card = 4 := hL _
-  have hB : B.card = 4 := hL _
+  have hA : A.card = k := hL _
+  have hB : B.card = k := hL _
   -- Push every right list into `A ∪ B`.
   choose T' hT'sub hT'card hT'le using fun w => exists_push (B := B) hA (hL (Sum.inr w))
   refine le_trans ?_ (sum_le_sum fun a ha => sum_le_sum fun b hb =>
@@ -329,29 +342,30 @@ theorem le_col_of_keyGoals {n T : ℕ} (goals : ∀ r ≤ 4, ∃ K, KeyGoal T n 
     exact this
   set m : List Bool → ℕ := fun t => (univ.filter fun w => key A B (T' w) = t).card
   -- Rewrite the sum over `A × B` as the checker's sum over the sixteen pairs.
-  have hsumA : ∀ f : ℕ → ℕ, ∑ a ∈ A, f a = ∑ i ∈ range 4, f ((lA A B).getD i 0) := by
+  have hsumA : ∀ f : ℕ → ℕ, ∑ a ∈ A, f a = ∑ i ∈ range k, f ((lA A B).getD i 0) := by
     intro f
     conv_lhs => rw [← toFinset_lA (A := A) (B := B)]
     rw [sum_eq_sum_range nodup_lA, length_lA hA]
-  have hsumB : ∀ f : ℕ → ℕ, ∑ b ∈ B, f b = ∑ j ∈ range 4, f ((lB A B).getD j 0) := by
+  have hsumB : ∀ f : ℕ → ℕ, ∑ b ∈ B, f b = ∑ j ∈ range k, f ((lB A B).getD j 0) := by
     intro f
     conv_lhs => rw [← toFinset_lB (A := A) (B := B)]
     rw [sum_eq_sum_range nodup_lB, length_lB hB]
   rw [hsumA]
   simp_rw [hsumB]
-  have hpair : ∀ i ∈ range 4, ∀ j ∈ range 4,
+  have hpair : ∀ i ∈ range k, ∀ j ∈ range k,
       ∏ w, (T' w \ {(lA A B).getD i 0, (lB A B).getD j 0}).card =
-        (K.map fun t => pairVal r t i j ^ m t).prod := by
+        (K.map fun t => pairVal k r t i j ^ m t).prod := by
     intro i hi j hj
     rw [prod_congr rfl fun w _ => card_sdiff_pair_eq_pairVal hA hB (hT'card w)
       (mem_range.mp hi) (mem_range.mp hj)]
-    exact prod_eq_prod_keys hKnodup (fun w => key A B (T' w)) hkey (fun t => pairVal r t i j)
+    exact prod_eq_prod_keys hKnodup (fun w => key A B (T' w)) hkey (fun t => pairVal k r t i j)
   rw [sum_congr rfl fun i hi => sum_congr rfl fun j hj => hpair i hi j hj]
   have hms : (K.map m).sum = n := by
     simpa [m] using sum_card_keys hKnodup (fun w => key A B (T' w)) hkey
   have := hgoal (K.map m) (by simp) hms
-  have hrow : K.map (rowOf r) = K.map fun t => pairs16.map fun p => pairVal r t p.1 p.2 := rfl
-  rw [hrow, ones16, evalC_map, sum_pairs16] at this
+  have hrow : K.map (rowOf k r) =
+      K.map fun t => (pairsK k).map fun p => pairVal k r t p.1 p.2 := rfl
+  rw [hrow, onesK, evalC_map, sum_pairsK] at this
   simpa using this
 
 

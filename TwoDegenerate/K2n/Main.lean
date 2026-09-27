@@ -2,60 +2,70 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import TwoDegenerate.K2n.R0
-import TwoDegenerate.K2n.R1
-import TwoDegenerate.K2n.R2
-import TwoDegenerate.K2n.R3
-import TwoDegenerate.K2n.R4
+import TwoDegenerate.K2n.Positive3
+import TwoDegenerate.K2n.Positive4
+import TwoDegenerate.K2n.Positive5
+import TwoDegenerate.K2n.Negative
 
 /-!
-# `K₂,₂₅` is enumeratively chromatic-choosable at four
+# `K₂,ₙ` at list sizes three, four and five
+
+For `k = 3, 4, 5`, `K₂,ₙ` is enumeratively chromatic-choosable at `k` exactly when `n ≤ 11`,
+`n ≤ 25`, `n ≤ 43` respectively.
 
 Kaul, Kumar, Liu, Mudrock, Rewers, Shin, Tanahara and To (*Bounding the list color function
-threshold from above*, Involve 16 (2023), Theorem 7(ii)) prove that `K₂,ₙ` is ECC at four for
-`n ≤ 24` and not for `n ≥ 27`, and leave `n = 25, 26` open. `TwoDegenerate/Counterexample.lean`
-settles `n = 26` negatively. This file settles `n = 25` positively, so the threshold is exact:
-`K₂,ₙ` is ECC at four exactly when `n ≤ 25`.
+threshold from above*, Involve 16 (2023), Theorem 7) prove: ECC at three for `2 ≤ n ≤ 10` and not
+for `n ≥ 12`; at four for `2 ≤ n ≤ 24` and not for `n ≥ 27`; at five for `2 ≤ n ≤ 43` and not for
+`n ≥ 44`. They leave `K₂,₁₁` at three and `K₂,₂₅`, `K₂,₂₆` at four open. Here `K₂,₁₁` is ECC at
+three, `K₂,₂₅` is ECC at four and `K₂,₂₆` is not, which settles all three.
 
-The proof is `le_col_of_keyGoals` (`TwoDegenerate/K2n/Reduction.lean`) applied to one kernel-checked
-certificate per overlap `|A ∩ B| = 0, …, 4` of the two hub lists (`TwoDegenerate/K2n/R*.lean`).
+The proofs are independent of theirs, except that the negative side uses the list family of
+their Lemma 11:
+
+* positive (`n ≤ N`): every list assignment reduces to one numeric inequality per overlap of the hub
+  lists (`TwoDegenerate/K2n/Reduction.lean`), each closed by a kernel-checked AM–GM
+  branch-and-bound certificate (`TwoDegenerate/K2n/Checker.lean`, generated files in
+  `TwoDegenerate/K2n/Cert/` and `Keys/`), where they use floating-point checks of AM–GM bounds;
+* negative (`n > N`): the Lemma 11 family, with an induction on `n / 4`
+  (`TwoDegenerate/K2n/Witness.lean`, `Negative.lean`) in place of their appeal to Theorem 14 of
+  Kaul–Kumar–Mudrock–Rewers–Shin–To for large `n`.
 -/
 
-namespace SimpleGraph.TwoDegenerate.K2_25
+namespace SimpleGraph.TwoDegenerate
 
-open K2n K2n.K2_25
+open K2n
 
-/-- `K₂,₂₅`, on `Fin 2 ⊕ Fin 25`. -/
-abbrev G : SimpleGraph (Fin 2 ⊕ Fin 25) := completeBipartiteGraph (Fin 2) (Fin 25)
+/-- **`K₂,ₙ` is ECC at three exactly when `n ≤ 11`.** -/
+theorem completeBipartite_two_eccAt_three_iff (n : ℕ) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 3 ↔ n ≤ 11 :=
+  ⟨fun h => by by_contra hn; exact not_eccAt_three (by omega) h, eccAt_3_of_le⟩
 
-/-- The number of ordinary four-colourings of `K₂,₂₅`, `4·3²⁵ + 12·2²⁵`. -/
-theorem colConst_four : G.colConst 4 = 4 * 3 ^ 25 + 12 * 2 ^ 25 := by
-  rw [colConst, col_completeBipartite_two_right]
-  decide
+/-- **`K₂,ₙ` is ECC at four exactly when `n ≤ 25`.** -/
+theorem completeBipartite_two_eccAt_four_iff (n : ℕ) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 4 ↔ n ≤ 25 :=
+  ⟨fun h => by by_contra hn; exact not_eccAt_four (by omega) h, eccAt_4_of_le⟩
 
-theorem keyGoals : ∀ r ≤ 4, ∃ K, KeyGoal (4 * 3 ^ 25 + 12 * 2 ^ 25) 25 r K := by
-  intro r hr
-  match r, hr with
-  | 0, _ => exact ⟨_, keyGoal0⟩
-  | 1, _ => exact ⟨_, keyGoal1⟩
-  | 2, _ => exact ⟨_, keyGoal2⟩
-  | 3, _ => exact ⟨_, keyGoal3⟩
-  | 4, _ => exact ⟨_, keyGoal4⟩
+/-- **`K₂,ₙ` is ECC at five exactly when `n ≤ 43`.** -/
+theorem completeBipartite_two_eccAt_five_iff (n : ℕ) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 5 ↔ n ≤ 43 :=
+  ⟨fun h => by by_contra hn; exact not_eccAt_five (by omega) h, eccAt_5_of_le⟩
 
-/-- **`K₂,₂₅` is enumeratively chromatic-choosable at four**: no assignment of four-element
-lists admits fewer colourings than the constant one. -/
-theorem eccAt_four : (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 := by
-  intro L hL
-  rw [colConst_four]
-  exact le_col_of_keyGoals keyGoals L hL
+/-- `K₂,₁₁` is ECC at three: the case Kaul et al. leave open at list size three. -/
+theorem K2_11.eccAt_three : (completeBipartiteGraph (Fin 2) (Fin 11)).ECCAt 3 :=
+  eccAt_3_of_le le_rfl
 
-/-- The threshold, pinned down: `K₂,₂₅` is ECC at four and `K₂,₂₆` is not. -/
-theorem eccAt_four_twentyFive_and_not_twentySix :
+/-- `K₂,₂₅` is ECC at four. -/
+theorem K2_25.eccAt_four : (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 :=
+  eccAt_4_of_le le_rfl
+
+/-- The threshold at four, pinned down: `K₂,₂₅` is ECC at four and `K₂,₂₆` is not. -/
+theorem K2_25.eccAt_four_twentyFive_and_not_twentySix :
     (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 ∧
       ¬ (completeBipartiteGraph (Fin 2) (Fin 26)).ECCAt 4 :=
-  ⟨eccAt_four, K2_26.not_eccAt_four⟩
+  ⟨K2_25.eccAt_four, K2_26.not_eccAt_four⟩
 
-end SimpleGraph.TwoDegenerate.K2_25
+end SimpleGraph.TwoDegenerate
 
-#print axioms SimpleGraph.TwoDegenerate.K2_25.eccAt_four
-#print axioms SimpleGraph.TwoDegenerate.K2_25.eccAt_four_twentyFive_and_not_twentySix
+#print axioms SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff
+#print axioms SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff
+#print axioms SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff

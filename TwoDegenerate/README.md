@@ -1,17 +1,20 @@
-# Two-degenerate graphs, and the exact threshold for `K₂,ₙ` at four
+# Two-degenerate graphs, and `K₂,ₙ` at list sizes three, four and five
 
 The conjecture
 
 > Every 2-degenerate graph is `ECCAt k` for every `k ≥ 4`
 
-is false.  `K₂,₂₆` is 2-degenerate and is not `ECCAt 4` (`Counterexample.lean`).  And `K₂,₂₅`
-*is* `ECCAt 4` (`K2n/`), so `K₂,ₙ` is enumeratively chromatic-choosable at four exactly when
-`n ≤ 25`:
+is false.  `K₂,₂₆` is 2-degenerate and is not `ECCAt 4` (`Counterexample.lean`).
+
+More completely, for `k = 3, 4, 5` the thresholds are exact (`K2n/Main.lean`):
 
 ```lean
-SimpleGraph.TwoDegenerate.K2_25.eccAt_four :
-  (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4
-SimpleGraph.TwoDegenerate.K2_25.eccAt_four_twentyFive_and_not_twentySix
+SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff (n : ℕ) :
+  (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 3 ↔ n ≤ 11
+SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff (n : ℕ) :
+  (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 4 ↔ n ≤ 25
+SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff (n : ℕ) :
+  (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 5 ↔ n ≤ 43
 ```
 
 ## Exact witness
@@ -56,50 +59,63 @@ python3 TwoDegenerate/verify_k2_26.py
 ## Relation to the literature
 
 Kaul, Kumar, Liu, Mudrock, Rewers, Shin, Tanahara and To, *Bounding the List Color Function
-Threshold from Above*, Involve **16** (2023), 849–882, Theorem 7(ii), proved equality for
-`K₂,n` at four for `n ≤ 24`, strict inequality for `n ≥ 27`, and left `n = 25,26` open.
-Their balanced-list formula, independently reevaluated here, already yields the witness above at
-`n = 26`.  Thus this closes the `n = 26` case negatively, and `K2n/` closes `n = 25` positively,
-over all four-list assignments.  Together with their theorem this determines the threshold
-exactly.  As far as a targeted search found, neither case had been settled in the literature.
+Threshold from Above*, Involve **16** (2023), 849–882 (arXiv:2207.04831), Theorem 7, prove:
+`K₂,ₙ` is ECC at three for `2 ≤ n ≤ 10` and not for `n ≥ 12`; at four for `2 ≤ n ≤ 24` and not
+for `n ≥ 27`; at five for `2 ≤ n ≤ 43` and not for `n ≥ 44`. They state that `K₂,₁₁` at three and
+`K₂,₂₅`, `K₂,₂₆` at four are unknown, and conjecture (their Conjecture 8) that ECC at `m` is
+inherited from `K₂,ₙ₊₁` by `K₂,ₙ`. This development settles the three open cases:
 
-## `K₂,₂₅` is ECC at four
+| | list size | result |
+|---|---|---|
+| `K₂,₁₁` | 3 | ECC (least count 6,256 against 6,150, by exhaustive search outside Lean) |
+| `K₂,₂₅` | 4 | ECC |
+| `K₂,₂₆` | 4 | not ECC (the witness below) |
 
-Every four-list assignment has at least `P(K₂,₂₅, 4) = 4·3²⁵ + 12·2²⁵ = 3,389,557,090,956`
-colorings.  The proof has three reductions and a certificate.
+So the sets of `n` with `K₂,ₙ` ECC at three, four and five are `n ≤ 11`, `n ≤ 25` and `n ≤ 43`, and
+their Conjecture 8 holds at `m = 3, 4, 5`. The `K₂,₂₆` witness is their own Lemma 11 family at
+`n = 26 = 4·6 + 2`; their proof checks that family only from `n = 27`. As far as a targeted search
+found, none of the three cases had been settled in the literature.
 
-1. **Push into `A ∪ B`** (`K2n/Reduction.lean`, `exists_push`).  Replacing a right list `T` by a
-   four-subset of `A ∪ B` containing `T ∩ (A ∪ B)` never increases `|T \ {a,b}|` for `a ∈ A`,
-   `b ∈ B`, so it never increases the count.
+Reading the paper closely, the formal proofs differ from it as follows. Their positive
+cases rest on AM–GM lower bounds (their Lemma 13 and case analyses) checked by floating-point
+Python loops over all multiplicity vectors (their Appendix B); here every case is a kernel-checked
+exact certificate. For large `n` their negative side cites Theorem 14 of Kaul–Kumar–Mudrock–Rewers–
+Shin–To (arXiv:2202.03431); here an induction on `n / 4` for the Lemma 11 family replaces it
+(`K2n/Witness.lean`). Their Lemma 5 (lists may be pushed into `A ∪ B`) appears here as
+`exists_push`, proved without their hypothesis `m ≥ χℓ(G)`. Typographical slips noticed:
+"`⌊n/4⌋ ≥ 9 ln(16/17)`" and "`16 ln(16/17)`" should read `16/7`, and in the proof of Theorem 7(iii),
+case `d = 0`, "`[10]` choose `4`" should be "choose `5`". None affects a result.
+
+## `K₂,ₙ` at list sizes three, four and five
+
+**Positive side, `n ≤ 11, 25, 43`** (`K2n/Reduction.lean`, `K2n/Checker.lean`, generated
+`K2n/Keys/`, `K2n/Cert/`, `K2n/Positive{3,4,5}.lean`).
+
+1. **Push into `A ∪ B`** (`exists_push`).  Replacing a right list `T` by a `k`-subset of `A ∪ B`
+   containing `T ∩ (A ∪ B)` never increases `|T \ {a,b}|` for `a ∈ A`, `b ∈ B`.
 2. **Encode.**  With `A ∩ B`, `A \ B`, `B \ A` listed in increasing order, a right list is
-   determined, for the count, by its membership bits; `|T \ {a_i, b_j}|` is an explicit function
-   `pairVal` of those bits (`card_sdiff_pair_eq_pairVal`).
-3. **Group.**  Only the number `m_t` of right vertices of each type `t` matters, so the claim
-   becomes, for each overlap `r = |A ∩ B|`,
+   determined, for the count, by its membership bits; `|T \ {a_i, b_j}|` is the explicit
+   `pairVal k r` of those bits (`card_sdiff_pair_eq_pairVal`).
+3. **Group.**  Only the number `m_t` of right vertices of each type `t` matters; for each overlap
+   `r = |A ∩ B|` the claim becomes `∑_p ∏_t W[t][p] ^ m_t ≥ k(k−1)ⁿ + k(k−1)(k−2)ⁿ` for all
+   multiplicities summing to `n` (`colConst_K2n` is the right-hand side).
+4. **Certificates.**  Branch-and-bound trees whose nodes close by weighted AM–GM with integer
+   weights, `(∏ w_p^{w_p}) (∑ a_p)^D ≥ D^D ∏ a_p^{w_p}` (`amgm_finset`); `check_sound` proves the
+   checker, `decide +kernel` runs it. Almost every `(k, n, r)` needs a single AM–GM node; the
+   convex relaxation drops below the constant count only next to the thresholds, where integrality
+   is essential and the trees grow (`k = 3, n = 11`: 91 nodes; `k = 4, n = 25`: 575 and 133;
+   `k = 5, n = 43`: 761 and 469).
 
-   ```text
-   ∑_{16 pairs p} ∏_t W[t][p] ^ m_t  ≥  4·3²⁵ + 12·2²⁵   whenever  ∑_t m_t = 25,
-   ```
+**Negative side, `n ≥ 12, 26, 44`** (`K2n/Witness.lean`, `K2n/Negative.lean`).  The hubs get
+`A = {0,…,k−1}` and `B = {0,…,k−3} ∪ {k, k+1}`; right vertex `w` gets `{0,…,k−3} ∪ {a, b}` with
+`(a, b)` cycling through four pairs as `w mod 4` does (Kaul et al.'s Lemma 11 family).  For
+`n = 4q + s` the count is `∑ c_p G_p^q` with every `G_p ≤ (k−1)⁴`, so one base inequality per
+residue `s` (checked by `decide`) propagates to every larger `q` (`sum_geom_lt`).
 
-   with `C(8 − r, 4)` types (70, 35, 15, 5, 1 for `r = 0, …, 4`).
-4. **Certificate** (`K2n/Checker.lean`, `K2n/R0.lean` … `R4.lean`).  A branch-and-bound tree over
-   the multiplicities whose nodes are closed by weighted AM–GM with integer weights `k`:
-   `(∏ k_p^{k_p}) (∑ a_p)^D ≥ D^D ∏ a_p^{k_p}`.  The continuous relaxation is convex, and its
-   minimum is above the constant count for `r = 0, 1` (ratios 1.92 and 1.37), so one AM–GM node
-   suffices there; for `r = 2, 3` it is *below* it (0.986 and 0.9993), so integrality is
-   essential, and the trees have 597 and 163 nodes.  `r = 4` forces the constant assignment.
-   `check_sound` proves the checker correct; `decide +kernel` runs it on the data, about 50 s in
-   total on this machine.
-
-By exhaustive integer search (outside Lean), the true minima for `r = 2` and `r = 3` are 1.0051
-and 1.0090 times the constant count, attained at multiplicities `(7, 6, 5, 6)` plus one extra type,
-and `(12, 12, 1)`.  With the one-line argument for `r = 4` (a right list `T ≠ A` misses some
-`c ∈ A`, and the fiber `(c, c)` then gains a factor `4/3`), this would make the inequality strict
-for every non-constant assignment; that strengthening is not formalized.  The certificates are regenerated, and re-checked in exact
-integer arithmetic, by
+The certificates are regenerated, and re-checked in exact integer arithmetic, by
 
 ```sh
-python3 TwoDegenerate/K2n/gen_k2n.py            # rewrite R0..R4.lean
+python3 TwoDegenerate/K2n/gen_k2n.py            # rewrite Keys/, Cert/, Positive{3,4,5}.lean
 python3 TwoDegenerate/K2n/gen_k2n.py --check    # confirm the committed files (needs numpy)
 ```
 

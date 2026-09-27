@@ -55,7 +55,7 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19`
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 15, 20`, hence every rectangle at `k ≥ 20`), from one certificate theorem; also the separate conditional lookback route for general heights |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
-| `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture) and `K₂,₂₅` is, so `K₂,ₙ` is 4-ECC exactly for `n ≤ 25` |
+| `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43` |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
 | `formalization.yaml` | registry metadata (mathlib-initiative v0.4): sources, main results, fidelity, and the `alignment` map from every numbered result of the paper, and every result beyond it, to its Lean name, file and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
@@ -281,7 +281,7 @@ assignment is handled by a direct injection (`Grid3/AllU.lean`). See `Grid3/Thre
 Also a 2026 AI research collaboration result. `Grid3/` imports `ListColoring/` and is imported by
 nothing.
 
-## Beyond the paper: 2-degeneracy is not enough, and the exact threshold for `K₂,ₙ`
+## Beyond the paper: 2-degeneracy is not enough, and exact thresholds for `K₂,ₙ`
 
 `TwoDegenerate/` refutes the tempting grid generalization that every 2-degenerate graph is
 enumeratively chromatic-choosable at every list size `k ≥ 4`. The complete bipartite graph
@@ -298,19 +298,21 @@ open. Re-evaluating their balanced-list formula gives the `n = 26` witness above
 negatively. `TwoDegenerate/Counterexample.lean` proves a general 16-fibre counting formula, checks
 the two exact counts in the kernel, and verifies an explicit 2-degeneracy ordering.
 
-The other open case goes the other way:
+More completely, for list sizes three, four and five the thresholds are now exact:
 
-> `K₂,₂₅` **is** enumeratively chromatic-choosable at four
-> (`SimpleGraph.TwoDegenerate.K2_25.eccAt_four`),
+> `K₂,ₙ` is enumeratively chromatic-choosable at 3, 4, 5 exactly when `n ≤ 11`, `n ≤ 25`,
+> `n ≤ 43` (`SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_{three,four,five}_iff`).
 
-so `K₂,ₙ` is ECC at four exactly when `n ≤ 25`. The proof in `TwoDegenerate/K2n/` reduces an
-arbitrary four-list assignment, by pushing the right-hand lists into the union of the two hub lists
-and grouping them by type, to one inequality per overlap of the hub lists: a sum of products of
-powers, over multiplicities summing to 25. Each is closed by a kernel-checked branch-and-bound
-certificate whose nodes are weighted AM–GM bounds with integer weights. For two of the five
-overlaps the convex relaxation falls *below* the constant count, so the proof has to use
-integrality, and the certificates have 597 and 163 nodes. `TwoDegenerate/README.md` has the details,
-the generator, and the remaining research direction.
+Kaul et al.'s Theorem 7 proves these except at `K₂,₁₁` (list size 3) and `K₂,₂₅`, `K₂,₂₆` (list size
+4), which the paper states are unknown; here `K₂,₁₁` and `K₂,₂₅` are ECC and `K₂,₂₆` is not. The
+positive side reduces an arbitrary list assignment, by pushing the right-hand lists into the union
+of the two hub lists and grouping them by type, to one inequality per overlap of the hub lists: a
+sum of products of powers over multiplicities summing to `n`. Each is closed by a kernel-checked
+branch-and-bound certificate whose nodes are weighted AM–GM bounds with integer weights. Near each
+threshold the convex relaxation falls below the constant count, so integrality is essential there.
+The negative side is Kaul et al.'s Lemma 11 family with an induction on `n / 4`, in place of their
+appeal to a companion paper for large `n`. `TwoDegenerate/README.md` has the details, a comparison
+with the paper's proofs, the generator, and the remaining research direction.
 
 ## Standard of proof
 
@@ -326,11 +328,12 @@ the generator, and the remaining research direction.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **twenty-nine keystone theorems** — ten from the paper,
+  `comparator/Challenge.lean`, which claims **thirty-two keystone theorems** — ten from the paper,
   three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
   and height-three results, six maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `15`, maximum degree four at `20` with its arbitrary-grid corollary, and the
-  equality case), and `K₂,₂₆` not ECC at four with `K₂,₂₅` ECC at four —
+  equality case), and five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
+  thresholds at list sizes three, four and five) —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel

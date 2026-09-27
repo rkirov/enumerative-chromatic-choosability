@@ -35,6 +35,7 @@ These are known results. The Lean proof is ours; the mathematics is not.
 | `SimpleGraph.exists_ecc_forall_ge` | `P_ℓ(G,m) = P(G,m)` for all large `m` | **Donner 1992**; threshold via **Wang–Qian–Yan 2017** |
 | `SimpleGraph.ecc_of_two_pow_lt` | explicit threshold `2^{\|E(G)\|} < m` | weaker form of **Wang–Qian–Yan 2017**; superseded by **Dong–Zhang 2023** (`m ≥ \|E(G)\| − 1`) |
 | Lemmas 1–6 | the supporting lemmas | **Kirov–Naimi 2016**, numbered as in the paper |
+| `SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_{three,four,five}_iff` | `K₂,ₙ` is ECC at 3 for `2 ≤ n ≤ 10` and not for `n ≥ 12`; at 4 for `2 ≤ n ≤ 24` and not for `n ≥ 27`; at 5 exactly for `n ≤ 43` | **Kaul–Kumar–Liu–Mudrock–Rewers–Shin–Tanahara–To 2023** (Involve 16), Theorem 7 — proved here by a different method; the remaining cases `n = 11` (at 3) and `n = 25, 26` (at 4) are new, §3 |
 
 ### Rubin's theorem
 
@@ -104,13 +105,16 @@ published construction.
   `n = 25,26` open. Re-evaluating their balanced four-list construction at `n = 26` gives
   `9,925,029,789,650 < 10,168,268,619,684`. The exact list, independent checker, and kernel proof
   are in `TwoDegenerate/`. This closes `n = 26` negatively.
-* **`K₂,₂₅` is ECC at four** (`SimpleGraph.TwoDegenerate.K2_25.eccAt_four`), which closes the
-  other case Kaul et al. left open, positively; with their theorem and the item above, `K₂,ₙ` is
-  ECC at four exactly for `n ≤ 25`. The reduction to one numeric inequality per overlap of the hub
-  lists (push the right lists into `A ∪ B`, encode them by membership, group by type) and the
-  kernel-checked AM–GM branch-and-bound certificates are ours (`TwoDegenerate/K2n/`); the family
-  `K₂,ₙ` and the question are Kaul et al.'s. Weighted AM–GM, and bounding convex relaxations by
-  Lagrange duality, are standard. As far as a targeted search found, the case was open.
+* **`K₂,₁₁` is ECC at three and `K₂,₂₅` is ECC at four**, which, with the `K₂,₂₆` item above,
+  settles all three cases that Kaul et al.'s Theorem 7 states are unknown. So `K₂,ₙ` is ECC at 3, 4,
+  5 exactly for `n ≤ 11, 25, 43` (`SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff`
+  and the `four`, `five` versions). The known ranges of those statements are Kaul et al.'s (§1). The
+  reduction to one numeric inequality per overlap of the hub lists (push the right lists into
+  `A ∪ B`, encode them by membership, group by type), the kernel-checked AM–GM branch-and-bound
+  certificates, and the induction on `n / 4` that replaces their appeal to a companion paper for large
+  `n` are ours (`TwoDegenerate/K2n/`). The list family of the negative side is their Lemma 11, and the
+  push-into-`A ∪ B` step is their Lemma 5. Weighted AM–GM, and bounding convex relaxations by Lagrange
+  duality, are standard. As far as a targeted search found, the three cases were open.
 
 * **Maximum-degree thresholds for the list colour function (`GridGen/`).** Every finite graph is
   `k`-ECC once `567Δ ≤ 100k`; `Δ ≤ 3, 4, 5, 6, 7, 8` suffice at `k ≥ 15, 20, 26, 32, 37, 43`

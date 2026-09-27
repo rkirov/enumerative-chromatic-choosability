@@ -54,11 +54,12 @@ project:
     graph only constant assignments attain equality. This adapts Zhang and Dong's 2026
     interpolation method (their threshold is 23.41 Delta), and its limiting constant coincides
     with Dong and Koh's 2008 bound on real chromatic roots, to whom the positivity half is
-    credited. (4) K_{2,26} is not ECC at 4 and K_{2,25} is, which settles the two cases Kaul et al.
-    (2023) left open, so K_{2,n} is ECC at 4 exactly for n <= 25; the first refutes a uniform
-    statement for 2-degenerate graphs, and the second is proved by a reduction to one numeric
-    inequality per overlap of the hub lists, closed by kernel-checked AM-GM branch-and-bound
-    certificates.
+    credited. (4) K_{2,n} at list sizes 3, 4, 5: it is ECC exactly for n <= 11, 25, 43. Kaul et
+    al. (2023, Theorem 7) prove all but K_{2,11} at 3 and K_{2,25}, K_{2,26} at 4, which they state
+    are unknown; K_{2,11} and K_{2,25} are ECC and K_{2,26} is not, the last refuting a uniform
+    statement for 2-degenerate graphs. The positive side is a reduction to one numeric inequality
+    per overlap of the hub lists, closed by kernel-checked AM-GM branch-and-bound certificates; the
+    negative side is their Lemma 11 family with an induction on n/4.
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
     nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
@@ -138,14 +139,16 @@ sources:
     authors: ["Hemanshu Kaul", "Akash Kumar", "Andrew Liu", "Jeffrey A. Mudrock", "Patrick Rewers", "Paul Shin", "Michael Scott Tanahara", "Khue To"]
     type: paper
     id: "doi:10.2140/involve.2023.16.849"
-    location: "Involve 16 (5) (2023), 849-882, Theorem 7(ii)"
-    relationship: adapts
+    location: "Involve 16 (5) (2023), 849-882 (arXiv:2207.04831v2), Theorem 7; Lemmas 5 and 11"
+    relationship: formalizes
     note: >-
-      Their balanced four-list construction on K_{2,n} is evaluated at n = 26, a case they leave
-      open, giving 9,925,029,789,650 list colourings against 10,168,268,619,684 constant-list
-      colourings; TwoDegenerate/ proves the count formula and both counts in the kernel. The
-      other open case, n = 25, is settled positively (K_{2,25} is ECC at 4) by TwoDegenerate/K2n/,
-      so the threshold of their Theorem 7(ii) is exact.
+      Theorem 7 (K_{2,n} is ECC at 3 for 2 <= n <= 10 and not for n >= 12; at 4 for n <= 24 and
+      not for n >= 27; at 5 exactly for n <= 43) is proved here, by a different method: exact
+      kernel-checked AM-GM certificates in place of their floating-point checks of AM-GM bounds, and
+      an induction on n/4 for their Lemma 11 family in place of their appeal to Theorem 14 of
+      arXiv:2202.03431. Their Lemma 5 is exists_push. The three cases they state are unknown are
+      settled: K_{2,11} is ECC at 3, K_{2,25} is ECC at 4, and K_{2,26} is not (the last is their
+      Lemma 11 family at n = 26).
   - title: "When chromatic polynomials coincide with list-color functions: a threshold linear in the maximum degree"
     authors: ["Meiqiao Zhang", "Fengming Dong"]
     type: paper
@@ -395,6 +398,21 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
+    - declaration: SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff
+      file: TwoDegenerate/K2n/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff
+      file: TwoDegenerate/K2n/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff
+      file: TwoDegenerate/K2n/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
 
 fidelity:
   divergences: >-
@@ -636,13 +654,15 @@ alignment:
       module: TwoDegenerate/Counterexample.lean
       status: proved
       note: "K_{2,26} is not ECC at 4, and is 2-degenerate (SimpleGraph.TwoDegenerate.K2_26.not_every_twoDegenerate_eccAt_four)."
-    - source: "adapts Kaul et al. 2023, Theorem 7(ii) (the case n = 25 they leave open)"
-      lean: SimpleGraph.TwoDegenerate.K2_25.eccAt_four
+    - source: "Kaul et al. 2023, Theorem 7, with the cases it leaves open"
+      lean: SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff
       module: TwoDegenerate/K2n/Main.lean
       status: proved
       note: >-
-        K_{2,25} is ECC at 4, so K_{2,n} is ECC at 4 exactly for n <= 25
-        (SimpleGraph.TwoDegenerate.K2_25.eccAt_four_twentyFive_and_not_twentySix). Reduction in
-        TwoDegenerate/K2n/Reduction.lean (SimpleGraph.TwoDegenerate.K2n.le_col_of_keyGoals);
-        certificates in TwoDegenerate/K2n/R0.lean to R4.lean, checked by
-        SimpleGraph.TwoDegenerate.K2n.check_sound.
+        K_{2,n} is ECC at 3, 4, 5 exactly for n <= 11, 25, 43
+        (SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff, _four_iff, _five_iff;
+        SimpleGraph.TwoDegenerate.K2_11.eccAt_three, K2_25.eccAt_four). The cases n = 11 at 3 and
+        n = 25, 26 at 4 are original to this repository. Reduction:
+        SimpleGraph.TwoDegenerate.K2n.le_col_of_keyGoals; checker:
+        SimpleGraph.TwoDegenerate.K2n.check_sound; negative side:
+        SimpleGraph.TwoDegenerate.K2n.col_witness_lt.

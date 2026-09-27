@@ -15,7 +15,8 @@ Section 14 is proved in `GridGen/MaximumDegree.lean` (the uniform bound `k ≥ c
 arbitrary maximum degree), `GridGen/SmallDegree.lean` (subcubic graphs at `k ≥ 15`) and
 `GridGen/PolymerStability.lean` (the equality case).
 Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
-(`TwoDegenerate/Counterexample.lean`) and `K₂,₂₅` is (`TwoDegenerate/K2n/Main.lean`).
+(`TwoDegenerate/Counterexample.lean`), and `K₂,ₙ` at list sizes three, four and five
+(`TwoDegenerate/K2n/Main.lean`).
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the

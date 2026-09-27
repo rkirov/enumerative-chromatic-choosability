@@ -641,13 +641,14 @@ theorem col_eq_colConst_iff_constant_of_degree_bound {V : Type*} [Fintype V] [De
 
 end SimpleGraph
 
-/-! ### 15. The complete bipartite graphs `K₂,₂₅` and `K₂,₂₆` at list size four
+/-! ### 15. The complete bipartite graphs `K₂,ₙ` at list sizes three, four and five
 
-Kaul et al. (Involve 16 (2023), Theorem 7(ii)) prove `K₂,ₙ` ECC at four for `n ≤ 24` and not for
-`n ≥ 27`, leaving `n = 25, 26` open. The proofs are in `TwoDegenerate/Counterexample.lean` (an
-explicit four-list assignment on `K₂,₂₆` with fewer colourings) and `TwoDegenerate/K2n/` (every
-four-list assignment on `K₂,₂₅`, via a reduction and kernel-checked AM–GM certificates). Together:
-`K₂,ₙ` is ECC at four exactly when `n ≤ 25`.
+Kaul et al. (Involve 16 (2023), Theorem 7) prove `K₂,ₙ` ECC at three for `n ≤ 10` and not for
+`n ≥ 12`, at four for `n ≤ 24` and not for `n ≥ 27`, and at five exactly for `n ≤ 43`, leaving
+`K₂,₁₁` at three and `K₂,₂₅`, `K₂,₂₆` at four open. The proofs are in `TwoDegenerate/`: an explicit
+four-list assignment on `K₂,₂₆` (`Counterexample.lean`), and in `K2n/` a reduction of every list
+assignment to kernel-checked AM–GM certificates for the positive side and an induction over their
+Lemma 11 family for the negative side.
 -/
 
 namespace SimpleGraph.TwoDegenerate.K2_26
@@ -663,3 +664,19 @@ namespace SimpleGraph.TwoDegenerate.K2_25
 theorem eccAt_four : (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 := sorry
 
 end SimpleGraph.TwoDegenerate.K2_25
+
+namespace SimpleGraph.TwoDegenerate
+
+/-- `K₂,ₙ` is ECC at three exactly when `n ≤ 11`. -/
+theorem completeBipartite_two_eccAt_three_iff (n : ℕ) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 3 ↔ n ≤ 11 := sorry
+
+/-- `K₂,ₙ` is ECC at four exactly when `n ≤ 25`. -/
+theorem completeBipartite_two_eccAt_four_iff (n : ℕ) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 4 ↔ n ≤ 25 := sorry
+
+/-- `K₂,ₙ` is ECC at five exactly when `n ≤ 43`. -/
+theorem completeBipartite_two_eccAt_five_iff (n : ℕ) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 5 ↔ n ≤ 43 := sorry
+
+end SimpleGraph.TwoDegenerate
