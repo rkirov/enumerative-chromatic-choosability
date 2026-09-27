@@ -55,7 +55,7 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19`
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 15, 20`, hence every rectangle at `k ≥ 20`), from one certificate theorem; also the separate conditional lookback route for general heights |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
-| `TwoDegenerate/` | the formal `K₂,₂₆` counterexample to a uniform 2-degenerate-graph conjecture |
+| `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture) and `K₂,₂₅` is, so `K₂,ₙ` is 4-ECC exactly for `n ≤ 25` |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
 | `formalization.yaml` | registry metadata (mathlib-initiative v0.4): sources, main results, fidelity, and the `alignment` map from every numbered result of the paper, and every result beyond it, to its Lean name, file and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
@@ -281,7 +281,7 @@ assignment is handled by a direct injection (`Grid3/AllU.lean`). See `Grid3/Thre
 Also a 2026 AI research collaboration result. `Grid3/` imports `ListColoring/` and is imported by
 nothing.
 
-## Beyond the paper: 2-degeneracy is not enough
+## Beyond the paper: 2-degeneracy is not enough, and the exact threshold for `K₂,ₙ`
 
 `TwoDegenerate/` refutes the tempting grid generalization that every 2-degenerate graph is
 enumeratively chromatic-choosable at every list size `k ≥ 4`. The complete bipartite graph
@@ -296,9 +296,21 @@ The general `K₂,n` construction comes from Kaul et al., *Bounding the List Col
 Threshold from Above* (2023). Their Theorem 7(ii) proves failure for `n ≥ 27` and leaves `n = 25,26`
 open. Re-evaluating their balanced-list formula gives the `n = 26` witness above, closing that case
 negatively. `TwoDegenerate/Counterexample.lean` proves a general 16-fibre counting formula, checks
-the two exact counts in the kernel, and verifies an explicit 2-degeneracy ordering. An independent
-integer checker and the remaining corrected research direction are in
-`TwoDegenerate/README.md`.
+the two exact counts in the kernel, and verifies an explicit 2-degeneracy ordering.
+
+The other open case goes the other way:
+
+> `K₂,₂₅` **is** enumeratively chromatic-choosable at four
+> (`SimpleGraph.TwoDegenerate.K2_25.eccAt_four`),
+
+so `K₂,ₙ` is ECC at four exactly when `n ≤ 25`. The proof in `TwoDegenerate/K2n/` reduces an
+arbitrary four-list assignment, by pushing the right-hand lists into the union of the two hub lists
+and grouping them by type, to one inequality per overlap of the hub lists: a sum of products of
+powers, over multiplicities summing to 25. Each is closed by a kernel-checked branch-and-bound
+certificate whose nodes are weighted AM–GM bounds with integer weights. For two of the five
+overlaps the convex relaxation falls *below* the constant count, so the proof has to use
+integrality, and the certificates have 597 and 163 nodes. `TwoDegenerate/README.md` has the details,
+the generator, and the remaining research direction.
 
 ## Standard of proof
 

@@ -103,7 +103,14 @@ published construction.
   `Pℓ(K₂,n,4) = P(K₂,n,4)` for `n ≤ 24`, strict inequality for `n ≥ 27`, and explicitly leaves
   `n = 25,26` open. Re-evaluating their balanced four-list construction at `n = 26` gives
   `9,925,029,789,650 < 10,168,268,619,684`. The exact list, independent checker, and kernel proof
-  are in `TwoDegenerate/`. This closes `n = 26` negatively; it does not settle `n = 25`.
+  are in `TwoDegenerate/`. This closes `n = 26` negatively.
+* **`K₂,₂₅` is ECC at four** (`SimpleGraph.TwoDegenerate.K2_25.eccAt_four`), which closes the
+  other case Kaul et al. left open, positively; with their theorem and the item above, `K₂,ₙ` is
+  ECC at four exactly for `n ≤ 25`. The reduction to one numeric inequality per overlap of the hub
+  lists (push the right lists into `A ∪ B`, encode them by membership, group by type) and the
+  kernel-checked AM–GM branch-and-bound certificates are ours (`TwoDegenerate/K2n/`); the family
+  `K₂,ₙ` and the question are Kaul et al.'s. Weighted AM–GM, and bounding convex relaxations by
+  Lagrange duality, are standard. As far as a targeted search found, the case was open.
 
 * **Maximum-degree thresholds for the list colour function (`GridGen/`).** Every finite graph is
   `k`-ECC once `567Δ ≤ 100k`; `Δ ≤ 3, 4, 5, 6, 7, 8` suffice at `k ≥ 15, 20, 26, 32, 37, 43`

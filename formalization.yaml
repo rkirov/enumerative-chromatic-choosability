@@ -54,8 +54,11 @@ project:
     graph only constant assignments attain equality. This adapts Zhang and Dong's 2026
     interpolation method (their threshold is 23.41 Delta), and its limiting constant coincides
     with Dong and Koh's 2008 bound on real chromatic roots, to whom the positivity half is
-    credited. (4) K_{2,26} is not ECC at 4, which settles one of the two cases Kaul et al. (2023)
-    left open and refutes a uniform statement for 2-degenerate graphs.
+    credited. (4) K_{2,26} is not ECC at 4 and K_{2,25} is, which settles the two cases Kaul et al.
+    (2023) left open, so K_{2,n} is ECC at 4 exactly for n <= 25; the first refutes a uniform
+    statement for 2-degenerate graphs, and the second is proved by a reduction to one numeric
+    inequality per overlap of the hub lists, closed by kernel-checked AM-GM branch-and-bound
+    certificates.
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
     nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
@@ -141,7 +144,8 @@ sources:
       Their balanced four-list construction on K_{2,n} is evaluated at n = 26, a case they leave
       open, giving 9,925,029,789,650 list colourings against 10,168,268,619,684 constant-list
       colourings; TwoDegenerate/ proves the count formula and both counts in the kernel. The
-      case n = 25 remains open.
+      other open case, n = 25, is settled positively (K_{2,25} is ECC at 4) by TwoDegenerate/K2n/,
+      so the threshold of their Theorem 7(ii) is exact.
   - title: "When chromatic polynomials coincide with list-color functions: a threshold linear in the maximum degree"
     authors: ["Meiqiao Zhang", "Fengming Dong"]
     type: paper
@@ -385,6 +389,10 @@ status:
       file: TwoDegenerate/Counterexample.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
+    - declaration: SimpleGraph.TwoDegenerate.K2_25.eccAt_four
+      file: TwoDegenerate/K2n/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
 
 fidelity:
   divergences: >-
@@ -626,3 +634,13 @@ alignment:
       module: TwoDegenerate/Counterexample.lean
       status: proved
       note: "K_{2,26} is not ECC at 4, and is 2-degenerate (SimpleGraph.TwoDegenerate.K2_26.not_every_twoDegenerate_eccAt_four)."
+    - source: "adapts Kaul et al. 2023, Theorem 7(ii) (the case n = 25 they leave open)"
+      lean: SimpleGraph.TwoDegenerate.K2_25.eccAt_four
+      module: TwoDegenerate/K2n/Main.lean
+      status: proved
+      note: >-
+        K_{2,25} is ECC at 4, so K_{2,n} is ECC at 4 exactly for n <= 25
+        (SimpleGraph.TwoDegenerate.K2_25.eccAt_four_twentyFive_and_not_twentySix). Reduction in
+        TwoDegenerate/K2n/Reduction.lean (SimpleGraph.TwoDegenerate.K2n.le_col_of_keyGoals);
+        certificates in TwoDegenerate/K2n/R0.lean to R4.lean, checked by
+        SimpleGraph.TwoDegenerate.K2n.check_sound.
