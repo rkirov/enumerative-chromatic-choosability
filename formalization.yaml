@@ -1,22 +1,16 @@
-# formalization.yaml — the registry metadata for this development, and the map from
-# Kirov & Naimi's paper to the Lean that formalizes it.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
 #
-# The file serves two readers. The blocks down to `related_formalizations` are the
-# mathlib-initiative formalization.yaml v0.4 record, which is what a registry consumes:
-# who did the work, what it formalizes, how it was produced, and what it depends on.
-# Everything from `paper:` onwards is this repository's own index — one entry per numbered
-# result of the paper, plus the results the paper cites and this development proves rather
-# than assumes. Prose lives in provenance.md (credit), plan.md (what mechanization turned
-# up) and references.md (bibliography).
+# Registry metadata for this development, in the mathlib-initiative formalization.yaml v0.4
+# format and nothing else: every key below is a v0.4 field. The statement-by-statement map from
+# the Kirov-Naimi paper (and from the other sources) to the Lean declarations is the free-form
+# `alignment` block, in the shape the v0.4 template suggests. Prose lives in provenance.md
+# (credit), plan.md (what mechanization turned up) and references.md (bibliography); the
+# toolchain and Mathlib pin are in lean-toolchain and lake-manifest.json, not repeated here.
 #
-# Every `lean.name` below was checked to resolve against the built library. Keep it that way:
-# a name here that no longer type-checks is a bug, not a stale note.
-#
-# For a registry submission the three repository-relative paths are
-#     selected project    comparator
-#     comparator config   comparator/config.json
-#     metadata            formalization.yaml
-# and `python3 check-submission.py` checks the mechanical requirements that go with them.
+# Every Lean name below resolves against the built library. For a registry submission the three
+# repository-relative paths are: selected project `comparator`, comparator config
+# `comparator/config.json`, metadata `formalization.yaml`; `python3 check-submission.py` checks
+# the mechanical requirements that go with them.
 
 version: v0.4
 
@@ -25,98 +19,50 @@ project:
   description: >-
     A machine-checked development of list colouring in Lean 4. Give each vertex of a finite
     graph its own list of n permitted colours and count the proper colourings that respect
-    those lists; the graph is enumeratively chromatic-choosable at n when that count is
+    those lists; the graph is enumeratively chromatic-choosable (ECC) at n when that count is
     minimized by giving every vertex the same list. Kostochka and Sidorenko raised the
     question in 1990.
 
     The development formalizes Kirov and Naimi, "List coloring and n-monophilic graphs"
     (Ars Combinatoria 124 (2016), 329-340; arXiv:1004.5183), in the generality the paper
-    states: every cycle is enumeratively chromatic-choosable at every n (their Theorem 1);
-    the exact characterization of the graphs enumeratively chromatic-choosable at 2 (their
-    Theorem 2), unconditionally, because the Rubin theorem that paper quotes is proved here
-    rather than assumed; and for every list size k at least 2 a graph that is k-choosable but
-    not enumeratively chromatic-choosable at k. It also proves the results the paper relies
-    on: the chromatic polynomial and its evaluation as a colouring count, the
-    Kostochka-Sidorenko corollary for chordal graphs, the Erdos-Rubin-Taylor separation, and
-    Donner's theorem that every graph is enumeratively chromatic-choosable at all sufficiently
-    large n. As far as we can determine, list colouring and choosability had not previously
-    been formalized in any proof assistant, and Rubin's 1980 characterization of the
-    2-choosable graphs is proved here in both directions.
+    states: every cycle is ECC at every n (their Theorem 1); the exact characterization of the
+    graphs ECC at 2 (their Theorem 2), unconditionally, because the Rubin theorem that paper
+    quotes is proved here rather than assumed; and for every list size k at least 2 a graph
+    that is k-choosable but not ECC at k. It also proves the results the paper relies on: the
+    chromatic polynomial and its evaluation as a colouring count, the Kostochka-Sidorenko
+    corollary for chordal graphs, the Erdos-Rubin-Taylor separation, and Donner's theorem that
+    every graph is ECC at all sufficiently large n. It formalizes Zhang and Dong's 2026
+    non-persistence theorem, which answers the paper's Question 2 negatively. As far as we can
+    determine, list colouring and choosability had not previously been formalized in any proof
+    assistant, and Rubin's 1980 characterization of the 2-choosable graphs is proved here in
+    both directions.
 
-    The development also proves a result that is not in the source paper and, as far as we can
-    determine, not in the literature: the complete spectrum of the enumeratively
-    chromatic-choosable cacti. A cactus - a connected graph in which any two cycles sharing an
-    edge are the same cycle - is enumeratively chromatic-choosable at every list size if and
-    only if it has at most one cycle or contains an odd cycle. Above 2 every cactus qualifies;
-    the argument runs an induction over the block structure that carries a pointwise bound on
-    the rooted colouring profile, and the bound has to change at list size 3, where the
-    peeling slack k - 3 vanishes and a pair bound gives way to geometric-mean dominance. The
-    even-cycle blocks at list size 3 are the substance of the proof and are handled by a
-    tensor capacity argument.
+    Beyond the paper, the development proves results that, as far as a targeted literature
+    search found, are not in the literature. (1) The complete ECC spectrum of cacti: a cactus is
+    ECC at every list size if and only if it has at most one cycle or contains an odd cycle; the
+    block induction carries a pair bound above list size 3 and geometric-mean dominance at 3,
+    where the even-cycle blocks need a tensor capacity argument. (2) The height-two and
+    height-three cases of Kirov-Naimi's Question 1 for paths: every 2 x (n+1) and every
+    3 x (n+1) grid is ECC at every list size k >= 3, with the uniform counts in closed form. The
+    ladder proof is a transfer-matrix invariant; the height-three proof is a telescoping
+    identity with pair lemmas for k >= 5, two-column lookback with LP certificates at k = 4, and
+    at k = 3 an entropy (Parry-Renyi) argument whose seam couplings are 22,157 kernel-checked
+    records. (3) Maximum-degree thresholds for the list colour function: every finite graph is
+    ECC at every k >= ceil(5.67 Delta); maximum degree at most 3 suffices at k >= 15 and at most
+    4 at k >= 20, so every rectangular grid is ECC at every k >= 20; at these thresholds two
+    adjacent vertices with different lists force strictly more colourings, so on a connected
+    graph only constant assignments attain equality. This adapts Zhang and Dong's 2026
+    interpolation method (their threshold is 23.41 Delta), and its limiting constant coincides
+    with Dong and Koh's 2008 bound on real chromatic roots, to whom the positivity half is
+    credited. (4) K_{2,26} is not ECC at 4, which settles one of the two cases Kaul et al. (2023)
+    left open and refutes a uniform statement for 2-degenerate graphs.
 
-    A second original result, in Ladder/, settles the height-two case of Kirov and Naimi's
-    Question 1 for paths: every 2 x (n+1) grid is enumeratively chromatic-choosable at every
-    list size k >= 3, with the count k(k-1)(k^2-3k+3)^n it is tight against. The question -
-    whether a Cartesian product of two enumeratively chromatic-choosable graphs is one - has
-    been open since 2016, and paths are chordal, hence qualify at every list size, so a
-    positive answer would give every rectangular grid. The proof is a transfer-matrix argument
-    carrying a combinatorial invariant across the rungs; k >= 3 is sharp, and enters at
-    exactly one place.
-
-    A third original result, in Grid3/, settles the height-three case for every list size
-    k >= 3: every 3 x (n+1) grid is enumeratively chromatic-choosable at k >= 3, with its
-    uniform count in closed form. The uniform height-three count is not geometric, so no
-    scalar per-column invariant can be tight; instead an exact telescoping identity writes the
-    list count minus the uniform count as a sum of per-seam terms against the uniform future
-    counts, every horizon reduces to two integer seam inequalities, and those are proved
-    pointwise one column back through a pair lemma whose threshold is (k-2)(k-3) >= k+1 for
-    k >= 5, and at k = 4 two columns back, through a conditional pair lemma and a family of
-    LP certificates over the Venn atoms of five lists. List size 3 (Grid3/Three/) is the
-    entropy route: a Markov chain on column states whose per-seam couplings are 22,157
-    kernel-checked records (decide +kernel on packed literals; one per row-reflection orbit of
-    the 43,736 maximal seam keys, the other orbit member reached by reflecting the seam), their
-    enumeration completeness,
-    the canonicalization of an arbitrary three-list assignment onto those records, the symbolic
-    uniform-to-uniform seam with the exact Parry entropy, and the entropy bound that turns the
-    chain into the count inequality.
-
-    There is no sorry, admit or native_decide in ListColoring/, Cacti/, NonPersistence/,
-    Ladder/ or Grid3/. Every claimed result depends on exactly propext, Classical.choice and
-    Quot.sound.
+    The only sorry in the repository is in OpenProblems.lean, a separate library imported by
+    nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
+    remark. Every claimed result depends on exactly propext, Classical.choice and Quot.sound.
   authors: ["Radoslav Kirov"]
   responsible_maintainers: ["Radoslav Kirov"]
   license: Apache-2.0
-  library: ListColoring
-  entry_point: ListColoring.lean
-  additional_library: Cacti
-  additional_entry_point: Cacti.lean
-  # Zhang-Dong 2026 (arXiv:2608.19773) Theorem 6, which refutes Kirov-Naimi section 6 Question 2.
-  # Imports ListColoring; imported only by OpenProblems.lean, to discharge that question.
-  further_library: NonPersistence
-  further_entry_point: NonPersistence.lean
-  # The ladder theorem: the height-two case of Kirov-Naimi section 6 Question 1 for paths.
-  # Original to this repository. Imports ListColoring; imported by nothing.
-  ladder_library: Ladder
-  ladder_entry_point: Ladder.lean
-  # The height-three grid theorem: every 3 x (n+1) grid is k-ECC for every k >= 3. The k >= 4
-  # cases are in the Grid3 entry point; the k = 3 case is Grid3/Three/Main.lean, which the entry
-  # point does not import (it rests on the 22,157 seam records of Grid3/Three/Cert/Data/) and the
-  # comparator submission imports directly. Original to this repository. Imports ListColoring.
-  grid3_library: Grid3
-  grid3_entry_point: Grid3.lean
-  open_problems_library: OpenProblems
-  open_problems_entry_point: OpenProblems.lean
-  lean_toolchain: "leanprover/lean4:v4.33.0"
-  mathlib_rev: "db584cd6d46c92f209a44c0f1c829460d327499d"
-  permitted_axioms: [propext, Classical.choice, Quot.sound]
-  standard_of_proof: >-
-    No sorry, admit or native_decide anywhere in ListColoring/, Cacti/, NonPersistence/,
-    Ladder/ or Grid3/. Every
-    headline result depends on exactly the three permitted axioms, asserted by #print axioms at
-    the foot of each file and enforced in CI by leanprover/comparator against
-    comparator/Challenge.lean. The only sorries in the repository are the two in
-    OpenProblems.lean, which is imported by nothing: there a sorry means the question is open,
-    not that a proof is missing. It held three until Zhang-Dong 2026 answered Question 2.
 
 classification:
   arxiv: [math.CO, cs.LO]
@@ -126,9 +72,10 @@ classification:
     - "05C38"   # paths and cycles
     - "68V20"   # formalization of mathematics in connection with theorem provers
 
-# What was formalized. The cactus classification of Cacti/, the ladder theorem of Ladder/ and the
-# height-three grid theorem of Grid3/ are original to this repository, but ten of the twenty-one compared theorems formalize prior work, so
-# the submitted result is source-based and no original-proof entry is claimed here.
+# Source-based: the paper and the literature below are formalized or adapted. The results
+# original to this repository (cacti, ladders, height-three grids, the maximum-degree
+# thresholds, K_{2,26}) are described in `project.description` and mapped in `alignment`;
+# Palomar's rules do not allow an `original-proof` entry next to substantive sources.
 sources:
   - title: "List coloring and n-monophilic graphs"
     authors: ["Radoslav Kirov", "Ramin Naimi"]
@@ -139,11 +86,12 @@ sources:
     license: "not stated by the publisher"
     author_endorsement: participated
     note: >-
-      The source paper. Its Lemmas 1-6, Theorem 1 and Theorem 2 are formalized in the paper's
-      own generality; see the `results` block below for the statement-by-statement map, and
-      `errata` for the one mathematical error found, a range condition on three lemmas of
-      Section 5 that does not affect that section's theorem. The first author of the paper is
-      the author of this formalization.
+      The source paper. Its Lemmas 1-10, Theorems 1 and 2 and the Section 5 construction are
+      formalized; see `alignment`. The paper's "n-monophilic" is the later literature's
+      "enumeratively chromatic-choosable" (SimpleGraph.ECCAt), the name used throughout. One
+      mathematical error was found, a range condition on three lemmas of Section 5 that does not
+      affect that section's theorem; see `fidelity`. The first author of the paper is the author
+      of this formalization.
   - title: "Choosability in graphs"
     authors: ["Paul Erdos", "Arthur L. Rubin", "Herbert Taylor"]
     type: paper
@@ -164,7 +112,7 @@ sources:
     note: >-
       Proved here with the explicit threshold n > 2^|E(G)|, a weaker bound than the polynomial
       one of Wang-Qian-Yan 2017 and much weaker than Dong-Zhang 2023, neither of which is
-      formalized.
+      formalized as stated.
   - title: "Problem presented at the problem session, Fourth Czechoslovak Symposium on Combinatorics, Prachatice 1990"
     authors: ["Alexandr V. Kostochka", "Alexander F. Sidorenko"]
     type: paper
@@ -173,13 +121,73 @@ sources:
     note: >-
       The origin of the question. It is a one-page problem-session abstract, not a paper; the
       chordal-graph corollary attributed to it is proved here as SimpleGraph.ecc_of_isChordal.
+  - title: "Non-persistence of equality between chromatic polynomials and list-color functions"
+    authors: ["Meiqiao Zhang", "Fengming Dong"]
+    type: paper
+    id: "arXiv:2608.19773"
+    location: "Theorem 6"
+    relationship: formalizes
+    note: >-
+      For every k >= 3, infinitely many k-colourable graphs that are ECC at k and not at k+1.
+      Formalized in NonPersistence/; it refutes Kirov-Naimi Section 6, Question 2. The
+      mathematics is Zhang and Dong's.
+  - title: "Bounding the list color function threshold from above"
+    authors: ["Hemanshu Kaul", "Akash Kumar", "Andrew Liu", "Jeffrey A. Mudrock", "Patrick Rewers", "Paul Shin", "Michael Scott Tanahara", "Khue To"]
+    type: paper
+    id: "doi:10.2140/involve.2023.16.849"
+    location: "Involve 16 (5) (2023), 849-882, Theorem 7(ii)"
+    relationship: adapts
+    note: >-
+      Their balanced four-list construction on K_{2,n} is evaluated at n = 26, a case they leave
+      open, giving 9,925,029,789,650 list colourings against 10,168,268,619,684 constant-list
+      colourings; TwoDegenerate/ proves the count formula and both counts in the kernel. The
+      case n = 25 remains open.
+  - title: "When chromatic polynomials coincide with list-color functions: a threshold linear in the maximum degree"
+    authors: ["Meiqiao Zhang", "Fengming Dong"]
+    type: paper
+    id: "arXiv:2609.08540"
+    location: "Theorem 5; Sections 2-3"
+    relationship: adapts
+    note: >-
+      The method of GridGen/'s maximum-degree theorems: the connected-set interpolation between
+      P(G,k) and P(G,L) and the tree-wise charging of list deficiencies. They prove equality
+      for k >= 23.41 Delta with a quantitative strictness estimate; GridGen/ reaches
+      ceil(5.67 Delta) by charging only adverse coefficient parities and keeping the
+      edge-deletion partition functions.
+  - title: "Bounds for the real zeros of chromatic polynomials"
+    authors: ["F. M. Dong", "K. M. Koh"]
+    type: paper
+    id: "Combinatorics, Probability and Computing 17 (6) (2008)"
+    relationship: other
+    note: >-
+      Real chromatic roots lie below 5.664 Delta, and below 4.765 Delta when Delta = 3. These
+      are exactly the limiting constants of GridGen/'s certificate (5.6634 Delta; 15 at
+      Delta = 3), so the positivity half of that argument is credited to them. Their proof has
+      not been compared line by line with this one.
+  - title: "When does the list-coloring function of a graph equal its chromatic polynomial"
+    authors: ["Wei Wang", "Jianguo Qian", "Zhidan Yan"]
+    type: paper
+    id: "doi:10.1016/j.jctb.2016.08.002"
+    location: "Journal of Combinatorial Theory, Series B 122 (2017), 543-549; the deficiency inequality along a tree"
+    relationship: adapts
+    note: >-
+      The inequality d(S) <= sum of the edge deficiencies along any spanning tree of S,
+      attributed to them as Lemma 10 of arXiv:2609.08540, is proved here
+      (GridGen/PolymerDeficiency.lean) and drives the derivative charging.
+  - title: "Bounds on the complex zeros of (di)chromatic polynomials and Potts-model partition functions"
+    authors: ["Alan D. Sokal"]
+    type: paper
+    id: "arXiv:cond-mat/9904146"
+    location: "Combinatorics, Probability and Computing 10 (2001), 41-77"
+    relationship: background
+    note: "The connected-block (polymer) expansion and the tree-graph bound, both standard; proved here from scratch."
 
 related_formalizations: []
 
 automation:
   methods:
     - method: agent
-      models: ["claude-opus-5", "claude-fable-5"]
+      models: ["claude-opus-5", "claude-fable-5", "claude-opus-5-5"]
       framework: "Claude Code"
       tool_setup: >-
         Agent sessions directed by the repository owner, with subagents used for parallel
@@ -187,10 +195,17 @@ automation:
         of claimed proofs. Every landed proof was compiled by Lake before being committed; no
         proof was accepted on an agent's report alone.
       prompting_notes: >-
-        The mathematical content of the cactus classification was developed in the same
-        sessions and is recorded in ai_research_notes/. Formalizing those notes corrected
-        three of their claims, including a reported gap that was an argument for longer cycles
-        misapplied to a short one.
+        The mathematics of the results beyond the paper (cacti, ladders, height-three grids)
+        was developed in the same sessions and is recorded in ai_research_notes/. Formalizing
+        those notes corrected several of their claims, including a reported gap that was an
+        argument for longer cycles misapplied to a short one.
+    - method: agent
+      framework: "OpenAI Codex CLI"
+      tool_setup: >-
+        A Codex session working in the same repository in September 2026, concurrently with
+        Claude Code; it proved the strictness and equality statements of
+        GridGen/PolymerStability.lean at the uniform maximum-degree threshold and wrote
+        GridGen/parity_budget_review.py.
     - method: manual
       tool_setup: >-
         Statement design, the choice of what to claim in comparator/Challenge.lean, the
@@ -206,21 +221,28 @@ review:
     to confirm that the statement proved is the statement claimed. Statements were also checked
     by brute-force evaluation before being proved, which repeatedly caught indexing and
     orientation errors that do not surface as type errors; those checks are #guard commands in
-    the library. In addition, leanprover/comparator runs in CI on every commit against
-    comparator/Challenge.lean, checking statement identity, the permitted axioms, and replay
-    of the exported proofs through Lean's kernel (the independent NanoDa kernel is not run: a
+    the library and in Checks/. In addition, leanprover/comparator runs in CI against
+    comparator/Challenge.lean, checking statement identity, the permitted axioms, and replay of
+    the exported proofs through Lean's kernel (the independent NanoDa kernel is not run: a
     second sequential replay of the k = 3 certificate does not fit CI's time limit). No
     independent human review has been performed.
 
 status:
   scope: >-
-    ListColoring/ formalizes the source paper and the results it quotes; Cacti/ proves the
-    cactus classification and Ladder/ the ladder theorem, both importing ListColoring/, never
-    the reverse. OpenProblems.lean is a
-    separate library, imported by nothing, that states the source paper's two open questions
-    and asserts them with sorry: there a sorry records that the question is open, not that a
-    proof is missing. The three sorries counted below are exactly those.
-  sorry_count: 3
+    ListColoring/ formalizes the source paper and the results it quotes. NonPersistence/
+    formalizes Zhang-Dong's non-persistence theorem. Cacti/, Ladder/, Grid3/ (with the k = 3
+    case in Grid3/Three/Main.lean, outside the Grid3 entry point because it rests on the
+    kernel-checked seam records of Grid3/Three/Cert/Data/), GridGen/ and TwoDegenerate/ prove
+    the results beyond the paper; each imports ListColoring/, never the reverse. GridGen/ also
+    contains a conditional reduction for grids of every height whose open hypotheses are stated
+    as Props, not assumed. There is no sorry, admit or native_decide in any of these libraries,
+    which CI checks. OpenProblems.lean is a separate library, imported by nothing, that states
+    Kirov-Naimi's Question 1 (open) and the known but unformalized negative remark under it,
+    both asserted with sorry, and proves Question 2 false from NonPersistence/. Those two are
+    the only sorries in the repository. Not formalized: the Dong-Zhang 2023 threshold
+    |E(G)| - 1, the Chi et al. 2026 theta-graph classification, and the rectangular grids at
+    list sizes 3 to 19 with both sides at least 4.
+  sorry_count: 2
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
   main_results:
@@ -229,477 +251,378 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "the chromatic polynomial evaluates to the colouring count"
     - declaration: SimpleGraph.ecc_iff_listColorFunction_eq_eval
       file: ListColoring/ListColorFunction.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "P_l(G,n) = P(G,n) is enumerative chromatic-choosability at n"
     - declaration: SimpleGraph.ERT.not_choosable
       file: ListColoring/NotChoosable.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "K_{n,n^n} is not n-choosable (Erdos-Rubin-Taylor)"
     - declaration: SimpleGraph.ERT.colorable
       file: ListColoring/NotChoosable.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "K_{n,n^n} is n-colourable (Erdos-Rubin-Taylor)"
     - declaration: SimpleGraph.KN5.exists_choosable_not_ecc_of_two_le
       file: ListColoring/Section5.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "Kirov-Naimi Section 5, at every list size k >= 2"
     - declaration: SimpleGraph.ecc_of_isChordal
       file: ListColoring/Dirac.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "Kostochka-Sidorenko: chordal graphs, via a simplicial elimination ordering"
     - declaration: SimpleGraph.ecc_cycleGraph_of_three_le
       file: ListColoring/CycleGraph.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "Kirov-Naimi Theorem 1: every cycle, at every list size"
     - declaration: SimpleGraph.rubinTheorem
       file: ListColoring/CoreGraphs.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "Rubin's characterization of the 2-choosable graphs, both directions"
     - declaration: SimpleGraph.ecc_two_iff
       file: ListColoring/CoreGraphs.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "Kirov-Naimi Theorem 2, with no hypothesis beyond connectivity"
     - declaration: SimpleGraph.exists_ecc_forall_ge
       file: ListColoring/Threshold.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "Donner's theorem; the explicit threshold is ecc_of_two_pow_lt"
+    - declaration: ZhangDong.exists_ecc_not_ecc_succ
+      file: NonPersistence/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: ZhangDong.not_persistence
+      file: NonPersistence/Statements.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
     - declaration: ListColoring.isCactus_ecc_of_three_le
       file: Cacti/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every cactus is enumeratively chromatic-choosable at every k >= 3 (original to this repository)"
     - declaration: ListColoring.isCactus_ecc_two_iff
       file: Cacti/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "the cactus classification at 2 (original to this repository)"
     - declaration: ListColoring.isCactus_ecc_iff
       file: Cacti/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "the full cactus spectrum (original to this repository)"
     - declaration: ListColoring.ecc_boxProd_pathG_one
       file: Ladder/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 2 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3, the height-two case of Kirov-Naimi section 6 Question 1 for paths (original to this repository)"
     - declaration: ListColoring.colConst_boxProd_pathG_one
       file: Ladder/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "the uniform count k(k-1)(k^2-3k+3)^n the previous entry is tight against (original to this repository)"
     - declaration: ListColoring.ecc_boxProd_pathG_two
       file: Grid3/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 5, the height-three case of Kirov-Naimi section 6 Question 1 for paths at list sizes >= 5 (original to this repository); list size 4 is the entry after next, list size 3 the one after that"
     - declaration: ListColoring.colConst_boxProd_pathG_two
       file: Grid3/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "the uniform height-three count Fne k n * k(k-1)^2 + Dp k n * k(k-1), with Fne, Dp the integer future-count sequences of Grid3/Transfer.lean (original to this repository)"
     - declaration: ListColoring.ecc_boxProd_pathG_two_of_four
       file: Grid3/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 4; the k = 4 case is the two-column-lookback proof of Grid3/Four/, whose arithmetic core is a family of LP certificates over the Venn atoms of five lists, checked by linear_combination (original to this repository); list size 3 is the next entry"
     - declaration: ListColoring.ecc_boxProd_pathG_two_of_three
       file: Grid3/Three/Main.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-      note: "every 3 x (n+1) grid is enumeratively chromatic-choosable at every k >= 3; the k = 3 case is the entropy (Parry-Renyi) certificate route of Grid3/Three/: 22,157 seam records checked by decide +kernel on packed literals (Grid3/Three/Cert/Data/), one per row-reflection orbit of the 43,736 maximal seam keys (Grid3/Three/Reflect.lean transports the other member), their enumeration completeness (Grid3/Three/Cert/Keys/), the canonicalization of an arbitrary three-list assignment (Grid3/Three/{Column,Seam,ColourMaps,Transport}.lean), the symbolic uniform-to-uniform seam (Cert/Parry.lean) and the Markov-chain entropy bound (Grid3/Three/Entropy.lean, FinalModel.lean); k >= 4 is the previous entry (original to this repository)"
+    - declaration: SimpleGraph.eccAt_of_degree_bound
+      file: GridGen/MaximumDegree.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.eccAt_of_maxDegree_bound
+      file: GridGen/MaximumDegree.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.eccAt_of_degree_le_three
+      file: GridGen/SmallDegree.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.eccAt_of_degree_le_four_twenty
+      file: GridGen/DegreeFourTwenty.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: ListColoring.ecc_boxProd_pathG_of_twenty
+      file: GridGen/DegreeFourTwenty.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound
+      file: GridGen/PolymerStability.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.TwoDegenerate.K2_26.not_eccAt_four
+      file: TwoDegenerate/Counterexample.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
 
 fidelity:
   divergences: >-
-    Three deliberate deviations from the source paper, each recorded with a `deviation` field
-    on the entry below: Lemma 3(c) is proved for n >= 3 rather than for all n; Section 5's
-    Lemmas 7, 9 and 10 are proved for n >= 2 rather than the paper's n >= 1, because they are
-    false at n = 1 (see `errata`, with machine-checked counterexamples in the library); and
-    Theorem 1 is stated on Mathlib's cycleGraph as well as on the development's own closePath.
-    Nothing downstream is weakened: Section 5's conclusion still holds at every list size
-    k >= 2. The cactus results of Cacti/ have no source to diverge from.
+    Deviations from the source paper, each noted on its `alignment` entry. (1) Section 5's
+    Lemmas 7, 9 and 10 are stated "for all n >= 1" but are false at n = 1 and are proved for
+    n >= 2: at n = 1 no admissible p exists (p is the least integer with n^p > x^{n^2}, which
+    reads 1 > 2), for any p the graph H_2 contains a triangle, so col(H_2,2) = 0 < 2 =
+    col(H_2,L) reverses Lemma 7 and H_2 is not 2-choosable, contradicting Lemma 10; and Lemma 9
+    fails separately on K_{1,1} with both lists {0,1}. The #guard witnesses are at the foot of
+    ListColoring/Section5.lean. Section 5's theorem is unaffected: at list size 2 the witness is
+    theta_{2,2,4}, 2-choosable by Rubin and not ECC at 2 by the paper's own Figure 2. This is
+    the only mathematical error found in the paper. (2) Lemma 8 is proved only in the two
+    consequences Lemma 9 uses (the lists on the n-side are pairwise disjoint and of size n); the
+    colour bijection and automorphism in "equivalent to L_0" are not needed downstream.
+    (3) Theorem 1 is stated both on Mathlib's cycleGraph and on the development's own
+    closePath. (4) A dangling cross-reference: the remark under Question 1 cites "Theorem 3",
+    which does not exist; the intended reference is the Kostochka-Sidorenko corollary of
+    Section 2 (paths are chordal). Donner's theorem is proved with the weaker explicit threshold
+    2^|E(G)|. The results beyond the paper have no source to diverge from, except that the
+    maximum-degree theorems prove a smaller threshold than the Zhang-Dong theorem they adapt.
 
-# How the source's statements map to the formal declarations: the `results` block below, one
-# entry per numbered result of the paper, each with its Lean name, file and status.
-alignment: "see the `results` block below, and `beyond_the_paper` for what is proved here that the paper does not state"
-
-paper:
-  title: "List coloring and n-monophilic graphs"
-  authors: ["Radoslav Kirov", "Ramin Naimi"]
-  journal: "Ars Combinatoria"
-  volume: 124
-  year: 2016
-  pages: "329-340"
-  arxiv: "1004.5183"
-  formalized_against: "arXiv:1004.5183v1, 29 Apr 2010"
-  note: >-
-    The paper's "n-monophilic" is what the later literature calls enumeratively
-    chromatic-choosable; this development uses the modern name throughout
-    (SimpleGraph.ECCAt at one n, SimpleGraph.ECC for all n). See provenance.md section 4.
-
-# Vocabulary for the `status` field of each entry in `results` below. Not the v0.4
-# `status:` block above, which is the project-level record.
-status_vocabulary:
-  proved: "Stated and proved here, in the paper's generality."
-  proved_weakened: "Proved in a weaker form than the paper states, sufficient for everything downstream. See `deviation`."
-  proved_corrected: "Proved, but with a hypothesis the paper does not have, because the paper's stated range is wrong. See `deviation`."
-  stated_open: "Stated in Lean in OpenProblems.lean and asserted with `sorry`. The question is OPEN — the `sorry` records that nobody knows, not that a proof is missing here."
-  stated_unproved: "Stated in Lean in OpenProblems.lean and asserted with `sorry`. Known in the literature; simply not proved here."
-  not_formalized: "Not formalized. Absence is deliberate and recorded; it is not a claim."
-
-results:
-
-  # ---------------------------------------------------------------- section 1
-  - id: fact-1-2
-    paper: {section: 1, kind: observation, number: "(2)", statement: "if n < chi(G) then G is n-monophilic"}
-    lean: {name: SimpleGraph.ecc_of_not_colorable, file: ListColoring/Basic.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016 (immediate from the definitions)"
-
-  - id: fact-1-3
-    paper: {section: 1, kind: observation, number: "(3)", statement: "if chi(G) <= n < chi_l(G) then G is not n-monophilic"}
-    lean: {name: SimpleGraph.not_ecc_of_colorable_of_not_choosable, file: ListColoring/Basic.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016 (immediate from the definitions)"
-
-  # ---------------------------------------------------------------- section 2
-  - id: lemma-1
-    paper: {section: 2, kind: lemma, number: 1, statement: "adding a vertex joined to a clique of an n-monophilic graph leaves it n-monophilic"}
-    lean: {name: SimpleGraph.ECCAt.coneOn, file: ListColoring/Cone.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 1"
-
-  - id: corollary-kostochka-sidorenko
-    paper: {section: 2, kind: corollary, number: null, statement: "every chordal graph is n-monophilic for every n"}
-    lean:
-      name: SimpleGraph.ecc_of_isChordal
-      file: ListColoring/Dirac.lean
-      also: [SimpleGraph.IsChordal.ecc, SimpleGraph.ecc_cliqueTower]
-    status: proved
-    credit: "Kostochka-Sidorenko 1990/92; = Theorem 2(i) of Chi et al. 2026"
-    note: >-
-      ecc_cliqueTower is the general form the paper actually needs — a simplicial elimination
-      ordering — so Dirac's theorem is not on the critical path.
-
-  - id: dirac
-    paper: {section: 2, kind: cited_theorem, number: null, statement: "a graph is chordal iff it has a simplicial elimination ordering"}
-    lean: {name: SimpleGraph.isChordal_iff_exists_cliqueTower, file: ListColoring/Dirac.lean}
-    status: proved
-    credit: "Dirac 1961; Fulkerson-Gross 1965"
-    note: "Cited by the paper, proved here; not needed by any Kirov-Naimi result."
-
-  # ---------------------------------------------------------------- section 3
-  - id: lemma-2
-    paper: {section: 3, kind: lemma, number: 2, statement: "a list swap across a bridge produces nested endpoint lists without increasing col"}
-    lean: {name: SimpleGraph.exists_nested_of_bridge, file: ListColoring/Bridge.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 2"
-
-  - id: lemma-3a
-    paper: {section: 3, kind: lemma, number: "3(a)", statement: "A_k - B_k = (-1)^k and A_k = ((n-1)/n)((n-1)^{k+1} + (-1)^k)"}
-    lean:
-      name: ListColoring.col_pathAssign
-      file: ListColoring/PathCount.lean
-      also: [ListColoring.col_of_isPathShape]
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 3(a)"
-    note: "col_of_isPathShape (PathMinimizing.lean) is the same count off the canonical assignment."
-
-  - id: lemma-3b
-    paper: {section: 3, kind: lemma, number: "3(b)", statement: "col(P,L) >= min(A_k, B_k)"}
-    lean: {name: ListColoring.min_pathA_pathB_le_col, file: ListColoring/PathMinimizing.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 3(b)"
-
-  - id: lemma-3c
-    paper: {section: 3, kind: lemma, number: "3(c)", statement: "for n >= 3, a minimizing assignment is type A with k odd, or type B with k even"}
-    lean:
-      name: ListColoring.isPathShape_parity_of_minimizing
-      file: ListColoring/PathMinimizing.lean
-      also: [ListColoring.exists_isPathShape_of_minimizing]
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 3(c)"
-    note: >-
-      The paper's "path of length at least one" is load-bearing, not decorative:
-      ListColoring.not_parity_of_minimizing_length_zero is a machine-checked counterexample
-      at k = 0. This confirms the paper.
-
-  - id: remark-3-n-two
-    paper: {section: 3, kind: remark, number: null, statement: "for n = 2 a minimizing list assignment need not be type A or type B"}
-    lean: null
-    status: not_formalized
-    credit: "Kirov-Naimi 2016, remark after Lemma 3"
-    note: "Asserted without proof in the paper ('examples are easy to construct')."
-
-  - id: lemma-4
-    paper: {section: 3, kind: lemma, number: 4, statement: "enlarging the lists on a path strictly increases col, when all lists have at least 2 colors"}
-    lean: {name: ListColoring.col_lt_col_of_ssubset, file: ListColoring/PathColorable.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 4"
-
-  - id: theorem-1
-    paper: {section: 3, kind: theorem, number: 1, statement: "every cycle is n-monophilic for all n >= 2"}
-    lean:
-      name: ListColoring.ecc_closePath_of_two_le
-      file: ListColoring/CycleRotate.lean
-      also: [ListColoring.ecc_closePath_all, ListColoring.closePath_ecc, ListColoring.ecc_closePath_two]
-    status: proved
-    credit: "Kirov-Naimi 2016, Theorem 1; = Theorem 2(ii) of Chi et al. 2026"
-    note: >-
-      The n >= 3 half is CycleECC.lean; the n = 2 half is CycleTwo.lean (forcing and
-      propagation) plus CycleRotate.lean (the rotation automorphism, which is the freedom the
-      paper exercises when it chooses an edge with L(v) != L(w)).
-
-  - id: note-3-tight-example
-    paper: {section: 3, kind: remark, number: null, statement: "every even cycle has a non-constant minimizing 2-list assignment: {1,2} on two adjacent vertices, {2,3} elsewhere"}
-    lean: {name: null, file: ListColoring/CycleTwo.lean, anchor: "testTight, checked by #guard"}
-    status: proved
-    credit: "Kirov-Naimi 2016, note after Theorem 1"
-    note: "Evaluated, not stated as a theorem: the witness is private and checked by #guard."
-
-  # ---------------------------------------------------------------- section 4
-  - id: lemma-5
-    paper: {section: 4, kind: lemma, number: 5, statement: "a connected graph is n-monophilic iff its core is"}
-    lean:
-      name: SimpleGraph.ecc_pendantTower_iff
-      file: ListColoring/Core.lean
-      also: [SimpleGraph.ecc_addPendant_iff]
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 5"
-
-  - id: rubin
-    paper: {section: 4, kind: cited_theorem, number: null, statement: "a connected graph is 2-choosable iff its core is a single vertex, an even cycle, or theta_{2,2,2m}"}
-    lean:
-      name: ListColoring.rubinTheorem
-      file: ListColoring/RubinProof.lean
-      also:
-        - ListColoring.choosable_two_of_rubinFamily
-        - ListColoring.choosable_two_gtheta_iff
-        - ListColoring.not_choosable_two_of_dumbbell
-        - ListColoring.rubin_structure
-        - ListColoring.hasCore
-        - ListColoring.choosable_iff_of_coreIs
-    status: proved
-    credit: "A. L. Rubin, in Erdos-Rubin-Taylor 1980, pp. 131-134"
-    note: >-
-      Cited by the paper, proved here in both directions, which is what makes Theorem 2
-      unconditional. Apparently not machine-checked anywhere before. None of the mathematics
-      is ours.
-
-  - id: lemma-6
-    paper: {section: 4, kind: lemma, number: 6, statement: "K_{2,3} is 2-monophilic"}
-    lean: {name: SimpleGraph.ecc_K23, file: ListColoring/K23.lean}
-    status: proved
-    credit: "Kirov-Naimi 2016, Lemma 6"
-    note: >-
-      The paper's first two cases (|L(x) cap L(y)| = 2 and = 1) merge; only the disjoint case
-      needs its own argument. Renaming invariance is not needed at all.
-
-  - id: theorem-2
-    paper: {section: 4, kind: theorem, number: 2, statement: "a connected graph is 2-monophilic iff its core is a single vertex, is a cycle, is K_{2,3}, or it contains an odd cycle"}
-    lean:
-      name: ListColoring.ecc_two_iff
-      file: ListColoring/RubinProof.lean
-      also: [SimpleGraph.ecc_two_iff_of_rubin, SimpleGraph.ecc_two_iff_of_rubin_hard]
-    status: proved
-    credit: "Kirov-Naimi 2016, Theorem 2; = Theorem 2(iv) of Chi et al. 2026"
-    note: >-
-      Unconditional. The ..._of_rubin forms, which take Rubin's theorem as an explicit
-      hypothesis with the core alternatives left abstract, are kept as the weaker statements
-      they are. The converse needs "not 2-colorable implies an odd cycle", an open TODO in
-      Mathlib at the pinned revision, proved here as
-      ListColoring.exists_odd_isCycle_of_odd_closed_walk.
-
-  # ---------------------------------------------------------------- section 5
-  - id: ert-block
-    paper: {section: 5, kind: construction, number: null, statement: "K_{n,n^n} with L_0 has no coloring, so it is n-colorable but not n-choosable"}
-    lean:
-      name: SimpleGraph.ERT.col_L₀_eq_zero
-      file: ListColoring/NotChoosable.lean
-      also: [SimpleGraph.ERT.not_choosable, SimpleGraph.ERT.colorable, SimpleGraph.ERT.not_ecc]
-    status: proved
-    credit: "Erdos-Rubin-Taylor 1980; also Kirov-Naimi 2016, section 5"
-
-  - id: lemma-7
-    paper: {section: 5, kind: lemma, number: 7, statement: "for all n >= 1, H_{n+1} is not (n+1)-monophilic"}
-    lean:
-      name: SimpleGraph.KN5.not_ecc
-      file: ListColoring/Section5.lean
-      also: [SimpleGraph.KN5.coloring_v, SimpleGraph.KN5.coloring_w, SimpleGraph.KN5.col_LH_le, SimpleGraph.KN5.pow_le_colConst]
-    status: proved_corrected
-    credit: "Kirov-Naimi 2016, Lemma 7"
-    deviation: >-
-      Requires 2 <= n. The paper's n >= 1 is wrong: at n = 1 no admissible p exists, and for
-      any p the graph H_2 contains a triangle, so col(H_2,2) = 0 < 2 = col(H_2,L) — the
-      inequality reversed. Machine-checked #guards in the file. See erratum kn5-n-1 below.
-    note: >-
-      col_LH_le proves the <= of the paper's col(H_{n+1},L) = x^{n^2}, which is the direction
-      Lemma 7 uses.
-
-  - id: lemma-8
-    paper: {section: 5, kind: lemma, number: 8, statement: "if col(K_{n,n^n}, L) = 0 for an assignment of lists of size >= n, then L is equivalent to L_0"}
-    lean:
-      name: SimpleGraph.KN5.left_disjoint
-      file: ListColoring/Section5.lean
-      also: [SimpleGraph.KN5.left_card_eq]
-    status: proved_weakened
-    credit: "Kirov-Naimi 2016, Lemma 8"
-    deviation: >-
-      Only the two consequences Lemma 9 consumes are proved: the lists on the n-element side
-      are pairwise disjoint, and each has exactly n colors. The paper's "equivalent to L_0"
-      additionally asserts a color bijection and a graph automorphism, which nothing
-      downstream uses.
-
-  - id: lemma-9
-    paper: {section: 5, kind: lemma, number: 9, statement: "at most one color of the apex list of K_{n,n^n,1} can kill every coloring"}
-    lean: {name: SimpleGraph.KN5.badColor_unique, file: ListColoring/Section5.lean}
-    status: proved_corrected
-    credit: "Kirov-Naimi 2016, Lemma 9"
-    deviation: >-
-      Requires 2 <= n; false at n = 1, where K_{1,1} with both lists {0,1} has two such
-      colors. Stated on K_{n,n^n} with an erased color rather than on K_{n,n^n,1} with an
-      apex vertex; the two are the same statement.
-
-  - id: lemma-10
-    paper: {section: 5, kind: lemma, number: 10, statement: "for all n >= 1, H_{n+1} is (n+1)-choosable"}
-    lean: {name: SimpleGraph.KN5.choosable, file: ListColoring/Section5.lean}
-    status: proved_corrected
-    credit: "Kirov-Naimi 2016, Lemma 10"
-    deviation: "Requires 2 <= n, through Lemma 9. H_2 is not 2-colorable, hence not 2-choosable."
-
-  - id: section-5-theorem
-    paper: {section: 5, kind: theorem, number: null, statement: "for every n >= 2 there is a graph that is n-choosable but not n-monophilic"}
-    lean:
-      name: SimpleGraph.KN5.exists_choosable_not_ecc_of_two_le
-      file: ListColoring/Section5.lean
-      also: [SimpleGraph.KN5.exists_choosable_not_ecc, SimpleGraph.KN5.H, ListColoring.choosable_and_not_ecc_theta]
-    status: proved
-    credit: "Kirov-Naimi 2016, section 5"
-    note: >-
-      Proved at every list size k >= 2. For k >= 3 the witness is the paper's H_k
-      (exists_choosable_not_ecc); for k = 2 it is theta_{2,2,4}, which is 2-choosable by
-      Rubin and not 2-monophilic by the paper's own Figure 2, since H_2 does not exist.
-
-  # ---------------------------------------------------------------- section 6
-  - id: question-1-n-two
-    paper: {section: 6, kind: remark, number: null, statement: "the product of two 2-monophilic graphs need not be 2-monophilic: P_2 box P_3 is not, while every path is"}
-    lean: {name: ListColoring.OpenProblem.not_ecc_two_boxProd_path_two_three, file: OpenProblems.lean}
-    status: stated_unproved
-    credit: "Kirov-Naimi 2016, remark under Question 1"
-    note: >-
-      Not open — a corollary of Theorem 2 rather than a separate argument, so
-      ListColoring.ecc_two_iff is the route to a proof. The other half of the remark, that every
-      path is 2-monophilic, is already available from SimpleGraph.ecc_of_isChordal.
-
-  - id: question-1
-    paper: {section: 6, kind: question, number: 1, statement: "is the product of two n-monophilic graphs n-monophilic, for n >= 3?"}
-    lean:
-      name: ListColoring.OpenProblem.Question1
-      file: OpenProblems.lean
-      also: [ListColoring.OpenProblem.question1]
-    status: stated_open
-    credit: "Kirov-Naimi 2016, Question 1"
-    note: >-
-      OPEN. The paper's product is Mathlib's SimpleGraph.boxProd (G box H); the DecidableRel
-      instance it needs to be stated at all is supplied in OpenProblems.lean. The n >= 3 is the
-      paper's own, since the answer at n = 2 is No — see question-1-n-two.
-
-  - id: question-2
-    paper: {section: 6, kind: question, number: 2, statement: "if a graph is n-colorable and n-monophilic, is it (n+1)-monophilic?"}
-    lean:
-      name: ListColoring.OpenProblem.Question2
-      file: OpenProblems.lean
-      also: [ListColoring.OpenProblem.not_question2, ZhangDong.not_persistence]
-    status: refuted
-    credit: "Kirov-Naimi 2016, Question 2; refuted by Zhang-Dong 2026 (arXiv:2608.19773)"
-    note: >-
-      REFUTED, and the refutation is formalized here. In modern terms: is nu(G) = tau(G) for
-      every graph? It was Question 2 of Allred-Mudrock and Question 1 of Chi et al. 2026, both
-      tracing it to this paper. The chi = 2 case is true, by Allred-Mudrock's Theorem 10, but the
-      general case is false: Zhang and Dong, Non-persistence of equality between chromatic
-      polynomials and list-color functions, arXiv:2608.19773 (20 August 2026), Theorem 6, give
-      for every k >= 3 infinitely many k-colourable graphs that are ECC at k and not at k+1. That
-      theorem is proved in NonPersistence/ and ListColoring.OpenProblem.not_question2 is the
-      corollary. The mathematics is Zhang and Dong's; this repository contributes only the
-      mechanization.
-
-# Results this development proves that the paper does not state. Formalizing a known theorem is
-# not a mathematical contribution and none of these is presented as one; they are here so the
-# index is complete. provenance.md is the credit ledger.
-beyond_the_paper:
-  - {name: SimpleGraph.eval_chromaticPolynomial, file: ListColoring/ChromaticPolynomial.lean, credit: "Whitney 1932; Birkhoff 1912", note: "The paper needs the number of colorings, never the polynomial; this is built separately so that ecc_iff_listColorFunction_eq_eval can put a genuine polynomial on the right."}
-  - {name: SimpleGraph.ecc_iff_listColorFunction_eq_eval, file: ListColoring/ListColorFunction.lean, credit: "definitional bridge; the notions are Kostochka-Sidorenko 1990/92 and Kirov-Naimi 2016"}
-  - {name: SimpleGraph.exists_ecc_forall_ge, file: ListColoring/Threshold.lean, credit: "Donner 1992; threshold via Wang-Qian-Yan 2017"}
-  - {name: SimpleGraph.ecc_of_two_pow_lt, file: ListColoring/Threshold.lean, credit: "weaker form of Wang-Qian-Yan 2017; superseded by Dong-Zhang 2023, which is not formalized"}
-  - {name: ListColoring.exists_odd_isCycle_of_odd_closed_walk, file: ListColoring/Theorem2.lean, credit: "classical", note: "Listed as an open TODO in Mathlib's Combinatorics/SimpleGraph/Bipartite.lean at the pinned revision. Worth upstreaming."}
-
-  # The cactus classification. Not in Kirov-Naimi and, as far as we can determine, not in the
-  # literature: the complete ECC spectrum of a cactus. Result of the 2026-08 AI research
-  # collaboration on this repository; source of record ai_research_notes/FINAL_CACTI_ECC_HANDOFF.md.
-  # Lives in its own lean_lib, Cacti/, which imports ListColoring and is imported by nothing.
-  - {name: ListColoring.isCactus_ecc_iff, file: Cacti/Statements.lean, credit: "2026-08 AI research collaboration (handoff Theorem A)", note: "A cactus is ECC at every list size iff it has at most one cycle or contains an odd cycle. The three cases below are its content."}
-  - {name: ListColoring.isCactus_ecc_two_iff, file: Cacti/Statements.lean, credit: "2026-08 AI research collaboration (handoff section 3)", note: "k = 2. Routes through Kirov-Naimi Theorem 2 and Rubin's theorem, plus the cactus core analysis."}
-  - {name: ListColoring.isCactus_ecc_three, file: Cacti/Statements.lean, credit: "2026-08 AI research collaboration (UM-105, handoff section 5)", note: "k = 3. The pair invariant is false here; the induction carries GM dominance, and the even-cycle block is the tensor capacity UM-104, split into C4, C6 (UM-096) and every longer cycle."}
-  - {name: ListColoring.isCactus_ecc_of_four_le, file: Cacti/Statements.lean, credit: "2026-08 AI research collaboration (UM-108, handoff section 6)", note: "k >= 4. Block induction on the pair invariant A^2 <= x_c x_d over the cut-vertex decomposition; the slack k - 3 >= 1 pays for the weight peeling."}
-  - {name: ListColoring.isCactus_ecc_of_three_le, file: Cacti/Statements.lean, credit: "2026-08 AI research collaboration", note: "k >= 3, the two cases above combined."}
-
-# Corrections to the literature found by formalizing it. references.md section 14 and
-# provenance.md section 3 carry the full statements.
-errata:
-  - id: kn5-n-1
-    target: "Kirov-Naimi 2016, section 5, Lemmas 7, 9 and 10"
-    claim: "stated 'for all n >= 1', i.e. down to list size 2"
-    verdict: false_at_n_1
-    reasons:
-      - "p is the least integer with n^p > x^{n^2}; at n = 1 this reads 1 > 2, so no p exists and H_2 is undefined."
-      - "For any p, v_1 is joined to both ends of the single edge of G_{1,1} = K_{1,1}, so H_2 has a triangle: col(H_2,2) = 0 < 2 = col(H_2,L), Lemma 7's inequality reversed, and H_2 is not 2-colorable so Lemma 10 fails too."
-      - "Lemma 9 fails separately: K_{1,1} with both lists {0,1} has two colors whose deletion destroys every coloring."
-    witnesses: "#guards at the foot of ListColoring/Section5.lean"
-    consequence_for_the_paper: none
-    repair: >-
-      Read the three lemmas as "for all n >= 2". Section 5's theorem then holds at every list
-      size k >= 2, with theta_{2,2,4} supplying k = 2 —
-      SimpleGraph.KN5.exists_choosable_not_ecc_of_two_le.
-    note: "The only mathematical error found in Kirov-Naimi. Every other refuted claim in this project has been one of ours; provenance.md section 3 lists those."
-
-  - id: kn6-theorem-3
-    target: "Kirov-Naimi 2016, section 6, remark under Question 1"
-    claim: "'while by Theorem 3 every P_i is 2-monophilic'"
-    verdict: dangling_cross_reference
-    reasons:
-      - "The paper has Theorems 1 and 2 only; there is no Theorem 3."
-    consequence_for_the_paper: none
-    repair: >-
-      The intended reference is the Kostochka-Sidorenko corollary of section 2: paths are
-      chordal, hence n-monophilic for every n (SimpleGraph.ecc_of_isChordal).
-    note: "Typographic, not mathematical. Recorded so a reader chasing the reference is not left hunting."
+alignment:
+  statements:
+    # ------------------------------------------------ Kirov-Naimi 2016, Section 1
+    - source: "Kirov-Naimi 2016, Section 1, observation (2)"
+      lean: SimpleGraph.ecc_of_not_colorable
+      module: ListColoring/Basic.lean
+      status: proved
+      note: "If n < chi(G) then G is n-monophilic. Immediate from the definitions."
+    - source: "Kirov-Naimi 2016, Section 1, observation (3)"
+      lean: SimpleGraph.not_ecc_of_colorable_of_not_choosable
+      module: ListColoring/Basic.lean
+      status: proved
+      note: "If chi(G) <= n < chi_l(G) then G is not n-monophilic."
+    # ------------------------------------------------ Section 2
+    - source: "Kirov-Naimi 2016, Lemma 1"
+      lean: SimpleGraph.ECCAt.coneOn
+      module: ListColoring/Cone.lean
+      status: proved
+      note: "Adding a vertex joined to a clique of an n-monophilic graph leaves it n-monophilic."
+    - source: "Kostochka-Sidorenko 1990/92, the Section 2 corollary; = Theorem 2(i) of Chi et al. 2026"
+      lean: SimpleGraph.ecc_of_isChordal
+      module: ListColoring/Dirac.lean
+      status: proved
+      note: >-
+        Every chordal graph is n-monophilic for every n. Also SimpleGraph.IsChordal.ecc and
+        SimpleGraph.ecc_cliqueTower, the simplicial-elimination form the paper actually needs, so
+        Dirac's theorem is not on the critical path.
+    - source: "Dirac 1961; Fulkerson-Gross 1965 (cited in Section 2)"
+      lean: SimpleGraph.isChordal_iff_exists_cliqueTower
+      module: ListColoring/Dirac.lean
+      status: proved
+      note: "A graph is chordal iff it has a simplicial elimination ordering. Not needed by any Kirov-Naimi result."
+    # ------------------------------------------------ Section 3
+    - source: "Kirov-Naimi 2016, Lemma 2"
+      lean: SimpleGraph.exists_nested_of_bridge
+      module: ListColoring/Bridge.lean
+      status: proved
+      note: "A list swap across a bridge produces nested endpoint lists without increasing col."
+    - source: "Kirov-Naimi 2016, Lemma 3(a)"
+      lean: ListColoring.col_pathAssign
+      module: ListColoring/PathCount.lean
+      status: proved
+      note: "A_k - B_k = (-1)^k and the closed form of A_k. ListColoring.col_of_isPathShape is the same count off the canonical assignment."
+    - source: "Kirov-Naimi 2016, Lemma 3(b)"
+      lean: ListColoring.min_pathA_pathB_le_col
+      module: ListColoring/PathMinimizing.lean
+      status: proved
+      note: "col(P,L) >= min(A_k, B_k)."
+    - source: "Kirov-Naimi 2016, Lemma 3(c)"
+      lean: ListColoring.isPathShape_parity_of_minimizing
+      module: ListColoring/PathMinimizing.lean
+      status: proved
+      note: >-
+        For n >= 3 a minimizing assignment is type A with k odd or type B with k even (also
+        ListColoring.exists_isPathShape_of_minimizing). The paper's "path of length at least one"
+        is load-bearing: ListColoring.not_parity_of_minimizing_length_zero is a machine-checked
+        counterexample at k = 0, which confirms the paper.
+    - source: "Kirov-Naimi 2016, remark after Lemma 3"
+      lean: ""
+      module: ""
+      status: not-formalized
+      note: "For n = 2 a minimizing assignment need not be type A or B; asserted without proof in the paper."
+    - source: "Kirov-Naimi 2016, Lemma 4"
+      lean: ListColoring.col_lt_col_of_ssubset
+      module: ListColoring/PathColorable.lean
+      status: proved
+      note: "Enlarging the lists on a path strictly increases col, when all lists have at least 2 colours."
+    - source: "Kirov-Naimi 2016, Theorem 1; = Theorem 2(ii) of Chi et al. 2026"
+      lean: ListColoring.ecc_closePath_of_two_le
+      module: ListColoring/CycleRotate.lean
+      status: proved
+      note: >-
+        Every cycle is n-monophilic for all n >= 2. Also ListColoring.ecc_closePath_all,
+        ListColoring.closePath_ecc, ListColoring.ecc_closePath_two, and
+        SimpleGraph.ecc_cycleGraph_of_three_le on Mathlib's cycleGraph.
+    - source: "Kirov-Naimi 2016, note after Theorem 1"
+      lean: ""
+      module: ListColoring/CycleTwo.lean
+      status: proved
+      note: "The non-constant minimizing 2-list assignment on an even cycle; evaluated by #guard (testTight), not stated as a theorem."
+    # ------------------------------------------------ Section 4
+    - source: "Kirov-Naimi 2016, Lemma 5"
+      lean: SimpleGraph.ecc_pendantTower_iff
+      module: ListColoring/Core.lean
+      status: proved
+      note: "A connected graph is n-monophilic iff its core is (also SimpleGraph.ecc_addPendant_iff)."
+    - source: "Rubin, in Erdos-Rubin-Taylor 1980, pp. 131-134 (cited in Section 4)"
+      lean: ListColoring.rubinTheorem
+      module: ListColoring/RubinProof.lean
+      status: proved
+      note: >-
+        A connected graph is 2-choosable iff its core is a vertex, an even cycle or
+        theta_{2,2,2m}; both directions, from ListColoring.choosable_two_of_rubinFamily,
+        ListColoring.choosable_two_gtheta_iff, ListColoring.not_choosable_two_of_dumbbell,
+        ListColoring.rubin_structure, ListColoring.hasCore and ListColoring.choosable_iff_of_coreIs.
+        None of the mathematics is ours.
+    - source: "Kirov-Naimi 2016, Lemma 6"
+      lean: SimpleGraph.ecc_K23
+      module: ListColoring/K23.lean
+      status: proved
+      note: "K_{2,3} is 2-monophilic."
+    - source: "Kirov-Naimi 2016, Theorem 2; = Theorem 2(iv) of Chi et al. 2026"
+      lean: ListColoring.ecc_two_iff
+      module: ListColoring/RubinProof.lean
+      status: proved
+      note: >-
+        Unconditional. The converse needs "not 2-colourable implies an odd cycle", an open TODO in
+        Mathlib at the pinned revision, proved here as
+        ListColoring.exists_odd_isCycle_of_odd_closed_walk.
+    # ------------------------------------------------ Section 5
+    - source: "Erdos-Rubin-Taylor 1980; Kirov-Naimi 2016, Section 5"
+      lean: SimpleGraph.ERT.col_L₀_eq_zero
+      module: ListColoring/NotChoosable.lean
+      status: proved
+      note: "K_{n,n^n} is n-colourable but not n-choosable (also SimpleGraph.ERT.not_choosable, SimpleGraph.ERT.colorable)."
+    - source: "Kirov-Naimi 2016, Lemma 7"
+      lean: SimpleGraph.KN5.not_ecc
+      module: ListColoring/Section5.lean
+      status: "proved for n >= 2 (the paper's n >= 1 is false)"
+      note: "See fidelity (1)."
+    - source: "Kirov-Naimi 2016, Lemma 8"
+      lean: SimpleGraph.KN5.left_disjoint
+      module: ListColoring/Section5.lean
+      status: "proved in the form used downstream"
+      note: "Also SimpleGraph.KN5.left_card_eq. See fidelity (2)."
+    - source: "Kirov-Naimi 2016, Lemma 9"
+      lean: SimpleGraph.KN5.badColor_unique
+      module: ListColoring/Section5.lean
+      status: "proved for n >= 2 (the paper's n >= 1 is false)"
+      note: "Stated on K_{n,n^n} with an erased colour rather than with an apex vertex; the same statement. See fidelity (1)."
+    - source: "Kirov-Naimi 2016, Lemma 10"
+      lean: SimpleGraph.KN5.choosable
+      module: ListColoring/Section5.lean
+      status: "proved for n >= 2 (the paper's n >= 1 is false)"
+      note: "See fidelity (1)."
+    - source: "Kirov-Naimi 2016, Section 5 theorem"
+      lean: SimpleGraph.KN5.exists_choosable_not_ecc_of_two_le
+      module: ListColoring/Section5.lean
+      status: proved
+      note: "For every k >= 2 a graph that is k-choosable but not ECC at k: H_k for k >= 3, theta_{2,2,4} for k = 2."
+    # ------------------------------------------------ Section 6
+    - source: "Kirov-Naimi 2016, remark under Question 1"
+      lean: ListColoring.OpenProblem.not_ecc_two_boxProd_path_two_three
+      module: OpenProblems.lean
+      status: "stated, asserted with sorry"
+      note: "Known (a corollary of Theorem 2), not proved here. Its citation of a nonexistent Theorem 3 is fidelity (4)."
+    - source: "Kirov-Naimi 2016, Question 1"
+      lean: ListColoring.OpenProblem.question1
+      module: OpenProblems.lean
+      status: "open, asserted with sorry"
+      note: >-
+        Is the product of two n-monophilic graphs n-monophilic, for n >= 3? Open. For two paths,
+        the ladder, height-three and maximum-degree results below settle it at heights 2 and 3
+        for every k >= 3, and for every rectangle at k >= 20.
+    - source: "Kirov-Naimi 2016, Question 2; Zhang-Dong, arXiv:2608.19773, Theorem 6"
+      lean: ListColoring.OpenProblem.not_question2
+      module: OpenProblems.lean
+      status: "refuted, proved"
+      note: "From ZhangDong.not_persistence and ZhangDong.exists_ecc_not_ecc_succ (NonPersistence/Statements.lean). The mathematics is Zhang and Dong's."
+    # ------------------------------------------------ results the paper uses but does not state
+    - source: "Whitney 1932; Birkhoff 1912"
+      lean: SimpleGraph.eval_chromaticPolynomial
+      module: ListColoring/ChromaticPolynomial.lean
+      status: proved
+      note: "The Whitney subset expansion evaluates to the colouring count; built so that ecc_iff_listColorFunction_eq_eval has a genuine polynomial on the right."
+    - source: "definitional; Kostochka-Sidorenko 1990/92 and Kirov-Naimi 2016"
+      lean: SimpleGraph.ecc_iff_listColorFunction_eq_eval
+      module: ListColoring/ListColorFunction.lean
+      status: proved
+      note: "ECC at n iff P_l(G,n) = P(G,n)."
+    - source: "Donner 1992"
+      lean: SimpleGraph.exists_ecc_forall_ge
+      module: ListColoring/Threshold.lean
+      status: proved
+      note: "Every graph is ECC at all large n; the explicit threshold 2^|E(G)| < n is SimpleGraph.ecc_of_two_pow_lt."
+    # ------------------------------------------------ beyond the paper (original to this repository)
+    - source: "original to this repository (cacti)"
+      lean: ListColoring.isCactus_ecc_iff
+      module: Cacti/Statements.lean
+      status: proved
+      note: >-
+        A cactus is ECC at every list size iff it has at most one cycle or contains an odd cycle.
+        Its cases: ListColoring.isCactus_ecc_two_iff, ListColoring.isCactus_ecc_three,
+        ListColoring.isCactus_ecc_of_four_le, ListColoring.isCactus_ecc_of_three_le.
+    - source: "original to this repository (ladders; Question 1 at height two)"
+      lean: ListColoring.ecc_boxProd_pathG_one
+      module: Ladder/Statements.lean
+      status: proved
+      note: "Every 2 x (n+1) grid is ECC at every k >= 3; the count is ListColoring.colConst_boxProd_pathG_one."
+    - source: "original to this repository (Question 1 at height three)"
+      lean: ListColoring.ecc_boxProd_pathG_two_of_three
+      module: Grid3/Three/Main.lean
+      status: proved
+      note: >-
+        Every 3 x (n+1) grid is ECC at every k >= 3; ListColoring.ecc_boxProd_pathG_two (k >= 5)
+        and ListColoring.ecc_boxProd_pathG_two_of_four (k >= 4) are in Grid3/Statements.lean, with
+        the count ListColoring.colConst_boxProd_pathG_two.
+    - source: "adapts Zhang-Dong arXiv:2609.08540; positivity half credited to Dong-Koh 2008"
+      lean: SimpleGraph.eccAt_of_degree_bound
+      module: GridGen/MaximumDegree.lean
+      status: proved
+      note: >-
+        Every finite graph is ECC at every k with 567 Delta <= 100 k (also
+        SimpleGraph.eccAt_of_maxDegree_bound). Sharper: SimpleGraph.eccAt_of_degree_le_three
+        (k >= 15), SimpleGraph.eccAt_of_degree_le_four_twenty (k >= 20) with every rectangle as
+        ListColoring.ecc_boxProd_pathG_of_twenty, and Delta <= 5..8 in GridGen/SmallDegree.lean.
+        All are instances of GridGen.Polymer.CertifiedAt.
+    - source: "adapts Zhang-Dong arXiv:2609.08540, Theorem 5 (strictness at 23.41 Delta)"
+      lean: SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound
+      module: GridGen/PolymerStability.lean
+      status: proved
+      note: >-
+        On a connected graph at the uniform threshold, equality holds exactly for constant
+        assignments; the generic form at every certified threshold is
+        GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt.
+    - source: "adapts Kaul et al. 2023, Theorem 7(ii) (the case n = 26 they leave open)"
+      lean: SimpleGraph.TwoDegenerate.K2_26.not_eccAt_four
+      module: TwoDegenerate/Counterexample.lean
+      status: proved
+      note: "K_{2,26} is not ECC at 4, and is 2-degenerate (SimpleGraph.TwoDegenerate.K2_26.not_every_twoDegenerate_eccAt_four)."

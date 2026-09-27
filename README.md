@@ -57,7 +57,7 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19`
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | the formal `K₂,₂₆` counterexample to a uniform 2-degenerate-graph conjecture |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
-| `formalization.yaml` | machine-readable map: every numbered result of the paper → its Lean name, file, and status |
+| `formalization.yaml` | registry metadata (mathlib-initiative v0.4): sources, main results, fidelity, and the `alignment` map from every numbered result of the paper, and every result beyond it, to its Lean name, file and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
 | `plan.md` | milestones, design decisions, progress log, and findings |
 | `references.md` | verified bibliography, with corrections to the literature |

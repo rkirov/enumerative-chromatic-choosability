@@ -50,7 +50,7 @@ hypothesis.
 The paper supports that observation with "by Theorem 3 every `Pᵢ` is 2-monophilic". **There is no
 Theorem 3** — the paper has Theorems 1 and 2 only. The intended reference is the Kostochka–Sidorenko
 corollary of §2, since paths are chordal (`SimpleGraph.ecc_of_isChordal`). A dangling
-cross-reference, not a mathematical error; recorded in `formalization.yaml` under `errata`.
+cross-reference, not a mathematical error; recorded in `formalization.yaml` under `fidelity`.
 -/
 
 open SimpleGraph
