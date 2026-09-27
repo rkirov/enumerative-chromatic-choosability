@@ -326,11 +326,11 @@ the generator, and the remaining research direction.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **twenty-seven keystone theorems** — ten from the paper,
+  `comparator/Challenge.lean`, which claims **twenty-nine keystone theorems** — ten from the paper,
   three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
-  and height-three results, and six maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
+  and height-three results, six maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `15`, maximum degree four at `20` with its arbitrary-grid corollary, and the
-  equality case) —
+  equality case), and `K₂,₂₆` not ECC at four with `K₂,₂₅` ECC at four —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel

@@ -150,7 +150,7 @@ theorem colConst_four : G.colConst 4 = 10168268619684 := by
   decide
 
 /-- **The counterexample:** `K₂,₂₆` is not enumeratively chromatic-choosable at four. -/
-theorem not_eccAt_four : ¬ G.ECCAt 4 := by
+theorem not_eccAt_four : ¬ (completeBipartiteGraph (Fin 2) (Fin 26)).ECCAt 4 := by
   intro h
   have hle := h badList isNListAssignment_badList
   rw [colConst_four, col_badList] at hle

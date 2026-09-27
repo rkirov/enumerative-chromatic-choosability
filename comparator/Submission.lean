@@ -5,13 +5,17 @@ import Ladder
 import Grid3
 import Grid3.Three.Main
 import GridGen.Polymer
+import TwoDegenerate
 /-!
 # Submission: the real development
 
 Section 13 is proved in `GridGen/DegreeFourTwenty.lean`: the maximum-degree-four
 theorem and its arbitrary-rectangle corollary, at every list size at least 20.
-Section 14 is proved in `GridGen/MaximumDegree.lean`: the uniform bound `k ≥ ceil(5.67Δ)`
-for arbitrary maximum degree.
+Section 14 is proved in `GridGen/MaximumDegree.lean` (the uniform bound `k ≥ ceil(5.67Δ)` for
+arbitrary maximum degree), `GridGen/SmallDegree.lean` (subcubic graphs at `k ≥ 15`) and
+`GridGen/PolymerStability.lean` (the equality case).
+Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
+(`TwoDegenerate/Counterexample.lean`) and `K₂,₂₅` is (`TwoDegenerate/K2n/Main.lean`).
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the

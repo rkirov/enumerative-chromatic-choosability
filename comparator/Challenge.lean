@@ -640,3 +640,26 @@ theorem col_eq_colConst_iff_constant_of_degree_bound {V : Type*} [Fintype V] [De
     G.col L = G.colConst k ↔ ∃ s : Finset ℕ, ∀ v, L v = s := sorry
 
 end SimpleGraph
+
+/-! ### 15. The complete bipartite graphs `K₂,₂₅` and `K₂,₂₆` at list size four
+
+Kaul et al. (Involve 16 (2023), Theorem 7(ii)) prove `K₂,ₙ` ECC at four for `n ≤ 24` and not for
+`n ≥ 27`, leaving `n = 25, 26` open. The proofs are in `TwoDegenerate/Counterexample.lean` (an
+explicit four-list assignment on `K₂,₂₆` with fewer colourings) and `TwoDegenerate/K2n/` (every
+four-list assignment on `K₂,₂₅`, via a reduction and kernel-checked AM–GM certificates). Together:
+`K₂,ₙ` is ECC at four exactly when `n ≤ 25`.
+-/
+
+namespace SimpleGraph.TwoDegenerate.K2_26
+
+/-- `K₂,₂₆` is not enumeratively chromatic-choosable at four. -/
+theorem not_eccAt_four : ¬ (completeBipartiteGraph (Fin 2) (Fin 26)).ECCAt 4 := sorry
+
+end SimpleGraph.TwoDegenerate.K2_26
+
+namespace SimpleGraph.TwoDegenerate.K2_25
+
+/-- `K₂,₂₅` is enumeratively chromatic-choosable at four. -/
+theorem eccAt_four : (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 := sorry
+
+end SimpleGraph.TwoDegenerate.K2_25

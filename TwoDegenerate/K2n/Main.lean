@@ -44,14 +44,15 @@ theorem keyGoals : ∀ r ≤ 4, ∃ K, KeyGoal (4 * 3 ^ 25 + 12 * 2 ^ 25) 25 r K
 
 /-- **`K₂,₂₅` is enumeratively chromatic-choosable at four**: no assignment of four-element
 lists admits fewer colourings than the constant one. -/
-theorem eccAt_four : G.ECCAt 4 := by
+theorem eccAt_four : (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 := by
   intro L hL
   rw [colConst_four]
   exact le_col_of_keyGoals keyGoals L hL
 
 /-- The threshold, pinned down: `K₂,₂₅` is ECC at four and `K₂,₂₆` is not. -/
 theorem eccAt_four_twentyFive_and_not_twentySix :
-    G.ECCAt 4 ∧ ¬ (completeBipartiteGraph (Fin 2) (Fin 26)).ECCAt 4 :=
+    (completeBipartiteGraph (Fin 2) (Fin 25)).ECCAt 4 ∧
+      ¬ (completeBipartiteGraph (Fin 2) (Fin 26)).ECCAt 4 :=
   ⟨eccAt_four, K2_26.not_eccAt_four⟩
 
 end SimpleGraph.TwoDegenerate.K2_25
