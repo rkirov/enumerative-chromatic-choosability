@@ -680,3 +680,23 @@ theorem completeBipartite_two_eccAt_five_iff (n : ℕ) :
     (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt 5 ↔ n ≤ 43 := sorry
 
 end SimpleGraph.TwoDegenerate
+
+/-! ### 16. `τ(K₂,ₙ) = O(√n)`
+
+Kaul, Kumar, Mudrock, Rewers, Shin and To (arXiv:2202.03431, Theorem 4) prove
+`τ(K₂,ₗ) - χ_ℓ(K₂,ₗ) ≥ C √l` and conjecture `τ(K₂,ₗ) = Θ(√l)` (their Conjecture 5). The upper
+bound is proved in `TwoDegenerate/K2nSqrt/`: `K₂,ₙ` is ECC at every `k ≥ 300` with `n ≤ k²`, by
+class AM–GM over the hub-colour pairs and a four-regime real inequality.
+-/
+
+namespace SimpleGraph.TwoDegenerate.K2nSqrt
+
+/-- `K₂,ₙ` is ECC at every `k ≥ 300` with `n ≤ k²`. -/
+theorem completeBipartite_two_eccAt_of_sq_le {k n : ℕ} (hk : 300 ≤ k) (hn : n ≤ k ^ 2) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt k := sorry
+
+/-- `τ(K₂,ₙ) ≤ max 300 (⌊√n⌋ + 1)`. -/
+theorem completeBipartite_two_eccAt_of_sqrt_lt {k n : ℕ} (hk : 300 ≤ k) (hkn : Nat.sqrt n < k) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt k := sorry
+
+end SimpleGraph.TwoDegenerate.K2nSqrt

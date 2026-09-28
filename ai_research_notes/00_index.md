@@ -98,3 +98,4 @@ and arbitrary rectangles at every `k >= 20`.
   research handoff and adversarial review were archived then, and
   `ADVERSARIAL_REVIEW_2026-08-15_HANDOFF.md` / `FINAL_CACTI_ECC_HANDOFF.md` remain here as
   navigation stubs to their new paths.
+- K2N_SQRT_N_2026-09-27.md, K2N_SQRT_N_2026-09-28_status.md — τ(K₂,ₙ)=O(√n): plan, math, DONE (TwoDegenerate/K2nSqrt/)

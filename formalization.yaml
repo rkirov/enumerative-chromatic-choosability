@@ -59,7 +59,12 @@ project:
     are unknown; K_{2,11} and K_{2,25} are ECC and K_{2,26} is not, the last refuting a uniform
     statement for 2-degenerate graphs. The positive side is a reduction to one numeric inequality
     per overlap of the hub lists, closed by kernel-checked AM-GM branch-and-bound certificates; the
-    negative side is their Lemma 11 family with an induction on n/4.
+    negative side is their Lemma 11 family with an induction on n/4. (5) tau(K_{2,n}) = O(sqrt n):
+    K_{2,n} is ECC at every k >= 300 with n <= k^2. With Theorem 4 of Kaul-Kumar-Mudrock-Rewers-
+    Shin-To (arXiv:2202.03431) this proves their Conjecture 5, tau(K_{2,n}) = Theta(sqrt n), which
+    both that paper and arXiv:2207.04831 state as open; the previous upper bound was linear. The
+    proof is AM-GM within four classes of hub-colour pairs and a four-regime real inequality closed
+    by tangent-line bounds of the exponential.
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
     nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
@@ -148,7 +153,19 @@ sources:
       an induction on n/4 for their Lemma 11 family in place of their appeal to Theorem 14 of
       arXiv:2202.03431. Their Lemma 5 is exists_push. The three cases they state are unknown are
       settled: K_{2,11} is ECC at 3, K_{2,25} is ECC at 4, and K_{2,26} is not (the last is their
-      Lemma 11 family at n = 26).
+      Lemma 11 family at n = 26). Their Lemma 6 (hub lists sharing k - 1 colours) is reproved as
+      SimpleGraph.TwoDegenerate.K2nSqrt.lemma6 and used for tau(K_{2,n}) = O(sqrt n).
+  - title: "On the list color function threshold"
+    authors: ["Hemanshu Kaul", "Akash Kumar", "Jeffrey A. Mudrock", "Patrick Rewers", "Paul Shin", "Khue To"]
+    type: paper
+    id: "arXiv:2202.03431"
+    location: "arXiv:2202.03431v2, Theorem 4 and Conjecture 5"
+    relationship: other
+    note: >-
+      Their Theorem 4 (tau(K_{2,l}) - chi_l(K_{2,l}) >= C sqrt l) is not formalized. Their
+      Conjecture 5, tau(K_{2,l}) = Theta(sqrt l), is proved here on the upper side:
+      SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le (ECC at every
+      k >= 300 with n <= k^2). The argument is original to this repository.
   - title: "When chromatic polynomials coincide with list-color functions: a threshold linear in the maximum degree"
     authors: ["Meiqiao Zhang", "Fengming Dong"]
     type: paper
@@ -413,6 +430,16 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
+    - declaration: SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le
+      file: TwoDegenerate/K2nSqrt/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt
+      file: TwoDegenerate/K2nSqrt/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
 
 fidelity:
   divergences: >-
@@ -666,3 +693,13 @@ alignment:
         SimpleGraph.TwoDegenerate.K2n.le_col_of_keyGoals; checker:
         SimpleGraph.TwoDegenerate.K2n.check_sound; negative side:
         SimpleGraph.TwoDegenerate.K2n.col_witness_lt.
+    - source: "Kaul et al. arXiv:2202.03431, Conjecture 5 (upper side), open in the literature"
+      lean: SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le
+      module: TwoDegenerate/K2nSqrt/Main.lean
+      status: proved
+      note: >-
+        K_{2,n} is ECC at every k >= 300 with n <= k^2, so tau(K_{2,n}) <= max(300, floor(sqrt n) + 1)
+        (SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt). Original to this
+        repository. Class AM-GM: SimpleGraph.TwoDegenerate.K2nSqrt.lowerG_le_sum; analytic
+        inequality: SimpleGraph.TwoDegenerate.K2nSqrt.target_le_lowerG; overlap k - 1 is Kaul et
+        al. arXiv:2207.04831 Lemma 6 (SimpleGraph.TwoDegenerate.K2nSqrt.lemma6).

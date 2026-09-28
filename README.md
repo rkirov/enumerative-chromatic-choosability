@@ -55,7 +55,7 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19`
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 15, 20`, hence every rectangle at `k ≥ 20`), from one certificate theorem; also the separate conditional lookback route for general heights |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
-| `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43` |
+| `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
 | `formalization.yaml` | registry metadata (mathlib-initiative v0.4): sources, main results, fidelity, and the `alignment` map from every numbered result of the paper, and every result beyond it, to its Lean name, file and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
@@ -314,6 +314,23 @@ The negative side is Kaul et al.'s Lemma 11 family with an induction on `n / 4`,
 appeal to a companion paper for large `n`. `TwoDegenerate/README.md` has the details, a comparison
 with the paper's proofs, the generator, and the remaining research direction.
 
+### `τ(K₂,ₙ) = O(√n)`
+
+> `K₂,ₙ` is enumeratively chromatic-choosable at every `k ≥ 300` with `n ≤ k²`
+> (`SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le`), so
+> `τ(K₂,ₙ) ≤ max(300, ⌊√n⌋ + 1)` (`…completeBipartite_two_eccAt_of_sqrt_lt`).
+
+Kaul, Kumar, Mudrock, Rewers, Shin and To (arXiv:2202.03431) proved `τ(K₂,ₗ) − χ_ℓ(K₂,ₗ) ≥ C√l`
+and conjectured `τ(K₂,ₗ) = Θ(√l)` (their Conjecture 5); the best upper bound in the literature was
+linear, `⌈(n + 2.05)/1.24⌉` (arXiv:2207.04831, Theorem 9). With their lower bound, the theorem
+above proves the conjecture. The argument is new: push the right lists into `A ∪ B`, split the hub
+pairs into four classes (equal shared colours, distinct shared colours, one shared and one private,
+two private), apply AM–GM inside each class with the class averages computed exactly per list
+type, and close the resulting inequality in `(k, r, n, w)` — `r` the hub overlap, `w` how many
+shared colours the right lists miss — with four regimes of tangent-line bounds for `exp`
+(`TwoDegenerate/K2nSqrt/`). Overlap `k − 1` is their Lemma 6, reproved. The constant 300 only
+keeps the error terms crude; numerically the argument works from `k ≈ 20`.
+
 ## Standard of proof
 
 * No `sorry`, `admit`, or `native_decide` anywhere in `ListColoring/`, `Cacti/`,
@@ -328,12 +345,12 @@ with the paper's proofs, the generator, and the remaining research direction.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirty-two keystone theorems** — ten from the paper,
+  `comparator/Challenge.lean`, which claims **thirty-four keystone theorems** — ten from the paper,
   three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
   and height-three results, six maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `15`, maximum degree four at `20` with its arbitrary-grid corollary, and the
   equality case), and five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
-  thresholds at list sizes three, four and five) —
+  thresholds at list sizes three, four and five), and two for `τ(K₂,ₙ) = O(√n)` —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel

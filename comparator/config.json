@@ -83,7 +83,9 @@
     "SimpleGraph.TwoDegenerate.K2_25.eccAt_four",
     "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff",
     "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff",
-    "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff"
+    "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff",
+    "SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le",
+    "SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt"
   ],
   "permitted_axioms": [
     "propext",

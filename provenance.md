@@ -115,6 +115,17 @@ published construction.
   `n` are ours (`TwoDegenerate/K2n/`). The list family of the negative side is their Lemma 11, and the
   push-into-`A ∪ B` step is their Lemma 5. Weighted AM–GM, and bounding convex relaxations by Lagrange
   duality, are standard. As far as a targeted search found, the three cases were open.
+* **`τ(K₂,ₙ) = O(√n)` (`TwoDegenerate/K2nSqrt/`).** `K₂,ₙ` is ECC at every `k ≥ 300` with
+  `n ≤ k²` (`SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le`). Kaul–Kumar–
+  Mudrock–Rewers–Shin–To, *On the List Color Function Threshold* (arXiv:2202.03431), prove the lower
+  bound `τ(K₂,ₗ) − χ_ℓ(K₂,ₗ) ≥ C√l` (Theorem 4, not formalized) and conjecture `τ(K₂,ₗ) = Θ(√l)`
+  (Conjecture 5; Conjecture 4 of arXiv:2207.04831, which proves the linear upper bound
+  `⌈(n + 2.05)/1.24⌉` and calls the conjecture open). With their Theorem 4 the result here proves the
+  conjecture. Ours: the four-class AM–GM with exact per-type class averages
+  (`TwoDegenerate/K2nSqrt/Classes.lean`), and the four-regime analytic inequality
+  (`TwoDegenerate/K2nSqrt/Analytic.lean`). Theirs: pushing lists into `A ∪ B` (Lemma 5) and the
+  overlap-`k − 1` case (Lemma 6, reproved as `lemma6`). A targeted search on 2026-09-28 found no
+  proof of the conjecture in the literature.
 
 * **Maximum-degree thresholds for the list colour function (`GridGen/`).** Every finite graph is
   `k`-ECC once `567Δ ≤ 100k`; `Δ ≤ 3, 4, 5, 6, 7, 8` suffice at `k ≥ 15, 20, 26, 32, 37, 43`

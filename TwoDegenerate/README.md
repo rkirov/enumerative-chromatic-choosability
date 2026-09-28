@@ -1,4 +1,4 @@
-# Two-degenerate graphs, and `K₂,ₙ` at list sizes three, four and five
+# Two-degenerate graphs, `K₂,ₙ` at list sizes three, four and five, and `τ(K₂,ₙ) = O(√n)`
 
 The conjecture
 
@@ -118,6 +118,44 @@ The certificates are regenerated, and re-checked in exact integer arithmetic, by
 python3 TwoDegenerate/K2n/gen_k2n.py            # rewrite Keys/, Cert/, Positive{3,4,5}.lean
 python3 TwoDegenerate/K2n/gen_k2n.py --check    # confirm the committed files (needs numpy)
 ```
+
+## `τ(K₂,ₙ) = O(√n)` (`K2nSqrt/`)
+
+```lean
+SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le
+    {k n : ℕ} (hk : 300 ≤ k) (hn : n ≤ k ^ 2) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt k
+SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt
+    {k n : ℕ} (hk : 300 ≤ k) (hkn : Nat.sqrt n < k) :
+    (completeBipartiteGraph (Fin 2) (Fin n)).ECCAt k
+```
+
+So `τ(K₂,ₙ) ≤ max(300, ⌊√n⌋ + 1)`. Kaul–Kumar–Mudrock–Rewers–Shin–To (arXiv:2202.03431, Theorem 4)
+prove `τ(K₂,ₗ) − χ_ℓ(K₂,ₗ) ≥ C√l` and conjecture `Θ(√l)` (Conjecture 5); this is the upper half.
+
+**Classes (`Classes.lean`).** Push the right lists `T_w` into `A ∪ B` (Lemma 5 of
+arXiv:2207.04831). With `I = A ∩ B` (`|I| = r`), `P = A \ B`, `Q = B \ A` (`|P| = |Q| = s`), split
+the hub pairs into `D = {(a,a)}`, `O` (distinct pairs in `I`), `M = I×Q ∪ P×I` and `PQ = P×Q`, and
+apply AM–GM inside each class. Since `log |T \ {a,b}| = log k − ℓ(χa + χb) − δ χa χb` with
+`ℓ = log(k/(k−1))`, `δ = log((k−1)²/(k(k−2)))`, the class means are exact in the per-list counts
+`i, j, l`, and after three elementary bounds (`i(i−1) ≤ i(r−1)`, `i(j+l) ≤ 2rs`,
+`4jl ≤ 3s(j+l) − 2s²`) everything depends only on `x = nℓ`, `η = nδ` and one free
+`w = ℓ Σ_w (r − i_w) / r ≥ 0` (`lowerG_le_sum`).
+
+**Analysis (`Analytic.lean`).** Dividing by `(k−1)ⁿ`, it remains to show `lowerG ≥ k + k(k−1)e^{−x−η}`
+for all `w ≥ 0` (`target_le_lowerG`). Every step is a tangent line `e^y ≥ e^{y₀}(1 + y − y₀)`:
+
+| regime | condition | argument |
+|---|---|---|
+| A | `e^{−x} ≥ 3/10` | tangent line at `w = 0`; its slope is affine in `s`, checked at `s = 2, k−1` |
+| Ψ | `r ≥ s` | linearise `D`, `O` in `u = (r/s)w`; Legendre bounds for the `PQ` and `M` exponentials |
+| Φ | `r < s`, `1/(k+r−1) ≤ e^{−x} ≤ 3/10` | split at the `w₁` where `M` alone reaches its share |
+| V | `r < s`, `e^{−x} ≤ 1/(k+r−1)` | target `≤ 2k`; split at the `w₂` where `D` reaches `2k` |
+
+`r = 0` is `target_le_zero`, `r = k − 1` is their Lemma 6 (`lemma6`, Bernoulli on the diagonal
+and on the one private pair), and `r = k` is immediate. The constant 300 only keeps the numeric
+bounds crude (`η ≤ 11/10`, `λ ≤ 1/298`); numerically every regime inequality holds from `k ≈ 20`.
+The relative margin is `Θ(s/k)`, which is why first-order terms in `1/k` are kept exactly.
 
 ## What survives of the research direction
 
