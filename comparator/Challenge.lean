@@ -641,6 +641,16 @@ theorem col_eq_colConst_iff_constant_of_degree_bound {V : Type*} [Fintype V] [De
 
 end SimpleGraph
 
+namespace SimpleGraph
+
+/-- Adjacency in a complete bipartite graph is decidable (`ListColoring/K23.lean`). The library
+has this instance besides `ERT.instDecidableRelCompleteBipartiteAdj`, and elaborates §15 and §16
+through it; declaring it here, after §§1–14, makes the challenge statements use the same one. -/
+instance instDecidableRelCompleteBipartiteGraphAdj (V W : Type*) :
+    DecidableRel (completeBipartiteGraph V W).Adj := sorry
+
+end SimpleGraph
+
 /-! ### 15. The complete bipartite graphs `K₂,ₙ` at list sizes three, four and five
 
 Kaul et al. (Involve 16 (2023), Theorem 7) prove `K₂,ₙ` ECC at three for `n ≤ 10` and not for

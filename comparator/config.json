@@ -16,6 +16,7 @@
     "SimpleGraph.colCounts",
     "SimpleGraph.listColorFunction",
     "SimpleGraph.ERT.instDecidableRelCompleteBipartiteAdj",
+    "SimpleGraph.instDecidableRelCompleteBipartiteGraphAdj",
     "SimpleGraph.ERT.K",
     "SimpleGraph.IsChordal",
     "SimpleGraph.TowerV",
