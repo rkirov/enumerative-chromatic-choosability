@@ -97,6 +97,9 @@ fi
 # Build the workspace (Challenge spec, Submission → library) and invoke the comparator directly
 # on the committed config (`enable_nanoda: false`), the way lean-eval's WorkspaceTest would except
 # for the nanoda override; `lake env` supplies LEAN_PATH for lean4export.
+#
+# COMPARATOR_CONFIG selects the config (default config.json); CI runs one shard per job, with
+# configs written by comparator/shard.py (see its docstring for why that checks the same thing).
 cd "$WS"
 lake build Challenge Submission
-exec lake env "$COMPARATOR_BIN" config.json
+exec lake env "$COMPARATOR_BIN" "${COMPARATOR_CONFIG:-config.json}"

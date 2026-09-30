@@ -19,10 +19,27 @@ name: comparator
 # no-placeholder grep in ci.yml.
 # Workflow pattern and tool pins follow github.com/rkirov/jacobian-fable.
 
+# Only changes that can affect the check trigger it: documentation-only pushes do not.
 on:
   push:
     branches: [main]
+    paths:
+      - "**/*.lean"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - "comparator/**"
+      - "verify.sh"
+      - ".github/workflows/comparator.yml"
   pull_request:
+    paths:
+      - "**/*.lean"
+      - "lakefile.toml"
+      - "lake-manifest.json"
+      - "lean-toolchain"
+      - "comparator/**"
+      - "verify.sh"
+      - ".github/workflows/comparator.yml"
   workflow_dispatch:
 
 concurrency:
@@ -31,8 +48,15 @@ concurrency:
 
 jobs:
   verify:
-    name: Comparator (statements, axioms, kernel replay)
+    name: Comparator (${{ matrix.shard }})
     runs-on: ubuntu-latest
+    # The claims run as three parallel shards (comparator/shard.py): the kernel replay is one
+    # sequential pass per run, and two kernel-decided certificates dominate it, so each gets a job
+    # of its own. Together the shards check exactly what one run over config.json checks.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [grid3-three, k2n, rest]
     steps:
       - uses: actions/checkout@v4
 
@@ -45,6 +69,19 @@ jobs:
           use-mathlib-cache: "true"
           test: "false"
           lint: "false"
+
+      # The k = 3 certificate (Grid3/Three/, 554 data modules, ~2.4 CPU-hours) is not a default
+      # target, so the lean-action cache above never holds it and verify.sh used to rebuild it on
+      # every run (37 min). Its sources almost never change: cache its build outputs on them. If
+      # an imported module changed anyway, lake's traces notice and rebuild, so a stale hit is
+      # only slow, never wrong.
+      - name: Cache Grid3/Three build
+        uses: actions/cache@v4
+        with:
+          path: |
+            .lake/build/lib/lean/Grid3/Three
+            .lake/build/ir/Grid3/Three
+          key: grid3-three-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'Grid3/Three/**') }}
 
       # comparator + lean4export + landrun are pinned and change rarely; cache their clones
       # and builds. verify.sh namespaces the cache directory by toolchain tag.
@@ -59,9 +96,13 @@ jobs:
       - name: Check go is available
         run: go version
 
+      - name: Write the shard's config
+        run: python3 comparator/shard.py ${{ matrix.shard }}
+
       # On CI there is room for comparator's own pinned toolchain, so use the upstream
       # recipe exactly rather than the disk-saving deviation verify.sh allows locally.
       - name: Run comparator
         run: ./verify.sh
         env:
           COMPARATOR_OWN_TOOLCHAIN: "1"
+          COMPARATOR_CONFIG: config.${{ matrix.shard }}.json
