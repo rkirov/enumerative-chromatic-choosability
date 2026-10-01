@@ -41,6 +41,9 @@ on:
       - "verify.sh"
       - ".github/workflows/comparator.yml"
   workflow_dispatch:
+  # Weekly full run: every shard regardless of what changed (see the scope step below).
+  schedule:
+    - cron: "17 3 * * 1"
 
 concurrency:
   group: comparator-${{ github.ref }}
@@ -60,11 +63,41 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # The grid3-three shard replays the k = 3 certificate (about 1 h 50 min). Its claim's import
+      # closure is Grid3/ and ListColoring/ (plus Mathlib), so it is run only when one of those,
+      # the build configuration, or the comparator setup changed since the previous commit (push)
+      # or the base (pull request); manual and the weekly scheduled runs always run it. The other
+      # shards take minutes and always run.
+      - name: Decide whether this shard must run
+        id: scope
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SHARD: ${{ matrix.shard }}
+          EVENT: ${{ github.event_name }}
+          BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
+          HEAD: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+        run: |
+          run=true
+          if [ "$SHARD" = grid3-three ] && { [ "$EVENT" = push ] || [ "$EVENT" = pull_request ]; } \
+             && [ -n "$BASE" ] && [ "$BASE" != 0000000000000000000000000000000000000000 ]; then
+            if files=$(gh api "repos/${{ github.repository }}/compare/$BASE...$HEAD" \
+                 --jq '.files | if length >= 300 then "TOO_MANY" else .[].filename end'); then
+              if ! echo "$files" | grep -qE '^(TOO_MANY$|Grid3/|Grid3\.lean$|ListColoring/|ListColoring\.lean$|lakefile\.toml$|lake-manifest\.json$|lean-toolchain$|comparator/|verify\.sh$|\.github/workflows/comparator\.yml$)'; then
+                run=false
+              fi
+            fi
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+          if [ "$run" = false ]; then
+            echo "::notice::grid3-three skipped: nothing in its closure changed between $BASE and $HEAD"
+          fi
+
       # Build the library and fetch the Mathlib olean cache. The comparator workspace
       # path-requires the library and reuses this package tree through the symlink verify.sh
       # creates -- not through `packagesDir`, which must stay inside the workspace so that a
       # registry verifier, which confines the build to the selected project, can build it too.
       - uses: leanprover/lean-action@v1
+        if: steps.scope.outputs.run == 'true'
         with:
           use-mathlib-cache: "true"
           test: "false"
@@ -76,6 +109,7 @@ jobs:
       # an imported module changed anyway, lake's traces notice and rebuild, so a stale hit is
       # only slow, never wrong.
       - name: Cache Grid3/Three build
+        if: steps.scope.outputs.run == 'true'
         uses: actions/cache@v4
         with:
           path: |
@@ -86,6 +120,7 @@ jobs:
       # comparator + lean4export + landrun are pinned and change rarely; cache their clones
       # and builds. verify.sh namespaces the cache directory by toolchain tag.
       - name: Cache comparator tooling
+        if: steps.scope.outputs.run == 'true'
         uses: actions/cache@v4
         with:
           path: ~/.cache/graph-coloring-comparator
@@ -94,14 +129,17 @@ jobs:
       # landrun is a Go build; ubuntu-latest ships go, but be explicit so a missing
       # toolchain fails here with a clear message rather than deep inside verify.sh.
       - name: Check go is available
+        if: steps.scope.outputs.run == 'true'
         run: go version
 
       - name: Write the shard's config
+        if: steps.scope.outputs.run == 'true'
         run: python3 comparator/shard.py ${{ matrix.shard }}
 
       # On CI there is room for comparator's own pinned toolchain, so use the upstream
       # recipe exactly rather than the disk-saving deviation verify.sh allows locally.
       - name: Run comparator
+        if: steps.scope.outputs.run == 'true'
         run: ./verify.sh
         env:
           COMPARATOR_OWN_TOOLCHAIN: "1"
