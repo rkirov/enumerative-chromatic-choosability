@@ -424,8 +424,8 @@ theorem H_le_log_card (p : ι → ℝ) (hp : ∀ i, 0 ≤ p i) (hsum : ∑ i, p 
     have per : ∀ i, p i * (p i)⁻¹ = if 0 < p i then (1 : ℝ) else 0 := by
       intro i
       by_cases h : 0 < p i
-      · rw [if_pos h, mul_inv_cancel₀ (ne_of_gt h)]
-      · rw [if_neg h, le_antisymm (not_lt.mp h) (hp i)]; simp
+      · rw [ite_eq_left h, mul_inv_cancel₀ (ne_of_gt h)]
+      · rw [ite_eq_right h, le_antisymm (not_lt.mp h) (hp i)]; simp
     rw [Finset.sum_congr rfl (fun i _ => per i), Finset.sum_boole]
   have e_rhs : H p = - ∑ i, p i * (- Real.log ((p i)⁻¹)) := by
     rw [H, ← Finset.sum_neg_distrib]
@@ -529,8 +529,8 @@ theorem seamterm_marginal [DecidableEq S] (alpha : S → ℝ) (K : ℕ → S →
   rw [Finset.sum_filter, lastMarg, Finset.sum_mul]
   refine Finset.sum_congr rfl (fun p _ => ?_)
   by_cases h : lastCol S k p = c
-  · rw [if_pos h, if_pos h, h]
-  · rw [if_neg h, if_neg h, zero_mul]
+  · rw [ite_eq_left h, ite_eq_left h, h]
+  · rw [ite_eq_right h, ite_eq_right h, zero_mul]
 
 /-- **Root marginal.** `lastMarg 0 = α`. -/
 theorem lastMarg_zero [DecidableEq S] (alpha : S → ℝ) (K : ℕ → S → S → ℝ) (c : S) :
@@ -559,8 +559,8 @@ theorem lastMarg_succ [DecidableEq S] (alpha : S → ℝ) (K : ℕ → S → S �
   rw [Finset.sum_filter, lastMarg, Finset.sum_mul]
   refine Finset.sum_congr rfl (fun p _ => ?_)
   by_cases h : lastCol S k p = c
-  · rw [if_pos h, if_pos h, h]
-  · rw [if_neg h, if_neg h, zero_mul]
+  · rw [ite_eq_left h, ite_eq_left h, h]
+  · rw [ite_eq_right h, ite_eq_right h, zero_mul]
 
 /-! ### Marginal consistency, normalization, and the hseam engine -/
 
@@ -894,11 +894,11 @@ theorem hcard_from_inj [DecidableEq S] (alpha : S → ℝ) (K : ℕ → S → S 
       ≤ properSet.card := by
   apply Finset.card_le_card_of_injOn f
   · intro p hp
-    simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_coe, Finset.mem_filter,
+    simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_coe, Finset.mem_filter,
       Finset.mem_univ, true_and] at hp
     exact hf_mem p hp
   · intro p hp q hq hpq
-    simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_coe, Finset.mem_filter,
+    simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_coe, Finset.mem_filter,
       Finset.mem_univ, true_and] at hp hq
     exact hf_inj p q hp hq hpq
 

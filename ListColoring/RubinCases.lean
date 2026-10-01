@@ -88,7 +88,7 @@ theorem gArmOf_gsize_take_add (ks : List ℕ) (i : ℕ) (hi : i < ks.length) (j 
       cases i with
       | zero =>
           simp only [List.getElem_cons_zero] at hj
-          simp only [List.take_zero, gsize_nil, Nat.zero_add, gArmOf, gOffOf, if_pos hj]
+          simp only [List.take_zero, gsize_nil, Nat.zero_add, gArmOf, gOffOf, ite_eq_left hj]
           exact ⟨trivial, trivial⟩
       | succ i =>
           have hi' : i < ks.length := by simpa using hi
@@ -98,7 +98,7 @@ theorem gArmOf_gsize_take_add (ks : List ℕ) (i : ℕ) (hi : i < ks.length) (j 
             simp only [List.take_succ_cons, gsize_cons]; omega
           have hnot : ¬ ((k - 1) + (gsize (ks.take i) + j) < k - 1) := by omega
           rw [hx]
-          simp only [gArmOf, gOffOf, if_neg hnot,
+          simp only [gArmOf, gOffOf, ite_eq_right hnot,
             show (k - 1) + (gsize (ks.take i) + j) - (k - 1) = gsize (ks.take i) + j from by omega,
             h1, h2]
           exact ⟨trivial, trivial⟩
@@ -111,13 +111,13 @@ theorem gDecode (ks : List ℕ) (x : ℕ) (hx : x < gsize ks) :
   | nil => simp at hx
   | cons k ks ih =>
       by_cases h : x < k - 1
-      · exact ⟨0, by simp, x, by simpa using h, by simp [gArmOf, if_pos h],
-          by simp [gOffOf, if_pos h], by simp⟩
+      · exact ⟨0, by simp, x, by simpa using h, by simp [gArmOf, ite_eq_left h],
+          by simp [gOffOf, ite_eq_left h], by simp⟩
       · have hx' : x - (k - 1) < gsize ks := by simp only [gsize_cons] at hx; omega
         obtain ⟨i, hi, j, hj, h1, h2, h3⟩ := ih (x - (k - 1)) hx'
         refine ⟨i + 1, by simpa using hi, j, by simpa using hj, ?_, ?_, ?_⟩
-        · simp only [gArmOf, if_neg h, h1]
-        · simp only [gOffOf, if_neg h, h2]
+        · simp only [gArmOf, ite_eq_right h, h1]
+        · simp only [gOffOf, ite_eq_right h, h2]
         · simp only [List.take_succ_cons, gsize_cons]; omega
 
 /-! ### Inverting the adjacency Boolean -/
@@ -204,16 +204,16 @@ theorem contains_gtheta_of_arms {s t : V} {ks : List ℕ} (A : ℕ → ℕ → V
     have hle := gsize_take_add_le ks i hi
     have hlt : v.val < gsize ks := by omega
     obtain ⟨e1, e2⟩ := gArmOf_gsize_take_add ks i hi j hj
-    simp only [hfdef, dif_pos hlt, hv, e1, e2]
+    simp only [hfdef, dite_eq_left hlt, hv, e1, e2]
   have hfs : ∀ v : GTV ks, v.val = gsize ks → f v = s := by
     intro v hv
     have h1 : ¬ (v.val < gsize ks) := by omega
-    simp only [hfdef, dif_neg h1, if_pos hv]
+    simp only [hfdef, dite_eq_right h1, ite_eq_left hv]
   have hft : ∀ v : GTV ks, v.val = gsize ks + 1 → f v = t := by
     intro v hv
     have h1 : ¬ (v.val < gsize ks) := by omega
     have h2 : ¬ (v.val = gsize ks) := by omega
-    simp only [hfdef, dif_neg h1, if_neg h2]
+    simp only [hfdef, dite_eq_right h1, ite_eq_right h2]
   -- every vertex is either interior, in which case its value is an interior arm vertex, or a
   -- branch vertex
   have hcases : ∀ v : GTV ks, (∃ i, ∃ hi : i < ks.length, ∃ j, 0 < j ∧ j < ks[i] ∧ f v = A i j ∧
@@ -390,15 +390,15 @@ theorem isArm_of_walk {s t : V} (p : G.Walk s t) (hp : p.IsPath) (hst : s ≠ t)
   · intro j hj0 hjl
     constructor
     · intro he
-      have : j = 0 := hinj (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) (by rw [he, p.getVert_zero])
+      have : j = 0 := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) (by rw [he, p.getVert_zero])
       omega
     · intro he
-      have : j = p.length := hinj (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) (by rw [he, p.getVert_length])
+      have : j = p.length := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) (by rw [he, p.getVert_length])
       omega
   · intro j j' _ hjl _ hj'l he
-    exact hinj (by simp only [Set.mem_setOf_eq]; omega) (by simp only [Set.mem_setOf_eq]; omega) he
+    exact hinj (by simp only [Set.mem_ofPred_eq]; omega) (by simp only [Set.mem_ofPred_eq]; omega) he
 
 omit [Fintype V] [DecidableEq V] [DecidableRel G.Adj] in
 /-- **Two path walks meeting only at their ends give internally disjoint arms.** -/
@@ -492,15 +492,15 @@ theorem exists_arcs_of_cycle {v : V} {c : G.Walk v v} (hc : c.IsCycle) {a b : V}
     refine ⟨hj1, h0, hjget, fun t ht => c'.adj_getVert_succ (by omega), ?_, ?_⟩
     · intro t ht0 htj
       refine ⟨fun he => ?_, fun he => ?_⟩
-      · have : t = 0 := hinj (by simp only [Set.mem_setOf_eq]; omega)
-          (by simp only [Set.mem_setOf_eq]; omega) (by rw [he, h0])
+      · have : t = 0 := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+          (by simp only [Set.mem_ofPred_eq]; omega) (by rw [he, h0])
         omega
-      · have : t = j := hinj (by simp only [Set.mem_setOf_eq]; omega)
-          (by simp only [Set.mem_setOf_eq]; omega) (by rw [he, ← hjget])
+      · have : t = j := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+          (by simp only [Set.mem_ofPred_eq]; omega) (by rw [he, ← hjget])
         omega
     · intro t t' _ htj _ ht'j he
-      exact hinj (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) he
+      exact hinj (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) he
   · -- the arc `a → b` running backwards
     refine ⟨by omega, ?_, ?_, ?_, ?_, ?_⟩
     · show c'.getVert (L - 0) = a
@@ -516,22 +516,22 @@ theorem exists_arcs_of_cycle {v : V} {c : G.Walk v v} (hc : c.IsCycle) {a b : V}
     · intro t ht0 htb
       show c'.getVert (L - t) ≠ a ∧ c'.getVert (L - t) ≠ b
       refine ⟨fun he => ?_, fun he => ?_⟩
-      · have : L - t = 0 := hinj (by simp only [Set.mem_setOf_eq]; omega)
-          (by simp only [Set.mem_setOf_eq]; omega) (by rw [he, h0])
+      · have : L - t = 0 := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+          (by simp only [Set.mem_ofPred_eq]; omega) (by rw [he, h0])
         omega
-      · have : L - t = j := hinj (by simp only [Set.mem_setOf_eq]; omega)
-          (by simp only [Set.mem_setOf_eq]; omega) (by rw [he, ← hjget])
+      · have : L - t = j := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+          (by simp only [Set.mem_ofPred_eq]; omega) (by rw [he, ← hjget])
         omega
     · intro t t' _ htb _ ht'b he
       have he' : c'.getVert (L - t) = c'.getVert (L - t') := he
-      have : L - t = L - t' := hinj (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) he'
+      have : L - t = L - t' := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) he'
       omega
   · -- the two arcs are internally disjoint
     intro t t' ht0 htj ht0' ht'b he
     have he' : c'.getVert t = c'.getVert (L - t') := he
-    have : t = L - t' := hinj (by simp only [Set.mem_setOf_eq]; omega)
-      (by simp only [Set.mem_setOf_eq]; omega) he'
+    have : t = L - t' := hinj (by simp only [Set.mem_ofPred_eq]; omega)
+      (by simp only [Set.mem_ofPred_eq]; omega) he'
     omega
   · exact fun t _ => (hmem _).mp (c'.getVert_mem_support t)
   · exact fun t _ => (hmem _).mp (c'.getVert_mem_support (L - t))
@@ -895,26 +895,26 @@ theorem case_middles {a u b w : V} {L M : ℕ} {p q : ℕ → V}
   have harm2 : IsArm G u b (fun j => if j = 0 then u else p (j - 1)) (L + 1) := by
     refine ⟨by omega, ?_, ?_, ?_, ?_, ?_⟩
     · show (if (0 : ℕ) = 0 then u else p (0 - 1)) = u
-      rw [if_pos rfl]
+      rw [ite_eq_left rfl]
     · show (if L + 1 = 0 then u else p (L + 1 - 1)) = b
-      rw [if_neg (by omega), show L + 1 - 1 = L from by omega]
+      rw [ite_eq_right (by omega), show L + 1 - 1 = L from by omega]
       exact hpL
     · intro j hj
       show G.Adj (if j = 0 then u else p (j - 1)) (if j + 1 = 0 then u else p (j + 1 - 1))
-      rw [if_neg (by omega : ¬ (j + 1 = 0)), show j + 1 - 1 = j from by omega]
+      rw [ite_eq_right (by omega : ¬ (j + 1 = 0)), show j + 1 - 1 = j from by omega]
       rcases Nat.eq_zero_or_pos j with rfl | hj0
-      · rw [if_pos rfl, hp0]; exact hau.symm
-      · rw [if_neg (by omega : ¬ (j = 0)), show j = (j - 1) + 1 from by omega]
+      · rw [ite_eq_left rfl, hp0]; exact hau.symm
+      · rw [ite_eq_right (by omega : ¬ (j = 0)), show j = (j - 1) + 1 from by omega]
         exact hParm.2.2.2.1 (j - 1) (by omega)
     · intro j hj0 hjL
       show (if j = 0 then u else p (j - 1)) ≠ u ∧ (if j = 0 then u else p (j - 1)) ≠ b
-      rw [if_neg (by omega : ¬ (j = 0))]
+      rw [ite_eq_right (by omega : ¬ (j = 0))]
       rcases Nat.eq_zero_or_pos (j - 1) with h | h
       · rw [h, hp0]; exact ⟨hau.ne, hab⟩
       · exact ⟨hpu (j - 1) h (by omega), (hpne (j - 1) h (by omega)).2⟩
     · intro j j' hj0 hjL hj0' hj'L he
       have he' : p (j - 1) = p (j' - 1) := by
-        simpa only [if_neg (by omega : ¬ (j = 0)), if_neg (by omega : ¬ (j' = 0))] using he
+        simpa only [ite_eq_right (by omega : ¬ (j = 0)), ite_eq_right (by omega : ¬ (j' = 0))] using he
       rcases Nat.eq_zero_or_pos (j - 1) with h | h
       · rcases Nat.eq_zero_or_pos (j' - 1) with h' | h'
         · omega
@@ -929,20 +929,20 @@ theorem case_middles {a u b w : V} {L M : ℕ} {p q : ℕ → V}
   have harm3 : IsArm G u b (fun j => if j ≤ M then q j else b) (M + 1) := by
     refine ⟨by omega, ?_, ?_, ?_, ?_, ?_⟩
     · show (if (0 : ℕ) ≤ M then q 0 else b) = u
-      rw [if_pos (Nat.zero_le M)]; exact hq0
+      rw [ite_eq_left (Nat.zero_le M)]; exact hq0
     · show (if M + 1 ≤ M then q (M + 1) else b) = b
-      rw [if_neg (by omega)]
+      rw [ite_eq_right (by omega)]
     · intro j hj
       show G.Adj (if j ≤ M then q j else b) (if j + 1 ≤ M then q (j + 1) else b)
       rcases Nat.lt_or_ge j M with h | h
-      · rw [if_pos (by omega : j ≤ M), if_pos (by omega : j + 1 ≤ M)]
+      · rw [ite_eq_left (by omega : j ≤ M), ite_eq_left (by omega : j + 1 ≤ M)]
         exact hqadj j h
       · have hjM : j = M := by omega
-        rw [if_pos (by omega : j ≤ M), if_neg (by omega : ¬ (j + 1 ≤ M)), hjM, hqM]
+        rw [ite_eq_left (by omega : j ≤ M), ite_eq_right (by omega : ¬ (j + 1 ≤ M)), hjM, hqM]
         exact hwb
     · intro j hj0 hjM
       show (if j ≤ M then q j else b) ≠ u ∧ (if j ≤ M then q j else b) ≠ b
-      rw [if_pos (by omega : j ≤ M)]
+      rw [ite_eq_left (by omega : j ≤ M)]
       rcases Nat.lt_or_ge j M with h | h
       · exact ⟨(hqint j hj0 h).2.1, (hqint j hj0 h).2.2.1⟩
       · have hjM' : j = M := by omega
@@ -950,7 +950,7 @@ theorem case_middles {a u b w : V} {L M : ℕ} {p q : ℕ → V}
         exact ⟨fun he => huw he.symm, hwb.ne⟩
     · intro j j' hj0 hjM hj0' hj'M he
       have he' : q j = q j' := by
-        simpa only [if_pos (by omega : j ≤ M), if_pos (by omega : j' ≤ M)] using he
+        simpa only [ite_eq_left (by omega : j ≤ M), ite_eq_left (by omega : j' ≤ M)] using he
       exact hqinj j j' (by omega) (by omega) he'
   refine not_choosable_two_of_arm_one (P := fun j => if j = 0 then u else b)
     (Q := fun j => if j = 0 then u else p (j - 1)) (R := fun j => if j ≤ M then q j else b)
@@ -959,7 +959,7 @@ theorem case_middles {a u b w : V} {L M : ℕ} {p q : ℕ → V}
   · intro j j' hj0 hj1; omega
   · intro j j' hj0 hjL hj0' hj'M he
     have he' : p (j - 1) = q j' := by
-      simpa only [if_neg (by omega : ¬ (j = 0)), if_pos (by omega : j' ≤ M)] using he
+      simpa only [ite_eq_right (by omega : ¬ (j = 0)), ite_eq_left (by omega : j' ≤ M)] using he
     rcases Nat.lt_or_ge j' M with h | h
     · exact (hqint j' hj0' h).2.2.2.2 (j - 1) (by omega) he'.symm
     · have hj'M' : j' = M := by omega
@@ -1071,16 +1071,16 @@ theorem case_interior {a u b w : V} {L M k : ℕ} {p q : ℕ → V}
     · have hjM : j = M := h.symm
       subst hjM
       simp only [hR]
-      rw [if_pos (le_refl j), Nat.sub_self, Nat.sub_zero]
+      rw [ite_eq_left (le_refl j), Nat.sub_self, Nat.sub_zero]
       exact hqM
-    · simp only [hR, if_neg (by omega : ¬ (j ≤ M))]
+    · simp only [hR, ite_eq_right (by omega : ¬ (j ≤ M))]
   have harm3 : IsArm G u a R (M + k) := by
     refine ⟨by omega, ?_, ?_, ?_, ?_, ?_⟩
-    · simp only [hR, if_pos (Nat.zero_le M)]; exact hq0
+    · simp only [hR, ite_eq_left (Nat.zero_le M)]; exact hq0
     · rw [hRM (M + k) (by omega) (by omega), show k - (M + k - M) = 0 from by omega]; exact hp0
     · intro j hj
       rcases Nat.lt_or_ge j M with h | h
-      · simp only [hR, if_pos (by omega : j ≤ M), if_pos (by omega : j + 1 ≤ M)]
+      · simp only [hR, ite_eq_left (by omega : j ≤ M), ite_eq_left (by omega : j + 1 ≤ M)]
         exact hqadj j h
       · rw [hRM j (by omega) (by omega), hRM (j + 1) (by omega) (by omega)]
         have := hParm.2.2.2.1 (k - (j + 1 - M)) (by omega)
@@ -1088,7 +1088,7 @@ theorem case_interior {a u b w : V} {L M k : ℕ} {p q : ℕ → V}
         exact this.symm
     · intro j hj0 hjMk
       rcases Nat.lt_or_ge j M with h | h
-      · simp only [hR, if_pos (by omega : j ≤ M)]
+      · simp only [hR, ite_eq_left (by omega : j ≤ M)]
         exact ⟨(hqint j hj0 h).2.1, (hqint j hj0 h).1⟩
       · rw [hRM j (by omega) (by omega)]
         exact ⟨hpu (k - (j - M)) (by omega) (by omega),
@@ -1096,13 +1096,13 @@ theorem case_interior {a u b w : V} {L M k : ℕ} {p q : ℕ → V}
     · intro j j' hj0 hjMk hj0' hj'Mk he
       rcases Nat.lt_or_ge j M with h | h <;> rcases Nat.lt_or_ge j' M with h' | h'
       · have he' : q j = q j' := by
-          simpa only [hR, if_pos (by omega : j ≤ M), if_pos (by omega : j' ≤ M)] using he
+          simpa only [hR, ite_eq_left (by omega : j ≤ M), ite_eq_left (by omega : j' ≤ M)] using he
         exact hqinj j j' (by omega) (by omega) he'
       · rw [hRM j' (by omega) (by omega)] at he
-        simp only [hR, if_pos (by omega : j ≤ M)] at he
+        simp only [hR, ite_eq_left (by omega : j ≤ M)] at he
         exact absurd he ((hqint j hj0 h).2.2.2.2 (k - (j' - M)) (by omega))
       · rw [hRM j (by omega) (by omega)] at he
-        simp only [hR, if_pos (by omega : j' ≤ M)] at he
+        simp only [hR, ite_eq_left (by omega : j' ≤ M)] at he
         exact absurd he.symm ((hqint j' hj0' h').2.2.2.2 (k - (j - M)) (by omega))
       · rw [hRM j (by omega) (by omega), hRM j' (by omega) (by omega)] at he
         have := hpinj (k - (j - M)) (k - (j' - M)) (by omega) (by omega) he
@@ -1117,11 +1117,11 @@ theorem case_interior {a u b w : V} {L M k : ℕ} {p q : ℕ → V}
     have hval : R j' = b ∨ R j' = w → False := by
       rintro (hb | hw)
       · rcases Nat.lt_or_ge j' M with h | h
-        · exact (hqint j' hj0' h).2.2.1 (by simpa only [hR, if_pos (by omega : j' ≤ M)] using hb)
+        · exact (hqint j' hj0' h).2.2.1 (by simpa only [hR, ite_eq_left (by omega : j' ≤ M)] using hb)
         · rw [hRM j' (by omega) (by omega)] at hb
           exact (hpne (k - (j' - M)) (by omega) (by omega)).2 hb
       · rcases Nat.lt_or_ge j' M with h | h
-        · exact (hqint j' hj0' h).2.2.2.1 (by simpa only [hR, if_pos (by omega : j' ≤ M)] using hw)
+        · exact (hqint j' hj0' h).2.2.2.1 (by simpa only [hR, ite_eq_left (by omega : j' ≤ M)] using hw)
         · rw [hRM j' (by omega) (by omega)] at hw
           exact hpw (k - (j' - M)) (by omega) (by omega) hw
     have e1 : j = 1 ∨ j = 2 := by omega
@@ -1170,9 +1170,9 @@ theorem case_onP1 {a u b w : V} {L M α β : ℕ} {p q : ℕ → V}
   have hA3 : A 3 = w := by simp [hAdef]
   set B : ℕ → V := fun t => if t ≤ β - α then p (α + t) else q (M - (t - (β - α))) with hBdef
   have hB1 : ∀ t, t ≤ β - α → B t = p (α + t) := by
-    intro t ht; simp only [hBdef, if_pos ht]
+    intro t ht; simp only [hBdef, ite_eq_left ht]
   have hB2 : ∀ t, β - α < t → B t = q (M - (t - (β - α))) := by
-    intro t ht; simp only [hBdef, if_neg (by omega : ¬ (t ≤ β - α))]
+    intro t ht; simp only [hBdef, ite_eq_right (by omega : ¬ (t ≤ β - α))]
   -- the far end of `P₂`, read from the `p` side
   have hqadj0 : G.Adj (p α) (q 1) := by rw [← hq0]; exact hqadj 0 (by omega)
   have hBn : B ((β - α) + M - 1) = q 1 := by
@@ -1349,8 +1349,8 @@ theorem step56 (hconn : G.Connected) (hdeg : ∀ z : V, 2 ≤ G.degree z) (hch :
   set M : ℕ := r.length with hMdef
   have hM1 : 1 ≤ M := hr1
   have hrinj : ∀ j j', j ≤ M → j' ≤ M → r.getVert j = r.getVert j' → j = j' :=
-    fun j j' hj hj' he => hr.getVert_injOn (by simp only [Set.mem_setOf_eq]; omega)
-      (by simp only [Set.mem_setOf_eq]; omega) he
+    fun j j' hj hj' he => hr.getVert_injOn (by simp only [Set.mem_ofPred_eq]; omega)
+      (by simp only [Set.mem_ofPred_eq]; omega) he
   have hrout : ∀ j, 0 < j → j < M → r.getVert j ∉ c.support ∧ r.getVert j ∉ p.support := by
     intro j hj0 hjM
     have h1 : r.getVert j ≠ x₂ := by
@@ -1360,7 +1360,7 @@ theorem step56 (hconn : G.Connected) (hdeg : ∀ z : V, 2 ≤ G.degree z) (hch :
       intro he
       exact absurd (hrinj j M (by omega) (by omega) (by rw [he, r.getVert_length])) (by omega)
     have := hrint _ (r.getVert_mem_support j) h1 h2
-    simp only [Set.mem_setOf_eq, not_or] at this
+    simp only [Set.mem_ofPred_eq, not_or] at this
     exact this
   -- the interior data both orientations of `P₂` need
   have hdata : ∀ (R : ℕ → V), (∀ j, 0 < j → j < M → ∃ i, 0 < i ∧ i < M ∧ R j = r.getVert i) →

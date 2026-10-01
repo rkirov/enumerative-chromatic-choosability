@@ -195,7 +195,7 @@ private lemma exists_mem_ne_of_card_eq_two {s : Finset ℕ} (hs : s.card = 2) (c
 /-- A good pair contributes a term that is at least `1`. -/
 private lemma one_le_prod_sdiff_pair (hZ : ∀ j, (Z j).card = 2) (hgood : ∀ j, Z j ≠ {a, b}) :
     1 ≤ ∏ j : Fin 3, (Z j \ {a, b}).card :=
-  Finset.one_le_prod' fun j _ => one_le_card_sdiff_pair (hZ j) (hgood j)
+  Finset.one_le_prod fun j _ => one_le_card_sdiff_pair (hZ j) (hgood j)
 
 /-- A good pair one of whose factors is at least `2` contributes a term that is at least `2`. -/
 private lemma two_le_prod_sdiff_pair (hZ : ∀ j, (Z j).card = 2) (hgood : ∀ j, Z j ≠ {a, b})
@@ -205,7 +205,7 @@ private lemma two_le_prod_sdiff_pair (hZ : ∀ j, (Z j).card = 2) (hgood : ∀ j
   calc (2 : ℕ) = 2 * 1 := (mul_one 2).symm
     _ ≤ (Z j₀ \ {a, b}).card * ∏ j ∈ Finset.univ.erase j₀, (Z j \ {a, b}).card :=
         Nat.mul_le_mul h2
-          (Finset.one_le_prod' fun j _ => one_le_card_sdiff_pair (hZ j) (hgood j))
+          (Finset.one_le_prod fun j _ => one_le_card_sdiff_pair (hZ j) (hgood j))
 
 /-- One term of a double sum of naturals is at most the whole sum. -/
 private lemma single_term_le (F : ℕ → ℕ → ℕ) (ha : a ∈ X) (hb : b ∈ Y) :

@@ -48,13 +48,13 @@ theorem exists_glued [Inhabited α] [Inhabited β] (A : ι → Finset α) (B : �
     have hc := hA i a ha
     simp only [f]
     subst hc
-    rw [dif_pos ha]
+    rw [dite_eq_left ha]
   have hg : ∀ i, ∀ b, ∀ (hb : b ∈ B i), g b = ((e i).symm ⟨b, hb⟩).1 := by
     intro i b hb
     have hc := hB i b hb
     simp only [g]
     subst hc
-    rw [dif_pos hb]
+    rw [dite_eq_left hb]
   refine ⟨⟨f, g, ?_, ?_, ?_, ?_⟩⟩
   · intro i a ha
     rw [hf i a ha]; exact (e i ⟨a, ha⟩).2

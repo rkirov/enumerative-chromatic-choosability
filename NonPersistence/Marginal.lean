@@ -36,7 +36,7 @@ theorem card_sdiff_pair (S : Finset ℕ) (z₁ z₂ : ℕ) (h12 : z₁ ≠ z₂)
   have hint : (S ∩ {z₁, z₂}).card
       = (if z₁ ∈ S then 1 else 0) + (if z₂ ∈ S then 1 else 0) := by
     by_cases h1 : z₁ ∈ S <;> by_cases h2 : z₂ ∈ S
-    · rw [if_pos h1, if_pos h2]
+    · rw [ite_eq_left h1, ite_eq_left h2]
       have : S ∩ {z₁, z₂} = {z₁, z₂} :=
         Finset.inter_eq_right.mpr (by
           intro c hc
@@ -44,7 +44,7 @@ theorem card_sdiff_pair (S : Finset ℕ) (z₁ z₂ : ℕ) (h12 : z₁ ≠ z₂)
           · exact h1
           · rw [Finset.mem_singleton] at hc; subst hc; exact h2)
       rw [this, Finset.card_insert_of_notMem (by simpa using h12), Finset.card_singleton]
-    · rw [if_pos h1, if_neg h2]
+    · rw [ite_eq_left h1, ite_eq_right h2]
       have : S ∩ {z₁, z₂} = {z₁} := by
         ext c
         simp only [Finset.mem_inter, Finset.mem_insert, Finset.mem_singleton]
@@ -54,7 +54,7 @@ theorem card_sdiff_pair (S : Finset ℕ) (z₁ z₂ : ℕ) (h12 : z₁ ≠ z₂)
           · exact absurd hcS h2
         · rintro rfl; exact ⟨h1, Or.inl rfl⟩
       rw [this, Finset.card_singleton]
-    · rw [if_neg h1, if_pos h2]
+    · rw [ite_eq_right h1, ite_eq_left h2]
       have : S ∩ {z₁, z₂} = {z₂} := by
         ext c
         simp only [Finset.mem_inter, Finset.mem_insert, Finset.mem_singleton]
@@ -64,7 +64,7 @@ theorem card_sdiff_pair (S : Finset ℕ) (z₁ z₂ : ℕ) (h12 : z₁ ≠ z₂)
           · rfl
         · rintro rfl; exact ⟨h2, Or.inr rfl⟩
       rw [this, Finset.card_singleton]
-    · rw [if_neg h1, if_neg h2]
+    · rw [ite_eq_right h1, ite_eq_right h2]
       have : S ∩ {z₁, z₂} = ∅ := by
         ext c
         simp only [Finset.mem_inter, Finset.mem_insert, Finset.mem_singleton,
@@ -129,25 +129,25 @@ theorem prod_four_le (m : ℕ) {z₁ z₂ : ℕ} (h12 : z₁ ≠ z₂)
       ((C m ∪ D m j) \ {z₁, z₂}).card = m + 2 := by
     intro j hj ha hb
     have h := card_sdiff_pair (C m ∪ D m j) z₁ z₂ h12
-    rw [card_D m hj, if_pos ha, if_pos hb] at h
+    rw [card_D m hj, ite_eq_left ha, ite_eq_left hb] at h
     omega
   have cl : ∀ j : ℕ, j < 4 → z₁ ∈ C m ∪ D m j → z₂ ∉ C m ∪ D m j →
       ((C m ∪ D m j) \ {z₁, z₂}).card = m + 3 := by
     intro j hj ha hb
     have h := card_sdiff_pair (C m ∪ D m j) z₁ z₂ h12
-    rw [card_D m hj, if_pos ha, if_neg hb] at h
+    rw [card_D m hj, ite_eq_left ha, ite_eq_right hb] at h
     omega
   have cr : ∀ j : ℕ, j < 4 → z₁ ∉ C m ∪ D m j → z₂ ∈ C m ∪ D m j →
       ((C m ∪ D m j) \ {z₁, z₂}).card = m + 3 := by
     intro j hj ha hb
     have h := card_sdiff_pair (C m ∪ D m j) z₁ z₂ h12
-    rw [card_D m hj, if_neg ha, if_pos hb] at h
+    rw [card_D m hj, ite_eq_right ha, ite_eq_left hb] at h
     omega
   have cn : ∀ j : ℕ, j < 4 → z₁ ∉ C m ∪ D m j → z₂ ∉ C m ∪ D m j →
       ((C m ∪ D m j) \ {z₁, z₂}).card = m + 4 := by
     intro j hj ha hb
     have h := card_sdiff_pair (C m ∪ D m j) z₁ z₂ h12
-    rw [card_D m hj, if_neg ha, if_neg hb] at h
+    rw [card_D m hj, ite_eq_right ha, ite_eq_right hb] at h
     omega
   -- Four factors, each at most `m + 4` and never two of them that big.
   have step : ∀ a b c d : ℕ, a ≤ m + 3 → b ≤ m + 3 → c ≤ m + 2 → d ≤ m + 4 →

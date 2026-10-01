@@ -143,14 +143,14 @@ theorem col_pos_of_one_le_card_pathEnd :
       -- the equation instead works, because `inducedList_addPendant` is definitional and the
       -- ascription is checked at default transparency.
       have e : ((pathG k).addPendant (pathEnd k)).inducedList L c (pathEnd k)
-          = (L (some (pathEnd k))).erase c := if_pos rfl
+          = (L (some (pathEnd k))).erase c := ite_eq_left rfl
       rw [e]
       have h2 : 2 ≤ (L (some (pathEnd k))).card := hrest _ (some_ne_pathEnd_succ _)
       have h1 := Finset.pred_card_le_card_erase (s := L (some (pathEnd k))) (a := c)
       omega
     · -- every other vertex keeps its whole list
       intro v hv
-      have e : ((pathG k).addPendant (pathEnd k)).inducedList L c v = L (some v) := if_neg hv
+      have e : ((pathG k).addPendant (pathEnd k)).inducedList L c v = L (some v) := ite_eq_right hv
       rw [e]
       exact hrest _ (some_ne_pathEnd_succ v)
 
@@ -183,13 +183,13 @@ theorem colFix_pos_of_two_le_card :
       refine colFix_none_addPendant_pos (pathG k) (pathEnd k) L hc
         (col_pos_of_one_le_card_pathEnd k _ ?_ ?_)
       · have e : ((pathG k).addPendant (pathEnd k)).inducedList L c (pathEnd k)
-            = (L (some (pathEnd k))).erase c := if_pos rfl
+            = (L (some (pathEnd k))).erase c := ite_eq_left rfl
         rw [e]
         have h2 := hcard (some (pathEnd k))
         have h1 := Finset.pred_card_le_card_erase (s := L (some (pathEnd k))) (a := c)
         omega
       · intro v hv
-        have e : ((pathG k).addPendant (pathEnd k)).inducedList L c v = L (some v) := if_neg hv
+        have e : ((pathG k).addPendant (pathEnd k)).inducedList L c v = L (some v) := ite_eq_right hv
         rw [e]
         exact hcard (some v)
     | some w' =>

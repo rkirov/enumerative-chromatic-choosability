@@ -125,9 +125,9 @@ theorem card_filter_TM_le {k : ℕ} (S : Finset ℕ) {T M : Finset ℕ} (hT : T.
   have h3 : (M \ T).card = ((M.erase y).filter (· ∉ T)).card + (if y ∈ M ∧ y ∉ T then 1 else 0) := by
     rw [Finset.filter_erase, ← Finset.sdiff_eq_filter]
     by_cases hy : y ∈ M \ T
-    · rw [Finset.card_erase_of_mem hy, if_pos (Finset.mem_sdiff.mp hy)]
+    · rw [Finset.card_erase_of_mem hy, ite_eq_left (Finset.mem_sdiff.mp hy)]
       have := Finset.card_pos.mpr ⟨y, hy⟩; omega
-    · rw [Finset.erase_eq_of_notMem hy, if_neg (fun h => hy (Finset.mem_sdiff.mpr h))]; simp
+    · rw [Finset.erase_eq_of_notMem hy, ite_eq_right (fun h => hy (Finset.mem_sdiff.mpr h))]; simp
   have h4 := Finset.card_le_card h1
   unfold ind
   rw [h2, h3] at h4

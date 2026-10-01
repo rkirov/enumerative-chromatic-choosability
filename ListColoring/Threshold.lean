@@ -179,12 +179,12 @@ theorem sum_prod_constOnEdge_indicator_list (L : ListAssignment V) (S : Finset (
       = if ∀ e ∈ S, ConstOnEdge f e then (1 : ℤ) else 0 := by
     intro f
     by_cases h : ∀ e ∈ S, ConstOnEdge f e
-    · rw [if_pos h]
-      exact Finset.prod_eq_one fun e he => if_pos (h e he)
-    · rw [if_neg h]
+    · rw [ite_eq_left h]
+      exact Finset.prod_eq_one fun e he => ite_eq_left (h e he)
+    · rw [ite_eq_right h]
       push Not at h
       obtain ⟨e, he, hne⟩ := h
-      exact Finset.prod_eq_zero he (if_neg hne)
+      exact Finset.prod_eq_zero he (ite_eq_right hne)
   simp_rw [key]
   rw [sum_ite_one_zero, listCount]
 

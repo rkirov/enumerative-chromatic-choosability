@@ -195,7 +195,7 @@ theorem colL_active (i : ℕ) (r : Fin 3) (hi : i < (cols Lc Lc' M).length)
     colL Lc Lc' M cm B i = cm.ψL i ∧ cm.ψL i ∈ Lc r ∧ cm.φL (cm.ψL i) = i := by
   have hne := ne_zero_of_testBit _ _ hr
   have hψ := cm.φL_ψL i hi hne
-  refine ⟨by unfold colL; rw [if_pos ⟨hi, hne⟩], ?_, hψ.2⟩
+  refine ⟨by unfold colL; rw [ite_eq_left ⟨hi, hne⟩], ?_, hψ.2⟩
   rw [← patOf_testBit Lc _ r, ← cm.φL_pat _ hψ.1, hψ.2]
   exact hr
 
@@ -204,7 +204,7 @@ theorem colR_active (i : ℕ) (r : Fin 3) (hi : i < (cols Lc Lc' M).length)
     colR Lc Lc' M cm B i = cm.ψR i ∧ cm.ψR i ∈ Lc' r ∧ cm.φR (cm.ψR i) = i := by
   have hne := ne_zero_of_testBit _ _ hr
   have hψ := cm.φR_ψR i hi hne
-  refine ⟨by unfold colR; rw [if_pos ⟨hi, hne⟩], ?_, hψ.2⟩
+  refine ⟨by unfold colR; rw [ite_eq_left ⟨hi, hne⟩], ?_, hψ.2⟩
   rw [← patOf_testBit Lc' _ r, ← cm.φR_pat _ hψ.1, hψ.2]
   exact hr
 
@@ -432,8 +432,8 @@ theorem sigOf_fL (st : Fin SB) (hst : st.val ∈ stsOf (pL Lc Lc' M)) :
   rw [lab_zero, lab_one, lab_two]
   congr 1
   by_cases h : isABA st.val = true
-  · rw [if_pos h, if_pos (hABA.1 h)]
-  · rw [if_neg h, if_neg (fun h' => h (hABA.2 h'))]
+  · rw [ite_eq_left h, ite_eq_left (hABA.1 h)]
+  · rw [ite_eq_right h, ite_eq_right (fun h' => h (hABA.2 h'))]
 
 include h32 in
 theorem sigOf_fR (st : Fin SB) (hst : st.val ∈ stsOf (pR Lc Lc' M)) :
@@ -470,8 +470,8 @@ theorem sigOf_fR (st : Fin SB) (hst : st.val ∈ stsOf (pR Lc Lc' M)) :
   rw [lab_zero, lab_one, lab_two]
   congr 1
   by_cases h : isABA st.val = true
-  · rw [if_pos h, if_pos (hABA.1 h)]
-  · rw [if_neg h, if_neg (fun h' => h (hABA.2 h'))]
+  · rw [ite_eq_left h, ite_eq_left (hABA.1 h)]
+  · rw [ite_eq_right h, ite_eq_right (fun h' => h (hABA.2 h'))]
 
 /-! ### The law transports exactly -/
 
@@ -485,12 +485,12 @@ theorem liftLaw_fL :
     rw [liftLaw_apply _ (fL_injective Lc Lc' M cm B C hB hBC), lawR_eq_lawSig]
     unfold lawC
     by_cases hst : st.val ∈ stsOf (pL Lc Lc' M)
-    · rw [if_pos hst, if_pos (isCol_fL Lc Lc' M cm B C hB hBC h32 st hst),
+    · rw [ite_eq_left hst, ite_eq_left (isCol_fL Lc Lc' M cm B C hB hBC h32 st hst),
         sigOf_fL Lc Lc' M cm B C hB hBC h32 st hst]
-    · rw [if_neg hst, if_neg (fun h => hst (mem_of_isCol_fL Lc Lc' M cm B C hB hBC st h))]
+    · rw [ite_eq_right hst, ite_eq_right (fun h => hst (mem_of_isCol_fL Lc Lc' M cm B C hB hBC st h))]
   · rw [liftLaw_off _ _ _ hs]
     unfold lawC
-    rw [if_neg]
+    rw [ite_eq_right]
     intro hcol
     obtain ⟨st, -, hst⟩ := exists_fL Lc Lc' M cm B C hB hBC h32 s hcol
     exact hs ⟨st, hst⟩
@@ -505,12 +505,12 @@ theorem liftLaw_fR :
     rw [liftLaw_apply _ (fR_injective Lc Lc' M cm B C hB' hBC), lawR_eq_lawSig]
     unfold lawC
     by_cases hst : st.val ∈ stsOf (pR Lc Lc' M)
-    · rw [if_pos hst, if_pos (isCol_fR Lc Lc' M cm B C hB' hBC h32 st hst),
+    · rw [ite_eq_left hst, ite_eq_left (isCol_fR Lc Lc' M cm B C hB' hBC h32 st hst),
         sigOf_fR Lc Lc' M cm B C hB' hBC h32 st hst]
-    · rw [if_neg hst, if_neg (fun h => hst (mem_of_isCol_fR Lc Lc' M cm B C hB' hBC st h))]
+    · rw [ite_eq_right hst, ite_eq_right (fun h => hst (mem_of_isCol_fR Lc Lc' M cm B C hB' hBC st h))]
   · rw [liftLaw_off _ _ _ hs]
     unfold lawC
-    rw [if_neg]
+    rw [ite_eq_right]
     intro hcol
     obtain ⟨st, -, hst⟩ := exists_fR Lc Lc' M cm B C hB' hBC h32 s hcol
     exact hs ⟨st, hst⟩

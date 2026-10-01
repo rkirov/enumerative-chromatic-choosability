@@ -236,12 +236,12 @@ theorem exists_iso_theta_of_thetaData {W : Type} [Fintype W] [DecidableEq W] {H 
     intro i hi0 hil
     constructor
     · intro h
-      have : i = 0 := hp.getVert_injOn (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) (h.trans p.getVert_zero.symm)
+      have : i = 0 := hp.getVert_injOn (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) (h.trans p.getVert_zero.symm)
       omega
     · intro h
-      have : i = p.length := hp.getVert_injOn (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) (h.trans p.getVert_length.symm)
+      have : i = p.length := hp.getVert_injOn (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) (h.trans p.getVert_length.symm)
       omega
   have hrout : ∀ i, 0 < i → i < p.length → p.getVert i ∉ c.support := fun i hi0 hil =>
     hpint _ (p.getVert_mem_support i) (hrin i hi0 hil).1 (hrin i hi0 hil).2
@@ -276,8 +276,8 @@ theorem exists_iso_theta_of_thetaData {W : Type} [Fintype W] [DecidableEq W] {H 
     case hqinj => intro i hi0 hi2 j hj0 hj2 _; omega
     case hrinj =>
       intro i hi0 hi2 j hj0 hj2 he
-      exact hp.getVert_injOn (by simp only [Set.mem_setOf_eq]; omega)
-        (by simp only [Set.mem_setOf_eq]; omega) he
+      exact hp.getVert_injOn (by simp only [Set.mem_ofPred_eq]; omega)
+        (by simp only [Set.mem_ofPred_eq]; omega) he
     case hpq =>
       intro i hi0 hi2 j hj0 hj2
       obtain rfl : i = 1 := by omega

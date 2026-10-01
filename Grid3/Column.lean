@@ -129,8 +129,8 @@ theorem pathVec_one_compat (L : Cols) (j : ℕ) {s₀ : State} (hs₀ : s₀ ∈
     rw [Finset.mem_filter]
     exact ⟨fun h => h.2, fun h => ⟨hs₀, h⟩⟩
   by_cases hc : Compat s₀ s
-  · rw [if_pos (hmem.mpr hc), if_pos hc]
-  · rw [if_neg (fun h => hc (hmem.mp h)), if_neg hc]
+  · rw [ite_eq_left (hmem.mpr hc), ite_eq_left hc]
+  · rw [ite_eq_right (fun h => hc (hmem.mp h)), ite_eq_right hc]
 
 /-- The depth-one path vector of `s₀ ∈ cols L j` is the indicator of its successors, which are
 the states of the punctured next column. -/
@@ -145,8 +145,8 @@ theorem pathVec_one (L : Cols) (j : ℕ) {s₀ : State} (hs₀ : s₀ ∈ cols L
     rw [← filter_compat_eq_states, Finset.mem_filter]
     exact ⟨fun h => h.2, fun h => ⟨hs, h⟩⟩
   by_cases hc : Compat s₀ s
-  · rw [if_pos hc, if_pos (h2.mpr hc)]
-  · rw [if_neg hc, if_neg (fun h => hc (h2.mp h))]
+  · rw [ite_eq_left hc, ite_eq_left (h2.mpr hc)]
+  · rw [ite_eq_right hc, ite_eq_right (fun h => hc (h2.mp h))]
 
 theorem nearK_erase {k : ℕ} {X : Finset ℕ} (hX : X.card = k) (a : ℕ) : NearK k (X.erase a) := by
   by_cases h : a ∈ X

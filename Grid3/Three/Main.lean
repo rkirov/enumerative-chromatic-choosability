@@ -86,10 +86,10 @@ theorem entropy_half_pos (n : ℕ) (L : ListAssignment (PathV 2 × PathV n))
   let K : ℕ → (Fin 3 → Fin C) → (Fin 3 → Fin C) → ℝ := fun k =>
     if h : k < n then Kf ⟨k, h⟩ else fun _ _ => 1 / (Fintype.card (Fin 3 → Fin C) : ℝ)
   have hlaw : ∀ (j : Fin (n + 1)), law j.val = lawC (colOf n L j) := fun j => by
-    simp only [law, dif_pos j.isLt]
-  have hK : ∀ (k : Fin n), K k.val = Kf k := fun k => by simp only [K, dif_pos k.isLt]
+    simp only [law, dite_eq_left j.isLt]
+  have hK : ∀ (k : Fin n), K k.val = Kf k := fun k => by simp only [K, dite_eq_left k.isLt]
   have hfall : ∀ k, n ≤ k → K k = fun _ _ => 1 / (Fintype.card (Fin 3 → Fin C) : ℝ) := fun k hk => by
-    simp only [K, dif_neg (not_lt.2 hk)]
+    simp only [K, dite_eq_right (not_lt.2 hk)]
   have hcard : (Fintype.card (Fin 3 → Fin C) : ℝ) ≠ 0 := by
     rw [Fintype.card_fun, Fintype.card_fin, Fintype.card_fin]
     have : 0 < C := by omega

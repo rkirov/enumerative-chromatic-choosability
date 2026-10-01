@@ -1,5 +1,5 @@
 import Mathlib.Order.Partition.Finpartition
-import Mathlib.Data.Real.Basic
+import Mathlib.Basic.Real.Basic
 import Mathlib.Data.Fintype.Card
 import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Algebra.BigOperators.Group.Finset.Sigma
@@ -131,7 +131,7 @@ theorem partitionSum_root (w : Finset V → ℝ) (v : V) (hv : v ∈ U) :
     intro P
     obtain ⟨R, hR, hvR⟩ := P.exists_mem hv
     rw [Finset.sum_eq_single R]
-    · rw [if_pos hvR]
+    · rw [ite_eq_left hvR]
       exact Finset.mul_prod_erase _ _ hR
     · intro S hS hne
       have hvS : v ∉ S := fun h => hne (P.eq_of_mem_parts hS hR h hvR)

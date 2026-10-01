@@ -65,14 +65,14 @@ theorem count_pair (mL mR M p q : ℕ) (hp : p < 7) (hq : q < 7) :
     rw [count_flatMap, list_range_sum]
     apply Finset.sum_eq_zero
     intro p' _
-    rw [count_replicate', if_neg]
+    rw [count_replicate', ite_eq_right]
     simp
   have hC : (((List.range 7).flatMap fun q' =>
       List.replicate (mult mR q' - sumCol M q') (0, q' + 1)).count (p + 1, q + 1)) = 0 := by
     rw [count_flatMap, list_range_sum]
     apply Finset.sum_eq_zero
     intro q' _
-    rw [count_replicate', if_neg]
+    rw [count_replicate', ite_eq_right]
     simp
   simp only [hA, hB, hC, Nat.add_zero, Nat.zero_add]
 
@@ -87,7 +87,7 @@ theorem count_left (mL mR M p : ℕ) (hp : p < 7) :
     rw [count_flatMap, list_range_sum]
     apply Finset.sum_eq_zero
     intro q' _
-    rw [count_replicate', if_neg]
+    rw [count_replicate', ite_eq_right]
     simp
   have hB : (((List.range 7).flatMap fun p' =>
       List.replicate (mult mL p' - sumRow M p') (p' + 1, 0)).count (p + 1, 0))
@@ -103,7 +103,7 @@ theorem count_left (mL mR M p : ℕ) (hp : p < 7) :
     rw [count_flatMap, list_range_sum]
     apply Finset.sum_eq_zero
     intro q' _
-    rw [count_replicate', if_neg]
+    rw [count_replicate', ite_eq_right]
     simp
   simp only [hA, hB, hC, Nat.add_zero, Nat.zero_add]
 
@@ -118,14 +118,14 @@ theorem count_right (mL mR M q : ℕ) (hq : q < 7) :
     rw [count_flatMap, list_range_sum]
     apply Finset.sum_eq_zero
     intro q' _
-    rw [count_replicate', if_neg]
+    rw [count_replicate', ite_eq_right]
     simp
   have hB : (((List.range 7).flatMap fun p' =>
       List.replicate (mult mL p' - sumRow M p') (p' + 1, 0)).count (0, q + 1)) = 0 := by
     rw [count_flatMap, list_range_sum]
     apply Finset.sum_eq_zero
     intro p' _
-    rw [count_replicate', if_neg]
+    rw [count_replicate', ite_eq_right]
     simp
   have hC : (((List.range 7).flatMap fun q' =>
       List.replicate (mult mR q' - sumCol M q') (0, q' + 1)).count (0, q + 1))

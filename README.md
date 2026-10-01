@@ -67,14 +67,14 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19`
 
 ## Building
 
-Toolchain: `leanprover/lean4:v4.33.0`; Mathlib is pinned in `lake-manifest.json`.
+Toolchain: `leanprover/lean4:v4.35.0-rc3`; Mathlib is pinned in `lake-manifest.json` (master `516d3125`).
 
 ```sh
 lake exe cache get     # fetch Mathlib oleans (first time only)
 lake build             # the formalization
 ```
 
-For the companion book (Verso `v4.33.0`):
+For the companion book (Verso `v4.35.0-rc3`):
 
 ```sh
 cd book

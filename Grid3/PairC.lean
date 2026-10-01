@@ -288,7 +288,7 @@ theorem two_ind_le_card (M T : Finset ℕ) {y₁ y₂ : ℕ} (hne : y₁ ≠ y�
   rw [key, key]
   unfold ind
   by_cases h1 : y₁ ∈ M.filter (· ∉ T) <;> by_cases h2 : y₂ ∈ M.filter (· ∉ T) <;>
-    simp only [h1, h2, if_true, if_false]
+    simp only [h1, h2, ite_true, ite_false]
   · have hsub : ({y₁, y₂} : Finset ℕ) ⊆ M.filter (· ∉ T) := by
       intro a ha
       rw [Finset.mem_insert, Finset.mem_singleton] at ha

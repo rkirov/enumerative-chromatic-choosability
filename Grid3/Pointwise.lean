@@ -46,8 +46,8 @@ theorem card_erase_erase_int (T : Finset ℕ) (a m : ℕ) :
   congr 1
   unfold ind
   by_cases h : m ∈ T.erase a
-  · rw [if_pos h, if_pos (by rw [Finset.mem_erase] at h; exact ⟨Ne.symm h.1, h.2⟩)]
-  · rw [if_neg h, if_neg (by intro h'; exact h (Finset.mem_erase.mpr ⟨Ne.symm h'.1, h'.2⟩))]
+  · rw [ite_eq_left h, ite_eq_left (by rw [Finset.mem_erase] at h; exact ⟨Ne.symm h.1, h.2⟩)]
+  · rw [ite_eq_right h, ite_eq_right (by intro h'; exact h (Finset.mem_erase.mpr ⟨Ne.symm h'.1, h'.2⟩))]
 
 /-- The bonus of the top (or bottom) factor over its uniform value. -/
 def dT (T : Finset ℕ) (a m : ℕ) : ℤ := ind (m ∉ T) * ind (a ≠ m) + ind (a ∉ T)

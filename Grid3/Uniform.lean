@@ -139,9 +139,9 @@ theorem card_erase_erase_range {k a y : ℕ} (hk : 2 ≤ k) (ha : a ∈ Finset.r
     (((Finset.range k).erase a).erase y).card = k - 2 + (if y = a then 1 else 0) := by
   by_cases h : y = a
   · subst h
-    rw [Finset.erase_eq_of_notMem (Finset.notMem_erase _ _), card_erase_range ha, if_pos rfl]
+    rw [Finset.erase_eq_of_notMem (Finset.notMem_erase _ _), card_erase_range ha, ite_eq_left rfl]
     omega
-  · rw [Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨h, hy⟩), card_erase_range ha, if_neg h]
+  · rw [Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨h, hy⟩), card_erase_range ha, ite_eq_right h]
     omega
 
 /-- **Uniform successors.** A uniform state has `ene k + [eq]` successors in a uniform column. -/
@@ -166,7 +166,7 @@ theorem succ_uniform {k : ℕ} (hk : 2 ≤ k) {s : State}
     Finset.sum_ite_eq', card_erase_range hb]
   have hab' : a ∈ (Finset.range k).erase b := Finset.mem_erase.mpr ⟨hab, ha⟩
   have hcb' : c ∈ (Finset.range k).erase b := Finset.mem_erase.mpr ⟨Ne.symm hbc, hc⟩
-  rw [if_pos hab', if_pos hcb', if_pos hab']
+  rw [ite_eq_left hab', ite_eq_left hcb', ite_eq_left hab']
   unfold ene eqInd IsEq
   simp only
   by_cases hac : a = c
@@ -196,7 +196,7 @@ theorem eqSucc_uniform {k : ℕ} (hk : 2 ≤ k) {s : State}
   rw [card_erase_erase_range hk ha hc]
   have hb' : b ∈ ((Finset.range k).erase a).erase c :=
     Finset.mem_erase.mpr ⟨hbc, Finset.mem_erase.mpr ⟨Ne.symm hab, hb⟩⟩
-  rw [if_pos hb']
+  rw [ite_eq_left hb']
   unfold gam del eqInd IsEq
   simp only
   by_cases hac : a = c
@@ -247,12 +247,12 @@ theorem card_states_ge' {k : ℕ} {T M B : Finset ℕ} (hk : 1 ≤ k) (hT : T.ca
     intro b _
     have h1 : (T.erase b).card = k - 1 + (if b ∉ T then 1 else 0) := by
       by_cases h : b ∈ T
-      · rw [Finset.card_erase_of_mem h, hT, if_neg (not_not.mpr h)]; omega
-      · rw [Finset.erase_eq_of_notMem h, hT, if_pos h]; omega
+      · rw [Finset.card_erase_of_mem h, hT, ite_eq_right (not_not.mpr h)]; omega
+      · rw [Finset.erase_eq_of_notMem h, hT, ite_eq_left h]; omega
     have h2 : (B.erase b).card = k - 1 + (if b ∉ B then 1 else 0) := by
       by_cases h : b ∈ B
-      · rw [Finset.card_erase_of_mem h, hB, if_neg (not_not.mpr h)]; omega
-      · rw [Finset.erase_eq_of_notMem h, hB, if_pos h]; omega
+      · rw [Finset.card_erase_of_mem h, hB, ite_eq_right (not_not.mpr h)]; omega
+      · rw [Finset.erase_eq_of_notMem h, hB, ite_eq_left h]; omega
     rw [h1, h2]
     split_ifs <;> nlinarith
   calc k * (k - 1) ^ 2 + (k - 1) * ((M.filter (· ∉ T)).card + (M.filter (· ∉ B)).card)

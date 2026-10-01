@@ -187,8 +187,8 @@ theorem eqInd_patCap {k : ℕ} (hk : 3 ≤ k) (s : State V3) :
     exact pat_eq_iff
   unfold Grid3.eqInd
   by_cases h : Grid3.IsEq (toS s)
-  · rw [if_pos h, if_pos (hiff.mpr h)]
-  · rw [if_neg h, if_neg (fun h' => h (hiff.mp h'))]
+  · rw [ite_eq_left h, ite_eq_left (hiff.mpr h)]
+  · rw [ite_eq_right h, ite_eq_right (fun h' => h (hiff.mp h'))]
 
 /-! ### The uniform futures are `Fpat` -/
 
@@ -267,8 +267,8 @@ theorem depthOK_pathG_two {k : ℕ} (hk : 5 ≤ k) : DepthOK (pathG 2) (Φ (path
     rw [Grid3.pathVec_one_compat (toCols L) j hs₀' s' hs', pathVec_one (pathG 2) L j hs₀]
     simp only []
     by_cases hcp : Compat s₀ (ofS s')
-    · rw [if_pos hcp, if_pos (by rw [← toS_ofS s']; exact (compat3 _ _).mp hcp)]
-    · rw [if_neg hcp, if_neg (fun h => hcp ((compat3 _ _).mpr (by rw [toS_ofS]; exact h)))]
+    · rw [ite_eq_left hcp, ite_eq_left (by rw [← toS_ofS s']; exact (compat3 _ _).mp hcp)]
+    · rw [ite_eq_right hcp, ite_eq_right (fun h => hcp ((compat3 _ _).mpr (by rw [toS_ofS]; exact h)))]
   exact seam_of_grid3 (by omega) (L (j + 1)) _ (L (j + 1 + 1)) i (Grid3.H1_congr hvec h1)
     (Grid3.C1r_congr hvec hc)
 

@@ -169,11 +169,11 @@ theorem hwCyc_eq_hw {N : ℕ} (σ : Equiv.Perm (Fin 3)) (a : Fin (N + 1) → Fin
       apply Fin.ext
       rw [Fin.val_add_one_of_lt hlt]
       simp
-    rw [if_neg hne, hadd]
+    rw [ite_eq_right hne, hadd]
     by_cases h : a j.castSucc = a j.succ
-    · rw [if_pos h.symm, if_pos h]
-    · rw [if_neg (fun h' => h h'.symm), if_neg h]
-  · rw [if_pos rfl]
+    · rw [ite_eq_left h.symm, ite_eq_left h]
+    · rw [ite_eq_right (fun h' => h h'.symm), ite_eq_right h]
+  · rw [ite_eq_left rfl]
     have hz : (Fin.last N : Fin (N + 1)) + 1 = 0 := by
       apply Fin.ext; simp
     rw [hz]
@@ -218,7 +218,7 @@ theorem marginal_two_pow_hw {N : ℕ} (σ : Equiv.Perm (Fin 3)) (p : Fin (N + 1)
     rw [Finset.sum_filter]
     refine Finset.sum_congr rfl fun a _ => ?_
     by_cases h : a p = c
-    · simp only [h, if_true]; exact two_pow_hw σ a
+    · simp only [h, ite_true]; exact two_pow_hw σ a
     · simp [h]
   rw [hfilter]
   rw [sum_pathWeight_pin N p c (fun i j => if i = σ j then 2 else 1)]
@@ -275,12 +275,12 @@ theorem marginal_corr {N : ℕ} (σ : Equiv.Perm (Fin 3)) (p : Fin (N + 1)) (c :
       = if σ c = c then 0 else 1 := by
   rw [← Finset.card_filter]
   by_cases hc : σ c = c
-  · rw [if_pos hc, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+  · rw [ite_eq_left hc, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     rintro a ha ⟨hconst, hne⟩
     rw [Finset.mem_filter] at ha
     have h0 : a 0 = c := by rw [← hconst p]; exact ha.2
     exact hne (by rw [h0, hc])
-  · rw [if_neg hc]
+  · rw [ite_eq_right hc]
     have hset : (univ.filter (fun a : Fin (N + 1) → Fin 3 => a p = c)).filter
         (fun a => (∀ i, a i = a 0) ∧ σ (a 0) ≠ a 0) = {fun _ => c} := by
       ext a
@@ -343,7 +343,7 @@ theorem fibre_amgm_even {N : ℕ} (σ : Equiv.Perm (Fin 3)) (X : (Fin (N + 1) �
     intro c
     exact weighted_amgm_masses _ X (Uw σ) hEpos (marginal_Uw σ 0 c) (fun a _ => Uw_pos σ a)
   -- multiply the three fibres and refold the products
-  have hmul := Finset.prod_le_prod' (s := (univ : Finset (Fin 3))) (fun c _ => hfib c)
+  have hmul := Finset.prod_le_prod (s := (univ : Finset (Fin 3))) (fun c _ => hfib c)
   rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin,
     ← pow_mul, Finset.prod_mul_distrib] at hmul
   have hXfib : ∏ c : Fin 3, ∏ a ∈ univ.filter (fun a : Fin (N + 1) → Fin 3 => a 0 = c),

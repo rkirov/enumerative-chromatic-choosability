@@ -162,28 +162,28 @@ vertex. -/
 lemma inducedList_closePath_pathEnd (j : ℕ) (M : ListAssignment (PathV (j + 1))) (c : ℕ) :
     (closePath (j + 1)).inducedList M c (pathEnd j) = (M (some (pathEnd j))).erase c := by
   rw [inducedList_closePath_succ]
-  exact if_pos (Or.inl rfl)
+  exact ite_eq_left (Or.inl rfl)
 
 /-- The list induced at the terminal vertex `pathStart j`: it too loses the color of the deleted
 vertex. -/
 lemma inducedList_closePath_pathStart (j : ℕ) (M : ListAssignment (PathV (j + 1))) (c : ℕ) :
     (closePath (j + 1)).inducedList M c (pathStart j) = (M (some (pathStart j))).erase c := by
   rw [inducedList_closePath_succ]
-  exact if_pos (Or.inr rfl)
+  exact ite_eq_left (Or.inr rfl)
 
 /-- Both terminal vertices of the path lose the color of the deleted vertex. -/
 lemma inducedList_closePath_terminal (M : ListAssignment (PathV (j + 1))) (c : ℕ) {v : PathV j}
     (h : v = pathEnd j ∨ v = pathStart j) :
     (closePath (j + 1)).inducedList M c v = (M (some v)).erase c := by
   rw [inducedList_closePath_succ]
-  exact if_pos h
+  exact ite_eq_left h
 
 /-- An interior vertex of the path keeps its whole list. -/
 lemma inducedList_closePath_interior (M : ListAssignment (PathV (j + 1))) (c : ℕ)
     {v : PathV j} (h1 : v ≠ pathEnd j) (h2 : v ≠ pathStart j) :
     (closePath (j + 1)).inducedList M c v = M (some v) := by
   rw [inducedList_closePath_succ]
-  exact if_neg (by tauto)
+  exact ite_eq_right (by tauto)
 
 section Cards
 
@@ -243,22 +243,22 @@ lemma exists_isNNAssign_subset (hj : 1 ≤ j) {N : ListAssignment (PathV j)} {Te
     · subst h1; exact hEN
     · subst h2; exact hSN
     · exact Finset.Subset.refl _
-  · rw [if_pos rfl]
+  · rw [ite_eq_left rfl]
     exact hEcard
-  · rw [if_neg (Ne.symm hne), if_pos rfl]
+  · rw [ite_eq_right (Ne.symm hne), ite_eq_left rfl]
     exact hScard
   · intro v h1 h2
-    rw [if_neg h1, if_neg h2]
+    rw [ite_eq_right h1, ite_eq_right h2]
     exact hint v h1 h2
   · dsimp only
-    rw [if_pos rfl]
+    rw [ite_eq_left rfl]
     exact hTeE
   · dsimp only
-    rw [if_neg (Ne.symm hne), if_pos rfl]
+    rw [ite_eq_right (Ne.symm hne), ite_eq_left rfl]
     exact hTsS
   · intro v h1 h2
     dsimp only
-    rw [if_neg h1, if_neg h2]
+    rw [ite_eq_right h1, ite_eq_right h2]
 
 /-! ### The reduction of a cycle to a path -/
 
@@ -330,7 +330,7 @@ theorem pathA_le_col_of_notMem_interior (hm : 1 ≤ m) (hj : 2 ≤ j) (hev : Eve
     (hz : z ∈ L (pathEnd j) ∨ z ∈ L (pathStart j)) (hz' : z ∉ L (pathVtx j 1)) :
     pathA m j ≤ (pathG j).col L := by
   have hmin : min (pathA m j) (pathB m j) = pathB m j := by
-    rw [min_pathA_pathB_eq, if_pos hev]
+    rw [min_pathA_pathB_eq, ite_eq_left hev]
   have hge : pathB m j ≤ (pathG j).col L := by
     rw [← hmin]; exact min_pathA_pathB_le_col hL
   have hAB : pathA m j = pathB m j + 1 := pathA_eq_pathB_succ hev
@@ -370,7 +370,7 @@ theorem isPathShape_of_col_lt (hm : 1 ≤ m) (hj : 2 ≤ j) (hev : Even j)
     exists_isNNAssign_subset (m := m) (by omega : 1 ≤ j) (Te := ∅) (Ts := ∅)
       (Finset.empty_subset _) (by simp) (Finset.empty_subset _) (by simp) hend hstart hint
   have hmin : min (pathA m j) (pathB m j) = pathB m j := by
-    rw [min_pathA_pathB_eq, if_pos hev]
+    rw [min_pathA_pathB_eq, ite_eq_left hev]
   have hAB : pathA m j = pathB m j + 1 := pathA_eq_pathB_succ hev
   have h1 : pathB m j ≤ (pathG j).col L := by rw [← hmin]; exact min_pathA_pathB_le_col hL
   have h2 : (pathG j).col L ≤ (pathG j).col N := col_le_col_of_subset hsub
@@ -581,7 +581,7 @@ theorem ecc_closePath_of_even (hj : 2 ≤ j) (hev : Even j) (hm : 1 ≤ m) :
   -- and the fibre of `c₀` itself is at least `B_j`
   have hBc₀ : pathB m j ≤ (pathG j).col ((closePath (j + 1)).inducedList M c₀) := by
     have h := min_pathA_pathB_le_col_inducedList hj1 hM c₀
-    rw [min_pathA_pathB_eq, if_pos hev] at h
+    rw [min_pathA_pathB_eq, ite_eq_left hev] at h
     exact h
   exact sum_lower_bound (m := m)
     (F := fun c => (pathG j).col ((closePath (j + 1)).inducedList M c))

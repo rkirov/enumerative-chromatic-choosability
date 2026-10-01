@@ -115,12 +115,12 @@ theorem col_pathAssign (m : ℕ) :
     by_cases hxy : x = y
     · subst hxy
       rw [Finset.erase_idem, Finset.card_erase_of_mem (Finset.mem_range.mpr hx),
-        Finset.card_range, if_pos rfl, pathA_zero]
+        Finset.card_range, ite_eq_left rfl, pathA_zero]
       omega
     · rw [Finset.card_erase_of_mem
           (Finset.mem_erase.mpr ⟨Ne.symm hxy, Finset.mem_range.mpr hy⟩),
         Finset.card_erase_of_mem (Finset.mem_range.mpr hx), Finset.card_range,
-        if_neg hxy, pathB_zero]
+        ite_eq_right hxy, pathB_zero]
       omega
   | succ k ih =>
     intro x y hx hy
@@ -138,21 +138,21 @@ theorem col_pathAssign (m : ℕ) :
     · -- type A: `y` is the erased color, so every term is type B
       subst hxy
       have : ∀ c ∈ (range (m + 2)).erase x, (if c = x then pathA m k else pathB m k) = pathB m k :=
-        fun c hc => if_neg (Finset.ne_of_mem_erase hc)
+        fun c hc => ite_eq_right (Finset.ne_of_mem_erase hc)
       rw [Finset.sum_congr rfl this, Finset.sum_const, Finset.card_erase_of_mem hxr,
         Finset.card_range, smul_eq_mul]
       have hm : m + 2 - 1 = m + 1 := by omega
-      rw [if_pos rfl, hm, pathA_succ]
+      rw [ite_eq_left rfl, hm, pathA_succ]
     · -- type B: exactly one term is type A, the rest are type B
       have hymem : y ∈ (range (m + 2)).erase x :=
         Finset.mem_erase.mpr ⟨Ne.symm hxy, Finset.mem_range.mpr hy⟩
-      rw [← Finset.add_sum_erase _ _ hymem, if_pos rfl]
+      rw [← Finset.add_sum_erase _ _ hymem, ite_eq_left rfl]
       have : ∀ c ∈ ((range (m + 2)).erase x).erase y,
           (if c = y then pathA m k else pathB m k) = pathB m k :=
-        fun c hc => if_neg (Finset.ne_of_mem_erase hc)
+        fun c hc => ite_eq_right (Finset.ne_of_mem_erase hc)
       rw [Finset.sum_congr rfl this, Finset.sum_const, smul_eq_mul,
         Finset.card_erase_of_mem hymem, Finset.card_erase_of_mem hxr, Finset.card_range]
       have hm : m + 2 - 1 - 1 = m := by omega
-      rw [hm, pathB_succ, if_neg hxy]
+      rw [hm, pathB_succ, ite_eq_right hxy]
 
 end ListColoring

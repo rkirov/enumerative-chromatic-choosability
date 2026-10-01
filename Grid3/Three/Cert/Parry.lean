@@ -71,20 +71,20 @@ theorem uLaw_eq (c : Fin SB) : uLaw c =
     if c.val ∈ stsOf uPats then (if isABA c.val then (17 + s17) / 204 else (17 - s17) / 204)
     else 0 := by
   unfold uLaw lawR lawE0 lawE1
-  simp only [UTYPE, beq_self_eq_true, if_true]
+  simp only [UTYPE, beq_self_eq_true, ite_true]
   by_cases hc : c.val ∈ stsOf uPats
-  · rw [if_pos hc, if_pos hc]
+  · rw [ite_eq_left hc, ite_eq_left hc]
     by_cases ha : isABA c.val
-    · rw [if_pos ha, if_pos ha]; push_cast; ring
-    · rw [if_neg ha, if_neg ha]; push_cast; ring
-  · rw [if_neg hc, if_neg hc]
+    · rw [ite_eq_left ha, ite_eq_left ha]; push_cast; ring
+    · rw [ite_eq_right ha, ite_eq_right ha]; push_cast; ring
+  · rw [ite_eq_right hc, ite_eq_right hc]
 
 theorem uLaw_zero (c : Fin SB) (hc : c.val ∉ stsOf uPats) : uLaw c = 0 := by
-  rw [uLaw_eq, if_neg hc]
+  rw [uLaw_eq, ite_eq_right hc]
 
 theorem uLaw_val (x : Nat) (hx : x ∈ stsOf uPats) :
     uLaw (toFin x) = if isABA x then (17 + s17) / 204 else (17 - s17) / 204 := by
-  rw [uLaw_eq, toFin_val x (uSts_lt x hx), if_pos hx]
+  rw [uLaw_eq, toFin_val x (uSts_lt x hx), ite_eq_left hx]
 
 /-! ### The Perron weight and the Parry kernel -/
 
@@ -119,16 +119,16 @@ theorem KU_support (c s : Fin SB) (hc : 0 < uLaw c) (hK : 0 < KU c s) :
   have hc' : c.val ∈ stsOf uPats := by
     by_contra h; rw [uLaw_zero c h] at hc; exact lt_irrefl _ hc
   unfold KU at hK
-  rw [if_pos hc'] at hK
+  rw [ite_eq_left hc'] at hK
   by_cases hs : s.val ∈ stsOf uPats ∧ compat c.val s.val = true
   · exact ⟨hs.2, hc', hs.1⟩
-  · rw [if_neg hs] at hK; exact absurd hK (lt_irrefl _)
+  · rw [ite_eq_right hs] at hK; exact absurd hK (lt_irrefl _)
 
 
 theorem KU_val (x y : Nat) (hx : x ∈ stsOf uPats) (hy : y < SB) :
     KU (toFin x) (toFin y) =
       if y ∈ stsOf uPats ∧ compat x y = true then pv y / (rhoR * pv x) else 0 := by
-  unfold KU; rw [toFin_val x (uSts_lt x hx), toFin_val y hy, if_pos hx]
+  unfold KU; rw [toFin_val x (uSts_lt x hx), toFin_val y hy, ite_eq_left hx]
 
 /-! ### Sums over the packed state space reduce to the twelve states -/
 
@@ -175,7 +175,7 @@ theorem mem_uSts_cases (c : Fin SB) (hc : c.val ∈ stsOf uPats) :
 set_option maxHeartbeats 1000000 in
 theorem KU_rowsum (c : Fin SB) : ∑ s, KU c s = 1 := by
   by_cases hc : c.val ∈ stsOf uPats
-  · rw [sum_uFin (KU c) (fun s hs => by unfold KU; rw [if_pos hc, if_neg (fun h => hs h.1)])]
+  · rw [sum_uFin (KU c) (fun s hs => by unfold KU; rw [ite_eq_left hc, ite_eq_right (fun h => hs h.1)])]
     have h17 := s17_sq
     have h5 : (5 : ℝ) + s17 ≠ 0 := by have := s17_pos; linarith
     have hv : s17 - 1 ≠ 0 := by have := s17_gt_one; linarith
@@ -185,8 +185,8 @@ theorem KU_rowsum (c : Fin SB) : ∑ s, KU c s = 1 := by
       norm_num
       field_simp
       nlinarith [h17, s17_pos]
-  · have : ∀ s, KU c s = if s = c then 1 else 0 := fun s => by unfold KU; rw [if_neg hc]
-    simp only [this, Finset.sum_ite_eq', Finset.mem_univ, if_true]
+  · have : ∀ s, KU c s = if s = c then 1 else 0 := fun s => by unfold KU; rw [ite_eq_right hc]
+    simp only [this, Finset.sum_ite_eq', Finset.mem_univ, ite_true]
 
 theorem uLaw_sum : ∑ c, uLaw c = 1 := by
   rw [sum_uFin uLaw uLaw_zero]
@@ -213,7 +213,7 @@ theorem KU_step (s : Fin SB) : ∑ c, uLaw c * KU c s = uLaw s := by
     apply Finset.sum_eq_zero
     intro c _
     by_cases hc : c.val ∈ stsOf uPats
-    · unfold KU; rw [if_pos hc, if_neg (fun h => hs h.1), mul_zero]
+    · unfold KU; rw [ite_eq_left hc, ite_eq_right (fun h => hs h.1), mul_zero]
     · rw [uLaw_zero c hc, zero_mul]
 
 /-! ### The conditional entropy is exactly `log rhoR` -/
@@ -222,12 +222,12 @@ theorem KU_log (c s : Fin SB) (hc : c.val ∈ stsOf uPats) :
     KU c s * (-Real.log (KU c s))
       = KU c s * (Real.log rhoR + Real.log (pv c.val) - Real.log (pv s.val)) := by
   unfold KU
-  rw [if_pos hc]
+  rw [ite_eq_left hc]
   by_cases h : s.val ∈ stsOf uPats ∧ compat c.val s.val = true
-  · rw [if_pos h, Real.log_div (pv_pos _).ne' (mul_pos rhoR_pos (pv_pos _)).ne',
+  · rw [ite_eq_left h, Real.log_div (pv_pos _).ne' (mul_pos rhoR_pos (pv_pos _)).ne',
       Real.log_mul rhoR_pos.ne' (pv_pos _).ne']
     ring
-  · rw [if_neg h]; ring
+  · rw [ite_eq_right h]; ring
 
 theorem parry_entropy :
     ∑ c, uLaw c * ∑ s, KU c s * (-Real.log (KU c s)) = Real.log rhoR := by

@@ -225,7 +225,7 @@ theorem pathInterior_eq_ite_pathStart :
     intro n y w
     have h : w = pathStart 0 := Subsingleton.elim w (pathStart 0)
     show (range n).erase y = if w = pathStart 0 then (range n).erase y else range n
-    rw [if_pos h]
+    rw [ite_eq_left h]
   | succ k ih =>
     intro n y w
     match w with
@@ -240,7 +240,7 @@ theorem pathInterior_eq_ite_pathStart :
         fun hc => absurd hc.symm (Option.some_ne_none (pathStart k))
       show range n
           = if (none : PathV (k + 1)) = pathStart (k + 1) then (range n).erase y else range n
-      rw [if_neg h]
+      rw [ite_eq_right h]
     | some w' =>
       letI : Decidable ((some w' : PathV (k + 1)) = pathStart (k + 1)) :=
         instDecidableEqPathV (k + 1) _ _
@@ -250,8 +250,8 @@ theorem pathInterior_eq_ite_pathStart :
           = if (some w' : PathV (k + 1)) = pathStart (k + 1) then (range n).erase y else range n
       rw [ih n y w']
       by_cases h : w' = pathStart k
-      · rw [if_pos h, if_pos (key.mpr h)]
-      · rw [if_neg h, if_neg (fun hc => h (key.mp hc))]
+      · rw [ite_eq_left h, ite_eq_left (key.mpr h)]
+      · rw [ite_eq_right h, ite_eq_right (fun hc => h (key.mp hc))]
 
 /-- **The type A assignment, pointwise.** `pathAssign k n c c` — the `(n, n-1)`-assignment missing
 the *same* color `c` at both ends of the path — is exactly "the full palette, minus `c` at the two
@@ -267,7 +267,7 @@ theorem pathAssign_self_apply :
     have h : w = pathEnd 0 ∨ w = pathStart 0 := Or.inl (Subsingleton.elim w (pathEnd 0))
     show ((range n).erase c).erase c
         = if w = pathEnd 0 ∨ w = pathStart 0 then (range n).erase c else range n
-    rw [if_pos h, Finset.erase_idem]
+    rw [ite_eq_left h, Finset.erase_idem]
   | succ k _ =>
     intro n c w
     match w with
@@ -281,7 +281,7 @@ theorem pathAssign_self_apply :
       show (range n).erase c
           = if (none : PathV (k + 1)) = pathEnd (k + 1) ∨
               (none : PathV (k + 1)) = pathStart (k + 1) then (range n).erase c else range n
-      rw [if_pos h]
+      rw [ite_eq_left h]
     | some w' =>
       letI : Decidable ((some w' : PathV (k + 1)) = pathEnd (k + 1)) :=
         instDecidableEqPathV (k + 1) _ _
@@ -299,8 +299,8 @@ theorem pathAssign_self_apply :
               (some w' : PathV (k + 1)) = pathStart (k + 1) then (range n).erase c else range n
       rw [pathInterior_eq_ite_pathStart]
       by_cases h : w' = pathStart k
-      · rw [if_pos h, if_pos (key.mpr h)]
-      · rw [if_neg h, if_neg (fun hc => h (key.mp hc))]
+      · rw [ite_eq_left h, ite_eq_left (key.mpr h)]
+      · rw [ite_eq_right h, ite_eq_right (fun hc => h (key.mp hc))]
 
 /-- **Deliverable: deleting a vertex of the cycle gives a type A assignment.** Giving the color `c`
 to the deleted vertex `pathEnd (k+1)` of `closePath (k+1)` induces on the remaining path `pathG k`
@@ -334,7 +334,7 @@ theorem colConst_closePath_succ (m k : ℕ) :
         = pathA m k := by
     intro c hc
     rw [inducedList_closePath_constList,
-      col_pathAssign m k c c (mem_range.mp hc) (mem_range.mp hc), if_pos rfl]
+      col_pathAssign m k c c (mem_range.mp hc) (mem_range.mp hc), ite_eq_left rfl]
   rw [colConst, col_closePath_succ]
   simp only [constList_apply]
   rw [Finset.sum_congr rfl hterm, Finset.sum_const, Finset.card_range, smul_eq_mul]

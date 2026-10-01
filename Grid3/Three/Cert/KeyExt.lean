@@ -61,8 +61,8 @@ theorem mcount_bump (M p q p' q' : Nat) (hq : q < 7) (hq' : q' < 7) (h : mcount 
   simp only [mcount_eq_digit_cell] at h ⊢
   by_cases hpq : p' = p ∧ q' = q
   · obtain ⟨rfl, rfl⟩ := hpq
-    rw [if_pos ⟨rfl, rfl⟩, digit_add_pow_self _ _ h]
-  · rw [if_neg hpq, Nat.add_zero]
+    rw [ite_eq_left ⟨rfl, rfl⟩, digit_add_pow_self _ _ h]
+  · rw [ite_eq_right hpq, Nat.add_zero]
     apply digit_add_pow_ne _ _ _ h
     intro heq
     obtain ⟨h1, h2⟩ := (cellIdx_inj hq hq').1 heq
@@ -195,18 +195,18 @@ theorem bump_step {mL mR M p q : Nat} (hp : p < 7) (hq : q < 7) (hM : M < 16384 
       by_cases hpq : p' = p ∧ q' = q
       · obtain ⟨rfl, rfl⟩ := hpq
         rw [hi'] at hi; exact absurd hi (by decide)
-      · rw [if_neg hpq, Nat.add_zero]
+      · rw [ite_eq_right hpq, Nat.add_zero]
         exact validKey_inter hv p' hp' q' hq' hi'
     · intro p' hp'
       rw [sumRow_bump M p q p' hq hlt3]
       by_cases hp' : p' = p
-      · subst hp'; rw [if_pos rfl]; omega
-      · rw [if_neg hp', Nat.add_zero]; exact validKey_row hv p' (by assumption)
+      · subst hp'; rw [ite_eq_left rfl]; omega
+      · rw [ite_eq_right hp', Nat.add_zero]; exact validKey_row hv p' (by assumption)
     · intro q' hq'
       rw [sumCol_bump M p q q' hp hq hq' hlt3]
       by_cases hq'' : q' = q
-      · subst hq''; rw [if_pos rfl]; omega
-      · rw [if_neg hq'', Nat.add_zero]; exact validKey_col hv q' hq'
+      · subst hq''; rw [ite_eq_left rfl]; omega
+      · rw [ite_eq_right hq'', Nat.add_zero]; exact validKey_col hv q' hq'
   · rw [total_eq, total_eq]
     rw [sumRow_bump M p q 0 hq hlt3, sumRow_bump M p q 1 hq hlt3, sumRow_bump M p q 2 hq hlt3,
       sumRow_bump M p q 3 hq hlt3, sumRow_bump M p q 4 hq hlt3, sumRow_bump M p q 5 hq hlt3,

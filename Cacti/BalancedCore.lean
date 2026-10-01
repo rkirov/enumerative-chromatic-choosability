@@ -50,8 +50,8 @@ theorem cover_diag_value (hk : 2 ≤ k) {m : ℕ} (hm : Even m) (P : Equiv.Perm 
     ((offDiag k ^ m) * offPerm P) d d
       = uniformA k (m + 1) + (if P.symm d = d then 0 else 1) := by
   by_cases hfix : P.symm d = d
-  · rw [if_pos hfix, base_diag_fixed (by omega) P hfix, uniformA, Nat.add_sub_cancel, Nat.add_zero]
-  · rw [if_neg hfix, base_diag_moved (by omega) P hfix, uniformA, Nat.add_sub_cancel]
+  · rw [ite_eq_left hfix, base_diag_fixed (by omega) P hfix, uniformA, Nat.add_sub_cancel, Nat.add_zero]
+  · rw [ite_eq_right hfix, base_diag_moved (by omega) P hfix, uniformA, Nat.add_sub_cancel]
     have halt : alpha k m = beta k m + 1 := (beta_alternation hk m).2 hm
     rw [halt, show k - 1 = 1 + (k - 2) from by omega]
     ring
@@ -79,20 +79,20 @@ theorem rot1_mem (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) {g : Fin (m + 1) → Fi
     have hc : (e.castSucc).val = e.val := rfl
     have hs : (e.succ).val = e.val + 1 := rfl
     rw [rot1, rot1]
-    rw [dif_pos (show (e.castSucc).val < m from by rw [hc]; exact e.isLt)]
+    rw [dite_eq_left (show (e.castSucc).val < m from by rw [hc]; exact e.isLt)]
     by_cases hlt : (e.succ).val < m
-    · rw [dif_pos hlt]
+    · rw [dite_eq_left hlt]
       have := hpath ⟨e.val + 1, by rw [hs] at hlt; omega⟩
       exact this
-    · rw [dif_neg hlt]
+    · rw [dite_eq_right hlt]
       have hem : e.val + 1 = m := by rw [hs] at hlt; omega
       have hg1 : g ⟨(e.castSucc).val + 1, by omega⟩ = g (Fin.last m) :=
         congrArg g (Fin.ext (by show (e.castSucc).val + 1 = m; omega))
       rw [hg1]
       intro hcon
       exact hclose (by rw [hcon, Equiv.apply_symm_apply])
-  · rw [rot1, rot1, dif_neg (by simp),
-      dif_pos (show (0 : Fin (m + 1)).val < m from by simp only [Fin.val_zero]; omega),
+  · rw [rot1, rot1, dite_eq_right (by simp),
+      dite_eq_left (show (0 : Fin (m + 1)).val < m from by simp only [Fin.val_zero]; omega),
       Equiv.apply_symm_apply]
     have := hpath ⟨0, by omega⟩
     simpa using this
@@ -105,7 +105,7 @@ theorem unrot1_mem (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) {h : Fin (m + 1) → 
   · intro e
     rw [unrot1, unrot1]
     by_cases he0 : 0 < (e.castSucc).val
-    · rw [dif_pos he0, dif_pos (show 0 < (e.succ).val from by simp)]
+    · rw [dite_eq_left he0, dite_eq_left (show 0 < (e.succ).val from by simp)]
       have := hpath ⟨e.val - 1, by have := e.isLt; omega⟩
       have hcc : (⟨(e.castSucc).val - 1, by omega⟩ : Fin (m + 1))
           = (⟨e.val - 1, by have := e.isLt; omega⟩ : Fin m).castSucc := Fin.ext rfl
@@ -118,7 +118,7 @@ theorem unrot1_mem (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) {h : Fin (m + 1) → 
         omega
       rw [hcc, hss]
       exact this
-    · rw [dif_neg he0, dif_pos (show 0 < (e.succ).val from by simp)]
+    · rw [dite_eq_right he0, dite_eq_left (show 0 < (e.succ).val from by simp)]
       have he : e.val = 0 := by
         have : (e.castSucc).val = e.val := rfl
         omega
@@ -129,8 +129,8 @@ theorem unrot1_mem (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) {h : Fin (m + 1) → 
         omega
       rw [h1]
       exact hclose
-  · rw [unrot1, unrot1, dif_pos (show 0 < (Fin.last m).val from by simp only [Fin.val_last]; omega),
-      dif_neg (by simp)]
+  · rw [unrot1, unrot1, dite_eq_left (show 0 < (Fin.last m).val from by simp only [Fin.val_last]; omega),
+      dite_eq_right (by simp)]
     intro hcon
     have hinj := P.injective hcon
     have := hpath ⟨m - 1, by omega⟩
@@ -146,10 +146,10 @@ theorem unrot1_rot1 (P : Equiv.Perm (Fin k)) (g : Fin (m + 1) → Fin k) :
   funext s
   rw [unrot1]
   by_cases hs : 0 < s.val
-  · rw [dif_pos hs, rot1, dif_pos (show s.val - 1 < m from by have := s.isLt; omega)]
+  · rw [dite_eq_left hs, rot1, dite_eq_left (show s.val - 1 < m from by have := s.isLt; omega)]
     congr 1
     exact Fin.ext (by show s.val - 1 + 1 = s.val; omega)
-  · rw [dif_neg hs, rot1, dif_neg (by simp), Equiv.apply_symm_apply]
+  · rw [dite_eq_right hs, rot1, dite_eq_right (by simp), Equiv.apply_symm_apply]
     have hs0 : s.val = 0 := by omega
     congr 1
     exact Fin.ext (by simpa using hs0.symm)
@@ -159,9 +159,9 @@ theorem rot1_unrot1 (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) (h : Fin (m + 1) →
   funext t
   rw [rot1]
   by_cases ht : t.val < m
-  · rw [dif_pos ht, unrot1, dif_pos (show 0 < t.val + 1 from by omega)]
+  · rw [dite_eq_left ht, unrot1, dite_eq_left (show 0 < t.val + 1 from by omega)]
     rfl
-  · rw [dif_neg ht, unrot1, dif_neg (by simp), Equiv.symm_apply_apply]
+  · rw [dite_eq_right ht, unrot1, dite_eq_right (by simp), Equiv.symm_apply_apply]
     have htm : t.val = m := by have := t.isLt; omega
     congr 1
     exact Fin.ext (by simpa using htm.symm)
@@ -176,7 +176,7 @@ theorem card_cover_step (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) (j : Fin m) (d :
     simp only [Finset.mem_coe, Finset.mem_filter] at hg ⊢
     refine ⟨rot1_mem hm P hg.1, ?_⟩
     have hjc : (j.castSucc).val = j.val := rfl
-    rw [rot1, dif_pos (show (j.castSucc).val < m from j.isLt)]
+    rw [rot1, dite_eq_left (show (j.castSucc).val < m from j.isLt)]
     have : (⟨(j.castSucc).val + 1, by have := j.isLt; omega⟩ : Fin (m + 1)) = j.succ :=
       Fin.ext rfl
     rw [this]
@@ -184,7 +184,7 @@ theorem card_cover_step (hm : 1 ≤ m) (P : Equiv.Perm (Fin k)) (j : Fin m) (d :
   · intro h hh
     simp only [Finset.mem_coe, Finset.mem_filter] at hh ⊢
     refine ⟨unrot1_mem hm P hh.1, ?_⟩
-    rw [unrot1, dif_pos (show 0 < (j.succ).val from by simp)]
+    rw [unrot1, dite_eq_left (show 0 < (j.succ).val from by simp)]
     have : (⟨(j.succ).val - 1, by have := j.isLt; omega⟩ : Fin (m + 1)) = j.castSucc :=
       Fin.ext (by show (j.succ).val - 1 = j.val; rfl)
     rw [this]
@@ -228,12 +228,12 @@ theorem altCol_mem (hm : Even m) (P : Equiv.Perm (Fin k)) {c : Fin k} (hc : P c 
     have hs' : (e.succ).val = e.val + 1 := rfl
     simp only [altCol]
     by_cases hpar : Even e.val
-    · rw [if_pos (by rw [hc']; exact hpar), if_neg (by rw [hs']; simp [Nat.even_add_one, hpar])]
+    · rw [ite_eq_left (by rw [hc']; exact hpar), ite_eq_right (by rw [hs']; simp [Nat.even_add_one, hpar])]
       exact fun h => hc h.symm
-    · rw [if_neg (by rw [hc']; exact hpar), if_pos (by rw [hs']; simp [Nat.even_add_one, hpar])]
+    · rw [ite_eq_right (by rw [hc']; exact hpar), ite_eq_left (by rw [hs']; simp [Nat.even_add_one, hpar])]
       exact hc
   · simp only [altCol]
-    rw [if_pos (show Even (Fin.last m).val from by simpa using hm), if_pos (by simp)]
+    rw [ite_eq_left (show Even (Fin.last m).val from by simpa using hm), ite_eq_left (by simp)]
     exact hc
 
 /-- The alternating family: one coloring per moved label. -/
@@ -244,7 +244,7 @@ theorem altCol_injOn (P : Equiv.Perm (Fin k)) (m : ℕ) :
     Set.InjOn (altCol P m) (Finset.univ.filter (fun c => P c ≠ c) : Finset (Fin k)) := by
   intro a _ b _ hab
   have := congrFun hab (0 : Fin (m + 1))
-  rwa [altCol, altCol, if_pos (by simp), if_pos (by simp)] at this
+  rwa [altCol, altCol, ite_eq_left (by simp), ite_eq_left (by simp)] at this
 
 theorem altSet_subset (hm : Even m) (P : Equiv.Perm (Fin k)) :
     altSet P m ⊆ coverSet P m := by
@@ -274,13 +274,13 @@ theorem card_alt_filter (_hm : Even m) (P : Equiv.Perm (Fin k)) (i : Fin (m + 1)
     rw [Finset.mem_filter, Finset.mem_filter, halt]
     simp only [Finset.mem_univ, true_and, hu]
     by_cases hpar : Even i.val
-    · rw [if_pos hpar, if_pos hpar]
+    · rw [ite_eq_left hpar, ite_eq_left hpar]
       constructor
       · rintro ⟨hc, rfl⟩
         exact ⟨fun h => hc ((Equiv.symm_apply_eq P).mp h).symm, rfl⟩
       · rintro ⟨hd, rfl⟩
         exact ⟨fun h => hd ((Equiv.symm_apply_eq P).mpr h.symm), rfl⟩
-    · rw [if_neg hpar, if_neg hpar]
+    · rw [ite_eq_right hpar, ite_eq_right hpar]
       constructor
       · rintro ⟨hc, rfl⟩
         rw [Equiv.symm_apply_apply]
@@ -289,9 +289,9 @@ theorem card_alt_filter (_hm : Even m) (P : Equiv.Perm (Fin k)) (i : Fin (m + 1)
         rw [Equiv.apply_symm_apply]
         exact ⟨fun h => hd h.symm, rfl⟩
   by_cases hfix : P.symm d = d
-  · rw [if_pos hfix, Finset.card_eq_zero, Finset.eq_empty_iff_forall_notMem]
+  · rw [ite_eq_left hfix, Finset.card_eq_zero, Finset.eq_empty_iff_forall_notMem]
     exact fun c hc => (hmem c).mp hc |>.1 hfix
-  · rw [if_neg hfix]
+  · rw [ite_eq_right hfix]
     refine Finset.card_eq_one.mpr ⟨u, ?_⟩
     ext c
     rw [hmem c, Finset.mem_singleton]
@@ -359,7 +359,7 @@ theorem labelOf_mem_colorings {m k : ℕ} (ix : Fin (m + 1) ≃ V)
     intro i j hij
     rcases fin_succ_cases hij with ⟨e, rfl, rfl⟩ | ⟨rfl, rfl⟩
     · refine (hfac e _ _).mp ?_
-      rw [factor_apply, if_neg (hpath e)]
+      rw [factor_apply, ite_eq_right (hpath e)]
     · intro hcon
       have hmem : σ 0 (g 0) ∈ L (ix (Fin.last m)) := hcon ▸ hσmem (Fin.last m) (g (Fin.last m))
       have hd : g 0 ∈ dom := (hdom (g 0)).mpr hmem
@@ -432,7 +432,7 @@ theorem exists_cover_model {m k : ℕ} (ix : Fin (m + 1) ≃ V)
   have hμspec : ∀ c (hc : c ∈ dom), σ (Fin.last m) (μ c) = σ 0 c := by
     intro c hc
     simp only [hμ]
-    rw [dif_pos hc]
+    rw [dite_eq_left hc]
     exact Classical.choose_spec (hμex c hc)
   have hμinj : ∀ c ∈ dom, ∀ c' ∈ dom, μ c = μ c' → c = c' := by
     intro c hc c' hc' hcc
@@ -453,7 +453,7 @@ theorem exists_cover_model {m k : ℕ} (ix : Fin (m + 1) ≃ V)
   obtain ⟨P, hP⟩ := exists_extendPerm (dom.image μ) g (by
     intro a ha b hb hab
     simp only [hg] at hab
-    rw [dif_pos ha, dif_pos hb] at hab
+    rw [dite_eq_left ha, dite_eq_left hb] at hab
     obtain ⟨hca, hμa⟩ := hgspec a ha
     obtain ⟨hcb, hμb⟩ := hgspec b hb
     rw [← hμa, ← hμb, hab])
@@ -462,7 +462,7 @@ theorem exists_cover_model {m k : ℕ} (ix : Fin (m + 1) ≃ V)
     have hmem : μ c ∈ dom.image μ := Finset.mem_image_of_mem μ hc
     rw [hP _ hmem]
     simp only [hg]
-    rw [dif_pos hmem]
+    rw [dite_eq_left hmem]
     obtain ⟨hc', hμ'⟩ := hgspec (μ c) hmem
     exact hμinj _ hc' _ hc hμ'
   have hPsymm : ∀ c ∈ dom, P.symm c = μ c := by

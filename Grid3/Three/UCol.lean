@@ -40,7 +40,7 @@ theorem patOf_U (c : ℕ) (hc : c ∈ Col.colours Lc) : patOf Lc c = 7 := by
   obtain ⟨r, hr⟩ := (mem_colours Lc c).1 hc
   rw [hU r] at hr
   unfold patOf
-  rw [if_pos hr, if_pos (by rw [hU 1]; exact hr), if_pos (by rw [hU 2]; exact hr)]
+  rw [ite_eq_left hr, ite_eq_left (by rw [hU 1]; exact hr), ite_eq_left (by rw [hU 2]; exact hr)]
 
 include hU in
 theorem colours_U : Col.colours Lc = Lc 0 := by
@@ -51,9 +51,9 @@ theorem cnt_U (p : ℕ) : cnt Lc p = if p = 6 then 3 else 0 := by
   unfold cnt
   by_cases hp : p = 6
   · subst hp
-    rw [if_pos rfl, Finset.filter_true_of_mem (fun c hc => patOf_U Lc hU c hc), colours_U Lc hU]
+    rw [ite_eq_left rfl, Finset.filter_true_of_mem (fun c hc => patOf_U Lc hU c hc), colours_U Lc hU]
     exact h3 0
-  · rw [if_neg hp, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+  · rw [ite_eq_right hp, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     intro c hc h
     rw [patOf_U Lc hU c hc] at h
     omega
@@ -80,10 +80,10 @@ theorem mact_U (p q : ℕ) : mact Lc Lc p q = if p = 6 ∧ q = 6 then 3 else 0 :
   rw [commonI_U Lc hU]
   by_cases hpq : p = 6 ∧ q = 6
   · obtain ⟨rfl, rfl⟩ := hpq
-    rw [if_pos ⟨rfl, rfl⟩, Finset.filter_true_of_mem, colours_U Lc hU]
+    rw [ite_eq_left ⟨rfl, rfl⟩, Finset.filter_true_of_mem, colours_U Lc hU]
     · exact h3 0
     · intro c hc; rw [patOf_U Lc hU c hc]; exact ⟨rfl, rfl⟩
-  · rw [if_neg hpq, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+  · rw [ite_eq_right hpq, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     intro c hc ⟨h1, h2⟩
     rw [patOf_U Lc hU c hc] at h1 h2
     exact hpq ⟨by omega, by omega⟩

@@ -1,4 +1,5 @@
 import GridGen.PolymerWalkTree
+import Mathlib.Tactic.Ring
 
 /-!
 # Parity-sensitive walk-tree budgets from a numeric certificate

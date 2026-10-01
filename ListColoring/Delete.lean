@@ -65,12 +65,12 @@ color was there to begin with. -/
 lemma card_inducedList_of_adj {M : ListAssignment (Option V)} {c : ℕ} {v : V}
     (hadj : H.Adj none (some v)) (hc : c ∈ M (some v)) :
     (H.inducedList M c v).card = (M (some v)).card - 1 := by
-  rw [inducedList, if_pos hadj, Finset.card_erase_of_mem hc]
+  rw [inducedList, ite_eq_left hadj, Finset.card_erase_of_mem hc]
 
 lemma card_inducedList_of_not_adj {M : ListAssignment (Option V)} {c : ℕ} {v : V}
     (hadj : ¬ H.Adj none (some v)) :
     (H.inducedList M c v).card = (M (some v)).card := by
-  rw [inducedList, if_neg hadj]
+  rw [inducedList, ite_eq_right hadj]
 
 /-- **The deletion identity.** Colorings of `H` from `M` that give the color `c` to `none`
 correspond exactly to colorings of `H − none` from the induced list assignment. -/

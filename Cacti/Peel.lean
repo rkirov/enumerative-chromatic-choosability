@@ -73,10 +73,10 @@ theorem rootedWcol2_weight_at (L : ListAssignment V) (w : V → ℕ → ℕ) (r 
   rw [← Finset.mul_prod_erase Finset.univ (fun v => w v (f v)) hu',
     ← Finset.mul_prod_erase Finset.univ
       (fun v => (if v = u then 1 else w v (f v))) hu']
-  rw [if_pos rfl, one_mul, hf.2.2]
+  rw [ite_eq_left rfl, one_mul, hf.2.2]
   congr 1
   refine Finset.prod_congr rfl fun v hv => ?_
-  rw [if_neg (Finset.ne_of_mem_erase hv)]
+  rw [ite_eq_right (Finset.ne_of_mem_erase hv)]
 
 
 /-- **The peel step** (UM-107's engine): at a vertex `u ≠ r` whose weight is pair-dominant
@@ -214,47 +214,47 @@ theorem rootedWcol2_delete {r u : V} (hru : r ≠ u) (L : ListAssignment V) (w :
     refine ⟨⟨?_, ?_⟩, ?_, ?_⟩
     · intro v
       by_cases hv : v = u
-      · rw [dif_pos hv, hv]
+      · rw [dite_eq_left hv, hv]
         exact ha
-      · rw [dif_neg hv]
+      · rw [dite_eq_right hv]
         exact hmem _
     · intro v y hadj
       by_cases hv : v = u
-      · rw [dif_pos hv]
+      · rw [dite_eq_left hv]
         by_cases hy : y = u
         · exact absurd (hv ▸ hy ▸ hadj) (G.irrefl)
-        · rw [dif_neg hy]
+        · rw [dite_eq_right hy]
           exact fun h => hcompat ⟨y, hy⟩ (hv ▸ hadj) h.symm
-      · rw [dif_neg hv]
+      · rw [dite_eq_right hv]
         by_cases hy : y = u
-        · rw [dif_pos hy]
+        · rw [dite_eq_left hy]
           exact fun h => hcompat ⟨v, hv⟩ (hy ▸ hadj.symm) h
-        · rw [dif_neg hy]
+        · rw [dite_eq_right hy]
           exact hprop ⟨v, hv⟩ ⟨y, hy⟩ hadj
     · show (if hv : r = u then a else g ⟨r, hv⟩) = c
-      rw [dif_neg hru]
+      rw [dite_eq_right hru]
       exact hgr
     · show (if hv : u = u then a else g ⟨u, hv⟩) = a
-      rw [dif_pos rfl]
+      rw [dite_eq_left rfl]
   · -- left inverse
     intro f hf
     rw [Finset.mem_filter] at hf
     funext v
     show (if hv : v = u then a else f v) = f v
     by_cases hv : v = u
-    · rw [dif_pos hv, ← hf.2.2, hv]
-    · rw [dif_neg hv]
+    · rw [dite_eq_left hv, ← hf.2.2, hv]
+    · rw [dite_eq_right hv]
   · -- right inverse
     intro g hg
     funext v
     show (if hv : (v : V) = u then a else g ⟨v, hv⟩) = g v
-    rw [dif_neg v.property]
+    rw [dite_eq_right v.property]
   · -- summand
     intro f hf
     rw [Finset.mem_filter] at hf
-    rw [prod_delOption (fun v => if v = u then 1 else w v (f v)) u, if_pos rfl, one_mul]
+    rw [prod_delOption (fun v => if v = u then 1 else w v (f v)) u, ite_eq_left rfl, one_mul]
     refine Finset.prod_congr rfl fun v _ => ?_
-    rw [if_neg v.property]
+    rw [ite_eq_right v.property]
 
 end Deletion
 
@@ -294,7 +294,7 @@ theorem slack_of_two_nbrs {r u : V} (hru : r ≠ u) {n₁ n₂ : V}
   rw [hsplit a, Finset.sum_congr rfl (fun e he => hsplit e), Finset.sum_comm]
   refine Finset.sum_le_sum fun g hg => ?_
   by_cases hcompat : ∀ y : {y : V // y ≠ u}, G.Adj u y.val → g y ≠ a
-  · rw [if_pos hcompat]
+  · rw [ite_eq_left hcompat]
     -- the excluded colour values: the image of `g` on the ≤ 2 neighbours of `u`
     set D : Finset ℕ :=
       (Finset.univ.filter (fun y : {y : V // y ≠ u} => G.Adj u y.val)).image g with hD
@@ -331,7 +331,7 @@ theorem slack_of_two_nbrs {r u : V} (hru : r ≠ u) {n₁ n₂ : V}
       exact heD (Finset.mem_image.mpr ⟨y, Finset.mem_filter.mpr ⟨Finset.mem_univ _, hy⟩, hcon⟩)
     calc (∏ v : {y : V // y ≠ u}, w v.val (g v))
         = (if (∀ y : {y : V // y ≠ u}, G.Adj u y.val → g y ≠ e) then
-            ∏ v : {y : V // y ≠ u}, w v.val (g v) else 0) := by rw [if_pos hecompat]
+            ∏ v : {y : V // y ≠ u}, w v.val (g v) else 0) := by rw [ite_eq_left hecompat]
       _ ≤ ∑ e' ∈ (L u).erase a,
             (if (∀ y : {y : V // y ≠ u}, G.Adj u y.val → g y ≠ e') then
               ∏ v : {y : V // y ≠ u}, w v.val (g v) else 0) :=
@@ -339,7 +339,7 @@ theorem slack_of_two_nbrs {r u : V} (hru : r ≠ u) {n₁ n₂ : V}
             (f := fun e' => if (∀ y : {y : V // y ≠ u}, G.Adj u y.val → g y ≠ e') then
               ∏ v : {y : V // y ≠ u}, w v.val (g v) else 0)
             (fun e' _ => Nat.zero_le _) hea
-  · rw [if_neg hcompat]
+  · rw [ite_eq_right hcompat]
     exact Nat.zero_le _
 
 end Slack
@@ -353,8 +353,8 @@ theorem rootedWcol_root_weight (L : ListAssignment V) (wr : ℕ → ℕ) (r : V)
   rw [rootedWcol, rootedCol, Finset.card_eq_sum_ones, Finset.mul_sum]
   refine Finset.sum_congr rfl fun f hf => ?_
   rw [Finset.mem_filter] at hf
-  rw [prod_delOption (fun v => if v = r then wr (f v) else 1) r, if_pos rfl, hf.2,
-    Finset.prod_congr rfl (fun v _ => if_neg v.property), Finset.prod_const_one, mul_one]
+  rw [prod_delOption (fun v => if v = r then wr (f v) else 1) r, ite_eq_left rfl, hf.2,
+    Finset.prod_congr rfl (fun v _ => ite_eq_right v.property), Finset.prod_const_one, mul_one]
 
 /-- **The peel induction**: peeling every vertex of `T` (away from the root) extracts the
 square of its normalizer product, leaving the weight trivial off the root. -/
@@ -378,8 +378,8 @@ theorem peel_all {r : V} {k : ℕ} (hk : 4 ≤ k) (L : ListAssignment V)
       intro c'
       refine rootedWcol_weight_congr (fun v e _ => ?_) _ _
       by_cases hv : v = r
-      · rw [if_pos hv, hv]
-      · rw [if_neg hv, htriv v (Finset.notMem_empty v) hv]
+      · rw [ite_eq_left hv, hv]
+      · rw [ite_eq_right hv, htriv v (Finset.notMem_empty v) hv]
     rw [← hcong c, ← hcong d]
     simp
   | @insert u T huT IH =>
@@ -394,22 +394,22 @@ theorem peel_all {r : V} {k : ℕ} (hk : 4 ≤ k) (L : ListAssignment V)
     -- then the smaller set, on the `u`-trivialized weight
     have hIH := IH hrT' (fun v e => if v = u then 1 else w v e)
       (fun v hv c' hc' d' hd' hcd' => by
-        simp only [if_neg (fun h : v = u => huT (h ▸ hv))]
+        simp only [ite_eq_right (fun h : v = u => huT (h ▸ hv))]
         exact hdomT v (Finset.mem_insert_of_mem hv) c' hc' d' hd' hcd')
       (fun v hv hvr e => by
         by_cases hvu : v = u
-        · rw [if_pos hvu]
-        · rw [if_neg hvu]
+        · rw [ite_eq_left hvu]
+        · rw [ite_eq_right hvu]
           exact htriv v (fun h => (Finset.mem_insert.mp h).elim hvu hv) hvr e)
     have hroot : (fun v e => if v = r then
         (fun v' e' => if v' = u then 1 else w v' e') r e else 1)
         = (fun v e => if v = r then w r e else 1) := by
       funext v e
       by_cases hv : v = r
-      · rw [if_pos hv, if_pos hv]
+      · rw [ite_eq_left hv, ite_eq_left hv]
         show (if r = u then 1 else w r e) = w r e
-        rw [if_neg (fun h : r = u => hur h.symm)]
-      · rw [if_neg hv, if_neg hv]
+        rw [ite_eq_right (fun h : r = u => hur h.symm)]
+      · rw [ite_eq_right hv, ite_eq_right hv]
     rw [hroot] at hIH
     calc (∏ v ∈ insert u T, W v) ^ 2 *
           (rootedWcol G L (fun v e => if v = r then w r e else 1) r c *

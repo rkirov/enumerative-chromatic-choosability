@@ -373,13 +373,13 @@ theorem exists_iso_closePath_of_two_regular {W : Type} [Fintype W] [DecidableEq 
   have hnext : ∀ i, i ≤ k → H.Adj (f i) (f (if i = k then 0 else i + 1)) := by
     intro i hi
     by_cases h : i = k
-    · rw [if_pos h, h]; exact hclose
-    · rw [if_neg h]; exact hstep i (by omega)
+    · rw [ite_eq_left h, h]; exact hclose
+    · rw [ite_eq_right h]; exact hstep i (by omega)
   have hprev : ∀ i, i ≤ k → H.Adj (f i) (f (if i = 0 then k else i - 1)) := by
     intro i hi
     by_cases h : i = 0
-    · rw [if_pos h, h]; exact hclose.symm
-    · rw [if_neg h]
+    · rw [ite_eq_left h, h]; exact hclose.symm
+    · rw [ite_eq_right h]
       have h2 := hstep (i - 1) (by omega)
       rw [show i - 1 + 1 = i by omega] at h2
       exact h2.symm
@@ -454,10 +454,10 @@ variable {o len ps pt : ℕ}
 @[simp] lemma armIdx_zero : armIdx o len ps pt 0 = ps := rfl
 
 lemma armIdx_len (h : 1 ≤ len) : armIdx o len ps pt len = pt := by
-  unfold armIdx; rw [if_neg (by omega), if_pos rfl]
+  unfold armIdx; rw [ite_eq_right (by omega), ite_eq_left rfl]
 
 lemma armIdx_mid {i : ℕ} (h1 : 1 ≤ i) (h2 : i < len) : armIdx o len ps pt i = o + (i - 1) := by
-  unfold armIdx; rw [if_neg (by omega), if_neg (by omega)]
+  unfold armIdx; rw [ite_eq_right (by omega), ite_eq_right (by omega)]
 
 /-- The positions of an arm get distinct indices. -/
 lemma armIdx_inj (hlen : 1 ≤ len) (hgap : o + len ≤ ps + 1) (hpp : ps < pt)
@@ -681,35 +681,35 @@ lemma armVertex_tgArm (h : IsThetaArms H a b c p q r) {t : ℕ} (ht : t < 3) {i 
     have hi' : i ≤ a := hi
     show armVertex a b c p q r (armIdx 0 a (a + b + c - 3) (a + b + c - 2) i) = p i
     rcases Nat.eq_zero_or_pos i with rfl | hi0
-    · rw [armIdx_zero]; unfold armVertex; rw [if_neg (by omega), if_pos rfl]
+    · rw [armIdx_zero]; unfold armVertex; rw [ite_eq_right (by omega), ite_eq_left rfl]
     by_cases hil : i < a
     · rw [armIdx_mid hi0 hil]; unfold armVertex
-      rw [if_neg (by omega), if_neg (by omega), if_pos (by omega)]
+      rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left (by omega)]
       congr 1; omega
-    · rw [show i = a by omega, armIdx_len ha]; unfold armVertex; rw [if_pos rfl]
+    · rw [show i = a by omega, armIdx_len ha]; unfold armVertex; rw [ite_eq_left rfl]
   | 1, _ =>
     have hi' : i ≤ b := hi
     show armVertex a b c p q r (armIdx (a - 1) b (a + b + c - 3) (a + b + c - 2) i) = q i
     rcases Nat.eq_zero_or_pos i with rfl | hi0
-    · rw [armIdx_zero]; unfold armVertex; rw [if_neg (by omega), if_pos rfl]
+    · rw [armIdx_zero]; unfold armVertex; rw [ite_eq_right (by omega), ite_eq_left rfl]
       exact (h.start 1 (by omega)).symm
     by_cases hil : i < b
     · rw [armIdx_mid hi0 hil]; unfold armVertex
-      rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), if_pos (by omega)]
+      rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left (by omega)]
       congr 1; omega
-    · rw [show i = b by omega, armIdx_len hb]; unfold armVertex; rw [if_pos rfl]
+    · rw [show i = b by omega, armIdx_len hb]; unfold armVertex; rw [ite_eq_left rfl]
       exact (h.finish 1 (by omega)).symm
   | 2, _ =>
     have hi' : i ≤ c := hi
     show armVertex a b c p q r (armIdx (a + b - 2) c (a + b + c - 3) (a + b + c - 2) i) = r i
     rcases Nat.eq_zero_or_pos i with rfl | hi0
-    · rw [armIdx_zero]; unfold armVertex; rw [if_neg (by omega), if_pos rfl]
+    · rw [armIdx_zero]; unfold armVertex; rw [ite_eq_right (by omega), ite_eq_left rfl]
       exact (h.start 2 (by omega)).symm
     by_cases hil : i < c
     · rw [armIdx_mid hi0 hil]; unfold armVertex
-      rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), if_neg (by omega)]
+      rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega)]
       congr 1; omega
-    · rw [show i = c by omega, armIdx_len hc]; unfold armVertex; rw [if_pos rfl]
+    · rw [show i = c by omega, armIdx_len hc]; unfold armVertex; rw [ite_eq_left rfl]
       exact (h.finish 2 (by omega)).symm
 
 lemma tgArm_zero {t : ℕ} (ht : t < 3) : tgArm a b c t 0 = a + b + c - 3 := by

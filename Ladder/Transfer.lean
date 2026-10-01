@@ -214,22 +214,22 @@ theorem ext_add_card_inter {T B : Finset ℕ} {a b : ℕ} (hab : a ≠ b) :
   have hb : (((T ∩ B).erase a).erase b).card + (if b ∈ (T ∩ B).erase a then 1 else 0)
       = ((T ∩ B).erase a).card := by
     by_cases h : b ∈ (T ∩ B).erase a
-    · rw [if_pos h, Finset.card_erase_of_mem h]
+    · rw [ite_eq_left h, Finset.card_erase_of_mem h]
       have : 0 < ((T ∩ B).erase a).card := Finset.card_pos.mpr ⟨b, h⟩
       omega
-    · rw [if_neg h, Finset.erase_eq_of_notMem h]
+    · rw [ite_eq_right h, Finset.erase_eq_of_notMem h]
       omega
   have ha : ((T ∩ B).erase a).card + (if a ∈ T ∩ B then 1 else 0) = (T ∩ B).card := by
     by_cases h : a ∈ T ∩ B
-    · rw [if_pos h, Finset.card_erase_of_mem h]
+    · rw [ite_eq_left h, Finset.card_erase_of_mem h]
       have : 0 < (T ∩ B).card := Finset.card_pos.mpr ⟨a, h⟩
       omega
-    · rw [if_neg h, Finset.erase_eq_of_notMem h]
+    · rw [ite_eq_right h, Finset.erase_eq_of_notMem h]
       omega
   have hbeq : (if b ∈ (T ∩ B).erase a then 1 else 0) = (if b ∈ T ∩ B then 1 else 0) := by
     by_cases h : b ∈ T ∩ B
-    · rw [if_pos h, if_pos (Finset.mem_erase.mpr ⟨fun hc => hab hc.symm, h⟩)]
-    · rw [if_neg h, if_neg (fun hc => h (Finset.mem_of_mem_erase hc))]
+    · rw [ite_eq_left h, ite_eq_left (Finset.mem_erase.mpr ⟨fun hc => hab hc.symm, h⟩)]
+    · rw [ite_eq_right h, ite_eq_right (fun hc => h (Finset.mem_of_mem_erase hc))]
   rw [hbeq] at hb
   omega
 
@@ -237,10 +237,10 @@ theorem card_erase_add {T : Finset ℕ} {a : ℕ} :
     (T.erase a).card + (if a ∈ T then 1 else 0) = T.card := by
   classical
   by_cases h : a ∈ T
-  · rw [if_pos h, Finset.card_erase_of_mem h]
+  · rw [ite_eq_left h, Finset.card_erase_of_mem h]
     have : 0 < T.card := Finset.card_pos.mpr ⟨a, h⟩
     omega
-  · rw [if_neg h, Finset.erase_eq_of_notMem h]
+  · rw [ite_eq_right h, Finset.erase_eq_of_notMem h]
     omega
 
 /-! ### The deficient state is unique, and everything off its row and column has slack
@@ -277,61 +277,61 @@ theorem deficient_structure {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.
   -- Step 1: both erasures must drop an element, i.e. `x ∈ T` and `y ∈ B`.
   have hxT : x ∈ T := by
     by_contra hxT
-    rw [if_neg hxT] at hTe
+    rw [ite_eq_right hxT] at hTe
     have hTc : (T.erase x).card = m + 2 := by omega
     have hix : (if x ∈ T ∩ B then 1 else 0) = 0 :=
-      if_neg fun h => hxT (Finset.mem_inter.mp h).1
+      ite_eq_right fun h => hxT (Finset.mem_inter.mp h).1
     by_cases hyB : y ∈ B
-    · rw [if_pos hyB] at hBe
+    · rw [ite_eq_left hyB] at hBe
       have hBc : (B.erase y).card = m + 1 := by omega
       rw [hTc, hBc, hdef', hp3, hix] at hform
       by_cases hyT : y ∈ T
-      · rw [if_pos (Finset.mem_inter.mpr ⟨hyT, hyB⟩)] at hform; omega
-      · rw [if_neg (fun h => hyT (Finset.mem_inter.mp h).1)] at hform
+      · rw [ite_eq_left (Finset.mem_inter.mpr ⟨hyT, hyB⟩)] at hform; omega
+      · rw [ite_eq_right (fun h => hyT (Finset.mem_inter.mp h).1)] at hform
         -- `mI = 2m + 2` and `mI ≤ m + 2` force `m = 0` and a full intersection, so `T = B`
         exact hyT (by rw [hTB_of_full (by omega : (T ∩ B).card = m + 2)]; exact hyB)
-    · rw [if_neg hyB] at hBe
+    · rw [ite_eq_right hyB] at hBe
       have hBc : (B.erase y).card = m + 2 := by omega
       rw [hTc, hBc, hdef', hp4, hix,
-        if_neg (fun h => hyB (Finset.mem_inter.mp h).2)] at hform
+        ite_eq_right (fun h => hyB (Finset.mem_inter.mp h).2)] at hform
       omega
   have hyB : y ∈ B := by
     by_contra hyB
-    rw [if_neg hyB] at hBe
+    rw [ite_eq_right hyB] at hBe
     have hBc : (B.erase y).card = m + 2 := by omega
-    rw [if_pos hxT] at hTe
+    rw [ite_eq_left hxT] at hTe
     have hTc : (T.erase x).card = m + 1 := by omega
-    rw [hTc, hBc, hdef', hp2, if_neg (fun h => hyB (Finset.mem_inter.mp h).2)] at hform
+    rw [hTc, hBc, hdef', hp2, ite_eq_right (fun h => hyB (Finset.mem_inter.mp h).2)] at hform
     by_cases hxB : x ∈ B
-    · rw [if_pos (Finset.mem_inter.mpr ⟨hxT, hxB⟩)] at hform; omega
-    · rw [if_neg (fun h => hxB (Finset.mem_inter.mp h).2)] at hform
+    · rw [ite_eq_left (Finset.mem_inter.mpr ⟨hxT, hxB⟩)] at hform; omega
+    · rw [ite_eq_right (fun h => hxB (Finset.mem_inter.mp h).2)] at hform
       exact hxB (by rw [← hTB_of_full (by omega : (T ∩ B).card = m + 2)]; exact hxT)
   -- Step 2: with both erasures dropping, the intersection is pinned.
-  rw [if_pos hxT] at hTe
-  rw [if_pos hyB] at hBe
+  rw [ite_eq_left hxT] at hTe
+  rw [ite_eq_left hyB] at hBe
   have hTc : (T.erase x).card = m + 1 := by omega
   have hBc : (B.erase y).card = m + 1 := by omega
   rw [hTc, hBc, hdef', hp1] at hform
   -- Step 3: neither `x ∈ B` nor `y ∈ T`, else the intersection is everything and `T = B`.
   have hxB : x ∉ B := by
     intro hxB
-    have hix : (if x ∈ T ∩ B then 1 else 0) = 1 := if_pos (Finset.mem_inter.mpr ⟨hxT, hxB⟩)
+    have hix : (if x ∈ T ∩ B then 1 else 0) = 1 := ite_eq_left (Finset.mem_inter.mpr ⟨hxT, hxB⟩)
     have hiy1 : (if y ∈ T ∩ B then 1 else 0) ≤ 1 := by split <;> omega
     rw [hix] at hform
     have hfull : (T ∩ B).card = m + 2 := by omega
     have hyT : y ∈ T := by rw [hTB_of_full hfull]; exact hyB
-    rw [if_pos (Finset.mem_inter.mpr ⟨hyT, hyB⟩)] at hform
+    rw [ite_eq_left (Finset.mem_inter.mpr ⟨hyT, hyB⟩)] at hform
     omega
   have hyT : y ∉ T := by
     intro hyT
-    have hiy : (if y ∈ T ∩ B then 1 else 0) = 1 := if_pos (Finset.mem_inter.mpr ⟨hyT, hyB⟩)
+    have hiy : (if y ∈ T ∩ B then 1 else 0) = 1 := ite_eq_left (Finset.mem_inter.mpr ⟨hyT, hyB⟩)
     have hix : (if x ∈ T ∩ B then 1 else 0) = 0 :=
-      if_neg fun h => hxB (Finset.mem_inter.mp h).2
+      ite_eq_right fun h => hxB (Finset.mem_inter.mp h).2
     rw [hix, hiy] at hform
     have hfull : (T ∩ B).card = m + 2 := by omega
     exact hxB (by rw [← hTB_of_full hfull]; exact hxT)
-  have hix : (if x ∈ T ∩ B then 1 else 0) = 0 := if_neg fun h => hxB (Finset.mem_inter.mp h).2
-  have hiy : (if y ∈ T ∩ B then 1 else 0) = 0 := if_neg fun h => hyT (Finset.mem_inter.mp h).1
+  have hix : (if x ∈ T ∩ B then 1 else 0) = 0 := ite_eq_right fun h => hxB (Finset.mem_inter.mp h).2
+  have hiy : (if y ∈ T ∩ B then 1 else 0) = 0 := ite_eq_right fun h => hyT (Finset.mem_inter.mp h).1
   rw [hix, hiy] at hform
   exact ⟨hxT, hxB, hyB, hyT, by omega⟩
 
@@ -377,32 +377,32 @@ theorem ext_ge_succ_of_ne {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.ca
     have hbT : b ∈ T := by
       refine mem_of_ne_of_card hB hyB hyT ?_ (by omega) hbB hby
       rw [Finset.inter_comm]; omega
-    rw [if_pos haT] at hTe
-    rw [if_pos hbB] at hBe
+    rw [ite_eq_left haT] at hTe
+    rw [ite_eq_left hbB] at hBe
     rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 1 by omega, hp1,
-      if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩), if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
+      ite_eq_left (Finset.mem_inter.mpr ⟨haT, haB⟩), ite_eq_left (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
     omega
   · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB (by omega) (by omega) haT hax
-    rw [if_pos haT] at hTe
-    rw [if_neg hbB] at hBe
+    rw [ite_eq_left haT] at hTe
+    rw [ite_eq_right hbB] at hBe
     rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 2 by omega, hp2,
-      if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩),
-      if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
+      ite_eq_left (Finset.mem_inter.mpr ⟨haT, haB⟩),
+      ite_eq_right (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
     omega
   · have hbT : b ∈ T := by
       refine mem_of_ne_of_card hB hyB hyT ?_ (by omega) hbB hby
       rw [Finset.inter_comm]; omega
-    rw [if_neg haT] at hTe
-    rw [if_pos hbB] at hBe
+    rw [ite_eq_right haT] at hTe
+    rw [ite_eq_left hbB] at hBe
     rw [show (T.erase a).card = m + 2 by omega, show (B.erase b).card = m + 1 by omega, hp3,
-      if_neg (fun h => haT (Finset.mem_inter.mp h).1),
-      if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
+      ite_eq_right (fun h => haT (Finset.mem_inter.mp h).1),
+      ite_eq_left (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
     omega
-  · rw [if_neg haT] at hTe
-    rw [if_neg hbB] at hBe
+  · rw [ite_eq_right haT] at hTe
+    rw [ite_eq_right hbB] at hBe
     rw [show (T.erase a).card = m + 2 by omega, show (B.erase b).card = m + 2 by omega, hp4,
-      if_neg (fun h => haT (Finset.mem_inter.mp h).1),
-      if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
+      ite_eq_right (fun h => haT (Finset.mem_inter.mp h).1),
+      ite_eq_right (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
     omega
 
 /-- Every state other than the deficient one already clears the floor. -/
@@ -423,20 +423,20 @@ theorem ext_ge_of_ne {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.card = 
     rw [hB] at hBe
     have hp1 : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
     have hp2 : (m + 1) * (m + 2) = (m + 1) * m + 2 * (m + 1) := by ring
-    rw [if_pos hxT] at hTe
+    rw [ite_eq_left hxT] at hTe
     have hia : (if a ∈ T ∩ B then 1 else 0) = 0 :=
-      if_neg fun h => hxB (Finset.mem_inter.mp h).2
+      ite_eq_right fun h => hxB (Finset.mem_inter.mp h).2
     by_cases hbB : b ∈ B
     · have hbT : b ∈ T := by
         refine mem_of_ne_of_card hB hyB hyT ?_ (by omega) hbB hby
         rw [Finset.inter_comm]; omega
-      rw [if_pos hbB] at hBe
+      rw [ite_eq_left hbB] at hBe
       rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 1 by omega, hp1,
-        hia, if_pos (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
+        hia, ite_eq_left (Finset.mem_inter.mpr ⟨hbT, hbB⟩)] at hform
       omega
-    · rw [if_neg hbB] at hBe
+    · rw [ite_eq_right hbB] at hBe
       rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 2 by omega, hp2,
-        hia, if_neg (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
+        hia, ite_eq_right (fun h => hbB (Finset.mem_inter.mp h).2)] at hform
       omega
   · by_cases hby : b = y
     · subst hby
@@ -449,18 +449,18 @@ theorem ext_ge_of_ne {t : ℕ} (ht : 2 ≤ t) {T B : Finset ℕ} (hT : T.card = 
       rw [hB] at hBe
       have hp1 : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
       have hp3 : (m + 2) * (m + 1) = (m + 1) * m + 2 * (m + 1) := by ring
-      rw [if_pos hyB] at hBe
+      rw [ite_eq_left hyB] at hBe
       have hib : (if b ∈ T ∩ B then 1 else 0) = 0 :=
-        if_neg fun h => hyT (Finset.mem_inter.mp h).1
+        ite_eq_right fun h => hyT (Finset.mem_inter.mp h).1
       by_cases haT : a ∈ T
       · have haB : a ∈ B := mem_of_ne_of_card hT hxT hxB (by omega) (by omega) haT hax
-        rw [if_pos haT] at hTe
+        rw [ite_eq_left haT] at hTe
         rw [show (T.erase a).card = m + 1 by omega, show (B.erase b).card = m + 1 by omega, hp1,
-          hib, if_pos (Finset.mem_inter.mpr ⟨haT, haB⟩)] at hform
+          hib, ite_eq_left (Finset.mem_inter.mpr ⟨haT, haB⟩)] at hform
         omega
-      · rw [if_neg haT] at hTe
+      · rw [ite_eq_right haT] at hTe
         rw [show (T.erase a).card = m + 2 by omega, show (B.erase b).card = m + 1 by omega, hp3,
-          hib, if_neg (fun h => haT (Finset.mem_inter.mp h).1)] at hform
+          hib, ite_eq_right (fun h => haT (Finset.mem_inter.mp h).1)] at hform
         omega
     · exact le_trans (by omega) (ext_ge_succ_of_ne ht hT hB hxT hxB hyB hyT hm hab hax hby)
 
@@ -529,17 +529,17 @@ theorem floor_succ_mul_total_le {t : ℕ} (ht : 2 ≤ t) {S : Finset (ℕ × ℕ
       intro p hp
       by_cases hoff : ¬ p.1 = q.1 ∧ ¬ p.2 = q.2
       · have hpq : p ≠ q := fun h => hoff.1 (by rw [h])
-        rw [if_pos hoff, if_neg hpq]
+        rw [ite_eq_left hoff, ite_eq_right hpq]
         have hge : F + 2 ≤ ext T B p.1 p.2 :=
           ext_ge_succ_of_ne ht hT hB hxT hxB hyB hyT hm (hSsub p hp) hoff.1 hoff.2
         have hmul := Nat.mul_le_mul_left (N p) hge
         nlinarith [hmul]
-      · rw [if_neg hoff, Nat.add_zero]
+      · rw [ite_eq_right hoff, Nat.add_zero]
         by_cases hpq : p = q
         · subst hpq
-          rw [if_pos rfl, hdef]
+          rw [ite_eq_left rfl, hdef]
           nlinarith []
-        · rw [if_neg hpq]
+        · rw [ite_eq_right hpq]
           have hnp : ¬ (p.1 = q.1 ∧ p.2 = q.2) := fun h => hpq (Prod.ext h.1 h.2)
           have hge : F + 1 ≤ ext T B p.1 p.2 :=
             ext_ge_of_ne ht hT hB hxT hxB hyB hyT hm (hSsub p hp) hnp
@@ -547,7 +547,7 @@ theorem floor_succ_mul_total_le {t : ℕ} (ht : 2 ≤ t) {S : Finset (ℕ × ℕ
           nlinarith [hmul]
     have hsum := Finset.sum_le_sum hpoint
     rw [Finset.sum_add_distrib, Finset.sum_add_distrib, ← Finset.mul_sum, ← total,
-      ← Finset.sum_filter, Finset.sum_ite_eq' S q N, if_pos hqS] at hsum
+      ← Finset.sum_filter, Finset.sum_ite_eq' S q N, ite_eq_left hqS] at hsum
     -- the invariant says there is at least `N q` of mass off `q`'s row and column
     have hq' : (q.1, q.2) ∈ S := by simpa using hqS
     have hoffsum := sum_off_add (N := N) hq'
@@ -697,11 +697,11 @@ theorem ext_const {k a b : ℕ} (ha : a ∈ Finset.range k) (hb : b ∈ Finset.r
     Finset.inter_self _
   have hTe := card_erase_add (T := Finset.range (m + 2)) (a := a)
   have hBe := card_erase_add (T := Finset.range (m + 2)) (a := b)
-  rw [Finset.card_range, if_pos ha] at hTe
-  rw [Finset.card_range, if_pos hb] at hBe
+  rw [Finset.card_range, ite_eq_left ha] at hTe
+  rw [Finset.card_range, ite_eq_left hb] at hBe
   have hTc : ((Finset.range (m + 2)).erase a).card = m + 1 := by omega
   have hBc : ((Finset.range (m + 2)).erase b).card = m + 1 := by omega
-  rw [hTc, hBc, hself, Finset.card_range, if_pos ha, if_pos hb] at hform
+  rw [hTc, hBc, hself, Finset.card_range, ite_eq_left ha, ite_eq_left hb] at hform
   have hp : (m + 1) * (m + 1) = (m + 1) * m + (m + 1) := by ring
   have hlam : lam (m + 2) = (m + 1) * m + 1 := by simp [lam]
   omega

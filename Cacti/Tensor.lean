@@ -56,9 +56,9 @@ theorem onesPlus_pow_apply : ∀ (s : ℕ) (i j : Fin 3),
   | zero =>
     intro i j
     by_cases hij : i = j
-    · rw [if_pos hij, hij, pow_zero, Matrix.one_apply_eq, gammaPlus_zero]
+    · rw [ite_eq_left hij, hij, pow_zero, Matrix.one_apply_eq, gammaPlus_zero]
       rfl
-    · rw [if_neg hij, pow_zero, Matrix.one_apply_ne hij, gammaPlus_zero]
+    · rw [ite_eq_right hij, pow_zero, Matrix.one_apply_ne hij, gammaPlus_zero]
   | succ s ih =>
     intro i j
     rw [pow_succ', Matrix.mul_apply, Fin.sum_univ_three]

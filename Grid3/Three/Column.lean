@@ -78,7 +78,7 @@ theorem patOf_pos (c : ℕ) (hc : c ∈ colours Lc) : 0 < patOf Lc c := by
 
 theorem patOf_eq_zero (c : ℕ) (hc : c ∉ colours Lc) : patOf Lc c = 0 := by
   unfold patOf
-  rw [if_neg, if_neg, if_neg]
+  rw [ite_eq_right, ite_eq_right, ite_eq_right]
   all_goals intro h; exact hc ((mem_colours Lc c).2 ⟨_, h⟩)
 
 /-! ### The packed type -/
@@ -183,19 +183,19 @@ theorem sum_cnt_row (h3 : ∀ r, (Lc r).card = 3) (r : Fin 3) :
 theorem row0_sum (h3 : ∀ r, (Lc r).card = 3) : cnt Lc 0 + cnt Lc 2 + cnt Lc 4 + cnt Lc 6 = 3 := by
   have := sum_cnt_row Lc h3 0
   simp +decide only [Finset.sum_filter, Finset.sum_range_succ, Finset.sum_range_zero,
-    Fin.val_zero, if_true, if_false] at this
+    Fin.val_zero, ite_true, ite_false] at this
   omega
 
 theorem row1_sum (h3 : ∀ r, (Lc r).card = 3) : cnt Lc 1 + cnt Lc 2 + cnt Lc 5 + cnt Lc 6 = 3 := by
   have := sum_cnt_row Lc h3 1
   simp +decide only [Finset.sum_filter, Finset.sum_range_succ, Finset.sum_range_zero,
-    Fin.val_one, if_true, if_false] at this
+    Fin.val_one, ite_true, ite_false] at this
   omega
 
 theorem row2_sum (h3 : ∀ r, (Lc r).card = 3) : cnt Lc 3 + cnt Lc 4 + cnt Lc 5 + cnt Lc 6 = 3 := by
   have := sum_cnt_row Lc h3 2
   simp +decide only [Finset.sum_filter, Finset.sum_range_succ, Finset.sum_range_zero,
-    Fin.val_two, if_true, if_false] at this
+    Fin.val_two, ite_true, ite_false] at this
   omega
 
 theorem validType_packType (h3 : ∀ r, (Lc r).card = 3) : validType (packType Lc) = true := by
@@ -207,7 +207,7 @@ theorem validType_packType (h3 : ∀ r, (Lc r).card = 3) : validType (packType L
   unfold validType rowSum3
   show ((List.foldl _ 0 [0, 1, 2, 3, 4, 5, 6] == 3) && (List.foldl _ 0 [0, 1, 2, 3, 4, 5, 6] == 3)
     && (List.foldl _ 0 [0, 1, 2, 3, 4, 5, 6] == 3)) = true
-  simp +decide only [List.foldl, if_true, if_false, m0, m1, m2, m3, m4, m5, m6,
+  simp +decide only [List.foldl, ite_true, ite_false, m0, m1, m2, m3, m4, m5, m6,
     Bool.and_eq_true, beq_iff_eq]
   exact ⟨⟨by simpa using r0, by simpa using r1⟩, by simpa using r2⟩
 
@@ -235,7 +235,7 @@ theorem lawC_nonneg (s : Fin 3 → Fin C) : 0 ≤ lawC Lc s := by
   · exact le_refl _
 
 theorem lawC_of_not (s : Fin 3 → Fin C) (h : ¬ IsCol Lc s) : lawC Lc s = 0 := by
-  unfold lawC; rw [if_neg h]
+  unfold lawC; rw [ite_eq_right h]
 
 theorem isCol_of_lawC_pos (s : Fin 3 → Fin C) (h : 0 < lawC Lc s) : IsCol Lc s := by
   by_contra hn; rw [lawC_of_not Lc s hn] at h; exact lt_irrefl _ h

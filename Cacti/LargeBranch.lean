@@ -162,7 +162,7 @@ theorem sum_pin_fiber (s t : Fin (N + 1)) (φ : Fin 3 → Fin 3)
   rw [Finset.sum_eq_single (a s)]
   · by_cases h : a t = φ (a s) <;> simp [h]
   · intro c _ hc
-    exact if_neg (fun hh => hc hh.1.symm)
+    exact ite_eq_right (fun hh => hc hh.1.symm)
   · intro h
     exact absurd (Finset.mem_univ _) h
 
@@ -182,7 +182,7 @@ theorem corr_pin (σ : Equiv.Perm (Fin 3)) (s t : Fin (N + 1)) (p q : Fin 3) :
   by_cases hpq : p = q ∧ σ p ≠ p
   · obtain ⟨heq, hmv⟩ := hpq
     subst heq
-    rw [if_pos ⟨rfl, hmv⟩]
+    rw [ite_eq_left ⟨rfl, hmv⟩]
     have hset : (univ.filter (fun a : Fin (N + 1) → Fin 3 => (a s, a t) = (p, p))).filter
         (fun a => (∀ j, a j = a 0) ∧ σ (a 0) ≠ a 0) = {fun _ => p} := by
       ext a
@@ -195,7 +195,7 @@ theorem corr_pin (σ : Equiv.Perm (Fin 3)) (s t : Fin (N + 1)) (p q : Fin 3) :
       · rintro rfl
         exact ⟨⟨rfl, rfl⟩, fun j => rfl, hmv⟩
     rw [hset, Finset.card_singleton]
-  · rw [if_neg hpq, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+  · rw [ite_eq_right hpq, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     rintro a ha ⟨hconst, hmv⟩
     rw [Finset.mem_filter] at ha
     obtain ⟨-, hst⟩ := ha
@@ -242,14 +242,14 @@ theorem edge_mass (σ : Equiv.Perm (Fin 3)) (i : Fin (N + 1)) :
     have hz : (Fin.last N : Fin (N + 1)) + 1 = 0 := by apply Fin.ext; simp
     have hc := cell_two_pow σ (Fin.last N) (Fin.last N + 1) c (σ c)
     have hzero : (if c = σ c ∧ σ c ≠ c then (1:ℕ) else 0) = 0 := by
-      rw [if_neg]; rintro ⟨h1, h2⟩; exact h2 h1.symm
+      rw [ite_eq_right]; rintro ⟨h1, h2⟩; exact h2 h1.symm
     rw [hzero, add_zero] at hc
     have hres : resClose σ c c = 2 * (if σ c = c then 1 else 0) := by
       simp only [resClose, Matrix.of_apply]
       by_cases h : σ c = c
-      · rw [if_pos h.symm, if_pos h]
-      · rw [if_neg (fun hh : c = σ c => h hh.symm), if_neg h]
-    rw [hc, hz, pairMarginal_closing σ c c, if_pos rfl, hres]
+      · rw [ite_eq_left h.symm, ite_eq_left h]
+      · rw [ite_eq_right (fun hh : c = σ c => h hh.symm), ite_eq_right h]
+    rw [hc, hz, pairMarginal_closing σ c c, ite_eq_left rfl, hres]
   · have hi : i.val + 1 < N + 1 := by
       have h1 : i.val ≤ N := by omega
       have h2 : i.val ≠ N := fun hh => hlast (Fin.ext hh)
@@ -257,7 +257,7 @@ theorem edge_mass (σ : Equiv.Perm (Fin 3)) (i : Fin (N + 1)) :
     have hIf : ∀ a : Fin (N + 1) → Fin 3,
         (if a (i + 1) = (if i = Fin.last N then σ (a i) else a i) then 2 ^ hw σ a else 0)
           = (if a (i + 1) = a i then 2 ^ hw σ a else 0) := by
-      intro a; rw [if_neg hlast]
+      intro a; rw [ite_eq_right hlast]
     rw [Finset.sum_congr rfl (fun a _ => hIf a), sum_pin_fiber_id i (i + 1) (fun a => 2 ^ hw σ a)]
     refine hfin _ fun c => ?_
     have hc := cell_two_pow σ i (i + 1) c c
@@ -265,15 +265,15 @@ theorem edge_mass (σ : Equiv.Perm (Fin 3)) (i : Fin (N + 1)) :
       simp only [resOrd, Matrix.of_apply]
       by_cases h : σ c = c
       · simp [h]
-      · simp only [h, if_false]
-        rw [if_neg (fun hh : c = σ c => h hh.symm)]
+      · simp only [h, ite_false]
+        rw [ite_eq_right (fun hh : c = σ c => h hh.symm)]
         simp
-    rw [pairMarginal_ordinary σ i hi c c, if_pos rfl, hres] at hc
+    rw [pairMarginal_ordinary σ i hi c c, ite_eq_left rfl, hres] at hc
     by_cases h : σ c = c
-    · rw [if_neg (by rintro ⟨-, h2⟩; exact h2 h), if_pos h] at hc
-      rw [if_pos h]; omega
-    · rw [if_pos ⟨rfl, h⟩, if_neg h] at hc
-      rw [if_neg h]; omega
+    · rw [ite_eq_right (by rintro ⟨-, h2⟩; exact h2 h), ite_eq_left h] at hc
+      rw [ite_eq_left h]; omega
+    · rw [ite_eq_left ⟨rfl, h⟩, ite_eq_right h] at hc
+      rw [ite_eq_right h]; omega
 
 /-- **The entropy sum `∑_a h(a) 2^{h(a)}` at a general holonomy** (handoff (5.6) before the
 `Δ` correction): `m (6 γ_N + 2 f)` with `m = N + 1` terminals and `f = fix σ`. -/
@@ -320,7 +320,7 @@ theorem hw_const_moved (σ : Equiv.Perm (Fin 3)) (c : Fin 3) (hc : σ c ≠ c) :
       = (fun _ : Fin (N + 1) => c) i.succ) = univ := by
     apply Finset.filter_true_of_mem
     intro i _; rfl
-  rw [h1, Finset.card_univ, Fintype.card_fin, if_neg (by simpa using fun hh => hc hh.symm)]
+  rw [h1, Finset.card_univ, Fintype.card_fin, ite_eq_right (by simpa using fun hh => hc hh.symm)]
   omega
 
 theorem Uw_of_mem_movedConst {σ : Equiv.Perm (Fin 3)} {a : Fin (N + 1) → Fin 3}
@@ -328,7 +328,7 @@ theorem Uw_of_mem_movedConst {σ : Equiv.Perm (Fin 3)} {a : Fin (N + 1) → Fin 
   rw [mem_movedConst] at ha
   have hconst : a = fun _ => a 0 := funext ha.1
   unfold Uw
-  rw [if_pos ha]
+  rw [ite_eq_left ha]
   congr 1
   rw [hconst, hw_const_moved σ (a 0) ha.2]
 
@@ -336,7 +336,7 @@ theorem Uw_of_not_mem_movedConst {σ : Equiv.Perm (Fin 3)} {a : Fin (N + 1) → 
     (ha : a ∉ movedConst σ) : Uw σ a = 2 ^ hw σ a := by
   rw [mem_movedConst] at ha
   unfold Uw
-  rw [if_neg ha, add_zero]
+  rw [ite_eq_right ha, add_zero]
 
 /-- There are `3 - f` moved constant words. -/
 theorem card_movedConst_add_fixCount (σ : Equiv.Perm (Fin 3)) :
@@ -864,19 +864,19 @@ theorem prod_two_points {α : Type*} [Fintype α] [DecidableEq α] (i j : α) (h
       = (if k = i then u else 1) * (if k = j then v else 1) := by
     intro k
     by_cases h1 : k = i
-    · subst h1; rw [if_pos rfl, if_pos rfl, if_neg hij, mul_one]
-    · rw [if_neg h1, if_neg h1, one_mul]
+    · subst h1; rw [ite_eq_left rfl, ite_eq_left rfl, ite_eq_right hij, mul_one]
+    · rw [ite_eq_right h1, ite_eq_right h1, one_mul]
   rw [Finset.prod_congr rfl (fun k _ => hrw k), Finset.prod_mul_distrib,
     Finset.prod_ite_eq' univ i (fun _ => u), Finset.prod_ite_eq' univ j (fun _ => v),
-    if_pos (Finset.mem_univ i), if_pos (Finset.mem_univ j)]
+    ite_eq_left (Finset.mem_univ i), ite_eq_left (Finset.mem_univ j)]
 
 theorem prod_single_point {M : ℕ} (i₀ : Fin (M + 1)) (u v : ℕ) :
     (∏ k : Fin (M + 1), (if k = i₀ then u else v)) = u * v ^ M := by
   classical
   rw [← Finset.mul_prod_erase univ (fun k => if k = i₀ then u else v) (Finset.mem_univ i₀),
-    if_pos rfl]
+    ite_eq_left rfl]
   congr 1
-  rw [Finset.prod_congr rfl (fun k hk => if_neg (Finset.ne_of_mem_erase hk)),
+  rw [Finset.prod_congr rfl (fun k hk => ite_eq_right (Finset.ne_of_mem_erase hk)),
     Finset.prod_const, Finset.card_erase_of_mem (Finset.mem_univ i₀), Finset.card_univ,
     Fintype.card_fin]
   simp
@@ -937,7 +937,7 @@ theorem master_bound_nonidentity {M : ℕ} (_hM : 1 ≤ M) (jx : CycIx M ≃ V)
   have hterm : (∏ i : Fin (M + 1), W (tv jx i)) ^ (3 * E)
       ≤ ∏ i : Fin (M + 1), ∏ c : Fin 3, w (tv jx i) (σ i c) ^ E := by
     rw [← Finset.prod_pow]
-    refine Finset.prod_le_prod' fun i _ => ?_
+    refine Finset.prod_le_prod fun i _ => ?_
     have h1 : ∏ c ∈ L (tv jx i), w (tv jx i) c = ∏ c : Fin 3, w (tv jx i) (σ i c) :=
       prod_list_eq_prod_index (hL _) (hmem i) (hinj i) _
     calc W (tv jx i) ^ (3 * E) = (W (tv jx i) ^ 3) ^ E := by rw [← pow_mul]
@@ -956,28 +956,28 @@ theorem master_bound_nonidentity {M : ℕ} (_hM : 1 ≤ M) (jx : CycIx M ≃ V)
     intro i
     by_cases hii : i = i₀
     · subst hii
-      rw [if_pos rfl, if_pos rfl]
+      rw [ite_eq_left rfl, ite_eq_left rfl]
       exact vertex_ordinary_strict (x := w (iv jx i)) P i hi₀
         (isPathPattern_ordinary jx L hL σ hmem hinj hchain i hi₀) hne
     · by_cases hil : i = Fin.last M
       · subst hil
-        rw [if_neg hii, if_neg hii, if_pos rfl]
+        rw [ite_eq_right hii, ite_eq_right hii, ite_eq_left rfl]
         exact hseam
       · have hi : i.val + 1 < M + 1 := by
           have h1 : i.val ≤ M := by omega
           have h2 : i.val ≠ M := fun hh => hil (Fin.ext hh)
           omega
-        rw [if_neg hii, if_neg hii, if_neg hil, one_mul]
+        rw [ite_eq_right hii, ite_eq_right hii, ite_eq_right hil, one_mul]
         exact vertex_ordinary (x := w (iv jx i)) P i hi
           (isPathPattern_ordinary jx L hL σ hmem hinj hchain i hi)
-  have hmul := Finset.prod_le_prod' (s := (univ : Finset (Fin (M + 1)))) (fun i _ => hvert i)
+  have hmul := Finset.prod_le_prod (s := (univ : Finset (Fin (M + 1)))) (fun i _ => hvert i)
   rw [Finset.prod_mul_distrib, Finset.prod_mul_distrib,
     prod_single_point i₀ (729 ^ T) (2 ^ (6 * T)),
     prod_two_points i₀ (Fin.last M) hlast (4 ^ T) K, Finset.prod_pow] at hmul
   -- combine with the budget
   have hYW : (∏ i : Fin (M + 1), W (iv jx i)) ^ (3 * E) ≤ (∏ i : Fin (M + 1), Y i) ^ E := by
     rw [pow_mul, ← Finset.prod_pow]
-    exact Nat.pow_le_pow_left (Finset.prod_le_prod' fun i _ => hdom _) E
+    exact Nat.pow_le_pow_left (Finset.prod_le_prod fun i _ => hdom _) E
   have hint : (∏ i : Fin (M + 1), W (iv jx i)) ^ (3 * E) *
         (∏ a : Fin (M + 1) → Fin 3, Uw P a ^ Uw P a) ≤ ∏ i : Fin (M + 1), Q i := by
     have hpos : 0 < 4 ^ T * K := Nat.mul_pos (pow_pos (by norm_num : (0:ℕ) < 4) T) hK

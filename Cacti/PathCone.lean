@@ -75,7 +75,7 @@ theorem prod_le_prod_pathN (hZ : Z.card = 3) (x : ℕ → ℕ) {u v : Fin 3 → 
   calc ∏ z ∈ Z, x z = ∏ z ∈ (univ : Finset (Fin 3)).image f, x z := by rw [himg]
     _ = ∏ i : Fin 3, x (f i) := Finset.prod_image (fun i _ j _ h => hf h)
     _ ≤ ∏ i : Fin 3, pathN Z x (u i) (v i) := by
-        refine Finset.prod_le_prod' (fun i _ => ?_)
+        refine Finset.prod_le_prod (fun i _ => ?_)
         have := hmem i
         simp only [Finset.mem_erase] at this
         exact single_le_pathN this.2.2 this.2.1 this.1
@@ -322,7 +322,7 @@ theorem eight_mul_prod_le_pathDiag (h : IsPathPattern Z a b)
     rw [Finset.mem_erase] at hz
     obtain ⟨hzne, hzZ⟩ := hz
     by_cases hai : a i ∈ Z
-    · rw [hev i, if_pos hai] at hzne
+    · rw [hev i, ite_eq_left hai] at hzne
       refine Finset.mem_erase.mpr ⟨?_, Finset.mem_erase.mpr ⟨hzne, hzZ⟩⟩
       intro hzb
       have hbi : b i ∈ Z := hzb ▸ hzZ
@@ -330,58 +330,58 @@ theorem eight_mul_prod_le_pathDiag (h : IsPathPattern Z a b)
       · exact hh hai
       · exact hh hbi
       · exact hzne (hzb.trans hh.symm)
-    · rw [hev i, if_neg hai] at hzne
+    · rw [hev i, ite_eq_right hai] at hzne
       exact Finset.mem_erase.mpr ⟨hzne, Finset.mem_erase.mpr ⟨fun hh => hai (hh ▸ hzZ), hzZ⟩⟩
   have hene : ∀ i j : Fin 3, i ≠ j → e i ≠ e j := by
     intro i j hij hee
     rw [hev i, hev j] at hee
     by_cases hai : a i ∈ Z <;> by_cases haj : a j ∈ Z
-    · rw [if_pos hai, if_pos haj] at hee; exact hij (h.injA hee)
-    · rw [if_pos hai, if_neg haj] at hee; exact hij (h.extEq i j hee)
-    · rw [if_neg hai, if_pos haj] at hee; exact hij (h.extEq j i hee.symm).symm
-    · rw [if_neg hai, if_neg haj] at hee; exact hij (h.injB hee)
+    · rw [ite_eq_left hai, ite_eq_left haj] at hee; exact hij (h.injA hee)
+    · rw [ite_eq_left hai, ite_eq_right haj] at hee; exact hij (h.extEq i j hee)
+    · rw [ite_eq_right hai, ite_eq_left haj] at hee; exact hij (h.extEq j i hee.symm).symm
+    · rw [ite_eq_right hai, ite_eq_right haj] at hee; exact hij (h.injB hee)
   obtain ⟨T, hTv⟩ : ∃ T : Fin 3 → Finset ℕ, ∀ i, T i = if e i ∈ Z then {e i} else Z :=
     ⟨_, fun _ => rfl⟩
   have hTsub : ∀ i, T i ⊆ Z := by
     intro i
     by_cases hi : e i ∈ Z
-    · rw [hTv i, if_pos hi]; simpa using hi
-    · rw [hTv i, if_neg hi]
+    · rw [hTv i, ite_eq_left hi]; simpa using hi
+    · rw [hTv i, ite_eq_right hi]
   have h1 : ∀ i, 1 ≤ (T i).card := by
     intro i
     by_cases hi : e i ∈ Z
-    · rw [hTv i, if_pos hi]; simp
-    · rw [hTv i, if_neg hi, h.cardZ]; omega
+    · rw [hTv i, ite_eq_left hi]; simp
+    · rw [hTv i, ite_eq_right hi, h.cardZ]; omega
   have h2 : ∀ i j : Fin 3, i ≠ j → 2 ≤ (T i ∪ T j).card := by
     intro i j hij
     by_cases hi : e i ∈ Z
     · by_cases hj : e j ∈ Z
       · have hu : T i ∪ T j = {e i, e j} := by
-          rw [hTv i, hTv j, if_pos hi, if_pos hj, Finset.singleton_union]
+          rw [hTv i, hTv j, ite_eq_left hi, ite_eq_left hj, Finset.singleton_union]
         rw [hu, Finset.card_insert_of_notMem (by simpa using hene i j hij),
           Finset.card_singleton]
       · have hz : Z ⊆ T i ∪ T j := by
-          rw [hTv j, if_neg hj]; exact Finset.subset_union_right
+          rw [hTv j, ite_eq_right hj]; exact Finset.subset_union_right
         have h4 := Finset.card_le_card hz
         have h5 := h.cardZ
         omega
     · have hz : Z ⊆ T i ∪ T j := by
-        rw [hTv i, if_neg hi]; exact Finset.subset_union_left
+        rw [hTv i, ite_eq_right hi]; exact Finset.subset_union_left
       have h4 := Finset.card_le_card hz
       have h5 := h.cardZ
       omega
   have h3 : 3 ≤ ((univ : Finset (Fin 3)).biUnion T).card := by
     by_cases hi : ∀ i, e i ∈ Z
-    · have e0 : T 0 = {e 0} := by rw [hTv 0, if_pos (hi 0)]
-      have e1 : T 1 = {e 1} := by rw [hTv 1, if_pos (hi 1)]
-      have e2 : T 2 = {e 2} := by rw [hTv 2, if_pos (hi 2)]
+    · have e0 : T 0 = {e 0} := by rw [hTv 0, ite_eq_left (hi 0)]
+      have e1 : T 1 = {e 1} := by rw [hTv 1, ite_eq_left (hi 1)]
+      have e2 : T 2 = {e 2} := by rw [hTv 2, ite_eq_left (hi 2)]
       have hset : (univ : Finset (Fin 3)).biUnion T = {e 0, e 1, e 2} := by
         ext z
         simp only [Finset.mem_biUnion, Finset.mem_univ, true_and, Finset.mem_insert,
           Finset.mem_singleton]
         constructor
         · rintro ⟨i, hz⟩
-          rw [hTv i, if_pos (hi i), Finset.mem_singleton] at hz
+          rw [hTv i, ite_eq_left (hi i), Finset.mem_singleton] at hz
           subst hz
           fin_cases i
           · exact Or.inl rfl
@@ -398,7 +398,7 @@ theorem eight_mul_prod_le_pathDiag (h : IsPathPattern Z a b)
         Finset.card_singleton]
     · obtain ⟨i, hii⟩ := not_forall.mp hi
       have hz : Z ⊆ (univ : Finset (Fin 3)).biUnion T := by
-        have hTi : T i = Z := by rw [hTv i, if_neg hii]
+        have hTi : T i = Z := by rw [hTv i, ite_eq_right hii]
         exact hTi ▸ Finset.subset_biUnion_of_mem T (Finset.mem_univ i)
       have h4 := Finset.card_le_card hz
       have h5 := h.cardZ
@@ -410,15 +410,15 @@ theorem eight_mul_prod_le_pathDiag (h : IsPathPattern Z a b)
     by_cases hi : e i ∈ Z
     · have hpsi : ψ i = e i := by
         have hm := hψmem i
-        rw [hTv i, if_pos hi] at hm
+        rw [hTv i, ite_eq_left hi] at hm
         simpa using hm
       rw [hpsi]; exact hsub i
     · have hai : a i ∉ Z := by
         intro hh
-        exact hi (by rw [hev i, if_pos hh]; exact hh)
+        exact hi (by rw [hev i, ite_eq_left hh]; exact hh)
       have hbi : b i ∉ Z := by
         intro hh
-        exact hi (by rw [hev i, if_neg hai]; exact hh)
+        exact hi (by rw [hev i, ite_eq_right hai]; exact hh)
       intro z hz
       have hzZ : z ∈ Z := Finset.mem_of_mem_erase hz
       exact Finset.mem_erase.mpr ⟨fun hh => hbi (hh ▸ hzZ),
@@ -434,7 +434,7 @@ theorem eight_mul_prod_le_pathDiag (h : IsPathPattern Z a b)
     _ = ∏ i : Fin 3, ∑ d ∈ Z.erase (ψ i), x d := by
         rw [← himg, Finset.prod_image (fun i _ j _ hh => hψinj hh)]
     _ ≤ ∏ i : Fin 3, pathN Z x (a i) (b i) :=
-        Finset.prod_le_prod' (fun i _ => Finset.sum_le_sum_of_subset (hkey i))
+        Finset.prod_le_prod (fun i _ => Finset.sum_le_sum_of_subset (hkey i))
     _ = pathDiag Z x a b := rfl
 
 /-- Two cells both carrying the colour `A`, at least one of them also carrying `C`. -/

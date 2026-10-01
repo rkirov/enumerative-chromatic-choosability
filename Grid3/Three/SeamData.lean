@@ -48,9 +48,9 @@ theorem keyLE_MUU' (Lc Lc' : Fin 3 → Finset ℕ) (hU : ∀ r, Lc r = Lc 0) (hU
   rw [mcount_Mact Lc Lc' h3 p q hp hq, mcount_MUU p hp q hq]
   by_cases hpq : p = 6 ∧ q = 6
   · obtain ⟨rfl, rfl⟩ := hpq
-    rw [if_pos ⟨rfl, rfl⟩]
+    rw [ite_eq_left ⟨rfl, rfl⟩]
     exact (mact_le_cnt Lc Lc' 6 6).trans (cnt_le Lc h3 6 (by decide))
-  · rw [if_neg hpq]
+  · rw [ite_eq_right hpq]
     apply Nat.le_of_eq
     unfold mact
     rw [Finset.card_eq_zero, Finset.filter_eq_empty_iff]

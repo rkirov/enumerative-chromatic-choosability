@@ -230,15 +230,15 @@ theorem pkList_range_sumR (key f : EntR → Nat) :
       have hget : (List.range n)[key e]'hmem = key e := by simp
       have := pkList_single B (f e) (List.range n) 0 (key e) hmem hnd
       rw [Nat.zero_add] at this
-      rw [if_pos h, ← this]
+      rw [ite_eq_left h, ← this]
       congr 1; funext s
       rw [hget]
       by_cases hs : key e = s
       · subst hs; simp
       · simp [hs, Ne.symm hs]
-    · rw [if_neg h]
+    · rw [ite_eq_right h]
       exact pkList_zero_of B _ (List.range n) 0 (fun s hs => by
-        rw [List.mem_range] at hs; rw [if_neg]; omega)
+        rw [List.mem_range] at hs; rw [ite_eq_right]; omega)
 
 def sumNat : List Nat → Nat
   | [] => 0
@@ -341,7 +341,7 @@ theorem sumRange_single (m t v : Nat) (ht : t < m) :
     rw [hsum]
     by_cases hm : t = m
     · subst hm
-      rw [sumNat_map_zero _ _ (fun x hx => by rw [List.mem_range] at hx; rw [if_neg]; omega)]
+      rw [sumNat_map_zero _ _ (fun x hx => by rw [List.mem_range] at hx; rw [ite_eq_right]; omega)]
       simp [sumNat]
     · rw [ih (by omega)]
       simp [sumNat, Ne.symm hm]
@@ -372,7 +372,7 @@ theorem rowSum_regroup (k1 k2 : EntR → Nat) (f : EntR → Nat) (s m : Nat) :
     simp only [sumR]
     congr 1
     by_cases hs : k1 e = s
-    · rw [if_pos hs]
+    · rw [ite_eq_left hs]
       have hfun : (fun t => if k1 e = s ∧ k2 e = t then f e else 0)
           = fun t => if t = k2 e then f e else 0 := by
         funext t
@@ -383,7 +383,7 @@ theorem rowSum_regroup (k1 k2 : EntR → Nat) (f : EntR → Nat) (s m : Nat) :
       have := sumRange_single m (k2 e) (f e) (hb e (List.mem_cons_self ..))
       unfold sumRange at this
       exact this
-    · rw [if_neg hs]
+    · rw [ite_eq_right hs]
       exact sumNat_map_zero _ _ (fun t _ => by simp [hs])
 
 theorem sumR_idx_zero_of_not_mem (i : Nat) (f : EntR → Nat) :
@@ -394,7 +394,7 @@ theorem sumR_idx_zero_of_not_mem (i : Nat) (f : EntR → Nat) :
   | cons e es ih =>
     intro h
     have hne : idxR e ≠ i := fun heq => h (List.mem_map.mpr ⟨e, List.mem_cons_self .., heq⟩)
-    simp only [sumR, if_neg hne, Nat.zero_add]
+    simp only [sumR, ite_eq_right hne, Nat.zero_add]
     exact ih (fun hm => h (List.mem_cons_of_mem _ hm))
 
 /-- a cell sum along a chain with distinct indices is a single entry -/
@@ -410,9 +410,9 @@ theorem cell_lt_gen (f : EntR → Nat) (bound : Nat) : ∀ (es : List EntR) (i :
     have hnot := (List.nodup_cons.mp hnd).1
     simp only [sumR]
     by_cases hi : idxR e = i
-    · rw [if_pos hi, sumR_idx_zero_of_not_mem i _ es (hi ▸ hnot), Nat.add_zero]
+    · rw [ite_eq_left hi, sumR_idx_zero_of_not_mem i _ es (hi ▸ hnot), Nat.add_zero]
       exact hb e (List.mem_cons_self ..)
-    · rw [if_neg hi, Nat.zero_add]
+    · rw [ite_eq_right hi, Nat.zero_add]
       exact ih i hnd' (fun x hx => hb x (List.mem_cons_of_mem e hx)) hpos
 
 theorem cell_lt (bound : Nat) (es : List EntR) (i : Nat) (hnd : (es.map idxR).Nodup)
@@ -553,8 +553,8 @@ theorem rowSumR_lt_B (es : List EntR) (m : Nat) (hm : m ≤ 27) (hnd : (es.map i
     · intro e he
       have h2 := (hb e he).1
       by_cases h1 : e.1 = s ∧ e.2.1 = t
-      · rw [if_pos h1, if_pos]; unfold idxR; omega
-      · rw [if_neg h1, if_neg]; unfold idxR; omega
+      · rw [ite_eq_left h1, ite_eq_left]; unfold idxR; omega
+      · rw [ite_eq_right h1, ite_eq_right]; unfold idxR; omega
   have := sumRange_le m 1000000 _ hcell
   unfold B; omega
 
@@ -573,8 +573,8 @@ theorem colSumR_lt_B (es : List EntR) (m : Nat) (hm : m ≤ 27) (hnd : (es.map i
     · intro e he
       have h2 := (hb e he).2.1
       by_cases h1 : e.2.1 = t ∧ e.1 = s
-      · rw [if_pos h1, if_pos]; unfold idxR; omega
-      · rw [if_neg h1, if_neg]; unfold idxR; omega
+      · rw [ite_eq_left h1, ite_eq_left]; unfold idxR; omega
+      · rw [ite_eq_right h1, ite_eq_right]; unfold idxR; omega
   have := sumRange_le m 1000000 _ hcell
   unfold B; omega
 
@@ -689,7 +689,7 @@ theorem checkRecord_zero_spec (mL mR M ne blob : Nat) (h : checkRecord 0 mL mR M
     rw [foldl_stepR_r0, hLexp] at hr0
     simp only [Nat.zero_add] at hr0
     have hsplit := pkList_range_sumR (fun e => e.1) (fun e => e.2.2.1) es (stsOf pL).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) es (fun e he => by rw [if_pos (hent e he).1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) es (fun e he => by rw [ite_eq_left (hent e he).1])] at hsplit
     rw [← hsplit] at hr0
     intro s hs
     have := pkList_inj B (by decide) (fun s => sumR (fun e => if e.1 = s then e.2.2.1 else 0) es)
@@ -705,7 +705,7 @@ theorem checkRecord_zero_spec (mL mR M ne blob : Nat) (h : checkRecord 0 mL mR M
     rw [foldl_stepR_c0, hRexp] at hc0
     simp only [Nat.zero_add] at hc0
     have hsplit := pkList_range_sumR (fun e => e.2.1) (fun e => e.2.2.1) es (stsOf pR).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) es (fun e he => by rw [if_pos (hent e he).2.1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) es (fun e he => by rw [ite_eq_left (hent e he).2.1])] at hsplit
     rw [← hsplit] at hc0
     intro t ht
     have := pkList_inj B (by decide) (fun t => sumR (fun e => if e.2.1 = t then e.2.2.1 else 0) es)
@@ -1002,12 +1002,12 @@ theorem keyCnt_le (key key' : EntR → Nat) (swap : Bool) (es : List EntR) (m : 
         have hk := hkey e
         cases swap <;> simp only [Bool.false_eq_true, ↓reduceIte] at hk ⊢ <;>
         · by_cases h1 : key e = s ∧ key' e = t
-          · rw [if_pos h1, if_pos]; omega
-          · rw [if_neg h1, if_neg]; omega
+          · rw [ite_eq_left h1, ite_eq_left]; omega
+          · rw [ite_eq_right h1, ite_eq_right]; omega
     have := sumRange_le m 2 _ hcell
     omega
   · unfold keyCnt
-    rw [sumR_congr _ (fun _ => 0) es (fun e he => by rw [if_neg]; have := hb'' e he; omega), sumR_zero_fn]
+    rw [sumR_congr _ (fun _ => 0) es (fun e he => by rw [ite_eq_right]; have := hb'' e he; omega), sumR_zero_fn]
     decide
 
 theorem keySum_pow (key : EntR → Nat) (es : List EntR) (n : Nat) (hb : ∀ e ∈ es, key e < n) :
@@ -1016,7 +1016,7 @@ theorem keySum_pow (key : EntR → Nat) (es : List EntR) (n : Nat) (hb : ∀ e �
   rw [pkList_range_sumR key (fun _ => 1) es n]
   apply sumR_congr
   intro e he
-  rw [if_pos (hb e he), Nat.one_mul]
+  rw [ite_eq_left (hb e he), Nat.one_mul]
 
 /-- `sumInt` of the `v1` field over a key class, in terms of the `toR1` projection -/
 theorem v1_key_sum (keyQ : EntQ → Nat) (key : EntR → Nat) (hk1 : ∀ e, key (toR1 e) = keyQ e)
@@ -1035,12 +1035,12 @@ theorem v1_key_sum (keyQ : EntQ → Nat) (key : EntR → Nat) (hk1 : ∀ e, key 
     have htn : ((Int.toNat (e.2.2.2.1 + OFF) : Nat) : Int) = e.2.2.2.1 + OFF := by
       rw [Int.toNat_of_nonneg (by omega)]
     by_cases hs : keyQ e = s
-    · simp only [hs, if_true, toR1]
+    · simp only [hs, ite_true, toR1]
       push_cast
       rw [htn]
       unfold OFF at ih' ⊢
       omega
-    · simp only [hs, if_false, toR1]
+    · simp only [hs, ite_false, toR1]
       push_cast
       unfold OFF at ih' ⊢
       omega
@@ -1058,8 +1058,8 @@ theorem keyCnt_pos (key : EntR → Nat) (f : EntR → Nat) :
     intro s h
     unfold keyCnt; simp only [sumR] at h ⊢
     by_cases hs : key e = s
-    · rw [if_pos hs]; omega
-    · rw [if_neg hs] at h ⊢; rw [Nat.zero_add] at h ⊢; exact ih s h
+    · rw [ite_eq_left hs]; omega
+    · rw [ite_eq_right hs] at h ⊢; rw [Nat.zero_add] at h ⊢; exact ih s h
 
 /-- the semantic collision increments of an entry -/
 def dqSem (m : Nat) (pats : List Nat) (lc : Nat) (e : EntQ) : Int × Int :=
@@ -1233,7 +1233,7 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
   have hrow0 : ∀ s (hs : s < (stsOf pL).length), rowSumR (es.map toR) s = lawE0 mL pL (stsOf pL)[s] := by
     rw [hf0, hLexp] at hr0
     have hsplit := pkList_range_sumR (fun e => e.1) (fun e => e.2.2.1) (es.map toR) (stsOf pL).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [if_pos (hmemR e he).1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [ite_eq_left (hmemR e he).1])] at hsplit
     rw [← hsplit] at hr0
     intro s hs
     have := pkList_inj B (by decide) (fun s => sumR (fun e => if e.1 = s then e.2.2.1 else 0) (es.map toR))
@@ -1250,7 +1250,7 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
   have hcol0 : ∀ t (ht : t < (stsOf pR).length), colSumR (es.map toR) t = lawE0 mR pR (stsOf pR)[t] := by
     rw [hfc0, hRexp] at hc0
     have hsplit := pkList_range_sumR (fun e => e.2.1) (fun e => e.2.2.1) (es.map toR) (stsOf pR).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [if_pos (hmemR e he).2.1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [ite_eq_left (hmemR e he).2.1])] at hsplit
     rw [← hsplit] at hc0
     intro t ht
     have := pkList_inj B (by decide) (fun t => sumR (fun e => if e.2.1 = t then e.2.2.1 else 0) (es.map toR))
@@ -1286,7 +1286,7 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
       sumInt (fun e => if e.1 = s then e.2.2.2.1 else 0) es = lawE1 mL (stsOf pL)[s] := by
     rw [hf1, hrc, exp1Of_eq mL pL _ hcntL] at hr1
     have hsplit := pkList_range_sumR (fun e => e.1) (fun e => e.2.2.1) (es.map toR1) (stsOf pL).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [if_pos (hmemR1 e he).1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [ite_eq_left (hmemR1 e he).1])] at hsplit
     rw [← hsplit] at hr1
     intro s hs
     have hdig := pkList_inj B (by decide) (fun s => sumR (fun e => if e.1 = s then e.2.2.1 else 0) (es.map toR1))
@@ -1305,14 +1305,14 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
     unfold exp1Digit at hv
     unfold lawE1
     by_cases hu : (mL == UTYPE) = true
-    · simp only [hu, eq_self_iff_true, if_true, ↓reduceIte] at hv ⊢
+    · simp only [hu, eq_self_iff_true, ite_true, ↓reduceIte] at hv ⊢
       have hpos : 1 ≤ keyCnt (fun e => e.1) (es.map toR) s := by
         apply keyCnt_pos (fun e => e.1) (fun e => e.2.2.1)
         have := hrow0 s hs; unfold rowSumR at this; rw [this]; unfold lawE0; rw [hu]; simp
       rw [hg] at hv
       by_cases ha : isABA (stsOf pL)[s]
-      · rw [if_pos ha] at hv ⊢; unfold OFF at hv; omega
-      · rw [if_neg ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_left ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_right ha] at hv ⊢; unfold OFF at hv; omega
     · have hu' : (mL == UTYPE) = false := by simpa using hu
       simp only [hu', Bool.false_eq_true, ↓reduceIte] at hv ⊢
       unfold OFF at hv; omega
@@ -1321,7 +1321,7 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
       sumInt (fun e => if e.2.1 = t then e.2.2.2.1 else 0) es = lawE1 mR (stsOf pR)[t] := by
     rw [hfc1, hcc, exp1Of_eq mR pR _ hcntR] at hc1
     have hsplit := pkList_range_sumR (fun e => e.2.1) (fun e => e.2.2.1) (es.map toR1) (stsOf pR).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [if_pos (hmemR1 e he).2.1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [ite_eq_left (hmemR1 e he).2.1])] at hsplit
     rw [← hsplit] at hc1
     intro t ht
     have hdig := pkList_inj B (by decide) (fun t => sumR (fun e => if e.2.1 = t then e.2.2.1 else 0) (es.map toR1))
@@ -1342,14 +1342,14 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
     unfold exp1Digit at hv
     unfold lawE1
     by_cases hu : (mR == UTYPE) = true
-    · simp only [hu, eq_self_iff_true, if_true, ↓reduceIte] at hv ⊢
+    · simp only [hu, eq_self_iff_true, ite_true, ↓reduceIte] at hv ⊢
       have hpos : 1 ≤ keyCnt (fun e => e.2.1) (es.map toR) t := by
         apply keyCnt_pos (fun e => e.2.1) (fun e => e.2.2.1)
         have := hcol0 t ht; unfold colSumR at this; rw [this]; unfold lawE0; rw [hu]; simp
       rw [hg] at hv
       by_cases ha : isABA (stsOf pR)[t]
-      · rw [if_pos ha] at hv ⊢; unfold OFF at hv; omega
-      · rw [if_neg ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_left ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_right ha] at hv ⊢; unfold OFF at hv; omega
     · have hu' : (mR == UTYPE) = false := by simpa using hu
       simp only [hu', Bool.false_eq_true, ↓reduceIte] at hv ⊢
       unfold OFF at hv; omega
@@ -1379,7 +1379,7 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
     unfold dq dqSem
     rw [hLP, stateAt_packStates _ hSBL _ h1, ← getD_of_lt (l := stsOf pL) (d := 0) h1, hLU]
     by_cases hu : (mL == UTYPE) = true
-    · simp only [hu, eq_self_iff_true, if_true, ↓reduceIte]
+    · simp only [hu, eq_self_iff_true, ite_true, ↓reduceIte]
     · have hu' : (mL == UTYPE) = false := by simpa using hu
       obtain ⟨hCV, hlcm, -, -⟩ := hLnUf hu'
       simp only [hu', Bool.false_eq_true, ↓reduceIte]
@@ -1400,7 +1400,7 @@ theorem checkRecord_one_spec (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M 
     simp only [Bool.false_eq_true, ↓reduceIte, Bool.and_eq_true, Bool.or_eq_true, Bool.not_eq_true'] at hfin
     rw [hq0, hq1, hLU] at hfin
     by_cases hu : (mL == UTYPE) = true
-    · simp only [hu, eq_self_iff_true, if_true, ↓reduceIte] at hfin ⊢
+    · simp only [hu, eq_self_iff_true, ite_true, ↓reduceIte] at hfin ⊢
       rcases hfin with ⟨hb, hs | hs⟩
       · exact absurd hs (by decide)
       · exact ⟨hb, fun _ => hs⟩
@@ -1499,7 +1499,7 @@ theorem checkRecord_two_spec (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M 
     rw [foldl_stepR_r0, hLexp] at hr0
     simp only [Nat.zero_add] at hr0
     have hsplit := pkList_range_sumR (fun e => e.1) (fun e => e.2.2.1) es (stsOf pL).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) es (fun e he => by rw [if_pos (hent e he).1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) es (fun e he => by rw [ite_eq_left (hent e he).1])] at hsplit
     rw [← hsplit] at hr0
     intro s hs
     have := pkList_inj B (by decide) (fun s => sumR (fun e => if e.1 = s then e.2.2.1 else 0) es)
@@ -1515,7 +1515,7 @@ theorem checkRecord_two_spec (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M 
     rw [foldl_stepR_c0, hRexp] at hc0
     simp only [Nat.zero_add] at hc0
     have hsplit := pkList_range_sumR (fun e => e.2.1) (fun e => e.2.2.1) es (stsOf pR).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) es (fun e he => by rw [if_pos (hent e he).2.1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) es (fun e he => by rw [ite_eq_left (hent e he).2.1])] at hsplit
     rw [← hsplit] at hc0
     intro t ht
     have := pkList_inj B (by decide) (fun t => sumR (fun e => if e.2.1 = t then e.2.2.1 else 0) es)
@@ -1656,7 +1656,7 @@ theorem checkRecord_three_spec (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR 
   have hrow0 : ∀ s (hs : s < (stsOf pL).length), rowSumR (es.map toR) s = lawE0 mL pL (stsOf pL)[s] := by
     rw [hf0, hLexp] at hr0
     have hsplit := pkList_range_sumR (fun e => e.1) (fun e => e.2.2.1) (es.map toR) (stsOf pL).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [if_pos (hmemR e he).1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [ite_eq_left (hmemR e he).1])] at hsplit
     rw [← hsplit] at hr0
     intro s hs
     have := pkList_inj B (by decide) (fun s => sumR (fun e => if e.1 = s then e.2.2.1 else 0) (es.map toR))
@@ -1673,7 +1673,7 @@ theorem checkRecord_three_spec (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR 
   have hcol0 : ∀ t (ht : t < (stsOf pR).length), colSumR (es.map toR) t = lawE0 mR pR (stsOf pR)[t] := by
     rw [hfc0, hRexp] at hc0
     have hsplit := pkList_range_sumR (fun e => e.2.1) (fun e => e.2.2.1) (es.map toR) (stsOf pR).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [if_pos (hmemR e he).2.1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [ite_eq_left (hmemR e he).2.1])] at hsplit
     rw [← hsplit] at hc0
     intro t ht
     have := pkList_inj B (by decide) (fun t => sumR (fun e => if e.2.1 = t then e.2.2.1 else 0) (es.map toR))
@@ -1709,7 +1709,7 @@ theorem checkRecord_three_spec (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR 
       sumInt (fun e => if e.1 = s then e.2.2.2.1 else 0) es = lawE1 mL (stsOf pL)[s] := by
     rw [hf1, hrc, exp1Of_eq mL pL _ hcntL] at hr1
     have hsplit := pkList_range_sumR (fun e => e.1) (fun e => e.2.2.1) (es.map toR1) (stsOf pL).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [if_pos (hmemR1 e he).1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.1) _ (fun e he => by rw [ite_eq_left (hmemR1 e he).1])] at hsplit
     rw [← hsplit] at hr1
     intro s hs
     have hdig := pkList_inj B (by decide) (fun s => sumR (fun e => if e.1 = s then e.2.2.1 else 0) (es.map toR1))
@@ -1728,14 +1728,14 @@ theorem checkRecord_three_spec (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR 
     unfold exp1Digit at hv
     unfold lawE1
     by_cases hu : (mL == UTYPE) = true
-    · simp only [hu, eq_self_iff_true, if_true, ↓reduceIte] at hv ⊢
+    · simp only [hu, eq_self_iff_true, ite_true, ↓reduceIte] at hv ⊢
       have hpos : 1 ≤ keyCnt (fun e => e.1) (es.map toR) s := by
         apply keyCnt_pos (fun e => e.1) (fun e => e.2.2.1)
         have := hrow0 s hs; unfold rowSumR at this; rw [this]; unfold lawE0; rw [hu]; simp
       rw [hg] at hv
       by_cases ha : isABA (stsOf pL)[s]
-      · rw [if_pos ha] at hv ⊢; unfold OFF at hv; omega
-      · rw [if_neg ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_left ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_right ha] at hv ⊢; unfold OFF at hv; omega
     · have hu' : (mL == UTYPE) = false := by simpa using hu
       simp only [hu', Bool.false_eq_true, ↓reduceIte] at hv ⊢
       unfold OFF at hv; omega
@@ -1744,7 +1744,7 @@ theorem checkRecord_three_spec (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR 
       sumInt (fun e => if e.2.1 = t then e.2.2.2.1 else 0) es = lawE1 mR (stsOf pR)[t] := by
     rw [hfc1, hcc, exp1Of_eq mR pR _ hcntR] at hc1
     have hsplit := pkList_range_sumR (fun e => e.2.1) (fun e => e.2.2.1) (es.map toR1) (stsOf pR).length
-    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [if_pos (hmemR1 e he).2.1])] at hsplit
+    rw [sumR_congr _ (fun e => e.2.2.1 * B ^ e.2.1) _ (fun e he => by rw [ite_eq_left (hmemR1 e he).2.1])] at hsplit
     rw [← hsplit] at hc1
     intro t ht
     have hdig := pkList_inj B (by decide) (fun t => sumR (fun e => if e.2.1 = t then e.2.2.1 else 0) (es.map toR1))
@@ -1765,14 +1765,14 @@ theorem checkRecord_three_spec (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR 
     unfold exp1Digit at hv
     unfold lawE1
     by_cases hu : (mR == UTYPE) = true
-    · simp only [hu, eq_self_iff_true, if_true, ↓reduceIte] at hv ⊢
+    · simp only [hu, eq_self_iff_true, ite_true, ↓reduceIte] at hv ⊢
       have hpos : 1 ≤ keyCnt (fun e => e.2.1) (es.map toR) t := by
         apply keyCnt_pos (fun e => e.2.1) (fun e => e.2.2.1)
         have := hcol0 t ht; unfold colSumR at this; rw [this]; unfold lawE0; rw [hu]; simp
       rw [hg] at hv
       by_cases ha : isABA (stsOf pR)[t]
-      · rw [if_pos ha] at hv ⊢; unfold OFF at hv; omega
-      · rw [if_neg ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_left ha] at hv ⊢; unfold OFF at hv; omega
+      · rw [ite_eq_right ha] at hv ⊢; unfold OFF at hv; omega
     · have hu' : (mR == UTYPE) = false := by simpa using hu
       simp only [hu', Bool.false_eq_true, ↓reduceIte] at hv ⊢
       unfold OFF at hv; omega

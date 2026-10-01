@@ -90,7 +90,7 @@ theorem pkList_single {α : Type} [DecidableEq α] (b : Nat) (v : Nat) :
     have hx : x ∉ l := (List.nodup_cons.mp hnd).1
     cases j with
     | zero =>
-      simp only [pkList, List.getElem_cons_zero, if_true, Nat.add_zero]
+      simp only [pkList, List.getElem_cons_zero, ite_true, Nat.add_zero]
       have : pkList b (fun y => if y = x then v else 0) l (i + 1) = 0 := by
         clear ih hj hnd hnd'
         induction l generalizing i with
@@ -98,14 +98,14 @@ theorem pkList_single {α : Type} [DecidableEq α] (b : Nat) (v : Nat) :
         | cons y l ih2 =>
           have hy : y ≠ x := fun h => hx (h ▸ List.mem_cons_self ..)
           have hx' : x ∉ l := fun h => hx (List.mem_cons_of_mem y h)
-          simp only [pkList, if_neg hy, Nat.zero_mul, Nat.zero_add]
+          simp only [pkList, ite_eq_right hy, Nat.zero_mul, Nat.zero_add]
           exact ih2 (i + 1) hx'
       rw [this, Nat.add_zero]
     | succ j =>
       have hj' : j < l.length := Nat.lt_of_succ_lt_succ hj
       simp only [pkList, List.getElem_cons_succ]
       have hne : x ≠ l[j]'hj' := fun h => hx (h ▸ List.getElem_mem hj')
-      rw [if_neg hne, Nat.zero_mul, Nat.zero_add, ih (i + 1) j hj' hnd']
+      rw [ite_eq_right hne, Nat.zero_mul, Nat.zero_add, ih (i + 1) j hj' hnd']
       congr 1
       rw [Nat.add_assoc, Nat.add_comm 1 j]
 

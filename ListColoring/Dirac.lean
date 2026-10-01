@@ -286,15 +286,15 @@ theorem IsChordal.coneOn (hG : G.IsChordal) (hK : G.IsClique (K : Set V)) :
     · -- `d.penultimate = d.getVert (d.length - 1)`, and `2 ≠ d.length - 1`
       have hpen : d.penultimate = d.getVert (d.length - 1) := rfl
       have h2mem : (2 : ℕ) ∈ {i : ℕ | 1 ≤ i ∧ i ≤ d.length} := by
-        simp only [Set.mem_setOf_eq]; omega
+        simp only [Set.mem_ofPred_eq]; omega
       have hlmem : d.length - 1 ∈ {i : ℕ | 1 ≤ i ∧ i ≤ d.length} := by
-        simp only [Set.mem_setOf_eq]; omega
+        simp only [Set.mem_ofPred_eq]; omega
       have := hc'.getVert_injOn h2mem hlmem (by rw [← h, hpen])
       omega
   · -- the cycle avoids the apex, so it lives in the base graph
     have hs : ∀ x ∈ c.support, x ∈ {x : Option V | x ≠ none} := by
       intro x hx
-      simp only [Set.mem_setOf_eq, ne_eq]
+      simp only [Set.mem_ofPred_eq, ne_eq]
       rintro rfl
       exact hnone hx
     have hbase : ((SimpleGraph.coneOn G K).induce {x : Option V | x ≠ none}).IsChordal :=

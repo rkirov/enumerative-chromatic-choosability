@@ -311,12 +311,12 @@ lemma eraseEnds_levelAssign (k : ℕ) (Λ : ℕ → Finset ℕ) (h s : Finset �
   rw [eraseEnds]
   by_cases hw1 : w = pathStart (k + 1)
   · subst hw1
-    rw [if_pos (Finset.mem_insert_self _ _), levelAssign_pathStart, levelAssign_pathStart]
+    rw [ite_eq_left (Finset.mem_insert_self _ _), levelAssign_pathStart, levelAssign_pathStart]
   · by_cases hw2 : w = pathEnd (k + 1)
     · subst hw2
-      rw [if_pos (Finset.mem_insert_of_mem (Finset.mem_singleton_self _)),
+      rw [ite_eq_left (Finset.mem_insert_of_mem (Finset.mem_singleton_self _)),
         levelAssign_pathEnd_succ, levelAssign_pathEnd_succ]
-    · rw [if_neg (fun hmem => by
+    · rw [ite_eq_right (fun hmem => by
         rcases Finset.mem_insert.mp hmem with hc | hc
         · exact hw1 hc
         · exact hw2 (Finset.mem_singleton.mp hc))]
@@ -331,9 +331,9 @@ theorem inducedList_levelAssign (k : ℕ) (Λ : ℕ → Finset ℕ) (h s : Finse
   rw [inducedList_pathG_succ]
   by_cases hw : w = pathEnd (k + 1)
   · subst hw
-    rw [if_pos rfl]
+    rw [ite_eq_left rfl]
     rfl
-  · rw [if_neg hw]
+  · rw [ite_eq_right hw]
     exact levelAssign_head_irrel _ _ _ _ _ _ hw
 
 /-- **The recursion.** -/
@@ -433,15 +433,15 @@ theorem col_thetaOf_thetaAssign (k : ℕ) (Lb La : Finset ℕ) (P : ListAssignme
       = optAssign La (eraseEnds k b P) := by
     funext v
     cases v with
-    | none => rw [if_neg (by simp)]; rfl
+    | none => rw [ite_eq_right (by simp)]; rfl
     | some w =>
         show (if (some w : Option (PathV k)) ∈ _ then ((optAssign La P) (some w)).erase b
               else (optAssign La P) (some w)) = eraseEnds k b P w
         rw [eraseEnds]
         by_cases hw : w ∈ ({pathStart k, pathEnd k} : Finset (PathV k))
-        · rw [if_pos ((mem_some_pair _ _ _).mpr hw), if_pos hw]
+        · rw [ite_eq_left ((mem_some_pair _ _ _).mpr hw), ite_eq_left hw]
           rfl
-        · rw [if_neg (fun hc => hw ((mem_some_pair _ _ _).mp hc)), if_neg hw]
+        · rw [ite_eq_right (fun hc => hw ((mem_some_pair _ _ _).mp hc)), ite_eq_right hw]
           rfl
   rw [hrw]
   show (coneOn (pathG k) {pathStart k, pathEnd k}).col (optAssign La (eraseEnds k b P)) = _

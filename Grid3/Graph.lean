@@ -342,11 +342,11 @@ def colVtx : (n j : ℕ) → PathV n
 @[simp] lemma colVtx_self (n : ℕ) : colVtx n n = pathEnd n := by
   cases n with
   | zero => rfl
-  | succ n => exact if_pos rfl
+  | succ n => exact ite_eq_left rfl
 
 lemma colVtx_succ_of_le {n j : ℕ} (h : j ≤ n) :
     colVtx (n + 1) j = (some (colVtx n j) : PathV (n + 1)) :=
-  if_neg (by omega)
+  ite_eq_right (by omega)
 
 /-- The lists of the columns of an assignment, as an abstract sequence. -/
 def Lof (n : ℕ) (M : ListAssignment (PathV 2 × PathV n)) : Cols :=

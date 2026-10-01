@@ -86,8 +86,8 @@ private lemma cycleGraph_adj_val {m : ℕ} (a b : Fin (2 * m + 2)) :
       t % (2 * m + 2) = if t < 2 * m + 2 then t else t - (2 * m + 2) := by
     intro t ht
     by_cases h : t < 2 * m + 2
-    · rw [if_pos h, Nat.mod_eq_of_lt h]
-    · rw [if_neg h, Nat.mod_eq_sub_mod (by omega), Nat.mod_eq_of_lt (by omega)]
+    · rw [ite_eq_left h, Nat.mod_eq_of_lt h]
+    · rw [ite_eq_right h, Nat.mod_eq_sub_mod (by omega), Nat.mod_eq_of_lt (by omega)]
   rw [cycleGraph_adj', hsub a b, hsub b a, hmod _ (by omega), hmod _ (by omega)]
   split_ifs <;> omega
 
@@ -109,7 +109,7 @@ private lemma thetaEquivAux_apply (m : ℕ) (j : Fin (2 * m + 2)) :
       apply Fin.ext
       rw [hval, h1, Nat.mod_eq_of_lt (by omega), Fin.val_last]
       omega
-    rw [if_pos h1, hlast, finSuccEquivLast_last]
+    rw [ite_eq_left h1, hlast, finSuccEquivLast_last]
     rfl
   · have hsle : (if j.val = 0 then 0 else 2 * m + 2 - j.val) < 2 * m + 1 := by
       split_ifs <;> omega
@@ -119,9 +119,9 @@ private lemma thetaEquivAux_apply (m : ℕ) (j : Fin (2 * m + 2)) :
       rw [hval]
       show (2 * m + 2 - j.val) % (2 * m + 2) = if j.val = 0 then 0 else 2 * m + 2 - j.val
       by_cases h0 : j.val = 0
-      · rw [if_pos h0, h0, Nat.sub_zero, Nat.mod_self]
-      · rw [if_neg h0, Nat.mod_eq_of_lt (by omega)]
-    rw [if_neg h1, hcast, finSuccEquivLast_castSucc]
+      · rw [ite_eq_left h0, h0, Nat.sub_zero, Nat.mod_self]
+      · rw [ite_eq_right h0, Nat.mod_eq_of_lt (by omega)]
+    rw [ite_eq_right h1, hcast, finSuccEquivLast_castSucc]
     rfl
 
 private lemma theta_adj_none_some_aux (m : ℕ) (hm : 1 ≤ m) (j : Fin (2 * m + 2)) :
@@ -135,12 +135,12 @@ private lemma theta_adj_none_some_aux (m : ℕ) (hm : 1 ≤ m) (j : Fin (2 * m +
     show (theta m) = coneOn (thetaBaseOf (2 * m))
       {some (pathStart (2 * m)), some (pathEnd (2 * m))} from rfl]
   by_cases h1 : j.val = 1
-  · rw [if_pos h1, coneOn_adj_none_some]
+  · rw [ite_eq_left h1, coneOn_adj_none_some]
     refine iff_of_false (by simp) ?_
     rintro (rfl | rfl)
     · rw [h0v] at h1; omega
     · rw [h2v] at h1; omega
-  · rw [if_neg h1, coneOn_adj_none_some, Finset.mem_insert, Finset.mem_singleton,
+  · rw [ite_eq_right h1, coneOn_adj_none_some, Finset.mem_insert, Finset.mem_singleton,
       Option.some_inj, Option.some_inj,
       pathVtx_eq_pathStart_iff (by split_ifs <;> omega),
       pathVtx_eq_pathEnd_iff (by split_ifs <;> omega),
@@ -160,28 +160,28 @@ private lemma theta_adj_some_some_aux (m : ℕ) (hm : 1 ≤ m) (j j' : Fin (2 * 
     show thetaBaseOf (2 * m) = coneOn (pathG (2 * m))
       {pathStart (2 * m), pathEnd (2 * m)} from rfl]
   by_cases h1 : j.val = 1 <;> by_cases h1' : j'.val = 1
-  · rw [if_pos h1, if_pos h1']
+  · rw [ite_eq_left h1, ite_eq_left h1']
     exact iff_of_false (coneOn_adj_none_none _ _) (by omega)
-  · rw [if_pos h1, if_neg h1', coneOn_adj_none_some, Finset.mem_insert, Finset.mem_singleton,
+  · rw [ite_eq_left h1, ite_eq_right h1', coneOn_adj_none_some, Finset.mem_insert, Finset.mem_singleton,
       pathVtx_eq_pathStart_iff (by split_ifs <;> omega),
       pathVtx_eq_pathEnd_iff (by split_ifs <;> omega)]
     split_ifs <;> omega
-  · rw [if_neg h1, if_pos h1', coneOn_adj_some_none, Finset.mem_insert, Finset.mem_singleton,
+  · rw [ite_eq_right h1, ite_eq_left h1', coneOn_adj_some_none, Finset.mem_insert, Finset.mem_singleton,
       pathVtx_eq_pathStart_iff (by split_ifs <;> omega),
       pathVtx_eq_pathEnd_iff (by split_ifs <;> omega)]
     split_ifs <;> omega
-  · rw [if_neg h1, if_neg h1']
+  · rw [ite_eq_right h1, ite_eq_right h1']
     by_cases h0 : (j : ℕ) = 0 <;> by_cases h0' : (j' : ℕ) = 0
-    · rw [if_pos h0, if_pos h0', coneOn_adj_some_some,
+    · rw [ite_eq_left h0, ite_eq_left h0', coneOn_adj_some_some,
         pathG_adj_pathVtx (2 * m) 0 0 (by omega) (by omega)]
       omega
-    · rw [if_pos h0, if_neg h0', coneOn_adj_some_some,
+    · rw [ite_eq_left h0, ite_eq_right h0', coneOn_adj_some_some,
         pathG_adj_pathVtx (2 * m) 0 (2 * m + 2 - (j' : ℕ)) (by omega) (by omega)]
       omega
-    · rw [if_neg h0, if_pos h0', coneOn_adj_some_some,
+    · rw [ite_eq_right h0, ite_eq_left h0', coneOn_adj_some_some,
         pathG_adj_pathVtx (2 * m) (2 * m + 2 - (j : ℕ)) 0 (by omega) (by omega)]
       omega
-    · rw [if_neg h0, if_neg h0', coneOn_adj_some_some,
+    · rw [ite_eq_right h0, ite_eq_right h0', coneOn_adj_some_some,
         pathG_adj_pathVtx (2 * m) (2 * m + 2 - (j : ℕ)) (2 * m + 2 - (j' : ℕ)) (by omega)
           (by omega)]
       omega

@@ -156,7 +156,7 @@ lemma mem_inner2 (c0 c1 : Nat) (L2 : List Nat) (x : Nat) :
     · simp at hx
     · exact ⟨c2, hc2, by assumption, List.mem_singleton.mp hx⟩
   · rintro ⟨c2, hc2, hne, rfl⟩
-    exact ⟨c2, hc2, by rw [if_neg hne]; exact List.mem_singleton_self _⟩
+    exact ⟨c2, hc2, by rw [ite_eq_right hne]; exact List.mem_singleton_self _⟩
 
 lemma mem_inner1 (c0 : Nat) (L1 L2 : List Nat) (x : Nat) :
     x ∈ inner1 c0 L1 L2 ↔ ∃ c1 ∈ L1, c1 ≠ c0 ∧ ∃ c2 ∈ L2, c2 ≠ c1 ∧ x = c0 * 1024 + c1 * 32 + c2 := by
@@ -168,7 +168,7 @@ lemma mem_inner1 (c0 : Nat) (L1 L2 : List Nat) (x : Nat) :
     · simp at hx
     · exact ⟨c1, hc1, by assumption, (mem_inner2 c0 c1 L2 x).mp hx⟩
   · rintro ⟨c1, hc1, hne, h2⟩
-    exact ⟨c1, hc1, by rw [if_neg hne]; exact (mem_inner2 c0 c1 L2 x).mpr h2⟩
+    exact ⟨c1, hc1, by rw [ite_eq_right hne]; exact (mem_inner2 c0 c1 L2 x).mpr h2⟩
 
 lemma mem_states (L0 L1 L2 : List Nat) (x : Nat) :
     x ∈ states L0 L1 L2 ↔ ∃ c0 ∈ L0, ∃ c1 ∈ L1, c1 ≠ c0 ∧ ∃ c2 ∈ L2, c2 ≠ c1 ∧ x = c0 * 1024 + c1 * 32 + c2 := by
@@ -279,7 +279,7 @@ lemma sum_Xof_row (es : List EntQ) (sL sR : List Nat) (hR : ∀ e ∈ es, sR.get
     · show (if sL.getD e.1 0 = c.val ∧ sR.getD e.2.1 0 = sR.getD e.2.1 0 then _ else (0 : ℝ)) = _
       simp only [eq_self_iff_true, and_true]
     · intro b _ hb
-      rw [if_neg]
+      rw [ite_eq_right]
       rintro ⟨-, h2⟩
       exact hb (Fin.ext h2.symm)
     · intro h; exact absurd (Finset.mem_univ _) h
@@ -299,7 +299,7 @@ lemma sum_Xof_col (es : List EntQ) (sL sR : List Nat) (hL : ∀ e ∈ es, sL.get
     · show (if sL.getD e.1 0 = sL.getD e.1 0 ∧ sR.getD e.2.1 0 = s.val then _ else (0 : ℝ)) = _
       simp only [eq_self_iff_true, true_and]
     · intro b _ hb
-      rw [if_neg]
+      rw [ite_eq_right]
       rintro ⟨h1, -⟩
       exact hb (Fin.ext h1.symm)
     · intro h; exact absurd (Finset.mem_univ _) h
@@ -314,8 +314,8 @@ lemma sum_entryVal_key (es : List EntQ) (key : EntQ → Nat) (i : Nat) :
   | cons e es ih =>
     simp only [List.map_cons, List.sum_cons, sumR, sumInt, ih]
     by_cases h : key e = i
-    · simp only [h, if_true]; unfold entryVal; push_cast; ring
-    · simp only [h, if_false]; push_cast; ring
+    · simp only [h, ite_true]; unfold entryVal; push_cast; ring
+    · simp only [h, ite_false]; push_cast; ring
 
 /-! ### Marginals of the coupling against the laws -/
 
@@ -347,8 +347,8 @@ lemma sum_Xof_row_eq (es : List EntQ) (sL sR : List Nat) (hndL : sL.Nodup)
     simp only
     have hiff := getD_eq_iff sL hndL i e.1 hi (hL e he)
     by_cases h : e.1 = i
-    · rw [if_pos (hiff.mpr h), if_pos h]
-    · rw [if_neg (fun h' => h (hiff.mp h')), if_neg h]
+    · rw [ite_eq_left (hiff.mpr h), ite_eq_left h]
+    · rw [ite_eq_right (fun h' => h (hiff.mp h')), ite_eq_right h]
   rw [hmap, sum_entryVal_key es (fun e => e.1) i]
   unfold rowSumR toR
   rfl
@@ -367,8 +367,8 @@ lemma sum_Xof_col_eq (es : List EntQ) (sL sR : List Nat) (hndR : sR.Nodup)
     simp only
     have hiff := getD_eq_iff sR hndR j e.2.1 hj (hR e he)
     by_cases h : e.2.1 = j
-    · rw [if_pos (hiff.mpr h), if_pos h]
-    · rw [if_neg (fun h' => h (hiff.mp h')), if_neg h]
+    · rw [ite_eq_left (hiff.mpr h), ite_eq_left h]
+    · rw [ite_eq_right (fun h' => h (hiff.mp h')), ite_eq_right h]
   rw [hmap, sum_entryVal_key es (fun e => e.2.1) j, sumR_col_map]
 
 /-- a state that is not in the column has zero row -/
@@ -379,7 +379,7 @@ lemma sum_Xof_row_zero (es : List EntQ) (sL sR : List Nat) (hL : ∀ e ∈ es, e
   apply List.sum_eq_zero
   intro x hx
   obtain ⟨e, he, rfl⟩ := List.mem_map.mp hx
-  rw [if_neg]
+  rw [ite_eq_right]
   intro h
   apply hc
   rw [← h, getD_of_lt (hL e he)]
@@ -392,7 +392,7 @@ lemma sum_Xof_col_zero (es : List EntQ) (sL sR : List Nat) (hL : ∀ e ∈ es, e
   apply List.sum_eq_zero
   intro x hx
   obtain ⟨e, he, rfl⟩ := List.mem_map.mp hx
-  rw [if_neg]
+  rw [ite_eq_right]
   intro h
   apply hs
   rw [← h, getD_of_lt (hR e he)]
@@ -412,7 +412,7 @@ lemma Xof_pos_support (es : List EntQ) (sL sR : List Nat)
     apply List.sum_eq_zero
     intro x hx
     obtain ⟨e, he, rfl⟩ := List.mem_map.mp hx
-    rw [if_neg]
+    rw [ite_eq_right]
     rintro ⟨h1, h2⟩
     apply hcon
     refine ⟨by rw [← h1, ← h2]; exact hcomp e he, ?_, ?_⟩
@@ -438,9 +438,9 @@ lemma Kof_sum (law : Fin SB → ℝ) (X : Fin SB → Fin SB → ℝ) (hrow : ∀
     ∑ s, Kof law X c s = 1 := by
   unfold Kof
   by_cases h : 0 < law c
-  · simp only [h, if_true]
+  · simp only [h, ite_true]
     rw [← Finset.sum_div, hrow c, div_self (ne_of_gt h)]
-  · simp only [h, if_false]
+  · simp only [h, ite_false]
     rw [Finset.sum_ite_eq' Finset.univ c]
     simp
 
@@ -452,8 +452,8 @@ lemma Kof_step (law : Fin SB → ℝ) (X : Fin SB → Fin SB → ℝ) (hX : ∀ 
   intro c _
   unfold Kof
   by_cases h : 0 < law c
-  · simp only [h, if_true]; field_simp
-  · simp only [h, if_false]
+  · simp only [h, ite_true]; field_simp
+  · simp only [h, ite_false]
     have hl : law c = 0 := le_antisymm (not_lt.mp h) (hlaw c)
     have hz : X c s = 0 := by
       have := hrow c
@@ -488,18 +488,18 @@ theorem Xof_marginals (mL mR : Nat) (pL pR : List Nat) (es : List EntQ)
       have hc' : c = ⟨(stsOf pL)[i], hci ▸ c.isLt⟩ := Fin.ext hci.symm
       rw [hc', sum_Xof_row_eq es _ _ hndL hL hR hSR i hi, hrow0 i hi]
       have := hrow1 i hi; unfold rowSum1 at this; rw [this]
-      unfold lawR; rw [if_pos (List.getElem_mem hi)]
+      unfold lawR; rw [ite_eq_left (List.getElem_mem hi)]
     · rw [sum_Xof_row_zero es _ _ hL hR hSR c hc]
-      unfold lawR; rw [if_neg hc]
+      unfold lawR; rw [ite_eq_right hc]
   · intro s
     by_cases hs : s.val ∈ stsOf pR
     · obtain ⟨j, hj, hsj⟩ := List.getElem_of_mem hs
       have hs' : s = ⟨(stsOf pR)[j], hsj ▸ s.isLt⟩ := Fin.ext hsj.symm
       rw [hs', sum_Xof_col_eq es _ _ hndR hL hR hSL j hj, hcol0 j hj]
       have := hcol1 j hj; unfold colSum1 at this; rw [this]
-      unfold lawR; rw [if_pos (List.getElem_mem hj)]
+      unfold lawR; rw [ite_eq_left (List.getElem_mem hj)]
     · rw [sum_Xof_col_zero es _ _ hL hR hSL s hs]
-      unfold lawR; rw [if_neg hs]
+      unfold lawR; rw [ite_eq_right hs]
 
 /-! ### Squares of the coupling: one entry per cell -/
 
@@ -538,20 +538,20 @@ lemma prod_cell_sum (sL sR : List Nat) (hndL : sL.Nodup) (hndR : sR.Nodup) (g h 
     have hb' := fun e' he' => hb e' (List.mem_cons_of_mem e he')
     simp only [List.map_cons, List.sum_cons]
     by_cases hc : cellIs sL sR e c s
-    · rw [if_pos hc, if_pos hc, if_pos hc]
+    · rw [ite_eq_left hc, ite_eq_left hc, ite_eq_left hc]
       have hz : ∀ f : EntQ → ℝ, (es.map fun e' => if cellIs sL sR e' c s then f e' else 0).sum = 0 := by
         intro f
         apply List.sum_eq_zero
         intro x hx
         obtain ⟨e', he', rfl⟩ := List.mem_map.mp hx
-        rw [if_neg]
+        rw [ite_eq_right]
         intro hc'
         apply hnot
         rw [cell_inj sL sR hndL hndR e e' (hb e (List.mem_cons_self ..)).1 (hb' e' he').1
           (hb e (List.mem_cons_self ..)).2 (hb' e' he').2 c s hc hc']
         exact List.mem_map.mpr ⟨e', he', rfl⟩
       rw [hz, hz, hz]; ring
-    · rw [if_neg hc, if_neg hc, if_neg hc, zero_add, zero_add, zero_add]
+    · rw [ite_eq_right hc, ite_eq_right hc, ite_eq_right hc, zero_add, zero_add, zero_add]
       exact ih hnd' hb' c s
 
 /-- with at most one entry per cell, the square of a cell sum is the sum of squares -/
@@ -580,16 +580,16 @@ lemma sum_cells (sL sR : List Nat) (g : EntQ → ℝ) (es : List EntQ)
     rw [Finset.sum_eq_single ⟨sL.getD e.1 0, hl⟩]
     · rw [Finset.sum_eq_single ⟨sR.getD e.2.1 0, hr⟩]
       · show (if cellIs sL sR e ⟨sL.getD e.1 0, hl⟩ ⟨sR.getD e.2.1 0, hr⟩ then g e else 0) = g e
-        rw [if_pos ⟨rfl, rfl⟩]
+        rw [ite_eq_left ⟨rfl, rfl⟩]
       · intro b _ hb
         show (if cellIs sL sR e ⟨sL.getD e.1 0, hl⟩ b then g e else 0) = 0
-        rw [if_neg]; rintro ⟨-, h2⟩; exact hb (Fin.ext h2.symm)
+        rw [ite_eq_right]; rintro ⟨-, h2⟩; exact hb (Fin.ext h2.symm)
       · intro h; exact absurd (Finset.mem_univ _) h
     · intro b _ hb
       apply Finset.sum_eq_zero
       intro s _
       show (if cellIs sL sR e b s then g e else 0) = 0
-      rw [if_neg]; rintro ⟨h1, -⟩; exact hb (Fin.ext h1.symm)
+      rw [ite_eq_right]; rintro ⟨h1, -⟩; exact hb (Fin.ext h1.symm)
     · intro h; exact absurd (Finset.mem_univ _) h
 
 /-! ### The collision sum -/
@@ -609,8 +609,8 @@ lemma lawK_sq (law : Fin SB → ℝ) (X : Fin SB → Fin SB → ℝ) (hX : ∀ c
     law c * (Kof law X c s) ^ 2 = X c s ^ 2 / law c := by
   unfold Kof
   by_cases h : 0 < law c
-  · simp only [h, if_true]; field_simp
-  · simp only [h, if_false]
+  · simp only [h, ite_true]; field_simp
+  · simp only [h, ite_false]
     have hl : law c = 0 := le_antisymm (not_lt.mp h) (hlaw c)
     have hz : X c s = 0 := by
       have := hrow c
@@ -641,10 +641,10 @@ lemma lawK_sq_sum (law : Fin SB → ℝ) (sL sR : List Nat) (hndL : sL.Nodup) (h
     apply List.map_congr_left
     intro e he
     by_cases hc : cellIs sL sR e c s
-    · rw [if_pos hc, if_pos hc, div_eq_mul_inv]
+    · rw [ite_eq_left hc, ite_eq_left hc, div_eq_mul_inv]
       have : toFin (sL.getD e.1 0) = c := Fin.ext (by rw [toFin_val _ (hgL e he)]; exact hc.1)
       rw [this]
-    · rw [if_neg hc, if_neg hc, zero_mul]
+    · rw [ite_eq_right hc, ite_eq_right hc, zero_mul]
   rw [Finset.sum_congr rfl (fun c _ => Finset.sum_congr rfl (fun s _ => step1 c s))]
   exact sum_cells sL sR _ es hgL hgR
 
@@ -670,7 +670,7 @@ lemma entry_sq_div_law_nonU (mL : Nat) (pL : List Nat) (lc : Nat) (e : EntQ)
     entryVal e.2.2.1 e.2.2.2.1 ^ 2 / lawR mL pL (toFin ((stsOf pL).getD e.1 0))
       = (((dqSem mL pL lc e).1 : ℝ) + ((dqSem mL pL lc e).2 : ℝ) * s17) / denOf mL lc := by
   unfold lawR dqSem denOf
-  rw [toFin_val _ hSB, if_pos hst]
+  rw [toFin_val _ hSB, ite_eq_left hst]
   simp only [hU, Bool.false_eq_true, ↓reduceIte, lawE0, lawE1]
   set cnt := cntOf mL pL ((stsOf pL).getD e.1 0) with hcnt
   obtain ⟨q, hq⟩ := hdvd
@@ -698,7 +698,7 @@ lemma entry_sq_div_law_U (mL : Nat) (pL : List Nat) (lc : Nat) (e : EntQ)
     entryVal e.2.2.1 e.2.2.2.1 ^ 2 / lawR mL pL (toFin ((stsOf pL).getD e.1 0))
       = (((dqSem mL pL lc e).1 : ℝ) + ((dqSem mL pL lc e).2 : ℝ) * s17) / denOf mL lc := by
   unfold lawR dqSem denOf
-  rw [toFin_val _ hSB, if_pos hst]
+  rw [toFin_val _ hSB, ite_eq_left hst]
   simp only [hU, ↓reduceIte, lawE0, lawE1, entryVal_eq]
   have hXD : (XD : ℝ) = 1836000 := by unfold XD; norm_num
   have h17 := s17_sq
@@ -833,7 +833,7 @@ theorem bridge_one (mL mR M ne blob : Nat) (h : checkRecord 1 mL mR M ne blob = 
   refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inl ?_⟩, fun hu => ?_⟩
   · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
   · unfold Kof at hk
-    rw [if_pos hl] at hk
+    rw [ite_eq_left hl] at hk
     have hXpos : 0 < X c s := by
       by_contra hcon; push Not at hcon
       have : X c s = 0 := le_antisymm hcon (hX c s)
@@ -900,7 +900,7 @@ lemma collision_lt_one_rat (q den : Nat) (hden : 0 < den) (h1 : 5 * q < 2 * den)
 lemma dqSem_toQ_snd (mL : Nat) (pL : List Nat) (lc : Nat) (hLU : (mL == UTYPE) = false) (e0 : EntR) :
     (dqSem mL pL lc (toQ e0)).2 = 0 := by
   unfold dqSem toQ
-  rw [if_neg (by rw [hLU]; decide)]
+  rw [ite_eq_right (by rw [hLU]; decide)]
   dsimp only
   generalize cntOf mL pL _ = cnt
   simp only [Int.mul_zero]
@@ -909,7 +909,7 @@ lemma dqSem_toQ_fst (mL : Nat) (pL : List Nat) (lc : Nat) (hLU : (mL == UTYPE) =
     (dqSem mL pL lc (toQ e0)).1
       = ((108 * (lc / cntOf mL pL ((stsOf pL).getD e0.1 0)) * (289 * e0.2.2.1 * e0.2.2.1) : Nat) : Int) := by
   unfold dqSem toQ
-  rw [if_neg (by rw [hLU]; decide)]
+  rw [ite_eq_right (by rw [hLU]; decide)]
   dsimp only
   generalize cntOf mL pL _ = cnt
   generalize e0.2.2.1 = v
@@ -993,7 +993,7 @@ theorem bridge_zero (mL mR M ne blob : Nat) (h : checkRecord 0 mL mR M ne blob =
   refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inl ?_⟩⟩
   · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
   · unfold Kof at hk
-    rw [if_pos hl] at hk
+    rw [ite_eq_left hl] at hk
     have hXpos : 0 < X c s := by
       by_contra hcon; push Not at hcon
       have : X c s = 0 := le_antisymm hcon (hX c s)
@@ -1069,8 +1069,8 @@ lemma lawKr_sum (law : Fin SB → ℝ) (sL sR : List Nat) (hndL : sL.Nodup) (hnd
     have hK : law c * Kof law (Xof es sL sR) c s = Xof es sL sR c s := by
       unfold Kof
       by_cases h : 0 < law c
-      · simp only [h, if_true]; field_simp
-      · simp only [h, if_false]
+      · simp only [h, ite_true]; field_simp
+      · simp only [h, ite_false]
         have hl : law c = 0 := le_antisymm (not_lt.mp h) (hlaw c)
         have hz : Xof es sL sR c s = 0 := by
           have := hrow c
@@ -1140,7 +1140,7 @@ theorem bridge_two (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M ne blob = 
   refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inr ⟨r, rOf_nonneg _ _ _, ?_, ?_⟩⟩⟩
   · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
   · unfold Kof at hk
-    rw [if_pos hl] at hk
+    rw [ite_eq_left hl] at hk
     have hXpos : 0 < X c s := by
       by_contra hcon; push Not at hcon
       have : X c s = 0 := le_antisymm hcon (hX c s)
@@ -1150,7 +1150,7 @@ theorem bridge_two (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M ne blob = 
     intro c s
     unfold Kof
     by_cases hl : 0 < law c
-    · simp only [hl, if_true]
+    · simp only [hl, ite_true]
       rw [mul_div_cancel₀ _ (ne_of_gt hl)]
       rw [hrdef, hXdef, Xof_eq_cell]
       unfold rOf
@@ -1159,13 +1159,13 @@ theorem bridge_two (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M ne blob = 
       apply List.sum_le_sum
       intro e he
       by_cases hc : cellIs (stsOf pL) (stsOf pR) e c s
-      · rw [if_pos hc, if_pos hc]
+      · rw [ite_eq_left hc, ite_eq_left hc]
         obtain ⟨e0, he0, rfl⟩ := hmem e he
         have hw := (hwit e0 he0).2
         have hrow_c : lawR mL pL c = (cntOf mL pL ((stsOf pL).getD e0.1 0) : ℝ) / 108 := by
           unfold lawR
           have hcv : c.val = (stsOf pL).getD e0.1 0 := hc.1.symm
-          rw [hcv, if_pos (by rw [getD_of_lt (hent0 e0 he0).1]; exact List.getElem_mem _)]
+          rw [hcv, ite_eq_left (by rw [getD_of_lt (hent0 e0 he0).1]; exact List.getElem_mem _)]
           unfold lawE0 lawE1; rw [hLU]; simp only [Bool.false_eq_true, ↓reduceIte]
           push_cast; ring
         rw [hrow_c]
@@ -1177,8 +1177,8 @@ theorem bridge_two (mL mR M ne blob : Nat) (h : checkRecord 2 mL mR M ne blob = 
         push_cast at hwR ⊢
         simp only [Int.cast_zero, zero_div, zero_mul, add_zero]
         nlinarith
-      · rw [if_neg hc, if_neg hc, zero_mul]
-    · simp only [hl, if_false]
+      · rw [ite_eq_right hc, ite_eq_right hc, zero_mul]
+    · simp only [hl, ite_false]
       have hl0 : lawR mL pL c = 0 := le_antisymm (not_lt.mp hl) (hlawL c)
       rw [hl0]; simp
   · -- the fourth-root bound
@@ -1256,7 +1256,7 @@ theorem bridge_three (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR M ne blob 
   refine ⟨Kof law X, ⟨Kof_nonneg law X hX, Kof_sum law X hrowX, fun s => ?_, fun c s hl hk => ?_, Or.inr ⟨r, rOf_nonneg _ _ _, ?_, ?_⟩⟩⟩
   · rw [Kof_step law X hX hlawL hrowX s]; exact hcolX s
   · unfold Kof at hk
-    rw [if_pos hl] at hk
+    rw [ite_eq_left hl] at hk
     have hXpos : 0 < X c s := by
       by_contra hcon; push Not at hcon
       have : X c s = 0 := le_antisymm hcon (hX c s)
@@ -1265,7 +1265,7 @@ theorem bridge_three (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR M ne blob 
   · intro c s
     unfold Kof
     by_cases hl : 0 < law c
-    · simp only [hl, if_true]
+    · simp only [hl, ite_true]
       rw [mul_div_cancel₀ _ (ne_of_gt hl)]
       rw [hrdef, hXdef, Xof_eq_cell]
       unfold rOf
@@ -1274,12 +1274,12 @@ theorem bridge_three (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR M ne blob 
       apply List.sum_le_sum
       intro e he
       by_cases hc : cellIs (stsOf pL) (stsOf pR) e c s
-      · rw [if_pos hc, if_pos hc]
+      · rw [ite_eq_left hc, ite_eq_left hc]
         have hw := (hwit e he).2
         have hrow_c : lawR mL pL c = (cntOf mL pL ((stsOf pL).getD e.1 0) : ℝ) / 108 := by
           unfold lawR
           have hcv : c.val = (stsOf pL).getD e.1 0 := hc.1.symm
-          rw [hcv, if_pos (by rw [getD_of_lt (hL e he)]; exact List.getElem_mem _)]
+          rw [hcv, ite_eq_left (by rw [getD_of_lt (hL e he)]; exact List.getElem_mem _)]
           unfold lawE0 lawE1; rw [hLU]; simp only [Bool.false_eq_true, ↓reduceIte]
           push_cast; ring
         rw [hrow_c, entryVal_eq]
@@ -1297,8 +1297,8 @@ theorem bridge_three (mL mR M ne blob : Nat) (h : checkRecord 3 mL mR M ne blob 
         rw [key, le_div_iff₀ (by positivity)]
         push_cast at hs ⊢
         nlinarith [hs]
-      · rw [if_neg hc, if_neg hc, zero_mul]
-    · simp only [hl, if_false]
+      · rw [ite_eq_right hc, ite_eq_right hc, zero_mul]
+    · simp only [hl, ite_false]
       have hl0 : lawR mL pL c = 0 := le_antisymm (not_lt.mp hl) (hlawL c)
       rw [hl0]; simp
   · rw [lawKr_sum law (stsOf pL) (stsOf pR) hndL hndR hSL hSR es hnd (fun e he => ⟨hL e he, hR e he⟩) hlawL hrowX hnn]

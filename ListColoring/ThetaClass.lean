@@ -126,13 +126,13 @@ theorem alt_chain {p q : ℕ} (g : ℕ → ℕ) (k m : ℕ)
       have hmem' := hmem (k + i + 1) (by omega) (by omega)
       rw [show k + (i + 1) = k + i + 1 from by omega]
       by_cases hpar : i % 2 = 0
-      · rw [if_pos hpar] at hgi
-        rw [if_neg (by omega : ¬ ((i + 1) % 2 = 0))]
+      · rw [ite_eq_left hpar] at hgi
+        rw [ite_eq_right (by omega : ¬ ((i + 1) % 2 = 0))]
         rcases hmem' with h | h
         · exact h
         · exact absurd (hgi.trans h.symm) hstep
-      · rw [if_neg hpar] at hgi
-        rw [if_pos (by omega : (i + 1) % 2 = 0)]
+      · rw [ite_eq_right hpar] at hgi
+        rw [ite_eq_left (by omega : (i + 1) % 2 = 0)]
         rcases hmem' with h | h
         · exact absurd (hgi.trans h.symm) hstep
         · exact h
@@ -174,17 +174,17 @@ theorem armBlockLists_forced (α β : ℕ) {m : ℕ} (hm : 2 ≤ m) (g : ℕ →
       · exact Or.inr hg0
       · have h := hg j hj
         rw [show armBlockLists α β m j = ({3, β} : Finset ℕ) from by
-          simp only [armBlockLists, if_pos hpar, if_neg (by omega : ¬ (j = 0))]] at h
+          simp only [armBlockLists, ite_eq_left hpar, ite_eq_right (by omega : ¬ (j = 0))]] at h
         simp only [Finset.mem_insert, Finset.mem_singleton] at h
         tauto
     have h := alt_chain (p := β) (q := 3) g 0 m hmem hne hg0 (m - 1) (by omega)
-    rw [if_neg (by omega : ¬ ((m - 1) % 2 = 0))] at h
+    rw [ite_eq_right (by omega : ¬ ((m - 1) % 2 = 0))] at h
     simpa using h
   · have hg1 : g 1 = 4 := by
       have h := hg 1 (by omega)
       rw [show armBlockLists α β m 1 = ({3, 4} : Finset ℕ) from by
-        simp only [armBlockLists, if_neg hpar, if_neg (by omega : ¬ ((1 : ℕ) = 0)),
-          if_true]] at h
+        simp only [armBlockLists, ite_eq_right hpar, ite_eq_right (by omega : ¬ ((1 : ℕ) = 0)),
+          ite_true]] at h
       have hs : g 0 ≠ g 1 := by simpa using hne 0 (by omega)
       simp only [Finset.mem_insert, Finset.mem_singleton] at h
       rw [hg0] at hs
@@ -192,8 +192,8 @@ theorem armBlockLists_forced (α β : ℕ) {m : ℕ} (hm : 2 ≤ m) (g : ℕ →
     have hg2 : g 2 = β := by
       have h := hg 2 (by omega)
       rw [show armBlockLists α β m 2 = ({4, β} : Finset ℕ) from by
-        simp only [armBlockLists, if_neg hpar, if_neg (by omega : ¬ ((2 : ℕ) = 0)),
-          if_neg (by omega : ¬ ((2 : ℕ) = 1)), if_true]] at h
+        simp only [armBlockLists, ite_eq_right hpar, ite_eq_right (by omega : ¬ ((2 : ℕ) = 0)),
+          ite_eq_right (by omega : ¬ ((2 : ℕ) = 1)), ite_true]] at h
       have hs : g 1 ≠ g 2 := by simpa using hne 1 (by omega)
       simp only [Finset.mem_insert, Finset.mem_singleton] at h
       rw [hg1] at hs
@@ -205,12 +205,12 @@ theorem armBlockLists_forced (α β : ℕ) {m : ℕ} (hm : 2 ≤ m) (g : ℕ →
         exact Or.inr hg2
       · have h := hg j hj
         rw [show armBlockLists α β m j = ({3, β} : Finset ℕ) from by
-          simp only [armBlockLists, if_neg hpar, if_neg (by omega : ¬ (j = 0)),
-            if_neg (by omega : ¬ (j = 1)), if_neg (by omega : ¬ (j = 2))]] at h
+          simp only [armBlockLists, ite_eq_right hpar, ite_eq_right (by omega : ¬ (j = 0)),
+            ite_eq_right (by omega : ¬ (j = 1)), ite_eq_right (by omega : ¬ (j = 2))]] at h
         simp only [Finset.mem_insert, Finset.mem_singleton] at h
         tauto
     have h := alt_chain (p := 3) (q := β) g 2 m hmem hne hg2 (m - 3) (by omega)
-    rw [if_pos (by omega : (m - 3) % 2 = 0), show 2 + (m - 3) = m - 1 from by omega] at h
+    rw [ite_eq_left (by omega : (m - 3) % 2 = 0), show 2 + (m - 3) = m - 1 from by omega] at h
     exact h
 
 /-! ### What an arm blocks -/
@@ -239,22 +239,22 @@ theorem const_block {m α β : ℕ} (g : ℕ → ℕ)
     have hh0 := h0 hm
     have hh1 := h1 hm
     by_cases hpar : (m - 1) % 2 = 0
-    · rw [if_pos hpar] at hchain; omega
-    · rw [if_neg hpar] at hchain; omega
+    · rw [ite_eq_left hpar] at hchain; omega
+    · rw [ite_eq_right hpar] at hchain; omega
 
 /-! ### Reading off the arms of `thetaGen` -/
 
 /-- The first vertex of an arm with at least one interior vertex is joined to the first branch
 vertex. -/
 private lemma armStepB_head (o m ps pt : ℕ) (hm : m ≠ 0) : armStepB o m ps pt ps o = true := by
-  simp only [armStepB, if_neg hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
+  simp only [armStepB, ite_eq_right hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
     decide_eq_true_eq]
   exact Or.inl (Or.inl ⟨trivial, trivial⟩)
 
 /-- Consecutive interior vertices of an arm are joined. -/
 private lemma armStepB_mid (o m ps pt j : ℕ) (hj : j + 1 < m) :
     armStepB o m ps pt (o + j) (o + j + 1) = true := by
-  simp only [armStepB, if_neg (show ¬ (m = 0) from by omega), Bool.or_eq_true, Bool.and_eq_true,
+  simp only [armStepB, ite_eq_right (show ¬ (m = 0) from by omega), Bool.or_eq_true, Bool.and_eq_true,
     beq_iff_eq, decide_eq_true_eq, and_true]
   omega
 
@@ -262,7 +262,7 @@ private lemma armStepB_mid (o m ps pt j : ℕ) (hj : j + 1 < m) :
 vertex. -/
 private lemma armStepB_last (o m ps pt : ℕ) (hm : m ≠ 0) :
     armStepB o m ps pt (o + (m - 1)) pt = true := by
-  simp only [armStepB, if_neg hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
+  simp only [armStepB, ite_eq_right hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
     decide_eq_true_eq, and_true]
   omega
 
@@ -316,12 +316,12 @@ private lemma bad_finish {a x y : ℕ} (ha : 1 ≤ a) (hx : x = 1 ∨ x = 2) (hy
   rcases hx with hA | hA
   · have hbk := hb2 hA
     by_cases hpar : a % 2 = 1
-    · rw [if_pos hpar] at hbk; omega
-    · rw [if_neg hpar] at hbk; omega
+    · rw [ite_eq_left hpar] at hbk; omega
+    · rw [ite_eq_right hpar] at hbk; omega
   · have hbk := hb3 hA
     by_cases hpar : a % 2 = 1
-    · rw [if_pos hpar] at hbk; omega
-    · rw [if_neg hpar] at hbk; omega
+    · rw [ite_eq_left hpar] at hbk; omega
+    · rw [ite_eq_right hpar] at hbk; omega
 
 /-- The endgame for a shape with `b = 2`: the three arms do not all have the same parity, so one
 of them forces the two branch colors equal and another forces them different. -/
@@ -408,8 +408,8 @@ private lemma thetaBad_no_index_coloring {a b c : ℕ} (ha : 1 ≤ a) (hab : a �
       intro j hj
       have h := hmem (0 + j) (by omega)
       rw [show badListAt a b c (0 + j) = ({1, 2} : Finset ℕ) from by
-        simp only [badListAt, if_neg (show ¬ (b ≤ 2) from by omega),
-          if_pos (show 0 + j + 1 < a from by omega)]] at h
+        simp only [badListAt, ite_eq_right (show ¬ (b ≤ 2) from by omega),
+          ite_eq_left (show 0 + j + 1 < a from by omega)]] at h
       simpa using h
     have key1 : F (a + b + c - 3) = F (a + b + c - 2) ↔ (a - 1) % 2 = 1 :=
       const_block (fun j => F (0 + j)) hL1 s1 (fun hm => Ne.symm (s2 hm)) s3 s4 hα hβ
@@ -419,9 +419,9 @@ private lemma thetaBad_no_index_coloring {a b c : ℕ} (ha : 1 ≤ a) (hab : a �
       have h := hmem (a - 1 + j) (by omega)
       rw [show badListAt a b c (a - 1 + j)
             = armBlockLists 1 (if a % 2 = 1 then 2 else 1) (b - 1) j from by
-        simp only [badListAt, if_neg (show ¬ (b ≤ 2) from by omega),
-          if_neg (show ¬ (a - 1 + j + 1 < a) from by omega),
-          if_pos (show a - 1 + j + 2 < a + b from by omega)]
+        simp only [badListAt, ite_eq_right (show ¬ (b ≤ 2) from by omega),
+          ite_eq_right (show ¬ (a - 1 + j + 1 < a) from by omega),
+          ite_eq_left (show a - 1 + j + 2 < a + b from by omega)]
         congr 1
         omega] at h
       exact h
@@ -431,10 +431,10 @@ private lemma thetaBad_no_index_coloring {a b c : ℕ} (ha : 1 ≤ a) (hab : a �
       have h := hmem (a + b - 2 + j) (by omega)
       rw [show badListAt a b c (a + b - 2 + j)
             = armBlockLists 2 (if a % 2 = 1 then 1 else 2) (c - 1) j from by
-        simp only [badListAt, if_neg (show ¬ (b ≤ 2) from by omega),
-          if_neg (show ¬ (a + b - 2 + j + 1 < a) from by omega),
-          if_neg (show ¬ (a + b - 2 + j + 2 < a + b) from by omega),
-          if_pos (show a + b - 2 + j + 3 < a + b + c from by omega)]
+        simp only [badListAt, ite_eq_right (show ¬ (b ≤ 2) from by omega),
+          ite_eq_right (show ¬ (a + b - 2 + j + 1 < a) from by omega),
+          ite_eq_right (show ¬ (a + b - 2 + j + 2 < a + b) from by omega),
+          ite_eq_left (show a + b - 2 + j + 3 < a + b + c from by omega)]
         congr 1
         omega] at h
       exact h
@@ -461,7 +461,7 @@ private lemma thetaBad_no_index_coloring {a b c : ℕ} (ha : 1 ≤ a) (hab : a �
       intro i hi
       have h := hmem i hi
       rw [show badListAt a b c i = ({1, 2} : Finset ℕ) from by
-        simp only [badListAt, if_pos (show b ≤ 2 from by omega)]] at h
+        simp only [badListAt, ite_eq_left (show b ≤ 2 from by omega)]] at h
       simpa using h
     have key1 : F (a + b + c - 3) = F (a + b + c - 2) ↔ (a - 1) % 2 = 1 :=
       const_block (fun j => F (0 + j)) (fun j hj => hall _ (by omega)) s1
@@ -557,38 +557,38 @@ def thetaGenToTheta (m : ℕ) (v : TGV 2 2 (2 * m)) : ThetaV m :=
 
 private lemma tgtt_zero (m : ℕ) (u : TGV 2 2 (2 * m)) (hu : u.val = 0) :
     thetaGenToTheta m u = none := by
-  simp only [thetaGenToTheta, if_pos hu]
+  simp only [thetaGenToTheta, ite_eq_left hu]
 
 private lemma tgtt_one (m : ℕ) (u : TGV 2 2 (2 * m)) (hu : u.val = 1) :
     thetaGenToTheta m u = some none := by
-  simp only [thetaGenToTheta, if_neg (show ¬ (u.val = 0) from by omega), if_pos hu]
+  simp only [thetaGenToTheta, ite_eq_right (show ¬ (u.val = 0) from by omega), ite_eq_left hu]
 
 private lemma tgtt_S (m : ℕ) (hm : 1 ≤ m) (u : TGV 2 2 (2 * m)) (hu : u.val = 2 * m + 1) :
     thetaGenToTheta m u = some (some (pathEnd (2 * m))) := by
-  simp only [thetaGenToTheta, if_neg (show ¬ (u.val = 0) from by omega),
-    if_neg (show ¬ (u.val = 1) from by omega), if_pos hu]
+  simp only [thetaGenToTheta, ite_eq_right (show ¬ (u.val = 0) from by omega),
+    ite_eq_right (show ¬ (u.val = 1) from by omega), ite_eq_left hu]
 
 private lemma tgtt_T (m : ℕ) (u : TGV 2 2 (2 * m)) (hu : u.val = 2 * m + 2) :
     thetaGenToTheta m u = some (some (pathStart (2 * m))) := by
-  simp only [thetaGenToTheta, if_neg (show ¬ (u.val = 0) from by omega),
-    if_neg (show ¬ (u.val = 1) from by omega), if_neg (show ¬ (u.val = 2 * m + 1) from by omega),
-    if_pos hu]
+  simp only [thetaGenToTheta, ite_eq_right (show ¬ (u.val = 0) from by omega),
+    ite_eq_right (show ¬ (u.val = 1) from by omega), ite_eq_right (show ¬ (u.val = 2 * m + 1) from by omega),
+    ite_eq_left hu]
 
 private lemma tgtt_mid (m : ℕ) (u : TGV 2 2 (2 * m)) (h2 : 2 ≤ u.val) (h3 : u.val ≤ 2 * m) :
     thetaGenToTheta m u = some (some (pathVtx (2 * m) (u.val - 1))) := by
-  simp only [thetaGenToTheta, if_neg (show ¬ (u.val = 0) from by omega),
-    if_neg (show ¬ (u.val = 1) from by omega), if_neg (show ¬ (u.val = 2 * m + 1) from by omega),
-    if_neg (show ¬ (u.val = 2 * m + 2) from by omega)]
+  simp only [thetaGenToTheta, ite_eq_right (show ¬ (u.val = 0) from by omega),
+    ite_eq_right (show ¬ (u.val = 1) from by omega), ite_eq_right (show ¬ (u.val = 2 * m + 1) from by omega),
+    ite_eq_right (show ¬ (u.val = 2 * m + 2) from by omega)]
 
 private lemma tgtt_idx (m : ℕ) (hm : 1 ≤ m) (u : TGV 2 2 (2 * m)) (h2 : 2 ≤ u.val) :
     thetaGenToTheta m u = some (some (pathVtx (2 * m) (tgIdx m u.val))) := by
   have hu := u.isLt
   rcases (show u.val = 2 * m + 1 ∨ u.val = 2 * m + 2 ∨ u.val ≤ 2 * m from by omega) with h | h | h
-  · rw [tgtt_S m hm u h, tgIdx, if_pos h, pathVtx_zero]
-  · rw [tgtt_T m u h, tgIdx, if_neg (show ¬ (u.val = 2 * m + 1) from by omega), if_pos h,
+  · rw [tgtt_S m hm u h, tgIdx, ite_eq_left h, pathVtx_zero]
+  · rw [tgtt_T m u h, tgIdx, ite_eq_right (show ¬ (u.val = 2 * m + 1) from by omega), ite_eq_left h,
       pathVtx_last]
-  · rw [tgtt_mid m u h2 h, tgIdx, if_neg (show ¬ (u.val = 2 * m + 1) from by omega),
-      if_neg (show ¬ (u.val = 2 * m + 2) from by omega)]
+  · rw [tgtt_mid m u h2 h, tgIdx, ite_eq_right (show ¬ (u.val = 2 * m + 1) from by omega),
+      ite_eq_right (show ¬ (u.val = 2 * m + 2) from by omega)]
 
 /-- The embedding is injective: distinct indices land on distinct positions along the long path. -/
 theorem thetaGenToTheta_injective (m : ℕ) (hm : 1 ≤ m) :
@@ -635,8 +635,8 @@ private lemma thetaGenAdjB_decode (m : ℕ) (hm : 1 ≤ m) {x y : ℕ}
     (x = 2 * m + 1 ∧ y = 0) ∨ (x = 0 ∧ y = 2 * m + 2) ∨ (x = 2 * m + 1 ∧ y = 1) ∨
       (x = 1 ∧ y = 2 * m + 2) ∨ (2 ≤ x ∧ x ≤ 2 * m - 1 ∧ y = x + 1) ∨
       (x = 2 * m + 1 ∧ y = 2) ∨ (x = 2 * m ∧ y = 2 * m + 2) := by
-  simp only [thetaGenAdjB, armStepB, if_neg (show ¬ ((2 : ℕ) - 1 = 0) from by omega),
-    if_neg (show ¬ (2 * m - 1 = 0) from by omega), Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
+  simp only [thetaGenAdjB, armStepB, ite_eq_right (show ¬ ((2 : ℕ) - 1 = 0) from by omega),
+    ite_eq_right (show ¬ (2 * m - 1 = 0) from by omega), Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
     decide_eq_true_eq] at h
   rcases h with (((h | h) | h) | ((h | h) | h)) | ((h | h) | h) <;> omega
 

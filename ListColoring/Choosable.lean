@@ -299,7 +299,7 @@ theorem colConst_closePath_two_of_even {k : ℕ} (hk : Even k) (hk2 : 2 ≤ k) :
   obtain ⟨j, rfl⟩ : ∃ j, k = j + 1 := ⟨k - 1, by omega⟩
   have hj : ¬ Even j := Nat.even_add_one.mp hk
   have h := colConst_closePath_succ 0 j
-  rw [(pathA_pathB_zero_parity j).1, if_neg hj] at h
+  rw [(pathA_pathB_zero_parity j).1, ite_eq_right hj] at h
   simpa only [zero_add, mul_zero] using h
 
 /-- **A cycle on an odd number of vertices is not `2`-colorable.** -/

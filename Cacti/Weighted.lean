@@ -53,8 +53,8 @@ theorem prod_split_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
   rw [hsub A F, hsub B (fun x => if x = r then 1 else F x)]
   have hB : (∏ v ∈ B.toFinset, if v = r then 1 else F v)
       = ∏ v ∈ B.toFinset.erase r, F v := by
-    rw [← Finset.mul_prod_erase B.toFinset _ (Set.mem_toFinset.mpr hrB), if_pos rfl, one_mul]
-    exact Finset.prod_congr rfl fun v hv => if_neg (Finset.ne_of_mem_erase hv)
+    rw [← Finset.mul_prod_erase B.toFinset _ (Set.mem_toFinset.mpr hrB), ite_eq_left rfl, one_mul]
+    exact Finset.prod_congr rfl fun v hv => ite_eq_right (Finset.ne_of_mem_erase hv)
   rw [hB, ← Finset.prod_union (by
     rw [Finset.disjoint_right]
     intro v hv hvA

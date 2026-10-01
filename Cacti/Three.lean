@@ -53,7 +53,7 @@ theorem pendant_gm_dominant {Lx Lu : Finset ℕ} (hLx : Lx.card = 3) (hLu : Lu.c
     _ = ∏ i : Fin 3, ∑ d ∈ Lx.erase (σ i), wx d := by
         rw [← enum_image hLx hσmem hσinj, Finset.prod_image (fun i _ j _ h => hσinj h)]
     _ ≤ ∏ i : Fin 3, ∑ e ∈ Lx.filter (· ≠ τ i), wx e :=
-        Finset.prod_le_prod' (fun i _ => hstep i)
+        Finset.prod_le_prod (fun i _ => hstep i)
     _ = ∏ c ∈ Lu, ∑ e ∈ Lx.filter (· ≠ c), wx e := by
         rw [← enum_image hLu hτmem hτinj, Finset.prod_image (fun i _ j _ h => hτinj h)]
 
@@ -90,8 +90,8 @@ theorem gm_bound_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePred 
     (fun x => if x.val = u then 1 else W x.val) (by
       intro x
       by_cases hxu : x.val = u
-      · simp only [if_pos hxu, one_pow, Finset.prod_const_one, le_refl]
-      · simp only [if_neg hxu]
+      · simp only [ite_eq_left hxu, one_pow, Finset.prod_const_one, le_refl]
+      · simp only [ite_eq_right hxu]
         exact hdom x.val)
   -- the absorbed weight at `u` is still GM-dominant, over the `B`-side normalizer
   have hA := hAside
@@ -116,7 +116,7 @@ theorem gm_bound_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePred 
                   (fun x e => if x.val = u then 1 else w x.val e) ⟨u, huB⟩ c :=
               Nat.mul_le_mul (hdom u) hB
           _ = _ := (Finset.prod_mul_distrib).symm
-      · simp only [if_neg hvu]
+      · simp only [ite_eq_right hvu]
         exact hdom v.val)
   rw [Finset.prod_congr rfl (fun c _ =>
       rootedWcol_absorb huA huB hcover hmeet hedge hrA L w c),
@@ -189,13 +189,13 @@ theorem gm_bound_of_balanced {k F : ℕ} (hF : 0 < F) (L : ListAssignment V)
             Finset.prod_fiberwise_of_maps_to
               (fun f hf => G.mem_list_of_mem_colorings (hS hf) r) x, htot]
       _ ≤ ∏ c ∈ L r, (rootedWcol G L w r c) ^ F :=
-          Finset.prod_le_prod' (fun c hc => hfibre c hc)
+          Finset.prod_le_prod (fun c hc => hfibre c hc)
       _ = (∏ c ∈ L r, rootedWcol G L w r c) ^ F := Finset.prod_pow _ _ _
   refine le_trans ?_ hkey
   calc (F * ∏ v, W v) ^ k = F ^ k * ∏ v, (W v) ^ k := by
         rw [mul_pow, Finset.prod_pow]
     _ ≤ F ^ k * ∏ v, ∏ c ∈ L v, w v c :=
-        Nat.mul_le_mul_left _ (Finset.prod_le_prod' (fun v _ => hdom v))
+        Nat.mul_le_mul_left _ (Finset.prod_le_prod (fun v _ => hdom v))
 
 end Balanced
 

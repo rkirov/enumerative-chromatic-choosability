@@ -202,21 +202,21 @@ lemma ofSeq_apply {u : ℕ → V} {m : ℕ} (M : ℕ → Finset ℕ) (dflt : V �
   have h : ∃ i, i ≤ m ∧ u i = u j := ⟨j, hj, rfl⟩
   have hs := h.choose_spec
   have : h.choose = j := hinj hs.1 hj hs.2
-  simp only [ofSeq, dif_pos h, this]
+  simp only [ofSeq, dite_eq_left h, this]
 
 lemma ofSeq_of_notMem {u : ℕ → V} {m : ℕ} (M : ℕ → Finset ℕ) (dflt : V → Finset ℕ) {w : V}
     (hw : ∀ i, i ≤ m → u i ≠ w) : ofSeq u m M dflt w = dflt w := by
   classical
   have h : ¬ ∃ i, i ≤ m ∧ u i = w := fun ⟨i, hi, he⟩ => hw i hi he
-  simp only [ofSeq, dif_neg h]
+  simp only [ofSeq, dite_eq_right h]
 
 lemma ofSeq_card {u : ℕ → V} {m : ℕ} {M : ℕ → Finset ℕ} {dflt : V → Finset ℕ}
     (hM : ∀ i, i ≤ m → (M i).card = 2) (hd : ∀ w, (dflt w).card = 2) (w : V) :
     (ofSeq u m M dflt w).card = 2 := by
   classical
   by_cases h : ∃ i, i ≤ m ∧ u i = w
-  · rw [ofSeq, dif_pos h]; exact hM _ h.choose_spec.1
-  · rw [ofSeq, dif_neg h]; exact hd w
+  · rw [ofSeq, dite_eq_left h]; exact hM _ h.choose_spec.1
+  · rw [ofSeq, dite_eq_right h]; exact hd w
 
 /-! ### A closed walk of odd length
 
@@ -262,10 +262,10 @@ theorem not_choosable_two_of_odd_closed_walk {m : ℕ} (hm : Even m) (u : ℕ �
     rcases Nat.even_or_odd i with h | h
     · have h1 : i % 2 = 0 := Nat.even_iff.mp h
       have h2 : (i + 1) % 2 ≠ 0 := by omega
-      simp only [if_pos h1, if_neg h2, hpair]
+      simp only [ite_eq_left h1, ite_eq_right h2, hpair]
     · have h1 : i % 2 ≠ 0 := by have := Nat.odd_iff.mp h; omega
       have h2 : (i + 1) % 2 = 0 := by have := Nat.odd_iff.mp h; omega
-      rw [if_neg h1, if_pos h2, Finset.pair_comm q p]
+      rw [ite_eq_right h1, ite_eq_left h2, Finset.pair_comm q p]
       exact hpair.symm
   · have : m % 2 = 0 := Nat.even_iff.mp hm
     simp [this]

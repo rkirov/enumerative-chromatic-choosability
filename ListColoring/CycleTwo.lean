@@ -114,7 +114,7 @@ theorem colConst_closePath_two_of_odd {k : ℕ} (hk : Odd k) : (closePath k).col
     · exact h
     · exact absurd hk (by simpa [Nat.even_add_one] using h)
   have h := colConst_closePath_succ 0 j
-  rw [(pathA_pathB_zero_parity j).1, if_pos hj] at h
+  rw [(pathA_pathB_zero_parity j).1, ite_eq_left hj] at h
   simpa only [zero_add, mul_one] using h
 
 /-! ### Colorings of the cycle are colorings of the path with distinct ends -/

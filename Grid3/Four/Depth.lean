@@ -239,7 +239,7 @@ theorem repl_mem {Z : Finset ℕ} (hZ : NearK 4 Z) (c b : ℕ) : repl Z c b ∈ 
     have h2 := Finset.pred_card_le_card_erase (s := Z.erase c) (a := b)
     rcases hZ with h | h <;> omega
   unfold repl
-  rw [dif_pos hne]
+  rw [dite_eq_left hne]
   exact Finset.min'_mem _ hne
 
 end Four

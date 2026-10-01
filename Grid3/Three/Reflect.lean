@@ -91,7 +91,7 @@ theorem patOf_mirror (c : ℕ) : patOf (mirror Lc) c = revPat (patOf Lc c) := by
   unfold patOf
   rw [mirror_0, mirror_1, mirror_2]
   by_cases h0 : c ∈ Lc 0 <;> by_cases h1 : c ∈ Lc 1 <;> by_cases h2 : c ∈ Lc 2 <;>
-    simp only [h0, h1, h2, if_true, if_false] <;> decide
+    simp only [h0, h1, h2, ite_true, ite_false] <;> decide
 
 theorem cnt_mirror (p : ℕ) (hp : p < 7) : cnt (mirror Lc) p = cnt Lc (rp p) := by
   unfold cnt
@@ -179,8 +179,8 @@ theorem sigC_mirror {C : ℕ} (c : Fin 3 → Fin C) (h : IsCol Lc c) :
   rw [e0, e1, e2, patOf_mirror, patOf_mirror, patOf_mirror]
   have he : (if c 2 = c 0 then 1 else 0 : ℕ) = if c 0 = c 2 then 1 else 0 := by
     by_cases hc : c 0 = c 2
-    · rw [if_pos hc, if_pos hc.symm]
-    · rw [if_neg hc, if_neg (Ne.symm hc)]
+    · rw [ite_eq_left hc, ite_eq_left hc.symm]
+    · rw [ite_eq_right hc, ite_eq_right (Ne.symm hc)]
   rw [he, rsig_sig _ _ _ _ b0 b1 b2 (by split_ifs <;> decide)]
 
 theorem sigC_lt {C : ℕ} (c : Fin 3 → Fin C) (h : IsCol Lc c) : sigC Lc c < 686 := by
@@ -196,19 +196,19 @@ theorem lawSig_rsig (m : ℕ) (hm : m ∈ validTypes) (s : ℕ) (hs : s < 686) :
   by_cases hU : m = UTYPE
   · subst hU
     rw [rtype_UTYPE, rsig_mod_two]
-    simp only [beq_self_eq_true, if_true]
+    simp only [beq_self_eq_true, ite_true]
   · have hU' : rtype m ≠ UTYPE := fun h => hU ((rtype_eq_UTYPE_iff m hm).1 h)
-    rw [if_neg (by simpa using hU'), if_neg (by simpa using hU), subTable_rsig m hm s hs]
+    rw [ite_eq_right (by simpa using hU'), ite_eq_right (by simpa using hU), subTable_rsig m hm s hs]
 
 /-- **The concrete law is reflection-invariant.** -/
 theorem lawC_mirror {C : ℕ} (h3 : ∀ r, (Lc r).card = 3) (c : Fin 3 → Fin C) :
     lawC (mirror Lc) (rs c) = lawC Lc c := by
   unfold lawC
   by_cases h : IsCol Lc c
-  · rw [if_pos ((isCol_mirror Lc c).2 h), if_pos h, sigC_mirror Lc c h, packType_mirror Lc h3]
+  · rw [ite_eq_left ((isCol_mirror Lc c).2 h), ite_eq_left h, sigC_mirror Lc c h, packType_mirror Lc h3]
     exact lawSig_rsig (packType Lc)
       (validType_mem_validTypes _ (packType_lt Lc h3) (validType_packType Lc h3)) _ (sigC_lt Lc c h)
-  · rw [if_neg (fun h' => h ((isCol_mirror Lc c).1 h')), if_neg h]
+  · rw [ite_eq_right (fun h' => h ((isCol_mirror Lc c).1 h')), ite_eq_right h]
 
 /-! ### Transporting a seam -/
 

@@ -70,31 +70,31 @@ theorem rootedWcol_absorb {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
             = p.2 ⟨v, hv⟩ := by
         intro v hv
         by_cases hv' : v ∈ A
-        · rw [dif_pos hv']
+        · rw [dite_eq_left hv']
           have hveq : v = u := hmeet v hv' hv
           subst hveq
           rw [h2u]
-        · rw [dif_neg hv']
+        · rw [dite_eq_right hv']
       rw [Finset.mem_filter, SimpleGraph.mem_colorings_iff]
       refine ⟨⟨?_, ?_⟩, ?_⟩
       · intro v
         by_cases hv : v ∈ A
-        · rw [dif_pos hv]; exact h1mem ⟨v, hv⟩
-        · rw [dif_neg hv]; exact h2mem _
+        · rw [dite_eq_left hv]; exact h1mem ⟨v, hv⟩
+        · rw [dite_eq_right hv]; exact h2mem _
       · intro v x hadj
         rcases hedge v x hadj with ⟨hvA, hxA⟩ | ⟨hvB, hxB⟩
-        · rw [dif_pos hvA, dif_pos hxA]
+        · rw [dite_eq_left hvA, dite_eq_left hxA]
           exact h1prop ⟨v, hvA⟩ ⟨x, hxA⟩ hadj
         · rw [hglueB v hvB, hglueB x hxB]
           exact h2prop ⟨v, hvB⟩ ⟨x, hxB⟩ hadj
       · show (if hv : r ∈ A then p.1 ⟨r, hv⟩ else p.2 ⟨r, (hcover r).resolve_left hv⟩) = c
-        rw [dif_pos hrA]; exact h1r
+        rw [dite_eq_left hrA]; exact h1r
     · -- left inverse
       intro f hf
       funext v
       by_cases hv : v ∈ A
-      · rw [dif_pos hv]
-      · rw [dif_neg hv]
+      · rw [dite_eq_left hv]
+      · rw [dite_eq_right hv]
     · -- right inverse
       intro p hp
       rw [Finset.mem_sigma, Finset.mem_filter, Finset.mem_filter] at hp
@@ -108,15 +108,15 @@ theorem rootedWcol_absorb {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
           else p.2 ⟨v, (hcover v).resolve_left hv⟩)) = p.1 := by
         funext v
         show (if hv : v.val ∈ A then _ else _) = p.1 v
-        rw [dif_pos v.property]
+        rw [dite_eq_left v.property]
       have h2 : (fun (v : B) => (if hv : (v : V) ∈ A then p.1 ⟨v, hv⟩
           else p.2 ⟨v, (hcover v).resolve_left hv⟩)) = p.2 := by
         funext v
         show (if hv : v.val ∈ A then _ else _) = p.2 v
         by_cases hv : v.val ∈ A
-        · rw [dif_pos hv]
+        · rw [dite_eq_left hv]
           exact hcoh v.val hv v.property
-        · rw [dif_neg hv]
+        · rw [dite_eq_right hv]
       exact Sigma.ext h1 (heq_of_eq h2)
     · -- the summand matches
       intro f hf
@@ -132,10 +132,10 @@ theorem rootedWcol_absorb {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
         (if x.val = u then w u (g x) * msg (g x) else w x.val (g x)))
       = ∏ x ∈ Finset.univ.erase (⟨u, huA⟩ : A), w x.val (g x) :=
     Finset.prod_congr rfl fun v hv =>
-      if_neg (fun h => Finset.ne_of_mem_erase hv (Subtype.ext h))
+      ite_eq_right (fun h => Finset.ne_of_mem_erase hv (Subtype.ext h))
   rw [← Finset.mul_prod_erase Finset.univ
     (fun v => if v.val = u then w u (g v) * msg (g v) else w v.val (g v)) hu',
-    ← Finset.mul_prod_erase Finset.univ (fun v => w v.val (g v)) hu', herase, if_pos rfl]
+    ← Finset.mul_prod_erase Finset.univ (fun v => w v.val (g v)) hu', herase, ite_eq_left rfl]
   ring
 
 
@@ -161,10 +161,10 @@ theorem cut_normalizer_eq {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
         ∏ v ∈ Finset.univ.erase (⟨u, huA⟩ : A), W v.val := by
     rw [← Finset.mul_prod_erase Finset.univ
       (fun v : A => if v.val = u then W u * (MB * ∏ x : B, (if x.val = u then 1 else W x.val))
-        else W v.val) (Finset.mem_univ (⟨u, huA⟩ : A)), if_pos rfl]
+        else W v.val) (Finset.mem_univ (⟨u, huA⟩ : A)), ite_eq_left rfl]
     congr 1
     exact Finset.prod_congr rfl fun v hv =>
-      if_neg (fun h => Finset.ne_of_mem_erase hv (Subtype.ext h))
+      ite_eq_right (fun h => Finset.ne_of_mem_erase hv (Subtype.ext h))
   calc MB * MA * ∏ v, W v
       = MA * (MB * ((∏ v : A, W v.val) * ∏ x : B, (if x.val = u then 1 else W x.val))) := by
         rw [hsplit]; ring
@@ -228,38 +228,38 @@ theorem rootedWcol_edge_full {u x : V} (hux : G.Adj u x)
     · intro v
       rcases v.property with h | h
       · have : v.val = u := h
-        rw [if_pos this]
+        rw [ite_eq_left this]
         show d ∈ L v.val
         rw [this]
         exact hd
       · have hvx : v.val = x := h
         by_cases hvu : v.val = u
-        · rw [if_pos hvu]
+        · rw [ite_eq_left hvu]
           show d ∈ L v.val
           rw [hvu]
           exact hd
-        · rw [if_neg hvu]
+        · rw [ite_eq_right hvu]
           show e ∈ L v.val
           rw [hvx]
           exact hemem
     · intro a b hadj
       rcases hBedge a.val b.val hadj a.property b.property with ⟨ha, hb⟩ | ⟨ha, hb⟩
-      · rw [if_pos ha, if_neg (fun h => hne.symm (hb.symm.trans h))]
+      · rw [ite_eq_left ha, ite_eq_right (fun h => hne.symm (hb.symm.trans h))]
         exact fun h => hene h.symm
-      · rw [if_neg (fun h => hne.symm (ha.symm.trans h)), if_pos hb]
+      · rw [ite_eq_right (fun h => hne.symm (ha.symm.trans h)), ite_eq_left hb]
         exact hene
     · show (if (u : V) = u then d else e) = d
-      rw [if_pos rfl]
+      rw [ite_eq_left rfl]
   · intro f hf
     rw [Finset.mem_filter] at hf
     funext v
     by_cases hvu : v.val = u
     · show (if v.val = u then d else _) = f v
-      rw [if_pos hvu, ← hf.2]
+      rw [ite_eq_left hvu, ← hf.2]
       congr 1
       exact Subtype.ext hvu.symm
     · show (if v.val = u then d else f ⟨x, hmemx⟩) = f v
-      rw [if_neg hvu]
+      rw [ite_eq_right hvu]
       congr 1
       exact Subtype.ext (by
         rcases v.property with h | h
@@ -267,7 +267,7 @@ theorem rootedWcol_edge_full {u x : V} (hux : G.Adj u x)
         · exact h.symm)
   · intro e he
     show (if (x : V) = u then d else e) = e
-    rw [if_neg hne.symm]
+    rw [ite_eq_right hne.symm]
   · intro f hf
     rw [Finset.mem_filter] at hf
     have hnesub : (⟨u, hmemu⟩ : (({u, x} : Set V) : Type _)) ∉
@@ -333,7 +333,7 @@ theorem rootedWcol_pendant {x u : V} (hxu : G.Adj x u) (huniq : ∀ y, G.Adj x y
   rw [habs]
   refine rootedWcol_weight_congr (fun v d hd => ?_) _ _
   by_cases hvu : v.val = u
-  · rw [if_pos hvu, if_pos hvu]
+  · rw [ite_eq_left hvu, ite_eq_left hvu]
     congr 1
     have hdu : d ∈ L u := by rw [← hvu]; exact hd
     have hBedge : ∀ a b, G.Adj a b → a ∈ ({u, x} : Set V) → b ∈ ({u, x} : Set V) →
@@ -345,7 +345,7 @@ theorem rootedWcol_pendant {x u : V} (hxu : G.Adj x u) (huniq : ∀ y, G.Adj x y
       · exact Or.inr ⟨ha, hb⟩
       · exact absurd (ha.symm ▸ hb.symm ▸ hadj) (G.irrefl)
     exact rootedWcol_edge hxu.symm hBedge L w hdu
-  · rw [if_neg hvu, if_neg hvu]
+  · rw [ite_eq_right hvu, ite_eq_right hvu]
 
 
 end Pendant

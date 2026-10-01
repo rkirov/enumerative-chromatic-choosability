@@ -218,9 +218,9 @@ theorem cnt_succ_aux (M : ListAssignment (PathV 1 × PathV (n + 1))) {p : ℕ ×
       intro x
       rw [hnew, extd_some]
       rcases row_eq x with rfl | rfl
-      · rw [if_pos rfl]
+      · rw [ite_eq_left rfl]
         exact fun hc => hne1 hc.symm
-      · rw [if_neg (Ne.symm rowT_ne_rowB)]
+      · rw [ite_eq_right (Ne.symm rowT_ne_rowB)]
         exact fun hc => hne2 hc.symm
     rw [Finset.mem_filter, mem_colorings]
     refine ⟨⟨?_, ?_⟩, extd_lastT p h, extd_lastB p h⟩
@@ -230,8 +230,8 @@ theorem cnt_succ_aux (M : ListAssignment (PathV 1 × PathV (n + 1))) {p : ℕ ×
       | none =>
           rw [hnew]
           rcases row_eq x with rfl | rfl
-          · rw [if_pos rfl]; exact hp1
-          · rw [if_neg (Ne.symm rowT_ne_rowB)]; exact hp2
+          · rw [ite_eq_left rfl]; exact hp1
+          · rw [ite_eq_right (Ne.symm rowT_ne_rowB)]; exact hp2
     · rintro ⟨x, qx⟩ ⟨y, qy⟩ hab
       match qx, qy with
       | some v, some w => exact hprop (adj_some_some.mp hab)
@@ -240,8 +240,8 @@ theorem cnt_succ_aux (M : ListAssignment (PathV 1 × PathV (n + 1))) {p : ℕ ×
           rw [hnew, hnew]
           rcases row_eq x with rfl | rfl <;> rcases row_eq y with rfl | rfl
           · exact absurd rfl hxy
-          · rw [if_pos rfl, if_neg (Ne.symm rowT_ne_rowB)]; exact hpne
-          · rw [if_neg (Ne.symm rowT_ne_rowB), if_pos rfl]; exact Ne.symm hpne
+          · rw [ite_eq_left rfl, ite_eq_right (Ne.symm rowT_ne_rowB)]; exact hpne
+          · rw [ite_eq_right (Ne.symm rowT_ne_rowB), ite_eq_left rfl]; exact Ne.symm hpne
           · exact absurd rfl hxy
       | none, some w =>
           obtain ⟨rfl, rfl⟩ := adj_none_some.mp hab
@@ -258,8 +258,8 @@ theorem cnt_succ_aux (M : ListAssignment (PathV 1 × PathV (n + 1))) {p : ℕ ×
     | (x, none) =>
         show (if x = rowT then p.1 else p.2) = f (x, (none : PathV (n + 1)))
         rcases row_eq x with rfl | rfl
-        · rw [if_pos rfl]; exact hf.2.1.symm
-        · rw [if_neg (Ne.symm rowT_ne_rowB)]; exact hf.2.2.symm
+        · rw [ite_eq_left rfl]; exact hf.2.1.symm
+        · rw [ite_eq_right (Ne.symm rowT_ne_rowB)]; exact hf.2.2.symm
   · -- round trip on the shorter ladder
     intro h _
     funext q

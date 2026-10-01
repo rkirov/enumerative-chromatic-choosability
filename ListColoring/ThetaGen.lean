@@ -251,21 +251,21 @@ theorem gAdjB_of_armStepB (ks : List ℕ) (i : ℕ) (hi : i < ks.length) (x y : 
 
 /-- The first interior vertex of an arm is joined to the first branch vertex. -/
 private theorem armStep_head (o m ps pt : ℕ) (hm : m ≠ 0) : armStepB o m ps pt ps o = true := by
-  simp only [armStepB, if_neg hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
+  simp only [armStepB, ite_eq_right hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
     decide_eq_true_eq]
   exact Or.inl (Or.inl ⟨trivial, trivial⟩)
 
 /-- Consecutive interior vertices of an arm are joined. -/
 private theorem armStep_mid (o m ps pt j : ℕ) (hj : j + 1 < m) :
     armStepB o m ps pt (o + j) (o + j + 1) = true := by
-  simp only [armStepB, if_neg (show ¬ (m = 0) from by omega), Bool.or_eq_true, Bool.and_eq_true,
+  simp only [armStepB, ite_eq_right (show ¬ (m = 0) from by omega), Bool.or_eq_true, Bool.and_eq_true,
     beq_iff_eq, decide_eq_true_eq, and_true]
   omega
 
 /-- The last interior vertex of an arm is joined to the second branch vertex. -/
 private theorem armStep_last (o m ps pt : ℕ) (hm : m ≠ 0) :
     armStepB o m ps pt (o + (m - 1)) pt = true := by
-  simp only [armStepB, if_neg hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
+  simp only [armStepB, ite_eq_right hm, Bool.or_eq_true, Bool.and_eq_true, beq_iff_eq,
     decide_eq_true_eq, and_true]
   omega
 
@@ -368,7 +368,7 @@ theorem gArmBlocks {m : ℕ} (hm : 1 ≤ m) (α β : ℕ) : ArmBlocks m (gArmLis
     have hg0 : g 0 = 5 := by
       have h := hg 0 (by omega)
       rw [show gArmLists α β m 0 = ({α, 5} : Finset ℕ) from by
-        simp only [gArmLists, if_neg hmne]; split_ifs <;> rfl] at h
+        simp only [gArmLists, ite_eq_right hmne]; split_ifs <;> rfl] at h
       simp only [Finset.mem_insert, Finset.mem_singleton] at h
       have := h0 (by omega)
       tauto
@@ -379,18 +379,18 @@ theorem gArmBlocks {m : ℕ} (hm : 1 ≤ m) (α β : ℕ) : ArmBlocks m (gArmLis
         · exact Or.inr hg0
         · have h := hg j hj
           rw [show gArmLists α β m j = ({5, β} : Finset ℕ) from by
-            simp only [gArmLists, if_neg hmne, if_pos hpar,
-              if_neg (show ¬ (j = 0) from by omega)]] at h
+            simp only [gArmLists, ite_eq_right hmne, ite_eq_left hpar,
+              ite_eq_right (show ¬ (j = 0) from by omega)]] at h
           simp only [Finset.mem_insert, Finset.mem_singleton] at h
           tauto
       have h := alt_chain (p := β) (q := 5) g 0 m hmem hne hg0 (m - 1) (by omega)
-      rw [if_neg (show ¬ ((m - 1) % 2 = 0) from by omega)] at h
+      rw [ite_eq_right (show ¬ ((m - 1) % 2 = 0) from by omega)] at h
       exact h1 (by omega) (by simpa using h)
     · have hg1 : g 1 = 6 := by
         have h := hg 1 (by omega)
         rw [show gArmLists α β m 1 = ({5, 6} : Finset ℕ) from by
-          simp only [gArmLists, if_neg hmne, if_neg hpar,
-            if_neg (show ¬ ((1 : ℕ) = 0) from by omega), if_true]] at h
+          simp only [gArmLists, ite_eq_right hmne, ite_eq_right hpar,
+            ite_eq_right (show ¬ ((1 : ℕ) = 0) from by omega), ite_true]] at h
         have hs : g 0 ≠ g 1 := by simpa using hne 0 (by omega)
         simp only [Finset.mem_insert, Finset.mem_singleton] at h
         rw [hg0] at hs
@@ -398,9 +398,9 @@ theorem gArmBlocks {m : ℕ} (hm : 1 ≤ m) (α β : ℕ) : ArmBlocks m (gArmLis
       have hg2 : g 2 = β := by
         have h := hg 2 (by omega)
         rw [show gArmLists α β m 2 = ({6, β} : Finset ℕ) from by
-          simp only [gArmLists, if_neg hmne, if_neg hpar,
-            if_neg (show ¬ ((2 : ℕ) = 0) from by omega),
-            if_neg (show ¬ ((2 : ℕ) = 1) from by omega), if_true]] at h
+          simp only [gArmLists, ite_eq_right hmne, ite_eq_right hpar,
+            ite_eq_right (show ¬ ((2 : ℕ) = 0) from by omega),
+            ite_eq_right (show ¬ ((2 : ℕ) = 1) from by omega), ite_true]] at h
         have hs : g 1 ≠ g 2 := by simpa using hne 1 (by omega)
         simp only [Finset.mem_insert, Finset.mem_singleton] at h
         rw [hg1] at hs
@@ -412,13 +412,13 @@ theorem gArmBlocks {m : ℕ} (hm : 1 ≤ m) (α β : ℕ) : ArmBlocks m (gArmLis
           exact Or.inr hg2
         · have h := hg j hj
           rw [show gArmLists α β m j = ({5, β} : Finset ℕ) from by
-            simp only [gArmLists, if_neg hmne, if_neg hpar,
-              if_neg (show ¬ (j = 0) from by omega), if_neg (show ¬ (j = 1) from by omega),
-              if_neg (show ¬ (j = 2) from by omega)]] at h
+            simp only [gArmLists, ite_eq_right hmne, ite_eq_right hpar,
+              ite_eq_right (show ¬ (j = 0) from by omega), ite_eq_right (show ¬ (j = 1) from by omega),
+              ite_eq_right (show ¬ (j = 2) from by omega)]] at h
           simp only [Finset.mem_insert, Finset.mem_singleton] at h
           tauto
       have h := alt_chain (p := 5) (q := β) g 2 m hmem hne hg2 (m - 3) (by omega)
-      rw [if_pos (show (m - 3) % 2 = 0 from by omega),
+      rw [ite_eq_left (show (m - 3) % 2 = 0 from by omega),
         show 2 + (m - 3) = m - 1 from by omega] at h
       exact h1 (by omega) h
 
@@ -461,16 +461,16 @@ theorem gListsAux_apply (R : ℕ → ℕ → ℕ → Finset ℕ) (ks : List ℕ)
       | zero =>
           simp only [List.getElem_cons_zero] at hj ⊢
           -- The branch is selected by rewriting the *condition* to `True`. Neither
-          -- `simp only [if_pos h]` nor `rw [if_pos h]` nor `split` works here any more: the
+          -- `simp only [ite_eq_left h]` nor `rw [ite_eq_left h]` nor `split` works here any more: the
           -- `Decidable` instance sitting in the goal does not unify with the one those carry.
           have hlt : o + j < o + (k - 1) := by omega
-          simp only [List.take_zero, gsize_nil, Nat.add_zero, gListsAux, hlt, if_true,
+          simp only [List.take_zero, gsize_nil, Nat.add_zero, gListsAux, hlt, ite_true,
             Nat.add_sub_cancel_left]
       | succ i =>
           have hi' : i < ks.length := by simpa using hi
           simp only [List.getElem_cons_succ] at hj ⊢
           have hge : ¬ (o + ((k - 1) + gsize (ks.take i)) + j < o + (k - 1)) := by omega
-          simp only [List.take_succ_cons, gsize_cons, gListsAux, hge, if_false]
+          simp only [List.take_succ_cons, gsize_cons, gListsAux, hge, ite_false]
           rw [show o + ((k - 1) + gsize (ks.take i)) + j
                 = o + (k - 1) + gsize (ks.take i) + j from by omega,
             ih i hi' (i₀ + 1) (o + (k - 1)) hj]
@@ -553,7 +553,7 @@ private theorem gtheta_no_index_coloring {ks : List ℕ} {LS LT : Finset ℕ}
   have hβ : F (gsize ks + 1) ∈ LT := by
     have h := hmem (gsize ks + 1) (by omega)
     rwa [show gBadListAt LS LT R ks (gsize ks + 1) = LT from by
-      simp only [gBadListAt, if_neg (show ¬ (gsize ks + 1 = gsize ks) from by omega)]
+      simp only [gBadListAt, ite_eq_right (show ¬ (gsize ks + 1 = gsize ks) from by omega)]
       simp] at h
   obtain ⟨i, hi, hblk⟩ := hblock _ hα _ hβ
   have hle := gsize_take_add_le ks i hi
@@ -562,8 +562,8 @@ private theorem gtheta_no_index_coloring {ks : List ℕ} {LS LT : Finset ℕ}
   intro j hj
   have h := hmem (gsize (ks.take i) + j) (by omega)
   rwa [show gBadListAt LS LT R ks (gsize (ks.take i) + j) = R i (ks[i] - 1) j from by
-    simp only [gBadListAt, if_neg (show ¬ (gsize (ks.take i) + j = gsize ks) from by omega),
-      if_neg (show ¬ (gsize (ks.take i) + j = gsize ks + 1) from by omega)]
+    simp only [gBadListAt, ite_eq_right (show ¬ (gsize (ks.take i) + j = gsize ks) from by omega),
+      ite_eq_right (show ¬ (gsize (ks.take i) + j = gsize ks + 1) from by omega)]
     simpa using gListsAux_apply R ks i hi 0 0 j hj] at h
 
 /-- **Blocking every branch pair leaves no coloring.** If for each `(α, β) ∈ LS × LT` some arm

@@ -116,7 +116,7 @@ argument needs at its first step. -/
 theorem exists_isCycle_of_two_le_degree (hconn : G.Connected) (hdeg : ∀ v : V, 2 ≤ G.degree v) :
     ∃ (v : V) (c : G.Walk v v), c.IsCycle := by
   by_contra hno
-  push_neg at hno
+  push Not at hno
   have hacyc : G.IsAcyclic := fun v c hc => hno v c hc
   have htree : G.IsTree := ⟨hconn, hacyc⟩
   have hcard : G.edgeFinset.card + 1 = Fintype.card V := htree.card_edgeFinset

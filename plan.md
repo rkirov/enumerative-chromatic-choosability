@@ -67,6 +67,22 @@ result. Deferred to an optional milestone.
 
 ## Progress log
 
+**2026-10-01 — Lean 4.35.0-rc3.** Toolchain `v4.33.0 → v4.35.0-rc3` in the root, `comparator/` and
+`book/`; Mathlib `db584cd6 → 516d3125` (master, after the `v4.35.0-rc3` tag) and all eight
+transitive packages to the revisions the sibling TauCeti project pins, whose toolchain is the same.
+Mathlib's `.olean`s were copied from TauCeti's build (lake accepted all 8,975 Mathlib jobs as up to
+date), not downloaded, and the old v4.33 tree was deleted first: the disk had 1.4 GB free. Verso
+`v4.33.0 → v4.35.0-rc3`. `verify.sh` pins comparator `fd5d5bc` (its own toolchain is now ours) and
+lean4export's `v4.35.0-rc3` tag. Breakage was small: `Mathlib.Tactic.Ring` is no longer imported
+transitively by `GridGen/PolymerWalkTree` (explicit import in `PolymerParityBounds`), and
+`Finset.prod_le_prod` is now the ordered-monoid lemma (the nonnegative-semiring one is
+`prod_le_prod₀`). The deprecations were renamed mechanically: `if_pos/if_neg → ite_eq_left/right`,
+`dif_pos/dif_neg → dite_eq_left/right`, `if_true/if_false → ite_true/ite_false`,
+`Set.mem_setOf_eq → Set.mem_ofPred_eq`, `prod_le_prod' → prod_le_prod`, `one_le_prod' → one_le_prod`,
+`Mathlib.Data.Real.Basic → Mathlib.Basic.Real.Basic`, `push_neg → push Not`. Everything builds,
+including the k = 3 certificate (554 data and 39 key modules) and `Checks`; all 34 comparator claims
+still depend on exactly `propext`, `Classical.choice`, `Quot.sound`.
+
 **2026-09-10 — the `k = 3` certificate halved by row reflection.** The seam keys are closed under
 swapping rows `0` and `2` (578 of 43,736 are self-symmetric), so one record per orbit suffices:
 22,157 records in 554 modules of forty (`Cert/Data/`, 46 MB instead of 100). The proof needs the

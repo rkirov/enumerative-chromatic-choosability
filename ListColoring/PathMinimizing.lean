@@ -247,18 +247,18 @@ lemma exists_palette {S : Finset ℕ} {n : ℕ} (hS : S.card = n) :
   refine ⟨fun i => if h : i < n then ((S.orderIsoOfFin hS) ⟨i, h⟩ : ℕ) else 0, ?_, ?_⟩
   · intro a ha b hb hab
     rw [Finset.coe_range, Set.mem_Iio] at ha hb
-    simp only [dif_pos ha, dif_pos hb] at hab
+    simp only [dite_eq_left ha, dite_eq_left hb] at hab
     have h : ((S.orderIsoOfFin hS) ⟨a, ha⟩ : S) = (S.orderIsoOfFin hS) ⟨b, hb⟩ := Subtype.ext hab
     simpa using (S.orderIsoOfFin hS).injective h
   · ext z
     simp only [Finset.mem_image, Finset.mem_range]
     constructor
     · rintro ⟨i, hi, rfl⟩
-      simp only [dif_pos hi]
+      simp only [dite_eq_left hi]
       exact ((S.orderIsoOfFin hS) ⟨i, hi⟩).2
     · intro hz
       refine ⟨((S.orderIsoOfFin hS).symm ⟨z, hz⟩ : Fin n).val, Fin.is_lt _, ?_⟩
-      simp only [dif_pos (Fin.is_lt _)]
+      simp only [dite_eq_left (Fin.is_lt _)]
       simp
 
 /-! ### The canonical assignments -/
@@ -475,8 +475,8 @@ theorem col_of_isPathShape {k m : ℕ} {L : ListAssignment (PathV k)} {S : Finse
     exact col_image_of_injOn (hinj.mono hsub)
   rw [hcol, col_pathAssign m k x' y' (Finset.mem_range.mp hx') (Finset.mem_range.mp hy')]
   by_cases hxy : x = y
-  · rw [if_pos hxy, if_pos (hiff.mpr hxy)]
-  · rw [if_neg hxy, if_neg fun hh => hxy (hiff.mp hh)]
+  · rw [ite_eq_left hxy, ite_eq_left (hiff.mpr hxy)]
+  · rw [ite_eq_right hxy, ite_eq_right fun hh => hxy (hiff.mp hh)]
 
 /-! ### A minimizing assignment is nested at every edge
 
@@ -679,11 +679,11 @@ theorem col_eq_min_of_minimizing {k m : ℕ} (hm : 1 ≤ m) (hk : 1 ≤ k)
   have hleA : (pathG (j + 1)).col L ≤ pathA m (j + 1) := by
     have h := hmin (pathAssign (j + 1) (m + 2) 0 0)
       (IsNNAssign.card_eq hL (isNNAssign_pathAssign j m 0 0 (by omega) (by omega)))
-    rwa [col_pathAssign m (j + 1) 0 0 (by omega) (by omega), if_pos rfl] at h
+    rwa [col_pathAssign m (j + 1) 0 0 (by omega) (by omega), ite_eq_left rfl] at h
   have hleB : (pathG (j + 1)).col L ≤ pathB m (j + 1) := by
     have h := hmin (pathAssign (j + 1) (m + 2) 0 1)
       (IsNNAssign.card_eq hL (isNNAssign_pathAssign j m 0 1 (by omega) (by omega)))
-    rwa [col_pathAssign m (j + 1) 0 1 (by omega) (by omega), if_neg (by omega)] at h
+    rwa [col_pathAssign m (j + 1) 0 1 (by omega) (by omega), ite_eq_right (by omega)] at h
   exact le_antisymm (le_min hleA hleB) (min_pathA_pathB_le_col hL)
 
 /-- **Lemma 3(c) of Kirov–Naimi.** For `n ≥ 3` and a path with at least one edge, a minimizing
@@ -700,13 +700,13 @@ theorem isPathShape_parity_of_minimizing {k m : ℕ} (hm : 1 ≤ m) (hk : 1 ≤ 
   refine ⟨S, x, y, hshape, ?_⟩
   by_cases hev : Even k
   · refine Or.inr ⟨hev, fun hxy => ?_⟩
-    rw [if_pos hxy] at hcol
+    rw [ite_eq_left hxy] at hcol
     have hlt := pathB_lt_pathA hev m
     rw [min_eq_right hlt.le] at hmincol
     omega
   · refine Or.inl ⟨Nat.not_even_iff_odd.mp hev, ?_⟩
     by_contra hxy
-    rw [if_neg hxy] at hcol
+    rw [ite_eq_right hxy] at hcol
     have hlt := pathA_lt_pathB (Nat.not_even_iff_odd.mp hev) m
     rw [min_eq_left hlt.le] at hmincol
     omega

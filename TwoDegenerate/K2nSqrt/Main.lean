@@ -101,13 +101,13 @@ theorem pf_ge (hk : 3 ≤ k) (hT : ∀ w, (T w).card = k) (a b : ℕ) :
     ((k : ℝ) - 2) ^ n ≤ pf T a b := by
   have hk' : (3 : ℝ) ≤ k := by exact_mod_cast hk
   calc ((k : ℝ) - 2) ^ n = ∏ _w : Fin n, ((k : ℝ) - 2) := by simp
-    _ ≤ pf T a b := prod_le_prod (fun _ _ => by linarith) fun w _ => card_sdiff_ge_real (hT w) a b
+    _ ≤ pf T a b := prod_le_prod₀ (fun _ _ => by linarith) fun w _ => card_sdiff_ge_real (hT w) a b
 
 theorem pf_diag_ge (hk : 3 ≤ k) (hT : ∀ w, (T w).card = k) (a : ℕ) :
     ((k : ℝ) - 1) ^ n ≤ pf T a a := by
   have hk' : (3 : ℝ) ≤ k := by exact_mod_cast hk
   calc ((k : ℝ) - 1) ^ n = ∏ _w : Fin n, ((k : ℝ) - 1) := by simp
-    _ ≤ pf T a a := prod_le_prod (fun _ _ => by linarith) fun w _ => by
+    _ ≤ pf T a a := prod_le_prod₀ (fun _ _ => by linarith) fun w _ => by
         rw [card_sdiff_single_real (hT w)]; simp only [ind]; split_ifs <;> linarith
 
 /-- Every pair other than the diagonal of `A ∩ B` contributes at least `(k - 2)ⁿ`. -/
@@ -369,7 +369,7 @@ theorem completeBipartite_two_eccAt_of_sq_le (hk : 300 ≤ k) (hn : n ≤ k ^ 2)
   have hB : B.card = k := hL _
   choose T' hT'sub hT'card hT'le using fun w => K2n.exists_push (B := B) hA (hL (Sum.inr w))
   refine le_trans ?_ (sum_le_sum fun a ha => sum_le_sum fun b hb =>
-    prod_le_prod' fun w _ => hT'le w a ha b hb)
+    prod_le_prod fun w _ => hT'le w a ha b hb)
   have key := colConst_le_sum hk hn hA hB hT'sub hT'card
   have hk' : (3 : ℝ) ≤ k := by exact_mod_cast hk3
   have e : ((k * (k - 1) ^ n + k * (k - 1) * (k - 2) ^ n : ℕ) : ℝ) =

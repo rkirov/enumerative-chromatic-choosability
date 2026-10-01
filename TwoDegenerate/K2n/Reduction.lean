@@ -233,10 +233,10 @@ theorem card_sdiff_pair_eq_pairVal (hA : A.card = k) (hB : B.card = k) {S : Fins
   set b := (lB A B).getD j 0
   by_cases hab : a = b
   · have hc := heq.mp hab
-    rw [if_pos hc, ← hab, insert_eq_of_mem (mem_singleton_self a)]
+    rw [ite_eq_left hc, ← hab, insert_eq_of_mem (mem_singleton_self a)]
     by_cases haS : a ∈ S <;> simp [haS]
   · have hc : ¬ (i = j ∧ j < (A ∩ B).card) := fun h => hab (heq.mpr h)
-    rw [if_neg hc]
+    rw [ite_eq_right hc]
     by_cases haS : a ∈ S <;> by_cases hbS : b ∈ S <;>
       simp [haS, hbS, insert_inter_of_mem, insert_inter_of_notMem, card_insert_of_notMem, hab] <;> omega
 
@@ -331,7 +331,7 @@ theorem le_col_of_keyGoals {k n T : ℕ} (goals : ∀ r ≤ k, ∃ K, KeyGoal k 
   -- Push every right list into `A ∪ B`.
   choose T' hT'sub hT'card hT'le using fun w => exists_push (B := B) hA (hL (Sum.inr w))
   refine le_trans ?_ (sum_le_sum fun a ha => sum_le_sum fun b hb =>
-    prod_le_prod' fun w _ => hT'le w a ha b hb)
+    prod_le_prod fun w _ => hT'le w a ha b hb)
   -- Fix the overlap and its numeric goal.
   set r := (A ∩ B).card with hr
   obtain ⟨K, hKnodup, hKall, hgoal⟩ := goals r (hA ▸ card_le_card inter_subset_left)

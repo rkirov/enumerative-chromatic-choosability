@@ -205,19 +205,19 @@ def cycEquiv (M : ℕ) : CycIx M ≃ Fin (2 * M + 1 + 1) where
     cases x with
     | inl i =>
       show cycUnidx M ⟨2 * i.val, _⟩ = _
-      rw [cycUnidx, if_pos (by show 2 * i.val % 2 = 0; omega)]
+      rw [cycUnidx, ite_eq_left (by show 2 * i.val % 2 = 0; omega)]
       exact congrArg Sum.inl (Fin.ext (by show 2 * i.val / 2 = i.val; omega))
     | inr i =>
       show cycUnidx M ⟨2 * i.val + 1, _⟩ = _
-      rw [cycUnidx, if_neg (by show ¬ (2 * i.val + 1) % 2 = 0; omega)]
+      rw [cycUnidx, ite_eq_right (by show ¬ (2 * i.val + 1) % 2 = 0; omega)]
       exact congrArg Sum.inr (Fin.ext (by show (2 * i.val + 1) / 2 = i.val; omega))
   right_inv := by
     intro k
     rw [cycUnidx]
     by_cases hk : k.val % 2 = 0
-    · rw [if_pos hk]
+    · rw [ite_eq_left hk]
       exact Fin.ext (by show 2 * (k.val / 2) = k.val; omega)
-    · rw [if_neg hk]
+    · rw [ite_eq_right hk]
       exact Fin.ext (by show 2 * (k.val / 2) + 1 = k.val; omega)
 
 theorem fin_add_one_val {n : ℕ} (a : Fin (n + 1)) : (a + 1).val = (a.val + 1) % (n + 1) := by
@@ -227,8 +227,8 @@ theorem fin_add_one_val {n : ℕ} (a : Fin (n + 1)) : (a + 1).val = (a.val + 1) 
 /-- The successor modulo a bound, as a decidable case split. -/
 theorem succ_mod_of_lt (a n : ℕ) (h : a < n) : (a + 1) % n = if a + 1 = n then 0 else a + 1 := by
   by_cases he : a + 1 = n
-  · rw [if_pos he, he, Nat.mod_self]
-  · rw [if_neg he, Nat.mod_eq_of_lt (by omega)]
+  · rw [ite_eq_left he, he, Nat.mod_self]
+  · rw [ite_eq_right he, Nat.mod_eq_of_lt (by omega)]
 
 /-- **The adjacency dictionary**: cyclic adjacency of the `2M+2` positions of an even cycle is
 exactly `CycAdj` in terminal/internal coordinates. -/

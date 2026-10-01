@@ -94,14 +94,14 @@ theorem lawR_eq_lawSig (m : Nat) (pats : List Nat) (c : Fin SB) :
     lawR m pats c = if c.val ∈ stsOf pats then lawSig m (sigOf pats c.val) else 0 := by
   unfold lawR lawSig lawE0 lawE1 cntOf countOf
   by_cases hc : c.val ∈ stsOf pats
-  · rw [if_pos hc, if_pos hc]
+  · rw [ite_eq_left hc, ite_eq_left hc]
     by_cases hU : (m == UTYPE) = true
-    · rw [if_pos hU, if_pos hU, if_pos hU, sigOf_mod_two]
+    · rw [ite_eq_left hU, ite_eq_left hU, ite_eq_left hU, sigOf_mod_two]
       by_cases ha : isABA c.val = true
-      · rw [if_pos ha, if_pos ha]; push_cast; ring
-      · rw [if_neg ha, if_neg ha]; push_cast; ring
-    · rw [if_neg hU, if_neg hU, if_neg hU]; push_cast; ring
-  · rw [if_neg hc, if_neg hc]
+      · rw [ite_eq_left ha, ite_eq_left ha]; push_cast; ring
+      · rw [ite_eq_right ha, ite_eq_right ha]; push_cast; ring
+    · rw [ite_eq_right hU, ite_eq_right hU, ite_eq_right hU]; push_cast; ring
+  · rw [ite_eq_right hc, ite_eq_right hc]
 
 theorem lawSig_nonneg (m sig : Nat) : 0 ≤ lawSig m sig := by
   unfold lawSig
@@ -117,8 +117,8 @@ theorem lawR_nonU (m : Nat) (pats : List Nat) (hU : (m == UTYPE) = false) (st : 
     (hst : st ∈ stsOf pats) (hlt : st < SB) :
     lawR m pats (toFin st) = (cntOf m pats st : ℝ) / 108 := by
   unfold lawR lawE0 lawE1
-  rw [toFin_val st hlt, if_pos hst, hU]
-  simp only [Bool.false_eq_true, if_false]
+  rw [toFin_val st hlt, ite_eq_left hst, hU]
+  simp only [Bool.false_eq_true, ite_false]
   push_cast; ring
 
 theorem sumNat_eq (l : List Nat) : sumNat l = l.sum := by
@@ -155,7 +155,7 @@ theorem sum_lawR_sq_list (m : Nat) (pats : List Nat) (hU : (m == UTYPE) = false)
 theorem lawR_sum_one (m : Nat) (pats : List Nat) (h32 : pats.length ≤ 32)
     (hU : (m == UTYPE) = false) (h108 : sumNat ((stsOf pats).map (cntOf m pats)) = 108) :
     ∑ c, lawR m pats c = 1 := by
-  rw [sum_stsOf pats h32 _ (fun c hc => by rw [lawR_eq_lawSig, if_neg hc]),
+  rw [sum_stsOf pats h32 _ (fun c hc => by rw [lawR_eq_lawSig, ite_eq_right hc]),
     sum_lawR_list m pats hU h32 _ (fun st hst => hst), ← sumNat_eq, h108]
   norm_num
 
@@ -165,7 +165,7 @@ theorem lawR_sq_le (m : Nat) (pats : List Nat) (h32 : pats.length ≤ 32)
     (h972 : sumNat (((stsOf pats).map (cntOf m pats)).map fun k => k * k) ≤ 972) :
     ∑ c, lawR m pats c ^ 2 ≤ 1 / 12 := by
   rw [sum_stsOf pats h32 (fun c => lawR m pats c ^ 2)
-      (fun c hc => by rw [lawR_eq_lawSig, if_neg hc]; ring),
+      (fun c hc => by rw [lawR_eq_lawSig, ite_eq_right hc]; ring),
     sum_lawR_sq_list m pats hU h32 _ (fun st hst => hst)]
   rw [sumNat_eq] at h972
   have : (((((stsOf pats).map (cntOf m pats)).map fun k => k * k).sum : ℕ) : ℝ) ≤ 972 := by

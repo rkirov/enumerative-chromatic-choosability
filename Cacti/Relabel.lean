@@ -55,30 +55,30 @@ theorem exists_extendPerm (s : Finset (Fin k)) (f : Fin k → Fin k)
     intro a b hab
     simp only [hF] at hab
     by_cases ha : a ∈ s <;> by_cases hb : b ∈ s
-    · rw [dif_pos ha, dif_pos hb] at hab
+    · rw [dite_eq_left ha, dite_eq_left hb] at hab
       exact hinj a ha b hb hab
-    · rw [dif_pos ha, dif_neg hb] at hab
+    · rw [dite_eq_left ha, dite_eq_right hb] at hab
       exfalso
       have h1 : f a ∈ s.image f := Finset.mem_image_of_mem f ha
       have h2 := (g ⟨b, by simpa using hb⟩).property
       rw [← hab] at h2
       rw [Finset.mem_compl] at h2
       exact h2 h1
-    · rw [dif_neg ha, dif_pos hb] at hab
+    · rw [dite_eq_right ha, dite_eq_left hb] at hab
       exfalso
       have h1 : f b ∈ s.image f := Finset.mem_image_of_mem f hb
       have h2 := (g ⟨a, by simpa using ha⟩).property
       rw [hab] at h2
       rw [Finset.mem_compl] at h2
       exact h2 h1
-    · rw [dif_neg ha, dif_neg hb] at hab
+    · rw [dite_eq_right ha, dite_eq_right hb] at hab
       have := g.injective (Subtype.ext hab)
       exact congrArg Subtype.val this
   refine ⟨Equiv.ofBijective F (Finite.injective_iff_bijective.mp hFinj), ?_⟩
   intro a ha
   show F a = f a
   simp only [hF]
-  exact dif_pos ha
+  exact dite_eq_left ha
 
 
 /-- **Equality-extending enumeration step.** Given an enumeration of a `k`-list `A` and a
@@ -108,19 +108,19 @@ theorem exists_extendEnum {A B : Finset ℕ} (hA : A.card = k) (hB : B.card = k)
   · intro i
     simp only [hτ]
     by_cases hi : i ∈ s
-    · rw [dif_pos hi]
+    · rw [dite_eq_left hi]
       rw [hs, Finset.mem_filter] at hi
       exact hi.2
-    · rw [dif_neg hi]
+    · rw [dite_eq_right hi]
       have := (g ⟨i, by simpa using hi⟩).property
       rw [Finset.mem_sdiff] at this
       exact this.1
   · intro a b hab
     simp only [hτ] at hab
     by_cases ha : a ∈ s <;> by_cases hb : b ∈ s
-    · rw [dif_pos ha, dif_pos hb] at hab
+    · rw [dite_eq_left ha, dite_eq_left hb] at hab
       exact hσinj hab
-    · rw [dif_pos ha, dif_neg hb] at hab
+    · rw [dite_eq_left ha, dite_eq_right hb] at hab
       exfalso
       have h1 : σ a ∈ img := by
         rw [himg]
@@ -128,7 +128,7 @@ theorem exists_extendEnum {A B : Finset ℕ} (hA : A.card = k) (hB : B.card = k)
       have h2 := (g ⟨b, by simpa using hb⟩).property
       rw [← hab, Finset.mem_sdiff] at h2
       exact h2.2 h1
-    · rw [dif_neg ha, dif_pos hb] at hab
+    · rw [dite_eq_right ha, dite_eq_left hb] at hab
       exfalso
       have h1 : σ b ∈ img := by
         rw [himg]
@@ -136,12 +136,12 @@ theorem exists_extendEnum {A B : Finset ℕ} (hA : A.card = k) (hB : B.card = k)
       have h2 := (g ⟨a, by simpa using ha⟩).property
       rw [hab, Finset.mem_sdiff] at h2
       exact h2.2 h1
-    · rw [dif_neg ha, dif_neg hb] at hab
+    · rw [dite_eq_right ha, dite_eq_right hb] at hab
       have := g.injective (Subtype.ext hab)
       exact congrArg Subtype.val this
   · intro i hiB
     simp only [hτ]
-    rw [dif_pos (by rw [hs, Finset.mem_filter]; exact ⟨Finset.mem_univ i, hiB⟩)]
+    rw [dite_eq_left (by rw [hs, Finset.mem_filter]; exact ⟨Finset.mem_univ i, hiB⟩)]
 
 
 section Chain
@@ -250,11 +250,11 @@ theorem factor_apply (T : Finset (Fin k)) (a x : Fin k) :
   rw [Matrix.add_apply]
   show (if a = x then 0 else 1) + (if a = x ∧ a ∈ T then 1 else 0) = _
   by_cases hax : a = x
-  · rw [if_pos hax, if_pos hax]
+  · rw [ite_eq_left hax, ite_eq_left hax]
     by_cases haT : a ∈ T
-    · rw [if_pos ⟨hax, haT⟩, if_pos haT]
-    · rw [if_neg (fun h => haT h.2), if_neg haT]
-  · rw [if_neg hax, if_neg (fun h => hax h.1), if_neg hax]
+    · rw [ite_eq_left ⟨hax, haT⟩, ite_eq_left haT]
+    · rw [ite_eq_right (fun h => haT h.2), ite_eq_right haT]
+  · rw [ite_eq_right hax, ite_eq_right (fun h => hax h.1), ite_eq_right hax]
 
 /-- The index-path count along a list of factors. -/
 def pathCount (Ts : List (Finset (Fin k))) (a b : Fin k) : ℕ :=
@@ -362,12 +362,12 @@ theorem transferProd_apply_eq_pathCount (Ts : List (Finset (Fin k))) (a b : Fin 
       have hfac0 : (offDiag k + diagInd T) a x = 0 := by
         rw [factor_apply] at hfac ⊢
         by_cases hax : a = x
-        · rw [if_pos hax] at hfac ⊢
+        · rw [ite_eq_left hax] at hfac ⊢
           by_cases haT : a ∈ T
-          · rw [if_pos haT] at hfac
+          · rw [ite_eq_left haT] at hfac
             exact absurd rfl hfac
-          · rw [if_neg haT]
-        · rw [if_neg hax] at hfac
+          · rw [ite_eq_right haT]
+        · rw [ite_eq_right hax] at hfac
           exact absurd rfl hfac
       rw [hfac0, Nat.zero_mul]
       refine Finset.card_eq_zero.mpr ?_
@@ -474,12 +474,12 @@ theorem factor_eq_one_iff {B : Finset ℕ} {σ τ : Fin k → ℕ}
   rw [factor_apply]
   by_cases hxy : x = y
   · subst hxy
-    rw [if_pos rfl]
+    rw [ite_eq_left rfl]
     by_cases hT : x ∈ Finset.univ.filter (fun z => σ z ≠ τ z)
-    · rw [if_pos hT]
+    · rw [ite_eq_left hT]
       rw [Finset.mem_filter] at hT
       exact ⟨fun _ => hT.2, fun _ => rfl⟩
-    · rw [if_neg hT]
+    · rw [ite_eq_right hT]
       rw [Finset.mem_filter] at hT
       push Not at hT
       have h2 := hT (Finset.mem_univ x)
@@ -488,7 +488,7 @@ theorem factor_eq_one_iff {B : Finset ℕ} {σ τ : Fin k → ℕ}
         exact absurd h (by omega)
       · intro h
         exact absurd h2 h
-  · rw [if_neg hxy]
+  · rw [ite_eq_right hxy]
     refine ⟨fun _ hcon => ?_, fun _ => rfl⟩
     have hB : σ x ∈ B := hcon ▸ hτmem y
     have h2 : τ x = σ x := hmatch x hB
@@ -581,8 +581,8 @@ theorem rootedCol_eq_rootCount {V : Type} [Fintype V] [DecidableEq V] {G : Simpl
   have hrc : rootCount (List.ofFn T) P dom c = ∑ b ∈ S, transferProd (List.ofFn T) c b := by
     rw [rootCount, hS]
     by_cases hc : c ∈ dom
-    · rw [if_pos hc, if_pos hc, mulOffPerm_diag]
-    · rw [if_neg hc, if_neg hc]
+    · rw [ite_eq_left hc, ite_eq_left hc, mulOffPerm_diag]
+    · rw [ite_eq_right hc, ite_eq_right hc]
   rw [hrc, sum_transferProd_ofFn]
   -- the factor entry is exactly colour compatibility across a path edge
   have hfac : ∀ (e : Fin m) (x y : Fin k),
@@ -615,7 +615,7 @@ theorem rootedCol_eq_rootCount {V : Type} [Fintype V] [DecidableEq V] {G : Simpl
       · intro hcon
         rw [h0] at hcon
         by_cases hc : c ∈ dom
-        · rw [hS, if_pos hc] at hlast
+        · rw [hS, ite_eq_left hc] at hlast
           exact Finset.ne_of_mem_erase hlast
             (hσinj (Fin.last m) (hcon.trans (hP c hc).symm))
         · exact (hdom c).not.mp hc (hcon ▸ hσmem (Fin.last m) (g (Fin.last m)))
@@ -647,11 +647,11 @@ theorem rootedCol_eq_rootCount {V : Type} [Fintype V] [DecidableEq V] {G : Simpl
     · simp only [Finset.mem_filter, Finset.mem_univ, true_and]
       refine ⟨hσinj 0 ((hgi 0).trans hfroot), ?_, fun e => ?_⟩
       · by_cases hc : c ∈ dom
-        · rw [hS, if_pos hc]
+        · rw [hS, ite_eq_left hc]
           refine Finset.mem_erase.mpr ⟨fun hcon => ?_, Finset.mem_univ _⟩
           refine hfprop _ _ hclose ?_
           rw [← hgi (Fin.last m), hcon, hP c hc, hfroot]
-        · rw [hS, if_neg hc]
+        · rw [hS, ite_eq_right hc]
           exact Finset.mem_univ _
       · refine (hfac e _ _).mpr ?_
         rw [hgi e.castSucc, hgi e.succ]
@@ -694,7 +694,7 @@ theorem exists_matrix_model {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGr
   have hμspec : ∀ c (hc : c ∈ dom), σ (Fin.last m) (μ c) = σ 0 c := by
     intro c hc
     simp only [hμ]
-    rw [dif_pos hc]
+    rw [dite_eq_left hc]
     exact Classical.choose_spec (hμex c hc)
   have hμinj : ∀ c ∈ dom, ∀ c' ∈ dom, μ c = μ c' → c = c' := by
     intro c hc c' hc' hcc
@@ -718,7 +718,7 @@ theorem exists_matrix_model {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGr
   obtain ⟨P, hP⟩ := exists_extendPerm (dom.image μ) g (by
     intro a ha b hb hab
     simp only [hg] at hab
-    rw [dif_pos ha, dif_pos hb] at hab
+    rw [dite_eq_left ha, dite_eq_left hb] at hab
     obtain ⟨hca, hμa⟩ := hgspec a ha
     obtain ⟨hcb, hμb⟩ := hgspec b hb
     rw [← hμa, ← hμb, hab])
@@ -727,7 +727,7 @@ theorem exists_matrix_model {V : Type} [Fintype V] [DecidableEq V] {G : SimpleGr
     have hmem : μ c ∈ dom.image μ := Finset.mem_image_of_mem μ hc
     rw [hP _ hmem]
     simp only [hg]
-    rw [dif_pos hmem]
+    rw [dite_eq_left hmem]
     obtain ⟨hc', hμ'⟩ := hgspec (μ c) hmem
     exact hμinj _ hc' _ hc hμ'
   have hPsymm : ∀ c ∈ dom, P.symm c = μ c := by
@@ -908,7 +908,7 @@ theorem rootedCol_constList_cycle {V : Type} [Fintype V] [DecidableEq V] {G : Si
     congr
     funext e
     simp
-  rw [h, hTs, rootCount, if_pos (Finset.mem_univ _), transferProd_replicate_empty,
+  rw [h, hTs, rootCount, ite_eq_left (Finset.mem_univ _), transferProd_replicate_empty,
     base_diag_fixed hk 1 rfl, uniformA, Nat.add_sub_cancel]
 
 end MatrixModel

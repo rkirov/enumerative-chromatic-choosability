@@ -66,9 +66,9 @@ noncomputable def ell (k : ℕ) : ℝ := log k - log ((k : ℝ) - 1)
 /-- `δ = 2 log (k - 1) - log k - log (k - 2)`. -/
 noncomputable def del (k : ℕ) : ℝ := 2 * log ((k : ℝ) - 1) - log k - log ((k : ℝ) - 2)
 
-theorem ind_mem (T : Finset ℕ) {a : ℕ} (h : a ∈ T) : ind T a = 1 := if_pos h
+theorem ind_mem (T : Finset ℕ) {a : ℕ} (h : a ∈ T) : ind T a = 1 := ite_eq_left h
 
-theorem ind_not_mem (T : Finset ℕ) {a : ℕ} (h : a ∉ T) : ind T a = 0 := if_neg h
+theorem ind_not_mem (T : Finset ℕ) {a : ℕ} (h : a ∉ T) : ind T a = 0 := ite_eq_right h
 
 theorem ind_mul_self (T : Finset ℕ) (a : ℕ) : ind T a * ind T a = ind T a := by
   unfold ind; split_ifs <;> norm_num

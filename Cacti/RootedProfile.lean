@@ -59,7 +59,7 @@ theorem pow_card_le_prod (hk : 2 ≤ k) (hA : 0 ≤ A) (hx : ∀ c, 0 ≤ x c)
     calc (A ^ (m + 2)) ^ 2 = ∏ _c : Fin (m + 2), (A ^ 2) := by
           rw [prod_const, card_univ, Fintype.card_fin]; ring
       _ ≤ ∏ c : Fin (m + 2), (x c * x (c + 1)) :=
-          prod_le_prod (fun _ _ => sq_nonneg A) (fun c _ => h (hstep c))
+          prod_le_prod₀ (fun _ _ => sq_nonneg A) (fun c _ => h (hstep c))
       _ = (∏ c, x c) ^ 2 := hprod2
   have hxprod : 0 ≤ ∏ c, x c := prod_nonneg fun c _ => hx c
   have hApow : 0 ≤ A ^ (m + 2) := pow_nonneg hA _

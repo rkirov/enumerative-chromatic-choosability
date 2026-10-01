@@ -154,8 +154,8 @@ private lemma succ_mod_succ {k i : ℕ} (hi : i ≤ k) :
     (i + 1) % (k + 1) = if i = k then 0 else i + 1 := by
   by_cases h : i = k
   · subst h
-    rw [if_pos rfl, Nat.mod_self]
-  · rw [if_neg h, Nat.mod_eq_of_lt (by omega)]
+    rw [ite_eq_left rfl, Nat.mod_self]
+  · rw [ite_eq_right h, Nat.mod_eq_of_lt (by omega)]
 
 /-- **Adjacency around the cycle, in terms of the numbering.** Two numbered vertices of
 `closePath k` are adjacent exactly when their numbers are *cyclically* consecutive. -/

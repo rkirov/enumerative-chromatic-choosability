@@ -37,11 +37,11 @@ theorem colConst_K2n (k n : ℕ) :
       ∑ b ∈ range k, (range k \ {a, b}).card ^ n = (k - 1) ^ n + (k - 1) * (k - 2) ^ n := by
     intro a ha
     rw [← add_sum_erase _ _ ha, card_range_sdiff_pair (mem_range.mp ha) (mem_range.mp ha),
-      if_pos rfl]
+      ite_eq_left rfl]
     congr 1
     rw [sum_congr rfl fun b hb => by
       rw [card_range_sdiff_pair (mem_range.mp ha) (mem_range.mp (mem_of_mem_erase hb)),
-        if_neg (Ne.symm (ne_of_mem_erase hb))]]
+        ite_eq_right (Ne.symm (ne_of_mem_erase hb))]]
     rw [sum_const, card_erase_of_mem ha, card_range, smul_eq_mul]
   rw [sum_congr rfl hinner, sum_const, card_range, smul_eq_mul]
   rw [Nat.mul_add, Nat.mul_assoc]

@@ -131,9 +131,9 @@ def offPerm (P : Equiv.Perm (Fin k)) : Matrix (Fin k) (Fin k) ℕ :=
 theorem sum_ite_single {i : Fin k} (a : ℕ) (b : Fin k → ℕ) :
     (∑ e : Fin k, if e = i then a else b e)
       = a + ∑ e ∈ Finset.univ.erase i, b e := by
-  rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i), if_pos rfl]
+  rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i), ite_eq_left rfl]
   congr 1
-  exact Finset.sum_congr rfl fun e he => if_neg (Finset.ne_of_mem_erase he)
+  exact Finset.sum_congr rfl fun e he => ite_eq_right (Finset.ne_of_mem_erase he)
 
 /-- The entries of `(J-I)^s` are `α` on the diagonal and `β` off it. -/
 theorem offDiag_pow_apply (hk : 1 ≤ k) :
@@ -143,8 +143,8 @@ theorem offDiag_pow_apply (hk : 1 ≤ k) :
   | zero =>
     intro i j
     by_cases hij : i = j
-    · rw [if_pos hij, hij, pow_zero, alpha_zero, Matrix.one_apply_eq]
-    · rw [if_neg hij, pow_zero, beta_zero, Matrix.one_apply_ne hij]
+    · rw [ite_eq_left hij, hij, pow_zero, alpha_zero, Matrix.one_apply_eq]
+    · rw [ite_eq_right hij, pow_zero, beta_zero, Matrix.one_apply_ne hij]
   | succ s ih =>
     intro i j
     rw [pow_succ', Matrix.mul_apply]
@@ -155,25 +155,25 @@ theorem offDiag_pow_apply (hk : 1 ≤ k) :
       rw [ih e j]
       show (if i = e then 0 else 1) * _ = _
       by_cases he : e = i
-      · rw [if_pos he.symm, if_pos he, Nat.zero_mul]
-      · rw [if_neg (fun h => he h.symm), if_neg he, Nat.one_mul]
+      · rw [ite_eq_left he.symm, ite_eq_left he, Nat.zero_mul]
+      · rw [ite_eq_right (fun h => he h.symm), ite_eq_right he, Nat.one_mul]
     rw [Finset.sum_congr rfl (fun e _ => hterm e), sum_ite_single]
     by_cases hij : i = j
     · subst hij
-      rw [if_pos rfl, alpha_succ]
+      rw [ite_eq_left rfl, alpha_succ]
       have hrest : ∀ e ∈ Finset.univ.erase i,
           (if e = i then alpha k s else beta k s) = beta k s :=
-        fun e he => if_neg (Finset.ne_of_mem_erase he)
+        fun e he => ite_eq_right (Finset.ne_of_mem_erase he)
       rw [Finset.sum_congr rfl hrest, Finset.sum_const,
         Finset.card_erase_of_mem (Finset.mem_univ i), Finset.card_univ, Fintype.card_fin,
         smul_eq_mul, Nat.zero_add]
-    · rw [if_neg hij, beta_succ]
+    · rw [ite_eq_right hij, beta_succ]
       have hji : j ∈ Finset.univ.erase i :=
         Finset.mem_erase.mpr ⟨fun h => hij h.symm, Finset.mem_univ j⟩
-      rw [← Finset.add_sum_erase _ _ hji, if_pos rfl]
+      rw [← Finset.add_sum_erase _ _ hji, ite_eq_left rfl]
       have hrest : ∀ e ∈ (Finset.univ.erase i).erase j,
           (if e = j then alpha k s else beta k s) = beta k s :=
-        fun e he => if_neg (Finset.ne_of_mem_erase he)
+        fun e he => ite_eq_right (Finset.ne_of_mem_erase he)
       rw [Finset.sum_congr rfl hrest, Finset.sum_const,
         Finset.card_erase_of_mem hji, Finset.card_erase_of_mem (Finset.mem_univ i),
         Finset.card_univ, Fintype.card_fin, smul_eq_mul, Nat.zero_add]
@@ -335,8 +335,8 @@ theorem mulOffPerm_diag (X : Matrix (Fin k) (Fin k) ℕ) (P : Equiv.Perm (Fin k)
     intro b
     show X c b * (if P b = c then 0 else 1) = _
     by_cases hb : P b = c
-    · rw [if_pos hb, if_pos (by rw [← hb, Equiv.symm_apply_apply]), Nat.mul_zero]
-    · rw [if_neg hb, if_neg (fun h => hb (by rw [h, Equiv.apply_symm_apply])), Nat.mul_one]
+    · rw [ite_eq_left hb, ite_eq_left (by rw [← hb, Equiv.symm_apply_apply]), Nat.mul_zero]
+    · rw [ite_eq_right hb, ite_eq_right (fun h => hb (by rw [h, Equiv.apply_symm_apply])), Nat.mul_one]
   rw [Finset.sum_congr rfl (fun b _ => hterm b), sum_ite_single, Nat.zero_add]
 
 /-- The base diagonal at a fixed index (`P⁻¹ c = c`): the value `A = (k-1)·β_{n-1}`. -/
@@ -345,7 +345,7 @@ theorem base_diag_fixed {n : ℕ} (hk : 1 ≤ k) (P : Equiv.Perm (Fin k)) {c : F
     ((offDiag k ^ n) * offPerm P) c c = (k - 1) * beta k n := by
   rw [mulOffPerm_diag, hc]
   rw [Finset.sum_congr rfl (fun b hb => by
-    rw [offDiag_pow_apply hk n c b, if_neg (fun h => Finset.ne_of_mem_erase hb h.symm)])]
+    rw [offDiag_pow_apply hk n c b, ite_eq_right (fun h => Finset.ne_of_mem_erase hb h.symm)])]
   rw [Finset.sum_const, Finset.card_erase_of_mem (Finset.mem_univ c), Finset.card_univ,
     Fintype.card_fin, smul_eq_mul]
 
@@ -357,11 +357,11 @@ theorem base_diag_moved {n : ℕ} (hk : 1 ≤ k) (P : Equiv.Perm (Fin k)) {c : F
   have hcmem : c ∈ Finset.univ.erase (P.symm c) :=
     Finset.mem_erase.mpr ⟨fun h => hc h.symm, Finset.mem_univ c⟩
   rw [← Finset.add_sum_erase _ _ hcmem]
-  rw [offDiag_pow_apply hk n c c, if_pos rfl]
+  rw [offDiag_pow_apply hk n c c, ite_eq_left rfl]
   congr 1
   rw [Finset.sum_congr rfl (fun b hb => by
     rw [offDiag_pow_apply hk n c b,
-      if_neg (fun h => Finset.ne_of_mem_erase hb h.symm)])]
+      ite_eq_right (fun h => Finset.ne_of_mem_erase hb h.symm)])]
   rw [Finset.sum_const, Finset.card_erase_of_mem hcmem,
     Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ, Fintype.card_fin,
     smul_eq_mul]
@@ -387,8 +387,8 @@ theorem mulOffPerm_apply (X : Matrix (Fin k) (Fin k) ℕ) (P : Equiv.Perm (Fin k
     intro b
     show X z b * (if P b = c then 0 else 1) = _
     by_cases hb : P b = c
-    · rw [if_pos hb, if_pos (by rw [← hb, Equiv.symm_apply_apply]), Nat.mul_zero]
-    · rw [if_neg hb, if_neg (fun h => hb (by rw [h, Equiv.apply_symm_apply])), Nat.mul_one]
+    · rw [ite_eq_left hb, ite_eq_left (by rw [← hb, Equiv.symm_apply_apply]), Nat.mul_zero]
+    · rw [ite_eq_right hb, ite_eq_right (fun h => hb (by rw [h, Equiv.apply_symm_apply])), Nat.mul_one]
   rw [Finset.sum_congr rfl (fun b _ => hterm b), sum_ite_single, Nat.zero_add]
 
 /-- The two values of `((J-I)^s · (J-P)) z c`. -/
@@ -398,19 +398,19 @@ theorem offDiag_pow_mulOffPerm_apply (hk : 1 ≤ k) (s : ℕ) (P : Equiv.Perm (F
       if z = P.symm c then (k - 1) * beta k s else alpha k s + (k - 2) * beta k s := by
   rw [mulOffPerm_apply]
   by_cases hz : z = P.symm c
-  · rw [if_pos hz, hz]
+  · rw [ite_eq_left hz, hz]
     rw [Finset.sum_congr rfl (fun b hb => by
-      rw [offDiag_pow_apply hk s _ b, if_neg (fun h => Finset.ne_of_mem_erase hb h.symm)])]
+      rw [offDiag_pow_apply hk s _ b, ite_eq_right (fun h => Finset.ne_of_mem_erase hb h.symm)])]
     rw [Finset.sum_const, Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ,
       Fintype.card_fin, smul_eq_mul]
-  · rw [if_neg hz]
+  · rw [ite_eq_right hz]
     have hzmem : z ∈ Finset.univ.erase (P.symm c) :=
       Finset.mem_erase.mpr ⟨hz, Finset.mem_univ z⟩
-    rw [← Finset.add_sum_erase _ _ hzmem, offDiag_pow_apply hk s z z, if_pos rfl]
+    rw [← Finset.add_sum_erase _ _ hzmem, offDiag_pow_apply hk s z z, ite_eq_left rfl]
     congr 1
     rw [Finset.sum_congr rfl (fun b hb => by
       rw [offDiag_pow_apply hk s z b,
-        if_neg (fun h => Finset.ne_of_mem_erase hb h.symm)])]
+        ite_eq_right (fun h => Finset.ne_of_mem_erase hb h.symm)])]
     rw [Finset.sum_const, Finset.card_erase_of_mem hzmem,
       Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ, Fintype.card_fin,
       smul_eq_mul]
@@ -425,13 +425,13 @@ theorem diagInd_mul_apply (T : Finset (Fin k)) (X : Matrix (Fin k) (Fin k) ℕ) 
     intro b
     show (if z = b ∧ z ∈ T then 1 else 0) * X b c = _
     by_cases h : z = b ∧ z ∈ T
-    · rw [if_pos h, if_pos ⟨h.1.symm, h.2⟩, Nat.one_mul]
-    · rw [if_neg h, if_neg (fun hh => h ⟨hh.1.symm, hh.2⟩), Nat.zero_mul]
+    · rw [ite_eq_left h, ite_eq_left ⟨h.1.symm, h.2⟩, Nat.one_mul]
+    · rw [ite_eq_right h, ite_eq_right (fun hh => h ⟨hh.1.symm, hh.2⟩), Nat.zero_mul]
   rw [Finset.sum_congr rfl (fun b _ => hterm b)]
   by_cases hzT : z ∈ T
-  · simp only [hzT, and_true, if_true]
-    rw [Finset.sum_ite_eq' Finset.univ z (fun b => X b c), if_pos (Finset.mem_univ z)]
-  · simp only [hzT, and_false, if_false]
+  · simp only [hzT, and_true, ite_true]
+    rw [Finset.sum_ite_eq' Finset.univ z (fun b => X b c), ite_eq_left (Finset.mem_univ z)]
+  · simp only [hzT, and_false, ite_false]
     exact Finset.sum_const_zero
 
 /-- **One retained slot of a correction**: keep a single index of the diagonal insertion. -/
@@ -440,7 +440,7 @@ theorem corr_diag_ge (i₁ : ℕ) (T : Finset (Fin k)) (X : Matrix (Fin k) (Fin 
     (offDiag k ^ i₁) c z * X z c ≤ ((offDiag k ^ i₁) * diagInd T * X) c c := by
   rw [Matrix.mul_assoc, Matrix.mul_apply]
   have hval : (diagInd T * X) z c = X z c := by
-    rw [diagInd_mul_apply, if_pos hz]
+    rw [diagInd_mul_apply, ite_eq_left hz]
   calc (offDiag k ^ i₁) c z * X z c
       = (offDiag k ^ i₁) c z * (diagInd T * X) z c := by rw [hval]
     _ ≤ ∑ b, (offDiag k ^ i₁) c b * (diagInd T * X) b c :=

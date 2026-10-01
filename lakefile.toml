@@ -12,7 +12,7 @@ relaxedAutoImplicit = false
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
-rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
+rev = "516d31250e96c4e8e76888c3d8e2e43a9642b9ee"
 
 [[lean_lib]]
 name = "ListColoring"

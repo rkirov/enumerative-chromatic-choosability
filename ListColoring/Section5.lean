@@ -202,7 +202,7 @@ theorem left_card_eq (hn : 0 < n) {L : ListAssignment (BV n)} (hcard : ∀ u, n 
     rw [Finset.prod_const, card_erase_of_mem (mem_univ i), card_univ, Fintype.card_fin]
   have hge : n ^ (n - 1) ≤ ∏ a ∈ univ.erase i, (L (Sum.inl a)).card := by
     rw [← herase]
-    exact Finset.prod_le_prod' fun a _ => hcard (Sum.inl a)
+    exact Finset.prod_le_prod fun a _ => hcard (Sum.inl a)
   have hsplit : (L (Sum.inl i)).card * ∏ a ∈ univ.erase i, (L (Sum.inl a)).card =
       ∏ a : Fin n, (L (Sum.inl a)).card :=
     Finset.mul_prod_erase univ (fun a => (L (Sum.inl a)).card) (mem_univ i)

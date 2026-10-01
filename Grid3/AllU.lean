@@ -36,11 +36,11 @@ noncomputable def enum (A : Finset ℕ) (h : A.card = 3) (p : ℕ) : ℕ :=
   if hp : p < 3 then A.orderEmbOfFin h ⟨p, hp⟩ else 0
 
 lemma enum_mem (A : Finset ℕ) (h : A.card = 3) {p : ℕ} (hp : p < 3) : enum A h p ∈ A := by
-  simp only [enum, dif_pos hp]; exact A.orderEmbOfFin_mem h _
+  simp only [enum, dite_eq_left hp]; exact A.orderEmbOfFin_mem h _
 
 lemma enum_inj (A : Finset ℕ) (h : A.card = 3) {p q : ℕ} (hp : p < 3) (hq : q < 3)
     (heq : enum A h p = enum A h q) : p = q := by
-  simp only [enum, dif_pos hp, dif_pos hq] at heq
+  simp only [enum, dite_eq_left hp, dite_eq_left hq] at heq
   have := (A.orderEmbOfFin h).injective heq
   simpa using this
 
@@ -64,12 +64,12 @@ noncomputable def gauge (C B : Finset ℕ) (h : C.card = B.card) (x : ℕ) : ℕ
 
 lemma gauge_fix {C B : Finset ℕ} (h : C.card = B.card) {x : ℕ} (hx : x ∈ C ∩ B) :
     gauge C B h x = x := by
-  simp only [gauge, dif_pos hx]
+  simp only [gauge, dite_eq_left hx]
 
 lemma gauge_eq_sdiff {C B : Finset ℕ} (h : C.card = B.card) {x : ℕ} (hx : x ∈ C \ B) :
     gauge C B h x = ((gEquiv C B h ⟨x, hx⟩ : ↥(B \ C)) : ℕ) := by
   have h1 : x ∉ C ∩ B := fun hi => (Finset.mem_sdiff.mp hx).2 (Finset.mem_inter.mp hi).2
-  simp only [gauge, dif_neg h1, dif_pos hx]
+  simp only [gauge, dite_eq_right h1, dite_eq_left hx]
 
 lemma gauge_mem {C B : Finset ℕ} (h : C.card = B.card) {x : ℕ} (hx : x ∈ C) :
     gauge C B h x ∈ B := by

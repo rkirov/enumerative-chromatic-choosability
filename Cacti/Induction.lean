@@ -131,7 +131,7 @@ theorem rootedCol_pendant_uniform {x u : V} (hxu : G.Adj x u)
           (fun v _ => if v = (⟨u, hu⟩ : {y : V // y ≠ x}) then k - 1 else 1) ⟨r, hrx⟩ c := by
         refine rootedWcol_weight_congr (fun v d hd => ?_) _ _
         by_cases hvu : v.val = u
-        · rw [if_pos hvu, if_pos (Subtype.ext hvu)]
+        · rw [ite_eq_left hvu, ite_eq_left (Subtype.ext hvu)]
           simp only [one_mul]
           rw [Finset.sum_const, smul_eq_mul, mul_one]
           have hd' : d ∈ Finset.range k := hd
@@ -139,7 +139,7 @@ theorem rootedCol_pendant_uniform {x u : V} (hxu : G.Adj x u)
             ext e
             simp [Finset.mem_erase, Finset.mem_filter, and_comm, constList_apply]]
           rw [Finset.card_erase_of_mem hd', Finset.card_range]
-        · rw [if_neg hvu, if_neg (fun h => hvu (congrArg Subtype.val h))]
+        · rw [ite_eq_right hvu, ite_eq_right (fun h => hvu (congrArg Subtype.val h))]
     _ = (k - 1) * rootedCol (G.induce {y | y ≠ x}) (fun v => constList V k v.val)
           ⟨r, hrx⟩ c :=
         rootedWcol_const_at _ _ _ _ _
@@ -231,10 +231,10 @@ theorem rootedCol_absorb_uniform {A B : Set V} [DecidablePred (· ∈ A)] [Decid
             else 1) ⟨r, hrA⟩ c := by
         refine rootedWcol_weight_congr (fun v d hd => ?_) _ _
         by_cases hvu : v.val = u
-        · rw [if_pos hvu, if_pos (Subtype.ext hvu), one_mul]
+        · rw [ite_eq_left hvu, ite_eq_left (Subtype.ext hvu), one_mul]
           rw [rootedWcol_weight_congr (fun _ _ _ => ite_self 1) _ _, rootedWcol_one]
           exact rootedCol_constList_eq (G.induce B) k ⟨u, huB⟩ hd hzero
-        · rw [if_neg hvu, if_neg (fun hv => hvu (congrArg Subtype.val hv))]
+        · rw [ite_eq_right hvu, ite_eq_right (fun hv => hvu (congrArg Subtype.val hv))]
     _ = _ := rootedWcol_const_at _ _ _ _ _
 
 /-- **The cut-vertex step**: with `V` split at `u` into `A` and `B` and the root in `A`, the
@@ -268,9 +268,9 @@ theorem pair_bound_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
     (fun x => if x.val = u then 1 else W x.val) (by
       intro x c' hc' d' hd' hcd'
       by_cases hxu : x.val = u
-      · rw [if_pos hxu, if_pos hxu, if_pos hxu]
+      · rw [ite_eq_left hxu, ite_eq_left hxu, ite_eq_left hxu]
         omega
-      · rw [if_neg hxu, if_neg hxu, if_neg hxu]
+      · rw [ite_eq_right hxu, ite_eq_right hxu, ite_eq_right hxu]
         exact hdom x.val c' hc' d' hd' hcd')
   -- the absorbed weight at `u` is still pair-dominant, over the `B`-side normalizer
   have hA := hAside
@@ -285,7 +285,7 @@ theorem pair_bound_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
     (by
       intro v c' hc' d' hd' hcd'
       by_cases hvu : v.val = u
-      · rw [if_pos hvu, if_pos hvu, if_pos hvu]
+      · rw [ite_eq_left hvu, ite_eq_left hvu, ite_eq_left hvu]
         have h1 := hdom u c' (hvu ▸ hc') d' (hvu ▸ hd') hcd'
         have h2 := hB c' (hvu ▸ hc') d' (hvu ▸ hd') hcd'
         calc (W u * (rootedCol (G.induce B) (constList B k) ⟨u, huB⟩ 0 *
@@ -299,7 +299,7 @@ theorem pair_bound_of_cut {A B : Set V} [DecidablePred (· ∈ A)] [DecidablePre
                   (fun x e => if x.val = u then 1 else w x.val e) ⟨u, huB⟩ d') :=
               Nat.mul_le_mul h1 h2
           _ = _ := by ring
-      · rw [if_neg hvu, if_neg hvu, if_neg hvu]
+      · rw [ite_eq_right hvu, ite_eq_right hvu, ite_eq_right hvu]
         exact hdom v.val c' hc' d' hd' hcd') c hc d hd hcd
   -- rewrite the goal through absorption, then match the normalizer products
   rw [rootedWcol_absorb huA huB hcover hmeet hedge hrA L w c,

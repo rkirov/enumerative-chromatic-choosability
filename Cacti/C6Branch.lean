@@ -90,52 +90,52 @@ theorem exists_label (h : IsPathPattern Z a b)
     intro i j hij hee
     rw [hev i, hev j] at hee
     by_cases hai : a i ∈ Z <;> by_cases haj : a j ∈ Z
-    · rw [if_pos hai, if_pos haj] at hee; exact hij (h.injA hee)
-    · rw [if_pos hai, if_neg haj] at hee; exact hij (h.extEq i j hee)
-    · rw [if_neg hai, if_pos haj] at hee; exact hij (h.extEq j i hee.symm).symm
-    · rw [if_neg hai, if_neg haj] at hee; exact hij (h.injB hee)
+    · rw [ite_eq_left hai, ite_eq_left haj] at hee; exact hij (h.injA hee)
+    · rw [ite_eq_left hai, ite_eq_right haj] at hee; exact hij (h.extEq i j hee)
+    · rw [ite_eq_right hai, ite_eq_left haj] at hee; exact hij (h.extEq j i hee.symm).symm
+    · rw [ite_eq_right hai, ite_eq_right haj] at hee; exact hij (h.injB hee)
   obtain ⟨T, hTv⟩ : ∃ T : Fin 3 → Finset ℕ, ∀ i, T i = if e i ∈ Z then {e i} else Z :=
     ⟨_, fun _ => rfl⟩
   have hTsub : ∀ i, T i ⊆ Z := by
     intro i
     by_cases hi : e i ∈ Z
-    · rw [hTv i, if_pos hi]; simpa using hi
-    · rw [hTv i, if_neg hi]
+    · rw [hTv i, ite_eq_left hi]; simpa using hi
+    · rw [hTv i, ite_eq_right hi]
   have h1 : ∀ i, 1 ≤ (T i).card := by
     intro i
     by_cases hi : e i ∈ Z
-    · rw [hTv i, if_pos hi]; simp
-    · rw [hTv i, if_neg hi, h.cardZ]; omega
+    · rw [hTv i, ite_eq_left hi]; simp
+    · rw [hTv i, ite_eq_right hi, h.cardZ]; omega
   have h2 : ∀ i j : Fin 3, i ≠ j → 2 ≤ (T i ∪ T j).card := by
     intro i j hij
     by_cases hi : e i ∈ Z
     · by_cases hj : e j ∈ Z
       · have hu : T i ∪ T j = {e i, e j} := by
-          rw [hTv i, hTv j, if_pos hi, if_pos hj, Finset.singleton_union]
+          rw [hTv i, hTv j, ite_eq_left hi, ite_eq_left hj, Finset.singleton_union]
         rw [hu, Finset.card_insert_of_notMem (by simpa using hene i j hij),
           Finset.card_singleton]
       · have hz : Z ⊆ T i ∪ T j := by
-          rw [hTv j, if_neg hj]; exact Finset.subset_union_right
+          rw [hTv j, ite_eq_right hj]; exact Finset.subset_union_right
         have h4 := Finset.card_le_card hz
         have h5 := h.cardZ
         omega
     · have hz : Z ⊆ T i ∪ T j := by
-        rw [hTv i, if_neg hi]; exact Finset.subset_union_left
+        rw [hTv i, ite_eq_right hi]; exact Finset.subset_union_left
       have h4 := Finset.card_le_card hz
       have h5 := h.cardZ
       omega
   have h3 : 3 ≤ ((univ : Finset (Fin 3)).biUnion T).card := by
     by_cases hi : ∀ i, e i ∈ Z
-    · have e0 : T 0 = {e 0} := by rw [hTv 0, if_pos (hi 0)]
-      have e1 : T 1 = {e 1} := by rw [hTv 1, if_pos (hi 1)]
-      have e2 : T 2 = {e 2} := by rw [hTv 2, if_pos (hi 2)]
+    · have e0 : T 0 = {e 0} := by rw [hTv 0, ite_eq_left (hi 0)]
+      have e1 : T 1 = {e 1} := by rw [hTv 1, ite_eq_left (hi 1)]
+      have e2 : T 2 = {e 2} := by rw [hTv 2, ite_eq_left (hi 2)]
       have hset : (univ : Finset (Fin 3)).biUnion T = {e 0, e 1, e 2} := by
         ext z
         simp only [Finset.mem_biUnion, Finset.mem_univ, true_and, Finset.mem_insert,
           Finset.mem_singleton]
         constructor
         · rintro ⟨i, hz⟩
-          rw [hTv i, if_pos (hi i), Finset.mem_singleton] at hz
+          rw [hTv i, ite_eq_left (hi i), Finset.mem_singleton] at hz
           subst hz
           fin_cases i
           · exact Or.inl rfl
@@ -152,7 +152,7 @@ theorem exists_label (h : IsPathPattern Z a b)
         Finset.card_singleton]
     · obtain ⟨i, hii⟩ := not_forall.mp hi
       have hz : Z ⊆ (univ : Finset (Fin 3)).biUnion T := by
-        have hTi : T i = Z := by rw [hTv i, if_neg hii]
+        have hTi : T i = Z := by rw [hTv i, ite_eq_right hii]
         exact hTi ▸ Finset.subset_biUnion_of_mem T (Finset.mem_univ i)
       have h4 := Finset.card_le_card hz
       have h5 := h.cardZ
@@ -162,11 +162,11 @@ theorem exists_label (h : IsPathPattern Z a b)
   have hpin : ∀ i, e i ∈ Z → ψ i = e i := by
     intro i hi
     have hm := hψmem i
-    rw [hTv i, if_pos hi] at hm
+    rw [hTv i, ite_eq_left hi] at hm
     simpa using hm
   refine ⟨ψ, hψinj, hψZ, ?_, ?_⟩
   · intro i hai
-    have he : e i = a i := by rw [hev i, if_pos hai]
+    have he : e i = a i := by rw [hev i, ite_eq_left hai]
     rw [hpin i (by rw [he]; exact hai), he]
   · intro i hbi
     by_cases hai : a i ∈ Z
@@ -175,9 +175,9 @@ theorem exists_label (h : IsPathPattern Z a b)
         · exact absurd hai hh
         · exact absurd hbi hh
         · exact hh
-      have he : e i = b i := by rw [hev i, if_pos hai, hab]
+      have he : e i = b i := by rw [hev i, ite_eq_left hai, hab]
       rw [hpin i (by rw [he]; exact hbi), he]
-    · have he : e i = b i := by rw [hev i, if_neg hai]
+    · have he : e i = b i := by rw [hev i, ite_eq_right hai]
       rw [hpin i (by rw [he]; exact hbi), he]
 
 /-! ## Case A: the nine cell bounds against the labelling -/
@@ -817,8 +817,8 @@ private theorem sum_perm_three (X : ℕ) (σ : Equiv.Perm (Fin 3)) (c u : Fin 3)
     rw [Equiv.apply_symm_apply]
     congr 1
     by_cases h : σ c = v
-    · rw [if_pos h, if_pos (by rw [← h, Equiv.symm_apply_apply])]
-    · rw [if_neg h, if_neg (fun hh => h (by rw [hh, Equiv.apply_symm_apply]))]
+    · rw [ite_eq_left h, ite_eq_left (by rw [← h, Equiv.symm_apply_apply])]
+    · rw [ite_eq_right h, ite_eq_right (fun hh => h (by rw [hh, Equiv.apply_symm_apply]))]
   rw [Finset.sum_congr rfl (fun v _ => hcong v), sum_three_pin X (σ c) u]
 
 private theorem sum_outer_pin (A B : ℕ) (p w : Fin 3) :
@@ -851,8 +851,8 @@ theorem pinned_double_sum (A B K : ℕ) (σ : Equiv.Perm (Fin 3)) (p q : Fin 3) 
   rw [Finset.sum_congr rfl (fun u _ => hinner u), ← Finset.mul_sum,
     sum_outer_pin A B p (σ q)]
   by_cases h : p = σ q
-  · rw [if_pos h, if_pos h.symm]; ring
-  · rw [if_neg h, if_neg (fun hh => h hh.symm)]; ring
+  · rw [ite_eq_left h, ite_eq_left h.symm]; ring
+  · rw [ite_eq_right h, ite_eq_right (fun hh => h hh.symm)]; ring
 
 /-! ### The correction term with two pins -/
 
@@ -868,7 +868,7 @@ private theorem corr_two_pin {N : ℕ} (σ : Equiv.Perm (Fin 3)) (r s : Fin (N +
     · obtain ⟨h1, h2⟩ := h
       subst h1
       simp [h2]
-    · rw [if_neg h]
+    · rw [ite_eq_right h]
       by_cases h1 : p = q
       · subst h1
         have h2 : ¬ (σ p ≠ p) := fun hh => h ⟨rfl, hh⟩
@@ -1003,7 +1003,7 @@ theorem pairMarginal_closing {N : ℕ} (σ : Equiv.Perm (Fin 3)) (p q : Fin 3) :
       = (if p = σ q ∧ σ p ≠ p then 1 else 0) := by
     by_cases h : σ q = p
     · subst h; simp
-    · rw [if_neg (fun hh => h hh.1), if_neg (fun hh => h hh.1.symm)]
+    · rw [ite_eq_right (fun hh => h hh.1), ite_eq_right (fun hh => h hh.1.symm)]
   rw [hcorr]
   exact pairClosing_of_transfer N σ p q
 
@@ -1045,7 +1045,7 @@ private theorem sum_match_eq_sum_pairs {N : ℕ} (i : Fin (N + 1))
     · simp [h]
     · simp [h]
   · intro c _ hc
-    exact if_neg (fun hh => hc hh.1.symm)
+    exact ite_eq_right (fun hh => hc hh.1.symm)
   · intro h
     exact absurd (Finset.mem_univ _) h
 
@@ -1164,7 +1164,7 @@ theorem prod_pair_identity (T : ℕ) (Z : Finset ℕ) (x : ℕ → ℕ) (a b : F
         pathN Z x (a pr.1) (b pr.2) ^ (if pr.1 = pr.2 then 2 * T + 2 else T))
       = pathDiag Z x a b ^ (2 * T + 2) * pathOff Z x a b ^ T := by
   rw [Fintype.prod_prod_type, pathDiag_eq, pathOff_eq]
-  simp +decide only [Fin.prod_univ_three, if_true, if_false]
+  simp +decide only [Fin.prod_univ_three, ite_true, ite_false]
   ring
 
 /-- An enumeration of a three-list reindexes any product over it. -/
@@ -1246,7 +1246,7 @@ theorem master_bound_identity {M : ℕ} (hM : 1 ≤ M) (jx : CycIx M ≃ V)
       ≤ ∏ i : Fin (M + 1), ∏ c : Fin 3,
           w (tv jx i) (σ i c) ^ (4 * gammaPlus M + 2) := by
     rw [← Finset.prod_pow]
-    refine Finset.prod_le_prod' fun i _ => ?_
+    refine Finset.prod_le_prod fun i _ => ?_
     have h1 : ∏ c ∈ L (tv jx i), w (tv jx i) c = ∏ c : Fin 3, w (tv jx i) (σ i c) :=
       prod_list_eq_prod_index (hL _) (hmem i) (hinj i) _
     calc W (tv jx i) ^ (3 * (4 * gammaPlus M + 2))
@@ -1296,7 +1296,7 @@ theorem master_bound_identity {M : ℕ} (hM : 1 ≤ M) (jx : CycIx M ≃ V)
             (2 ^ (6 * gammaPlus M + 6) * W (iv jx i) ^ (3 * (4 * gammaPlus M + 2))) := by
           rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin,
             ← pow_mul, Nat.mul_comm (6 * gammaPlus M + 6) (M + 1)]
-      _ ≤ _ := Finset.prod_le_prod' fun i _ => hvert i
+      _ ≤ _ := Finset.prod_le_prod fun i _ => hvert i
   -- put the two halves together
   have hWsplit : (∏ v, W v) = (∏ i : Fin (M + 1), W (tv jx i)) *
       (∏ i : Fin (M + 1), W (iv jx i)) := by
@@ -1639,7 +1639,7 @@ theorem fibre_amgm_gen (U : (Fin 3 → Fin 3) → ℕ) (E : ℕ) (hE : 0 < E)
           * ∏ a ∈ univ.filter (fun a : Fin 3 → Fin 3 => a 0 = c), (U a) ^ (U a) := by
     intro c
     exact weighted_amgm_masses _ X U hE (hmarg c) (fun a _ => hpos a)
-  have hmul := Finset.prod_le_prod' (s := (univ : Finset (Fin 3))) (fun c _ => hfib c)
+  have hmul := Finset.prod_le_prod (s := (univ : Finset (Fin 3))) (fun c _ => hfib c)
   rw [Finset.prod_mul_distrib, Finset.prod_const, Finset.card_univ, Fintype.card_fin,
     ← pow_mul, Finset.prod_mul_distrib] at hmul
   have hXfib : ∏ c : Fin 3, ∏ a ∈ univ.filter (fun a : Fin 3 → Fin 3 => a 0 = c),
@@ -1699,7 +1699,7 @@ theorem prod_pair_base (Z : Finset ℕ) (x : ℕ → ℕ) (a b : Fin 3 → ℕ) 
     (∏ pr : Fin 3 × Fin 3, pathN Z x (a pr.1) (b pr.2) ^ (if pr.1 = pr.2 then M else S))
       = pathDiag Z x a b ^ M * pathOff Z x a b ^ S := by
   rw [Fintype.prod_prod_type, pathDiag_eq, pathOff_eq]
-  simp +decide only [Fin.prod_univ_three, if_true, if_false]
+  simp +decide only [Fin.prod_univ_three, ite_true, ite_false]
   ring
 
 /-- The same on the closing edge, where the matching is the holonomy `P`. -/
@@ -1717,8 +1717,8 @@ theorem prod_pair_close (Z : Finset ℕ) (x : ℕ → ℕ) (s2 s0 : Fin 3 → �
       = pathN Z x (s2 u) (s0 (P (P.symm v))) ^ (if u = P.symm v then M else S)
   rw [h1]
   by_cases huv : v = P u
-  · rw [if_pos huv, if_pos (h2.mpr huv)]
-  · rw [if_neg huv, if_neg (fun hh => huv (h2.mp hh))]
+  · rw [ite_eq_left huv, ite_eq_left (h2.mpr huv)]
+  · rw [ite_eq_right huv, ite_eq_right (fun hh => huv (h2.mp hh))]
 
 end Cone
 
@@ -1872,7 +1872,7 @@ theorem c6_core (jx : CycIx 2 ≃ V)
     have hterm : (∏ i : Fin 3, W (tv jx i)) ^ 66
         ≤ ∏ i : Fin 3, ∏ c : Fin 3, w (tv jx i) (σ i c) ^ 22 := by
       rw [← Finset.prod_pow]
-      refine Finset.prod_le_prod' fun i _ => ?_
+      refine Finset.prod_le_prod fun i _ => ?_
       have h1 : ∏ c ∈ L (tv jx i), w (tv jx i) c = ∏ c : Fin 3, w (tv jx i) (σ i c) :=
         prod_list_eq_prod_index' (hL _) (hmem i) (hinj i) _
       calc W (tv jx i) ^ 66 = (W (tv jx i) ^ 3) ^ 22 := by ring

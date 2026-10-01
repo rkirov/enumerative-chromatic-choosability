@@ -146,7 +146,7 @@ theorem sumRow_Mact (h3 : ∀ r, (Lc r).card = 3) (p : ℕ) (hp : p < 7) :
         exact ⟨⟨hc, hpc⟩, by omega⟩
     · intro c hc
       have hle := patOf_le Lc' c
-      simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_coe] at hc
+      simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_coe] at hc
       show patOf Lc' c - 1 ∈ (range 7 : Set ℕ)
       rw [Finset.mem_coe, Finset.mem_range]; omega
   rw [key]
@@ -180,7 +180,7 @@ theorem sumCol_Mact (h3 : ∀ r, (Lc r).card = 3) (q : ℕ) (hq : q < 7) :
         exact ⟨⟨hc, hqc⟩, by omega⟩
     · intro c hc
       have hle := patOf_le Lc c
-      simp only [Finset.coe_filter, Set.mem_setOf_eq, Finset.mem_coe] at hc
+      simp only [Finset.coe_filter, Set.mem_ofPred_eq, Finset.mem_coe] at hc
       show patOf Lc c - 1 ∈ (range 7 : Set ℕ)
       rw [Finset.mem_coe, Finset.mem_range]; omega
   rw [key]

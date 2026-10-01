@@ -111,10 +111,10 @@ omit [LinearOrder (Sym2 V)] in
 theorem sign_toggleEdge (T : Finset (Sym2 V)) (e : Sym2 V) :
     (-1 : ℝ) ^ T.card + (-1 : ℝ) ^ (toggleEdge T e).card = 0 := by
   by_cases he : e ∈ T
-  · rw [toggleEdge, if_pos he]
+  · rw [toggleEdge, ite_eq_left he]
     conv_lhs => lhs; rw [← Finset.card_erase_add_one he, pow_succ]
     ring
-  · rw [toggleEdge, if_neg he, Finset.card_insert_of_notMem he, pow_succ]
+  · rw [toggleEdge, ite_eq_right he, Finset.card_insert_of_notMem he, pow_succ]
     ring
 
 

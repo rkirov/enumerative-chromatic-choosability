@@ -45,7 +45,7 @@ theorem rootCount_undef (hk : 4 ≤ k) {Ts : List (Finset (Fin k))} {P : Equiv.P
     {dom : Finset (Fin k)} {c : Fin k} (hc : c ∉ dom) {n : ℕ} (hn : 3 ≤ n)
     (hlen : Ts.length = n - 1) :
     uniformA k n + (k - 2) ≤ rootCount Ts P dom c := by
-  rw [rootCount, if_neg hc]
+  rw [rootCount, ite_eq_right hc]
   have hpure : ∀ b, (offDiag k ^ Ts.length) c b ≤ transferProd Ts c b :=
     fun b => offDiag_pow_le_transferProd Ts c b
   have hflip : ∀ b : Fin k,
@@ -53,8 +53,8 @@ theorem rootCount_undef (hk : 4 ≤ k) {Ts : List (Finset (Fin k))} {P : Equiv.P
         = (if b = c then alpha k Ts.length else beta k Ts.length) := by
     intro b
     by_cases h : c = b
-    · rw [if_pos h, if_pos h.symm]
-    · rw [if_neg h, if_neg (fun hh => h hh.symm)]
+    · rw [ite_eq_left h, ite_eq_left h.symm]
+    · rw [ite_eq_right h, ite_eq_right (fun hh => h hh.symm)]
   calc uniformA k n + (k - 2)
       ≤ alpha k (n - 1) + (k - 1) * beta k (n - 1) := by
         rw [uniformA]
@@ -74,7 +74,7 @@ theorem rootCount_fixed (hk : 4 ≤ k) {Ts : List (Finset (Fin k))} {P : Equiv.P
     {dom : Finset (Fin k)} {c : Fin k} (hc : c ∈ dom) (hfix : P.symm c = c) {n : ℕ}
     (hn : 3 ≤ n) (hlen : Ts.length = n - 1) :
     uniformA k n ≤ rootCount Ts P dom c := by
-  rw [rootCount, if_pos hc]
+  rw [rootCount, ite_eq_left hc]
   have h1 : uniformA k n = ((offDiag k ^ Ts.length) * offPerm P) c c := by
     rw [base_diag_fixed (show 1 ≤ k by omega) P hfix, uniformA, hlen]
   rw [h1]
@@ -98,7 +98,7 @@ theorem rootCount_defined_base (hk : 4 ≤ k) {Ts : List (Finset (Fin k))}
   have halt : beta k (n - 1) = alpha k (n - 1) + 1 :=
     (beta_alternation (show 2 ≤ k by omega) (n - 1)).1
       (Nat.Even.sub_odd (by omega) hne odd_one)
-  rw [rootCount, if_pos hc]
+  rw [rootCount, ite_eq_left hc]
   by_cases hfix : P.symm c = c
   · have h1 : ((offDiag k ^ Ts.length) * offPerm P) c c = (k - 1) * beta k (n - 1) := by
       rw [base_diag_fixed (show 1 ≤ k by omega) P hfix, hlen]
@@ -129,7 +129,7 @@ theorem rootCount_twisted (hk : 4 ≤ k) {P : Equiv.Perm (Fin k)}
       + alpha k Ts₁.length *
           (alpha k (Ts₂ ++ T' :: Ts₃).length + (k - 2) * beta k (Ts₂ ++ T' :: Ts₃).length)
       ≤ rootCount (Ts₁ ++ T :: (Ts₂ ++ T' :: Ts₃)) P dom c := by
-  rw [rootCount, if_pos hc]
+  rw [rootCount, ite_eq_left hc]
   have hmono := matmul_le_matmul (le_transferProd_two Ts₁ T Ts₂ T' Ts₃)
     (fun (i j : Fin k) => le_refl (offPerm P i j)) c c
   refine le_trans ?_ hmono
@@ -138,23 +138,23 @@ theorem rootCount_twisted (hk : 4 ≤ k) {P : Equiv.Perm (Fin k)}
   · -- the pure base
     have h := offDiag_pow_mulOffPerm_apply (show 1 ≤ k by omega)
       ((Ts₁ ++ T :: (Ts₂ ++ T' :: Ts₃)).length) P c c
-    rw [if_neg (fun h' : c = P.symm c => htw h'.symm)] at h
+    rw [ite_eq_right (fun h' : c = P.symm c => htw h'.symm)] at h
     rw [← hlen]
     exact le_of_eq h.symm
   · -- the entry correction at `T'`
     have hcg := corr_diag_ge (Ts₁.length + 1 + Ts₂.length) T'
       ((offDiag k ^ Ts₃.length) * offPerm P) c (P.symm c) hmT'
     rw [offDiag_pow_apply (show 1 ≤ k by omega),
-      if_neg (fun h' : c = P.symm c => htw h'.symm),
-      offDiag_pow_mulOffPerm_apply (show 1 ≤ k by omega), if_pos rfl] at hcg
+      ite_eq_right (fun h' : c = P.symm c => htw h'.symm),
+      offDiag_pow_mulOffPerm_apply (show 1 ≤ k by omega), ite_eq_left rfl] at hcg
     rw [Matrix.mul_assoc]
     exact hcg
   · -- the leave correction at `T`
     have hcg := corr_diag_ge Ts₁.length T
       ((offDiag k ^ (Ts₂ ++ T' :: Ts₃).length) * offPerm P) c c hcT
-    rw [offDiag_pow_apply (show 1 ≤ k by omega), if_pos rfl,
+    rw [offDiag_pow_apply (show 1 ≤ k by omega), ite_eq_left rfl,
       offDiag_pow_mulOffPerm_apply (show 1 ≤ k by omega),
-      if_neg (fun h' : c = P.symm c => htw h'.symm)] at hcg
+      ite_eq_right (fun h' : c = P.symm c => htw h'.symm)] at hcg
     rw [Matrix.mul_assoc]
     exact hcg
 
@@ -171,7 +171,7 @@ theorem rootCount_donation (hk : 4 ≤ k) {P : Equiv.Perm (Fin k)}
       + (((offDiag k ^ Ts₁.length) * diagInd T *
           (offDiag k ^ (Ts₂ ++ T' :: Ts₃).length)) * offPerm P) d d
       ≤ rootCount (Ts₁ ++ T :: (Ts₂ ++ T' :: Ts₃)) P dom d := by
-  rw [rootCount, if_pos hd]
+  rw [rootCount, ite_eq_left hd]
   have hmono := matmul_le_matmul (le_transferProd_two Ts₁ T Ts₂ T' Ts₃)
     (fun (i j : Fin k) => le_refl (offPerm P i j)) d d
   refine le_trans (le_of_eq ?_) hmono
@@ -196,10 +196,10 @@ theorem rootCount_donated (hk : 4 ≤ k) {P : Equiv.Perm (Fin k)} {dom : Finset 
   refine Nat.add_le_add (Nat.add_le_add ?_ ?_) ?_
   · -- the exact base at `d`
     by_cases hfix : P.symm d = d
-    · rw [if_pos hfix]
+    · rw [ite_eq_left hfix]
       refine le_of_eq ?_
       rw [base_diag_fixed (show 1 ≤ k by omega) P hfix, hlen, uniformA]
-    · rw [if_neg hfix]
+    · rw [ite_eq_right hfix]
       refine le_of_eq ?_
       rw [base_diag_moved (show 1 ≤ k by omega) P hfix, hlen]
   · -- the entry donation: prefix length `n - 2`, empty tail
@@ -215,13 +215,13 @@ theorem rootCount_donated (hk : 4 ≤ k) {P : Equiv.Perm (Fin k)} {dom : Finset 
         d (P.symm c) := by
       rw [offDiag_pow_apply (show 1 ≤ k by omega), hpre]
       by_cases hdm : d = P.symm c
-      · rw [if_pos hdm]
+      · rw [ite_eq_left hdm]
         exact alpha_ge (show 3 ≤ k by omega) (by omega)
-      · rw [if_neg hdm]
+      · rw [ite_eq_right hdm]
         exact beta_ge (show 3 ≤ k by omega) (by omega)
     have hval2 : offPerm P (P.symm c) d = 1 := by
       show (if P (P.symm c) = d then 0 else 1) = 1
-      rw [if_neg (fun h => hdc (hPc.symm.trans h).symm)]
+      rw [ite_eq_right (fun h => hdc (hPc.symm.trans h).symm)]
     calc k - 2 = (k - 2) * 1 := by omega
       _ ≤ (offDiag k ^ (([T₁] : List (Finset (Fin k))).length + 1 + Ts₂.length)) d (P.symm c)
             * offPerm P (P.symm c) d := by
@@ -238,17 +238,17 @@ theorem rootCount_donated (hk : 4 ≤ k) {P : Equiv.Perm (Fin k)} {dom : Finset 
       ((offDiag k ^ (Ts₂ ++ T' :: ([] : List (Finset (Fin k)))).length) * offPerm P) d c hcT
     have hval1 : (offDiag k ^ ([T₁] : List (Finset (Fin k))).length) d c = 1 := by
       rw [offDiag_pow_apply (show 1 ≤ k by omega)]
-      rw [if_neg hdc]
+      rw [ite_eq_right hdc]
       simp
     have hval2 : k - 2 ≤ ((offDiag k ^ (Ts₂ ++ T' :: ([] : List (Finset (Fin k)))).length)
         * offPerm P) c d := by
       rw [offDiag_pow_mulOffPerm_apply (show 1 ≤ k by omega), hrest]
       by_cases hcm : c = P.symm d
-      · rw [if_pos hcm]
+      · rw [ite_eq_left hcm]
         have hb := one_le_beta (show 3 ≤ k by omega) (n - 3) (by omega)
         calc k - 2 ≤ (k - 1) * 1 := by omega
           _ ≤ (k - 1) * beta k (n - 3) := Nat.mul_le_mul_left _ hb
-      · rw [if_neg hcm]
+      · rw [ite_eq_right hcm]
         exact moved_val_ge (show 3 ≤ k by omega) (by omega)
     calc k - 2 = 1 * (k - 2) := by omega
       _ ≤ (offDiag k ^ ([T₁] : List (Finset (Fin k))).length) d c *
@@ -380,9 +380,9 @@ theorem cycle_cases_pair (hk : 4 ≤ k) {n : ℕ} (hn : 4 ≤ n) (hne : Even n)
     have hdon := rootCount_donated hk hf hfe (Equiv.apply_symm_apply P e) hn hne
       T₁ T Ts₂ T' hlen heT hmT'
     by_cases hfixf : P.symm f = f
-    · rw [if_pos hfixf] at hdon
+    · rw [ite_eq_left hfixf] at hdon
       omega
-    · rw [if_neg hfixf] at hdon
+    · rw [ite_eq_right hfixf] at hdon
       omega
   -- every defined root clears `A - 1`, in additive form
   have hbase : ∀ e ∈ dom, uniformA k n ≤ rootCount Ts P dom e + 1 := by

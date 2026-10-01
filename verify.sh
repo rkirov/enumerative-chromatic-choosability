@@ -11,18 +11,18 @@
 # the comparator replays it sequentially through each kernel; two replays plus the build exceed
 # GitHub's six-hour job limit (run 34082945506, 2026-09-07). Lean's own kernel replay is kept.
 #
-# Tool pins below mirror lean-eval's .github/workflows/ci.yml (as of 2026-08-03). The
-# comparator/lean4export repos are tagged per Lean *minor* release, so there is no
-# v4.33.0 patch tag either; upstream pins lean4export by SHA and copies the workspace `lean-toolchain`
-# over it, which is what makes lean4export able to read this toolchain's `.olean`s.
+# Tool pins: comparator at its v4.35.0-rc3 toolchain bump (fd5d5bc, 2026-09-24) and lean4export at
+# its v4.35.0-rc3 tag, matching the workspace toolchain. (Before 2026-10-01 these mirrored
+# lean-eval's ci.yml at Lean v4.33.0.) Upstream pins lean4export by SHA and copies the workspace
+# `lean-toolchain` over it, which is what makes lean4export able to read this toolchain's `.olean`s.
 #
 # Script adapted from github.com/rkirov/jacobian-fable (verify.sh), which in turn came from
 # github.com/rkirov/jacobian-claude.
 set -euo pipefail
 
-# Upstream-pinned tool revisions (lean-eval ci.yml; bump only alongside upstream).
-COMPARATOR_REV=71b52ec29e06d4b7d882726553b1ceb99a2499e0
-LEAN4EXPORT_REV=15f6055e299ad5b89345e533cc2192f4cc00f659  # = refs/tags/v4.33.0
+# Pinned tool revisions (bump together with the workspace toolchain).
+COMPARATOR_REV=fd5d5bcf14177b187f66d4502071268d877887c3   # toolchain v4.35.0-rc3
+LEAN4EXPORT_REV=66f1fb4bc256072069767fce52d39480e4524869  # = refs/tags/v4.35.0-rc3
 LANDRUN_REV=5ed4a3db3a4ad930d577215c6b9abaa19df7f99f
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -43,8 +43,9 @@ clone_at https://github.com/leanprover/lean4export "$WORK/lean4export" "$LEAN4EX
 # lean4export must be built with the toolchain that produced the `.olean`s it reads
 # (upstream does exactly this `cp`).
 cp "$WS/lean-toolchain" "$WORK/lean4export/lean-toolchain"
-# DEVIATION from upstream: upstream builds comparator with comparator's OWN pinned toolchain
-# (v4.30.0-rc2 at $COMPARATOR_REV). We build it with the workspace toolchain instead, to avoid
+# comparator's own pinned toolchain at $COMPARATOR_REV is v4.35.0-rc3, the workspace's. Should they
+# diverge again: upstream builds comparator with its OWN toolchain; by default we build it with the
+# workspace toolchain instead, to avoid
 # installing a third full Lean toolchain on a disk-constrained machine. comparator only reads
 # the export produced by lean4export and replays it in-process, so its own build toolchain is
 # not part of the check. Set COMPARATOR_OWN_TOOLCHAIN=1 to restore upstream's exact recipe.

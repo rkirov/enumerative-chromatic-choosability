@@ -54,7 +54,7 @@ theorem graphTreeCharge_sum (L : ListAssignment V) (k : ℕ) (x : ℝ)
     _ = ∑ e ∈ T, if e ∈ T then (edgeDef L k e : ℝ) * x ^ S.card else 0 := by
       symm
       exact Finset.sum_subset hTU (by intro e _ he; simp [he])
-    _ = _ := Finset.sum_congr rfl (fun e he => if_pos he)
+    _ = _ := Finset.sum_congr rfl (fun e he => ite_eq_left he)
 
 /-- The coefficient-weighted deficiency is bounded by the total actual edge charge. -/
 theorem coefficient_deficiency_le_graphTreeCharge

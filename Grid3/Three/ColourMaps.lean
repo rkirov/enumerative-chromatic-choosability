@@ -509,8 +509,8 @@ theorem exists_colourMaps (h3 : ∀ r, (Lc r).card = 3) (h3' : ∀ r, (Lc' r).ca
     show (cs.getD (if c ∈ commonI Lc Lc' then (Gc.toFun c).val else (Gl.toFun c).val) (0, 0)).1
       = patOf Lc c
     by_cases hcc : c ∈ commonI Lc Lc'
-    · rw [if_pos hcc, hgetD, (hGc_slot c hcc).1]
-    · rw [if_neg hcc, hgetD, (hGl_slot c hc hcc).1]
+    · rw [ite_eq_left hcc, hgetD, (hGc_slot c hcc).1]
+    · rw [ite_eq_right hcc, hgetD, (hGl_slot c hc hcc).1]
   · -- φR_lt
     intro c hc
     show (if c ∈ commonI Lc Lc' then (Gc.toFun c).val else (Gr.toFun c).val) < cs.length
@@ -520,50 +520,50 @@ theorem exists_colourMaps (h3 : ∀ r, (Lc r).card = 3) (h3' : ∀ r, (Lc' r).ca
     show (cs.getD (if c ∈ commonI Lc Lc' then (Gc.toFun c).val else (Gr.toFun c).val) (0, 0)).2
       = patOf Lc' c
     by_cases hcc : c ∈ commonI Lc Lc'
-    · rw [if_pos hcc, hgetD, (hGc_slot c hcc).1]
-    · rw [if_neg hcc, hgetD, (hGr_slot c hc hcc).1]
+    · rw [ite_eq_left hcc, hgetD, (hGc_slot c hcc).1]
+    · rw [ite_eq_right hcc, hgetD, (hGr_slot c hc hcc).1]
   · -- common
     intro c hc
     show (if c ∈ commonI Lc Lc' then (Gc.toFun c).val else (Gl.toFun c).val)
       = (if c ∈ commonI Lc Lc' then (Gc.toFun c).val else (Gr.toFun c).val)
-    rw [if_pos hc, if_pos hc]
+    rw [ite_eq_left hc, ite_eq_left hc]
   · -- ψL_φL
     intro c hc
     by_cases hcc : c ∈ commonI Lc Lc'
     · have hlt := (Gc.toFun c).isLt
-      simp only [ψL, φL, if_pos hcc, dif_pos hlt, Fin.eta]
-      rw [if_pos (hGc_slot c hcc).2]
+      simp only [ψL, φL, ite_eq_left hcc, dite_eq_left hlt, Fin.eta]
+      rw [ite_eq_left (hGc_slot c hcc).2]
       exact Gc.left_inv _ c (hmemAcom c hcc)
     · have hlt := (Gl.toFun c).isLt
-      simp only [ψL, φL, if_neg hcc, dif_pos hlt, Fin.eta]
-      rw [if_neg (hGl_slot c hc hcc).2]
+      simp only [ψL, φL, ite_eq_right hcc, dite_eq_left hlt, Fin.eta]
+      rw [ite_eq_right (hGl_slot c hc hcc).2]
       exact Gl.left_inv _ c (hmemALO c hc hcc)
   · -- ψR_φR
     intro c hc
     by_cases hcc : c ∈ commonI Lc Lc'
     · have hlt := (Gc.toFun c).isLt
-      simp only [ψR, φR, if_pos hcc, dif_pos hlt, Fin.eta]
-      rw [if_pos (hGc_slot c hcc).2]
+      simp only [ψR, φR, ite_eq_left hcc, dite_eq_left hlt, Fin.eta]
+      rw [ite_eq_left (hGc_slot c hcc).2]
       exact Gc.left_inv _ c (hmemAcom c hcc)
     · have hlt := (Gr.toFun c).isLt
-      simp only [ψR, φR, if_neg hcc, dif_pos hlt, Fin.eta]
-      rw [if_neg (hGr_slot c hc hcc).2]
+      simp only [ψR, φR, ite_eq_right hcc, dite_eq_left hlt, Fin.eta]
+      rw [ite_eq_right (hGr_slot c hc hcc).2]
       exact Gr.left_inv _ c (hmemARO c hc hcc)
   · -- φL_ψL
     intro i hi hact
     rw [hgetD ⟨i, hi⟩] at hact
     have hi' : i < cs.length := hi
-    simp only [ψL, φL, dif_pos hi']
+    simp only [ψL, φL, dite_eq_left hi']
     by_cases hTU : (⟨i, hi⟩ : Fin cs.length) ∈ TU
-    · rw [if_pos hTU]
+    · rw [ite_eq_left hTU]
       rw [Finset.mem_biUnion] at hTU
       obtain ⟨k, _, hk⟩ := hTU
       have hinv := Gc.inv_mem k _ hk
       have hcom : Gc.invFun ⟨i, hi⟩ ∈ commonI Lc Lc' :=
         (Finset.mem_filter.1 hinv).1
       refine ⟨commonI_subset_left Lc Lc' hcom, ?_⟩
-      rw [if_pos hcom, Gc.right_inv k _ hk]
-    · rw [if_neg hTU]
+      rw [ite_eq_left hcom, Gc.right_inv k _ hk]
+    · rw [ite_eq_right hTU]
       have hB : (⟨i, hi⟩ : Fin cs.length) ∈ BLO (pidx (cs[(⟨i, hi⟩ : Fin cs.length)]).1) := by
         rw [Finset.mem_sdiff]
         refine ⟨?_, ?_⟩
@@ -584,22 +584,22 @@ theorem exists_colourMaps (h3 : ∀ r, (Lc r).card = 3) (h3' : ∀ r, (Lc' r).ca
       unfold ALO at hinv
       rw [Finset.mem_filter, Finset.mem_sdiff] at hinv
       refine ⟨hinv.1.1, ?_⟩
-      rw [if_neg hinv.1.2, Gl.right_inv _ _ hB]
+      rw [ite_eq_right hinv.1.2, Gl.right_inv _ _ hB]
   · -- φR_ψR
     intro i hi hact
     rw [hgetD ⟨i, hi⟩] at hact
     have hi' : i < cs.length := hi
-    simp only [ψR, φR, dif_pos hi']
+    simp only [ψR, φR, dite_eq_left hi']
     by_cases hTU : (⟨i, hi⟩ : Fin cs.length) ∈ TU
-    · rw [if_pos hTU]
+    · rw [ite_eq_left hTU]
       rw [Finset.mem_biUnion] at hTU
       obtain ⟨k, _, hk⟩ := hTU
       have hinv := Gc.inv_mem k _ hk
       have hcom : Gc.invFun ⟨i, hi⟩ ∈ commonI Lc Lc' :=
         (Finset.mem_filter.1 hinv).1
       refine ⟨commonI_subset_right Lc Lc' hcom, ?_⟩
-      rw [if_pos hcom, Gc.right_inv k _ hk]
-    · rw [if_neg hTU]
+      rw [ite_eq_left hcom, Gc.right_inv k _ hk]
+    · rw [ite_eq_right hTU]
       have hB : (⟨i, hi⟩ : Fin cs.length) ∈ BRO (pidx (cs[(⟨i, hi⟩ : Fin cs.length)]).2) := by
         rw [Finset.mem_sdiff]
         refine ⟨?_, ?_⟩
@@ -620,6 +620,6 @@ theorem exists_colourMaps (h3 : ∀ r, (Lc r).card = 3) (h3' : ∀ r, (Lc' r).ca
       unfold ARO at hinv
       rw [Finset.mem_filter, Finset.mem_sdiff] at hinv
       refine ⟨hinv.1.1, ?_⟩
-      rw [if_neg hinv.1.2, Gr.right_inv _ _ hB]
+      rw [ite_eq_right hinv.1.2, Gr.right_inv _ _ hB]
 
 end Grid3.Three.Seam

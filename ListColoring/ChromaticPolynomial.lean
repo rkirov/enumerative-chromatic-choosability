@@ -177,12 +177,12 @@ theorem sum_prod_constOnEdge_indicator (S : Finset (Sym2 V)) (n : ℕ) :
       = if ∀ e ∈ S, ConstOnEdge f e then (1 : ℤ) else 0 := by
     intro f
     by_cases h : ∀ e ∈ S, ConstOnEdge f e
-    · rw [if_pos h]
-      exact Finset.prod_eq_one fun e he => if_pos (h e he)
-    · rw [if_neg h]
+    · rw [ite_eq_left h]
+      exact Finset.prod_eq_one fun e he => ite_eq_left (h e he)
+    · rw [ite_eq_right h]
       push Not at h
       obtain ⟨e, he, hne⟩ := h
-      exact Finset.prod_eq_zero he (if_neg hne)
+      exact Finset.prod_eq_zero he (ite_eq_right hne)
   simp_rw [key]
   rw [sum_ite_one_zero, card_filter_constOnEdges S n, Nat.cast_pow]
 
@@ -215,7 +215,7 @@ theorem prod_one_sub_indicator (f : V → ℕ) :
     (∏ e ∈ G.edgeFinset, (1 - if ConstOnEdge f e then (1 : ℤ) else 0)) =
       if G.IsProperColoring f then 1 else 0 := by
   by_cases hf : G.IsProperColoring f
-  · rw [if_pos hf]
+  · rw [ite_eq_left hf]
     refine Finset.prod_eq_one fun e he => ?_
     rw [mem_edgeFinset] at he
     revert he
@@ -223,8 +223,8 @@ theorem prod_one_sub_indicator (f : V → ℕ) :
     | _ v w =>
       intro he
       rw [mem_edgeSet] at he
-      rw [if_neg ((constOnEdge_mk f v w).not.mpr (hf he)), sub_zero]
-  · rw [if_neg hf]
+      rw [ite_eq_right ((constOnEdge_mk f v w).not.mpr (hf he)), sub_zero]
+  · rw [ite_eq_right hf]
     have hex : ∃ v w, G.Adj v w ∧ f v = f w := by
       by_contra hcon
       push Not at hcon
@@ -232,7 +232,7 @@ theorem prod_one_sub_indicator (f : V → ℕ) :
     obtain ⟨v, w, hvw, heq⟩ := hex
     refine Finset.prod_eq_zero (i := s(v, w)) ?_ ?_
     · rw [mem_edgeFinset, mem_edgeSet]; exact hvw
-    · rw [if_pos ((constOnEdge_mk f v w).mpr heq), sub_self]
+    · rw [ite_eq_left ((constOnEdge_mk f v w).mpr heq), sub_self]
 
 /-- **Evaluation of the chromatic polynomial counts colorings.**  At a natural number `n`, the
 Whitney expansion returns `col(G, n)`, the number of proper colorings of `G` drawn from

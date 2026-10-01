@@ -144,9 +144,9 @@ for odd `k`. -/
 theorem min_pathA_pathB_eq (m k : ℕ) :
     min (pathA m k) (pathB m k) = if Even k then pathB m k else pathA m k := by
   by_cases hk : Even k
-  · rw [if_pos hk]
+  · rw [ite_eq_left hk]
     exact min_eq_right (pathB_lt_pathA hk m).le
-  · rw [if_neg hk]
+  · rw [ite_eq_right hk]
     exact min_eq_left (pathA_lt_pathB (Nat.not_even_iff_odd.mp hk) m).le
 
 end ListColoring

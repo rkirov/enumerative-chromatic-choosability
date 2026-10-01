@@ -124,12 +124,12 @@ theorem comps_complete (p : Nat) : ∀ (n rem r : Nat), r < 4 ^ n →
       fun q hq hi => by rw [hvd q hq]; exact hz q (by omega) hi
     have hvs : dsum (r % 4 ^ n) n = dsum r n := dsum_congr _ _ n hvd
     by_cases hi : inter p n = true
-    · simp only [comps, hi, if_true]
+    · simp only [comps, hi, ite_true]
       refine List.mem_flatMap.2 ⟨r / 4 ^ n, List.mem_range.2 (by omega), ?_⟩
       refine List.mem_map.2 ⟨r % 4 ^ n, ?_, hsplit⟩
       exact comps_complete p n (rem - r / 4 ^ n) (r % 4 ^ n) hv hvz (by omega)
     · have hi' : inter p n = false := by simpa using hi
-      simp only [comps, hi', Bool.false_eq_true, if_false]
+      simp only [comps, hi', Bool.false_eq_true, ite_false]
       have hz0 : digit r n = 0 := hz n (by omega) hi'
       have hr' : r < 4 ^ n := by
         have : r / 4 ^ n = 0 := by omega
@@ -286,9 +286,9 @@ theorem dpre_testBit (M mL : Nat) : ∀ p, p ≤ 7 → ∀ i < 21, (dpre M mL p)
     · obtain ⟨j, hj, hs, hi⟩ := dpre_testBit M mL p (by omega) i hi h
       exact ⟨j, by omega, hs, hi⟩
     · by_cases hs : sumRow M p < mult mL p
-      · rw [if_pos hs] at h
+      · rw [ite_eq_left hs] at h
         exact ⟨p, by omega, hs, colMask8_testBit p (by omega) i hi h⟩
-      · rw [if_neg hs] at h; simp at h
+      · rw [ite_eq_right hs] at h; simp at h
 
 /-! ### The main induction -/
 
@@ -375,7 +375,7 @@ theorem enumRows_complete (mL mR M : Nat) (hM : M < 16384 ^ 7) (hv : validKey mL
     refine List.mem_flatMap.2 ⟨tagRow p (mult mL p) (rowOf M p), hmem, ?_⟩
     have hfits' : ((resOf M mR p + G8 - (tagRow p (mult mL p) (rowOf M p)).2.1) &&& G8 == G8) = true := by
       simp only [tagRow]; exact beq_iff_eq.2 hfits
-    rw [if_pos hfits']
+    rw [ite_eq_left hfits']
     exact List.mem_map.2 ⟨M / 16384 ^ (p + 1), ih, hrest.symm⟩
 
 /-- the initial residual is the right type itself, repacked in base 8 -/
