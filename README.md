@@ -48,8 +48,8 @@ All of these are instances of one theorem with its numbers abstracted into a rat
 `P(G,L)`. Its positivity half coincides, constants included, with Dong–Koh's 2008 bound on real
 chromatic roots. The comparison with list assignments improves Zhang–Dong's `k ≥ 23.41Δ`
 (September 2026). [`GridGen/README.md`](GridGen/README.md) has the argument, the certificate
-table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 28 guarded axiom checks. None
-of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19` stays open.
+table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 36 guarded axiom checks. None
+of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 16` stays open at heights `≥ 4`.
 
 ## Layout
 

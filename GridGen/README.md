@@ -36,7 +36,7 @@ The rest of this file is about the polymer route.
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
-is claimed optimal. For grids the list sizes `3 ≤ k ≤ 19` stay open at heights `≥ 4`.
+is claimed optimal. For grids the list sizes `3 ≤ k ≤ 16` stay open at heights `≥ 4`.
 
 ## The argument
 
