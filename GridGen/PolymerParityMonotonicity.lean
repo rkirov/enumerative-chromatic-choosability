@@ -49,12 +49,14 @@ theorem graphTreeCharge_odd_budget {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
         mul_le_mul_of_nonneg_left hh hf
       _ = _ := by ring
 
-theorem graphActivity_odd_charged_tail {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
+/-- The odd tail, given monotonicity only from an anchor edge to a block whose spanning trees use
+it (the only comparison the charge needs). -/
+theorem graphActivity_odd_charged_tail_of {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
     {x₀ e₀ o₀ r₀ : ℝ} (hc : ParityCert D x₀ e₀ o₀ r₀)
     {L : ListAssignment V} {k : ℕ} (hL : IsNListAssignment L k)
     {x : ℝ} (hx : 0 ≤ x) (hxb : x ≤ x₀) (U : Finset V)
     (z : Finset V → ℝ) (hz : ∀ A, 0 ≤ z A)
-    (hmono : ∀ A B, A ⊆ B → z A ≤ z B) :
+    (hmono : ∀ S e, S ⊆ U → graphTreeCharge G L k x S e ≠ 0 → z (U \ S) ≤ z (U \ e.toFinset)) :
     (∑ S ∈ U.powerset.filter (fun S => 3 ≤ S.card ∧ Odd S.card),
       -graphActivityDeriv G L k x S * z (U \ S)) ≤
       (2 * e₀ * o₀) * ∑ e ∈ edgesWithin G.edgeFinset U,
@@ -92,11 +94,7 @@ theorem graphActivity_odd_charged_tail {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D
       by_cases hc : graphTreeCharge G L k x S e = 0
       · simp [hc]
       · apply mul_le_mul_of_nonneg_left _ (graphTreeCharge_nonneg G L k hx S e)
-        apply hmono
-        have hs := (mem_edgesWithin.mp (graphTreeCharge_support G L k x S e hc)).2
-        intro v hv
-        obtain ⟨hvU, hvS⟩ := Finset.mem_sdiff.mp hv
-        exact Finset.mem_sdiff.mpr ⟨hvU, fun hve => hvS (hs v (Sym2.mem_toFinset.mp hve))⟩
+        exact hmono S e (Finset.mem_powerset.mp (Finset.mem_filter.mp hS).1) hc
     _ ≤ ∑ e ∈ edgesWithin G.edgeFinset U,
         ((2 * e₀ * o₀) * ((edgeDef L k e : ℝ) * x ^ 2)) * z (U \ e.toFinset) := by
       apply Finset.sum_le_sum
@@ -106,6 +104,52 @@ theorem graphActivity_odd_charged_tail {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D
         (graphTreeCharge_odd_budget G hdeg hc L k hx hxb U (mem_edgesWithin.mp he).1) (hz _)
     _ = _ := by rw [Finset.mul_sum]; exact Finset.sum_congr rfl fun _ _ => by ring
 
+
+theorem graphActivity_odd_charged_tail {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
+    {x₀ e₀ o₀ r₀ : ℝ} (hc : ParityCert D x₀ e₀ o₀ r₀)
+    {L : ListAssignment V} {k : ℕ} (hL : IsNListAssignment L k)
+    {x : ℝ} (hx : 0 ≤ x) (hxb : x ≤ x₀) (U : Finset V)
+    (z : Finset V → ℝ) (hz : ∀ A, 0 ≤ z A)
+    (hmono : ∀ A B, A ⊆ B → z A ≤ z B) :
+    (∑ S ∈ U.powerset.filter (fun S => 3 ≤ S.card ∧ Odd S.card),
+      -graphActivityDeriv G L k x S * z (U \ S)) ≤
+      (2 * e₀ * o₀) * ∑ e ∈ edgesWithin G.edgeFinset U,
+        (edgeDef L k e : ℝ) * x ^ 2 * z (U \ e.toFinset) := by
+  refine graphActivity_odd_charged_tail_of G hdeg hc hL hx hxb U z hz fun S e _ hc' => ?_
+  apply hmono
+  have hs := (mem_edgesWithin.mp (graphTreeCharge_support G L k x S e hc')).2
+  intro v hv
+  obtain ⟨hvU, hvS⟩ := Finset.mem_sdiff.mp hv
+  exact Finset.mem_sdiff.mpr ⟨hvU, fun hve => hvS (hs v (Sym2.mem_toFinset.mp hve))⟩
+
+theorem graphActivity_parity_charged_tail_of {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
+    {x₀ e₀ o₀ r₀ : ℝ} (hc : ParityCert D x₀ e₀ o₀ r₀)
+    {L : ListAssignment V} {k : ℕ} (hL : IsNListAssignment L k)
+    {x : ℝ} (hx : 0 ≤ x) (hxb : x ≤ x₀) (U : Finset V)
+    (z : Finset V → ℝ) (hz : ∀ A, 0 ≤ z A)
+    (hmono : ∀ S e, S ⊆ U → graphTreeCharge G L k x S e ≠ 0 → z (U \ S) ≤ z (U \ e.toFinset)) :
+    (∑ S ∈ U.powerset.filter (fun S => 3 ≤ S.card),
+      -graphActivityDeriv G L k x S * z (U \ S)) ≤
+      (2 * e₀ * o₀) * ∑ e ∈ edgesWithin G.edgeFinset U,
+        (edgeDef L k e : ℝ) * x ^ 2 * z (U \ e.toFinset) := by
+  classical
+  apply le_trans ?_ (graphActivity_odd_charged_tail_of G hdeg hc hL hx hxb U z hz hmono)
+  rw [← Finset.filter_filter]
+  conv_rhs => rw [Finset.sum_filter]
+  apply Finset.sum_le_sum
+  intro S hS
+  split_ifs with ho
+  · exact le_rfl
+  · have he : Even S.card := (Nat.even_or_odd S.card).resolve_right ho
+    have hn : S.Nonempty := Finset.card_pos.mp (by
+      have := (Finset.mem_filter.mp hS).2
+      omega)
+    have hc := blockCoefficient_nonpos_of_even G S he hn
+    have hd := listDeficiency_nonneg hL hn
+    simp only [graphActivityDeriv, neg_mul, neg_neg]
+    exact mul_nonpos_of_nonpos_of_nonneg
+      (mul_nonpos_of_nonpos_of_nonneg
+        (mul_nonpos_of_nonpos_of_nonneg hc hd) (pow_nonneg hx _)) (hz _)
 
 theorem graphActivity_parity_charged_tail {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
     {x₀ e₀ o₀ r₀ : ℝ} (hc : ParityCert D x₀ e₀ o₀ r₀)

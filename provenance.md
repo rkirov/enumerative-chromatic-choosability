@@ -127,6 +127,19 @@ published construction.
   overlap-`k − 1` case (Lemma 6, reproved as `lemma6`). A targeted search on 2026-09-28 found no
   proof of the conjecture in the literature.
 
+* **Degree-sensitive deletion ratios (`GridGen/PolymerPeel*.lean`, `PeelDegree.lean`).** The same
+  interpolation, but the deletion ratio `Z(U) ≥ q Z(U − v)` is required only when `v` has at most
+  `Δ − 1` neighbours in `U`; every comparison the argument makes deletes a connected block outward
+  from a root or an anchor edge, and each step of that deletion removes a vertex that has already
+  lost a neighbour. Full-degree roots then only need positivity (root odd mass `< 1`). This lowers
+  every degree threshold by about four: `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`, and
+  every rectangular grid at `k ≥ 17` (`SimpleGraph.eccAt_of_degree_le_four_seventeen`,
+  `ListColoring.ecc_boxProd_pathG_of_seventeen`). **The idea is Codex's (OpenAI), proposed when
+  consulted on 2026-10-07** (`ai_research_notes/CODEX_GRID_ALL_HEIGHTS_2026-10-07.md` §3, which also
+  sketches `k ≥ 16` at degree four, not formalized); the Lean development and the certificates for
+  `Δ ≠ 4` are this repository's. Not checked against the literature beyond the sources credited in
+  the item below.
+
 * **Maximum-degree thresholds for the list colour function (`GridGen/`).** Every finite graph is
   `k`-ECC once `567Δ ≤ 100k`; `Δ ≤ 3, 4, 5, 6, 7, 8` suffice at `k ≥ 15, 20, 26, 32, 37, 43`
   (so every rectangular grid at `k ≥ 20`); and at each of these thresholds adjacent unequal lists

@@ -595,12 +595,22 @@ theorem eccAt_of_degree_le_four_twenty {V : Type*} [Fintype V] [DecidableEq V]
     (G : SimpleGraph V) [DecidableRel G.Adj]
     (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 20 ≤ k) : G.ECCAt k := sorry
 
+/-- Every finite simple graph of maximum degree at most four is ECC at every list size
+at least 17 (the degree-sensitive induction, `GridGen/PeelDegree.lean`). -/
+theorem eccAt_of_degree_le_four_seventeen {V : Type*} [Fintype V] [DecidableEq V]
+    (G : SimpleGraph V) [DecidableRel G.Adj]
+    (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 17 ≤ k) : G.ECCAt k := sorry
+
 end SimpleGraph
 
 namespace ListColoring
 
 /-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 20. -/
 theorem ecc_boxProd_pathG_of_twenty {k : ℕ} (hk : 20 ≤ k) (n m : ℕ) :
+    (pathG n □ pathG m).ECCAt k := sorry
+
+/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 17. -/
+theorem ecc_boxProd_pathG_of_seventeen {k : ℕ} (hk : 17 ≤ k) (n m : ℕ) :
     (pathG n □ pathG m).ECCAt k := sorry
 
 end ListColoring

@@ -116,3 +116,35 @@ the lemmas that carry the argument. Each must use exactly the three standard axi
 /-- info: 'SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_three_eleven' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_three_eleven
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_four_seventeen' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_four_seventeen
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_five_twentyTwo' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_five_twentyTwo
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_six_twentyEight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_six_twentyEight
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_seven_thirtyThree' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_seven_thirtyThree
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_eight_thirtyNine' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_eight_thirtyNine
+
+/-- info: 'ListColoring.ecc_boxProd_pathG_of_seventeen' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ListColoring.ecc_boxProd_pathG_of_seventeen
+
+/-- info: 'GridGen.Polymer.colConst_le_col_of_certifiedPeelAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms GridGen.Polymer.colConst_le_col_of_certifiedPeelAt

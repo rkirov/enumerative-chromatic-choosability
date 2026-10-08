@@ -2,6 +2,7 @@ import GridGen.MaximumDegree
 import GridGen.DegreeFourTwenty
 import GridGen.SmallDegree
 import GridGen.PolymerStability
+import GridGen.PeelDegree
 
 /-!
 # Eventual ECC with a linear maximum-degree bound
@@ -16,7 +17,11 @@ Instances:
   (hyperbolic certificate `parityCert_uniform`, `MaximumDegree.lean`);
 * `SimpleGraph.eccAt_of_degree_le_four_twenty`: `Δ ≤ 4`, `k ≥ 20`, with the rectangle
   corollary `ListColoring.ecc_boxProd_pathG_of_twenty` (`DegreeFourTwenty.lean`);
-* `Δ ≤ 3, 5, 6, 7, 8` at `k ≥ 15, 26, 32, 37, 43` (`SmallDegree.lean`).
+* `Δ ≤ 3, 5, 6, 7, 8` at `k ≥ 15, 26, 32, 37, 43` (`SmallDegree.lean`);
+* the degree-sensitive variant (`PolymerPeel*.lean`), which needs the deletion ratio only at
+  vertices of residual degree `≤ Δ - 1`: `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`,
+  with every rectangular grid ECC at `k ≥ 17` (`ListColoring.ecc_boxProd_pathG_of_seventeen`,
+  `PeelDegree.lean`). The induction was proposed by Codex (OpenAI).
 
 Every instance also gives strict inequality when two adjacent lists differ, and the
 characterization of equality on connected graphs (`PolymerCertificate.lean`; stated at the

@@ -32,8 +32,14 @@ choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything
 Every finite simple graph is `k`-ECC whenever `567 * Δ ≤ 100 * k`, equivalently
 `k ≥ ceil(5.67Δ)`, where `Δ` is its maximum degree (`SimpleGraph.eccAt_of_maxDegree_bound`).
 Sharper certificates give `Δ ≤ 3` at `k ≥ 15`, `Δ ≤ 4` at `k ≥ 20`
-(`SimpleGraph.eccAt_of_degree_le_four_twenty`, and so **every rectangular grid** at `k ≥ 20`,
+(`SimpleGraph.eccAt_of_degree_le_four_twenty`, and so every rectangular grid at `k ≥ 20`,
 `ListColoring.ecc_boxProd_pathG_of_twenty`), and `Δ ≤ 5, 6, 7, 8` at `k ≥ 26, 32, 37, 43`.
+A degree-sensitive version of the same induction, which needs the deletion ratio only at vertices
+with at most `Δ − 1` remaining neighbours, improves every one of these by about four:
+`Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`, so **every rectangular grid is ECC at
+`k ≥ 17`** (`SimpleGraph.eccAt_of_degree_le_four_seventeen`,
+`ListColoring.ecc_boxProd_pathG_of_seventeen`, `GridGen/PeelDegree.lean`). That induction was
+proposed by Codex (OpenAI) when consulted on 2026-10-07.
 At every one of these thresholds, two adjacent vertices with different lists force strictly more
 colourings, so on a connected graph only the constant assignments attain `P(G,k)`.
 
@@ -53,7 +59,7 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 19`
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
-| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 15, 20`, hence every rectangle at `k ≥ 20`), from one certificate theorem; also the separate conditional lookback route for general heights |
+| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 17` by the degree-sensitive certificate, hence every rectangle at `k ≥ 17`); also the separate conditional lookback route for general heights |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
@@ -345,11 +351,11 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirty-four keystone theorems** — ten from the paper,
+  `comparator/Challenge.lean`, which claims **thirty-six keystone theorems** — ten from the paper,
   three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
-  and height-three results, six maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
-  subcubic graphs at `15`, maximum degree four at `20` with its arbitrary-grid corollary, and the
-  equality case), and five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
+  and height-three results, eight maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
+  subcubic graphs at `15`, maximum degree four at `20` and at `17`, each with its arbitrary-grid
+  corollary, and the equality case), and five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
   thresholds at list sizes three, four and five), and two for `τ(K₂,ₙ) = O(√n)` —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,

@@ -23,6 +23,9 @@ The rest of this file is about the polymer route.
 | `SimpleGraph.eccAt_of_degree_le_four_twenty` | `Δ ≤ 4`, `k ≥ 20` | `G.ECCAt k` |
 | `ListColoring.ecc_boxProd_pathG_of_twenty` | any rectangle `P_n □ P_m`, `k ≥ 20` | ECC at `k` |
 | `SimpleGraph.eccAt_of_degree_le_{five,six,seven,eight}` | `Δ ≤ 5, 6, 7, 8`; `k ≥ 26, 32, 37, 43` | `G.ECCAt k` |
+| `SimpleGraph.eccAt_of_degree_le_three_eleven` … `_eight_thirtyNine` | `Δ ≤ 3, …, 8`; `k ≥ 11, 17, 22, 28, 33, 39` | `G.ECCAt k` (degree-sensitive, `PeelDegree.lean`) |
+| `SimpleGraph.eccAt_of_degree_le_four_seventeen` | `Δ ≤ 4`, `k ≥ 17` | `G.ECCAt k` |
+| `ListColoring.ecc_boxProd_pathG_of_seventeen` | any rectangle `P_n □ P_m`, `k ≥ 17` | ECC at `k` |
 | `GridGen.Polymer.colConst_lt_col_of_certifiedAt_of_adj` | any threshold above; two adjacent lists differ | `P(G,k) < P(G,L)` |
 | `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt` | any threshold above; `G` connected | `P(G,L) = P(G,k)` iff `L` is constant |
 
