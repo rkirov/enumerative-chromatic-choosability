@@ -26,17 +26,19 @@ The rest of this file is about the polymer route.
 | `SimpleGraph.eccAt_of_degree_le_three_eleven` … `_eight_thirtyNine` | `Δ ≤ 3, …, 8`; `k ≥ 11, 17, 22, 28, 33, 39` | `G.ECCAt k` (degree-sensitive, `PeelDegree.lean`) |
 | `SimpleGraph.eccAt_of_degree_le_four_seventeen` | `Δ ≤ 4`, `k ≥ 17` | `G.ECCAt k` |
 | `ListColoring.ecc_boxProd_pathG_of_seventeen` | any rectangle `P_n □ P_m`, `k ≥ 17` | ECC at `k` |
-| `GridGen.Polymer.colConst_lt_col_of_certifiedAt_of_adj` | any threshold above; two adjacent lists differ | `P(G,k) < P(G,L)` |
-| `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt` | any threshold above; `G` connected | `P(G,L) = P(G,k)` iff `L` is constant |
+| `SimpleGraph.eccAt_of_degree_le_{four_sixteen,six_twentySeven,eight_thirtyEight}` | `Δ ≤ 4, 6, 8`; `k ≥ 16, 27, 38` | `G.ECCAt k` (neighbour pairs, `PeelDegree.lean`) |
+| `ListColoring.ecc_boxProd_pathG_of_sixteen` | any rectangle `P_n □ P_m`, `k ≥ 16` | ECC at `k` |
+| `GridGen.Polymer.colConst_lt_col_of_certifiedAt_of_adj` | a `CertifiedAt` threshold (rows 1–6); two adjacent lists differ | `P(G,k) < P(G,L)` |
+| `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt` | a `CertifiedAt` threshold (rows 1–6); `G` connected | `P(G,L) = P(G,k)` iff `L` is constant |
 
 `PolymerStability.lean` restates the last two at the uniform threshold under the names
 `SimpleGraph.colConst_lt_col_of_degree_bound_of_adj_lists_ne` and
 `SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound`. For comparison, the ceiling bound gives
-18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 28 guarded
+18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 41 guarded
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
-is claimed optimal. For grids the list sizes `3 ≤ k ≤ 16` stay open at heights `≥ 4`.
+is claimed optimal. For grids the list sizes `3 ≤ k ≤ 15` stay open at heights `≥ 4`.
 
 ## The argument
 
@@ -100,13 +102,50 @@ Mathlib's degree-seven Taylor bound for `exp` (`PolymerUniformBounds.lean`).
 
 Numerically, the finite thresholds above are the least this certificate shape reaches for each
 `D`: the root budget binds, not the edge budget. The uniform constant tends to about `5.6634`.
-Degree four at 19, or a factor near 5, would need a new idea. For example, the root recursion
-could keep the cancellation between neighbouring positive and negative blocks instead of
-bounding each adverse block separately.
+For this certificate, degree four at 19 would need a new idea; the two variants below are such
+ideas.
+
+### Degree-sensitive variants
+
+* **Peeling** (`PolymerPeel`, `PolymerPeelGraph`, `PolymerPeelRoot`, `PolymerPeelCertificate`).
+  The ratio `Z_t(U − u) ≤ Z_t(U)` is claimed only when `u` has at most `D − 1` neighbours in `U`.
+  Every comparison the argument makes deletes a connected block outward from a root or an anchor
+  edge (`PeelChain`), so each step removes a vertex that has already lost a neighbour. At such a
+  root the harm counts trees of `G[U]` (`restrictTo G U`) with `D − 1` ports, so the budget is
+  `k x o ≤ k x − 1` with the branch mass `o`; a full-degree root needs only positivity, `r < 1`.
+  This is `CertifiedPeelAt`.
+* **Neighbour pairs** (`PolymerPairBlocks`, `PolymerUpperRoot`, `PolymerPairRoot`,
+  `PolymerPairCertificate`). A third claim joins the induction, `Z_t(U) ≤ k x Z_t(U − u)` at every
+  vertex: the edges at a root outweigh the odd blocks charged to them, by `2eo < 1`. With it each
+  positive block `{v, u, w}` (`u, w` neighbours of `v`; coefficient `1`, or `2` for a triangle) is
+  worth at least `x / k` relative to `Z_t(U − v)`, and the deficient edges' savings pay for the
+  pairs' deficiencies once `(D − 2) x³ ≤ x / k`. A root with `D − 1` neighbours gains
+  `C(D − 1, 2) x / k`; roots with fewer use the `D − 2`-port mass. This is `CertifiedPairAt`.
+
+| `D` | peel `k₀` | `s` | `e` | `o` | `r` | pair `k₀` | `s` | `e` | `o` | `r` |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 3 | 11 | 71/50 | 549/500 | 59/200 | 231/500 | — | | | | |
+| 4 | 17 | 7/5 | 549/500 | 57/200 | 391/1000 | 16 | 13/8 | 117/100 | 39/100 | 11/20 |
+| 5 | 22 | 3/2 | 283/250 | 333/1000 | 427/1000 | — | | | | |
+| 6 | 28 | 73/50 | 1121/1000 | 157/500 | 77/200 | 27 | 159/100 | 146/125 | 19/50 | 47/100 |
+| 7 | 33 | 8/5 | 583/500 | 3/8 | 56/125 | — | | | | |
+| 8 | 39 | 38/25 | 571/500 | 341/1000 | 99/250 | 38 | 79/50 | 117/100 | 379/1000 | 9/20 |
+
+The pair certificates are stated at `k₀` only; larger `k` use the peel instances. Numerically
+neither family goes further. For grids at `k = 15` the best degree-three root budget misses by
+about four percent, and removing the grid's 4-cycles from the walk-tree count recovers a tenth of
+that. To first order the root's edges alone need `s (1 − 3s/k) ≥ 1`, which already forces
+`k ≥ 12`. Arbitrary heights below 16 need a different method.
 
 ## Credit
 
 The ingredients are not new, and neither is the positivity half:
+
+* the degree-sensitive deletion ratio, and the neighbour-pair refinement with its upper ratio, were
+  proposed by Codex (OpenAI), consulted on 2026-10-07
+  (`ai_research_notes/CODEX_GRID_ALL_HEIGHTS_2026-10-07.md` §3). The formalization, the
+  certificates other than degree four, and the `D − 2`-port treatment of smaller roots are this
+  repository's;
 
 * the connected-block (polymer) expansion and the tree-graph bound are standard; see Sokal,
   *Bounds on the complex zeros of (di)chromatic polynomials and Potts-model partition functions*

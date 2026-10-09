@@ -3,6 +3,7 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import GridGen.PolymerPeelCertificate
+import GridGen.PolymerPairCertificate
 import GridGen.PolymerGridDegree
 import ListColoring.BoxProd
 
@@ -16,13 +17,19 @@ the branch odd mass `o` (`s o ≤ s - 1`), while the full-degree root only has t
 
 | `Δ ≤` | 3 | 4 | 5 | 6 | 7 | 8 |
 |---|---|---|---|---|---|---|
-| here | 11 | 17 | 22 | 28 | 33 | 39 |
+| with neighbour pairs (`CertifiedPairAt`) | 11 | 16 | 22 | 27 | 33 | 38 |
+| degree-sensitive (`CertifiedPeelAt`) | 11 | 17 | 22 | 28 | 33 | 39 |
 | `SmallDegree.lean`, `DegreeFourTwenty.lean` | 15 | 20 | 26 | 32 | 37 | 43 |
 
 Each threshold is the least this certificate shape reaches (checked numerically, not in Lean).
 The degree-sensitive induction was proposed by Codex (OpenAI); see
-`ai_research_notes/CODEX_GRID_ALL_HEIGHTS_2026-10-07.md` §3, which also sketches `k ≥ 16` at
-degree four by keeping the neighbour-pair blocks at a degree-three root (not done here).
+`ai_research_notes/CODEX_GRID_ALL_HEIGHTS_2026-10-07.md` §3.
+
+The neighbour-pair refinement (`PolymerPairCertificate.lean`, also Codex's proposal) lowers
+degrees four, six and eight by one; at degree four that is `eccAt_of_degree_le_four_sixteen`, and
+every rectangle at `k ≥ 16`. Numerically the family stops there for grids: at `k = 15` the best
+degree-three root budget misses by about four percent, and excluding the grid's 4-cycles from the
+tree count recovers only a tenth of that gap.
 -/
 
 namespace GridGen.Polymer
@@ -57,6 +64,37 @@ theorem parityCert_peel_eight :
   refine ⟨by norm_num, by norm_num, by norm_num, ?_, ?_, by norm_num⟩ <;>
     norm_num [parityPower]
 
+/-- The neighbour-pair certificate at degree four and `k = 16`: activity `x = 13 / 128`. -/
+theorem parityCert_pair_four :
+    ParityCert 4 (13 / 128 : ℝ) (117 / 100) (39 / 100) (11 / 20) := by
+  refine ⟨by norm_num, by norm_num, by norm_num, ?_, ?_, by norm_num⟩ <;>
+    norm_num [parityPower]
+
+theorem certifiedPairAt_four_sixteen : CertifiedPairAt 4 16 := by
+  refine ⟨128 / 13, 13 / 128, 117 / 100, 39 / 100, 11 / 20, by norm_num, parityCert_pair_four,
+    by norm_num, by norm_num, ?_, ?_, ?_⟩ <;>
+    norm_num [parityPower, Nat.choose]
+
+theorem parityCert_pair_six :
+    ParityCert 6 (53 / 900 : ℝ) (146 / 125) (19 / 50) (47 / 100) := by
+  refine ⟨by norm_num, by norm_num, by norm_num, ?_, ?_, by norm_num⟩ <;>
+    norm_num [parityPower]
+
+theorem certifiedPairAt_six_twentySeven : CertifiedPairAt 6 27 := by
+  refine ⟨900 / 53, 53 / 900, 146 / 125, 19 / 50, 47 / 100, by norm_num, parityCert_pair_six,
+    by norm_num, by norm_num, ?_, ?_, ?_⟩ <;>
+    norm_num [parityPower, Nat.choose]
+
+theorem parityCert_pair_eight :
+    ParityCert 8 (79 / 1900 : ℝ) (117 / 100) (379 / 1000) (9 / 20) := by
+  refine ⟨by norm_num, by norm_num, by norm_num, ?_, ?_, by norm_num⟩ <;>
+    norm_num [parityPower]
+
+theorem certifiedPairAt_eight_thirtyEight : CertifiedPairAt 8 38 := by
+  refine ⟨1900 / 79, 79 / 1900, 117 / 100, 379 / 1000, 9 / 20, by norm_num, parityCert_pair_eight,
+    by norm_num, by norm_num, ?_, ?_, ?_⟩ <;>
+    norm_num [parityPower, Nat.choose]
+
 end GridGen.Polymer
 
 namespace SimpleGraph
@@ -77,6 +115,14 @@ theorem eccAt_of_degree_le_four_seventeen (hdeg : ∀ v, G.degree v ≤ 4) {k : 
   eccAt_of_certifiedPeelAt G hdeg (certifiedPeelAt_of_parityCert parityCert_peel_four
     (by norm_num) (by norm_num) (by norm_num) (by norm_num) hk)
 
+/-- **Every finite graph of maximum degree at most four is ECC at every list size at least 16.**
+The case `k = 16` is the neighbour-pair certificate. -/
+theorem eccAt_of_degree_le_four_sixteen (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 16 ≤ k) :
+    G.ECCAt k := by
+  rcases Nat.eq_or_lt_of_le hk with rfl | h
+  · exact eccAt_of_certifiedPairAt G hdeg (by norm_num) certifiedPairAt_four_sixteen
+  · exact eccAt_of_degree_le_four_seventeen G hdeg h
+
 /-- Every finite graph of maximum degree at most five is ECC at every list size at least 22. -/
 theorem eccAt_of_degree_le_five_twentyTwo (hdeg : ∀ v, G.degree v ≤ 5) {k : ℕ} (hk : 22 ≤ k) :
     G.ECCAt k :=
@@ -89,6 +135,14 @@ theorem eccAt_of_degree_le_six_twentyEight (hdeg : ∀ v, G.degree v ≤ 6) {k :
   eccAt_of_certifiedPeelAt G hdeg (certifiedPeelAt_of_parityCert parityCert_peel_six
     (by norm_num) (by norm_num) (by norm_num) (by norm_num) hk)
 
+/-- Every finite graph of maximum degree at most six is ECC at every list size at least 27 (the
+neighbour-pair certificate at `k = 27`). -/
+theorem eccAt_of_degree_le_six_twentySeven (hdeg : ∀ v, G.degree v ≤ 6) {k : ℕ} (hk : 27 ≤ k) :
+    G.ECCAt k := by
+  rcases Nat.eq_or_lt_of_le hk with rfl | h
+  · exact eccAt_of_certifiedPairAt G hdeg (by norm_num) certifiedPairAt_six_twentySeven
+  · exact eccAt_of_degree_le_six_twentyEight G hdeg h
+
 /-- Every finite graph of maximum degree at most seven is ECC at every list size at least 33. -/
 theorem eccAt_of_degree_le_seven_thirtyThree (hdeg : ∀ v, G.degree v ≤ 7) {k : ℕ}
     (hk : 33 ≤ k) : G.ECCAt k :=
@@ -100,6 +154,14 @@ theorem eccAt_of_degree_le_eight_thirtyNine (hdeg : ∀ v, G.degree v ≤ 8) {k 
     (hk : 39 ≤ k) : G.ECCAt k :=
   eccAt_of_certifiedPeelAt G hdeg (certifiedPeelAt_of_parityCert parityCert_peel_eight
     (by norm_num) (by norm_num) (by norm_num) (by norm_num) hk)
+
+/-- Every finite graph of maximum degree at most eight is ECC at every list size at least 38 (the
+neighbour-pair certificate at `k = 38`). -/
+theorem eccAt_of_degree_le_eight_thirtyEight (hdeg : ∀ v, G.degree v ≤ 8) {k : ℕ}
+    (hk : 38 ≤ k) : G.ECCAt k := by
+  rcases Nat.eq_or_lt_of_le hk with rfl | h
+  · exact eccAt_of_certifiedPairAt G hdeg (by norm_num) certifiedPairAt_eight_thirtyEight
+  · exact eccAt_of_degree_le_eight_thirtyNine G hdeg h
 
 end SimpleGraph
 
@@ -114,6 +176,14 @@ theorem ecc_boxProd_pathG_of_seventeen {k : ℕ} (hk : 17 ≤ k) (n m : ℕ) :
     (pathG n □ pathG m).ECCAt k := by
   classical
   apply SimpleGraph.eccAt_of_degree_le_four_seventeen _ _ hk
+  intro v
+  convert! GridGen.Polymer.degree_full_grid_le_four n m v
+
+/-- **Every rectangular grid is ECC at every list size at least 16.** -/
+theorem ecc_boxProd_pathG_of_sixteen {k : ℕ} (hk : 16 ≤ k) (n m : ℕ) :
+    (pathG n □ pathG m).ECCAt k := by
+  classical
+  apply SimpleGraph.eccAt_of_degree_le_four_sixteen _ _ hk
   intro v
   convert! GridGen.Polymer.degree_full_grid_le_four n m v
 

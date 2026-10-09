@@ -78,6 +78,8 @@
     "ListColoring.ecc_boxProd_pathG_of_twenty",
     "SimpleGraph.eccAt_of_degree_le_four_seventeen",
     "ListColoring.ecc_boxProd_pathG_of_seventeen",
+    "SimpleGraph.eccAt_of_degree_le_four_sixteen",
+    "ListColoring.ecc_boxProd_pathG_of_sixteen",
     "SimpleGraph.eccAt_of_degree_bound",
     "SimpleGraph.eccAt_of_maxDegree_bound",
     "SimpleGraph.eccAt_of_degree_le_three",

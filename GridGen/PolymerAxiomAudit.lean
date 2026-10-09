@@ -148,3 +148,23 @@ the lemmas that carry the argument. Each must use exactly the three standard axi
 /-- info: 'GridGen.Polymer.colConst_le_col_of_certifiedPeelAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms GridGen.Polymer.colConst_le_col_of_certifiedPeelAt
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_four_sixteen' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_four_sixteen
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_six_twentySeven' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_six_twentySeven
+
+/-- info: 'SimpleGraph.eccAt_of_degree_le_eight_thirtyEight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms SimpleGraph.eccAt_of_degree_le_eight_thirtyEight
+
+/-- info: 'ListColoring.ecc_boxProd_pathG_of_sixteen' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ListColoring.ecc_boxProd_pathG_of_sixteen
+
+/-- info: 'GridGen.Polymer.colConst_le_col_of_certifiedPairAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms GridGen.Polymer.colConst_le_col_of_certifiedPairAt

@@ -21,9 +21,12 @@ Instances:
 * the degree-sensitive variant (`PolymerPeel*.lean`), which needs the deletion ratio only at
   vertices of residual degree `≤ Δ - 1`: `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`,
   with every rectangular grid ECC at `k ≥ 17` (`ListColoring.ecc_boxProd_pathG_of_seventeen`,
-  `PeelDegree.lean`). The induction was proposed by Codex (OpenAI).
+  `PeelDegree.lean`). The induction was proposed by Codex (OpenAI);
+* the neighbour-pair variant (`PolymerPair*.lean`, `PolymerUpperRoot.lean`), also Codex's proposal:
+  `Δ ≤ 4, 6, 8` at `k ≥ 16, 27, 38`, and every rectangular grid at `k ≥ 16`
+  (`ListColoring.ecc_boxProd_pathG_of_sixteen`).
 
-Every instance also gives strict inequality when two adjacent lists differ, and the
+Every `CertifiedAt` instance (the first three bullets) also gives strict inequality when two adjacent lists differ, and the
 characterization of equality on connected graphs (`PolymerCertificate.lean`; stated at the
 uniform threshold in `PolymerStability.lean`). `PolymerAxiomAudit.lean` checks their axioms. The argument, module by module, is in
 `GridGen/README.md`.

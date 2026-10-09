@@ -410,6 +410,16 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
+    - declaration: SimpleGraph.eccAt_of_degree_le_four_sixteen
+      file: GridGen/PeelDegree.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: ListColoring.ecc_boxProd_pathG_of_sixteen
+      file: GridGen/PeelDegree.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
     - declaration: SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound
       file: GridGen/PolymerStability.lean
       sorry_count: 0
@@ -681,7 +691,12 @@ alignment:
         (GridGen.Polymer.CertifiedPeelAt, deletion ratio only at residual degree <= Delta - 1; idea
         proposed by Codex/OpenAI on 2026-10-07) lowers the thresholds to Delta <= 3..8 at
         k >= 11, 17, 22, 28, 33, 39: SimpleGraph.eccAt_of_degree_le_four_seventeen and every
-        rectangle as ListColoring.ecc_boxProd_pathG_of_seventeen (GridGen/PeelDegree.lean).
+        rectangle as ListColoring.ecc_boxProd_pathG_of_seventeen (GridGen/PeelDegree.lean). The
+        neighbour-pair variant (GridGen.Polymer.CertifiedPairAt: an upper deletion ratio proved
+        alongside, and the positive blocks {v, u, w} at a root kept; also Codex's proposal) gives
+        Delta <= 4, 6, 8 at k >= 16, 27, 38: SimpleGraph.eccAt_of_degree_le_four_sixteen and every
+        rectangle as ListColoring.ecc_boxProd_pathG_of_sixteen. Strictness is proved only at the
+        CertifiedAt thresholds.
     - source: "adapts Zhang-Dong arXiv:2609.08540, Theorem 5 (strictness at 23.41 Delta)"
       lean: SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound
       module: GridGen/PolymerStability.lean

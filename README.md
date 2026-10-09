@@ -36,20 +36,23 @@ Sharper certificates give `Δ ≤ 3` at `k ≥ 15`, `Δ ≤ 4` at `k ≥ 20`
 `ListColoring.ecc_boxProd_pathG_of_twenty`), and `Δ ≤ 5, 6, 7, 8` at `k ≥ 26, 32, 37, 43`.
 A degree-sensitive version of the same induction, which needs the deletion ratio only at vertices
 with at most `Δ − 1` remaining neighbours, improves every one of these by about four:
-`Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`, so **every rectangular grid is ECC at
-`k ≥ 17`** (`SimpleGraph.eccAt_of_degree_le_four_seventeen`,
-`ListColoring.ecc_boxProd_pathG_of_seventeen`, `GridGen/PeelDegree.lean`). That induction was
-proposed by Codex (OpenAI) when consulted on 2026-10-07.
-At every one of these thresholds, two adjacent vertices with different lists force strictly more
-colourings, so on a connected graph only the constant assignments attain `P(G,k)`.
+`Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`. Keeping the positive neighbour-pair
+blocks at a root, with an upper deletion ratio proved alongside, takes degrees four, six and eight
+one further, to `k ≥ 16, 27, 38`, so **every rectangular grid is ECC at `k ≥ 16`**
+(`SimpleGraph.eccAt_of_degree_le_four_sixteen`, `ListColoring.ecc_boxProd_pathG_of_sixteen`,
+`GridGen/PeelDegree.lean`). Both refinements were proposed by Codex (OpenAI) when consulted on
+2026-10-07. Numerically this family of arguments stops there for grids.
+At the first set of thresholds (`15, 20, 26, 32, 37, 43` and `⌈5.67Δ⌉`), two adjacent vertices with
+different lists force strictly more colourings, so on a connected graph only the constant
+assignments attain `P(G,k)`; strictness is not proved at the sharper thresholds.
 
-All of these are instances of one theorem with its numbers abstracted into a rational certificate
-(`GridGen/PolymerCertificate.lean`). The method is a finite interpolation between `P(G,k)` and
+All of these are instances of three theorems with their numbers abstracted into rational
+certificates (`GridGen/PolymerCertificate.lean` and its degree-sensitive and neighbour-pair variants). The method is a finite interpolation between `P(G,k)` and
 `P(G,L)`. Its positivity half coincides, constants included, with Dong–Koh's 2008 bound on real
 chromatic roots. The comparison with list assignments improves Zhang–Dong's `k ≥ 23.41Δ`
 (September 2026). [`GridGen/README.md`](GridGen/README.md) has the argument, the certificate
-table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 36 guarded axiom checks. None
-of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 16` stays open at heights `≥ 4`.
+table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 41 guarded axiom checks. None
+of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 15` stays open at heights `≥ 4`.
 
 ## Layout
 
@@ -59,7 +62,7 @@ of this is ECC at every list size, and the arbitrary-grid range `3 ≤ k ≤ 16`
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
-| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 17` by the degree-sensitive certificate, hence every rectangle at `k ≥ 17`); also the separate conditional lookback route for general heights |
+| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates, hence every rectangle at `k ≥ 16`); also the separate conditional lookback route for general heights |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
@@ -351,10 +354,10 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirty-six keystone theorems** — ten from the paper,
+  `comparator/Challenge.lean`, which claims **thirty-eight keystone theorems** — ten from the paper,
   three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
-  and height-three results, eight maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
-  subcubic graphs at `15`, maximum degree four at `20` and at `17`, each with its arbitrary-grid
+  and height-three results, ten maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
+  subcubic graphs at `15`, maximum degree four at `20`, `17` and `16`, each with its arbitrary-grid
   corollary, and the equality case), and five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
   thresholds at list sizes three, four and five), and two for `τ(K₂,ₙ) = O(√n)` —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
