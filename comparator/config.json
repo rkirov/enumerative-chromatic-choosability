@@ -90,7 +90,8 @@
     "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff",
     "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff",
     "SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sq_le",
-    "SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt"
+    "SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt",
+    "GridGen.Four.ecc_boxProd_pathG_three"
   ],
   "permitted_axioms": [
     "propext",

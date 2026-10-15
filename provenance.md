@@ -127,6 +127,23 @@ published construction.
   overlap-`k − 1` case (Lemma 6, reproved as `lemma6`). A targeted search on 2026-09-28 found no
   proof of the conjecture in the literature.
 
+* **Height-four grids at `k ≥ 8` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
+  `k ≥ 8` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
+  `k ≥ 16`, from the maximum-degree item below. The route is GridGen's column telescoping: one seam
+  inequality between consecutive columns for every horizon, reduced to the eight corners of a box of
+  pattern weights that the uniform transfer maps into itself, then proved per previous column by
+  factoring its successor count into four row rates, bounding each rate's log against the uniform
+  one, and averaging the state-dependent terms with fibre bounds. **Credits.** The reduction to the
+  box, the row-rate localisation, the reference-palette pattern term in its final form, the initial
+  inequality, the concavity reduction of the final certificate to fourteen vertices per `k`, and the
+  Lean development are this repository's (Claude, 2026-10-10 to 2026-10-16). **Codex (OpenAI),
+  consulted on 2026-10-15** (`ai_research_notes/CODEX_H4_SEAM_BOUNDS_2026-10-15.md`), supplied the
+  symbolic invariant box `ρ = 1 − 2/(k−2)³`, the one-sided error bounds for rows three and four
+  (`rate3_err`, `rate4_err` and their uniform counterparts), the observation that strict three-row
+  locality is false together with the defect-free tail bound that replaces it (`rate4_tail`), and
+  the first certificate at `k = 8`. Not checked against the literature beyond Kirov–Naimi's
+  Question 1, which asks this for every grid; `3 ≤ k ≤ 7` remains open at height four.
+
 * **Degree-sensitive deletion ratios (`GridGen/PolymerPeel*.lean`, `PeelDegree.lean`).** The same
   interpolation, but the deletion ratio `Z(U) ≥ q Z(U − v)` is required only when `v` has at most
   `Δ − 1` neighbours in `U`; every comparison the argument makes deletes a connected block outward

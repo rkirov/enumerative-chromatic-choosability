@@ -8,7 +8,8 @@ Two independent developments share this library.
    connectedness, planarity or bipartiteness. Complete, with no unproved step, axiom-audited.
 2. **The column-lookback reduction** (`Column`, `Graph`, `Telescope`, `Uniform`, `Main`,
    `Explicit`, `Three`): `H □ P_n` is `k`-ECC from a two-step seam inequality and an initial
-   inequality, both stated as `Prop`s; proved at height three from `Grid3/`, open at height ≥ 4.
+   inequality, both stated as `Prop`s; proved at height three from `Grid3/`, and at height four
+   for `k ≥ 8` in `Four/` (see [`Four/README.md`](Four/README.md)); open at heights ≥ 5.
    See `ai_research_notes/GRID_REVIEW_2026-09-02.md` §5.6.
 
 The rest of this file is about the polymer route.
@@ -34,11 +35,12 @@ The rest of this file is about the polymer route.
 `PolymerStability.lean` restates the last two at the uniform threshold under the names
 `SimpleGraph.colConst_lt_col_of_degree_bound_of_adj_lists_ne` and
 `SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound`. For comparison, the ceiling bound gives
-18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 41 guarded
+18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 42 guarded
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
-is claimed optimal. For grids the list sizes `3 ≤ k ≤ 15` stay open at heights `≥ 4`.
+is claimed optimal. For grids the list sizes `3 ≤ k ≤ 7` stay open at height four (`Four/`
+proves `k ≥ 8`) and `3 ≤ k ≤ 15` at heights `≥ 5`.
 
 ## The argument
 

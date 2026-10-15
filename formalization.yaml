@@ -49,7 +49,8 @@ project:
     at k = 3 an entropy (Parry-Renyi) argument whose seam couplings are 22,157 kernel-checked
     records. (3) Maximum-degree thresholds for the list colour function: every finite graph is
     ECC at every k >= ceil(5.67 Delta); maximum degree at most 3 suffices at k >= 15 and at most
-    4 at k >= 20, so every rectangular grid is ECC at every k >= 20; at these thresholds two
+    4 at k >= 20, so every rectangular grid is ECC at every k >= 20 (degree-sensitive and
+    neighbour-pair refinements, proposed by Codex/OpenAI, lower these to k >= 16); at these thresholds two
     adjacent vertices with different lists force strictly more colourings, so on a connected
     graph only constant assignments attain equality. This adapts Zhang and Dong's 2026
     interpolation method (their threshold is 23.41 Delta), and its limiting constant coincides
@@ -64,7 +65,10 @@ project:
     Shin-To (arXiv:2202.03431) this proves their Conjecture 5, tau(K_{2,n}) = Theta(sqrt n), which
     both that paper and arXiv:2207.04831 state as open; the previous upper bound was linear. The
     proof is AM-GM within four classes of hub-colour pairs and a four-regime real inequality closed
-    by tangent-line bounds of the exponential.
+    by tangent-line bounds of the exponential. (6) Height four of Question 1: every 4 x (n+1) grid is
+    ECC at every k >= 8, by a column-to-column seam inequality proved for 8 <= k <= 15 from a
+    row-by-row bound on each previous column's log count ratio, fibre averaging, and an invariant
+    box of pattern weights (box and one-sided row error bounds due to Codex/OpenAI); k >= 16 is (3).
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
     nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
@@ -264,8 +268,8 @@ status:
     Kirov-Naimi's Question 1 (open) and the known but unformalized negative remark under it,
     both asserted with sorry, and proves Question 2 false from NonPersistence/. Those two are
     the only sorries in the repository. Not formalized: the Dong-Zhang 2023 threshold
-    |E(G)| - 1, the Chi et al. 2026 theta-graph classification, and the rectangular grids at
-    list sizes 3 to 19 with both sides at least 4.
+    |E(G)| - 1, the Chi et al. 2026 theta-graph classification, and the rectangular grids with
+    both sides at least 4 at list sizes 3 to 7 (height four) and 3 to 15 (both sides at least 5).
   sorry_count: 2
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -372,6 +376,11 @@ status:
       comparator_config: comparator/config.json
     - declaration: ListColoring.ecc_boxProd_pathG_two_of_three
       file: Grid3/Three/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
+    - declaration: GridGen.Four.ecc_boxProd_pathG_three
+      file: GridGen/Four/Main.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
@@ -678,6 +687,14 @@ alignment:
         Every 3 x (n+1) grid is ECC at every k >= 3; ListColoring.ecc_boxProd_pathG_two (k >= 5)
         and ListColoring.ecc_boxProd_pathG_two_of_four (k >= 4) are in Grid3/Statements.lean, with
         the count ListColoring.colConst_boxProd_pathG_two.
+    - source: "original to this repository, with error bounds by Codex/OpenAI (Question 1 at height four, k >= 8)"
+      lean: GridGen.Four.ecc_boxProd_pathG_three
+      module: GridGen/Four/Main.lean
+      status: proved
+      note: >-
+        Every 4 x (n+1) grid is ECC at every k >= 8. For 8 <= k <= 15: GridGen.Four.seam4Holds and
+        GridGen.Four.init4Holds feed GridGen's telescoping (GridGen.Four.ecc_pathG_three_of_holds);
+        k >= 16 is ListColoring.ecc_boxProd_pathG_of_sixteen.
     - source: "adapts Zhang-Dong arXiv:2609.08540; positivity half credited to Dong-Koh 2008"
       lean: SimpleGraph.eccAt_of_degree_bound
       module: GridGen/MaximumDegree.lean
