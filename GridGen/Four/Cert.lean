@@ -33,6 +33,17 @@ noncomputable def Fval (k : ℕ) (μ2 μ3 μ4 : ℝ) : ℝ :=
         + ku4e ((k : ℝ) - 1) * qk k + ku4b ((k : ℝ) - 1))
     - eta k * (1 + 4 * qk k) * (μ2 + 2 * μ3 + μ4)
 
+/-- The averaged gain with the pattern term capped at `(1-ρ)/ρ`. -/
+noncomputable def Fcap (k : ℕ) (μ2 μ3 μ4 : ℝ) : ℝ :=
+  log (1 + μ2 / kA ((k : ℝ) - 1)) + log (1 + μ3 / kA ((k : ℝ) - 1))
+    + log (1 + μ4 / kA ((k : ℝ) - 1))
+    - 2 * qk k * (μ2 + μ3 + μ4) / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1))
+    - J3 μ2 μ3 * ((μ2 + 1) * (μ3 + 1) / (((k : ℝ) - 1) ^ 2 * ((k : ℝ) - 1 - 1) ^ 2)
+        + ku3 ((k : ℝ) - 1) * qk k)
+    - J4 μ2 μ3 μ4 * ((μ3 + 2) * (μ4 + 1) / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1) ^ 3)
+        + ku4e ((k : ℝ) - 1) * qk k + ku4b ((k : ℝ) - 1))
+    - (1 - rho k) / rho k
+
 /-- The polynomial lower bound, with the indicators as parameters. -/
 noncomputable def Fg (A n q η u3 u4e u4b j3 j4 a b c : ℝ) : ℝ :=
   (a / A - a ^ 2 / (2 * A ^ 2)) + (b / A - b ^ 2 / (2 * A ^ 2)) + (c / A - c ^ 2 / (2 * A ^ 2))

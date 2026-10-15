@@ -70,59 +70,66 @@ theorem GU_nonneg {k : ℕ} (hk : 5 ≤ k) {w : Wt} (hw : InBox k w) (t : T4) : 
     have := card_ge_of_erase (card_range k) i; omega
   exact (G_pos hk hw (u _) (u _) (u _) (u _)).le
 
-/-- The decomposition of the gain into a constant and the state bits. -/
-theorem Lam_eq (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) :
-    Lam k B₁ B₂ B₃ B₄ s =
+/-- The decomposition of the capped gain into a constant and the state bits. -/
+theorem Lamc_eq (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) :
+    Lamc k B₁ B₂ B₃ B₄ s =
       (log (1 + mu k B₁ B₂ / kA ((k : ℝ) - 1)) + log (1 + mu k B₂ B₃ / kA ((k : ℝ) - 1))
         + log (1 + mu k B₃ B₄ / kA ((k : ℝ) - 1))
         - J3 (mu k B₁ B₂) (mu k B₂ B₃) * ((mu k B₁ B₂ + 1) * (mu k B₂ B₃ + 1)
             / (((k : ℝ) - 1) ^ 2 * ((k : ℝ) - 1 - 1) ^ 2))
         - J4 (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄) * ((mu k B₂ B₃ + 2) * (mu k B₃ B₄ + 1)
-            / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1) ^ 3) + ku4b ((k : ℝ) - 1))
-        - eta k * (mu k B₁ B₂ + 2 * mu k B₂ B₃ + mu k B₃ B₄))
+            / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1) ^ 3) + ku4b ((k : ℝ) - 1)))
       - 1 / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1)) * (zz B₁ B₂ (r1 s) (r2 s) + zz B₂ B₃ (r2 s) (r3 s)
           + zz B₃ B₄ (r3 s) (r4 s))
       - J3 (mu k B₁ B₂) (mu k B₂ B₃) * ku3 ((k : ℝ) - 1) * c13 s
       - J4 (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄) * ku4e ((k : ℝ) - 1) * c24 s
-      + (kβ0 ((k : ℝ) - 1) - kb3 ((k : ℝ) - 1) - kb4 ((k : ℝ) - 1) - 4 * eta k)
+      + (kβ0 ((k : ℝ) - 1) - kb3 ((k : ℝ) - 1) - kb4 ((k : ℝ) - 1))
           * (hb B₁ (r1 s) + hb B₂ (r2 s) + hb B₃ (r3 s) + hb B₄ (r4 s))
-      - 4 * eta k * (xin B₁ B₂ (r1 s) + xin B₃ B₂ (r3 s) + xin B₄ B₂ (r4 s)) := by
-  unfold Lam countBound
+      - min (eta k * PS k B₁ B₂ B₃ B₄ s) ((1 - rho k) / rho k) := by
+  unfold Lamc CB countBound
   ring
 
 /-- The bonus coefficient is nonnegative. -/
-theorem bonus_coef {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) :
+theorem bonus_coef {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) :
     0 ≤ kβ0 ((k : ℝ) - 1) - kb3 ((k : ℝ) - 1) - kb4 ((k : ℝ) - 1) - 4 * eta k := by
   interval_cases k <;> norm_num [kβ0, kb3, kb4, ku3, ku4e, ku4b, kt, kA, eta, rho]
 
 /-- Signs of the constants. -/
-theorem consts_sign {k : ℕ} (hk8 : 8 ≤ k) :
+theorem consts_sign {k : ℕ} (hk7 : 7 ≤ k) :
     0 ≤ 1 / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1)) ∧ 0 ≤ ku3 ((k : ℝ) - 1) ∧
       0 ≤ ku4e ((k : ℝ) - 1) ∧ 0 ≤ eta k ∧ 0 < qk k ∧
-      1 / rho k = ((k - 3 : ℕ) : ℝ) * qk k := by
-  have hk8' : (8 : ℝ) ≤ k := by exact_mod_cast hk8
+      1 / rho k = ((k - 3 : ℕ) : ℝ) * qk k ∧ 0 ≤ (1 - rho k) / rho k := by
+  have hk7' : (7 : ℝ) ≤ k := by exact_mod_cast hk7
   have hk5 : 5 ≤ k := by omega
   have hρ := rho_pos' hk5
   have hm : (0 : ℝ) < ((k - 3 : ℕ) : ℝ) := by
     have : 0 < k - 3 := by omega
     exact_mod_cast this
   have ht0 : 0 < kt ((k : ℝ) - 1) := by unfold kt kA; apply div_pos <;> nlinarith
-  refine ⟨div_nonneg zero_le_one (mul_nonneg (by linarith) (by linarith)), ?_, ?_, ?_, ?_, ?_⟩
+  have hc : 0 ≤ (1 - rho k) / rho k := div_nonneg (by linarith [rho_le_one k hk5]) hρ.le
+  refine ⟨div_nonneg zero_le_one (mul_nonneg (by linarith) (by linarith)), ?_, ?_, ?_, ?_, ?_, hc⟩
   · unfold ku3; apply div_nonneg (by linarith); positivity
   · unfold ku4e; apply div_nonneg zero_le_one; positivity
-  · unfold eta; exact div_nonneg (div_nonneg (by linarith [rho_le_one k hk5]) hρ.le) hm.le
+  · unfold eta; exact div_nonneg hc hm.le
   · unfold qk; positivity
   · unfold qk; field_simp
 
-/-- **The height-four seam inequality for `8 ≤ k ≤ 15`.** -/
-theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k := by
-  intro w hw X₁ X₂ X₃ X₄ B₁ B₂ B₃ B₄ hX₁ hX₂ hX₃ hX₄ hB₁ hB₂ hB₃ hB₄
+/-- **The seam inequality from either certificate**, for one system of lists. -/
+theorem seam_of_cert {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+    {X₁ X₂ X₃ X₄ B₁ B₂ B₃ B₄ : Finset ℕ}
+    (hX₁ : k - 1 ≤ X₁.card) (hX₂ : k - 1 ≤ X₂.card) (hX₃ : k - 1 ≤ X₃.card)
+    (hX₄ : k - 1 ≤ X₄.card)
+    (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
+    (hcert : 0 ≤ Fval k (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄)
+      ∨ 0 ≤ Fcap k (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄)) :
+    ∑ s ∈ sts X₁ X₂ X₃ X₄, GU k w s ≤ ∑ s ∈ sts X₁ X₂ X₃ X₄, GB w B₁ B₂ B₃ B₄ s := by
   have hk5 : 5 ≤ k := by omega
   have hρ := rho_pos' hk5
   have hm : (0 : ℝ) < ((k - 3 : ℕ) : ℝ) := by
     have : 0 < k - 3 := by omega
     exact_mod_cast this
-  obtain ⟨ha0, hku3, hku4e, hη0, hq0, hRq⟩ := consts_sign hk8
+  obtain ⟨ha0, hku3, hku4e, hη0, hq0, hRq, hc0⟩ := consts_sign hk7
+  have hβ := bonus_coef hk7 hk15
   set m : ℝ := ((k - 3 : ℕ) : ℝ) with hm_def
   set Ω := sts X₁ X₂ X₃ X₄ with hΩ
   set u : T4 → ℝ := GU k w with hu
@@ -133,23 +140,24 @@ theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k :=
     rw [← hRq]; exact GU_ratio hk5 hw (proper_of_mem_sts ht) (proper_of_mem_sts ht')
   -- the per-colour fibres
   have f1 : ∀ c, m * ∑ t ∈ Ω.filter (fun t => r1 t = c), u t ≤ (m * q) * ∑ t ∈ Ω, u t :=
-    fun c => fibre_sts1 u hu0 (fun t => r1 t = c) hX₁.1 hX₂.1 hX₃.1 hX₄.1 hR0 hR (fun _ => c)
+    fun c => fibre_sts1 u hu0 (fun t => r1 t = c) hX₁ hX₂ hX₃ hX₄ hR0 hR (fun _ => c)
       (fun _ _ => rfl) (fun _ h => h)
   have f2 : ∀ c, m * ∑ t ∈ Ω.filter (fun t => r2 t = c), u t ≤ (m * q) * ∑ t ∈ Ω, u t :=
-    fun c => fibre_sts2 u hu0 (fun t => r2 t = c) hX₁.1 hX₂.1 hX₃.1 hX₄.1 hR0 hR (fun _ => c)
+    fun c => fibre_sts2 u hu0 (fun t => r2 t = c) hX₁ hX₂ hX₃ hX₄ hR0 hR (fun _ => c)
       (fun _ _ => rfl) (fun _ h => h)
   have f3 : ∀ c, m * ∑ t ∈ Ω.filter (fun t => r3 t = c), u t ≤ (m * q) * ∑ t ∈ Ω, u t :=
-    fun c => fibre_sts3 u hu0 (fun t => r3 t = c) hX₁.1 hX₂.1 hX₃.1 hX₄.1 hR0 hR (fun _ => c)
+    fun c => fibre_sts3 u hu0 (fun t => r3 t = c) hX₁ hX₂ hX₃ hX₄ hR0 hR (fun _ => c)
       (fun _ _ => rfl) (fun _ h => h)
   have f4 : ∀ c, m * ∑ t ∈ Ω.filter (fun t => r4 t = c), u t ≤ (m * q) * ∑ t ∈ Ω, u t :=
-    fun c => fibre_sts4 u hu0 (fun t => r4 t = c) hX₁.1 hX₂.1 hX₃.1 hX₄.1 hR0 hR (fun _ => c)
+    fun c => fibre_sts4 u hu0 (fun t => r4 t = c) hX₁ hX₂ hX₃ hX₄ hR0 hR (fun _ => c)
       (fun _ _ => rfl) (fun _ h => h)
   -- summing the bound for one state
-  have hsum : ∑ s ∈ Ω, u s * (1 + Lam k B₁ B₂ B₃ B₄ s) ≤ ∑ s ∈ Ω, GB w B₁ B₂ B₃ B₄ s :=
-    Finset.sum_le_sum (fun s hs => state_bound hk8 hk15 hw hB₁ hB₂ hB₃ hB₄ (proper_of_mem_sts hs))
-  suffices h : 0 ≤ ∑ s ∈ Ω, u s * Lam k B₁ B₂ B₃ B₄ s by
-    have e : ∑ s ∈ Ω, u s * (1 + Lam k B₁ B₂ B₃ B₄ s)
-        = ∑ s ∈ Ω, u s + ∑ s ∈ Ω, u s * Lam k B₁ B₂ B₃ B₄ s := by
+  have hsum : ∑ s ∈ Ω, u s * (1 + Lamc k B₁ B₂ B₃ B₄ s) ≤ ∑ s ∈ Ω, GB w B₁ B₂ B₃ B₄ s :=
+    Finset.sum_le_sum (fun s hs => state_bound_cap hk7 hk15 hw hB₁ hB₂ hB₃ hB₄
+      (proper_of_mem_sts hs))
+  suffices h : 0 ≤ ∑ s ∈ Ω, u s * Lamc k B₁ B₂ B₃ B₄ s by
+    have e : ∑ s ∈ Ω, u s * (1 + Lamc k B₁ B₂ B₃ B₄ s)
+        = ∑ s ∈ Ω, u s + ∑ s ∈ Ω, u s * Lamc k B₁ B₂ B₃ B₄ s := by
       rw [← Finset.sum_add_distrib]; exact Finset.sum_congr rfl (fun s _ => by ring)
     linarith
   -- names for the constants
@@ -160,12 +168,12 @@ theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k :=
         + log (1 + M4 / kA ((k : ℝ) - 1))
         - J3 M2 M3 * ((M2 + 1) * (M3 + 1) / (((k : ℝ) - 1) ^ 2 * ((k : ℝ) - 1 - 1) ^ 2))
         - J4 M2 M3 M4 * ((M3 + 2) * (M4 + 1) / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1) ^ 3)
-            + ku4b ((k : ℝ) - 1))
-        - eta k * (M2 + 2 * M3 + M4) with hK0
+            + ku4b ((k : ℝ) - 1)) with hK0
   set a := 1 / (((k : ℝ) - 1) * ((k : ℝ) - 1 - 1)) with ha
   set g3 := J3 M2 M3 * ku3 ((k : ℝ) - 1) with hg3
   set g4 := J4 M2 M3 M4 * ku4e ((k : ℝ) - 1) with hg4
-  set βH := kβ0 ((k : ℝ) - 1) - kb3 ((k : ℝ) - 1) - kb4 ((k : ℝ) - 1) - 4 * eta k with hβH
+  set βc := kβ0 ((k : ℝ) - 1) - kb3 ((k : ℝ) - 1) - kb4 ((k : ℝ) - 1) with hβc
+  set cap := (1 - rho k) / rho k with hcap
   set W := ∑ s ∈ Ω, u s with hW
   -- the bit sums
   set Z2 := ∑ s ∈ Ω, u s * zz B₁ B₂ (r1 s) (r2 s) with hZ2
@@ -175,13 +183,29 @@ theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k :=
   set C24 := ∑ s ∈ Ω, u s * c24 s with hC24
   set HH := ∑ s ∈ Ω, u s * (hb B₁ (r1 s) + hb B₂ (r2 s) + hb B₃ (r3 s) + hb B₄ (r4 s)) with hHH
   set XX := ∑ s ∈ Ω, u s * (xin B₁ B₂ (r1 s) + xin B₃ B₂ (r3 s) + xin B₄ B₂ (r4 s)) with hXX
-  have e : ∑ s ∈ Ω, u s * Lam k B₁ B₂ B₃ B₄ s
-      = K0 * W - a * Z2 - a * Z3 - a * Z4 - g3 * C13 - g4 * C24 + βH * HH - 4 * eta k * XX := by
-    rw [hW, hZ2, hZ3, hZ4, hC13, hC24, hHH, hXX]
+  set MM := ∑ s ∈ Ω, u s * min (eta k * PS k B₁ B₂ B₃ B₄ s) cap with hMM
+  have e : ∑ s ∈ Ω, u s * Lamc k B₁ B₂ B₃ B₄ s
+      = K0 * W - a * Z2 - a * Z3 - a * Z4 - g3 * C13 - g4 * C24 + βc * HH - MM := by
+    rw [hW, hZ2, hZ3, hZ4, hC13, hC24, hHH, hMM]
     simp only [Finset.mul_sum, ← Finset.sum_sub_distrib, ← Finset.sum_add_distrib]
     refine Finset.sum_congr rfl (fun s _ => ?_)
-    rw [Lam_eq]; ring
+    rw [Lamc_eq]; ring
   rw [e]
+  have hW0 : 0 ≤ W := Finset.sum_nonneg (fun s _ => hu0 s)
+  -- the cap, both ways
+  have hMMc : MM ≤ cap * W := by
+    rw [hMM, hW, Finset.mul_sum]
+    exact Finset.sum_le_sum (fun s _ => by
+      rw [mul_comm cap]; exact mul_le_mul_of_nonneg_left (min_le_right _ _) (hu0 s))
+  have hMMη : MM ≤ eta k * ((M2 + 2 * M3 + M4) * W + 4 * HH + 4 * XX) := by
+    have : eta k * ((M2 + 2 * M3 + M4) * W + 4 * HH + 4 * XX)
+        = ∑ s ∈ Ω, u s * (eta k * PS k B₁ B₂ B₃ B₄ s) := by
+      rw [hW, hHH, hXX]
+      simp only [Finset.mul_sum, ← Finset.sum_add_distrib]
+      refine Finset.sum_congr rfl (fun s _ => ?_)
+      unfold PS; ring
+    rw [this, hMM]
+    exact Finset.sum_le_sum (fun s _ => mul_le_mul_of_nonneg_left (min_le_left _ _) (hu0 s))
   -- bounds on the bit sums
   have card_d : ∀ {B C : Finset ℕ}, B.card = k → ((B \ C).card : ℝ) = mu k B C :=
     fun hB => card_sdiff_mu hB _
@@ -210,16 +234,15 @@ theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k :=
     have : ∑ s ∈ Ω, u s * c13 s = ∑ s ∈ Ω.filter (fun t => r1 t = r3 t), u s := by
       rw [← sum_mul_ite]; rfl
     rw [this]
-    exact fibre_sts1 u hu0 (fun t => r1 t = r3 t) hX₁.1 hX₂.1 hX₃.1 hX₄.1 hR0 hR r3
+    exact fibre_sts1 u hu0 (fun t => r1 t = r3 t) hX₁ hX₂ hX₃ hX₄ hR0 hR r3
       (fun _ _ => rfl) (fun _ h => h)
   have bC24 : m * C24 ≤ (m * q) * W := by
     rw [hC24]
     have : ∑ s ∈ Ω, u s * c24 s = ∑ s ∈ Ω.filter (fun t => r2 t = r4 t), u s := by
       rw [← sum_mul_ite]; rfl
     rw [this]
-    exact fibre_sts2 u hu0 (fun t => r2 t = r4 t) hX₁.1 hX₂.1 hX₃.1 hX₄.1 hR0 hR r4
+    exact fibre_sts2 u hu0 (fun t => r2 t = r4 t) hX₁ hX₂ hX₃ hX₄ hR0 hR r4
       (fun _ _ => rfl) (fun _ h => h)
-  have hW0 : 0 ≤ W := Finset.sum_nonneg (fun s _ => hu0 s)
   have bXX : m * XX ≤ (m * q) * (M2 + 2 * M3 + M4) * W := by
     have e1 : XX = ∑ s ∈ Ω, u s * (if r1 s ∈ B₁ \ B₂ then 1 else 0)
         + ∑ s ∈ Ω, u s * (if r3 s ∈ B₃ \ B₂ then 1 else 0)
@@ -243,14 +266,6 @@ theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k :=
     unfold hb; split_ifs <;> norm_num
   have bHH : 0 ≤ HH := Finset.sum_nonneg (fun s _ => mul_nonneg (hu0 s)
     (add_nonneg (add_nonneg (add_nonneg (hbn _ _) (hbn _ _)) (hbn _ _)) (hbn _ _)))
-  -- the certificate
-  have hF := Fval_nonneg hk8 hk15 (mu_cases hB₁) (mu_cases hB₂) (mu_cases hB₃)
-    (mu_le B₁ B₂) (mu_le B₂ B₃) (mu_le B₃ B₄)
-  have hFW : 0 ≤ m * (W * Fval k M2 M3 M4) := mul_nonneg hm.le (mul_nonneg hW0 hF)
-  have eF : m * (W * Fval k M2 M3 M4) = m * K0 * W - a * ((m * q) * (2 * M2) * W)
-      - a * ((m * q) * (2 * M3) * W) - a * ((m * q) * (2 * M4) * W) - g3 * ((m * q) * W)
-      - g4 * ((m * q) * W) - 4 * eta k * ((m * q) * (M2 + 2 * M3 + M4) * W) := by
-    rw [hK0, ha, hg3, hg4, hq]; unfold Fval; ring
   have hJ3 : 0 ≤ J3 M2 M3 := by unfold J3; split_ifs <;> norm_num
   have hJ4 : 0 ≤ J4 M2 M3 M4 := by unfold J4; split_ifs <;> norm_num
   have hg30 : 0 ≤ g3 := mul_nonneg hJ3 hku3
@@ -260,15 +275,42 @@ theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k :=
   have i3 := mul_le_mul_of_nonneg_left bZ4 ha0
   have i4 := mul_le_mul_of_nonneg_left bC13 hg30
   have i5 := mul_le_mul_of_nonneg_left bC24 hg40
-  have i6 := mul_le_mul_of_nonneg_left bXX (by linarith : (0 : ℝ) ≤ 4 * eta k)
-  have i7 : 0 ≤ m * (βH * HH) := mul_nonneg hm.le (mul_nonneg (bonus_coef hk8 hk15) bHH)
-  have key : 0 ≤ m * (K0 * W - a * Z2 - a * Z3 - a * Z4 - g3 * C13 - g4 * C24 + βH * HH
-      - 4 * eta k * XX) := by
-    have : m * (K0 * W - a * Z2 - a * Z3 - a * Z4 - g3 * C13 - g4 * C24 + βH * HH
-        - 4 * eta k * XX) = m * K0 * W - a * (m * Z2) - a * (m * Z3) - a * (m * Z4)
-          - g3 * (m * C13) - g4 * (m * C24) + m * (βH * HH) - 4 * eta k * (m * XX) := by ring
-    rw [this]
-    linarith only [i1, i2, i3, i4, i5, i6, i7, eF, hFW]
-  exact (mul_nonneg_iff_of_pos_left hm).mp key
+  have eS : m * (K0 * W - a * Z2 - a * Z3 - a * Z4 - g3 * C13 - g4 * C24 + βc * HH - MM)
+      = m * K0 * W - a * (m * Z2) - a * (m * Z3) - a * (m * Z4)
+        - g3 * (m * C13) - g4 * (m * C24) + m * (βc * HH) - m * MM := by ring
+  suffices key : 0 ≤ m * (K0 * W - a * Z2 - a * Z3 - a * Z4 - g3 * C13 - g4 * C24 + βc * HH - MM)
+    from (mul_nonneg_iff_of_pos_left hm).mp key
+  rw [eS]
+  rcases hcert with hF | hF
+  · -- the uncapped certificate
+    have i6 := mul_le_mul_of_nonneg_left bXX (by linarith : (0 : ℝ) ≤ 4 * eta k)
+    have i7 : 0 ≤ m * ((βc - 4 * eta k) * HH) := mul_nonneg hm.le (mul_nonneg hβ bHH)
+    have i8 := mul_le_mul_of_nonneg_left hMMη hm.le
+    have hFW : 0 ≤ m * (W * Fval k M2 M3 M4) := mul_nonneg hm.le (mul_nonneg hW0 hF)
+    have eF : m * (W * Fval k M2 M3 M4) = m * K0 * W - a * ((m * q) * (2 * M2) * W)
+        - a * ((m * q) * (2 * M3) * W) - a * ((m * q) * (2 * M4) * W) - g3 * ((m * q) * W)
+        - g4 * ((m * q) * W) - m * (eta k * ((M2 + 2 * M3 + M4) * W))
+        - 4 * eta k * ((m * q) * (M2 + 2 * M3 + M4) * W) := by
+      rw [hK0, ha, hg3, hg4, hq]; unfold Fval; ring
+    have e7 : m * (βc * HH) - m * (eta k * ((M2 + 2 * M3 + M4) * W + 4 * HH + 4 * XX))
+        = m * ((βc - 4 * eta k) * HH) - m * (eta k * ((M2 + 2 * M3 + M4) * W))
+          - 4 * eta k * (m * XX) := by ring
+    linarith only [i1, i2, i3, i4, i5, i6, i7, i8, hFW, eF, e7]
+  · -- the capped certificate
+    have i7 : 0 ≤ m * (βc * HH) := mul_nonneg hm.le (mul_nonneg (by linarith) bHH)
+    have i8 := mul_le_mul_of_nonneg_left hMMc hm.le
+    have hFW : 0 ≤ m * (W * Fcap k M2 M3 M4) := mul_nonneg hm.le (mul_nonneg hW0 hF)
+    have eF : m * (W * Fcap k M2 M3 M4) = m * K0 * W - a * ((m * q) * (2 * M2) * W)
+        - a * ((m * q) * (2 * M3) * W) - a * ((m * q) * (2 * M4) * W) - g3 * ((m * q) * W)
+        - g4 * ((m * q) * W) - m * (cap * W) := by
+      rw [hK0, ha, hg3, hg4, hq, hcap]; unfold Fcap; ring
+    linarith only [i1, i2, i3, i4, i5, i7, i8, hFW, eF]
+
+/-- **The height-four seam inequality for `8 ≤ k ≤ 15`.** -/
+theorem seam4Holds {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) : Seam4Holds k := by
+  intro w hw X₁ X₂ X₃ X₄ B₁ B₂ B₃ B₄ hX₁ hX₂ hX₃ hX₄ hB₁ hB₂ hB₃ hB₄
+  exact seam_of_cert (by omega) hk15 hw hX₁.1 hX₂.1 hX₃.1 hX₄.1 hB₁ hB₂ hB₃ hB₄
+    (Or.inl (Fval_nonneg hk8 hk15 (mu_cases hB₁) (mu_cases hB₂) (mu_cases hB₃)
+      (mu_le B₁ B₂) (mu_le B₂ B₃) (mu_le B₃ B₄)))
 
 end GridGen.Four

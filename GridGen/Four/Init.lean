@@ -8,7 +8,7 @@ import GridGen.Four.Relabel
 /-!
 # Height four: the initial inequality
 
-`Init4Holds k` for every `k ≥ 8`: a column of `k`-lists `X₁, …, X₄`, weighted by pattern, weighs
+`Init4Holds k` for every `k ≥ 7`: a column of `k`-lists `X₁, …, X₄`, weighted by pattern, weighs
 at least the uniform column `range k`.
 
 * **Relabelling.** The uniform column weighs as much as the constant column `(P, P, P, P)` for
@@ -21,7 +21,7 @@ at least the uniform column `range k`.
 * **Pattern loss.** `pattern_log_ge` against `(P, P, P, P)` costs at most
   `(1-ρ)/ρ · 2S/(k-3) = 4S/(((k-2)³-2)(k-3))`, since `Σ|Xᵢ ∖ X₂| ≤ μ₂ + 2μ₃ + μ₄`.
 
-The gain dominates the loss for every `k ≥ 8` (`init_rate`).
+The gain dominates the loss for every `k ≥ 7` (`init_rate`).
 -/
 
 namespace GridGen.Four
@@ -122,29 +122,29 @@ theorem card_sts_le {k : ℕ} {X₁ X₂ X₃ X₄ : Finset ℕ} (h₁ : X₁.ca
 
 /-! ### The rate comparison -/
 
-/-- **Gain beats loss.** For `k ≥ 8`, `(k-2)/k³ ≥ 4/(((k-2)³-2)(k-3))`, as a statement with the
+/-- **Gain beats loss.** For `k ≥ 7`, `(k-2)/k³ ≥ 4/(((k-2)³-2)(k-3))`, as a statement with the
 mismatch `S ≥ 0` multiplied in. -/
-theorem init_rate {x S : ℝ} (hx : 8 ≤ x) (hS : 0 ≤ S) :
+theorem init_rate {x S : ℝ} (hx : 7 ≤ x) (hS : 0 ≤ S) :
     4 * S / (((x - 2) ^ 3 - 2) * (x - 3)) ≤ (x - 2) * S / x ^ 3 := by
   have hd : 0 < ((x - 2) ^ 3 - 2) * (x - 3) := by
-    apply mul_pos _ (by linarith); nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 6)
-      (by linarith : (6 : ℝ) ≤ x - 2) 3]
+    apply mul_pos _ (by linarith); nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5)
+      (by linarith : (5 : ℝ) ≤ x - 2) 3]
   rw [div_le_div_iff₀ hd (by positivity)]
-  -- `4x³ ≤ (x-2)((x-2)³-2)(x-3)`, with `y = x - 8 ≥ 0`
+  -- `4x³ ≤ (x-2)((x-2)³-2)(x-3)`, with `y = x - 7 ≥ 0`
   have hp : 4 * x ^ 3 ≤ (x - 2) * (((x - 2) ^ 3 - 2) * (x - 3)) := by
-    obtain ⟨y, hy, rfl⟩ : ∃ y, 0 ≤ y ∧ x = y + 8 := ⟨x - 8, by linarith, by ring⟩
+    obtain ⟨y, hy, rfl⟩ : ∃ y, 0 ≤ y ∧ x = y + 7 := ⟨x - 7, by linarith, by ring⟩
     nlinarith [pow_nonneg hy 2, pow_nonneg hy 3, pow_nonneg hy 4, pow_nonneg hy 5]
   nlinarith [mul_le_mul_of_nonneg_left hp hS]
 
 /-! ### The initial inequality -/
 
-/-- **The height-four initial inequality for every `k ≥ 8`.** -/
-theorem init4Holds {k : ℕ} (hk : 8 ≤ k) : Init4Holds k := by
+/-- **The height-four initial inequality for every `k ≥ 7`.** -/
+theorem init4Holds {k : ℕ} (hk : 7 ≤ k) : Init4Holds k := by
   intro w hw X₁ X₂ X₃ X₄ h₁ h₂ h₃ h₄
-  have hkR : (8 : ℝ) ≤ k := by exact_mod_cast hk
+  have hkR : (7 : ℝ) ≤ k := by exact_mod_cast hk
   -- the weights
   have hden : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 - 2 := by
-    nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 6) (by linarith : (6 : ℝ) ≤ (k : ℝ) - 2) 3]
+    nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5) (by linarith : (5 : ℝ) ≤ (k : ℝ) - 2) 3]
   have hc3 : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 := by linarith
   have hρ : rho k = (((k : ℝ) - 2) ^ 3 - 2) / ((k : ℝ) - 2) ^ 3 := by
     rw [rho, eq_div_iff hc3.ne', sub_mul, div_mul_cancel₀ _ hc3.ne', one_mul]

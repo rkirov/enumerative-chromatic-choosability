@@ -93,7 +93,7 @@ theorem card_rows_sdiff_le (B : Finset ℕ) (s : T4) :
   linarith
 
 /-- **The reference palette.** -/
-theorem exists_palette {k : ℕ} (hk : 8 ≤ k) {B₂ : Finset ℕ} (hB₂ : B₂.card = k) (s : T4) :
+theorem exists_palette {k : ℕ} (hk : 4 ≤ k) {B₂ : Finset ℕ} (hB₂ : B₂.card = k) (s : T4) :
     ∃ P : Finset ℕ, ∃ f : ℕ, P.card = k ∧ RowsIn s P ∧ (f : ℝ) ≤ jsum B₂ s ∧
       ∀ (B : Finset ℕ) (c : ℕ),
         (((B.erase c) \ (P.erase c)).card : ℝ) ≤ (B \ B₂).card + f ∧
@@ -108,8 +108,10 @@ theorem exists_palette {k : ℕ} (hk : 8 ≤ k) {B₂ : Finset ℕ} (hB₂ : B�
     simp only [Finset.card_singleton] at this; omega
   have hF4 : F.card ≤ 4 := (Finset.card_le_card Finset.sdiff_subset).trans hS4
   have hroom : F.card ≤ (B₂ \ S).card := by
-    have := Finset.le_card_sdiff S B₂
-    rw [hB₂] at this; omega
+    have h1 := Finset.card_sdiff_add_card_inter S B₂
+    have h2 := Finset.card_sdiff_add_card_inter B₂ S
+    rw [Finset.inter_comm] at h2
+    rw [hF]; omega
   obtain ⟨E, hEsub, hEcard⟩ := Finset.exists_subset_card_eq hroom
   refine ⟨(B₂ \ E) ∪ F, F.card, ?_, ?_, ?_, ?_⟩
   · have hdisj : Disjoint (B₂ \ E) F := by

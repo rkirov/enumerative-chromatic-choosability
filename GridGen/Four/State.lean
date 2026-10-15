@@ -53,7 +53,7 @@ theorem zz_self (B : Finset ℕ) (a b : ℕ) : zz B B a b = 0 := by
   unfold zz; simp
 
 /-- **The count bound of one state, from the lists.** -/
-theorem count_data {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {B₁ B₂ B₃ B₄ : Finset ℕ}
+theorem count_data {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
     {s : T4} (hs : Proper s) :
     countBound ((k : ℝ) - 1) (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄)
@@ -82,7 +82,7 @@ theorem count_data {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {B₁ B₂ B₃ B
     exact_mod_cast Finset.card_le_card h
   obtain ⟨hM30, hM3N⟩ := M3_bounds A₁ A₂ A₃
   obtain ⟨hM40, hM4N⟩ := M4_bounds A₁ A₂ A₃ A₄
-  refine count_log_bound hk8 hk15 rfl (hb_cases _ _) (hb_cases _ _) (hb_cases _ _) (hb_cases _ _)
+  refine count_log_bound hk7 hk15 rfl (hb_cases _ _) (hb_cases _ _) (hb_cases _ _) (hb_cases _ _)
     (card_erase_hb hB₁ _) (card_erase_hb hB₂ _) (card_erase_hb hB₃ _) (card_erase_hb hB₄ _)
     (mu_nonneg hB₁) (mu_nonneg hB₂) (mu_nonneg hB₃)
     (by have := mu_le (k := k) B₁ B₂; linarith) (by have := mu_le (k := k) B₂ B₃; linarith)
@@ -207,13 +207,33 @@ theorem card_ge_of_erase {k : ℕ} {B : Finset ℕ} (hB : B.card = k) (c : ℕ) 
     k - 1 ≤ (B.erase c).card := by
   have := Finset.pred_card_le_card_erase (s := B) (a := c); omega
 
-/-- **The bound for one state**: `GB ≥ GU · (1 + Λ)`. -/
-theorem state_bound {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+/-- The count part of the gain. -/
+noncomputable def CB (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : ℝ :=
+  countBound ((k : ℝ) - 1) (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄)
+      (zz B₁ B₂ (r1 s) (r2 s)) (zz B₂ B₃ (r2 s) (r3 s)) (zz B₃ B₄ (r3 s) (r4 s))
+      (hb B₁ (r1 s)) (hb B₂ (r2 s)) (hb B₃ (r3 s)) (hb B₄ (r4 s)) (c13 s) (c24 s)
+
+/-- The size of the difference from the reference palette. -/
+noncomputable def PS (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : ℝ :=
+  (mu k B₁ B₂ + 2 * mu k B₂ B₃ + mu k B₃ B₄)
+    + 4 * (hb B₁ (r1 s) + hb B₂ (r2 s) + hb B₃ (r3 s) + hb B₄ (r4 s))
+    + 4 * (xin B₁ B₂ (r1 s) + xin B₃ B₂ (r3 s) + xin B₄ B₂ (r4 s))
+
+theorem Lam_eq_CB (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) :
+    Lam k B₁ B₂ B₃ B₄ s = CB k B₁ B₂ B₃ B₄ s - eta k * PS k B₁ B₂ B₃ B₄ s := rfl
+
+/-- **The gain with the pattern term capped** at `(1-ρ)/ρ`. -/
+noncomputable def Lamc (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : ℝ :=
+  CB k B₁ B₂ B₃ B₄ s - min (eta k * PS k B₁ B₂ B₃ B₄ s) ((1 - rho k) / rho k)
+
+/-- **The log gain of one state**, with and without the cap. -/
+theorem state_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
     {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
     {s : T4} (hs : Proper s) :
-    GU k w s * (1 + Lam k B₁ B₂ B₃ B₄ s) ≤ GB w B₁ B₂ B₃ B₄ s := by
-  obtain ⟨P, f, hPc, hPr, hf, hdiff⟩ := exists_palette hk8 hB₂ s
+    0 < GU k w s ∧ 0 < GB w B₁ B₂ B₃ B₄ s ∧
+      Lamc k B₁ B₂ B₃ B₄ s ≤ log (GB w B₁ B₂ B₃ B₄ s / GU k w s) := by
+  obtain ⟨P, f, hPc, hPr, hf, hdiff⟩ := exists_palette (by omega) hB₂ s
   have hk5 : 5 ≤ k := by omega
   have hρ := rho_pos' hk5
   have hρ1 := rho_le_one k hk5
@@ -273,7 +293,7 @@ theorem state_bound {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : I
     exact mul_le_mul_of_nonneg_left (div_le_div_of_nonneg_right hmax hk3.le)
       (div_nonneg (by linarith) hρ.le)
   -- the count term
-  have hcnt := count_data hk8 hk15 hB₁ hB₂ hB₃ hB₄ hs
+  have hcnt := count_data hk7 hk15 hB₁ hB₂ hB₃ hB₄ hs
   -- positivity
   have c1 := card_ge_of_erase hB₁ (r1 s)
   have c2 := card_ge_of_erase hB₂ (r2 s)
@@ -291,7 +311,7 @@ theorem state_bound {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : I
       ((range k).erase (r3 (canon s))) ((range k).erase (r4 (canon s)))).card := by
     exact_mod_cast (sts_nonempty (u _) (u _) (u _) (u _)).card_pos
   -- combine
-  have hlog : Lam k B₁ B₂ B₃ B₄ s ≤ log (GB w B₁ B₂ B₃ B₄ s / GU k w s) := by
+  have hlog : Lamc k B₁ B₂ B₃ B₄ s ≤ log (GB w B₁ B₂ B₃ B₄ s / GU k w s) := by
     have e : GB w B₁ B₂ B₃ B₄ s / GU k w s
         = ((sts (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s)) (B₄.erase (r4 s))).card
             / (sts ((range k).erase (r1 (canon s))) ((range k).erase (r2 (canon s)))
@@ -302,15 +322,74 @@ theorem state_bound {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : I
               ((range k).erase (r3 (canon s))) ((range k).erase (r4 (canon s)))).card)) := by
       unfold GB; field_simp
     rw [e, Real.log_mul (by positivity) (by positivity)]
-    unfold Lam
-    linarith
-  have hpos : 0 < GB w B₁ B₂ B₃ B₄ s / GU k w s := div_pos (by unfold GB; exact hGA) hGU
-  have h2 : exp (Lam k B₁ B₂ B₃ B₄ s) ≤ GB w B₁ B₂ B₃ B₄ s / GU k w s := by
-    rw [← Real.exp_log hpos]; exact Real.exp_le_exp.mpr hlog
-  have h3 : 1 + Lam k B₁ B₂ B₃ B₄ s ≤ GB w B₁ B₂ B₃ B₄ s / GU k w s :=
-    (by rw [add_comm]; exact Real.add_one_le_exp _ : 1 + Lam k B₁ B₂ B₃ B₄ s ≤ _).trans h2
-  calc GU k w s * (1 + Lam k B₁ B₂ B₃ B₄ s)
-      ≤ GU k w s * (GB w B₁ B₂ B₃ B₄ s / GU k w s) := mul_le_mul_of_nonneg_left h3 hGU.le
-    _ = GB w B₁ B₂ B₃ B₄ s := mul_div_cancel₀ _ hGU.ne'
+    -- the pattern term is at least `log ρ ≥ -(1-ρ)/ρ`
+    have hGAlow : rho k * (sts (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s))
+        (B₄.erase (r4 s))).card
+        ≤ G w (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s)) (B₄.erase (r4 s)) := by
+      have := Finset.card_nsmul_le_sum (sts (B₁.erase (r1 s)) (B₂.erase (r2 s))
+        (B₃.erase (r3 s)) (B₄.erase (r4 s))) (gw w) (rho k) (fun t _ => (gw_mem hw t).1)
+      rw [G]; simpa [nsmul_eq_mul, mul_comm] using this
+    have hGUup : GU k w s ≤ (sts ((range k).erase (r1 (canon s))) ((range k).erase (r2 (canon s)))
+        ((range k).erase (r3 (canon s))) ((range k).erase (r4 (canon s)))).card := by
+      have := Finset.sum_le_card_nsmul (sts ((range k).erase (r1 (canon s)))
+        ((range k).erase (r2 (canon s))) ((range k).erase (r3 (canon s)))
+        ((range k).erase (r4 (canon s)))) (gw w) 1 (fun t _ => (gw_mem hw t).2)
+      unfold GU G; simpa [nsmul_eq_mul] using this
+    have hcap : -((1 - rho k) / rho k)
+        ≤ log ((G w (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s)) (B₄.erase (r4 s))
+              / (sts (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s)) (B₄.erase (r4 s))).card)
+            / (GU k w s / (sts ((range k).erase (r1 (canon s))) ((range k).erase (r2 (canon s)))
+              ((range k).erase (r3 (canon s))) ((range k).erase (r4 (canon s)))).card)) := by
+      have hx : rho k ≤ (G w (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s))
+            (B₄.erase (r4 s)) / (sts (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s))
+              (B₄.erase (r4 s))).card)
+            / (GU k w s / (sts ((range k).erase (r1 (canon s))) ((range k).erase (r2 (canon s)))
+              ((range k).erase (r3 (canon s))) ((range k).erase (r4 (canon s)))).card) := by
+        rw [div_div_eq_mul_div, le_div_iff₀ hGU, div_mul_eq_mul_div, le_div_iff₀ hNA]
+        calc rho k * GU k w s * _ ≤ rho k * _ * _ :=
+              mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hGUup hρ.le) hNA.le
+          _ = _ := by ring
+          _ ≤ _ := mul_le_mul_of_nonneg_right hGAlow hNU.le
+      have hl := Real.log_le_log hρ hx
+      have hl2 : 1 - 1 / rho k ≤ log (rho k) := by
+        have := Real.one_sub_inv_le_log_of_pos hρ; simpa [one_div] using this
+      have e : -((1 - rho k) / rho k) = 1 - 1 / rho k := by field_simp; ring
+      linarith
+    have hη' : -(eta k * PS k B₁ B₂ B₃ B₄ s) ≤ -((1 - rho k) / rho k * (max SA SU
+        / ((k - 3 : ℕ) : ℝ))) := hη
+    unfold Lamc CB
+    rcases le_total (eta k * PS k B₁ B₂ B₃ B₄ s) ((1 - rho k) / rho k) with hm | hm
+    · rw [min_eq_left hm]; linarith
+    · rw [min_eq_right hm]; linarith
+  exact ⟨hGU, by unfold GB; exact hGA, hlog⟩
+
+/-- From a log gain to the product form `GB ≥ GU · (1 + λ)`. -/
+theorem mul_one_add_le_of_log {u b l : ℝ} (hu : 0 < u) (hb : 0 < b) (h : l ≤ log (b / u)) :
+    u * (1 + l) ≤ b := by
+  have hpos : 0 < b / u := div_pos hb hu
+  have h2 : exp l ≤ b / u := by rw [← Real.exp_log hpos]; exact Real.exp_le_exp.mpr h
+  have h3 : 1 + l ≤ b / u := (by rw [add_comm]; exact Real.add_one_le_exp _ : 1 + l ≤ _).trans h2
+  calc u * (1 + l) ≤ u * (b / u) := mul_le_mul_of_nonneg_left h3 hu.le
+    _ = b := mul_div_cancel₀ _ hu.ne'
+
+/-- **The bound for one state**, capped: `GB ≥ GU · (1 + Λc)`. -/
+theorem state_bound_cap {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+    {B₁ B₂ B₃ B₄ : Finset ℕ}
+    (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
+    {s : T4} (hs : Proper s) :
+    GU k w s * (1 + Lamc k B₁ B₂ B₃ B₄ s) ≤ GB w B₁ B₂ B₃ B₄ s := by
+  obtain ⟨hu, hb, hl⟩ := state_log_bound hk7 hk15 hw hB₁ hB₂ hB₃ hB₄ hs
+  exact mul_one_add_le_of_log hu hb hl
+
+/-- **The bound for one state**: `GB ≥ GU · (1 + Λ)`. -/
+theorem state_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+    {B₁ B₂ B₃ B₄ : Finset ℕ}
+    (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
+    {s : T4} (hs : Proper s) :
+    GU k w s * (1 + Lam k B₁ B₂ B₃ B₄ s) ≤ GB w B₁ B₂ B₃ B₄ s := by
+  obtain ⟨hu, hb, hl⟩ := state_log_bound hk7 hk15 hw hB₁ hB₂ hB₃ hB₄ hs
+  refine mul_one_add_le_of_log hu hb (le_trans ?_ hl)
+  rw [Lam_eq_CB, Lamc]
+  linarith [min_le_left (eta k * PS k B₁ B₂ B₃ B₄ s) ((1 - rho k) / rho k)]
 
 end GridGen.Four

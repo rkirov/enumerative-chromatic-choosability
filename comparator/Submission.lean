@@ -20,7 +20,7 @@ Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
 (`TwoDegenerate/K2n/Main.lean`).
 Section 16 is proved in `TwoDegenerate/K2nSqrt/Main.lean`: `K₂,ₙ` is ECC at every `k ≥ 300`
 with `n ≤ k²`, so `τ(K₂,ₙ) = O(√n)`.
-Section 17 is proved in `GridGen/Four/Main.lean`: every `4 × (n+1)` grid is ECC at every `k ≥ 8`.
+Section 17 is proved in `GridGen/Four/Main.lean`: every `4 × (n+1)` grid is ECC at every `k ≥ 7`.
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the

@@ -54,10 +54,12 @@ chromatic roots. The comparison with list assignments improves Zhang–Dong's `k
 table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 42 guarded axiom checks. None
 of this is ECC at every list size.
 
-**Height four.** `P₄ □ Pₙ` is `k`-ECC for every `k ≥ 8` (`GridGen.Four.ecc_boxProd_pathG_three`,
+**Height four.** `P₄ □ Pₙ` is `k`-ECC for every `k ≥ 7` (`GridGen.Four.ecc_boxProd_pathG_three`,
 [`GridGen/Four/`](GridGen/Four/README.md)), by the column-lookback route: a seam inequality between
-consecutive columns, proved for `8 ≤ k ≤ 15` by bounding each previous column's log count ratio
-row by row and averaging with fibre bounds. The open grid cases are now `3 ≤ k ≤ 7` at height four
+consecutive columns, proved for `7 ≤ k ≤ 15` by bounding each previous column's log count ratio
+row by row and averaging with fibre bounds (at `k = 7` the five smallest list mismatches are
+certified exactly, by kernel evaluation over all column types). The open grid cases are now
+`3 ≤ k ≤ 6` at height four
 and `3 ≤ k ≤ 15` at heights `≥ 5`.
 
 ## Layout
@@ -68,7 +70,7 @@ and `3 ≤ k ≤ 15` at heights `≥ 5`.
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
-| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates, hence every rectangle at `k ≥ 16`); the column-lookback route for general heights, carried out at height four for `k ≥ 8` (`GridGen/Four/`) |
+| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates, hence every rectangle at `k ≥ 16`); the column-lookback route for general heights, carried out at height four for `k ≥ 7` (`GridGen/Four/`) |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
