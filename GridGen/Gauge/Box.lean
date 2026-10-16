@@ -218,12 +218,12 @@ theorem inY_cases (hc : 1 ≤ c) {v : Fin m} {y : Cell c m} (hy : inY v y) :
     · left
       refine ⟨by omega, ?_⟩
       rcases hcol with hcl | hcl
-      · left; exact cell_eq (by simp [yU₁, hcl, h1]) (by simp [yU₁]; omega)
+      · left; exact cell_eq (by simp [yU₁, hcl]) (by simp [yU₁]; omega)
       · right; exact cell_eq (by simp [yU₂, fut0, hcl]) (by simp [yU₂]; omega)
     · right
       refine ⟨by have := y.2.isLt; omega, ?_⟩
       rcases hcol with hcl | hcl
-      · left; exact cell_eq (by simp [yD₁, hcl, h1]) (by simp [yD₁]; omega)
+      · left; exact cell_eq (by simp [yD₁, hcl]) (by simp [yD₁]; omega)
       · right; exact cell_eq (by simp [yD₂, fut0, hcl]) (by simp [yD₂]; omega)
 
 theorem y₁_inY (v : Fin m) : inY v (y₁ (c := c) v) := by
@@ -341,19 +341,19 @@ theorem mem_avail_shift (hc : 1 ≤ c) {v : Fin m} {a₀ x₀ : ℕ} {g : Cell c
       refine ⟨fun h => ?_, fun h => ?_⟩
       · have h1 := hcolY h
         rw [slab_conf_eq (by rw [z₁_fst]; omega) (by rw [z₁_fst]; omega)]
-        simp only [fz, if_pos h1] at hne; exact hne
+        simp only [fz, ite_eq_left h1] at hne; exact hne
       · have h1 := hcolY (slabAdj_symm h)
         rw [slab_conf_eq (by rw [z₁_fst]; omega) (by rw [z₁_fst]; omega)]
-        simp only [fz, if_pos h1] at hne; exact fun e => hne e.symm
+        simp only [fz, ite_eq_left h1] at hne; exact fun e => hne e.symm
     · rw [shift_z₂]
       have hcolY : ∀ h : slabAdj y (z₂ hc v), 2 ≤ y.1.val := fun h => le_fst_of_adj_z₂ hc hy h
       refine ⟨fun h => ?_, fun h => ?_⟩
       · have h1 := hcolY h
         rw [slab_conf_eq (by rw [z₂_fst]; omega) (by rw [z₂_fst]; omega)]
-        simp only [fz, if_neg (show ¬ y.1.val ≤ 1 by omega)] at hne; exact hne
+        simp only [fz, ite_eq_right (show ¬ y.1.val ≤ 1 by omega)] at hne; exact hne
       · have h1 := hcolY (slabAdj_symm h)
         rw [slab_conf_eq (by rw [z₂_fst]; omega) (by rw [z₂_fst]; omega)]
-        simp only [fz, if_neg (show ¬ y.1.val ≤ 1 by omega)] at hne; exact fun e => hne e.symm
+        simp only [fz, ite_eq_right (show ¬ y.1.val ≤ 1 by omega)] at hne; exact fun e => hne e.symm
   · have hwB : w ∉ boxB c v := by rw [mem_boxB]; exact hB
     have h1 : w ≠ z₁ v := by rintro rfl; exact hB ((inB_iff hc).mpr (Or.inr (Or.inl rfl)))
     have h2 : w ≠ z₂ hc v := by rintro rfl; exact hB ((inB_iff hc).mpr (Or.inr (Or.inr rfl)))
@@ -460,11 +460,11 @@ theorem card_cls_le (hc : 1 ≤ c) (v : Fin m) (g : Cell c m → ℕ) :
     · rcases (inB_iff hc).mp (mem_boxB.mp hB) with hY | rfl | rfl
       · rcases inY_cases hc hY with rfl | ⟨h, rfl⟩ | ⟨h, rfl | rfl⟩ | ⟨h, rfl | rfl⟩
         · exact e3
-        · simp only [dif_pos h, Option.some.injEq] at e4; exact e4
-        · simp only [dif_pos h, Option.some.injEq, Prod.mk.injEq] at e5; exact e5.1
-        · simp only [dif_pos h, Option.some.injEq, Prod.mk.injEq] at e5; exact e5.2
-        · simp only [dif_pos h, Option.some.injEq, Prod.mk.injEq] at e6; exact e6.1
-        · simp only [dif_pos h, Option.some.injEq, Prod.mk.injEq] at e6; exact e6.2
+        · simp only [dite_eq_left h, Option.some.injEq] at e4; exact e4
+        · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e5; exact e5.1
+        · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e5; exact e5.2
+        · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e6; exact e6.1
+        · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e6; exact e6.2
       · exact e1
       · exact e2
     · rw [hf1.2 y hB, hf1'.2 y hB]
@@ -510,8 +510,8 @@ theorem fill_off (hc : 1 ≤ c) {v : Fin m} {a₀ x₀ : ℕ} {g : Cell c m → 
     {y : Cell c m} (hy : ¬ inY v y) : fill hc v a₀ x₀ g t y = shift hc v a₀ x₀ g y := by
   unfold inY inB at hy
   unfold fill
-  rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), if_neg (by omega),
-    if_neg (by omega), if_neg (by omega)]
+  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega),
+    ite_eq_right (by omega), ite_eq_right (by omega)]
 
 theorem fill_y₁ (hc : 1 ≤ c) (v : Fin m) (a₀ x₀ : ℕ) (g : Cell c m → ℕ) (t) :
     fill hc v a₀ x₀ g t (y₁ v) = t.1 := by
@@ -525,25 +525,25 @@ theorem fill_yU₁ (hc : 1 ≤ c) {v : Fin m} (a₀ x₀ : ℕ) (g : Cell c m �
     fill hc v a₀ x₀ g t (yU₁ h) = (t.2.2.1.getD (0, 0)).1 := by
   have h1 : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
   unfold fill yU₁; dsimp only; rw [h1]
-  rw [if_neg (by omega), if_neg (by omega), if_pos (by omega)]
+  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left (by omega)]
 
 theorem fill_yU₂ (hc : 1 ≤ c) {v : Fin m} (a₀ x₀ : ℕ) (g : Cell c m → ℕ) (t) (h : 1 ≤ v.val) :
     fill hc v a₀ x₀ g t (yU₂ hc h) = (t.2.2.1.getD (0, 0)).2 := by
   unfold fill yU₂ fut0; dsimp only
-  rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), if_pos (by omega)]
+  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left (by omega)]
 
 theorem fill_yD₁ (hc : 1 ≤ c) {v : Fin m} (a₀ x₀ : ℕ) (g : Cell c m → ℕ) (t)
     (h : v.val + 1 < m) : fill hc v a₀ x₀ g t (yD₁ h) = (t.2.2.2.getD (0, 0)).1 := by
   have h1 : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
   unfold fill yD₁; dsimp only; rw [h1]
-  rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), if_neg (by omega),
-    if_pos (by omega)]
+  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega),
+    ite_eq_left (by omega)]
 
 theorem fill_yD₂ (hc : 1 ≤ c) {v : Fin m} (a₀ x₀ : ℕ) (g : Cell c m → ℕ) (t)
     (h : v.val + 1 < m) : fill hc v a₀ x₀ g t (yD₂ hc h) = (t.2.2.2.getD (0, 0)).2 := by
   unfold fill yD₂ fut0; dsimp only
-  rw [if_neg (by omega), if_neg (by omega), if_neg (by omega), if_neg (by omega),
-    if_neg (by omega), if_pos (by omega)]
+  rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega),
+    ite_eq_right (by omega), ite_eq_left (by omega)]
 
 end Lower
 
@@ -552,36 +552,36 @@ section Lower2
 theorem mem_of_opt6' {v : Fin m} {x₀ : ℕ} {g : Cell c m → ℕ} {o : Option ℕ} (h : 2 ≤ c)
     (ho : o ∈ opt6' c k P A N v x₀ g) : ∃ q, o = some q ∧
       q ∈ ((slab c m k P A N).avail (boxB c v) g (y₆ h v)).erase x₀ := by
-  unfold opt6' at ho; rw [dif_pos h, mem_map] at ho
+  unfold opt6' at ho; rw [dite_eq_left h, mem_map] at ho
   obtain ⟨q, hq, rfl⟩ := ho; exact ⟨q, rfl, hq⟩
 
 theorem eq_none_of_opt6' {v : Fin m} {x₀ : ℕ} {g : Cell c m → ℕ} {o : Option ℕ} (h : ¬ 2 ≤ c)
     (ho : o ∈ opt6' c k P A N v x₀ g) : o = none := by
-  unfold opt6' at ho; rw [dif_neg h, mem_singleton] at ho; exact ho
+  unfold opt6' at ho; rw [dite_eq_right h, mem_singleton] at ho; exact ho
 
 theorem mem_of_optU' (hc : 1 ≤ c) {v : Fin m} {a₀ x₀ : ℕ} {g : Cell c m → ℕ}
     {o : Option (ℕ × ℕ)} (h : 1 ≤ v.val) (ho : o ∈ optU' c k P A N hc v a₀ x₀ g) :
     ∃ pq, o = some pq ∧ pq ∈ dom c k P A N (boxB c v) g (yU₁ h) (yU₂ hc h) ∧
       pq.1 ≠ a₀ ∧ pq.2 ≠ x₀ := by
-  unfold optU' at ho; rw [dif_pos h, mem_map] at ho
+  unfold optU' at ho; rw [dite_eq_left h, mem_map] at ho
   obtain ⟨pq, hpq, rfl⟩ := ho; rw [mem_filter] at hpq; exact ⟨pq, rfl, hpq.1, hpq.2⟩
 
 theorem eq_none_of_optU' (hc : 1 ≤ c) {v : Fin m} {a₀ x₀ : ℕ} {g : Cell c m → ℕ}
     {o : Option (ℕ × ℕ)} (h : ¬ 1 ≤ v.val) (ho : o ∈ optU' c k P A N hc v a₀ x₀ g) :
     o = none := by
-  unfold optU' at ho; rw [dif_neg h, mem_singleton] at ho; exact ho
+  unfold optU' at ho; rw [dite_eq_right h, mem_singleton] at ho; exact ho
 
 theorem mem_of_optD' (hc : 1 ≤ c) {v : Fin m} {a₀ x₀ : ℕ} {g : Cell c m → ℕ}
     {o : Option (ℕ × ℕ)} (h : v.val + 1 < m) (ho : o ∈ optD' c k P A N hc v a₀ x₀ g) :
     ∃ pq, o = some pq ∧ pq ∈ dom c k P A N (boxB c v) g (yD₁ h) (yD₂ hc h) ∧
       pq.1 ≠ a₀ ∧ pq.2 ≠ x₀ := by
-  unfold optD' at ho; rw [dif_pos h, mem_map] at ho
+  unfold optD' at ho; rw [dite_eq_left h, mem_map] at ho
   obtain ⟨pq, hpq, rfl⟩ := ho; rw [mem_filter] at hpq; exact ⟨pq, rfl, hpq.1, hpq.2⟩
 
 theorem eq_none_of_optD' (hc : 1 ≤ c) {v : Fin m} {a₀ x₀ : ℕ} {g : Cell c m → ℕ}
     {o : Option (ℕ × ℕ)} (h : ¬ v.val + 1 < m) (ho : o ∈ optD' c k P A N hc v a₀ x₀ g) :
     o = none := by
-  unfold optD' at ho; rw [dif_neg h, mem_singleton] at ho; exact ho
+  unfold optD' at ho; rw [dite_eq_right h, mem_singleton] at ho; exact ho
 
 theorem mem_dom_iff {U : Finset (Cell c m)} {g : Cell c m → ℕ} {y y' : Cell c m} {pq : ℕ × ℕ} :
     pq ∈ dom c k P A N U g y y' ↔ (pq.1 ∈ (slab c m k P A N).avail U g y ∧
@@ -626,7 +626,7 @@ theorem card_hit_ge (hc : 1 ≤ c) (v : Fin m) {a₀ x₀ : ℕ} {g : Cell c m �
           rw [fill_yU₁, hpq, Option.getD_some]
           have h1v : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
           exact mem_avail_shift hc (yU₁_inY h) ((mem_dom_iff.mp hd).1.1)
-            (by simp only [fz, yU₁, h1v, le_refl, if_true]; exact hne.1)
+            (by simp only [fz, yU₁, h1v, le_refl, ite_true]; exact hne.1)
         · obtain ⟨pq, hpq, hd, hne⟩ := mem_of_optU' hc h hU
           rw [fill_yU₂, hpq, Option.getD_some]
           exact mem_avail_shift hc (yU₂_inY hc h) ((mem_dom_iff.mp hd).1.2)
@@ -635,7 +635,7 @@ theorem card_hit_ge (hc : 1 ≤ c) (v : Fin m) {a₀ x₀ : ℕ} {g : Cell c m �
           rw [fill_yD₁, hpq, Option.getD_some]
           have h1v : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
           exact mem_avail_shift hc (yD₁_inY h) ((mem_dom_iff.mp hd).1.1)
-            (by simp only [fz, yD₁, h1v, le_refl, if_true]; exact hne.1)
+            (by simp only [fz, yD₁, h1v, le_refl, ite_true]; exact hne.1)
         · obtain ⟨pq, hpq, hd, hne⟩ := mem_of_optD' hc h hD
           rw [fill_yD₂, hpq, Option.getD_some]
           exact mem_avail_shift hc (yD₂_inY hc h) ((mem_dom_iff.mp hd).1.2)
@@ -1050,7 +1050,7 @@ theorem box_bound (hk : 6 ≤ k) (hK : KeyInj k A N) (hA : ∀ v, (A v).card = k
     (hPv : k - 1 ≤ (P v).card ∨ a₀ ∉ P v) :
     (slab c m k P A N).Ω.card * ((k - 4) ^ 2 * (k - 5) ^ 2) ≤
       ((slab c m k P A N).Ω.filter (Hit hc v a₀ x₀)).card * (k ^ 2 * (k - 3) ^ 4) :=
-  (slab c m k P A N).fibre_sum_ge (boxB c v) _ _ _ fun g hg =>
+  (slab c m k P A N).fibre_sum_ge (boxB c v) _ _ _ fun _ hg =>
     box_fibre hk hK hA hc v ha hx hN hPv ((CSP.mem_Ω _).mp hg)
 
 end Final

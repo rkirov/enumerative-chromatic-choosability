@@ -137,7 +137,8 @@ The pair certificates are stated at `k₀` only; larger `k` use the peel instanc
 neither family goes further. For grids at `k = 15` the best degree-three root budget misses by
 about four percent, and removing the grid's 4-cycles from the walk-tree count recovers a tenth of
 that. To first order the root's edges alone need `s (1 − 3s/k) ≥ 1`, which already forces
-`k ≥ 12`. Arbitrary heights below 16 need a different method.
+`k ≥ 12`. Arbitrary heights below 16 need a different method; the gauge route of
+[`Gauge/`](Gauge/README.md) is one, and reaches every rectangle at `k ≥ 10`.
 
 ## Credit
 

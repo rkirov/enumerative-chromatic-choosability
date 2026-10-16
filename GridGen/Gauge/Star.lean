@@ -84,7 +84,7 @@ theorem card_unpair (M : Fin m → ℕ → ℕ) (hc : 1 ≤ c) (v : Fin m) (a₀
         have : t = ⟨0, by omega⟩ := Fin.ext ht
         rw [this, futOf_zero hc] at he
         exact he.symm
-      · rwa [if_neg hv] at e
+      · rwa [ite_eq_right hv] at e
     · rintro ⟨h1, hhit⟩
       refine ⟨h1, fun h0 => ?_⟩
       rw [CSP.mem_Ω, valid_iff] at h0

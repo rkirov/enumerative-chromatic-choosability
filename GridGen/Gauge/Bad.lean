@@ -119,7 +119,7 @@ def lab (ℓ₀ j : ℕ) : ℕ := if j % 2 = 0 then ℓ₀ else oth x y ℓ₀
 
 variable {x y}
 
-theorem oth_mem {ℓ : ℕ} (h : ℓ = x ∨ ℓ = y) : oth x y ℓ = x ∨ oth x y ℓ = y := by
+theorem oth_mem {ℓ : ℕ} (_h : ℓ = x ∨ ℓ = y) : oth x y ℓ = x ∨ oth x y ℓ = y := by
   unfold oth; split_ifs <;> simp
 
 theorem oth_oth (hxy : x ≠ y) {ℓ : ℕ} (h : ℓ = x ∨ ℓ = y) : oth x y (oth x y ℓ) = ℓ := by
@@ -142,8 +142,8 @@ theorem lab_succ (hxy : x ≠ y) {ℓ₀ : ℕ} (h : ℓ₀ = x ∨ ℓ₀ = y) 
     lab x y ℓ₀ (j + 1) = lab x y (oth x y ℓ₀) j := by
   unfold lab
   by_cases hj : j % 2 = 0
-  · rw [if_neg (by omega), if_pos hj]
-  · rw [if_pos (by omega), if_neg hj, oth_oth hxy h]
+  · rw [ite_eq_right (by omega), ite_eq_left hj]
+  · rw [ite_eq_left (by omega), ite_eq_right hj, oth_oth hxy h]
 
 end Alt
 
@@ -266,14 +266,14 @@ theorem bad_event (hxy : x ≠ y) {f : Cell c m → ℕ} (hf : (slab c m k P A M
       List.mem_singleton] at hz
     unfold presc
     rcases hz with (rfl | hz) | rfl
-    · rw [if_pos (seamOf_fst _), if_pos (by rw [hhead]; rfl), mem_filter]
+    · rw [ite_eq_left (seamOf_fst _), ite_eq_left (by rw [hhead]; rfl), mem_filter]
       exact ⟨hA1 v₁, eq_oth hxy hℓ hk₁ (hseam v₁)⟩
     · have h2 := (hxyl z hz).1
-      rw [if_neg (by omega), mem_singleton]
+      rw [ite_eq_right (by omega), mem_singleton]
       have hi := List.idxOf_lt_length_of_mem hz
       have := halt _ hi
       rwa [List.getElem_idxOf] at this
-    · rw [if_pos (seamOf_fst _), if_neg (by rw [hhead]; simp [seamOf]; exact Ne.symm hv),
+    · rw [ite_eq_left (seamOf_fst _), ite_eq_right (by rw [hhead]; simp [seamOf]; exact Ne.symm hv),
         mem_filter]
       refine ⟨hA1 v₂, eq_oth hxy (lab_mem hℓ _) hk₂ ?_⟩
       have hlen : l.length - 1 < l.length := by

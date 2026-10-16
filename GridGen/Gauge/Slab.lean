@@ -152,27 +152,27 @@ theorem card_futs (k : ℕ) : ∀ (c : ℕ) (q : State (Fin m)), (futs c k q).ca
 def keyed (M : Fin m → ℕ → ℕ) (s : State (Fin m)) : State (Fin m) := fun v => M v (s v)
 
 theorem slab_D_zero {x : Cell c m} (h : x.1.val = 0) : (slab c m k P A M).D x = P x.2 := by
-  simp only [slab]; rw [if_pos h]
+  simp only [slab]; rw [ite_eq_left h]
 
 theorem slab_D_one {x : Cell c m} (h : x.1.val = 1) : (slab c m k P A M).D x = A x.2 := by
-  simp only [slab]; rw [if_neg (by omega), if_pos h]
+  simp only [slab]; rw [ite_eq_right (by omega), ite_eq_left h]
 
 theorem slab_D_fut {x : Cell c m} (h : 2 ≤ x.1.val) : (slab c m k P A M).D x = range k := by
-  simp only [slab]; rw [if_neg (by omega), if_neg (by omega)]
+  simp only [slab]; rw [ite_eq_right (by omega), ite_eq_right (by omega)]
 
 theorem slab_conf_seam {x y : Cell c m} (hx : x.1.val = 1) (hy : y.1.val = 2) {a b : ℕ} :
     (slab c m k P A M).conf x y a b ↔ M x.2 a = b := by
-  simp only [slab]; rw [if_pos ⟨hx, hy⟩]
+  simp only [slab]; rw [ite_eq_left ⟨hx, hy⟩]
 
 theorem slab_conf_seam' {x y : Cell c m} (hx : x.1.val = 2) (hy : y.1.val = 1) {a b : ℕ} :
     (slab c m k P A M).conf x y a b ↔ a = M y.2 b := by
-  simp only [slab]; rw [if_neg (by omega), if_pos ⟨hx, hy⟩]
+  simp only [slab]; rw [ite_eq_right (by omega), ite_eq_left ⟨hx, hy⟩]
 
 theorem slab_conf_eq {x y : Cell c m} (h1 : ¬ (x.1.val = 1 ∧ y.1.val = 2))
     (h2 : ¬ (x.1.val = 2 ∧ y.1.val = 1)) {a b : ℕ} :
     (slab c m k P A M).conf x y a b ↔ a = b := by
   simp only [slab]
-  rw [if_neg h1, if_neg h2]
+  rw [ite_eq_right h1, ite_eq_right h2]
 
 /-- Glue a past state, a seam state and a future into a slab assignment. -/
 def glue (p s : State (Fin m)) (ψ : Fin c → State (Fin m)) : Cell c m → ℕ := fun x =>
@@ -333,7 +333,7 @@ theorem colOf_glue_one (p s : State (Fin m)) (ψ : Fin c → State (Fin m)) :
 theorem futOf_glue (p s : State (Fin m)) (ψ : Fin c → State (Fin m)) :
     futOf (glue p s ψ) = ψ := by
   funext t v; simp only [futOf, glue]
-  rw [dif_neg (by simp), dif_neg (by simp)]
+  rw [dite_eq_right (by simp), dite_eq_right (by simp)]
   congr 1
 
 theorem glue_cols (f : Cell c m → ℕ) : glue (colOf f 0) (colOf f 1) (futOf f) = f := by
@@ -341,11 +341,11 @@ theorem glue_cols (f : Cell c m → ℕ) : glue (colOf f 0) (colOf f 1) (futOf f
   obtain ⟨j, v⟩ := x
   simp only [glue, colOf, futOf]
   by_cases h0 : j.val = 0
-  · rw [dif_pos h0]; congr; exact (Fin.ext h0).symm
-  rw [dif_neg h0]
+  · rw [dite_eq_left h0]; congr; exact (Fin.ext h0).symm
+  rw [dite_eq_right h0]
   by_cases h1 : j.val = 1
-  · rw [dif_pos h1]; congr; exact (Fin.ext (by rw [Fin.val_one]; exact h1)).symm
-  rw [dif_neg h1]
+  · rw [dite_eq_left h1]; congr; exact (Fin.ext (by rw [Fin.val_one]; exact h1)).symm
+  rw [dite_eq_right h1]
   exact congrArg f (Prod.ext (Fin.ext (show j.val - 2 + 2 = j.val by omega)) rfl)
 
 /-- **The slab count.** The number of slab solutions is the past–seam pairs weighted by the

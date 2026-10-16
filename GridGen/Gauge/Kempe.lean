@@ -101,7 +101,7 @@ theorem fut_of_inT {f : Cell c m → ℕ} {u : Cell c m} (h : InT hc M w x y f u
 
 theorem kswap_of_lt {f : Cell c m → ℕ} {u : Cell c m} (h : u.1.val < 2) :
     kswap hc M w x y f u = f u := by
-  unfold kswap; rw [if_neg (fun h' => by have := fut_of_inT h'; omega)]
+  unfold kswap; rw [ite_eq_right (fun h' => by have := fut_of_inT h'; omega)]
 
 /-- The swap preserves the `{x, y}` cells. -/
 theorem xy_kswap {f : Cell c m → ℕ} {u : Cell c m} :
@@ -123,12 +123,12 @@ theorem seed_kswap {f : Cell c m → ℕ} {u : Cell c m} :
   constructor
   · rintro ⟨hw, hu, hk, hxy⟩
     refine ⟨hw, hu, ?_, xy_kswap.mp hxy⟩
-    rw [moveKey, if_pos hw, kswap_of_lt (show (1 : Fin (c + 2)).val < 2 by
+    rw [moveKey, ite_eq_left hw, kswap_of_lt (show (1 : Fin (c + 2)).val < 2 by
       rw [Fin.val_one]; omega)] at hk
     exact swap_mem_xy.mp hk
   · rintro ⟨hw, hu, hk, hxy⟩
     refine ⟨hw, hu, ?_, xy_kswap.mpr hxy⟩
-    rw [moveKey, if_pos hw, kswap_of_lt (show (1 : Fin (c + 2)).val < 2 by
+    rw [moveKey, ite_eq_left hw, kswap_of_lt (show (1 : Fin (c + 2)).val < 2 by
       rw [Fin.val_one]; omega)]
     exact swap_mem_xy.mpr hk
 
@@ -165,20 +165,20 @@ theorem kswap_ne {f : Cell c m → ℕ} {u u' : Cell c m} (hu2 : 2 ≤ u.1.val) 
     kswap hc M w x y f u ≠ kswap hc M w x y f u' := by
   unfold kswap
   by_cases h : InT hc M w x y f u <;> by_cases h' : InT hc M w x y f u'
-  · rw [if_pos h, if_pos h']; exact fun e => hne ((Equiv.swap x y).injective e)
-  · rw [if_pos h, if_neg h']
+  · rw [ite_eq_left h, ite_eq_left h']; exact fun e => hne ((Equiv.swap x y).injective e)
+  · rw [ite_eq_left h, ite_eq_right h']
     have hxy := (xy_of_inT h).2
     have hxy' : ¬ (f u' = x ∨ f u' = y) := fun hm =>
       h' (inT_of_adj h ⟨hadj, xy_of_inT h, hu2', hm⟩)
     intro e
     exact hxy' (e ▸ swap_mem_xy.mpr hxy)
-  · rw [if_neg h, if_pos h']
+  · rw [ite_eq_right h, ite_eq_left h']
     have hxy := (xy_of_inT h').2
     have hxy' : ¬ (f u = x ∨ f u = y) := fun hm =>
       h (inT_of_adj h' ⟨slabAdj_symm hadj, xy_of_inT h', hu2, hm⟩)
     intro e
     exact hxy' (e.symm ▸ swap_mem_xy.mpr hxy)
-  · rw [if_neg h, if_neg h']; exact hne
+  · rw [ite_eq_right h, ite_eq_right h']; exact hne
 
 theorem kswap_lt {f : Cell c m → ℕ} {u : Cell c m} (hx : x < k) (hy : y < k)
     (hf : f u < k) : kswap hc M w x y f u < k := by
@@ -218,7 +218,7 @@ theorem valid_kswap (hx : x < k) (hy : y < k) {f : Cell c m → ℕ}
       rw [hz]; exact Prod.ext (Fin.ext (by simp [fut0, ht])) rfl
     rw [hz'] at hv ⊢
     by_cases hw : w < v.val
-    · rw [if_pos hw]
+    · rw [ite_eq_left hw]
       unfold kswap
       split_ifs with hT
       · exact fun e => hv ((Equiv.swap x y).injective e)
@@ -227,7 +227,7 @@ theorem valid_kswap (hx : x < k) (hy : y < k) {f : Cell c m → ℕ}
             hT ⟨z, ⟨v, hw, rfl, hm, ⟨by rw [hz]; rfl, hm'⟩⟩, SimpleGraph.Reachable.refl _⟩
           intro e; exact hzxy (e ▸ swap_mem_xy.mpr hm)
         · rw [swap_of_not_xy hm]; exact hv
-    · rw [if_neg hw]
+    · rw [ite_eq_right hw]
       unfold kswap
       split_ifs with hT
       · by_cases hm : M v (colOf f 1 v) = x ∨ M v (colOf f 1 v) = y

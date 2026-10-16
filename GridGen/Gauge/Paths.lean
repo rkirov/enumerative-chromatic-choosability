@@ -79,10 +79,10 @@ theorem mem_enum : ∀ (ds : List (Fin 4)) (x y : ℤ) (prev : Option (Fin 4)),
       simp only [WOK] at h
       simp only [List.length_cons, enum]
       simp only [List.length_cons, Nat.cast_add, Nat.cast_one] at hr
-      rw [if_neg (by omega)]
+      rw [ite_eq_right (by omega)]
       rw [List.mem_flatMap]
       refine ⟨d, by fin_cases d <;> simp, ?_⟩
-      rw [if_pos ⟨h.1, h.2.1⟩]
+      rw [ite_eq_left ⟨h.1, h.2.1⟩]
       exact List.mem_map.mpr ⟨ds, ih _ _ _ h.2.2, rfl⟩
 
 /-- The enumerator branches at most three ways after a step or on the axis. -/
@@ -108,10 +108,10 @@ theorem length_enum_le : ∀ (n : ℕ) (x y : ℤ) (prev : Option (Fin 4)),
           rcases hp with hp | hp
           · obtain ⟨p, rfl⟩ := Option.isSome_iff_exists.mp hp
             refine ⟨opp p, ?_⟩
-            rw [if_neg]; · simp
+            rw [ite_eq_right]; · simp
             intro h; apply h.1; fin_cases p <;> rfl
           · refine ⟨3, ?_⟩
-            rw [if_neg]; · simp
+            rw [ite_eq_right]; · simp
             intro h; have := h.2; simp [dx, hp] at this
         obtain ⟨d₀, hd₀⟩ := hclosed
         set e : Fin 4 → ℕ := fun d => (if prev ≠ some (opp d) ∧ 0 ≤ x + dx d then
@@ -157,12 +157,12 @@ theorem move {a b : Cell c m} (h : slabAdj a b) :
   rcases h with ⟨h1, h2⟩ | ⟨h1, h2⟩
   · have e1 : b.1.val = a.1.val := by rw [h1]
     rcases h2 with h2 | h2
-    · rw [if_neg (by omega), if_pos h2.symm]; simp only [dx, dy]; omega
-    · rw [if_pos h2]; simp only [dx, dy]; omega
+    · rw [ite_eq_right (by omega), ite_eq_left h2.symm]; simp only [dx, dy]; omega
+    · rw [ite_eq_left h2]; simp only [dx, dy]; omega
   · have e2 : b.2.val = a.2.val := by rw [h1]
     rcases h2 with h2 | h2
-    · rw [if_neg (by omega), if_neg (by omega), if_pos h2.symm]; simp only [dx, dy]; omega
-    · rw [if_neg (by omega), if_neg (by omega), if_neg (by omega)]; simp only [dx, dy]; omega
+    · rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_left h2.symm]; simp only [dx, dy]; omega
+    · rw [ite_eq_right (by omega), ite_eq_right (by omega), ite_eq_right (by omega)]; simp only [dx, dy]; omega
 
 theorem eq_of_dirOf {a b b' : Cell c m} (h : slabAdj a b) (h' : slabAdj a b')
     (hd : dirOf a b = dirOf a b') : b = b' := by

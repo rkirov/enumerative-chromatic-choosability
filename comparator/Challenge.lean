@@ -747,3 +747,25 @@ open scoped SimpleGraph
 theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 7 ≤ k) (n : ℕ) : (pathG 3 □ pathG n).ECCAt k := sorry
 
 end GridGen.Four
+
+/-! ### 18. Every grid at list sizes at least ten
+
+Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
+`GridGen/Gauge/` for every rectangle at every `k ≥ 10`, uniformly in the height. Each column is
+relabelled by a vertically consistent bijection onto `{0, …, k-1}`, which makes the telescoped
+quantity a count of correspondence colourings. At each seam a deleted seam pair gains at least
+`(k-4)²(k-5)²/(k²(k-3)⁴)` (a box bound). Each of the at most two label transpositions per
+deleted pair loses at most an explicit `ε_k`, by a Kempe-chain swap and a crossing-path count.
+For `k ≥ 10` the gains win.
+-/
+
+namespace ListColoring
+
+open SimpleGraph
+open scoped SimpleGraph
+
+/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 10. -/
+theorem ecc_boxProd_pathG_of_ten {k : ℕ} (hk : 10 ≤ k) (r n : ℕ) :
+    (pathG r □ pathG n).ECCAt k := sorry
+
+end ListColoring

@@ -190,7 +190,7 @@ theorem rho_spec (hR : RowLab k Bx βx) {pl : List (ℕ × ℕ)} (hpl : Small k 
         comp (rho k Bx βx v pl) (comp pl (βx (v + 1) c)) = comp pl (βx v c) := by
   have h := rgood hR hpl v
   unfold rho
-  rw [dif_pos h]
+  rw [dite_eq_left h]
   exact Classical.choose_spec (realize k _ (Bx v ∩ Bx (v + 1)) _ _ h.1 h.2.1 h.2.2.1 h.2.2.2 le_rfl)
 
 theorem small_piL (hR : RowLab k Bx βx) : ∀ v, Small k (piL k Bx βx v)
@@ -243,8 +243,8 @@ theorem applyEdge_eq {m : ℕ} (v : ℕ) : ∀ (ts : List (ℕ × ℕ)) (M : Fin
       simp only [applyEdge, List.foldr_cons] at ih ⊢
       rw [moveKey, ih]
       by_cases h : v < u.val
-      · simp only [if_pos h, comp_cons]
-      · simp only [if_neg h]
+      · simp only [ite_eq_left h, comp_cons]
+      · simp only [ite_eq_right h]
 
 /-- Process the row edges `0, …, e - 1` in order. -/
 noncomputable def applyAll {m : ℕ} : ℕ → (Fin m → ℕ → ℕ) → Fin m → ℕ → ℕ
@@ -297,14 +297,14 @@ theorem card_new_eq (hA : ∀ v, (Ax v).card = (Bx v).card) (hβ : ∀ v, Set.In
 theorem starMap_mem (hA : ∀ v, (Ax v).card = (Bx v).card) (hβ : ∀ v, Set.InjOn (β v) (Ax v))
     {v a : ℕ} (ha : a ∈ Bx v \ Ax v) : starMap Ax Bx β v a ∈ (Ax v \ Bx v).image (β v) := by
   unfold starMap
-  rw [dif_pos (card_new_eq hA hβ v), dif_pos ha]
+  rw [dite_eq_left (card_new_eq hA hβ v), dite_eq_left ha]
   exact Subtype.mem _
 
 theorem starMap_injOn (hA : ∀ v, (Ax v).card = (Bx v).card) (hβ : ∀ v, Set.InjOn (β v) (Ax v))
     (v : ℕ) {a a' : ℕ} (ha : a ∈ Bx v \ Ax v) (ha' : a' ∈ Bx v \ Ax v)
     (e : starMap Ax Bx β v a = starMap Ax Bx β v a') : a = a' := by
   unfold starMap at e
-  rw [dif_pos (card_new_eq hA hβ v), dif_pos ha, dif_pos ha'] at e
+  rw [dite_eq_left (card_new_eq hA hβ v), dite_eq_left ha, dite_eq_left ha'] at e
   have := (Fintype.equivOfCardEq _).injective (Subtype.ext e)
   exact congrArg Subtype.val this
 
@@ -317,16 +317,16 @@ theorem rowLab_tilde (hA : ∀ v, (Ax v).card = (Bx v).card)
   refine ⟨fun a ha a' ha' e => ?_, fun a ha => ?_⟩
   · unfold tilde at e
     by_cases h1 : a ∈ Ax v <;> by_cases h2 : a' ∈ Ax v
-    · rw [if_pos h1, if_pos h2] at e; exact hi v h1 h2 e
-    · rw [if_pos h1, if_neg h2] at e
+    · rw [ite_eq_left h1, ite_eq_left h2] at e; exact hi v h1 h2 e
+    · rw [ite_eq_left h1, ite_eq_right h2] at e
       obtain ⟨a'', ha'', e'⟩ := mem_image.mp (starMap_mem hA hi (mem_sdiff.mpr ⟨ha', h2⟩))
       have := hi v (mem_sdiff.mp ha'').1 h1 (e'.trans e.symm)
       subst this; exact absurd ha (mem_sdiff.mp ha'').2
-    · rw [if_neg h1, if_pos h2] at e
+    · rw [ite_eq_right h1, ite_eq_left h2] at e
       obtain ⟨a'', ha'', e'⟩ := mem_image.mp (starMap_mem hA hi (mem_sdiff.mpr ⟨ha, h1⟩))
       have := hi v (mem_sdiff.mp ha'').1 h2 (e'.trans e)
       subst this; exact absurd ha' (mem_sdiff.mp ha'').2
-    · rw [if_neg h1, if_neg h2] at e
+    · rw [ite_eq_right h1, ite_eq_right h2] at e
       exact starMap_injOn hA hi v (mem_sdiff.mpr ⟨ha, h1⟩) (mem_sdiff.mpr ⟨ha', h2⟩) e
   · unfold tilde
     split_ifs with h
@@ -348,7 +348,7 @@ theorem card_mismatch_le (hvc : ∀ v, ∀ c ∈ Ax v ∩ Ax (v + 1), β (v + 1)
   have h2 := hn.2 hc.1.2
   apply hc.2
   unfold tilde
-  rw [if_pos h1, if_pos h2]
+  rw [ite_eq_left h1, ite_eq_left h2]
   exact hvc v c (mem_inter.mpr ⟨h1, h2⟩)
 
 end Tilde
