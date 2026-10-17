@@ -3,8 +3,9 @@
 **`GridGen.Four.ecc_boxProd_pathG_three`**: for every `k ≥ 7` and every `n`,
 `(pathG 3 □ pathG n).ECCAt k`, i.e. every `4 × (n+1)` grid is ECC at list size `k`. The axioms
 are `[propext, Classical.choice, Quot.sound]` (`GridGen/PolymerAxiomAudit.lean`, comparator §17).
-For `k ≥ 16` this is `ListColoring.ecc_boxProd_pathG_of_sixteen`. The new range is `7 ≤ k ≤ 15`;
-`3 ≤ k ≤ 6` remains open.
+For `k ≥ 9` this is the gauge route's `ListColoring.ecc_boxProd_pathG_of_nine`. The new range is
+`k = 7, 8`; `3 ≤ k ≤ 6` remains open. (The certificates below once covered `8 ≤ k ≤ 15`, when the
+other route stopped at `16`; the range `9 ≤ k ≤ 15` was removed on 2026-10-17.)
 
 ## Route
 
@@ -29,10 +30,10 @@ two-step inequality, a first-seam inequality and an initial inequality.
 4. **Averaging** (`Fibre`, `Seam`). Any two uniform weights `GU` are within `1/ρ`, so a row pinned
    to a colour set `D` by the other rows carries at most `|D|/(ρ(k−3))` of the weight. This turns
    `Σ GU · Λ` into `(Σ GU) · Fval k μ₂ μ₃ μ₄`, or `Fcap` with the cap (`seam_of_cert`).
-5. **Certificates for `8 ≤ k ≤ 15`** (`Cert`). `Fval` is bounded below by a polynomial that, on
+5. **The certificate at `k = 8`** (`Cert`). `Fval` is bounded below by a polynomial that, on
    each region where the mismatch indicators are constant, is concave in each `μᵢ` separately. Its
-   minimum over a box is therefore at a vertex; fourteen vertex values per `k` are checked by
-   `norm_num`. The smallest margin is at `(μ₂, μ₃, μ₄) = (0, 1, 0)`, `k = 8`, about `0.0013`.
+   minimum over a box is therefore at a vertex; fourteen vertex values are checked by `norm_num`.
+   The smallest margin is at `(μ₂, μ₃, μ₄) = (0, 1, 0)`, about `0.0013`.
 6. **`k = 7`** (`Cert7`, `Exact`, `Small7`, `Seam7`). `Fcap` holds at 506 of the 512 integer
    mismatch triples (`cert7`, smallest value about `3.6·10⁻⁴`); `(0,0,0)` uses `Fval`. The five
    remaining triples, `(0,1,0)`, `(1,0,0)`, `(0,0,1)`, `(0,1,1)`, `(0,2,0)`, force the lists into

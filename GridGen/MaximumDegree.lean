@@ -7,8 +7,8 @@ import GridGen.PolymerCertificate
 The integer condition `567 * D ≤ 100 * k` is exactly `k ≥ ceil(5.67 * D)`.
 There is no restriction on graph order, connectedness, or maximum degree.
 An instance of `GridGen.Polymer.eccAt_of_parityCert` with the hyperbolic certificate
-`parityCert_uniform`. The degree-specific certificates are sharper for small degrees
-(`GridGen/DegreeFourTwenty.lean`, `GridGen/SmallDegree.lean`).
+`parityCert_uniform`. For `Δ ≤ 8` the degree-sensitive and neighbour-pair certificates are sharper
+(`GridGen/PeelDegree.lean`).
 -/
 
 namespace GridGen.Polymer

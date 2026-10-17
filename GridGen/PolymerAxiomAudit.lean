@@ -3,8 +3,8 @@ import GridGen.Four.Main
 
 /-!
 Guarded transitive axiom audit for the polymer route: every maximum-degree theorem and
-the lemmas that carry the argument; and the height-four grid theorem of `GridGen/Four/`. Each must
-use exactly the three standard axioms.
+the lemmas that carry the argument; the height-four grid theorem of `GridGen/Four/`; and every
+grid at `k ≥ 9` (`GridGen/Gauge/`). Each must use exactly the three standard axioms.
 -/
 
 /-- info: 'SimpleGraph.eccAt_of_degree_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
@@ -18,34 +18,6 @@ use exactly the three standard axioms.
 /-- info: 'SimpleGraph.eccAt_of_maxDegree_ceiling' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms SimpleGraph.eccAt_of_maxDegree_ceiling
-
-/-- info: 'SimpleGraph.eccAt_of_degree_le_three' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms SimpleGraph.eccAt_of_degree_le_three
-
-/-- info: 'SimpleGraph.eccAt_of_degree_le_four_twenty' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms SimpleGraph.eccAt_of_degree_le_four_twenty
-
-/-- info: 'SimpleGraph.eccAt_of_degree_le_five' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms SimpleGraph.eccAt_of_degree_le_five
-
-/-- info: 'SimpleGraph.eccAt_of_degree_le_six' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms SimpleGraph.eccAt_of_degree_le_six
-
-/-- info: 'SimpleGraph.eccAt_of_degree_le_seven' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms SimpleGraph.eccAt_of_degree_le_seven
-
-/-- info: 'SimpleGraph.eccAt_of_degree_le_eight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms SimpleGraph.eccAt_of_degree_le_eight
-
-/-- info: 'ListColoring.ecc_boxProd_pathG_of_twenty' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms ListColoring.ecc_boxProd_pathG_of_twenty
 
 /-- info: 'GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
@@ -143,10 +115,6 @@ use exactly the three standard axioms.
 #guard_msgs (whitespace := lax) in
 #print axioms SimpleGraph.eccAt_of_degree_le_eight_thirtyNine
 
-/-- info: 'ListColoring.ecc_boxProd_pathG_of_seventeen' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms ListColoring.ecc_boxProd_pathG_of_seventeen
-
 /-- info: 'GridGen.Polymer.colConst_le_col_of_certifiedPeelAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms GridGen.Polymer.colConst_le_col_of_certifiedPeelAt
@@ -163,10 +131,6 @@ use exactly the three standard axioms.
 #guard_msgs (whitespace := lax) in
 #print axioms SimpleGraph.eccAt_of_degree_le_eight_thirtyEight
 
-/-- info: 'ListColoring.ecc_boxProd_pathG_of_sixteen' depends on axioms: [propext, Classical.choice, Quot.sound] -/
-#guard_msgs (whitespace := lax) in
-#print axioms ListColoring.ecc_boxProd_pathG_of_sixteen
-
 /-- info: 'GridGen.Four.ecc_boxProd_pathG_three' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms GridGen.Four.ecc_boxProd_pathG_three
@@ -174,3 +138,7 @@ use exactly the three standard axioms.
 /-- info: 'GridGen.Polymer.colConst_le_col_of_certifiedPairAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms GridGen.Polymer.colConst_le_col_of_certifiedPairAt
+
+/-- info: 'ListColoring.ecc_boxProd_pathG_of_nine' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms ListColoring.ecc_boxProd_pathG_of_nine

@@ -5,11 +5,12 @@ Released under Apache 2.0 license.
 import GridGen.Gauge.Main
 
 /-!
-# Every rectangular grid is `k`-ECC for `k ≥ 10`
+# From row paths to the project's paths
 
-The gauge telescope is run on `rowG m`, the path on `Fin m`. This file transports the result to
-the project's paths `pathG r` (on `PathV r`, with `r + 1` vertices). The isomorphism
-`pathG r ≃g rowG (r + 1)` sends the last-attached vertex `none` to the last index.
+The gauge telescope is run on `rowG m`, the path on `Fin m`. This file transports it to the
+project's paths `pathG r` (on `PathV r`, with `r + 1` vertices). The isomorphism
+`pathG r ≃g rowG (r + 1)` sends the last-attached vertex `none` to the last index;
+`ecc_boxProd_pathG_of_nine` (`Nine/Main.lean`) uses it.
 -/
 
 open SimpleGraph ListColoring
@@ -101,17 +102,3 @@ def boxProdIsoLeft {α α' β : Type*} {G : SimpleGraph α} {G' : SimpleGraph α
       · exact Or.inr ⟨h1, by show e.toEquiv x.1 = e.toEquiv y.1; rw [h2]⟩
 
 end GridGen.Gauge
-
-namespace ListColoring
-
-open GridGen.Gauge
-
-/-- **Every rectangular grid is ECC at every list size at least 10.** Both dimensions are
-unrestricted; `pathG n` has `n + 1` vertices. -/
-theorem ecc_boxProd_pathG_of_ten {k : ℕ} (hk : 10 ≤ k) (r n : ℕ) :
-    (pathG r □ pathG n).ECCAt k := by
-  classical
-  rw [SimpleGraph.ecc_iso (boxProdIsoLeft (pathG n) (pathIso r)) k]
-  convert! ecc_rowG_boxProd hk (r + 1) n
-
-end ListColoring

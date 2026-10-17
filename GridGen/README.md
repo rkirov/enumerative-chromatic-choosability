@@ -3,7 +3,7 @@
 Two independent developments share this library.
 
 1. **The polymer route** (`Polymer*.lean`, `PolymerCertificate.lean`, `MaximumDegree.lean`,
-   `DegreeFourTwenty.lean`, `SmallDegree.lean`, `PolymerStability.lean`): every finite graph of
+   `PeelDegree.lean`, `PolymerStability.lean`): every finite graph of
    maximum degree `Δ` is `k`-ECC once `k` is linear in `Δ`, with no hypothesis on order,
    connectedness, planarity or bipartiteness. Complete, with no unproved step, axiom-audited.
 2. **The column-lookback reduction** (`Column`, `Graph`, `Telescope`, `Uniform`, `Main`,
@@ -12,7 +12,8 @@ Two independent developments share this library.
    for `k ≥ 7` in `Four/` (see [`Four/README.md`](Four/README.md)); open at heights ≥ 5.
    See `ai_research_notes/GRID_REVIEW_2026-09-02.md` §5.6.
 
-The rest of this file is about the polymer route.
+A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 9` (see
+[`Gauge/README.md`](Gauge/README.md)). The rest of this file is about the polymer route.
 
 ## Statements
 
@@ -20,27 +21,20 @@ The rest of this file is about the polymer route.
 |---|---|---|
 | `SimpleGraph.eccAt_of_degree_bound` | every degree `≤ D`, `567 D ≤ 100 k` | `G.ECCAt k` |
 | `SimpleGraph.eccAt_of_maxDegree_bound`, `…_ceiling` | `567 Δ ≤ 100 k`, i.e. `k ≥ ⌈5.67 Δ⌉` | `G.ECCAt k` |
-| `SimpleGraph.eccAt_of_degree_le_three` | `Δ ≤ 3`, `k ≥ 15` | `G.ECCAt k` |
-| `SimpleGraph.eccAt_of_degree_le_four_twenty` | `Δ ≤ 4`, `k ≥ 20` | `G.ECCAt k` |
-| `ListColoring.ecc_boxProd_pathG_of_twenty` | any rectangle `P_n □ P_m`, `k ≥ 20` | ECC at `k` |
-| `SimpleGraph.eccAt_of_degree_le_{five,six,seven,eight}` | `Δ ≤ 5, 6, 7, 8`; `k ≥ 26, 32, 37, 43` | `G.ECCAt k` |
 | `SimpleGraph.eccAt_of_degree_le_three_eleven` … `_eight_thirtyNine` | `Δ ≤ 3, …, 8`; `k ≥ 11, 17, 22, 28, 33, 39` | `G.ECCAt k` (degree-sensitive, `PeelDegree.lean`) |
-| `SimpleGraph.eccAt_of_degree_le_four_seventeen` | `Δ ≤ 4`, `k ≥ 17` | `G.ECCAt k` |
-| `ListColoring.ecc_boxProd_pathG_of_seventeen` | any rectangle `P_n □ P_m`, `k ≥ 17` | ECC at `k` |
 | `SimpleGraph.eccAt_of_degree_le_{four_sixteen,six_twentySeven,eight_thirtyEight}` | `Δ ≤ 4, 6, 8`; `k ≥ 16, 27, 38` | `G.ECCAt k` (neighbour pairs, `PeelDegree.lean`) |
-| `ListColoring.ecc_boxProd_pathG_of_sixteen` | any rectangle `P_n □ P_m`, `k ≥ 16` | ECC at `k` |
-| `GridGen.Polymer.colConst_lt_col_of_certifiedAt_of_adj` | a `CertifiedAt` threshold (rows 1–6); two adjacent lists differ | `P(G,k) < P(G,L)` |
-| `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt` | a `CertifiedAt` threshold (rows 1–6); `G` connected | `P(G,L) = P(G,k)` iff `L` is constant |
+| `GridGen.Polymer.colConst_lt_col_of_certifiedAt_of_adj` | a `CertifiedAt` threshold (rows 1–2); two adjacent lists differ | `P(G,k) < P(G,L)` |
+| `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt` | a `CertifiedAt` threshold (rows 1–2); `G` connected | `P(G,L) = P(G,k)` iff `L` is constant |
 
 `PolymerStability.lean` restates the last two at the uniform threshold under the names
 `SimpleGraph.colConst_lt_col_of_degree_bound_of_adj_lists_ne` and
 `SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound`. For comparison, the ceiling bound gives
-18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 42 guarded
+18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 34 guarded
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
-is claimed optimal. For grids the list sizes `3 ≤ k ≤ 6` stay open at height four (`Four/`
-proves `k ≥ 7`) and `3 ≤ k ≤ 15` at heights `≥ 5`.
+is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 9`); the list sizes
+`3 ≤ k ≤ 6` stay open at height four (`Four/` proves `k ≥ 7`) and `3 ≤ k ≤ 8` at heights `≥ 5`.
 
 ## The argument
 
@@ -90,22 +84,17 @@ when some edge has unequal lists, and the equality case (`PolymerCertificate.lea
 
 | instance | `D` | `k₀` | `s` | `e` | `o` | `r` |
 |---|---|---|---|---|---|---|
-| `parityCert_degree_three` | 3 | 15 | 3/2 | 132/125 | 27/125 | 1/3 |
-| `parityCert_degree_four` | 4 | 20 | 17/10 | 553/500 | 3/10 | 7/17 |
-| `parityCert_degree_five` | 5 | 26 | 8/5 | 111/100 | 29/100 | 3/8 |
-| `parityCert_degree_six` | 6 | 32 | 3/2 | 11/10 | 7/25 | 1/3 |
-| `parityCert_degree_seven` | 7 | 37 | 8/5 | 9/8 | 63/200 | 3/8 |
-| `parityCert_degree_eight` | 8 | 43 | 8/5 | 113/100 | 8/25 | 3/8 |
 | `parityCert_uniform` | any | `k` | 100/63 | 117/100 | 37/100 | 37/100 |
 
-The finite instances are checked by `norm_num`. The uniform one bounds `parityPower` by
-`(e^{ot} cosh(et), e^{ot} sinh(et))` at `t = n x`, and checks the endpoint `t = 10000/35721` with
-Mathlib's degree-seven Taylor bound for `exp` (`PolymerUniformBounds.lean`).
+The uniform certificate bounds `parityPower` by `(e^{ot} cosh(et), e^{ot} sinh(et))` at `t = n x`,
+and checks the endpoint `t = 10000/35721` with Mathlib's degree-seven Taylor bound for `exp`
+(`PolymerUniformBounds.lean`).
 
-Numerically, the finite thresholds above are the least this certificate shape reaches for each
-`D`: the root budget binds, not the edge budget. The uniform constant tends to about `5.6634`.
-For this certificate, degree four at 19 would need a new idea; the two variants below are such
-ideas.
+Numerically, for fixed `D` this certificate shape reaches `k₀ = 15, 20, 26, 32, 37, 43` at
+`D = 3, …, 8`: the root budget binds, not the edge budget. The uniform constant tends to about
+`5.6634`. Those fixed-degree instances were formalized (`DegreeFourTwenty.lean`,
+`SmallDegree.lean`) and removed on 2026-10-17, superseded by the two variants below; they are in
+the git history before that date.
 
 ### Degree-sensitive variants
 
@@ -162,7 +151,7 @@ The ingredients are not new, and neither is the positivity half:
 * **the constants coincide with Dong–Koh**, *Bounds for the real zeros of chromatic polynomials*,
   Combin. Probab. Comput. **17** (2008). They prove `P(G,q) ≠ 0` for real `q ≥ 5.664 Δ`, and
   `q ≥ 4.765 Δ` when `Δ = 3`. This proof's limiting constant is 5.6634, and at `Δ = 3` it reaches
-  `k ≥ 15 > 3 · 4.765`. We have not compared the two proofs line by line. The agreement suggests
+  `k ≥ 15 > 3 · 4.765` (before the degree-sensitive refinement). We have not compared the two proofs line by line. The agreement suggests
   their bound rests on the same sign-separated root recursion, so the positivity half of this
   argument should be credited to them. Positivity of `P(G,q)` alone is weaker than what is known:
   Bencs–Regts (arXiv:2505.04366) exclude all complex zeros with `|q| ≥ 4.25 Δ`.
@@ -170,7 +159,8 @@ The ingredients are not new, and neither is the positivity half:
 What this development adds is the *list-colouring comparison* at these constants. Positivity and
 monotonicity of the interpolation carry over from the real-root recursion, with only even blocks
 charged. The derivative charges only odd blocks, to individual trees, and keeps the edge-deletion
-partition functions. At `Δ = 4` this gives 20 against the 94 that Zhang–Dong's bound gives there.
+partition functions. At `Δ = 4` this gives 20 (16 with Codex's refinements) against the 94 that
+Zhang–Dong's bound gives there.
 This is a formal result of a 2026 AI research collaboration, not a claim of priority beyond the
 comparison stated. The literature check is targeted, not exhaustive
 (`MAX_DEGREE_ECC_LITERATURE_2026-09-12.md`).
@@ -179,13 +169,15 @@ comparison stated. The literature check is targeted, not exhaustive
 
 ```sh
 lake build GridGen                     # everything, including the polymer route
-lake build GridGen.PolymerAxiomAudit   # 28 guarded axiom checks
+lake build GridGen.PolymerAxiomAudit   # 34 guarded axiom checks
 python3 GridGen/polymer_audit.py --max-n 5 --grids   # independent exact-arithmetic bug detector
 python3 GridGen/parity_budget_review.py --explore    # rational certificates and numerical minima
 ```
 
 The polymer route imports no seam certificate and evaluates no `Finpartition` instance. History:
 the threshold went 544 → 25 (tree-wise charging) → 20 (coefficient signs), then was generalized to
-`⌈5.67 Δ⌉` and factored through `ParityCert` (2026-09-23). The superseded modules and dated
+`⌈5.67 Δ⌉` and factored through `ParityCert` (2026-09-23), refined to the degree-sensitive and
+neighbour-pair thresholds (2026-10-07), and for grids superseded by `Gauge/` (2026-10-16).
+The superseded modules and dated
 notes are kept, untracked, in `ai_research_notes/gridgen_retired_threshold25/` and
 `ai_research_notes/gridgen_history/`.

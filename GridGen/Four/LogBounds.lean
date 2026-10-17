@@ -338,7 +338,7 @@ theorem rate4_err {n n1 n2 n3 n4 e12 e23 e34 t123 t234 q μ3 μ4 : ℝ} (hn : 6 
     field_simp; ring
   linarith
 
-/-! ### The fourth row: uniform side and the defect-free tail (numerical, `7 ≤ k ≤ 15`) -/
+/-! ### The fourth row: uniform side and the defect-free tail (numerical, `7 ≤ k ≤ 8`) -/
 
 /-- The fourth rate from the counting data `(n₁, …, q)`. -/
 noncomputable def rate4 (n1 n2 n3 n4 e12 e23 e34 t123 t234 q : ℝ) : ℝ :=
@@ -354,8 +354,8 @@ theorem log_le_of_sub_one_le {x y : ℝ} (hx : 0 < x) (h : x - 1 ≤ y) : log x 
   (Real.log_le_sub_one_of_pos hx).trans h
 
 /-- **Row four, uniform side.** In log against `t`, the uniform fourth rate is at most
-`c₂₄/((n-1)²t) + 1/(nt²(n-1))`. Checked for each `k = 7, …, 15`, `n = k - 1`. -/
-theorem rate4_unif {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 15) {c13 c24 c14 : ℝ}
+`c₂₄/((n-1)²t) + 1/(nt²(n-1))`. Checked for each `k = 7, 8`, `n = k - 1`. -/
+theorem rate4_unif {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 8) {c13 c24 c14 : ℝ}
     (h13 : c13 = 0 ∨ c13 = 1) (h24 : c24 = 0 ∨ c24 = 1) (h14 : c14 = 0 ∨ c14 = 1)
     (h1314 : c13 * c14 = 0) (h2414 : c24 * c14 = 0) :
     log (r4U ((k : ℝ) - 1) c13 c24 c14 / ((((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1)))
@@ -374,7 +374,7 @@ theorem rate4_unif {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 15) {c13 c24 c14 : ℝ}
 
 /-- **Row four, the defect-free tail.** When all lists agree and only row one has a bonus, the
 data are explicit and the fourth-row error is at least `-1/(nt(n-1)³)`. -/
-theorem rate4_tail {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 15) {c24 : ℝ} (h24 : c24 = 0 ∨ c24 = 1) :
+theorem rate4_tail {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 8) {c24 : ℝ} (h24 : c24 = 0 ∨ c24 = 1) :
     -(1 / (((k : ℝ) - 1) * ((((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1))
           * ((k : ℝ) - 2) ^ 3))
       ≤ log (rate4 ((k : ℝ)) ((k : ℝ) - 1) ((k : ℝ) - 1) ((k : ℝ) - 1) ((k : ℝ) - 1)

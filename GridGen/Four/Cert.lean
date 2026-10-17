@@ -11,8 +11,8 @@ After averaging, the per-state gain becomes a function of the three list mismatc
 `Fval k μ₂ μ₃ μ₄`. With `log (1 + x) ≥ x - x²/2` it is bounded below by the polynomial `Fg`, which
 on each region where the mismatch indicators are constant is a concave quadratic in each variable
 separately; so it is nonnegative on a box once it is nonnegative at the box's eight vertices.
-Three boxes cover the nonzero integer mismatches, fourteen distinct vertices in all, checked for
-each `k = 8, …, 15` by `norm_num`.
+Three boxes cover the nonzero integer mismatches, fourteen distinct vertices in all, checked at
+`k = 8` by `norm_num`. (Larger `k` are covered by the gauge route, `GridGen/Gauge/`.)
 -/
 
 namespace GridGen.Four
@@ -110,7 +110,7 @@ noncomputable def Vx (k : ℕ) (j3 a b c : ℝ) : ℝ :=
   Fg (kA ((k : ℝ) - 1)) ((k : ℝ) - 1) (qk k) (eta k) (ku3 ((k : ℝ) - 1)) (ku4e ((k : ℝ) - 1))
     (ku4b ((k : ℝ) - 1)) j3 1 a b c
 
-/-! The vertex values, one `k` at a time. -/
+/-! The vertex values. -/
 
 set_option maxHeartbeats 2000000 in
 theorem vertices_8 :
@@ -121,84 +121,14 @@ theorem vertices_8 :
   refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
     norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
 
-set_option maxHeartbeats 2000000 in
-theorem vertices_9 :
-    (0 ≤ Vx 9 1 1 0 0 ∧ 0 ≤ Vx 9 1 1 0 9 ∧ 0 ≤ Vx 9 1 1 9 0 ∧ 0 ≤ Vx 9 1 1 9 9 ∧
-      0 ≤ Vx 9 1 9 0 0 ∧ 0 ≤ Vx 9 1 9 0 9 ∧ 0 ≤ Vx 9 1 9 9 0 ∧ 0 ≤ Vx 9 1 9 9 9) ∧
-    (0 ≤ Vx 9 1 0 1 0 ∧ 0 ≤ Vx 9 1 0 1 9 ∧ 0 ≤ Vx 9 1 0 9 0 ∧ 0 ≤ Vx 9 1 0 9 9) ∧
-    (0 ≤ Vx 9 0 0 0 1 ∧ 0 ≤ Vx 9 0 0 0 9) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-set_option maxHeartbeats 2000000 in
-theorem vertices_10 :
-    (0 ≤ Vx 10 1 1 0 0 ∧ 0 ≤ Vx 10 1 1 0 10 ∧ 0 ≤ Vx 10 1 1 10 0 ∧ 0 ≤ Vx 10 1 1 10 10 ∧
-      0 ≤ Vx 10 1 10 0 0 ∧ 0 ≤ Vx 10 1 10 0 10 ∧ 0 ≤ Vx 10 1 10 10 0 ∧ 0 ≤ Vx 10 1 10 10 10) ∧
-    (0 ≤ Vx 10 1 0 1 0 ∧ 0 ≤ Vx 10 1 0 1 10 ∧ 0 ≤ Vx 10 1 0 10 0 ∧ 0 ≤ Vx 10 1 0 10 10) ∧
-    (0 ≤ Vx 10 0 0 0 1 ∧ 0 ≤ Vx 10 0 0 0 10) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-set_option maxHeartbeats 2000000 in
-theorem vertices_11 :
-    (0 ≤ Vx 11 1 1 0 0 ∧ 0 ≤ Vx 11 1 1 0 11 ∧ 0 ≤ Vx 11 1 1 11 0 ∧ 0 ≤ Vx 11 1 1 11 11 ∧
-      0 ≤ Vx 11 1 11 0 0 ∧ 0 ≤ Vx 11 1 11 0 11 ∧ 0 ≤ Vx 11 1 11 11 0 ∧ 0 ≤ Vx 11 1 11 11 11) ∧
-    (0 ≤ Vx 11 1 0 1 0 ∧ 0 ≤ Vx 11 1 0 1 11 ∧ 0 ≤ Vx 11 1 0 11 0 ∧ 0 ≤ Vx 11 1 0 11 11) ∧
-    (0 ≤ Vx 11 0 0 0 1 ∧ 0 ≤ Vx 11 0 0 0 11) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-set_option maxHeartbeats 2000000 in
-theorem vertices_12 :
-    (0 ≤ Vx 12 1 1 0 0 ∧ 0 ≤ Vx 12 1 1 0 12 ∧ 0 ≤ Vx 12 1 1 12 0 ∧ 0 ≤ Vx 12 1 1 12 12 ∧
-      0 ≤ Vx 12 1 12 0 0 ∧ 0 ≤ Vx 12 1 12 0 12 ∧ 0 ≤ Vx 12 1 12 12 0 ∧ 0 ≤ Vx 12 1 12 12 12) ∧
-    (0 ≤ Vx 12 1 0 1 0 ∧ 0 ≤ Vx 12 1 0 1 12 ∧ 0 ≤ Vx 12 1 0 12 0 ∧ 0 ≤ Vx 12 1 0 12 12) ∧
-    (0 ≤ Vx 12 0 0 0 1 ∧ 0 ≤ Vx 12 0 0 0 12) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-set_option maxHeartbeats 2000000 in
-theorem vertices_13 :
-    (0 ≤ Vx 13 1 1 0 0 ∧ 0 ≤ Vx 13 1 1 0 13 ∧ 0 ≤ Vx 13 1 1 13 0 ∧ 0 ≤ Vx 13 1 1 13 13 ∧
-      0 ≤ Vx 13 1 13 0 0 ∧ 0 ≤ Vx 13 1 13 0 13 ∧ 0 ≤ Vx 13 1 13 13 0 ∧ 0 ≤ Vx 13 1 13 13 13) ∧
-    (0 ≤ Vx 13 1 0 1 0 ∧ 0 ≤ Vx 13 1 0 1 13 ∧ 0 ≤ Vx 13 1 0 13 0 ∧ 0 ≤ Vx 13 1 0 13 13) ∧
-    (0 ≤ Vx 13 0 0 0 1 ∧ 0 ≤ Vx 13 0 0 0 13) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-set_option maxHeartbeats 2000000 in
-theorem vertices_14 :
-    (0 ≤ Vx 14 1 1 0 0 ∧ 0 ≤ Vx 14 1 1 0 14 ∧ 0 ≤ Vx 14 1 1 14 0 ∧ 0 ≤ Vx 14 1 1 14 14 ∧
-      0 ≤ Vx 14 1 14 0 0 ∧ 0 ≤ Vx 14 1 14 0 14 ∧ 0 ≤ Vx 14 1 14 14 0 ∧ 0 ≤ Vx 14 1 14 14 14) ∧
-    (0 ≤ Vx 14 1 0 1 0 ∧ 0 ≤ Vx 14 1 0 1 14 ∧ 0 ≤ Vx 14 1 0 14 0 ∧ 0 ≤ Vx 14 1 0 14 14) ∧
-    (0 ≤ Vx 14 0 0 0 1 ∧ 0 ≤ Vx 14 0 0 0 14) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-set_option maxHeartbeats 2000000 in
-theorem vertices_15 :
-    (0 ≤ Vx 15 1 1 0 0 ∧ 0 ≤ Vx 15 1 1 0 15 ∧ 0 ≤ Vx 15 1 1 15 0 ∧ 0 ≤ Vx 15 1 1 15 15 ∧
-      0 ≤ Vx 15 1 15 0 0 ∧ 0 ≤ Vx 15 1 15 0 15 ∧ 0 ≤ Vx 15 1 15 15 0 ∧ 0 ≤ Vx 15 1 15 15 15) ∧
-    (0 ≤ Vx 15 1 0 1 0 ∧ 0 ≤ Vx 15 1 0 1 15 ∧ 0 ≤ Vx 15 1 0 15 0 ∧ 0 ≤ Vx 15 1 0 15 15) ∧
-    (0 ≤ Vx 15 0 0 0 1 ∧ 0 ≤ Vx 15 0 0 0 15) := by
-  refine ⟨⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩, ⟨?_, ?_, ?_, ?_⟩, ?_, ?_⟩ <;>
-    norm_num [Vx, Fg, kA, kt, ku3, ku4e, ku4b, qk, eta, rho]
-
-/-- **The fourteen vertices**, for each `k = 8, …, 15`. -/
-theorem vertices {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) :
+/-- **The fourteen vertices** at `k = 8`. -/
+theorem vertices {k : ℕ} (hk : k = 8) :
     (0 ≤ Vx k 1 1 0 0 ∧ 0 ≤ Vx k 1 1 0 k ∧ 0 ≤ Vx k 1 1 k 0 ∧ 0 ≤ Vx k 1 1 k k ∧
       0 ≤ Vx k 1 k 0 0 ∧ 0 ≤ Vx k 1 k 0 k ∧ 0 ≤ Vx k 1 k k 0 ∧ 0 ≤ Vx k 1 k k k) ∧
     (0 ≤ Vx k 1 0 1 0 ∧ 0 ≤ Vx k 1 0 1 k ∧ 0 ≤ Vx k 1 0 k 0 ∧ 0 ≤ Vx k 1 0 k k) ∧
     (0 ≤ Vx k 0 0 0 1 ∧ 0 ≤ Vx k 0 0 0 k) := by
-  interval_cases k
-  · exact_mod_cast vertices_8
-  · exact_mod_cast vertices_9
-  · exact_mod_cast vertices_10
-  · exact_mod_cast vertices_11
-  · exact_mod_cast vertices_12
-  · exact_mod_cast vertices_13
-  · exact_mod_cast vertices_14
-  · exact_mod_cast vertices_15
+  subst hk
+  exact_mod_cast vertices_8
 
 /-- The mismatches are integers: zero or at least one. -/
 theorem mu_cases {k : ℕ} {B C : Finset ℕ} (hB : B.card = k) : mu k B C = 0 ∨ 1 ≤ mu k B C := by
@@ -218,10 +148,10 @@ theorem log_quad {x A : ℝ} (hx : 0 ≤ x) (hA : 0 < A) :
   linarith
 
 /-- **The certificate**: the averaged gain is nonnegative for every list system. -/
-theorem Fval_nonneg {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {μ2 μ3 μ4 : ℝ}
+theorem Fval_nonneg {k : ℕ} (hk : k = 8) {μ2 μ3 μ4 : ℝ}
     (h2 : μ2 = 0 ∨ 1 ≤ μ2) (h3 : μ3 = 0 ∨ 1 ≤ μ3) (h4 : μ4 = 0 ∨ 1 ≤ μ4)
     (h2k : μ2 ≤ k) (h3k : μ3 ≤ k) (h4k : μ4 ≤ k) : 0 ≤ Fval k μ2 μ3 μ4 := by
-  have hk8' : (8 : ℝ) ≤ k := by exact_mod_cast hk8
+  have hk8' : (8 : ℝ) ≤ k := by subst hk; norm_num
   have hA : 0 < kA ((k : ℝ) - 1) := by unfold kA; nlinarith
   have hn2 : (k : ℝ) - 1 - 1 = (k : ℝ) - 1 - 1 := rfl
   have p2 : 0 ≤ μ2 := by rcases h2 with h | h <;> linarith
@@ -230,7 +160,7 @@ theorem Fval_nonneg {k : ℕ} (hk8 : 8 ≤ k) (hk15 : k ≤ 15) {μ2 μ3 μ4 : �
   have l2 := log_quad p2 hA
   have l3 := log_quad p3 hA
   have l4 := log_quad p4 hA
-  obtain ⟨V1, V2, V3⟩ := vertices hk8 hk15
+  obtain ⟨V1, V2, V3⟩ := vertices hk
   have hk0 : (0 : ℝ) ≤ k := by linarith
   have h01 : (0 : ℝ) ≤ 1 := zero_le_one
   have h1k : (1 : ℝ) ≤ k := by linarith

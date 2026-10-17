@@ -127,9 +127,24 @@ published construction.
   overlap-`k − 1` case (Lemma 6, reproved as `lemma6`). A targeted search on 2026-09-28 found no
   proof of the conjecture in the literature.
 
+* **Every grid at `k ≥ 9` (`GridGen/Gauge/`).** Every rectangle `P_m □ P_n`, of any height and
+  width, is ECC at every `k ≥ 9` (`ListColoring.ecc_boxProd_pathG_of_nine`). GridGen's column
+  telescope is run with each column relabelled by a vertically consistent bijection onto
+  `{0, …, k−1}`, so the telescoped quantity counts DP-colourings of an explicit cover; at each seam
+  a box bound gives the gain of a deleted seam pair, and a Kempe-chain swap with a crossing-path
+  count bounds the loss of each label transposition. At `k = 9` the box bound separates the labels
+  unavailable next to the seam, the shortest crossing path is charged as a 4-cycle, and crossing
+  paths are counted exactly up to twelve cells. **Credits.** The route and its proof are this
+  repository's (Claude, 2026-10-15 to 2026-10-17); DP-colourings are Dvořák–Postle's and the swap
+  is Kempe's. It supersedes the grid corollaries of the maximum-degree items below (`k ≥ 20`, then
+  `17`, then `16`), which have been removed, and the height-four item's range above `k = 8`.
+  Not checked against the literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 8` remains open at
+  heights `≥ 5`.
+
 * **Height-four grids at `k ≥ 7` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
   `k ≥ 7` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
-  `k ≥ 16`, from the maximum-degree item below. The route is GridGen's column telescoping: one seam
+  `k ≥ 16`, from the maximum-degree item below. The certificates covered `7 ≤ k ≤ 15`; since the
+  gauge item above, only `k = 7, 8` are kept. The route is GridGen's column telescoping: one seam
   inequality between consecutive columns for every horizon, reduced to the eight corners of a box of
   pattern weights that the uniform transfer maps into itself, then proved per previous column by
   factoring its successor count into four row rates, bounding each rate's log against the uniform
@@ -139,7 +154,7 @@ published construction.
   linear lower bound by kernel evaluation over every column type (`GridGen/Four/Exact.lean`,
   `Small7.lean`). **Credits.** The reduction to the box, the row-rate localisation, the
   reference-palette pattern term in its final form, the initial inequality, the concavity reduction
-  of the `k ≥ 8` certificate to fourteen vertices per `k`, the `k = 7` cap and exact certificates,
+  of the `k = 8` certificate to fourteen vertices, the `k = 7` cap and exact certificates,
   and the Lean development are this repository's (Claude, 2026-10-10 to 2026-10-16). **Codex
   (OpenAI), consulted on 2026-10-15** (`ai_research_notes/CODEX_H4_SEAM_BOUNDS_2026-10-15.md`),
   supplied the symbolic invariant box `ρ = 1 − 2/(k−2)³`, the one-sided error bounds for rows three
@@ -157,11 +172,12 @@ published construction.
   from a root or an anchor edge, and each step of that deletion removes a vertex that has already
   lost a neighbour. Full-degree roots then only need positivity (root odd mass `< 1`). This lowers
   every degree threshold by about four: `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`
-  (`SimpleGraph.eccAt_of_degree_le_four_seventeen`, `ListColoring.ecc_boxProd_pathG_of_seventeen`).
+  (`SimpleGraph.eccAt_of_degree_le_three_eleven`, …).
   A second refinement (`GridGen/PolymerPair*.lean`, `PolymerUpperRoot.lean`) proves the upper ratio
   `Z(U) ≤ k x Z(U − v)` alongside, and uses it to keep the positive neighbour-pair blocks `{v, u, w}`
   at a root; that takes `Δ ≤ 4, 6, 8` to `k ≥ 16, 27, 38`, and every rectangular grid to `k ≥ 16`
-  (`SimpleGraph.eccAt_of_degree_le_four_sixteen`, `ListColoring.ecc_boxProd_pathG_of_sixteen`).
+  (`SimpleGraph.eccAt_of_degree_le_four_sixteen`; the grid corollary is superseded by the gauge
+  item and removed).
   **Both ideas are Codex's (OpenAI), proposed when consulted on 2026-10-07**
   (`ai_research_notes/CODEX_GRID_ALL_HEIGHTS_2026-10-07.md` §3, including the `k ≥ 16` sketch);
   the Lean development, the certificates for `Δ ≠ 4` and the `Δ − 2`-port treatment of smaller roots
@@ -169,11 +185,11 @@ published construction.
   literature beyond the sources credited in the item below.
 
 * **Maximum-degree thresholds for the list colour function (`GridGen/`).** Every finite graph is
-  `k`-ECC once `567Δ ≤ 100k`; `Δ ≤ 3, 4, 5, 6, 7, 8` suffice at `k ≥ 15, 20, 26, 32, 37, 43`
-  (so every rectangular grid at `k ≥ 20`); and at each of these thresholds adjacent unequal lists
-  force `P(G,L) > P(G,k)`, so on a connected graph only constant assignments attain equality
-  (`SimpleGraph.eccAt_of_maxDegree_bound`, `SimpleGraph.eccAt_of_degree_le_three`,
-  `SimpleGraph.eccAt_of_degree_le_four_twenty`, `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt`).
+  `k`-ECC once `567Δ ≤ 100k`, and there adjacent unequal lists force `P(G,L) > P(G,k)`, so on a
+  connected graph only constant assignments attain equality (`SimpleGraph.eccAt_of_maxDegree_bound`,
+  `GridGen.Polymer.col_eq_colConst_iff_of_certifiedAt`). The same certificate gave
+  `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 15, 20, 26, 32, 37, 43` (every rectangular grid at `k ≥ 20`);
+  those instances were removed on 2026-10-17, superseded by the item above and the gauge item.
   **Mostly not new ideas, and credited in `GridGen/README.md`:** the connected-block expansion
   and tree-graph bound (standard; Sokal 2001), the tree deficiency inequality (Wang–Qian–Yan
   2017), the interpolation with tree-wise charging (Zhang–Dong 2026, who get `23.41Δ`), and — by

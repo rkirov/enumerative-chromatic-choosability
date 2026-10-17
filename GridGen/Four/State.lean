@@ -53,7 +53,7 @@ theorem zz_self (B : Finset ℕ) (a b : ℕ) : zz B B a b = 0 := by
   unfold zz; simp
 
 /-- **The count bound of one state, from the lists.** -/
-theorem count_data {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {B₁ B₂ B₃ B₄ : Finset ℕ}
+theorem count_data {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
     {s : T4} (hs : Proper s) :
     countBound ((k : ℝ) - 1) (mu k B₁ B₂) (mu k B₂ B₃) (mu k B₃ B₄)
@@ -82,7 +82,7 @@ theorem count_data {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {B₁ B₂ B₃ B
     exact_mod_cast Finset.card_le_card h
   obtain ⟨hM30, hM3N⟩ := M3_bounds A₁ A₂ A₃
   obtain ⟨hM40, hM4N⟩ := M4_bounds A₁ A₂ A₃ A₄
-  refine count_log_bound hk7 hk15 rfl (hb_cases _ _) (hb_cases _ _) (hb_cases _ _) (hb_cases _ _)
+  refine count_log_bound hk7 hk8 rfl (hb_cases _ _) (hb_cases _ _) (hb_cases _ _) (hb_cases _ _)
     (card_erase_hb hB₁ _) (card_erase_hb hB₂ _) (card_erase_hb hB₃ _) (card_erase_hb hB₄ _)
     (mu_nonneg hB₁) (mu_nonneg hB₂) (mu_nonneg hB₃)
     (by have := mu_le (k := k) B₁ B₂; linarith) (by have := mu_le (k := k) B₂ B₃; linarith)
@@ -227,7 +227,7 @@ noncomputable def Lamc (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : �
   CB k B₁ B₂ B₃ B₄ s - min (eta k * PS k B₁ B₂ B₃ B₄ s) ((1 - rho k) / rho k)
 
 /-- **The log gain of one state**, with and without the cap. -/
-theorem state_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+theorem state_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : InBox k w)
     {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
     {s : T4} (hs : Proper s) :
@@ -293,7 +293,7 @@ theorem state_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw
     exact mul_le_mul_of_nonneg_left (div_le_div_of_nonneg_right hmax hk3.le)
       (div_nonneg (by linarith) hρ.le)
   -- the count term
-  have hcnt := count_data hk7 hk15 hB₁ hB₂ hB₃ hB₄ hs
+  have hcnt := count_data hk7 hk8 hB₁ hB₂ hB₃ hB₄ hs
   -- positivity
   have c1 := card_ge_of_erase hB₁ (r1 s)
   have c2 := card_ge_of_erase hB₂ (r2 s)
@@ -373,21 +373,21 @@ theorem mul_one_add_le_of_log {u b l : ℝ} (hu : 0 < u) (hb : 0 < b) (h : l ≤
     _ = b := mul_div_cancel₀ _ hu.ne'
 
 /-- **The bound for one state**, capped: `GB ≥ GU · (1 + Λc)`. -/
-theorem state_bound_cap {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+theorem state_bound_cap {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : InBox k w)
     {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
     {s : T4} (hs : Proper s) :
     GU k w s * (1 + Lamc k B₁ B₂ B₃ B₄ s) ≤ GB w B₁ B₂ B₃ B₄ s := by
-  obtain ⟨hu, hb, hl⟩ := state_log_bound hk7 hk15 hw hB₁ hB₂ hB₃ hB₄ hs
+  obtain ⟨hu, hb, hl⟩ := state_log_bound hk7 hk8 hw hB₁ hB₂ hB₃ hB₄ hs
   exact mul_one_add_le_of_log hu hb hl
 
 /-- **The bound for one state**: `GB ≥ GU · (1 + Λ)`. -/
-theorem state_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {w : Wt} (hw : InBox k w)
+theorem state_bound {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : InBox k w)
     {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)
     {s : T4} (hs : Proper s) :
     GU k w s * (1 + Lam k B₁ B₂ B₃ B₄ s) ≤ GB w B₁ B₂ B₃ B₄ s := by
-  obtain ⟨hu, hb, hl⟩ := state_log_bound hk7 hk15 hw hB₁ hB₂ hB₃ hB₄ hs
+  obtain ⟨hu, hb, hl⟩ := state_log_bound hk7 hk8 hw hB₁ hB₂ hB₃ hB₄ hs
   refine mul_one_add_le_of_log hu hb (le_trans ?_ hl)
   rw [Lam_eq_CB, Lamc]
   linarith [min_le_left (eta k * PS k B₁ B₂ B₃ B₄ s) ((1 - rho k) / rho k)]

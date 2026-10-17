@@ -6,16 +6,15 @@ import Grid3
 import Grid3.Three.Main
 import GridGen.Polymer
 import GridGen.Four.Main
-import GridGen.Gauge.Grid
 import GridGen.Gauge.Nine.Main
 import TwoDegenerate
 /-!
 # Submission: the real development
 
-Section 13 is proved in `GridGen/DegreeFourTwenty.lean`: the maximum-degree-four
-theorem and its arbitrary-rectangle corollary, at every list size at least 20.
+Section 13 is proved in `GridGen/PeelDegree.lean`: maximum degree four at every list size at
+least 16.
 Section 14 is proved in `GridGen/MaximumDegree.lean` (the uniform bound `k ≥ ceil(5.67Δ)` for
-arbitrary maximum degree), `GridGen/SmallDegree.lean` (subcubic graphs at `k ≥ 15`) and
+arbitrary maximum degree), `GridGen/PeelDegree.lean` (subcubic graphs at `k ≥ 11`) and
 `GridGen/PolymerStability.lean` (the equality case).
 Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
 (`TwoDegenerate/Counterexample.lean`), and `K₂,ₙ` at list sizes three, four and five
@@ -23,8 +22,8 @@ Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
 Section 16 is proved in `TwoDegenerate/K2nSqrt/Main.lean`: `K₂,ₙ` is ECC at every `k ≥ 300`
 with `n ≤ k²`, so `τ(K₂,ₙ) = O(√n)`.
 Section 17 is proved in `GridGen/Four/Main.lean`: every `4 × (n+1)` grid is ECC at every `k ≥ 7`.
-Section 18 is proved in `GridGen/Gauge/Grid.lean`: every rectangular grid is ECC at every `k ≥ 10`.
-Section 19 is proved in `GridGen/Gauge/Nine/Main.lean`: the same at every `k ≥ 9`.
+Section 18 is proved in `GridGen/Gauge/Nine/Main.lean`: every rectangular grid is ECC at every
+`k ≥ 9`.
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the

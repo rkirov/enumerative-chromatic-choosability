@@ -168,13 +168,14 @@ namespace ListColoring
 open GridGen.Gauge
 
 /-- **Every rectangular grid is ECC at every list size at least 9.** Both dimensions are
-unrestricted; `pathG n` has `n + 1` vertices. -/
+unrestricted; `pathG n` has `n + 1` vertices. For `k ≥ 10` this is the gauge telescope with the
+constants of `Seam.lean` (`ecc_rowG_boxProd`); `k = 9` uses the sharper ones above. -/
 theorem ecc_boxProd_pathG_of_nine {k : ℕ} (hk : 9 ≤ k) (r n : ℕ) :
     (pathG r □ pathG n).ECCAt k := by
   classical
+  rw [SimpleGraph.ecc_iso (boxProdIsoLeft (pathG n) (pathIso r)) k]
   rcases Nat.eq_or_lt_of_le hk with rfl | hk'
-  · rw [SimpleGraph.ecc_iso (boxProdIsoLeft (pathG n) (pathIso r)) 9]
-    convert! ecc_rowG_boxProd_nine (r + 1) n
-  · exact ecc_boxProd_pathG_of_ten hk' r n
+  · convert! ecc_rowG_boxProd_nine (r + 1) n
+  · convert! ecc_rowG_boxProd hk' (r + 1) n
 
 end ListColoring

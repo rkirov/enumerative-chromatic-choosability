@@ -1,9 +1,9 @@
 # `GridGen/Gauge/` — every grid is `k`-ECC for `k ≥ 9`
 
 `ListColoring.ecc_boxProd_pathG_of_nine : 9 ≤ k → (pathG r □ pathG n).ECCAt k`, for every height
-and width. `ecc_boxProd_pathG_of_ten` is the same at `k ≥ 10` with simpler constants. Both are
-complete (no unproved steps), their axioms are `[propext, Classical.choice, Quot.sound]`, and the
-comparator claims them (§18, §19).
+and width. For `k ≥ 10` the proof uses the generic constants of `Seam.lean` (`ecc_rowG_boxProd`),
+and for `k = 9` the sharper ones of `Nine/`. It is complete (no unproved steps), its axioms are
+`[propext, Classical.choice, Quot.sound]`, and the comparator claims it (§18).
 
 ## The argument
 
@@ -54,7 +54,7 @@ That is the number of correspondence (DP) colourings of an explicit cover of the
 | `Labelling.lean` | transposition realization, glueing VC labellings, the move list |
 | `Seam.lean` | `γ_k`, `ε_k`, the threshold, star and move steps, `slab_core` |
 | `Main.lean` | gauges of a chain, stages (a) and (b), the telescope, `ecc_rowG_boxProd` |
-| `Grid.lean` | `pathG r ≃g rowG (r+1)` and `ecc_boxProd_pathG_of_ten` |
+| `Grid.lean` | `pathG r ≃g rowG (r+1)` |
 | `Nine/` | the sharper constants and `ecc_boxProd_pathG_of_nine` |
 
 ## `k = 9` (`Nine/`)

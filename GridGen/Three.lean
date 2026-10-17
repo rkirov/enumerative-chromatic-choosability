@@ -18,8 +18,8 @@ initial condition. This file transports those statements across the identificati
 capped pattern are exactly `Fpat`.
 
 So `GeneralHeightConjecture` holds at height three: `conjecture_height_three`. Through
-`ecc_of_twoStep` this reproves `ListColoring.ecc_boxProd_pathG_two` inside the general framework
-(`ecc_pathG_two_gridGen`).
+`ecc_of_twoStep` this reproves `Grid3.ecc_grid3_of_five` (height three at `k ≥ 5`) inside the
+general framework (`ecc_pathG_two_gridGen`).
 -/
 
 namespace GridGen

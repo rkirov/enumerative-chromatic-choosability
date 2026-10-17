@@ -17,7 +17,7 @@ The interface between the two halves of `GridGen/Four/`.
   column with `k`-lists `B` and every weight in the box, the weighted successors from `B` dominate
   the uniform prediction, summed over the proper states of `X`.
 
-`GridGen/Four/Seam.lean` proves `Seam4Holds k` for `8 ≤ k ≤ 15` and `GridGen/Four/Seam7.lean` at
+`GridGen/Four/Seam.lean` proves `Seam4Holds k` at `k = 8` and `GridGen/Four/Seam7.lean` at
 `k = 7`; the bridge to GridGen's
 telescoping (`GridGen/Four/Bridge.lean`) turns it into `TwoStepExplicit` and
 `FirstSeamExplicit` for `pathG 3` at every horizon.

@@ -48,11 +48,10 @@ project:
     identity with pair lemmas for k >= 5, two-column lookback with LP certificates at k = 4, and
     at k = 3 an entropy (Parry-Renyi) argument whose seam couplings are 22,157 kernel-checked
     records. (3) Maximum-degree thresholds for the list colour function: every finite graph is
-    ECC at every k >= ceil(5.67 Delta); maximum degree at most 3 suffices at k >= 15 and at most
-    4 at k >= 20, so every rectangular grid is ECC at every k >= 20 (degree-sensitive and
-    neighbour-pair refinements, proposed by Codex/OpenAI, lower these to k >= 16); at these thresholds two
-    adjacent vertices with different lists force strictly more colourings, so on a connected
-    graph only constant assignments attain equality. This adapts Zhang and Dong's 2026
+    ECC at every k >= ceil(5.67 Delta); maximum degree at most 3 suffices at k >= 11 and at most
+    4 at k >= 16 (degree-sensitive and neighbour-pair refinements, proposed by Codex/OpenAI); at
+    the uniform threshold two adjacent vertices with different lists force strictly more
+    colourings, so on a connected graph only constant assignments attain equality. This adapts Zhang and Dong's 2026
     interpolation method (their threshold is 23.41 Delta), and its limiting constant coincides
     with Dong and Koh's 2008 bound on real chromatic roots, to whom the positivity half is
     credited. (4) K_{2,n} at list sizes 3, 4, 5: it is ECC exactly for n <= 11, 25, 43. Kaul et
@@ -66,9 +65,13 @@ project:
     both that paper and arXiv:2207.04831 state as open; the previous upper bound was linear. The
     proof is AM-GM within four classes of hub-colour pairs and a four-regime real inequality closed
     by tangent-line bounds of the exponential. (6) Height four of Question 1: every 4 x (n+1) grid is
-    ECC at every k >= 7, by a column-to-column seam inequality proved for 7 <= k <= 15 from a
+    ECC at every k >= 7, by a column-to-column seam inequality proved for k = 7, 8 from a
     row-by-row bound on each previous column's log count ratio, fibre averaging, and an invariant
-    box of pattern weights (box and one-sided row error bounds due to Codex/OpenAI); k >= 16 is (3).
+    box of pattern weights (box and one-sided row error bounds due to Codex/OpenAI); k >= 9 is (7).
+    (7) Every grid of every height and width is ECC at every k >= 9: GridGen's column telescope
+    with each column relabelled by a vertically consistent bijection onto {0, ..., k-1} (a
+    DP-colouring gauge in the sense of Dvorak-Postle), a box bound for the gain at each seam, and
+    a Kempe-chain swap with a crossing-path count for the loss of each label transposition.
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
     nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
@@ -359,17 +362,7 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-    - declaration: ListColoring.ecc_boxProd_pathG_two
-      file: Grid3/Statements.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
     - declaration: ListColoring.colConst_boxProd_pathG_two
-      file: Grid3/Statements.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
-    - declaration: ListColoring.ecc_boxProd_pathG_two_of_four
       file: Grid3/Statements.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
@@ -384,6 +377,11 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
+    - declaration: ListColoring.ecc_boxProd_pathG_of_nine
+      file: GridGen/Gauge/Nine/Main.lean
+      sorry_count: 0
+      axioms: [propext, Classical.choice, Quot.sound]
+      comparator_config: comparator/config.json
     - declaration: SimpleGraph.eccAt_of_degree_bound
       file: GridGen/MaximumDegree.lean
       sorry_count: 0
@@ -394,37 +392,12 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-    - declaration: SimpleGraph.eccAt_of_degree_le_three
-      file: GridGen/SmallDegree.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
-    - declaration: SimpleGraph.eccAt_of_degree_le_four_twenty
-      file: GridGen/DegreeFourTwenty.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
-    - declaration: ListColoring.ecc_boxProd_pathG_of_twenty
-      file: GridGen/DegreeFourTwenty.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
-    - declaration: SimpleGraph.eccAt_of_degree_le_four_seventeen
-      file: GridGen/PeelDegree.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
-    - declaration: ListColoring.ecc_boxProd_pathG_of_seventeen
+    - declaration: SimpleGraph.eccAt_of_degree_le_three_eleven
       file: GridGen/PeelDegree.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
     - declaration: SimpleGraph.eccAt_of_degree_le_four_sixteen
-      file: GridGen/PeelDegree.lean
-      sorry_count: 0
-      axioms: [propext, Classical.choice, Quot.sound]
-      comparator_config: comparator/config.json
-    - declaration: ListColoring.ecc_boxProd_pathG_of_sixteen
       file: GridGen/PeelDegree.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
@@ -684,38 +657,44 @@ alignment:
       module: Grid3/Three/Main.lean
       status: proved
       note: >-
-        Every 3 x (n+1) grid is ECC at every k >= 3; ListColoring.ecc_boxProd_pathG_two (k >= 5)
-        and ListColoring.ecc_boxProd_pathG_two_of_four (k >= 4) are in Grid3/Statements.lean, with
-        the count ListColoring.colConst_boxProd_pathG_two.
+        Every 3 x (n+1) grid is ECC at every k >= 3; the k >= 4 case
+        ListColoring.ecc_boxProd_pathG_two_of_four is in Grid3/Statements.lean, with the count
+        ListColoring.colConst_boxProd_pathG_two.
     - source: "original to this repository, with error bounds by Codex/OpenAI (Question 1 at height four, k >= 7)"
       lean: GridGen.Four.ecc_boxProd_pathG_three
       module: GridGen/Four/Main.lean
       status: proved
       note: >-
-        Every 4 x (n+1) grid is ECC at every k >= 7. For 8 <= k <= 15: GridGen.Four.seam4Holds, at
+        Every 4 x (n+1) grid is ECC at every k >= 7. At k = 8 GridGen.Four.seam4Holds_eight, at
         k = 7 GridGen.Four.seam4Holds_seven (capped pattern term; exact kernel-checked certificates
         for the five smallest mismatch triples, GridGen/Four/Small7.lean), and
         GridGen.Four.init4Holds feed GridGen's telescoping (GridGen.Four.ecc_pathG_three_of_holds);
-        k >= 16 is ListColoring.ecc_boxProd_pathG_of_sixteen.
+        k >= 9 is ListColoring.ecc_boxProd_pathG_of_nine.
+    - source: "original to this repository; DP-colourings after Dvorak-Postle, Kempe swaps (Question 1 at every height, k >= 9)"
+      lean: ListColoring.ecc_boxProd_pathG_of_nine
+      module: GridGen/Gauge/Nine/Main.lean
+      status: proved
+      note: >-
+        Every rectangular grid pathG r box pathG n is ECC at every k >= 9. For k >= 10 the generic
+        seam constants (GridGen.Gauge.ecc_rowG_boxProd); at k = 9 a refined box bound, 4-cycle
+        chain weights and exact crossing-path counts up to twelve cells
+        (GridGen.Gauge.ecc_rowG_boxProd_nine). Supersedes the polymer route's grid corollaries at
+        k >= 20, 17, 16, which were removed.
     - source: "adapts Zhang-Dong arXiv:2609.08540; positivity half credited to Dong-Koh 2008"
       lean: SimpleGraph.eccAt_of_degree_bound
       module: GridGen/MaximumDegree.lean
       status: proved
       note: >-
         Every finite graph is ECC at every k with 567 Delta <= 100 k (also
-        SimpleGraph.eccAt_of_maxDegree_bound). Sharper: SimpleGraph.eccAt_of_degree_le_three
-        (k >= 15), SimpleGraph.eccAt_of_degree_le_four_twenty (k >= 20) with every rectangle as
-        ListColoring.ecc_boxProd_pathG_of_twenty, and Delta <= 5..8 in GridGen/SmallDegree.lean.
-        All are instances of GridGen.Polymer.CertifiedAt. The degree-sensitive variant
-        (GridGen.Polymer.CertifiedPeelAt, deletion ratio only at residual degree <= Delta - 1; idea
-        proposed by Codex/OpenAI on 2026-10-07) lowers the thresholds to Delta <= 3..8 at
-        k >= 11, 17, 22, 28, 33, 39: SimpleGraph.eccAt_of_degree_le_four_seventeen and every
-        rectangle as ListColoring.ecc_boxProd_pathG_of_seventeen (GridGen/PeelDegree.lean). The
-        neighbour-pair variant (GridGen.Polymer.CertifiedPairAt: an upper deletion ratio proved
-        alongside, and the positive blocks {v, u, w} at a root kept; also Codex's proposal) gives
-        Delta <= 4, 6, 8 at k >= 16, 27, 38: SimpleGraph.eccAt_of_degree_le_four_sixteen and every
-        rectangle as ListColoring.ecc_boxProd_pathG_of_sixteen. Strictness is proved only at the
-        CertifiedAt thresholds.
+        SimpleGraph.eccAt_of_maxDegree_bound), an instance of GridGen.Polymer.CertifiedAt. The
+        degree-sensitive variant (GridGen.Polymer.CertifiedPeelAt, deletion ratio only at residual
+        degree <= Delta - 1; idea proposed by Codex/OpenAI on 2026-10-07) gives Delta <= 3..8 at
+        k >= 11, 17, 22, 28, 33, 39 (SimpleGraph.eccAt_of_degree_le_three_eleven, ...,
+        GridGen/PeelDegree.lean). The neighbour-pair variant (GridGen.Polymer.CertifiedPairAt: an
+        upper deletion ratio proved alongside, and the positive blocks {v, u, w} at a root kept;
+        also Codex's proposal) gives Delta <= 4, 6, 8 at k >= 16, 27, 38
+        (SimpleGraph.eccAt_of_degree_le_four_sixteen). Strictness is proved only at the uniform
+        threshold.
     - source: "adapts Zhang-Dong arXiv:2609.08540, Theorem 5 (strictness at 23.41 Delta)"
       lean: SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound
       module: GridGen/PolymerStability.lean

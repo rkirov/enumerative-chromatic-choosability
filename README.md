@@ -31,39 +31,34 @@ choosability, no DP-coloring, no chordality, and no Brooks or Vizing. Everything
 
 Every finite simple graph is `k`-ECC whenever `567 * Δ ≤ 100 * k`, equivalently
 `k ≥ ceil(5.67Δ)`, where `Δ` is its maximum degree (`SimpleGraph.eccAt_of_maxDegree_bound`).
-Sharper certificates give `Δ ≤ 3` at `k ≥ 15`, `Δ ≤ 4` at `k ≥ 20`
-(`SimpleGraph.eccAt_of_degree_le_four_twenty`, and so every rectangular grid at `k ≥ 20`,
-`ListColoring.ecc_boxProd_pathG_of_twenty`), and `Δ ≤ 5, 6, 7, 8` at `k ≥ 26, 32, 37, 43`.
 A degree-sensitive version of the same induction, which needs the deletion ratio only at vertices
-with at most `Δ − 1` remaining neighbours, improves every one of these by about four:
-`Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`. Keeping the positive neighbour-pair
-blocks at a root, with an upper deletion ratio proved alongside, takes degrees four, six and eight
-one further, to `k ≥ 16, 27, 38`, so **every rectangular grid is ECC at `k ≥ 16`**
-(`SimpleGraph.eccAt_of_degree_le_four_sixteen`, `ListColoring.ecc_boxProd_pathG_of_sixteen`,
+with at most `Δ − 1` remaining neighbours, gives `Δ ≤ 3, 4, 5, 6, 7, 8` at
+`k ≥ 11, 17, 22, 28, 33, 39`. Keeping the positive neighbour-pair blocks at a root, with an upper
+deletion ratio proved alongside, takes degrees four, six and eight one further, to `k ≥ 16, 27, 38`
+(`SimpleGraph.eccAt_of_degree_le_three_eleven`, `SimpleGraph.eccAt_of_degree_le_four_sixteen`,
 `GridGen/PeelDegree.lean`). Both refinements were proposed by Codex (OpenAI) when consulted on
-2026-10-07. Numerically this family of arguments stops there for grids.
-At the first set of thresholds (`15, 20, 26, 32, 37, 43` and `⌈5.67Δ⌉`), two adjacent vertices with
-different lists force strictly more colourings, so on a connected graph only the constant
-assignments attain `P(G,k)`; strictness is not proved at the sharper thresholds.
+2026-10-07. At `⌈5.67Δ⌉`, two adjacent vertices with different lists force strictly more
+colourings, so on a connected graph only the constant assignments attain `P(G,k)`; strictness is
+not proved at the sharper thresholds.
 
 All of these are instances of three theorems with their numbers abstracted into rational
 certificates (`GridGen/PolymerCertificate.lean` and its degree-sensitive and neighbour-pair variants). The method is a finite interpolation between `P(G,k)` and
 `P(G,L)`. Its positivity half coincides, constants included, with Dong–Koh's 2008 bound on real
 chromatic roots. The comparison with list assignments improves Zhang–Dong's `k ≥ 23.41Δ`
 (September 2026). [`GridGen/README.md`](GridGen/README.md) has the argument, the certificate
-table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 42 guarded axiom checks. None
+table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 34 guarded axiom checks. None
 of this is ECC at every list size.
 
 **Height four.** `P₄ □ Pₙ` is `k`-ECC for every `k ≥ 7` (`GridGen.Four.ecc_boxProd_pathG_three`,
 [`GridGen/Four/`](GridGen/Four/README.md)), by the column-lookback route: a seam inequality between
-consecutive columns, proved for `7 ≤ k ≤ 15` by bounding each previous column's log count ratio
+consecutive columns, proved for `k = 7, 8` by bounding each previous column's log count ratio
 row by row and averaging with fibre bounds (at `k = 7` the five smallest list mismatches are
-certified exactly, by kernel evaluation over all column types).
+certified exactly, by kernel evaluation over all column types); `k ≥ 9` is the next paragraph.
 
 **Every grid, `k ≥ 9`.** Every rectangle `P_m □ P_n` is `k`-ECC for every `k ≥ 9`
-(`ListColoring.ecc_boxProd_pathG_of_nine`; the simpler constants of
-`ListColoring.ecc_boxProd_pathG_of_ten` give `k ≥ 10`; [`GridGen/Gauge/`](GridGen/Gauge/README.md)),
-uniformly in the height. Each column is relabelled by a vertically consistent bijection onto `{0, …, k-1}`, so
+(`ListColoring.ecc_boxProd_pathG_of_nine`, [`GridGen/Gauge/`](GridGen/Gauge/README.md)),
+uniformly in the height. This supersedes the polymer route's grid corollaries (every grid at
+`k ≥ 20`, then `17`, then `16`), which have been removed. Each column is relabelled by a vertically consistent bijection onto `{0, …, k-1}`, so
 the telescoped quantity counts correspondence colourings of an explicit cover. At a seam each
 leaving colour gains a box-bounded factor. The label transpositions that keep the gauge
 consistent (at most two per leaving colour) lose at most a Kempe-chain bad event, bounded by
@@ -251,7 +246,7 @@ Also a 2026 AI research collaboration result, not the paper's; notes in `ai_rese
 
 > Every `3 × (n+1)` grid is enumeratively chromatic-choosable at every list size `k ≥ 3`
 > (`ListColoring.ecc_boxProd_pathG_two_of_three`; `ecc_boxProd_pathG_two_of_four` is the `k ≥ 4`
-> case and `ecc_boxProd_pathG_two` the `k ≥ 5` case), and the count it is tight against is
+> case), and the count it is tight against is
 > `Fne k n · k(k-1)² + Dp k n · k(k-1)` (`ListColoring.colConst_boxProd_pathG_two`), where
 > `Fne`, `Dp` are the integer sequences `Fne (i+1) = ene·Fne i + gam·Dp i`,
 > `Dp (i+1) = Fne i + del·Dp i` of `Grid3/Transfer.lean` — `12, 54, 246, 1122, 5118, …` at `k = 3`.
@@ -371,13 +366,13 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **forty-one keystone theorems** — ten from the paper,
-  three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
-  and height-three results, ten maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
-  subcubic graphs at `15`, maximum degree four at `20`, `17` and `16`, each with its arbitrary-grid
-  corollary, and the equality case), five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
-  thresholds at list sizes three, four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at
-  `k ≥ 7`, and every grid at `k ≥ 10` and at `k ≥ 9` —
+  `comparator/Challenge.lean`, which claims **thirty-three keystone theorems** — ten from the
+  paper, three of the cactus classification, two of Zhang–Dong's non-persistence theorem, four
+  ladder and height-three results, five maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
+  subcubic graphs at `11`, maximum degree four at `16`, and the equality case), five on `K₂,ₙ`
+  (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact thresholds at list sizes three,
+  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 7`, and every grid at
+  `k ≥ 9` — superseded statements are not claimed —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel

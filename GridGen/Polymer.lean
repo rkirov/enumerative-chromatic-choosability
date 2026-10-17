@@ -1,6 +1,4 @@
 import GridGen.MaximumDegree
-import GridGen.DegreeFourTwenty
-import GridGen.SmallDegree
 import GridGen.PolymerStability
 import GridGen.PeelDegree
 
@@ -15,19 +13,14 @@ nondecreasing by charging odd-sized blocks to the edges of their spanning trees.
 Instances:
 * `SimpleGraph.eccAt_of_maxDegree_bound`: every finite graph, `567 Δ ≤ 100 k`
   (hyperbolic certificate `parityCert_uniform`, `MaximumDegree.lean`);
-* `SimpleGraph.eccAt_of_degree_le_four_twenty`: `Δ ≤ 4`, `k ≥ 20`, with the rectangle
-  corollary `ListColoring.ecc_boxProd_pathG_of_twenty` (`DegreeFourTwenty.lean`);
-* `Δ ≤ 3, 5, 6, 7, 8` at `k ≥ 15, 26, 32, 37, 43` (`SmallDegree.lean`);
 * the degree-sensitive variant (`PolymerPeel*.lean`), which needs the deletion ratio only at
-  vertices of residual degree `≤ Δ - 1`: `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`,
-  with every rectangular grid ECC at `k ≥ 17` (`ListColoring.ecc_boxProd_pathG_of_seventeen`,
-  `PeelDegree.lean`). The induction was proposed by Codex (OpenAI);
+  vertices of residual degree `≤ Δ - 1`: `Δ ≤ 3, 4, 5, 6, 7, 8` at `k ≥ 11, 17, 22, 28, 33, 39`
+  (`PeelDegree.lean`). The induction was proposed by Codex (OpenAI);
 * the neighbour-pair variant (`PolymerPair*.lean`, `PolymerUpperRoot.lean`), also Codex's proposal:
-  `Δ ≤ 4, 6, 8` at `k ≥ 16, 27, 38`, and every rectangular grid at `k ≥ 16`
-  (`ListColoring.ecc_boxProd_pathG_of_sixteen`).
+  `Δ ≤ 4, 6, 8` at `k ≥ 16, 27, 38`.
 
-Every `CertifiedAt` instance (the first three bullets) also gives strict inequality when two adjacent lists differ, and the
-characterization of equality on connected graphs (`PolymerCertificate.lean`; stated at the
-uniform threshold in `PolymerStability.lean`). `PolymerAxiomAudit.lean` checks their axioms. The argument, module by module, is in
+The uniform `CertifiedAt` instance also gives strict inequality when two adjacent lists differ,
+and the characterization of equality on connected graphs (`PolymerCertificate.lean`; stated in
+`PolymerStability.lean`). `PolymerAxiomAudit.lean` checks their axioms. The argument, module by module, is in
 `GridGen/README.md`.
 -/

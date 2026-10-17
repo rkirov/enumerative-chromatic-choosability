@@ -224,7 +224,7 @@ theorem tail_le_ku4e {n : ℝ} (hn : 6 ≤ n) :
 set_option maxHeartbeats 2000000 in
 /-- **Row four, the error.** As for row three, with the defect-free tail of `rate4_tail` when only
 row one has a bonus. -/
-theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {n : ℝ} (hnk : n = (k : ℝ) - 1)
+theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {n : ℝ} (hnk : n = (k : ℝ) - 1)
     {n1 n2 n3 n4 e12 e23 e34 t123 t234 q h1 h2 h3 h4 μ2 μ3 μ4 z2 z3 z4 c13 c24 c14 : ℝ}
     (hh1 : h1 = 0 ∨ h1 = 1) (hh2 : h2 = 0 ∨ h2 = 1) (hh3 : h3 = 0 ∨ h3 = 1) (hh4 : h4 = 0 ∨ h4 = 1)
     (hn1 : n1 = n + h1) (hn2 : n2 = n + h2) (hn3 : n3 = n + h3) (hn4 : n4 = n + h4)
@@ -269,7 +269,7 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {n : ℝ} (hnk :
   have e2 : (k : ℝ) - 2 = n - 1 := by rw [hnk]; ring
   have e3 : (k : ℝ) - 3 = n - 2 := by rw [hnk]; ring
   have e0 : (k : ℝ) = n + 1 := by rw [hnk]; ring
-  have hunif := rate4_unif hk7 hk15 hc13 hc24 hc14 h1314 h2414
+  have hunif := rate4_unif hk7 hk8 hc13 hc24 hc14 h1314 h2414
   rw [e1, e2] at hunif
   have eku : c24 / ((n - 1) ^ 2 * ((n ^ 2 - n + 1) / n))
       + 1 / (n * ((n ^ 2 - n + 1) / n) ^ 2 * (n - 1)) = ku4e n * c24 + ku4b n := by
@@ -314,7 +314,7 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {n : ℝ} (hnk :
         have a1 : n1 = n + 1 := by rw [hn1]
         have b12 : e12 = n := by rw [he12]; ring
         rw [a1, b12, u1, u2, yt]
-        have htail := rate4_tail hk7 hk15 hc24
+        have htail := rate4_tail hk7 hk8 hc24
         rw [e1, e2, e3, e0, main_unif hn0] at htail
         have h1t := tail_le_ku4e hn
         have h1k : kb4 n * (1 + 0 + 0 + 0) = kb4 n := by ring
@@ -334,7 +334,7 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {n : ℝ} (hnk :
     linarith
 
 /-- **The log count ratio of one column.** -/
-theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {n : ℝ} (hnk : n = (k : ℝ) - 1)
+theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {n : ℝ} (hnk : n = (k : ℝ) - 1)
     {n1 n2 n3 n4 e12 e23 e34 t123 t234 q h1 h2 h3 h4 μ2 μ3 μ4 z2 z3 z4 c13 c24 c14 : ℝ}
     (hh1 : h1 = 0 ∨ h1 = 1) (hh2 : h2 = 0 ∨ h2 = 1) (hh3 : h3 = 0 ∨ h3 = 1) (hh4 : h4 = 0 ∨ h4 = 1)
     (hn1 : n1 = n + h1) (hn2 : n2 = n + h2) (hn3 : n3 = n + h3) (hn4 : n4 = n + h4)
@@ -425,7 +425,7 @@ theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hk15 : k ≤ 15) {n : ℝ} (h
   rw [e4, e4U] at hsplit
   have hm4 := rate_main hn hh3 hh4 hz4 hμ4 hμ4k he34 he34a (by rw [← hn3]; exact he34b)
   rw [← hn3, ← hn4] at hm4
-  have hE4 := row4_charge hk7 hk15 hnk hh1 hh2 hh3 hh4 hn1 hn2 hn3 hn4 hμ2 hμ3 hμ4 hz3 hz4
+  have hE4 := row4_charge hk7 hk8 hnk hh1 hh2 hh3 hh4 hn1 hn2 hn3 hn4 hμ2 hμ3 hμ4 hz3 hz4
     he12 he23 he34 he12a he12b he23c he34a he34b ht0 ht1 ht234 hq hM30 hM3N hM40 hM4N
     hc13 hc24 hc14 h1314 h2414 hZ4
   have hbon := bonus_sum hn hh1'.1 hh2'.1 hh3'.1 hh4'.1 hμ2k hμ3k hμ4k

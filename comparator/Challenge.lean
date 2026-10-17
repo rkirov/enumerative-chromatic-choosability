@@ -516,7 +516,7 @@ instance instDecidableRelPathG : (k : ℕ) → DecidableRel (pathG k).Adj
 of Kirov–Naimi §6 Question 1 for paths, proved rather than assumed. -/
 theorem ecc_boxProd_pathG_one {k : ℕ} (hk : 3 ≤ k) (n : ℕ) : (pathG 1 □ pathG n).ECCAt k := sorry
 
-/-- **The count the previous claim is tight against:**
+/-- **The count height-three grids are tight against:**
 `P(P₂ □ P_{n+1}, k) = k(k-1)(k² - 3k + 3)ⁿ`.  The transfer eigenvalue `k² - 3k + 3` is the number
 of ways to extend a rung `(a,b)` with `a ≠ b` to the next one. -/
 theorem colConst_boxProd_pathG_one {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :
@@ -552,82 +552,44 @@ namespace ListColoring
 
 open SimpleGraph
 
-/-- **Height-three grids are `k`-monophilic for every `k ≥ 5`.**  No assignment of `k`-element
-lists to the `3 × (n+1)` grid admits fewer colourings than the constant assignment does.  The
-height-three case of Kirov–Naimi §6 Question 1 for paths at list sizes `≥ 5`, proved rather than
-assumed. -/
-theorem ecc_boxProd_pathG_two {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 2 □ pathG n).ECCAt k := sorry
-
-/-- **The count the previous claim is tight against:**
+/-- **The count height-three grids are tight against:**
 `P(P₃ □ P_{n+1}, k) = Fne k n · k(k-1)² + Dp k n · k(k-1)` — `12, 54, 246, 1122, 5118, …` at
 `k = 3`. -/
 theorem colConst_boxProd_pathG_two {k : ℕ} (hk : 2 ≤ k) (n : ℕ) :
     (pathG 2 □ pathG n).colConst k
       = Grid3.Fne k n * (k * (k - 1) ^ 2) + Grid3.Dp k n * (k * (k - 1)) := sorry
 
-/-- **Height-three grids are `k`-monophilic for every `k ≥ 4`.**  The `k = 4` case needs two
-columns of lookback and a family of LP certificates over the Venn atoms of five lists; `k ≥ 5` is
-the claim two above. -/
-theorem ecc_boxProd_pathG_two_of_four {k : ℕ} (hk : 4 ≤ k) (n : ℕ) :
-    (pathG 2 □ pathG n).ECCAt k := sorry
-
 /-- **Height-three grids are `k`-monophilic for every `k ≥ 3`.**  The `k = 3` case is the entropy
 (Parry–Rényi) certificate: 22,157 kernel-checked seam records (one per row-reflection orbit of
 the 43,736 maximal seam keys) and their enumeration completeness,
 the canonicalization of an arbitrary three-list assignment onto those records, the symbolic
-uniform-to-uniform seam, and the Markov-chain entropy bound; `k ≥ 4` is the claim above. -/
+uniform-to-uniform seam, and the Markov-chain entropy bound. `k = 4` needs two columns of lookback
+and a family of LP certificates over the Venn atoms of five lists; `k ≥ 5` one column. -/
 theorem ecc_boxProd_pathG_two_of_three {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :
     (pathG 2 □ pathG n).ECCAt k := sorry
 
 end ListColoring
 
-/-! ### 13. Maximum-degree-four graphs and arbitrary rectangles at list sizes at least twenty
+/-! ### 13. Maximum-degree-four graphs at list sizes at least sixteen
 
-The proofs are in `GridGen/DegreeFourTwenty.lean`. The coefficient signs and
-parity-sensitive embedded-tree counts improve the previous threshold of 25.
+The proof is in `GridGen/PeelDegree.lean`: the degree-sensitive induction (deletion ratios only at
+vertices that have lost a neighbour) with the neighbour-pair refinement at `k = 16`, both proposed
+by Codex (OpenAI). It improves the threshold of 20 from the plain parity certificate.
 -/
 
 namespace SimpleGraph
 
 /-- Every finite simple graph of maximum degree at most four is ECC at every list size
-at least 20. -/
-theorem eccAt_of_degree_le_four_twenty {V : Type*} [Fintype V] [DecidableEq V]
-    (G : SimpleGraph V) [DecidableRel G.Adj]
-    (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 20 ≤ k) : G.ECCAt k := sorry
-
-/-- Every finite simple graph of maximum degree at most four is ECC at every list size
-at least 17 (the degree-sensitive induction, `GridGen/PeelDegree.lean`). -/
-theorem eccAt_of_degree_le_four_seventeen {V : Type*} [Fintype V] [DecidableEq V]
-    (G : SimpleGraph V) [DecidableRel G.Adj]
-    (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 17 ≤ k) : G.ECCAt k := sorry
-
-/-- Every finite simple graph of maximum degree at most four is ECC at every list size
-at least 16 (the neighbour-pair induction, `GridGen/PeelDegree.lean`). -/
+at least 16. -/
 theorem eccAt_of_degree_le_four_sixteen {V : Type*} [Fintype V] [DecidableEq V]
     (G : SimpleGraph V) [DecidableRel G.Adj]
     (hdeg : ∀ v, G.degree v ≤ 4) {k : ℕ} (hk : 16 ≤ k) : G.ECCAt k := sorry
 
 end SimpleGraph
 
-namespace ListColoring
-
-/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 20. -/
-theorem ecc_boxProd_pathG_of_twenty {k : ℕ} (hk : 20 ≤ k) (n m : ℕ) :
-    (pathG n □ pathG m).ECCAt k := sorry
-
-/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 17. -/
-theorem ecc_boxProd_pathG_of_seventeen {k : ℕ} (hk : 17 ≤ k) (n m : ℕ) :
-    (pathG n □ pathG m).ECCAt k := sorry
-
-/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 16. -/
-theorem ecc_boxProd_pathG_of_sixteen {k : ℕ} (hk : 16 ≤ k) (n m : ℕ) :
-    (pathG n □ pathG m).ECCAt k := sorry
-
-end ListColoring
-
 /-! ### 14. Uniform ECC threshold linear in maximum degree
 
-The proofs are in `GridGen/MaximumDegree.lean`, `GridGen/SmallDegree.lean` and
+The proofs are in `GridGen/MaximumDegree.lean`, `GridGen/PeelDegree.lean` and
 `GridGen/PolymerStability.lean`; no restriction on graph order, connectedness (except in the
 equality case), or maximum degree is assumed. The integer inequality is exact.
 -/
@@ -644,11 +606,11 @@ theorem eccAt_of_maxDegree_bound {V : Type*} [Fintype V] [DecidableEq V]
     (G : SimpleGraph V) [DecidableRel G.Adj] {k : ℕ}
     (hk : 567 * G.maxDegree ≤ 100 * k) : G.ECCAt k := sorry
 
-/-- Every finite subcubic graph is ECC at every list size at least 15. The proof is in
-`GridGen/SmallDegree.lean`, from the same certificate theorem as the bounds above. -/
-theorem eccAt_of_degree_le_three {V : Type*} [Fintype V] [DecidableEq V]
+/-- Every finite subcubic graph is ECC at every list size at least 11. The proof is in
+`GridGen/PeelDegree.lean`, by the degree-sensitive form of the certificate theorem above. -/
+theorem eccAt_of_degree_le_three_eleven {V : Type*} [Fintype V] [DecidableEq V]
     (G : SimpleGraph V) [DecidableRel G.Adj] (hdeg : ∀ v, G.degree v ≤ 3) {k : ℕ}
-    (hk : 15 ≤ k) : G.ECCAt k := sorry
+    (hk : 11 ≤ k) : G.ECCAt k := sorry
 
 /-- The equality case at the uniform threshold: on a connected graph, a `k`-list assignment
 attains the constant-list count exactly when all its lists are equal. The proof is in
@@ -735,7 +697,7 @@ end SimpleGraph.TwoDegenerate.K2nSqrt
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
 `GridGen/Four/` for the `4 × (n+1)` grids at every `k ≥ 7`: a seam inequality between consecutive
-columns for `7 ≤ k ≤ 15`, fed to GridGen's telescoping, and §13's `k ≥ 16` above.
+columns for `k = 7, 8`, fed to GridGen's telescoping, and §18's `k ≥ 9` below.
 -/
 
 namespace GridGen.Four
@@ -748,31 +710,15 @@ theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 7 ≤ k) (n : ℕ) : (pathG 3 �
 
 end GridGen.Four
 
-/-! ### 18. Every grid at list sizes at least ten
+/-! ### 18. Every grid at list sizes at least nine
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
-`GridGen/Gauge/` for every rectangle at every `k ≥ 10`, uniformly in the height. Each column is
+`GridGen/Gauge/` for every rectangle at every `k ≥ 9`, uniformly in the height. Each column is
 relabelled by a vertically consistent bijection onto `{0, …, k-1}`, which makes the telescoped
 quantity a count of correspondence colourings. At each seam a deleted seam pair gains at least
 `(k-4)²(k-5)²/(k²(k-3)⁴)` (a box bound). Each of the at most two label transpositions per
 deleted pair loses at most an explicit `ε_k`, by a Kempe-chain swap and a crossing-path count.
-For `k ≥ 10` the gains win.
--/
-
-namespace ListColoring
-
-open SimpleGraph
-open scoped SimpleGraph
-
-/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 10. -/
-theorem ecc_boxProd_pathG_of_ten {k : ℕ} (hk : 10 ≤ k) (r n : ℕ) :
-    (pathG r □ pathG n).ECCAt k := sorry
-
-end ListColoring
-
-/-! ### 19. Every grid at list size nine
-
-The same gauge route as §18, with sharper constants at `k = 9`:
+For `k ≥ 10` the gains win. At `k = 9` the constants are sharper:
 * the box bound treats the labels unavailable next to the seam separately, giving a star gain of
   `2450/449334`;
 * a crossing path of two cells closes a 4-cycle and is charged `7 · 6² · 5`;

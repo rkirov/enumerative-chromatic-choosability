@@ -63,16 +63,6 @@ namespace ListColoring
 
 open SimpleGraph
 
-/-- **Height-three grids are `k`-ECC for every `k ≥ 5`.** No assignment of `k`-element lists to
-the `3 × (n+1)` grid admits fewer colourings than the constant assignment does. -/
-theorem ecc_boxProd_pathG_two {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 2 □ pathG n).ECCAt k :=
-  Grid3.ecc_grid3_of_five hk n
-
-/-- The same, in the `P_ℓ = P` form of `ListColoring.OpenProblem.GridTarget`. -/
-theorem gridTarget_boxProd_pathG_two {k : ℕ} (hk : 5 ≤ k) (n : ℕ) :
-    (pathG 2 □ pathG n).listColorFunction k = (pathG 2 □ pathG n).colConst k :=
-  (ecc_iff_listColorFunction_eq k).mp (ecc_boxProd_pathG_two hk n)
-
 /-- **Height-three grids are `k`-ECC for every `k ≥ 4`.** For `k ≥ 5` this is the one-column
 lookback proof of `Grid3.PairC`; for `k = 4` it is the two-column lookback proof of `Grid3/Four/`
 (`Grid3.Four.ecc_grid3_four`), whose arithmetic core is a family of LP certificates checked by
@@ -100,7 +90,5 @@ theorem colConst_boxProd_pathG_two {k : ℕ} (hk : 2 ≤ k) (n : ℕ) :
 
 end ListColoring
 
-#print axioms ListColoring.ecc_boxProd_pathG_two
 #print axioms ListColoring.ecc_boxProd_pathG_two_of_four
-#print axioms ListColoring.gridTarget_boxProd_pathG_two
 #print axioms ListColoring.colConst_boxProd_pathG_two

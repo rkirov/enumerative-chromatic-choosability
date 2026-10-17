@@ -253,7 +253,7 @@ end Grid3.Three
 namespace ListColoring
 
 /-- **Height-three grids are `k`-ECC for every `k ≥ 3`**, under the name the comparator surface
-`comparator/Challenge.lean` states it by (next to `ecc_boxProd_pathG_two_of_four`). -/
+`comparator/Challenge.lean` states it by. -/
 theorem ecc_boxProd_pathG_two_of_three {k : ℕ} (hk : 3 ≤ k) (n : ℕ) :
     (pathG 2 □ pathG n).ECCAt k :=
   Grid3.Three.ecc_boxProd_pathG_two_of_three hk n

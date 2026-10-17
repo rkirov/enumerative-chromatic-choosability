@@ -4,8 +4,6 @@ Released under Apache 2.0 license.
 -/
 import GridGen.PolymerPeelCertificate
 import GridGen.PolymerPairCertificate
-import GridGen.PolymerGridDegree
-import ListColoring.BoxProd
 
 /-!
 # Degree thresholds from the degree-sensitive certificate
@@ -19,17 +17,16 @@ the branch odd mass `o` (`s o ≤ s - 1`), while the full-degree root only has t
 |---|---|---|---|---|---|---|
 | with neighbour pairs (`CertifiedPairAt`) | 11 | 16 | 22 | 27 | 33 | 38 |
 | degree-sensitive (`CertifiedPeelAt`) | 11 | 17 | 22 | 28 | 33 | 39 |
-| `SmallDegree.lean`, `DegreeFourTwenty.lean` | 15 | 20 | 26 | 32 | 37 | 43 |
 
 Each threshold is the least this certificate shape reaches (checked numerically, not in Lean).
 The degree-sensitive induction was proposed by Codex (OpenAI); see
 `ai_research_notes/CODEX_GRID_ALL_HEIGHTS_2026-10-07.md` §3.
 
 The neighbour-pair refinement (`PolymerPairCertificate.lean`, also Codex's proposal) lowers
-degrees four, six and eight by one; at degree four that is `eccAt_of_degree_le_four_sixteen`, and
-every rectangle at `k ≥ 16`. Numerically the family stops there for grids: at `k = 15` the best
-degree-three root budget misses by about four percent, and excluding the grid's 4-cycles from the
-tree count recovers only a tenth of that gap.
+degrees four, six and eight by one; at degree four that is `eccAt_of_degree_le_four_sixteen`.
+Numerically the family stops there for grids: at `k = 15` the best degree-three root budget misses
+by about four percent, and excluding the grid's 4-cycles from the tree count recovers only a tenth
+of that gap. (Grids themselves are ECC at every `k ≥ 9` by the gauge route, `GridGen/Gauge/`.)
 -/
 
 namespace GridGen.Polymer
@@ -164,27 +161,3 @@ theorem eccAt_of_degree_le_eight_thirtyEight (hdeg : ∀ v, G.degree v ≤ 8) {k
   · exact eccAt_of_degree_le_eight_thirtyNine G hdeg h
 
 end SimpleGraph
-
-namespace ListColoring
-
-open SimpleGraph
-open scoped SimpleGraph
-
-/-- **Every rectangular grid is ECC at every list size at least 17.** Both dimensions are
-unrestricted; `pathG n` has `n + 1` vertices. -/
-theorem ecc_boxProd_pathG_of_seventeen {k : ℕ} (hk : 17 ≤ k) (n m : ℕ) :
-    (pathG n □ pathG m).ECCAt k := by
-  classical
-  apply SimpleGraph.eccAt_of_degree_le_four_seventeen _ _ hk
-  intro v
-  convert! GridGen.Polymer.degree_full_grid_le_four n m v
-
-/-- **Every rectangular grid is ECC at every list size at least 16.** -/
-theorem ecc_boxProd_pathG_of_sixteen {k : ℕ} (hk : 16 ≤ k) (n m : ℕ) :
-    (pathG n □ pathG m).ECCAt k := by
-  classical
-  apply SimpleGraph.eccAt_of_degree_le_four_sixteen _ _ hk
-  intro v
-  convert! GridGen.Polymer.degree_full_grid_le_four n m v
-
-end ListColoring

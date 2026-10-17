@@ -7,8 +7,8 @@ The uniform proof leaves a fraction `1 - 2eo = 671/5000` of the positive edge de
 Retaining it proves strict inequality whenever two adjacent lists differ, and hence that on a
 connected graph only the constant assignments attain `P(G,k)`. The argument is now the
 generic `GridGen.Polymer.colConst_lt_col_of_certifiedAt` (`PolymerCertificate.lean`), so the
-same conclusions hold at every certified threshold (`DegreeFourTwenty.lean`,
-`SmallDegree.lean`); this file states them at `567 D ≤ 100 k`.
+same conclusions hold at every `CertifiedAt` threshold; this file states them at
+`567 D ≤ 100 k`.
 
 This is a refinement of this repository's degree bound, using the same interpolation and
 charging method; strict comparison at a larger degree threshold also follows from Zhang–Dong,
