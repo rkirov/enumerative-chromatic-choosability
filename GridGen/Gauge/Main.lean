@@ -182,14 +182,23 @@ theorem slab_sum (P A : Fin m → Finset ℕ) (M : Fin m → ℕ → ℕ) (c : �
     ∑ p ∈ states (rowG m) P, ∑ s ∈ (states (rowG m) A).filter (Compat p),
       F (rowG m) k c (keyed M s) = Z c m k P A M := (card_Ω_eq).symm
 
+/-- Seam bounds on every slab with `k`-lists in the seam column. -/
+def GaugeBounds (k : ℕ) : Prop :=
+  ∀ (c m : ℕ) (P A : Fin m → Finset ℕ), 1 ≤ c → (∀ v, (A v).card = k) →
+    Nonempty (SlabBounds c m k P A)
+
+theorem gaugeBounds_ten (hk : 10 ≤ k) : GaugeBounds k :=
+  fun _ _ _ _ hc hA => ⟨slabBounds_ten hk hc hA⟩
+
 /-- The core comparison on every admissible past column. -/
-theorem core (hk : 10 ≤ k) (hL : IsKCols k L) (j c : ℕ) (hc : 1 ≤ c) (P : Fin m → Finset ℕ)
+theorem core (hG : GaugeBounds k) (hL : IsKCols k L) (j c : ℕ) (hc : 1 ≤ c) (P : Fin m → Finset ℕ)
     (hP : ∀ v a, a ∈ L j v → k - 1 ≤ (P v).card ∨ a ∉ P v) :
     Z c m k P (L j) (keysOf k L j) ≤ Z c m k P (L j) (newKeys k L j) := by
   obtain ⟨hR, hvc⟩ := gauge_props hL j
   have hβ : ∀ v : Fin m, Set.InjOn (gauge k L j v.val) (L j v) ∧ ∀ a ∈ L j v, gauge k L j v.val a < k :=
     fun v => by have := hR v.val; rw [extR_val] at this; exact this
-  exact slab_core hk hc (hL j) (hL (j + 1)) (gauge k L j) hβ hvc hP
+  exact slab_core_gen (Classical.choice (hG c m P (L j) hc (hL j))) (hL j) (hL (j + 1))
+    (gauge k L j) hβ hvc hP
 
 /-- The fresh past column of the first seam: one colour per row, above every list colour. -/
 noncomputable def freshP (L : Cols (Fin m)) : Fin m → Finset ℕ :=
@@ -214,10 +223,10 @@ theorem states_freshP (L : Cols (Fin m)) :
     rcases hvv' with h | h <;> simp only at e <;> omega
 
 /-- **Stage (b).** -/
-theorem stage_b (hk : 10 ≤ k) (hL : IsKCols k L) (j i : ℕ) :
+theorem stage_b (hG : GaugeBounds k) (hL : IsKCols k L) (j i : ℕ) :
     ∑ s ∈ cols (rowG m) L j, vec (rowG m) L j s * F (rowG m) k (i + 1) (keyed (keysOf k L j) s) ≤
       ∑ s ∈ cols (rowG m) L j, vec (rowG m) L j s * F (rowG m) k (i + 1) (keyed (newKeys k L j) s) := by
-  have hcore := fun P hP => core (L := L) hk hL j (i + 1) (by omega) P hP
+  have hcore := fun P hP => core (L := L) hG hL j (i + 1) (by omega) P hP
   match j with
   | 0 =>
       -- the fresh past column
@@ -277,21 +286,21 @@ noncomputable def W (k : ℕ) (L : Cols (Fin m)) (n j : ℕ) : ℕ :=
   ∑ s ∈ cols (rowG m) L j, vec (rowG m) L j s * F (rowG m) k (n - j) (keyed (keysOf k L j) s)
 
 /-- **One seam.** -/
-theorem W_le_succ (hk : 10 ≤ k) (hL : IsKCols k L) {n j : ℕ} (hj : j < n) :
+theorem W_le_succ (hG : GaugeBounds k) (hL : IsKCols k L) {n j : ℕ} (hj : j < n) :
     W k L n j ≤ W k L n (j + 1) := by
   unfold W
   rw [show n - j = (n - (j + 1)) + 1 by omega]
-  refine le_trans (stage_b hk hL j _) ?_
+  refine le_trans (stage_b hG hL j _) ?_
   rw [vec_succ]
   unfold cols
   rw [sum_step_mul]
   exact sum_le_sum fun s _ => Nat.mul_le_mul_left _ (stage_a hL j _)
 
-theorem W_mono (hk : 10 ≤ k) (hL : IsKCols k L) (n : ℕ) : ∀ j, j ≤ n → W k L n 0 ≤ W k L n j := by
+theorem W_mono (hG : GaugeBounds k) (hL : IsKCols k L) (n : ℕ) : ∀ j, j ≤ n → W k L n 0 ≤ W k L n j := by
   intro j
   induction j with
   | zero => intro _; exact le_rfl
-  | succ j ih => intro hj; exact le_trans (ih (by omega)) (W_le_succ hk hL (by omega))
+  | succ j ih => intro hj; exact le_trans (ih (by omega)) (W_le_succ hG hL (by omega))
 
 /-- **The initial condition.** -/
 theorem init_le (hL : IsKCols k L) (n : ℕ) :
@@ -308,18 +317,23 @@ theorem W_end (L : Cols (Fin m)) (n : ℕ) :
   simp
 
 /-- **The uniform count is a lower bound for every chain of `k`-lists**, `k ≥ 10`. -/
-theorem uniform_le_total (hk : 10 ≤ k) (hL : IsKCols k L) (n : ℕ) :
+theorem uniform_le_total (hG : GaugeBounds k) (hL : IsKCols k L) (n : ℕ) :
     ∑ u ∈ states (rowG m) (unif k), F (rowG m) k n u ≤
       total (cols (rowG m) L n) (vec (rowG m) L n) := by
   rw [← W_end (k := k)]
-  exact le_trans (init_le hL n) (W_mono hk hL n n le_rfl)
+  exact le_trans (init_le hL n) (W_mono hG hL n n le_rfl)
 
 end Telescope
 
-/-- **`rowG m □ P_{n+1}` is `k`-ECC for every `k ≥ 10`.** -/
-theorem ecc_rowG_boxProd {k : ℕ} (hk : 10 ≤ k) (m n : ℕ) : (rowG m □ pathG n).ECCAt k := by
+/-- **`rowG m □ P_{n+1}` is `k`-ECC whenever the seam bounds hold at `k`.** -/
+theorem ecc_rowG_boxProd_of {k : ℕ} (hG : GaugeBounds k) (m n : ℕ) :
+    (rowG m □ pathG n).ECCAt k := by
   intro M hM
   rw [colConst_eq, col_eq_total_vec]
-  exact uniform_le_total hk (Lof_isKCols hM) n
+  exact uniform_le_total hG (Lof_isKCols hM) n
+
+/-- **`rowG m □ P_{n+1}` is `k`-ECC for every `k ≥ 10`.** -/
+theorem ecc_rowG_boxProd {k : ℕ} (hk : 10 ≤ k) (m n : ℕ) : (rowG m □ pathG n).ECCAt k :=
+  ecc_rowG_boxProd_of (gaugeBounds_ten hk) m n
 
 end GridGen.Gauge

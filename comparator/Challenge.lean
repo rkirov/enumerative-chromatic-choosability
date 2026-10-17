@@ -769,3 +769,23 @@ theorem ecc_boxProd_pathG_of_ten {k : ℕ} (hk : 10 ≤ k) (r n : ℕ) :
     (pathG r □ pathG n).ECCAt k := sorry
 
 end ListColoring
+
+/-! ### 19. Every grid at list size nine
+
+The same gauge route as §18, with sharper constants at `k = 9`:
+* the box bound treats the labels unavailable next to the seam separately, giving a star gain of
+  `2450/449334`;
+* a crossing path of two cells closes a 4-cycle and is charged `7 · 6² · 5`;
+* crossing paths are counted exactly up to twelve cells.
+-/
+
+namespace ListColoring
+
+open SimpleGraph
+open scoped SimpleGraph
+
+/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 9. -/
+theorem ecc_boxProd_pathG_of_nine {k : ℕ} (hk : 9 ≤ k) (r n : ℕ) :
+    (pathG r □ pathG n).ECCAt k := sorry
+
+end ListColoring

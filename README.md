@@ -60,14 +60,16 @@ consecutive columns, proved for `7 ≤ k ≤ 15` by bounding each previous colum
 row by row and averaging with fibre bounds (at `k = 7` the five smallest list mismatches are
 certified exactly, by kernel evaluation over all column types).
 
-**Every grid, `k ≥ 10`.** Every rectangle `P_m □ P_n` is `k`-ECC for every `k ≥ 10`
-(`ListColoring.ecc_boxProd_pathG_of_ten`, [`GridGen/Gauge/`](GridGen/Gauge/README.md)), uniformly in
-the height. Each column is relabelled by a vertically consistent bijection onto `{0, …, k-1}`, so
+**Every grid, `k ≥ 9`.** Every rectangle `P_m □ P_n` is `k`-ECC for every `k ≥ 9`
+(`ListColoring.ecc_boxProd_pathG_of_nine`; the simpler constants of
+`ListColoring.ecc_boxProd_pathG_of_ten` give `k ≥ 10`; [`GridGen/Gauge/`](GridGen/Gauge/README.md)),
+uniformly in the height. Each column is relabelled by a vertically consistent bijection onto `{0, …, k-1}`, so
 the telescoped quantity counts correspondence colourings of an explicit cover. At a seam each
 leaving colour gains a box-bounded factor. The label transpositions that keep the gauge
 consistent (at most two per leaving colour) lose at most a Kempe-chain bad event, bounded by
-counting crossing paths. The open grid cases are now `3 ≤ k ≤ 6` at height four and `3 ≤ k ≤ 9`
-at heights `≥ 5`.
+counting crossing paths. At `k = 9` the box bound separates the labels unavailable next to the seam, the shortest
+crossing path is charged as a 4-cycle, and crossing paths are counted exactly up to twelve cells.
+The open grid cases are now `3 ≤ k ≤ 6` at height four and `3 ≤ k ≤ 8` at heights `≥ 5`.
 
 ## Layout
 
@@ -77,7 +79,7 @@ at heights `≥ 5`.
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
-| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 7` (`GridGen/Four/`); and the gauge route, every rectangle at `k ≥ 10` (`GridGen/Gauge/`) |
+| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 7` (`GridGen/Four/`); and the gauge route, every rectangle at `k ≥ 9` (`GridGen/Gauge/`) |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
@@ -369,13 +371,13 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **forty keystone theorems** — ten from the paper,
+  `comparator/Challenge.lean`, which claims **forty-one keystone theorems** — ten from the paper,
   three of the cactus classification, two of Zhang–Dong's non-persistence theorem, six ladder
   and height-three results, ten maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `15`, maximum degree four at `20`, `17` and `16`, each with its arbitrary-grid
   corollary, and the equality case), five on `K₂,ₙ` (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact
   thresholds at list sizes three, four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at
-  `k ≥ 7`, and every grid at `k ≥ 10` —
+  `k ≥ 7`, and every grid at `k ≥ 10` and at `k ≥ 9` —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel

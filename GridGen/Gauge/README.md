@@ -1,8 +1,9 @@
-# `GridGen/Gauge/` — every grid is `k`-ECC for `k ≥ 10`
+# `GridGen/Gauge/` — every grid is `k`-ECC for `k ≥ 9`
 
-`ListColoring.ecc_boxProd_pathG_of_ten : 10 ≤ k → (pathG r □ pathG n).ECCAt k`, for every height
-and width. It is complete (no unproved steps), its axioms are `[propext, Classical.choice, Quot.sound]`, and the
-comparator claims it (§18).
+`ListColoring.ecc_boxProd_pathG_of_nine : 9 ≤ k → (pathG r □ pathG n).ECCAt k`, for every height
+and width. `ecc_boxProd_pathG_of_ten` is the same at `k ≥ 10` with simpler constants. Both are
+complete (no unproved steps), their axioms are `[propext, Classical.choice, Quot.sound]`, and the
+comparator claims them (§18, §19).
 
 ## The argument
 
@@ -54,18 +55,31 @@ That is the number of correspondence (DP) colourings of an explicit cover of the
 | `Seam.lean` | `γ_k`, `ε_k`, the threshold, star and move steps, `slab_core` |
 | `Main.lean` | gauges of a chain, stages (a) and (b), the telescope, `ecc_rowG_boxProd` |
 | `Grid.lean` | `pathG r ≃g rowG (r+1)` and `ecc_boxProd_pathG_of_ten` |
+| `Nine/` | the sharper constants and `ecc_boxProd_pathG_of_nine` |
 
-## Margins and what is left
+## `k = 9` (`Nine/`)
 
-At `k = 10` the formal constants give `γ = 0.003748` against `2ε = 0.003238`. Below that, the
-mathematics in `ai_research_notes/GRID_ALL_HEIGHTS_GAUGE_2026-10-15.md` reaches `k = 9`. It needs
-two refinements: a sharper box bound that separates the labels next to the seam from the others,
-and exact path counts up to about 12 cells. `k = 8` fails for this method: `ε_8 ≈ 0.0076`.
+The seam machinery is generic in the constants (`SlabBounds`, `GaugeBounds`). At `k = 9`:
+
+* **Box** (`Nine/Box9.lean`). The fibre is split by the centre values `(a, b)`. The `y₁` factors
+  sum to at most `53/5` lower-bound factors. For each label `b`, the `y₆` factor has ratio `1`
+  or `6/5`, and each domino factor has ratio `9/7` or `3/2`, depending on whether `b` is
+  available at that cell. At most `3, 2, 2` labels are unavailable, so the nine labels contribute
+  at most `8478/490`. The result is `γ₉ = 2450/449334`, against `400/104976` for the uniform
+  bound.
+* **Paths** (`Nine/Bad9.lean`, `Nine/Counts.lean`). A 2-cell crossing path closes a 4-cycle with
+  its seam cells; its first cell has two later neighbours, so its chain costs `7 · 6² · 5`. The
+  other chains cost `5 · 6^{L+1}`. Shape counts are exact up to twelve cells:
+  `212, 552, 1607, 4250, 12296` for `L = 8, …, 12`, by kernel evaluation of a count-only
+  enumerator (about 2.5 minutes). The `(L-1)3^{L-1}` tail covers longer paths.
+* **Threshold.** `(1 - ε₉)² ≥ 1 - γ₉` with a margin of about 3%.
+
+`k = 8` fails for this method: the path loss alone is about `0.0076`.
 
 ## Credit
 
 The route and its proof are new in this development, worked out by Claude (Anthropic) on
-2026-10-15 and 16. The building blocks are classical:
+2026-10-15 to 17. The building blocks are classical:
 * DP-colourings are Dvořák–Postle's;
 * the swap is Kempe's;
 * the column telescope is GridGen's (`GridGen/Telescope.lean`), used here with a column-dependent

@@ -260,10 +260,41 @@ theorem one_sub_eps_nonneg (hk : 10 ≤ k) : 0 ≤ 1 - epsK k := by
   have h3 := epsK_nonneg hk
   linarith
 
+/-- **Seam bounds.** A star gain `γ` and a move loss `ε` with `(1 - ε)² ≥ 1 - γ`, valid on the slabs
+with past lists `P` and seam lists `A`. -/
+structure SlabBounds (c m k : ℕ) (P A : Fin m → Finset ℕ) where
+  /-- The star gain. -/
+  γ : ℚ
+  /-- The move loss. -/
+  ε : ℚ
+  hε0 : 0 ≤ 1 - ε
+  hε1 : 1 - ε ≤ 1
+  hγ0 : 0 ≤ 1 - γ
+  hγε : 1 - γ ≤ (1 - ε) ^ 2
+  star : ∀ N : Fin m → ℕ → ℕ, KeyInj k A N → ∀ (v : Fin m) (a₀ : ℕ), a₀ ∈ A v → N v a₀ < k →
+    (k - 1 ≤ (P v).card ∨ a₀ ∉ P v) →
+      (Z c m k P A N : ℚ) ≤ (1 - γ) * Z c m k P A (unpair k N v a₀)
+  move : ∀ M : Fin m → ℕ → ℕ, KeyInj k A M → ∀ (w x y : ℕ), x < k → y < k →
+    (1 - ε) * Z c m k P A M ≤ Z c m k P A (moveKey M w x y)
+
+/-- The bounds for `k ≥ 10`. -/
+noncomputable def slabBounds_ten (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k) :
+    SlabBounds c m k P A where
+  γ := gammaK k
+  ε := epsK k
+  hε0 := one_sub_eps_nonneg hk
+  hε1 := by linarith [epsK_nonneg hk]
+  hγ0 := by linarith [gammaK_le_one hk]
+  hγε := by
+    have := two_epsK_le_gammaK hk
+    nlinarith [sq_nonneg (epsK k)]
+  star := fun _ hK v _ ha hx hPv => star_step hk hc hA hK v ha hx hPv
+  move := fun _ hK w _ _ hx hy => move_step hk hc hA hK w hx hy
+
 /-- The moves of one edge. -/
-theorem applyEdge_step (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k) (v : ℕ) :
+theorem applyEdge_step (S : SlabBounds c m k P A) (v : ℕ) :
     ∀ (ts : List (ℕ × ℕ)) {M : Fin m → ℕ → ℕ}, Small k ts → KeyInj k A M →
-      (1 - epsK k) ^ ts.length * Z c m k P A M ≤ Z c m k P A (applyEdge v ts M) ∧
+      (1 - S.ε) ^ ts.length * Z c m k P A M ≤ Z c m k P A (applyEdge v ts M) ∧
         KeyInj k A (applyEdge v ts M) := by
   intro ts
   induction ts with
@@ -275,19 +306,19 @@ theorem applyEdge_step (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = 
       have e : applyEdge v (p :: ts) M = moveKey (applyEdge v ts M) v p.1 p.2 := rfl
       rw [e]
       refine ⟨?_, keyInj_moveKey h2 v hp.1 hp.2⟩
-      have hm := move_step (P := P) hk hc hA h2 v hp.1 hp.2
-      have hε := one_sub_eps_nonneg hk
+      have hm := S.move _ h2 v p.1 p.2 hp.1 hp.2
+      have hε := S.hε0
       rw [List.length_cons, pow_succ]
-      calc (1 - epsK k) ^ ts.length * (1 - epsK k) * (Z c m k P A M : ℚ)
-          = (1 - epsK k) * ((1 - epsK k) ^ ts.length * Z c m k P A M) := by ring
-        _ ≤ (1 - epsK k) * Z c m k P A (applyEdge v ts M) := mul_le_mul_of_nonneg_left h1 hε
+      calc (1 - S.ε) ^ ts.length * (1 - S.ε) * (Z c m k P A M : ℚ)
+          = (1 - S.ε) * ((1 - S.ε) ^ ts.length * Z c m k P A M) := by ring
+        _ ≤ (1 - S.ε) * Z c m k P A (applyEdge v ts M) := mul_le_mul_of_nonneg_left h1 hε
         _ ≤ _ := hm
 
 /-- The moves of all edges. -/
-theorem applyAll_step (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k)
+theorem applyAll_step (S : SlabBounds c m k P A)
     {Bx : ℕ → Finset ℕ} {βx : ℕ → ℕ → ℕ} (hR : RowLab k Bx βx) :
     ∀ (e : ℕ) {M : Fin m → ℕ → ℕ}, KeyInj k A M →
-      (1 - epsK k) ^ (∑ i ∈ range e, (rho k Bx βx i (piL k Bx βx i)).length) *
+      (1 - S.ε) ^ (∑ i ∈ range e, (rho k Bx βx i (piL k Bx βx i)).length) *
           Z c m k P A M ≤ Z c m k P A (applyAll (k := k) (Bx := Bx) (βx := βx) e M) ∧
         KeyInj k A (applyAll (k := k) (Bx := Bx) (βx := βx) e M) := by
   intro e
@@ -297,16 +328,16 @@ theorem applyAll_step (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k
       intro M hK
       obtain ⟨h1, h2⟩ := ih hK
       have hs := (rho_spec hR (small_piL hR e) e).2.1
-      obtain ⟨h3, h4⟩ := applyEdge_step (P := P) hk hc hA e _ hs h2
+      obtain ⟨h3, h4⟩ := applyEdge_step S e _ hs h2
       refine ⟨?_, h4⟩
-      have hε := one_sub_eps_nonneg hk
+      have hε := S.hε0
       rw [sum_range_succ, pow_add]
-      calc (1 - epsK k) ^ (∑ i ∈ range e, (rho k Bx βx i (piL k Bx βx i)).length) *
-            (1 - epsK k) ^ (rho k Bx βx e (piL k Bx βx e)).length * (Z c m k P A M : ℚ)
-          = (1 - epsK k) ^ (rho k Bx βx e (piL k Bx βx e)).length *
-              ((1 - epsK k) ^ (∑ i ∈ range e, (rho k Bx βx i (piL k Bx βx i)).length) *
+      calc (1 - S.ε) ^ (∑ i ∈ range e, (rho k Bx βx i (piL k Bx βx i)).length) *
+            (1 - S.ε) ^ (rho k Bx βx e (piL k Bx βx e)).length * (Z c m k P A M : ℚ)
+          = (1 - S.ε) ^ (rho k Bx βx e (piL k Bx βx e)).length *
+              ((1 - S.ε) ^ (∑ i ∈ range e, (rho k Bx βx i (piL k Bx βx i)).length) *
                 Z c m k P A M) := by ring
-        _ ≤ (1 - epsK k) ^ (rho k Bx βx e (piL k Bx βx e)).length *
+        _ ≤ (1 - S.ε) ^ (rho k Bx βx e (piL k Bx βx e)).length *
               Z c m k P A (applyAll (k := k) (Bx := Bx) (βx := βx) e M) :=
             mul_le_mul_of_nonneg_left h1 (pow_nonneg hε _)
         _ ≤ _ := h3
@@ -340,32 +371,32 @@ def starKeys (k : ℕ) (β : ℕ → ℕ → ℕ) (S : Finset (Fin m × ℕ)) : 
   fun v a => if (v, a) ∈ S then k else β v.val a
 
 /-- **The star phase.** -/
-theorem star_phase (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k) {B : Fin m → Finset ℕ}
+theorem star_phase (S : SlabBounds c m k P A) {B : Fin m → Finset ℕ}
     (β : ℕ → ℕ → ℕ) (hβ : ∀ v : Fin m, Set.InjOn (β v.val) (A v) ∧ ∀ a ∈ A v, β v.val a < k)
     (hP : ∀ v a, a ∈ A v → k - 1 ≤ (P v).card ∨ a ∉ P v) :
-    ∀ S : Finset (Fin m × ℕ), S ⊆ stars A B →
+    ∀ T : Finset (Fin m × ℕ), T ⊆ stars A B →
       (Z c m k P A (fun v a => β v.val a) : ℚ) ≤
-        (1 - gammaK k) ^ S.card * Z c m k P A (starKeys k β S) := by
-  intro S
-  induction S using Finset.induction_on with
+        (1 - S.γ) ^ T.card * Z c m k P A (starKeys k β T) := by
+  intro T
+  induction T using Finset.induction_on with
   | empty =>
       intro _
       simp only [card_empty, pow_zero, one_mul, Nat.cast_le]
       exact le_of_eq (congrArg _ (by funext v a; simp [starKeys]))
-  | insert p S hp ih =>
+  | insert p T hp ih =>
       intro hsub
-      have hpS := hsub (mem_insert_self p S)
+      have hpS := hsub (mem_insert_self p T)
       rw [mem_stars] at hpS
       have h1 := ih (fun q hq => hsub (mem_insert_of_mem hq))
-      have hK : KeyInj k A (starKeys k β S) := by
+      have hK : KeyInj k A (starKeys k β T) := by
         intro v a a' ha ha' e hlt
         unfold starKeys at e hlt
         split_ifs at e hlt with h1 h2 h2 <;> try omega
         exact (hβ v).1 ha ha' e
-      have hx : starKeys k β S p.1 p.2 < k := by
+      have hx : starKeys k β T p.1 p.2 < k := by
         unfold starKeys; rw [ite_eq_right (by simpa using hp)]; exact (hβ p.1).2 _ hpS.1
-      have hstep := star_step (P := P) hk hc hA hK p.1 hpS.1 hx (hP p.1 p.2 hpS.1)
-      have e : unpair k (starKeys k β S) p.1 p.2 = starKeys k β (insert p S) := by
+      have hstep := S.star _ hK p.1 p.2 hpS.1 hx (hP p.1 p.2 hpS.1)
+      have e : unpair k (starKeys k β T) p.1 p.2 = starKeys k β (insert p T) := by
         funext v a
         unfold unpair starKeys
         by_cases h : v = p.1 ∧ a = p.2
@@ -374,11 +405,11 @@ theorem star_phase (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k) {
           have hne : (v, a) ≠ p := fun e' => h ⟨congrArg Prod.fst e', congrArg Prod.snd e'⟩
           simp only [mem_insert, hne, false_or]
       rw [e] at hstep
-      have hγ : 0 ≤ 1 - gammaK k := by linarith [gammaK_le_one hk]
+      have hγ : 0 ≤ 1 - S.γ := S.hγ0
       rw [card_insert_of_notMem hp, pow_succ]
       calc (Z c m k P A (fun v a => β v.val a) : ℚ)
-          ≤ (1 - gammaK k) ^ S.card * Z c m k P A (starKeys k β S) := h1
-        _ ≤ (1 - gammaK k) ^ S.card * ((1 - gammaK k) * Z c m k P A (starKeys k β (insert p S))) :=
+          ≤ (1 - S.γ) ^ T.card * Z c m k P A (starKeys k β T) := h1
+        _ ≤ (1 - S.γ) ^ T.card * ((1 - S.γ) * Z c m k P A (starKeys k β (insert p T))) :=
             mul_le_mul_of_nonneg_left hstep (pow_nonneg hγ _)
         _ = _ := by ring
 
@@ -395,7 +426,7 @@ theorem extR_ge (A : Fin m → Finset ℕ) {v : ℕ} (h : m ≤ v) : extR A v = 
 
 /-- **The slab inequality.** The new gauge's keys give at least as many slab solutions as the old
 gauge's keys. -/
-theorem slab_core (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k)
+theorem slab_core_gen (S : SlabBounds c m k P A) (hA : ∀ v, (A v).card = k)
     {B : Fin m → Finset ℕ} (hB : ∀ v, (B v).card = k) (β : ℕ → ℕ → ℕ)
     (hβ : ∀ v : Fin m, Set.InjOn (β v.val) (A v) ∧ ∀ a ∈ A v, β v.val a < k)
     (hvc : ∀ v, ∀ c ∈ extR A v ∩ extR A (v + 1), β (v + 1) c = β v c)
@@ -416,14 +447,14 @@ theorem slab_core (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k)
   have hR : RowLab k Bx (tilde Ax Bx β) := rowLab_tilde hcard hβx
   set M0 := starKeys k β (stars A B)
   -- the star phase
-  have h1 := star_phase (P := P) (B := B) hk hc hA β hβ hP (stars A B) (Subset.refl _)
+  have h1 := star_phase S (B := B) β hβ hP (stars A B) (Subset.refl _)
   have hK0 : KeyInj k A M0 := by
     intro v a a' ha ha' e hlt
     simp only [M0, starKeys] at e hlt
     split_ifs at e hlt with h1 h2 h2 <;> try omega
     exact (hβ v).1 ha ha' e
   -- the moves
-  obtain ⟨h2, -⟩ := applyAll_step (P := P) hk hc hA hR m hK0
+  obtain ⟨h2, -⟩ := applyAll_step S hR m hK0
   have hfin : Z c m k P A (applyAll (k := k) (Bx := Bx) (βx := tilde Ax Bx β) m M0) =
       Z c m k P A (fun v a => if a ∈ B v then glueLab k Bx (tilde Ax Bx β) v.val a else k) := by
     refine Z_congr fun v a ha => ?_
@@ -464,22 +495,31 @@ theorem slab_core (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k)
           sum_add_distrib
       _ ≤ 2 * H := by omega
   -- the arithmetic
-  have hε := one_sub_eps_nonneg hk
-  have hε1 : 1 - epsK k ≤ 1 := by linarith [epsK_nonneg hk]
-  have hγ : 1 - gammaK k ≤ (1 - epsK k) ^ 2 := by
-    have := two_epsK_le_gammaK hk
-    nlinarith [sq_nonneg (epsK k)]
-  have hγ0 : 0 ≤ 1 - gammaK k := by linarith [gammaK_le_one hk]
-  have hpow : (1 - gammaK k) ^ H ≤ (1 - epsK k) ^ T := by
-    calc (1 - gammaK k) ^ H ≤ ((1 - epsK k) ^ 2) ^ H := pow_le_pow_left₀ hγ0 hγ H
-      _ = (1 - epsK k) ^ (2 * H) := by rw [← pow_mul]
-      _ ≤ (1 - epsK k) ^ T := pow_le_pow_of_le_one hε hε1 hT
+  have hε := S.hε0
+  have hε1 := S.hε1
+  have hγ := S.hγε
+  have hγ0 := S.hγ0
+  have hpow : (1 - S.γ) ^ H ≤ (1 - S.ε) ^ T := by
+    calc (1 - S.γ) ^ H ≤ ((1 - S.ε) ^ 2) ^ H := pow_le_pow_left₀ hγ0 hγ H
+      _ = (1 - S.ε) ^ (2 * H) := by rw [← pow_mul]
+      _ ≤ (1 - S.ε) ^ T := pow_le_pow_of_le_one hε hε1 hT
   have hZ0 : (0 : ℚ) ≤ Z c m k P A M0 := by positivity
   have : (Z c m k P A (fun v a => β v.val a) : ℚ) ≤
       Z c m k P A (fun v a => if a ∈ B v then glueLab k Bx (tilde Ax Bx β) v.val a else k) :=
-    calc (Z c m k P A (fun v a => β v.val a) : ℚ) ≤ (1 - gammaK k) ^ H * Z c m k P A M0 := h1
-      _ ≤ (1 - epsK k) ^ T * Z c m k P A M0 := mul_le_mul_of_nonneg_right hpow hZ0
+    calc (Z c m k P A (fun v a => β v.val a) : ℚ) ≤ (1 - S.γ) ^ H * Z c m k P A M0 := h1
+      _ ≤ (1 - S.ε) ^ T * Z c m k P A M0 := mul_le_mul_of_nonneg_right hpow hZ0
       _ ≤ _ := h2
   exact_mod_cast this
+
+/-- **The slab inequality** for `k ≥ 10`. -/
+theorem slab_core (hk : 10 ≤ k) (hc : 1 ≤ c) (hA : ∀ v, (A v).card = k)
+    {B : Fin m → Finset ℕ} (hB : ∀ v, (B v).card = k) (β : ℕ → ℕ → ℕ)
+    (hβ : ∀ v : Fin m, Set.InjOn (β v.val) (A v) ∧ ∀ a ∈ A v, β v.val a < k)
+    (hvc : ∀ v, ∀ c ∈ extR A v ∩ extR A (v + 1), β (v + 1) c = β v c)
+    (hP : ∀ v a, a ∈ A v → k - 1 ≤ (P v).card ∨ a ∉ P v) :
+    Z c m k P A (fun v a => β v.val a) ≤
+      Z c m k P A (fun v a => if a ∈ B v then
+        glueLab k (extR B) (tilde (extR A) (extR B) β) v.val a else k) :=
+  slab_core_gen (slabBounds_ten hk hc hA) hA hB β hβ hvc hP
 
 end GridGen.Gauge
