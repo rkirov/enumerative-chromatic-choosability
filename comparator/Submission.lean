@@ -6,7 +6,7 @@ import Grid3
 import Grid3.Three.Main
 import GridGen.Polymer
 import GridGen.Four.Main
-import GridGen.Gauge.Nine.Main
+import GridGen.Gauge.Eight.Main8
 import TwoDegenerate
 /-!
 # Submission: the real development
@@ -22,8 +22,8 @@ Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
 Section 16 is proved in `TwoDegenerate/K2nSqrt/Main.lean`: `K₂,ₙ` is ECC at every `k ≥ 300`
 with `n ≤ k²`, so `τ(K₂,ₙ) = O(√n)`.
 Section 17 is proved in `GridGen/Four/Main.lean`: every `4 × (n+1)` grid is ECC at every `k ≥ 7`.
-Section 18 is proved in `GridGen/Gauge/Nine/Main.lean`: every rectangular grid is ECC at every
-`k ≥ 9`.
+Section 18 is proved in `GridGen/Gauge/Eight/Main8.lean`: every rectangular grid is ECC at every
+`k ≥ 8`.
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the

@@ -5,7 +5,7 @@ Released under Apache 2.0 license.
 import GridGen.Four.Cert
 
 /-!
-# Height four: the seam inequality at `k = 8`
+# Height four: the seam inequality from a certificate
 
 Summing `state_bound` over the previous column `s ∈ sts X` with the uniform weights `GU`,
 `Σ GB ≥ Σ GU + Σ GU·Λ`. The gain `Λ` is a constant (in `s`) plus multiples of the state bits
@@ -90,7 +90,7 @@ theorem Lamc_eq (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) :
   ring
 
 /-- The bonus coefficient is nonnegative. -/
-theorem bonus_coef {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) :
+theorem bonus_coef {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) :
     0 ≤ kβ0 ((k : ℝ) - 1) - kb3 ((k : ℝ) - 1) - kb4 ((k : ℝ) - 1) - 4 * eta k := by
   interval_cases k <;> norm_num [kβ0, kb3, kb4, ku3, ku4e, ku4b, kt, kA, eta, rho]
 
@@ -115,7 +115,7 @@ theorem consts_sign {k : ℕ} (hk7 : 7 ≤ k) :
   · unfold qk; field_simp
 
 /-- **The seam inequality from either certificate**, for one system of lists. -/
-theorem seam_of_cert {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : InBox k w)
+theorem seam_of_cert {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {w : Wt} (hw : InBox k w)
     {X₁ X₂ X₃ X₄ B₁ B₂ B₃ B₄ : Finset ℕ}
     (hX₁ : k - 1 ≤ X₁.card) (hX₂ : k - 1 ≤ X₂.card) (hX₃ : k - 1 ≤ X₃.card)
     (hX₄ : k - 1 ≤ X₄.card)
@@ -129,7 +129,7 @@ theorem seam_of_cert {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : In
     have : 0 < k - 3 := by omega
     exact_mod_cast this
   obtain ⟨ha0, hku3, hku4e, hη0, hq0, hRq, hc0⟩ := consts_sign hk7
-  have hβ := bonus_coef hk7 hk8
+  have hβ := bonus_coef hk7 hkle
   set m : ℝ := ((k - 3 : ℕ) : ℝ) with hm_def
   set Ω := sts X₁ X₂ X₃ X₄ with hΩ
   set u : T4 → ℝ := GU k w with hu
@@ -153,7 +153,7 @@ theorem seam_of_cert {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : In
       (fun _ _ => rfl) (fun _ h => h)
   -- summing the bound for one state
   have hsum : ∑ s ∈ Ω, u s * (1 + Lamc k B₁ B₂ B₃ B₄ s) ≤ ∑ s ∈ Ω, GB w B₁ B₂ B₃ B₄ s :=
-    Finset.sum_le_sum (fun s hs => state_bound_cap hk7 hk8 hw hB₁ hB₂ hB₃ hB₄
+    Finset.sum_le_sum (fun s hs => state_bound_cap hk7 hkle hw hB₁ hB₂ hB₃ hB₄
       (proper_of_mem_sts hs))
   suffices h : 0 ≤ ∑ s ∈ Ω, u s * Lamc k B₁ B₂ B₃ B₄ s by
     have e : ∑ s ∈ Ω, u s * (1 + Lamc k B₁ B₂ B₃ B₄ s)
@@ -305,12 +305,5 @@ theorem seam_of_cert {k : ℕ} (hk7 : 7 ≤ k) (hk8 : k ≤ 8) {w : Wt} (hw : In
         - g4 * ((m * q) * W) - m * (cap * W) := by
       rw [hK0, ha, hg3, hg4, hq, hcap]; unfold Fcap; ring
     linarith only [i1, i2, i3, i4, i5, i7, i8, hFW, eF]
-
-/-- **The height-four seam inequality at `k = 8`.** -/
-theorem seam4Holds_eight : Seam4Holds 8 := by
-  intro w hw X₁ X₂ X₃ X₄ B₁ B₂ B₃ B₄ hX₁ hX₂ hX₃ hX₄ hB₁ hB₂ hB₃ hB₄
-  exact seam_of_cert (by norm_num) le_rfl hw hX₁.1 hX₂.1 hX₃.1 hX₄.1 hB₁ hB₂ hB₃ hB₄
-    (Or.inl (Fval_nonneg rfl (mu_cases hB₁) (mu_cases hB₂) (mu_cases hB₃)
-      (mu_le B₁ B₂) (mu_le B₂ B₃) (mu_le B₃ B₄)))
 
 end GridGen.Four

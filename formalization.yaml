@@ -65,13 +65,15 @@ project:
     both that paper and arXiv:2207.04831 state as open; the previous upper bound was linear. The
     proof is AM-GM within four classes of hub-colour pairs and a four-regime real inequality closed
     by tangent-line bounds of the exponential. (6) Height four of Question 1: every 4 x (n+1) grid is
-    ECC at every k >= 7, by a column-to-column seam inequality proved for k = 7, 8 from a
+    ECC at every k >= 7, by a column-to-column seam inequality proved for k = 7 from a
     row-by-row bound on each previous column's log count ratio, fibre averaging, and an invariant
-    box of pattern weights (box and one-sided row error bounds due to Codex/OpenAI); k >= 9 is (7).
-    (7) Every grid of every height and width is ECC at every k >= 9: GridGen's column telescope
+    box of pattern weights (box and one-sided row error bounds due to Codex/OpenAI); k >= 8 is (7).
+    (7) Every grid of every height and width is ECC at every k >= 8: GridGen's column telescope
     with each column relabelled by a vertically consistent bijection onto {0, ..., k-1} (a
     DP-colouring gauge in the sense of Dvorak-Postle), a box bound for the gain at each seam, and
-    a Kempe-chain swap with a crossing-path count for the loss of each label transposition.
+    a Kempe-chain swap with a crossing-path count for the loss of each label transposition; at
+    k = 8 also relaxation gains on the next column's vertical edges, transpositions through
+    unmatched labels, and exact crossing-walk counts to eighteen cells.
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
     nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
@@ -377,8 +379,8 @@ status:
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
-    - declaration: ListColoring.ecc_boxProd_pathG_of_nine
-      file: GridGen/Gauge/Nine/Main.lean
+    - declaration: ListColoring.ecc_boxProd_pathG_of_eight
+      file: GridGen/Gauge/Eight/Main8.lean
       sorry_count: 0
       axioms: [propext, Classical.choice, Quot.sound]
       comparator_config: comparator/config.json
@@ -665,21 +667,22 @@ alignment:
       module: GridGen/Four/Main.lean
       status: proved
       note: >-
-        Every 4 x (n+1) grid is ECC at every k >= 7. At k = 8 GridGen.Four.seam4Holds_eight, at
-        k = 7 GridGen.Four.seam4Holds_seven (capped pattern term; exact kernel-checked certificates
-        for the five smallest mismatch triples, GridGen/Four/Small7.lean), and
-        GridGen.Four.init4Holds feed GridGen's telescoping (GridGen.Four.ecc_pathG_three_of_holds);
-        k >= 9 is ListColoring.ecc_boxProd_pathG_of_nine.
-    - source: "original to this repository; DP-colourings after Dvorak-Postle, Kempe swaps (Question 1 at every height, k >= 9)"
-      lean: ListColoring.ecc_boxProd_pathG_of_nine
-      module: GridGen/Gauge/Nine/Main.lean
+        Every 4 x (n+1) grid is ECC at every k >= 7. At k = 7 GridGen.Four.seam4Holds_seven
+        (capped pattern term; exact kernel-checked certificates for the five smallest mismatch
+        triples, GridGen/Four/Small7.lean) and GridGen.Four.init4Holds feed GridGen's telescoping
+        (GridGen.Four.ecc_pathG_three_of_holds); k >= 8 is ListColoring.ecc_boxProd_pathG_of_eight.
+    - source: "original to this repository; DP-colourings after Dvorak-Postle, Kempe swaps (Question 1 at every height, k >= 8)"
+      lean: ListColoring.ecc_boxProd_pathG_of_eight
+      module: GridGen/Gauge/Eight/Main8.lean
       status: proved
       note: >-
-        Every rectangular grid pathG r box pathG n is ECC at every k >= 9. For k >= 10 the generic
+        Every rectangular grid pathG r box pathG n is ECC at every k >= 8. For k >= 10 the generic
         seam constants (GridGen.Gauge.ecc_rowG_boxProd); at k = 9 a refined box bound, 4-cycle
         chain weights and exact crossing-path counts up to twelve cells
-        (GridGen.Gauge.ecc_rowG_boxProd_nine). Supersedes the polymer route's grid corollaries at
-        k >= 20, 17, 16, which were removed.
+        (GridGen.Gauge.ecc_rowG_boxProd_nine, ListColoring.ecc_boxProd_pathG_of_nine); at k = 8
+        the relaxed telescope with a potential, transpositions through holes and exact
+        crossing-walk counts to eighteen cells (GridGen.Gauge.ecc_rowG_boxProd_eight). Supersedes
+        the polymer route's grid corollaries at k >= 20, 17, 16, which were removed.
     - source: "adapts Zhang-Dong arXiv:2609.08540; positivity half credited to Dong-Koh 2008"
       lean: SimpleGraph.eccAt_of_degree_bound
       module: GridGen/MaximumDegree.lean

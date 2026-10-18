@@ -127,24 +127,29 @@ published construction.
   overlap-`k − 1` case (Lemma 6, reproved as `lemma6`). A targeted search on 2026-09-28 found no
   proof of the conjecture in the literature.
 
-* **Every grid at `k ≥ 9` (`GridGen/Gauge/`).** Every rectangle `P_m □ P_n`, of any height and
-  width, is ECC at every `k ≥ 9` (`ListColoring.ecc_boxProd_pathG_of_nine`). GridGen's column
+* **Every grid at `k ≥ 8` (`GridGen/Gauge/`).** Every rectangle `P_m □ P_n`, of any height and
+  width, is ECC at every `k ≥ 8` (`ListColoring.ecc_boxProd_pathG_of_eight`). GridGen's column
   telescope is run with each column relabelled by a vertically consistent bijection onto
   `{0, …, k−1}`, so the telescoped quantity counts DP-colourings of an explicit cover; at each seam
   a box bound gives the gain of a deleted seam pair, and a Kempe-chain swap with a crossing-path
   count bounds the loss of each label transposition. At `k = 9` the box bound separates the labels
   unavailable next to the seam, the shortest crossing path is charged as a 4-cycle, and crossing
-  paths are counted exactly up to twelve cells. **Credits.** The route and its proof are this
-  repository's (Claude, 2026-10-15 to 2026-10-17); DP-colourings are Dvořák–Postle's and the swap
+  paths are counted exactly up to twelve cells. At `k = 8` (`GridGen/Gauge/Eight/`): the next
+  column's colour-proper, label-improper states are counted as relaxed diagonal pairs, each with a
+  box-bounded gain, so a potential `(1 − ε)^{D_j} W_j` charges every transposition to a vertical
+  list difference or a star; the transpositions run through labels that the deleted pairs leave
+  unmatched, so the 4-cycle bad event has one phase; and crossing paths are counted exactly up to
+  eighteen cells by a kernel-checked dynamic program. **Credits.** The route and its proof are this
+  repository's (Claude, 2026-10-15 to 2026-10-18); DP-colourings are Dvořák–Postle's and the swap
   is Kempe's. It supersedes the grid corollaries of the maximum-degree items below (`k ≥ 20`, then
-  `17`, then `16`), which have been removed, and the height-four item's range above `k = 8`.
-  Not checked against the literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 8` remains open at
+  `17`, then `16`), which have been removed, and the height-four item's range above `k = 7`.
+  Not checked against the literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 7` remains open at
   heights `≥ 5`.
 
 * **Height-four grids at `k ≥ 7` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
   `k ≥ 7` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
   `k ≥ 16`, from the maximum-degree item below. The certificates covered `7 ≤ k ≤ 15`; since the
-  gauge item above, only `k = 7, 8` are kept. The route is GridGen's column telescoping: one seam
+  gauge item above, only `k = 7` is kept. The route is GridGen's column telescoping: one seam
   inequality between consecutive columns for every horizon, reduced to the eight corners of a box of
   pattern weights that the uniform transfer maps into itself, then proved per previous column by
   factoring its successor count into four row rates, bounding each rate's log against the uniform

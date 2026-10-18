@@ -1,9 +1,10 @@
-# `GridGen/Gauge/` — every grid is `k`-ECC for `k ≥ 9`
+# `GridGen/Gauge/` — every grid is `k`-ECC for `k ≥ 8`
 
-`ListColoring.ecc_boxProd_pathG_of_nine : 9 ≤ k → (pathG r □ pathG n).ECCAt k`, for every height
-and width. For `k ≥ 10` the proof uses the generic constants of `Seam.lean` (`ecc_rowG_boxProd`),
-and for `k = 9` the sharper ones of `Nine/`. It is complete (no unproved steps), its axioms are
-`[propext, Classical.choice, Quot.sound]`, and the comparator claims it (§18).
+`ListColoring.ecc_boxProd_pathG_of_eight : 8 ≤ k → (pathG r □ pathG n).ECCAt k`, for every height
+and width (`ecc_boxProd_pathG_of_nine` is the `k ≥ 9` step). For `k ≥ 10` the proof uses the
+generic constants of `Seam.lean` (`ecc_rowG_boxProd`), for `k = 9` the sharper ones of `Nine/`, and
+for `k = 8` the relaxed telescope of `Eight/`. It is complete (no unproved steps), its axioms are
+`[propext, Classical.choice, Quot.sound]`, and the comparator claims the `k ≥ 8` form (§18).
 
 ## The argument
 
@@ -56,6 +57,7 @@ That is the number of correspondence (DP) colourings of an explicit cover of the
 | `Main.lean` | gauges of a chain, stages (a) and (b), the telescope, `ecc_rowG_boxProd` |
 | `Grid.lean` | `pathG r ≃g rowG (r+1)` |
 | `Nine/` | the sharper constants and `ecc_boxProd_pathG_of_nine` |
+| `Eight/` | relaxation gains, holes, exact counts to 18 cells, and `ecc_boxProd_pathG_of_eight` |
 
 ## `k = 9` (`Nine/`)
 
@@ -74,12 +76,34 @@ The seam machinery is generic in the constants (`SlabBounds`, `GaugeBounds`). At
   enumerator (about 2.5 minutes). The `(L-1)3^{L-1}` tail covers longer paths.
 * **Threshold.** `(1 - ε₉)² ≥ 1 - γ₉` with a margin of about 3%.
 
-`k = 8` fails for this method: the path loss alone is about `0.0076`.
+## `k = 8` (`Eight/`)
+
+At `k = 8` the method above fails: it needs `2ε ≤ γ`, and the path loss alone is about `0.0076`.
+Three changes bring the condition to `ε ≤ γ`, `ε ≤ γ_V`:
+
+* **Relaxation** (`SlabR.lean`, `BoxV.lean`). The next column's states are coloured from lists, so
+  read through its (vertically consistent) gauge two adjacent cells may share any label that no
+  shared colour carries. `slabR` allows those diagonal pairs; each one gains at least
+  `γ_V = 152/27675` (a vertical box: the cells above and below, a list domino and a future domino).
+* **Accounting** (`Holes.lean`, `Core8.lean`). A mismatched colour at an edge is new in the lower
+  row or lies in the old column's vertical difference, so the transpositions number at most
+  `H + D_A`. With the potential `(1 − ε)^{D_j} W_j` (`Main8.lean`) each column's vertical
+  difference is charged once, to its own relaxation.
+* **Holes** (`Holes.lean`, `Bad8.lean`). Every mismatch has an endpoint label that the deleted
+  pairs leave unmatched in one of the two rows. `realizeH` builds the transpositions through these
+  holes, and a move through a hole leaves the two-cell crossing path one phase, so the 4-cycle term
+  is `1/600` instead of `2/600`.
+
+The star gain is the `k = 9` box at `k = 8`, `γ₈ = 5184/960375` (`Box8.lean`). Crossing paths are
+counted exactly up to eighteen cells (`Counts8.lean`): a level-by-level dynamic program for `cntW`
+on a grid with a clamped bottom row, about 20 seconds of kernel evaluation. Then
+`ε₈ ≈ 0.00474 ≤ γ₈ ≈ 0.00540, γ_V ≈ 0.00549` (`Seam8.lean`). `k = 7` fails by a factor of about
+four: the union bound over paths with `1/(k−3)` per step is the obstacle.
 
 ## Credit
 
 The route and its proof are new in this development, worked out by Claude (Anthropic) on
-2026-10-15 to 17. The building blocks are classical:
+2026-10-15 to 18. The building blocks are classical:
 * DP-colourings are Dvořák–Postle's;
 * the swap is Kempe's;
 * the column telescope is GridGen's (`GridGen/Telescope.lean`), used here with a column-dependent

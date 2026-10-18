@@ -697,7 +697,7 @@ end SimpleGraph.TwoDegenerate.K2nSqrt
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
 `GridGen/Four/` for the `4 × (n+1)` grids at every `k ≥ 7`: a seam inequality between consecutive
-columns for `k = 7, 8`, fed to GridGen's telescoping, and §18's `k ≥ 9` below.
+columns for `k = 7`, fed to GridGen's telescoping, and §18's `k ≥ 8` below.
 -/
 
 namespace GridGen.Four
@@ -710,19 +710,22 @@ theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 7 ≤ k) (n : ℕ) : (pathG 3 �
 
 end GridGen.Four
 
-/-! ### 18. Every grid at list sizes at least nine
+/-! ### 18. Every grid at list sizes at least eight
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
-`GridGen/Gauge/` for every rectangle at every `k ≥ 9`, uniformly in the height. Each column is
+`GridGen/Gauge/` for every rectangle at every `k ≥ 8`, uniformly in the height. Each column is
 relabelled by a vertically consistent bijection onto `{0, …, k-1}`, which makes the telescoped
-quantity a count of correspondence colourings. At each seam a deleted seam pair gains at least
-`(k-4)²(k-5)²/(k²(k-3)⁴)` (a box bound). Each of the at most two label transpositions per
-deleted pair loses at most an explicit `ε_k`, by a Kempe-chain swap and a crossing-path count.
-For `k ≥ 10` the gains win. At `k = 9` the constants are sharper:
-* the box bound treats the labels unavailable next to the seam separately, giving a star gain of
-  `2450/449334`;
-* a crossing path of two cells closes a 4-cycle and is charged `7 · 6² · 5`;
-* crossing paths are counted exactly up to twelve cells.
+quantity a count of correspondence colourings. At each seam a deleted seam pair gains at least a
+box-bounded fraction; each label transposition loses at most an explicit `ε_k`, by a Kempe-chain
+swap and a crossing-path count. For `k ≥ 10` the gains win. At `k = 9` the constants are sharper
+(the labels unavailable next to the seam are treated separately, the two-cell crossing path is a
+4-cycle, crossing paths are counted exactly up to twelve cells). At `k = 8`, in addition:
+* the next column's states are read as *relaxed* label states, and each relaxed diagonal pair
+  gains at least `152/27675`; a potential charges every transposition to a star or a vertical
+  list difference;
+* the transpositions run through labels left unmatched by the deleted pairs, so the two-cell
+  crossing path has one phase;
+* crossing paths are counted exactly up to eighteen cells.
 -/
 
 namespace ListColoring
@@ -730,8 +733,8 @@ namespace ListColoring
 open SimpleGraph
 open scoped SimpleGraph
 
-/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 9. -/
-theorem ecc_boxProd_pathG_of_nine {k : ℕ} (hk : 9 ≤ k) (r n : ℕ) :
+/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 8. -/
+theorem ecc_boxProd_pathG_of_eight {k : ℕ} (hk : 8 ≤ k) (r n : ℕ) :
     (pathG r □ pathG n).ECCAt k := sorry
 
 end ListColoring

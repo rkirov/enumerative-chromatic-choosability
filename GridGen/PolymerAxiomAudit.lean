@@ -4,7 +4,7 @@ import GridGen.Four.Main
 /-!
 Guarded transitive axiom audit for the polymer route: every maximum-degree theorem and
 the lemmas that carry the argument; the height-four grid theorem of `GridGen/Four/`; and every
-grid at `k ≥ 9` (`GridGen/Gauge/`). Each must use exactly the three standard axioms.
+grid at `k ≥ 8` (`GridGen/Gauge/`). Each must use exactly the three standard axioms.
 -/
 
 /-- info: 'SimpleGraph.eccAt_of_degree_bound' depends on axioms: [propext, Classical.choice, Quot.sound] -/
@@ -139,6 +139,6 @@ grid at `k ≥ 9` (`GridGen/Gauge/`). Each must use exactly the three standard a
 #guard_msgs (whitespace := lax) in
 #print axioms GridGen.Polymer.colConst_le_col_of_certifiedPairAt
 
-/-- info: 'ListColoring.ecc_boxProd_pathG_of_nine' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+/-- info: 'ListColoring.ecc_boxProd_pathG_of_eight' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
-#print axioms ListColoring.ecc_boxProd_pathG_of_nine
+#print axioms ListColoring.ecc_boxProd_pathG_of_eight
