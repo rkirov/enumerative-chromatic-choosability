@@ -49,11 +49,12 @@ chromatic roots. The comparison with list assignments improves Zhang–Dong's `k
 table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 34 guarded axiom checks. None
 of this is ECC at every list size.
 
-**Height four.** `P₄ □ Pₙ` is `k`-ECC for every `k ≥ 7` (`GridGen.Four.ecc_boxProd_pathG_three`,
+**Height four.** `P₄ □ Pₙ` is `k`-ECC for every `k ≥ 6` (`GridGen.Four.ecc_boxProd_pathG_three`,
 [`GridGen/Four/`](GridGen/Four/README.md)), by the column-lookback route: a seam inequality between
-consecutive columns, proved for `k = 7` by bounding each previous column's log count ratio
-row by row and averaging with fibre bounds (the five smallest list mismatches are certified
-exactly, by kernel evaluation over all column types); `k ≥ 8` is the next paragraph.
+consecutive columns, proved for `k = 6` and `k = 7` by bounding each previous column's log count
+ratio row by row and averaging with fibre bounds (the smallest list mismatches, 5 triples at
+`k = 7` and 16 triples in 69 list shapes at `k = 6`, are certified exactly, by kernel evaluation
+over all column types); `k ≥ 8` is the next paragraph.
 
 **Every grid, `k ≥ 8`.** Every rectangle `P_m □ P_n` is `k`-ECC for every `k ≥ 8`
 (`ListColoring.ecc_boxProd_pathG_of_eight`, [`GridGen/Gauge/`](GridGen/Gauge/README.md)),
@@ -69,7 +70,7 @@ label-improper states are counted (a relaxation gain per vertical list differenc
 the transpositions); the transpositions run through labels left unmatched by the deleted pairs,
 so the 4-cycle bad event has one phase instead of two; and crossing paths are counted exactly up
 to eighteen cells by a kernel-checked dynamic program.
-The open grid cases are now `3 ≤ k ≤ 6` at height four and `3 ≤ k ≤ 7` at heights `≥ 5`.
+The open grid cases are now `3 ≤ k ≤ 5` at height four and `3 ≤ k ≤ 7` at heights `≥ 5`.
 
 ## Layout
 
@@ -79,7 +80,7 @@ The open grid cases are now `3 ≤ k ≤ 6` at height four and `3 ≤ k ≤ 7` a
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
-| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 7` (`GridGen/Four/`); and the gauge route, every rectangle at `k ≥ 8` (`GridGen/Gauge/`) |
+| `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 6` (`GridGen/Four/`); and the gauge route, every rectangle at `k ≥ 8` (`GridGen/Gauge/`) |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
 | `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
 | `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
@@ -376,7 +377,7 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
   ladder and height-three results, five maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `11`, maximum degree four at `16`, and the equality case), five on `K₂,ₙ`
   (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact thresholds at list sizes three,
-  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 7`, and every grid at
+  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 6`, and every grid at
   `k ≥ 8` — superseded statements are not claimed —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,

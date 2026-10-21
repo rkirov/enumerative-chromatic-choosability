@@ -65,7 +65,7 @@ project:
     both that paper and arXiv:2207.04831 state as open; the previous upper bound was linear. The
     proof is AM-GM within four classes of hub-colour pairs and a four-regime real inequality closed
     by tangent-line bounds of the exponential. (6) Height four of Question 1: every 4 x (n+1) grid is
-    ECC at every k >= 7, by a column-to-column seam inequality proved for k = 7 from a
+    ECC at every k >= 6, by a column-to-column seam inequality proved for k = 6, 7 from a
     row-by-row bound on each previous column's log count ratio, fibre averaging, and an invariant
     box of pattern weights (box and one-sided row error bounds due to Codex/OpenAI); k >= 8 is (7).
     (7) Every grid of every height and width is ECC at every k >= 8: GridGen's column telescope
@@ -274,7 +274,7 @@ status:
     both asserted with sorry, and proves Question 2 false from NonPersistence/. Those two are
     the only sorries in the repository. Not formalized: the Dong-Zhang 2023 threshold
     |E(G)| - 1, the Chi et al. 2026 theta-graph classification, and the rectangular grids with
-    both sides at least 4 at list sizes 3 to 6 (height four) and 3 to 15 (both sides at least 5).
+    both sides at least 4 at list sizes 3 to 5 (height four) and 3 to 15 (both sides at least 5).
   sorry_count: 2
   sorry_in_definitions: 0
   axioms: [propext, Classical.choice, Quot.sound]
@@ -662,12 +662,15 @@ alignment:
         Every 3 x (n+1) grid is ECC at every k >= 3; the k >= 4 case
         ListColoring.ecc_boxProd_pathG_two_of_four is in Grid3/Statements.lean, with the count
         ListColoring.colConst_boxProd_pathG_two.
-    - source: "original to this repository, with error bounds by Codex/OpenAI (Question 1 at height four, k >= 7)"
+    - source: "original to this repository, with error bounds by Codex/OpenAI (Question 1 at height four, k >= 6)"
       lean: GridGen.Four.ecc_boxProd_pathG_three
       module: GridGen/Four/Main.lean
       status: proved
       note: >-
-        Every 4 x (n+1) grid is ECC at every k >= 7. At k = 7 GridGen.Four.seam4Holds_seven
+        Every 4 x (n+1) grid is ECC at every k >= 6. At k = 6 GridGen.Four.seam4Holds_six (box
+        edge 487/500, sharpened row bounds, pattern cap 209/14123; exact kernel-checked
+        certificates for sixteen mismatch triples in 69 list shapes, GridGen/Four/Small6/) and
+        GridGen.Four.init4Holds_six; at k = 7 GridGen.Four.seam4Holds_seven
         (capped pattern term; exact kernel-checked certificates for the five smallest mismatch
         triples, GridGen/Four/Small7.lean) and GridGen.Four.init4Holds feed GridGen's telescoping
         (GridGen.Four.ecc_pathG_three_of_holds); k >= 8 is ListColoring.ecc_boxProd_pathG_of_eight.

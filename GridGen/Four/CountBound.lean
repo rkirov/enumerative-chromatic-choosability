@@ -35,7 +35,7 @@ theorem log_split {a b c d : ℝ} (ha : 0 < a) (hb : 0 < b) (hc : 0 < c) (hd : 0
   ring
 
 /-- The positivity of the prefix counts from the counting constraints. -/
-theorem counts_pos {n n1 n2 n3 n4 e12 e23 t123 M4 : ℝ} (hn : 6 ≤ n) (hn1 : n ≤ n1) (hn2 : n ≤ n2)
+theorem counts_pos {n n1 n2 n3 n4 e12 e23 t123 M4 : ℝ} (hn : 5 ≤ n) (hn1 : n ≤ n1) (hn2 : n ≤ n2)
     (hn3 : n ≤ n3) (hn4 : n ≤ n4) (he12 : e12 ≤ n1) (hM3 : n1 * e23 - t123 ≤ n1 * n2 - e12)
     (hM4 : M4 ≤ n3 * (n1 * n2 - e12) - (n1 * e23 - t123)) :
     0 < n1 * n2 - e12 ∧ 0 < n3 * (n1 * n2 - e12) - (n1 * e23 - t123) ∧
@@ -45,7 +45,7 @@ theorem counts_pos {n n1 n2 n3 n4 e12 e23 t123 M4 : ℝ} (hn : 6 ≤ n) (hn1 : n
   refine ⟨h2, h3, by nlinarith⟩
 
 /-- The uniform counts are positive. -/
-theorem counts_pos_unif {n c13 : ℝ} (hn : 6 ≤ n) (hc : c13 = 0 ∨ c13 = 1) :
+theorem counts_pos_unif {n c13 : ℝ} (hn : 5 ≤ n) (hc : c13 = 0 ∨ c13 = 1) :
     0 < n * n - (n - 1) ∧ 0 < n * (n * n - (n - 1)) - (n * (n - 1) - (n - 2 + c13)) := by
   constructor
   · nlinarith
@@ -85,7 +85,7 @@ noncomputable def countBound (n μ2 μ3 μ4 z2 z3 z4 h1 h2 h3 h4 c13 c24 : ℝ) 
     + (kβ0 n - kb3 n - kb4 n) * (h1 + h2 + h3 + h4)
 
 /-- The uniform fourth count is positive. -/
-theorem N4U_pos {n c13 c24 c14 : ℝ} (hn : 6 ≤ n) (hc13 : c13 = 0 ∨ c13 = 1)
+theorem N4U_pos {n c13 c24 c14 : ℝ} (hn : 5 ≤ n) (hc13 : c13 = 0 ∨ c13 = 1)
     (hc24 : c24 = 0 ∨ c24 = 1) (hc14 : c14 = 0 ∨ c14 = 1) (h1314 : c13 * c14 = 0)
     (h2414 : c24 * c14 = 0) : 0 < N4U n c13 c24 c14 := by
   unfold N4U N4
@@ -97,7 +97,7 @@ theorem N4U_pos {n c13 c24 c14 : ℝ} (hn : 6 ≤ n) (hc13 : c13 = 0 ∨ c13 = 1
     nlinarith
 
 /-- The uniform third count is positive. -/
-theorem N3U_pos {n c13 : ℝ} (hn : 6 ≤ n) (hc : c13 = 0 ∨ c13 = 1) :
+theorem N3U_pos {n c13 : ℝ} (hn : 5 ≤ n) (hc : c13 = 0 ∨ c13 = 1) :
     0 < n * (n ^ 2 - n + 1) - (n * (n - 1) - (n - 2 + c13)) := by
   rcases hc with rfl | rfl <;> nlinarith
 
@@ -106,7 +106,7 @@ theorem main_unif {n : ℝ} (hn : 0 < n) : n - (n - 1) / n = (n ^ 2 - n + 1) / n
   field_simp; ring
 
 /-- **The bonuses.** The row gains `(n-1)h/(n(n+1))` pay for the next-row losses. -/
-theorem bonus_sum {n h1 h2 h3 h4 μ2 μ3 μ4 : ℝ} (hn : 6 ≤ n)
+theorem bonus_sum {n h1 h2 h3 h4 μ2 μ3 μ4 : ℝ} (hn : 5 ≤ n)
     (hh1 : 0 ≤ h1) (hh2 : 0 ≤ h2) (hh3 : 0 ≤ h3) (hh4 : 0 ≤ h4)
     (hμ2k : μ2 ≤ n + 1) (hμ3k : μ3 ≤ n + 1) (hμ4k : μ4 ≤ n + 1) :
     kβ0 n * (h1 + h2 + h3 + h4)
@@ -141,7 +141,7 @@ theorem bonus_sum {n h1 h2 h3 h4 μ2 μ3 μ4 : ℝ} (hn : 6 ≤ n)
 
 /-- **Row three, the error.** The actual-versus-main deviation and the uniform excess are charged
 to `J₃`, or, in a defect-free column with a bonus row, to `b₃`. -/
-theorem row3_charge {n n1 n2 n3 e12 e23 t123 μ2 μ3 h1 h2 h3 h4 z2 z3 c13 : ℝ} (hn : 6 ≤ n)
+theorem row3_charge {n n1 n2 n3 e12 e23 t123 μ2 μ3 h1 h2 h3 h4 z2 z3 c13 : ℝ} (hn : 5 ≤ n)
     (hh1 : h1 = 0 ∨ h1 = 1) (hh2 : h2 = 0 ∨ h2 = 1) (hh3 : h3 = 0 ∨ h3 = 1) (hh4 : 0 ≤ h4)
     (hn1 : n1 = n + h1) (hn2 : n2 = n + h2) (hn3 : n3 = n + h3)
     (hμ2 : 0 ≤ μ2) (hμ3 : 0 ≤ μ3) (hz2 : 0 ≤ z2) (hz3 : 0 ≤ z3)
@@ -211,7 +211,7 @@ theorem row3_charge {n n1 n2 n3 e12 e23 t123 μ2 μ3 h1 h2 h3 h4 z2 z3 c13 : ℝ
     linarith
 
 /-- `1/(nt(n-1)³) ≤ 1/((n-1)²t)`. -/
-theorem tail_le_ku4e {n : ℝ} (hn : 6 ≤ n) :
+theorem tail_le_ku4e {n : ℝ} (hn : 5 ≤ n) :
     1 / (n * ((n ^ 2 - n + 1) / n) * (n - 1) ^ 3) ≤ ku4e n := by
   unfold ku4e kt kA
   have hl : 0 < n - 1 := by linarith
@@ -224,7 +224,7 @@ theorem tail_le_ku4e {n : ℝ} (hn : 6 ≤ n) :
 set_option maxHeartbeats 2000000 in
 /-- **Row four, the error.** As for row three, with the defect-free tail of `rate4_tail` when only
 row one has a bonus. -/
-theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : n = (k : ℝ) - 1)
+theorem row4_charge {k : ℕ} (hk6 : 6 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : n = (k : ℝ) - 1)
     {n1 n2 n3 n4 e12 e23 e34 t123 t234 q h1 h2 h3 h4 μ2 μ3 μ4 z2 z3 z4 c13 c24 c14 : ℝ}
     (hh1 : h1 = 0 ∨ h1 = 1) (hh2 : h2 = 0 ∨ h2 = 1) (hh3 : h3 = 0 ∨ h3 = 1) (hh4 : h4 = 0 ∨ h4 = 1)
     (hn1 : n1 = n + h1) (hn2 : n2 = n + h2) (hn3 : n3 = n + h3) (hn4 : n4 = n + h4)
@@ -247,8 +247,8 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : 
         - kb4 n * (h1 + h2 + h3 + h4)
       ≤ log (rate4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q / (n4 - e34 / n3))
         - log (r4U n c13 c24 c14 / ((n ^ 2 - n + 1) / n)) := by
-  have hk7' : (7 : ℝ) ≤ k := by exact_mod_cast hk7
-  have hn : 6 ≤ n := by rw [hnk]; linarith
+  have hk6' : (6 : ℝ) ≤ k := by exact_mod_cast hk6
+  have hn : 5 ≤ n := by rw [hnk]; linarith
   have hn0 : 0 < n := by linarith
   have hl0 : 0 < n - 1 := by linarith
   have hb1 : 0 ≤ h1 ∧ h1 ≤ 1 := by rcases hh1 with rfl | rfl <;> norm_num
@@ -269,7 +269,7 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : 
   have e2 : (k : ℝ) - 2 = n - 1 := by rw [hnk]; ring
   have e3 : (k : ℝ) - 3 = n - 2 := by rw [hnk]; ring
   have e0 : (k : ℝ) = n + 1 := by rw [hnk]; ring
-  have hunif := rate4_unif hk7 hkle hc13 hc24 hc14 h1314 h2414
+  have hunif := rate4_unif hk6 hkle hc13 hc24 hc14 h1314 h2414
   rw [e1, e2] at hunif
   have eku : c24 / ((n - 1) ^ 2 * ((n ^ 2 - n + 1) / n))
       + 1 / (n * ((n ^ 2 - n + 1) / n) ^ 2 * (n - 1)) = ku4e n * c24 + ku4b n := by
@@ -314,7 +314,7 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : 
         have a1 : n1 = n + 1 := by rw [hn1]
         have b12 : e12 = n := by rw [he12]; ring
         rw [a1, b12, u1, u2, yt]
-        have htail := rate4_tail hk7 hkle hc24
+        have htail := rate4_tail hk6 hkle hc24
         rw [e1, e2, e3, e0, main_unif hn0] at htail
         have h1t := tail_le_ku4e hn
         have h1k : kb4 n * (1 + 0 + 0 + 0) = kb4 n := by ring
@@ -334,7 +334,7 @@ theorem row4_charge {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : 
     linarith
 
 /-- **The log count ratio of one column.** -/
-theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : n = (k : ℝ) - 1)
+theorem count_log_bound {k : ℕ} (hk6 : 6 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : n = (k : ℝ) - 1)
     {n1 n2 n3 n4 e12 e23 e34 t123 t234 q h1 h2 h3 h4 μ2 μ3 μ4 z2 z3 z4 c13 c24 c14 : ℝ}
     (hh1 : h1 = 0 ∨ h1 = 1) (hh2 : h2 = 0 ∨ h2 = 1) (hh3 : h3 = 0 ∨ h3 = 1) (hh4 : h4 = 0 ∨ h4 = 1)
     (hn1 : n1 = n + h1) (hn2 : n2 = n + h2) (hn3 : n3 = n + h3) (hn4 : n4 = n + h4)
@@ -361,8 +361,8 @@ theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hn
       (h1 = 1 → t123 = n - 1 ∧ q = t234 ∧ c13 = 0 ∧ c14 = 0)) :
     countBound n μ2 μ3 μ4 z2 z3 z4 h1 h2 h3 h4 c13 c24
       ≤ log (N4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q / N4U n c13 c24 c14) := by
-  have hk7' : (7 : ℝ) ≤ k := by exact_mod_cast hk7
-  have hn : 6 ≤ n := by rw [hnk]; linarith
+  have hk6' : (6 : ℝ) ≤ k := by exact_mod_cast hk6
+  have hn : 5 ≤ n := by rw [hnk]; linarith
   have hn0 : 0 < n := by linarith
   have hh1' : 0 ≤ h1 ∧ h1 ≤ 1 := by rcases hh1 with rfl | rfl <;> norm_num
   have hh2' : 0 ≤ h2 ∧ h2 ≤ 1 := by rcases hh2 with rfl | rfl <;> norm_num
@@ -371,7 +371,7 @@ theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hn
   have hn1p : 0 < n1 := by rw [hn1]; linarith
   have hn2p : 0 < n2 := by rw [hn2]; linarith
   have hn3p : 0 < n3 := by rw [hn3]; linarith
-  have hn4p : 6 ≤ n4 := by rw [hn4]; linarith
+  have hn4p : 5 ≤ n4 := by rw [hn4]; linarith
   -- positivity of all counts
   obtain ⟨hN2, hN3, hN4⟩ := counts_pos (n1 := n1) (n2 := n2) (n3 := n3) (n4 := n4) hn
     (by rw [hn1]; linarith) (by rw [hn2]; linarith) (by rw [hn3]; linarith)
@@ -425,7 +425,7 @@ theorem count_log_bound {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hn
   rw [e4, e4U] at hsplit
   have hm4 := rate_main hn hh3 hh4 hz4 hμ4 hμ4k he34 he34a (by rw [← hn3]; exact he34b)
   rw [← hn3, ← hn4] at hm4
-  have hE4 := row4_charge hk7 hkle hnk hh1 hh2 hh3 hh4 hn1 hn2 hn3 hn4 hμ2 hμ3 hμ4 hz3 hz4
+  have hE4 := row4_charge hk6 hkle hnk hh1 hh2 hh3 hh4 hn1 hn2 hn3 hn4 hμ2 hμ3 hμ4 hz3 hz4
     he12 he23 he34 he12a he12b he23c he34a he34b ht0 ht1 ht234 hq hM30 hM3N hM40 hM4N
     hc13 hc24 hc14 h1314 h2414 hZ4
   have hbon := bonus_sum hn hh1'.1 hh2'.1 hh3'.1 hh4'.1 hμ2k hμ3k hμ4k

@@ -82,7 +82,7 @@ theorem count_data {k : ℕ} (hk7 : 7 ≤ k) (hkle : k ≤ 7) {B₁ B₂ B₃ B�
     exact_mod_cast Finset.card_le_card h
   obtain ⟨hM30, hM3N⟩ := M3_bounds A₁ A₂ A₃
   obtain ⟨hM40, hM4N⟩ := M4_bounds A₁ A₂ A₃ A₄
-  refine count_log_bound hk7 hkle rfl (hb_cases _ _) (hb_cases _ _) (hb_cases _ _) (hb_cases _ _)
+  refine count_log_bound (by omega) hkle rfl (hb_cases _ _) (hb_cases _ _) (hb_cases _ _) (hb_cases _ _)
     (card_erase_hb hB₁ _) (card_erase_hb hB₂ _) (card_erase_hb hB₃ _) (card_erase_hb hB₄ _)
     (mu_nonneg hB₁) (mu_nonneg hB₂) (mu_nonneg hB₃)
     (by have := mu_le (k := k) B₁ B₂; linarith) (by have := mu_le (k := k) B₂ B₃; linarith)

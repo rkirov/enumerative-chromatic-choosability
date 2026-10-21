@@ -3,11 +3,13 @@
 
 The comparator exports and kernel-replays the closure of `theorem_names` only, and consults
 `definition_names` only for constants that closure reaches, so running it once per shard checks
-exactly what one run over config.json checks. Shards run as parallel CI jobs; the two heavy ones
-isolate the two kernel-decided certificates, whose replay dominates the running time:
+exactly what one run over config.json checks. Shards run as parallel CI jobs; the heavy ones
+isolate the kernel-decided certificates, whose replay dominates the running time:
 
 * grid3-three: the k = 3 height-three grid theorem (22,157 records in Grid3/Three/Cert/Data/);
 * k2n: the K_{2,n} results at list sizes 3, 4, 5 (the AM-GM certificates in TwoDegenerate/K2n/);
+* grid4: the height-four grid theorem (the k = 6 exact certificates in GridGen/Four/Small6/,
+  79,439 column types, about 20 minutes of kernel evaluation);
 * rest: every other claim, including any claim added to config.json later.
 
 config.json stays the single source of truth; `rest` is its complement, so the union of the
@@ -29,6 +31,9 @@ SHARDS = {
         "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_three_iff",
         "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_four_iff",
         "SimpleGraph.TwoDegenerate.completeBipartite_two_eccAt_five_iff",
+    ],
+    "grid4": [
+        "GridGen.Four.ecc_boxProd_pathG_three",
     ],
 }
 ALL_SHARDS = list(SHARDS) + ["rest"]

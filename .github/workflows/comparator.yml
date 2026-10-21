@@ -53,13 +53,13 @@ jobs:
   verify:
     name: Comparator (${{ matrix.shard }})
     runs-on: ubuntu-latest
-    # The claims run as three parallel shards (comparator/shard.py): the kernel replay is one
-    # sequential pass per run, and two kernel-decided certificates dominate it, so each gets a job
-    # of its own. Together the shards check exactly what one run over config.json checks.
+    # The claims run as four parallel shards (comparator/shard.py): the kernel replay is one
+    # sequential pass per run, and three kernel-decided certificates dominate it, so each gets a
+    # job of its own. Together the shards check exactly what one run over config.json checks.
     strategy:
       fail-fast: false
       matrix:
-        shard: [grid3-three, k2n, rest]
+        shard: [grid3-three, k2n, grid4, rest]
     steps:
       - uses: actions/checkout@v4
 

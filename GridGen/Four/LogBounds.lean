@@ -70,7 +70,7 @@ mismatch `μ` and `z` state colours in the difference sets, the punctured inters
 `e = (n - 1 - μ) + h₀ + h₁ + z` colours, and the uniform-on-list rate
 `r̃ = (n + h₁) - e/(n + h₀)` satisfies
 `log (r̃ / t) ≥ log (1 + μ/A) + ((n-1)/n) h₁/(n+1) - z/(n(n-1)) - (μ+1) h₀/(n(n+1)(n-1))`. -/
-theorem rate_main {n h0 h1 z μ e : ℝ} (hn : 6 ≤ n) (hh0 : h0 = 0 ∨ h0 = 1)
+theorem rate_main {n h0 h1 z μ e : ℝ} (hn : 5 ≤ n) (hh0 : h0 = 0 ∨ h0 = 1)
     (hh1 : h1 = 0 ∨ h1 = 1) (hz : 0 ≤ z) (hμ : 0 ≤ μ) (hμk : μ ≤ n + 1)
     (he : e = (n - 1 - μ) + h0 + h1 + z) (he0 : 0 ≤ e) (heN : e ≤ n + h0) :
     log (1 + μ / (n ^ 2 - n + 1)) + ((n - 1) / n) * h1 / (n + 1)
@@ -133,7 +133,7 @@ theorem rate_main {n h0 h1 z μ e : ℝ} (hn : 6 ≤ n) (hh0 : h0 = 0 ∨ h0 = 1
   linarith
 
 /-- **Row one.** `log ((n + h₁)/n) ≥ ((n-1)/n) h₁ / (n+1)`. -/
-theorem rate_first {n h1 : ℝ} (hn : 6 ≤ n) (hh1 : h1 = 0 ∨ h1 = 1) :
+theorem rate_first {n h1 : ℝ} (hn : 5 ≤ n) (hh1 : h1 = 0 ∨ h1 = 1) :
     ((n - 1) / n) * h1 / (n + 1) ≤ log ((n + h1) / n) := by
   have hn0 : 0 < n := by linarith
   rcases hh1 with rfl | rfl
@@ -150,7 +150,7 @@ theorem rate_first {n h1 : ℝ} (hn : 6 ≤ n) (hh1 : h1 = 0 ∨ h1 = 1) :
 /-- **Row three, actual side.** With `N₂ = n₁n₂ - e₁₂` and `M₃ = n₁e₂₃ - t₁₂₃ ∈ [0, N₂]`, the rate
 `r₃ = (n₃N₂ - M₃)/N₂` is within `(μ₂+1)(μ₃+1)/(n²(n-1)²)` (in log) below
 `r̃₃ = n₃ - e₂₃/n₂`. -/
-theorem rate3_err {n n1 n2 n3 e12 e23 t123 μ2 μ3 : ℝ} (hn : 6 ≤ n)
+theorem rate3_err {n n1 n2 n3 e12 e23 t123 μ2 μ3 : ℝ} (hn : 5 ≤ n)
     (hn1 : n ≤ n1) (hn1' : n1 ≤ n + 1) (hn2 : n ≤ n2) (hn2' : n2 ≤ n + 1)
     (hn3 : n ≤ n3) (hn3' : n3 ≤ n + 1)
     (he12 : 0 ≤ e12) (he12n : e12 ≤ n1) (he12m : e12 ≤ n2) (he23 : 0 ≤ e23) (he23n : e23 ≤ n2)
@@ -208,7 +208,7 @@ theorem rate3_err {n n1 n2 n3 e12 e23 t123 μ2 μ3 : ℝ} (hn : 6 ≤ n)
 /-- **Row three, uniform side.** For the uniform column the deviation is `-1/(nA)` or, when rows 1
 and 3 share a colour (`c = 1`), `(n-1)/(nA)`; in log against `t` it is at most
 `(n-1)/(n²t²)·c`. -/
-theorem rate3_unif {n c : ℝ} (hn : 6 ≤ n) (hc : c = 0 ∨ c = 1) :
+theorem rate3_unif {n c : ℝ} (hn : 5 ≤ n) (hc : c = 0 ∨ c = 1) :
     log (((n * (n ^ 2 - n + 1) - (n * (n - 1) - (n - 2 + c))) / (n ^ 2 - n + 1))
         / ((n ^ 2 - n + 1) / n))
       ≤ (n - 1) / (n ^ 2 * ((n ^ 2 - n + 1) / n) ^ 2) * c := by
@@ -250,7 +250,7 @@ theorem rate4_id (n1 n2 n3 n4 e12 e23 e34 t123 t234 q : ℝ) (hn3 : n3 ≠ 0)
 /-- **Row four, actual side.** With `N₃ = n₃N₂ - M₃` and `M₄ = n₁(n₂e₃₄ - t₂₃₄) - e₁₂e₃₄ + q ∈ [0, N₃]`,
 the rate `r₄ = (n₄N₃ - M₄)/N₃` is within `(μ₃+2)(μ₄+1)/(n(n-1)³)` (in log) below
 `r̃₄ = n₄ - e₃₄/n₃`. -/
-theorem rate4_err {n n1 n2 n3 n4 e12 e23 e34 t123 t234 q μ3 μ4 : ℝ} (hn : 6 ≤ n)
+theorem rate4_err {n n1 n2 n3 n4 e12 e23 e34 t123 t234 q μ3 μ4 : ℝ} (hn : 5 ≤ n)
     (hn1 : n ≤ n1) (hn1' : n1 ≤ n + 1) (hn2 : n ≤ n2) (hn2' : n2 ≤ n + 1)
     (hn3 : n ≤ n3) (hn3' : n3 ≤ n + 1) (hn4 : n ≤ n4) (hn4' : n4 ≤ n + 1)
     (he12 : 0 ≤ e12) (he12n : e12 ≤ n1) (he23n : e23 ≤ n3) (he34 : 0 ≤ e34) (he34n : e34 ≤ n3)
@@ -338,7 +338,7 @@ theorem rate4_err {n n1 n2 n3 n4 e12 e23 e34 t123 t234 q μ3 μ4 : ℝ} (hn : 6 
     field_simp; ring
   linarith
 
-/-! ### The fourth row: uniform side and the defect-free tail (numerical, `7 ≤ k ≤ 7`) -/
+/-! ### The fourth row: uniform side and the defect-free tail (numerical, `6 ≤ k ≤ 7`) -/
 
 /-- The fourth rate from the counting data `(n₁, …, q)`. -/
 noncomputable def rate4 (n1 n2 n3 n4 e12 e23 e34 t123 t234 q : ℝ) : ℝ :=
@@ -354,8 +354,8 @@ theorem log_le_of_sub_one_le {x y : ℝ} (hx : 0 < x) (h : x - 1 ≤ y) : log x 
   (Real.log_le_sub_one_of_pos hx).trans h
 
 /-- **Row four, uniform side.** In log against `t`, the uniform fourth rate is at most
-`c₂₄/((n-1)²t) + 1/(nt²(n-1))`. Checked for each `k = 7`, `n = k - 1`. -/
-theorem rate4_unif {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 7) {c13 c24 c14 : ℝ}
+`c₂₄/((n-1)²t) + 1/(nt²(n-1))`. Checked for each `k ∈ {6, 7}`, `n = k - 1`. -/
+theorem rate4_unif {k : ℕ} (hk : 6 ≤ k) (hk' : k ≤ 7) {c13 c24 c14 : ℝ}
     (h13 : c13 = 0 ∨ c13 = 1) (h24 : c24 = 0 ∨ c24 = 1) (h14 : c14 = 0 ∨ c14 = 1)
     (h1314 : c13 * c14 = 0) (h2414 : c24 * c14 = 0) :
     log (r4U ((k : ℝ) - 1) c13 c24 c14 / ((((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1)))
@@ -374,7 +374,7 @@ theorem rate4_unif {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 7) {c13 c24 c14 : ℝ}
 
 /-- **Row four, the defect-free tail.** When all lists agree and only row one has a bonus, the
 data are explicit and the fourth-row error is at least `-1/(nt(n-1)³)`. -/
-theorem rate4_tail {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 7) {c24 : ℝ} (h24 : c24 = 0 ∨ c24 = 1) :
+theorem rate4_tail {k : ℕ} (hk : 6 ≤ k) (hk' : k ≤ 7) {c24 : ℝ} (h24 : c24 = 0 ∨ c24 = 1) :
     -(1 / (((k : ℝ) - 1) * ((((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1))
           * ((k : ℝ) - 2) ^ 3))
       ≤ log (rate4 ((k : ℝ)) ((k : ℝ) - 1) ((k : ℝ) - 1) ((k : ℝ) - 1) ((k : ℝ) - 1)
@@ -390,14 +390,14 @@ theorem rate4_tail {k : ℕ} (hk : 7 ≤ k) (hk' : k ≤ 7) {c24 : ℝ} (h24 : c
     refine h.trans ?_
     have := Real.one_sub_inv_le_log_of_pos (div_pos hx hy)
     rwa [inv_div] at this
-  have hz : ∀ k : ℕ, 7 ≤ k → 0 < (((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1) := by
+  have hz : ∀ k : ℕ, 6 ≤ k → 0 < (((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1) := by
     intro k hk
-    have : (7 : ℝ) ≤ k := by exact_mod_cast hk
+    have : (6 : ℝ) ≤ k := by exact_mod_cast hk
     apply div_pos <;> nlinarith
-  have heq : ∀ k : ℕ, 7 ≤ k → ((k : ℝ) - 1) - ((k : ℝ) - 2) / ((k : ℝ) - 1)
+  have heq : ∀ k : ℕ, 6 ≤ k → ((k : ℝ) - 1) - ((k : ℝ) - 2) / ((k : ℝ) - 1)
       = (((k : ℝ) - 1) ^ 2 - ((k : ℝ) - 1) + 1) / ((k : ℝ) - 1) := by
     intro k hk
-    have : (7 : ℝ) ≤ k := by exact_mod_cast hk
+    have : (6 : ℝ) ≤ k := by exact_mod_cast hk
     have : (k : ℝ) - 1 ≠ 0 := by linarith
     field_simp; ring
   rw [heq k hk]

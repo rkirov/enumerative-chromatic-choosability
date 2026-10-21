@@ -146,10 +146,10 @@ published construction.
   Not checked against the literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 7` remains open at
   heights `≥ 5`.
 
-* **Height-four grids at `k ≥ 7` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
-  `k ≥ 7` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
+* **Height-four grids at `k ≥ 6` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
+  `k ≥ 6` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
   `k ≥ 16`, from the maximum-degree item below. The certificates covered `7 ≤ k ≤ 15`; since the
-  gauge item above, only `k = 7` is kept. The route is GridGen's column telescoping: one seam
+  gauge item above, only `k = 7` is kept, and `k = 6` was added on 2026-10-21. The route is GridGen's column telescoping: one seam
   inequality between consecutive columns for every horizon, reduced to the eight corners of a box of
   pattern weights that the uniform transfer maps into itself, then proved per previous column by
   factoring its successor count into four row rates, bounding each rate's log against the uniform
@@ -165,11 +165,16 @@ published construction.
   supplied the symbolic invariant box `ρ = 1 − 2/(k−2)³`, the one-sided error bounds for rows three
   and four (`rate3_err`, `rate4_err` and their uniform counterparts), the observation that strict
   three-row locality is false together with the defect-free tail bound that replaces it
-  (`rate4_tail`), and the first certificate at `k = 8`. Not checked against the literature beyond
-  Kirov–Naimi's Question 1, which asks this for every grid; `3 ≤ k ≤ 6` remains open at height four.
-  With exact per-state values, the averaged inequality this route needs still held in the list
-  configurations tested at `k = 6` (smallest margin about `0.009`) but fails at `k = 5`, so `k = 5`
-  needs a different argument.
+  (`rate4_tail`), and the first certificate at `k = 8`. **`k = 6` (Claude, 2026-10-21).** The box
+  edge `487/500`; sharp fibre bounds (`R + m − 1` options, with end rows separate); the cap
+  `min(q|D|, 1)` on pinned sums; the `e`-min form of the row-three and row-four errors; the
+  chord bound on the state-bit loss (`zslope`); a pattern lemma comparing the uniform class
+  frequencies at list size `5` with the box corners (`pattern_six`, cap `209/14123`); and exact
+  certificates for the sixteen remaining mismatch triples, 69 list shapes and 79,439 column types
+  (`GridGen/Four/Exact6.lean`, `Small6/`). Not checked against the literature beyond Kirov–Naimi's
+  Question 1, which asks this for every grid; `3 ≤ k ≤ 5` remains open at height four. With exact
+  per-state values the averaged inequality this route needs fails at `k = 5` (about `−0.019` at
+  `(0,1,0)`), so `k = 5` needs a different argument.
 
 * **Degree-sensitive deletion ratios (`GridGen/PolymerPeel*.lean`, `PeelDegree.lean`).** The same
   interpolation, but the deletion ratio `Z(U) ≥ q Z(U − v)` is required only when `v` has at most
