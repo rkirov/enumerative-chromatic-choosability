@@ -167,7 +167,9 @@ noncomputable def Lam (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : �
 
 theorem rho_pos' {k : ℕ} (hk : 5 ≤ k) : 0 < rho k := by
   obtain ⟨m, rfl⟩ : ∃ m, k = m + 5 := ⟨k - 5, by omega⟩
-  exact rho_pos rho_eq
+  by_cases h6 : m = 1
+  · subst h6; rw [show (1 + 5 : ℕ) = 6 from rfl, rho_six]; norm_num
+  exact rho_pos (rho_eq h6)
 
 theorem gw_mem {k : ℕ} {w : Wt} (hw : InBox k w) (t : T4) : rho k ≤ gw w t ∧ gw w t ≤ 1 := by
   obtain ⟨ha, ha', hb, hb', hc, hc'⟩ := hw

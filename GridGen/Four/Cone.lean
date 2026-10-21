@@ -21,8 +21,8 @@ reduced matrix of `ai_research_notes/CODEX_H4_SEAM_BOUNDS_2026-10-15.md` §1 (eq
 sharing `vB`). So the uniform transfer of a pattern weight is again a pattern weight:
 `GU k w s = vA · gw (nextW k w) s` (`GU_eq`).
 
-**The box.** For `k ≥ 5` the transfer maps the box `ρ ≤ a, b, c ≤ 1`, `ρ = 1 - 2/(k-2)³`, into
-itself (`nextW_inBox`): `ρ·vA ≤ vX ≤ vA` is affine in the weights, so it suffices at the eight
+**The box.** For `k ≥ 5` the transfer maps the box `ρ ≤ a, b, c ≤ 1`, `ρ = 1 - 2/(k-2)³` (`487/500`
+at `k = 6`, `box_six`), into itself (`nextW_inBox`): `ρ·vA ≤ vX ≤ vA` is affine in the weights, so it suffices at the eight
 corners (`aff_nonneg`), and there, with `ℓ = m + 3`, it is a polynomial in `m` with nonnegative
 coefficients after clearing `ℓ³` or `ℓ⁶`.
 
@@ -527,8 +527,37 @@ theorem vA_pos {m : ℕ} {r : ℝ} (hr : r = 1 - 2 / ((m : ℝ) + 3) ^ 3) {w : W
   nlinarith [mul_nonneg c1 (hr0.le.trans ha), mul_nonneg c2 (hr0.le.trans hb),
     mul_nonneg c3 (hr0.le.trans hc)]
 
-theorem rho_eq {m : ℕ} : rho (m + 5) = 1 - 2 / ((m : ℝ) + 3) ^ 3 := by
-  unfold rho; push_cast; ring_nf
+theorem rho_eq {m : ℕ} (hm : m ≠ 1) : rho (m + 5) = 1 - 2 / ((m : ℝ) + 3) ^ 3 := by
+  unfold rho; rw [if_neg (by omega)]; push_cast; ring_nf
+
+
+/-! At `k = 6` (`ℓ = 4`) the box `[487/500, 1]³`: the same six inequalities, at the eight corners
+by `norm_num`. -/
+
+theorem le_vX_six {p0 p1 p2 p3 : ℝ} {w : Wt} (h : BoxR (487 / 500) w)
+    (hc : ∀ x y z : ℝ, (x = 487 / 500 ∨ x = 1) → (y = 487 / 500 ∨ y = 1) → (z = 487 / 500 ∨ z = 1) →
+      0 ≤ aff p0 p1 p2 p3 ⟨x, y, z⟩) : 0 ≤ aff p0 p1 p2 p3 w := by
+  obtain ⟨ha, ha', hb, hb', hc', hc''⟩ := h
+  exact aff_nonneg ha ha' hb hb' hc' hc'' hc
+
+theorem box_six {w : Wt} (h : BoxR (487 / 500) w) :
+    vB 4 w ≤ vA 4 w ∧ 487 / 500 * vA 4 w ≤ vB 4 w ∧ vC 4 w ≤ vA 4 w ∧ 487 / 500 * vA 4 w ≤ vC 4 w ∧
+      vD 4 w ≤ vA 4 w ∧ 487 / 500 * vA 4 w ≤ vD 4 w ∧ 0 < vA 4 w := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  all_goals first
+    | (rw [← sub_nonneg, vA, vB, aff_sub]; refine le_vX_six h ?_;
+        rintro x y z (rfl | rfl) (rfl | rfl) (rfl | rfl) <;> norm_num [aff])
+    | (rw [← sub_nonneg, vA, vC, aff_sub]; refine le_vX_six h ?_;
+        rintro x y z (rfl | rfl) (rfl | rfl) (rfl | rfl) <;> norm_num [aff])
+    | (rw [← sub_nonneg, vA, vD, aff_sub]; refine le_vX_six h ?_;
+        rintro x y z (rfl | rfl) (rfl | rfl) (rfl | rfl) <;> norm_num [aff])
+    | (rw [← sub_nonneg, vA, vB, mul_aff, aff_sub]; refine le_vX_six h ?_;
+        rintro x y z (rfl | rfl) (rfl | rfl) (rfl | rfl) <;> norm_num [aff])
+    | (rw [← sub_nonneg, vA, vC, mul_aff, aff_sub]; refine le_vX_six h ?_;
+        rintro x y z (rfl | rfl) (rfl | rfl) (rfl | rfl) <;> norm_num [aff])
+    | (rw [← sub_nonneg, vA, vD, mul_aff, aff_sub]; refine le_vX_six h ?_;
+        rintro x y z (rfl | rfl) (rfl | rfl) (rfl | rfl) <;> norm_num [aff])
+    | (obtain ⟨ha, -, hb, -, hc, -⟩ := h; unfold vA aff; nlinarith)
 
 theorem cast_sub_two (m : ℕ) : (((m + 5 : ℕ) : ℝ) - 2) = (m : ℝ) + 3 := by
   push_cast; ring
@@ -536,28 +565,50 @@ theorem cast_sub_two (m : ℕ) : (((m + 5 : ℕ) : ℝ) - 2) = (m : ℝ) + 3 := 
 /-- **Box invariance**: for `k ≥ 5` the uniform transfer maps the box `[ρ, 1]³` into itself. -/
 theorem nextW_inBox {k : ℕ} (hk : 5 ≤ k) {w : Wt} (hw : InBox k w) : InBox k (nextW k w) := by
   obtain ⟨m, rfl⟩ : ∃ m, k = m + 5 := ⟨k - 5, by omega⟩
+  by_cases h6 : m = 1
+  · subst h6
+    have hb : BoxR (487 / 500) w := by rw [← rho_six]; exact hw
+    obtain ⟨b1, b2, c1, c2, d1, d2, hpos⟩ := box_six hb
+    have e4 : (((1 + 5 : ℕ) : ℝ) - 2) = 4 := by norm_num
+    unfold InBox nextW
+    rw [show (1 + 5 : ℕ) = 6 from rfl, rho_six]
+    rw [show ((6 : ℕ) : ℝ) - 2 = 4 by norm_num]
+    refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+    · rw [le_div_iff₀ hpos]; exact b2
+    · rw [div_le_one hpos]; exact b1
+    · rw [le_div_iff₀ hpos]; exact c2
+    · rw [div_le_one hpos]; exact c1
+    · rw [le_div_iff₀ hpos]; exact d2
+    · rw [div_le_one hpos]; exact d1
   have hb : BoxR (rho (m + 5)) w := hw
-  have hpos := vA_pos rho_eq hb
+  have hpos := vA_pos (rho_eq h6) hb
   unfold InBox nextW
   simp only [cast_sub_two]
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
-  · rw [le_div_iff₀ hpos]; exact le_vB rho_eq hb
-  · rw [div_le_one hpos]; exact vB_le_vA rho_eq hb
-  · rw [le_div_iff₀ hpos]; exact le_vC rho_eq hb
-  · rw [div_le_one hpos]; exact vC_le_vA rho_eq hb
-  · rw [le_div_iff₀ hpos]; exact le_vD rho_eq hb
-  · rw [div_le_one hpos]; exact vD_le_vA rho_eq hb
+  · rw [le_div_iff₀ hpos]; exact le_vB (rho_eq h6) hb
+  · rw [div_le_one hpos]; exact vB_le_vA (rho_eq h6) hb
+  · rw [le_div_iff₀ hpos]; exact le_vC (rho_eq h6) hb
+  · rw [div_le_one hpos]; exact vC_le_vA (rho_eq h6) hb
+  · rw [le_div_iff₀ hpos]; exact le_vD (rho_eq h6) hb
+  · rw [div_le_one hpos]; exact vD_le_vA (rho_eq h6) hb
 
 /-- The `0101` row is positive on the box. -/
 theorem vA_pos_of_inBox {k : ℕ} (hk : 5 ≤ k) {w : Wt} (hw : InBox k w) :
     0 < vA ((k : ℝ) - 2) w := by
   obtain ⟨m, rfl⟩ : ∃ m, k = m + 5 := ⟨k - 5, by omega⟩
+  by_cases h6 : m = 1
+  · subst h6
+    have hb : BoxR (487 / 500) w := by rw [← rho_six]; exact hw
+    rw [show (((1 + 5 : ℕ) : ℝ) - 2) = 4 by norm_num]
+    exact (box_six hb).2.2.2.2.2.2
   rw [cast_sub_two]
-  exact vA_pos rho_eq hw
+  exact vA_pos (rho_eq h6) hw
 
 theorem rho_le_one (k : ℕ) (hk : 5 ≤ k) : rho k ≤ 1 := by
   obtain ⟨m, rfl⟩ : ∃ m, k = m + 5 := ⟨k - 5, by omega⟩
-  rw [rho_eq]
+  by_cases h6 : m = 1
+  · subst h6; rw [show (1 + 5 : ℕ) = 6 from rfl, rho_six]; norm_num
+  rw [rho_eq h6]
   have : (0 : ℝ) ≤ 2 / ((m : ℝ) + 3) ^ 3 := by positivity
   linarith
 

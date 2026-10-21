@@ -138,22 +138,14 @@ theorem init_rate {x S : ℝ} (hx : 7 ≤ x) (hS : 0 ≤ S) :
 
 /-! ### The initial inequality -/
 
-/-- **The height-four initial inequality for every `k ≥ 7`.** -/
-theorem init4Holds {k : ℕ} (hk : 7 ≤ k) : Init4Holds k := by
+/-- **The initial inequality from the rate comparison**: if the pattern loss rate
+`(1-ρ)/ρ · 2/(k-3)` is at most the count gain rate `(k-2)/k³`. -/
+theorem init4Holds_of {k : ℕ} (hk : 6 ≤ k) (hρ0 : 0 < rho k) (hρ1 : rho k ≤ 1)
+    (hrate : ∀ S : ℝ, 0 ≤ S →
+      (1 - rho k) / rho k * (2 * S / ((k : ℝ) - 3)) ≤ ((k : ℝ) - 2) * S / (k : ℝ) ^ 3) :
+    Init4Holds k := by
   intro w hw X₁ X₂ X₃ X₄ h₁ h₂ h₃ h₄
-  have hkR : (7 : ℝ) ≤ k := by exact_mod_cast hk
-  -- the weights
-  have hden : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 - 2 := by
-    nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5) (by linarith : (5 : ℝ) ≤ (k : ℝ) - 2) 3]
-  have hc3 : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 := by linarith
-  have hρ : rho k = (((k : ℝ) - 2) ^ 3 - 2) / ((k : ℝ) - 2) ^ 3 := by
-    rw [rho, eq_div_iff hc3.ne', sub_mul, div_mul_cancel₀ _ hc3.ne', one_mul]
-  have hρ0 : 0 < rho k := by rw [hρ]; positivity
-  have hρ1 : rho k ≤ 1 := by rw [rho]; have : 0 ≤ 2 / ((k : ℝ) - 2) ^ 3 := by positivity
-                             linarith
-  have hρq : (1 - rho k) / rho k = 2 / (((k : ℝ) - 2) ^ 3 - 2) := by
-    rw [hρ, one_sub_div hc3.ne', div_div_div_cancel_right₀ hc3.ne']
-    ring
+  have hkR : (6 : ℝ) ≤ k := by exact_mod_cast hk
   obtain ⟨ha0, ha1, hb0, hb1, hc0, hc1⟩ := hw
   have hg : ∀ t, rho k ≤ gw w t ∧ gw w t ≤ 1 := by
     intro t; unfold gw
@@ -253,25 +245,52 @@ theorem init4Holds {k : ℕ} (hk : 7 ≤ k) : Init4Holds k := by
     exact max_le nA' nU'
   have hk3 : ((k - 3 : ℕ) : ℝ) = (k : ℝ) - 3 := by
     rw [Nat.cast_sub (by omega)]; norm_num
-  have hloss : -(4 * S / ((((k : ℝ) - 2) ^ 3 - 2) * ((k : ℝ) - 3)))
+  have hloss : -((1 - rho k) / rho k * (2 * S / ((k : ℝ) - 3)))
       ≤ Real.log ((GX / NX) / (GP / NP)) := by
     refine le_trans ?_ hpat
-    rw [hρq, hk3, neg_le_neg_iff]
+    rw [hk3, neg_le_neg_iff]
     have hk3p : (0 : ℝ) < (k : ℝ) - 3 := by linarith
-    calc 2 / (((k : ℝ) - 2) ^ 3 - 2) * (max _ _ / ((k : ℝ) - 3))
-        ≤ 2 / (((k : ℝ) - 2) ^ 3 - 2) * (2 * S / ((k : ℝ) - 3)) := by
-          apply mul_le_mul_of_nonneg_left _ (by positivity)
-          exact div_le_div_of_nonneg_right hmax hk3p.le
-      _ = 4 * S / ((((k : ℝ) - 2) ^ 3 - 2) * ((k : ℝ) - 3)) := by
-          field_simp; ring
+    have hc0 : 0 ≤ (1 - rho k) / rho k := div_nonneg (by linarith) hρ0.le
+    exact mul_le_mul_of_nonneg_left (div_le_div_of_nonneg_right hmax hk3p.le) hc0
   -- combine
   have hsplit : GX / GP = (GX / NX) / (GP / NP) * (NX / NP) := by
     field_simp
   have hlog : 0 ≤ Real.log (GX / GP) := by
     rw [hsplit, Real.log_mul (by positivity) (by positivity)]
-    have := init_rate hkR hS
+    have := hrate S hS
     linarith
   have := (Real.log_nonneg_iff (div_pos hGX hGP)).mp hlog
   rwa [le_div_iff₀ hGP, one_mul] at this
+
+/-- **The height-four initial inequality for every `k ≥ 7`.** -/
+theorem init4Holds {k : ℕ} (hk : 7 ≤ k) : Init4Holds k := by
+  have hkR : (7 : ℝ) ≤ k := by exact_mod_cast hk
+  have hden : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 - 2 := by
+    nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5) (by linarith : (5 : ℝ) ≤ (k : ℝ) - 2) 3]
+  have hc3 : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 := by linarith
+  have hρ : rho k = (((k : ℝ) - 2) ^ 3 - 2) / ((k : ℝ) - 2) ^ 3 := by
+    rw [rho, if_neg (by omega), eq_div_iff hc3.ne', sub_mul, div_mul_cancel₀ _ hc3.ne', one_mul]
+  have hρ0 : 0 < rho k := by rw [hρ]; positivity
+  have hρ1 : rho k ≤ 1 := by
+    rw [rho, if_neg (by omega)]; have : 0 ≤ 2 / ((k : ℝ) - 2) ^ 3 := by positivity
+    linarith
+  have hρq : (1 - rho k) / rho k = 2 / (((k : ℝ) - 2) ^ 3 - 2) := by
+    rw [hρ, one_sub_div hc3.ne', div_div_div_cancel_right₀ hc3.ne']
+    ring
+  refine init4Holds_of (by omega) hρ0 hρ1 (fun S hS => ?_)
+  rw [hρq]
+  have h := init_rate hkR hS
+  have hk3p : (0 : ℝ) < (k : ℝ) - 3 := by linarith
+  calc 2 / (((k : ℝ) - 2) ^ 3 - 2) * (2 * S / ((k : ℝ) - 3))
+      = 4 * S / ((((k : ℝ) - 2) ^ 3 - 2) * ((k : ℝ) - 3)) := by field_simp; ring
+    _ ≤ ((k : ℝ) - 2) * S / (k : ℝ) ^ 3 := h
+
+/-- **The height-four initial inequality at `k = 6`**, with the box edge `ρ = 487/500`. -/
+theorem init4Holds_six : Init4Holds 6 := by
+  refine init4Holds_of le_rfl (by rw [rho_six]; norm_num) (by rw [rho_six]; norm_num)
+    (fun S hS => ?_)
+  rw [rho_six]
+  norm_num
+  nlinarith
 
 end GridGen.Four
