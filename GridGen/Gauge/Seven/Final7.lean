@@ -12,7 +12,8 @@ import GridGen.Gauge.Seven.Box7
 From the box bounds (`Boxes7`) the seam bounds `K7Bounds` follow:
 
 * the star: `γ = 432/69101` (`box_bound_seven`);
-* the move: `θ = 41/200`, `ε = 1/249` (`move_H`, `move_D`, `thetaM_le`, `epsM_le`);
+* the move: `θ = 189/500`, `ε = 1/337` (`move_H`, `move_D`, `thetaM_le`, `thetaJ_le`,
+  `epsM_le`);
 * the drift: `δ = 7/50` (`drift7`);
 * the relaxation constant `γ_V = 27/5075`.
 
@@ -29,7 +30,7 @@ namespace GridGen.Gauge
 /-- **The seam bounds at `k = 7`**, from the box bounds. -/
 theorem k7Bounds_of_boxes (B : Boxes7) : K7Bounds := by
   intro c m P A hc hA hP
-  refine ⟨⟨432 / 69101, 41 / 200, 1 / 249, 7 / 50, gammaV7, ?_, ?_, ?_, by norm_num, by norm_num,
+  refine ⟨⟨432 / 69101, 189 / 500, 1 / 337, 7 / 50, gammaV7, ?_, ?_, ?_, by norm_num, by norm_num,
     by norm_num, by norm_num, by norm_num, by norm_num, by norm_num [gammaV7],
     by norm_num [gammaV7], by norm_num, by norm_num [gammaV7]⟩, rfl⟩
   · intro N hK v a₀ ha h7 hPv x₀ hx
@@ -39,12 +40,13 @@ theorem k7Bounds_of_boxes (B : Boxes7) : K7Bounds := by
     unfold Z
     linarith
   · intro M hK w x y hx hy hxy r hr h hh hhole a₀ ha₀ h7
-    have hθ := thetaM_le
+    have hθ : thetaM + thetaJ ≤ 189 / 500 := by
+      have := thetaM_le; have := thetaJ_le; linarith
     have hε := epsM_le
     have hH0 : (0 : ℚ) ≤ ((slab c m 7 P A M).Ω.filter (Hit hc r a₀ h)).card := by positivity
     have hZ0 : (0 : ℚ) ≤ (slab c m 7 P A M).Ω.card := by positivity
     have key : (((slab c m 7 P A M).Ω.filter (Bad hc M w x y)).card : ℚ) ≤
-        thetaM * ((slab c m 7 P A M).Ω.filter (Hit hc r a₀ h)).card +
+        (thetaM + thetaJ) * ((slab c m 7 P A M).Ω.filter (Hit hc r a₀ h)).card +
           epsM * (slab c m 7 P A M).Ω.card := by
       obtain ⟨rv, hrv⟩ := r
       simp only at hr

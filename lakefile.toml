@@ -64,7 +64,7 @@ name = "TwoDegenerate"
 # GridGen/PolymerCertificate.lean proves ECC (with strictness and the equality case) from a
 # rational parity certificate; MaximumDegree.lean (k >= ceil(5.67Δ)) is its instance, and
 # PeelDegree.lean has the sharper Δ <= 8 thresholds. This finite polymer proof uses no seam
-# enumeration. GridGen/Gauge/ proves every rectangular grid ECC at k >= 8. See GridGen/README.md.
+# enumeration. GridGen/Gauge/ proves every rectangular grid ECC at k >= 7. See GridGen/README.md.
 # The separate all-k >= 5 route remains the telescoping and lookback reduction of
 # ai_research_notes/GRID_REVIEW_2026-09-02.md section 5.6 for an arbitrary row graph H, so that
 # H box P_n is k-ECC once the two-step seam inequality and the initial inequality hold. Both are

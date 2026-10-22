@@ -21,7 +21,7 @@ at least the uniform column `range k`.
 * **Pattern loss.** `pattern_log_ge` against `(P, P, P, P)` costs at most
   `(1-ρ)/ρ · 2S/(k-3) = 4S/(((k-2)³-2)(k-3))`, since `Σ|Xᵢ ∖ X₂| ≤ μ₂ + 2μ₃ + μ₄`.
 
-The gain dominates the loss for every `k ≥ 7` (`init_rate`).
+At `k = 6`, with the box edge `ρ = 487/500`, the gain dominates the loss (`init4Holds_six`).
 -/
 
 namespace GridGen.Four
@@ -119,22 +119,6 @@ theorem card_sts_le {k : ℕ} {X₁ X₂ X₃ X₄ : Finset ℕ} (h₁ : X₁.ca
   refine (Finset.card_le_card hsub).trans_eq ?_
   simp only [card_product, h₁, h₂, h₃, h₄]
   ring
-
-/-! ### The rate comparison -/
-
-/-- **Gain beats loss.** For `k ≥ 7`, `(k-2)/k³ ≥ 4/(((k-2)³-2)(k-3))`, as a statement with the
-mismatch `S ≥ 0` multiplied in. -/
-theorem init_rate {x S : ℝ} (hx : 7 ≤ x) (hS : 0 ≤ S) :
-    4 * S / (((x - 2) ^ 3 - 2) * (x - 3)) ≤ (x - 2) * S / x ^ 3 := by
-  have hd : 0 < ((x - 2) ^ 3 - 2) * (x - 3) := by
-    apply mul_pos _ (by linarith); nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5)
-      (by linarith : (5 : ℝ) ≤ x - 2) 3]
-  rw [div_le_div_iff₀ hd (by positivity)]
-  -- `4x³ ≤ (x-2)((x-2)³-2)(x-3)`, with `y = x - 7 ≥ 0`
-  have hp : 4 * x ^ 3 ≤ (x - 2) * (((x - 2) ^ 3 - 2) * (x - 3)) := by
-    obtain ⟨y, hy, rfl⟩ : ∃ y, 0 ≤ y ∧ x = y + 7 := ⟨x - 7, by linarith, by ring⟩
-    nlinarith [pow_nonneg hy 2, pow_nonneg hy 3, pow_nonneg hy 4, pow_nonneg hy 5]
-  nlinarith [mul_le_mul_of_nonneg_left hp hS]
 
 /-! ### The initial inequality -/
 
@@ -261,29 +245,6 @@ theorem init4Holds_of {k : ℕ} (hk : 6 ≤ k) (hρ0 : 0 < rho k) (hρ1 : rho k 
     linarith
   have := (Real.log_nonneg_iff (div_pos hGX hGP)).mp hlog
   rwa [le_div_iff₀ hGP, one_mul] at this
-
-/-- **The height-four initial inequality for every `k ≥ 7`.** -/
-theorem init4Holds {k : ℕ} (hk : 7 ≤ k) : Init4Holds k := by
-  have hkR : (7 : ℝ) ≤ k := by exact_mod_cast hk
-  have hden : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 - 2 := by
-    nlinarith [pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 5) (by linarith : (5 : ℝ) ≤ (k : ℝ) - 2) 3]
-  have hc3 : (0 : ℝ) < ((k : ℝ) - 2) ^ 3 := by linarith
-  have hρ : rho k = (((k : ℝ) - 2) ^ 3 - 2) / ((k : ℝ) - 2) ^ 3 := by
-    rw [rho, if_neg (by omega), eq_div_iff hc3.ne', sub_mul, div_mul_cancel₀ _ hc3.ne', one_mul]
-  have hρ0 : 0 < rho k := by rw [hρ]; positivity
-  have hρ1 : rho k ≤ 1 := by
-    rw [rho, if_neg (by omega)]; have : 0 ≤ 2 / ((k : ℝ) - 2) ^ 3 := by positivity
-    linarith
-  have hρq : (1 - rho k) / rho k = 2 / (((k : ℝ) - 2) ^ 3 - 2) := by
-    rw [hρ, one_sub_div hc3.ne', div_div_div_cancel_right₀ hc3.ne']
-    ring
-  refine init4Holds_of (by omega) hρ0 hρ1 (fun S hS => ?_)
-  rw [hρq]
-  have h := init_rate hkR hS
-  have hk3p : (0 : ℝ) < (k : ℝ) - 3 := by linarith
-  calc 2 / (((k : ℝ) - 2) ^ 3 - 2) * (2 * S / ((k : ℝ) - 3))
-      = 4 * S / ((((k : ℝ) - 2) ^ 3 - 2) * ((k : ℝ) - 3)) := by field_simp; ring
-    _ ≤ ((k : ℝ) - 2) * S / (k : ℝ) ^ 3 := h
 
 /-- **The height-four initial inequality at `k = 6`**, with the box edge `ρ = 487/500`. -/
 theorem init4Holds_six : Init4Holds 6 := by

@@ -10,3 +10,4 @@ import GridGen.Four.Main
 import GridGen.Gauge.Grid
 import GridGen.Gauge.Nine.Main
 import GridGen.Gauge.Eight.Main8
+import GridGen.Gauge.Seven.Assemble7

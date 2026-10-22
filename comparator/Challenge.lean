@@ -697,7 +697,7 @@ end SimpleGraph.TwoDegenerate.K2nSqrt
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
 `GridGen/Four/` for the `4 × (n+1)` grids at every `k ≥ 6`: a seam inequality between consecutive
-columns for `k = 6` and `k = 7`, fed to GridGen's telescoping, and §18's `k ≥ 8` below.
+columns for `k = 6`, fed to GridGen's telescoping, and §18's `k ≥ 7` below.
 -/
 
 namespace GridGen.Four
@@ -710,10 +710,10 @@ theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 6 ≤ k) (n : ℕ) : (pathG 3 �
 
 end GridGen.Four
 
-/-! ### 18. Every grid at list sizes at least eight
+/-! ### 18. Every grid at list sizes at least seven
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
-`GridGen/Gauge/` for every rectangle at every `k ≥ 8`, uniformly in the height. Each column is
+`GridGen/Gauge/` for every rectangle at every `k ≥ 7`, uniformly in the height. Each column is
 relabelled by a vertically consistent bijection onto `{0, …, k-1}`, which makes the telescoped
 quantity a count of correspondence colourings. At each seam a deleted seam pair gains at least a
 box-bounded fraction; each label transposition loses at most an explicit `ε_k`, by a Kempe-chain
@@ -726,6 +726,11 @@ swap and a crossing-path count. For `k ≥ 10` the gains win. At `k = 9` the con
 * the transpositions run through labels left unmatched by the deleted pairs, so the two-cell
   crossing path has one phase;
 * crossing paths are counted exactly up to eighteen cells.
+At `k = 7`, in addition, each transposition is charged to the star deleted just before it: the
+crossing paths with an end at the hole row, and the three-cell path through the star's own cell,
+are bounded against the star's hit event; shortest crossing paths are chordless and are counted
+to twenty cells; the growth of the hit event between a colour's two transpositions is bounded
+inside the hit event.
 -/
 
 namespace ListColoring
@@ -733,8 +738,8 @@ namespace ListColoring
 open SimpleGraph
 open scoped SimpleGraph
 
-/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 8. -/
-theorem ecc_boxProd_pathG_of_eight {k : ℕ} (hk : 8 ≤ k) (r n : ℕ) :
+/-- Every rectangular grid, with both dimensions unrestricted, is ECC at list sizes ≥ 7. -/
+theorem ecc_boxProd_pathG_of_seven {k : ℕ} (hk : 7 ≤ k) (r n : ℕ) :
     (pathG r □ pathG n).ECCAt k := sorry
 
 end ListColoring

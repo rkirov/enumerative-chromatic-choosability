@@ -16,8 +16,8 @@ size is the size of `⋂_{i∈I} Bᵢ` minus the number of distinct `sᵢ` in it
 function of the Venn sizes of `B` and the bits of `s` (`GB_cls`). The uniform side `GU` depends on
 the pattern bits only (`GU_urow`).
 
-This is the computational core of the exact certificates for small mismatches at `k = 7`
-(`GridGen/Four/Small7.lean`).
+This is the computational core of the exact certificates for small mismatches at `k = 6`
+(`GridGen/Four/Small6.lean`, via `Exact6.lean`).
 -/
 
 namespace GridGen.Four

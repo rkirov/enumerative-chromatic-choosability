@@ -8,9 +8,9 @@ import GridGen.Four.State
 # Height four: the averaged gain
 
 After averaging, the per-state gain becomes a function of the three list mismatches alone:
-`Fval k μ₂ μ₃ μ₄`, or `Fcap k μ₂ μ₃ μ₄` with the pattern term capped. `Cert7.lean` checks them at
-`k = 7`. (For `k ≥ 8` every grid is ECC by the gauge route, `GridGen/Gauge/`, so the certificate
-for `k = 8` that once lived here was removed.)
+`Fval k μ₂ μ₃ μ₄`, or `Fcap k μ₂ μ₃ μ₄` with the pattern term capped. `Cert6.lean` checks them at
+`k = 6`. (For `k ≥ 7` every grid is ECC by the gauge route, `GridGen/Gauge/`, so the certificates
+for `k = 7` and `k = 8` that once lived here were removed.)
 -/
 
 namespace GridGen.Four

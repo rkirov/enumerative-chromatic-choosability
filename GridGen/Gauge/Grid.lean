@@ -10,7 +10,7 @@ import GridGen.Gauge.Main
 The gauge telescope is run on `rowG m`, the path on `Fin m`. This file transports it to the
 project's paths `pathG r` (on `PathV r`, with `r + 1` vertices). The isomorphism
 `pathG r ≃g rowG (r + 1)` sends the last-attached vertex `none` to the last index;
-`ecc_boxProd_pathG_of_nine` and `ecc_boxProd_pathG_of_eight` use it.
+`ecc_boxProd_pathG_of_nine`, `ecc_boxProd_pathG_of_eight` and `ecc_boxProd_pathG_of_seven` use it.
 -/
 
 open SimpleGraph ListColoring

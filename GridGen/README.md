@@ -12,7 +12,7 @@ Two independent developments share this library.
    for `k ≥ 6` in `Four/` (see [`Four/README.md`](Four/README.md)); open at heights ≥ 5.
    See `ai_research_notes/GRID_REVIEW_2026-09-02.md` §5.6.
 
-A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 8` (see
+A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 7` (see
 [`Gauge/README.md`](Gauge/README.md)). The rest of this file is about the polymer route.
 
 ## Statements
@@ -33,8 +33,8 @@ A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 8` (see
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
-is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 8`); the list sizes
-`3 ≤ k ≤ 5` stay open at height four (`Four/` proves `k ≥ 6`) and `3 ≤ k ≤ 7` at heights `≥ 5`.
+is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 7`); the list sizes
+`3 ≤ k ≤ 5` stay open at height four (`Four/` proves `k ≥ 6`) and `3 ≤ k ≤ 6` at heights `≥ 5`.
 
 ## The argument
 
@@ -127,7 +127,7 @@ neither family goes further. For grids at `k = 15` the best degree-three root bu
 about four percent, and removing the grid's 4-cycles from the walk-tree count recovers a tenth of
 that. To first order the root's edges alone need `s (1 − 3s/k) ≥ 1`, which already forces
 `k ≥ 12`. Arbitrary heights below 16 need a different method; the gauge route of
-[`Gauge/`](Gauge/README.md) is one, and reaches every rectangle at `k ≥ 8`.
+[`Gauge/`](Gauge/README.md) is one, and reaches every rectangle at `k ≥ 7`.
 
 ## Credit
 

@@ -127,8 +127,8 @@ published construction.
   overlap-`k − 1` case (Lemma 6, reproved as `lemma6`). A targeted search on 2026-09-28 found no
   proof of the conjecture in the literature.
 
-* **Every grid at `k ≥ 8` (`GridGen/Gauge/`).** Every rectangle `P_m □ P_n`, of any height and
-  width, is ECC at every `k ≥ 8` (`ListColoring.ecc_boxProd_pathG_of_eight`). GridGen's column
+* **Every grid at `k ≥ 7` (`GridGen/Gauge/`).** Every rectangle `P_m □ P_n`, of any height and
+  width, is ECC at every `k ≥ 7` (`ListColoring.ecc_boxProd_pathG_of_seven`). GridGen's column
   telescope is run with each column relabelled by a vertically consistent bijection onto
   `{0, …, k−1}`, so the telescoped quantity counts DP-colourings of an explicit cover; at each seam
   a box bound gives the gain of a deleted seam pair, and a Kempe-chain swap with a crossing-path
@@ -139,25 +139,31 @@ published construction.
   box-bounded gain, so a potential `(1 − ε)^{D_j} W_j` charges every transposition to a vertical
   list difference or a star; the transpositions run through labels that the deleted pairs leave
   unmatched, so the 4-cycle bad event has one phase; and crossing paths are counted exactly up to
-  eighteen cells by a kernel-checked dynamic program. **Credits.** The route and its proof are this
-  repository's (Claude, 2026-10-15 to 2026-10-18); DP-colourings are Dvořák–Postle's and the swap
-  is Kempe's. It supersedes the grid corollaries of the maximum-degree items below (`k ≥ 20`, then
-  `17`, then `16`), which have been removed, and the height-four item's range above `k = 7`.
-  Not checked against the literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 7` remains open at
-  heights `≥ 5`.
+  eighteen cells by a kernel-checked dynamic program. At `k = 7` (`GridGen/Gauge/Seven/`): each
+  transposition is charged to the star deleted just before it, in the same cover, so crossing
+  paths with an end at the hole row and the three-cell path through the star's own cell are bounded
+  against the star's hit event by box bounds (`θ₂ ≤ 512/3969`, `7/81` per phase), the other paths
+  against the whole count; shortest witnesses are chordless and counted to twenty cells; a colour's
+  two transpositions are pooled with its star, and the growth of the hit event between them is
+  bounded by the chain bound inside the hit event (factor `1 + 7/50`). **Credits.** The route and
+  its proof are this repository's (Claude, 2026-10-15 to 2026-10-18 for `k ≥ 8`, 2026-10-18 to
+  2026-10-22 for `k = 7`); DP-colourings are Dvořák–Postle's and the swap is Kempe's. It supersedes
+  the grid corollaries of the maximum-degree items below (`k ≥ 20`, then `17`, then `16`), which
+  have been removed, and the height-four item's range above `k = 6`. Not checked against the
+  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 5`.
 
 * **Height-four grids at `k ≥ 6` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
   `k ≥ 6` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
-  `k ≥ 16`, from the maximum-degree item below. The certificates covered `7 ≤ k ≤ 15`; since the
-  gauge item above, only `k = 7` is kept, and `k = 6` was added on 2026-10-21. The route is GridGen's column telescoping: one seam
+  `k ≥ 16`, from the maximum-degree item below. The certificates covered `7 ≤ k ≤ 15`; as the
+  gauge item above reached `8` and then `7` they were removed (the `k = 7` ones on 2026-10-22), and
+  `k = 6` was added on 2026-10-21. The route is GridGen's column telescoping: one seam
   inequality between consecutive columns for every horizon, reduced to the eight corners of a box of
   pattern weights that the uniform transfer maps into itself, then proved per previous column by
   factoring its successor count into four row rates, bounding each rate's log against the uniform
-  one, and averaging the state-dependent terms with fibre bounds. At `k = 7` the pattern term is
-  capped at `(1-ρ)/ρ`, which leaves five small list-mismatch triples; for those the lists have eight
-  shapes, and each successor count is computed exactly from membership bits and checked against a
-  linear lower bound by kernel evaluation over every column type (`GridGen/Four/Exact.lean`,
-  `Small7.lean`). **Credits.** The reduction to the box, the row-rate localisation, the
+  one, and averaging the state-dependent terms with fibre bounds. At `k = 7` (removed) the pattern
+  term was capped at `(1-ρ)/ρ`, which left five small list-mismatch triples; for those each
+  successor count was computed exactly from membership bits and checked against a linear lower
+  bound by kernel evaluation over every column type (`GridGen/Four/Exact.lean` keeps the method). **Credits.** The reduction to the box, the row-rate localisation, the
   reference-palette pattern term in its final form, the initial inequality, the concavity reduction
   of the `k = 8` certificate to fourteen vertices, the `k = 7` cap and exact certificates,
   and the Lean development are this repository's (Claude, 2026-10-10 to 2026-10-16). **Codex

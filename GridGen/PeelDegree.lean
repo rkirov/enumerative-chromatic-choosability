@@ -26,7 +26,7 @@ The neighbour-pair refinement (`PolymerPairCertificate.lean`, also Codex's propo
 degrees four, six and eight by one; at degree four that is `eccAt_of_degree_le_four_sixteen`.
 Numerically the family stops there for grids: at `k = 15` the best degree-three root budget misses
 by about four percent, and excluding the grid's 4-cycles from the tree count recovers only a tenth
-of that gap. (Grids themselves are ECC at every `k ≥ 8` by the gauge route, `GridGen/Gauge/`.)
+of that gap. (Grids themselves are ECC at every `k ≥ 7` by the gauge route, `GridGen/Gauge/`.)
 -/
 
 namespace GridGen.Polymer
