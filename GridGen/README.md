@@ -29,12 +29,13 @@ A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 7` (see
 `PolymerStability.lean` restates the last two at the uniform threshold under the names
 `SimpleGraph.colConst_lt_col_of_degree_bound_of_adj_lists_ne` and
 `SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound`. For comparison, the ceiling bound gives
-18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 34 guarded
+18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 35 guarded
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
 is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 7`); the list sizes
-`3 ≤ k ≤ 5` stay open at height four (`Four/` proves `k ≥ 6`) and `3 ≤ k ≤ 6` at heights `≥ 5`.
+`3 ≤ k ≤ 5` stay open at heights four and five (`Four/` and `Five/` prove `k ≥ 6`) and `3 ≤ k ≤ 6`
+at heights `≥ 6`.
 
 ## The argument
 
@@ -169,7 +170,7 @@ comparison stated. The literature check is targeted, not exhaustive
 
 ```sh
 lake build GridGen                     # everything, including the polymer route
-lake build GridGen.PolymerAxiomAudit   # 34 guarded axiom checks
+lake build GridGen.PolymerAxiomAudit   # 35 guarded axiom checks
 python3 GridGen/polymer_audit.py --max-n 5 --grids   # independent exact-arithmetic bug detector
 python3 GridGen/parity_budget_review.py --explore    # rational certificates and numerical minima
 ```

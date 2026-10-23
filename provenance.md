@@ -150,7 +150,23 @@ published construction.
   2026-10-22 for `k = 7`); DP-colourings are Dvořák–Postle's and the swap is Kempe's. It supersedes
   the grid corollaries of the maximum-degree items below (`k ≥ 20`, then `17`, then `16`), which
   have been removed, and the height-four item's range above `k = 6`. Not checked against the
-  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 5`.
+  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 6`, and
+  `3 ≤ k ≤ 5` at heights four and five.
+
+* **Height-five grids at `k ≥ 6` (`GridGen/Five/`).** Every `5 × (n+1)` grid is ECC at every
+  `k ≥ 6` (`GridGen.Five.ecc_boxProd_pathG_four`); before this, height five was known at `k ≥ 7`
+  (the gauge item above). The route is the height-four item's, with five rows: an invariant
+  per-pattern box of the fifteen pattern weights (eleven reflection orbits); a universal lower
+  bound `|sts A| ≥ κ·n₁·∏ r̃ⱼ`, `κ = 123125/128018`, from greedy interval profiles; a chain-fibre
+  lemma for the pattern term with exact dual certificates at the 1,024 box corners; an analytic
+  certificate for every list-mismatch quad outside 24 small ones and 38 dual certificates over the
+  state bits; exact certificates for the 24 small quads (13 up to row reflection, 58 list shapes,
+  137,717 column types, kernel-checked); and an analytic initial inequality. **Credits.** The
+  height-five box, count, pattern and bit-level certificates, the exact-layer reductions and the
+  Lean development are this repository's (Claude, 2026-10-23), built on the height-four method
+  (whose credits, including Codex's, are in the next item). Not checked against the literature
+  beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 5` remains open at height five, and the method
+  degrades with height (the single-mismatch margin at height six is about `0.0036`).
 
 * **Height-four grids at `k ≥ 6` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
   `k ≥ 6` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at

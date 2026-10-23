@@ -10,6 +10,8 @@ isolate the kernel-decided certificates, whose replay dominates the running time
 * k2n: the K_{2,n} results at list sizes 3, 4, 5 (the AM-GM certificates in TwoDegenerate/K2n/);
 * grid4: the height-four grid theorem (the k = 6 exact certificates in GridGen/Four/Small6/,
   79,439 column types, about 20 minutes of kernel evaluation);
+* grid5: the height-five grid theorem (the k = 6 exact certificates in GridGen/Five/Small5/,
+  137,717 column types, and the dispatch modules);
 * rest: every other claim, including any claim added to config.json later.
 
 config.json stays the single source of truth; `rest` is its complement, so the union of the
@@ -34,6 +36,9 @@ SHARDS = {
     ],
     "grid4": [
         "GridGen.Four.ecc_boxProd_pathG_three",
+    ],
+    "grid5": [
+        "GridGen.Five.ecc_boxProd_pathG_four",
     ],
 }
 ALL_SHARDS = list(SHARDS) + ["rest"]

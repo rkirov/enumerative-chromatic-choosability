@@ -1,9 +1,11 @@
 import GridGen.Polymer
 import GridGen.Four.Main
+import GridGen.Five.Main
 
 /-!
 Guarded transitive axiom audit for the polymer route: every maximum-degree theorem and
-the lemmas that carry the argument; the height-four grid theorem of `GridGen/Four/`; and every
+the lemmas that carry the argument; the height-four and height-five grid theorems of
+`GridGen/Four/` and `GridGen/Five/`; and every
 grid at `k ≥ 7` (`GridGen/Gauge/`). Each must use exactly the three standard axioms.
 -/
 
@@ -134,6 +136,10 @@ grid at `k ≥ 7` (`GridGen/Gauge/`). Each must use exactly the three standard a
 /-- info: 'GridGen.Four.ecc_boxProd_pathG_three' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
 #print axioms GridGen.Four.ecc_boxProd_pathG_three
+
+/-- info: 'GridGen.Five.ecc_boxProd_pathG_four' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs (whitespace := lax) in
+#print axioms GridGen.Five.ecc_boxProd_pathG_four
 
 /-- info: 'GridGen.Polymer.colConst_le_col_of_certifiedPairAt' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs (whitespace := lax) in
