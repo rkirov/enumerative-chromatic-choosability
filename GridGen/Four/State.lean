@@ -169,7 +169,9 @@ theorem rho_pos' {k : ℕ} (hk : 5 ≤ k) : 0 < rho k := by
   obtain ⟨m, rfl⟩ : ∃ m, k = m + 5 := ⟨k - 5, by omega⟩
   by_cases h6 : m = 1
   · subst h6; rw [show (1 + 5 : ℕ) = 6 from rfl, rho_six]; norm_num
-  exact rho_pos (rho_eq h6)
+  by_cases h5 : m = 0
+  · subst h5; rw [show (0 + 5 : ℕ) = 5 from rfl, rho_five]; norm_num
+  exact rho_pos (rho_eq h5 h6)
 
 theorem gw_mem {k : ℕ} {w : Wt} (hw : InBox k w) (t : T4) : rho k ≤ gw w t ∧ gw w t ≤ 1 := by
   obtain ⟨ha, ha', hb, hb', hc, hc'⟩ := hw

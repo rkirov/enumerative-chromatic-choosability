@@ -12,7 +12,8 @@ The interface between the two halves of `GridGen/Four/`.
 * `GU k w s`: the pattern-weighted number of uniform successors of a column `s`, computed on the
   canonical realisation `canon s` of its equality pattern inside `{0, …, k-1}`.
 * `InBox k w`: the pattern weights lie in the box `[ρ, 1]³`, `ρ = 1 - 2/(k-2)³` (and `ρ = 487/500`
-  at `k = 6`), which the uniform transfer maps into itself (`GridGen/Four/Cone.lean`).
+  at `k = 6`, `ρ = 118/125` at `k = 5`), which the uniform transfer maps into itself
+  (`GridGen/Four/Cone.lean`).
 * `Seam4Holds k`: for every previous column with lists `X` of `k - 1` or `k` colours, every next
   column with `k`-lists `B` and every weight in the box, the weighted successors from `B` dominate
   the uniform prediction, summed over the proper states of `X`.
@@ -41,11 +42,14 @@ noncomputable def GU (k : ℕ) (w : Wt) (s : T4) : ℝ :=
 noncomputable def GB (w : Wt) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : ℝ :=
   G w (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s)) (B₄.erase (r4 s))
 
-/-- The lower edge of the invariant box: `1 - 2/(k-2)³`, except `487/500` at `k = 6`, where the
-symbolic value `31/32` is not sharp enough. -/
-noncomputable def rho (k : ℕ) : ℝ := if k = 6 then 487 / 500 else 1 - 2 / ((k : ℝ) - 2) ^ 3
+/-- The lower edge of the invariant box: `1 - 2/(k-2)³`, except `487/500` at `k = 6` and
+`118/125` at `k = 5`, where the symbolic values `31/32` and `25/27` are not sharp enough. -/
+noncomputable def rho (k : ℕ) : ℝ :=
+  if k = 6 then 487 / 500 else if k = 5 then 118 / 125 else 1 - 2 / ((k : ℝ) - 2) ^ 3
 
 theorem rho_six : rho 6 = 487 / 500 := by unfold rho; rw [if_pos rfl]
+
+theorem rho_five : rho 5 = 118 / 125 := by unfold rho; norm_num
 
 /-- The pattern weights lie in the invariant box. -/
 def InBox (k : ℕ) (w : Wt) : Prop :=
