@@ -150,8 +150,8 @@ published construction.
   2026-10-22 for `k = 7`); DP-colourings are Dvořák–Postle's and the swap is Kempe's. It supersedes
   the grid corollaries of the maximum-degree items below (`k ≥ 20`, then `17`, then `16`), which
   have been removed, and the height-four item's range above `k = 6`. Not checked against the
-  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 6`, and
-  `3 ≤ k ≤ 5` at heights four and five.
+  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 6`,
+  `3 ≤ k ≤ 5` at height five and `3 ≤ k ≤ 4` at height four.
 
 * **Height-five grids at `k ≥ 6` (`GridGen/Five/`).** Every `5 × (n+1)` grid is ECC at every
   `k ≥ 6` (`GridGen.Five.ecc_boxProd_pathG_four`); before this, height five was known at `k ≥ 7`
@@ -168,8 +168,8 @@ published construction.
   beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 5` remains open at height five, and the method
   degrades with height (the single-mismatch margin at height six is about `0.0036`).
 
-* **Height-four grids at `k ≥ 6` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
-  `k ≥ 6` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
+* **Height-four grids at `k ≥ 5` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
+  `k ≥ 5` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at
   `k ≥ 16`, from the maximum-degree item below. The certificates covered `7 ≤ k ≤ 15`; as the
   gauge item above reached `8` and then `7` they were removed (the `k = 7` ones on 2026-10-22), and
   `k = 6` was added on 2026-10-21. The route is GridGen's column telescoping: one seam
@@ -194,9 +194,14 @@ published construction.
   frequencies at list size `5` with the box corners (`pattern_six`, cap `209/14123`); and exact
   certificates for the sixteen remaining mismatch triples, 69 list shapes and 79,439 column types
   (`GridGen/Four/Exact6.lean`, `Small6/`). Not checked against the literature beyond Kirov–Naimi's
-  Question 1, which asks this for every grid; `3 ≤ k ≤ 5` remains open at height four. With exact
-  per-state values the averaged inequality this route needs fails at `k = 5` (about `−0.019` at
-  `(0,1,0)`), so `k = 5` needs a different argument.
+  Question 1, which asks this for every grid. **`k = 5` (Claude, 2026-10-24).** The averaged
+  inequality of the `k = 6` argument fails at `k = 5` (about `−0.019` at `(0,1,0)`), but the true
+  one-column inequality holds. The box edge `118/125`; a universal count constant from greedy
+  profiles; new pins, an event-conditioned fibre bound and a marginal bound for one or two adjacent
+  middle rows from the path marginals on both sides (`Pins5`, `Block5`); dual certificates over the
+  state bits for 201 triples; exact certificates for fourteen small triples (59 list shapes, 62.5k
+  column types); `(0,0,0)` pointwise; an analytic initial inequality. `3 ≤ k ≤ 4` remains open at
+  height four.
 
 * **Degree-sensitive deletion ratios (`GridGen/PolymerPeel*.lean`, `PeelDegree.lean`).** The same
   interpolation, but the deletion ratio `Z(U) ≥ q Z(U − v)` is required only when `v` has at most

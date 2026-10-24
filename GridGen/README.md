@@ -9,7 +9,8 @@ Two independent developments share this library.
 2. **The column-lookback reduction** (`Column`, `Graph`, `Telescope`, `Uniform`, `Main`,
    `Explicit`, `Three`): `H □ P_n` is `k`-ECC from a two-step seam inequality and an initial
    inequality, both stated as `Prop`s; proved at height three from `Grid3/`, and at height four
-   for `k ≥ 6` in `Four/` (see [`Four/README.md`](Four/README.md)); open at heights ≥ 5.
+   for `k ≥ 5` in `Four/` (see [`Four/README.md`](Four/README.md)), and at height five for `k ≥ 6`
+   in `Five/`.
    See `ai_research_notes/GRID_REVIEW_2026-09-02.md` §5.6.
 
 A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 7` (see
@@ -34,7 +35,8 @@ transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
 is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 7`); the list sizes
-`3 ≤ k ≤ 5` stay open at heights four and five (`Four/` and `Five/` prove `k ≥ 6`) and `3 ≤ k ≤ 6`
+`3 ≤ k ≤ 4` stay open at height four (`Four/` proves `k ≥ 5`), `3 ≤ k ≤ 5` at height five (`Five/`
+proves `k ≥ 6`) and `3 ≤ k ≤ 6`
 at heights `≥ 6`.
 
 ## The argument

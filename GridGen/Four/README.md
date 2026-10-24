@@ -1,10 +1,10 @@
-# `GridGen/Four/`: height-four grids at `k ≥ 6`
+# `GridGen/Four/`: height-four grids at `k ≥ 5`
 
-**`GridGen.Four.ecc_boxProd_pathG_three`**: for every `k ≥ 6` and every `n`,
+**`GridGen.Four.ecc_boxProd_pathG_three`**: for every `k ≥ 5` and every `n`,
 `(pathG 3 □ pathG n).ECCAt k`, i.e. every `4 × (n+1)` grid is ECC at list size `k`. The axioms
 are `[propext, Classical.choice, Quot.sound]` (`GridGen/PolymerAxiomAudit.lean`, comparator §17).
 For `k ≥ 7` this is the gauge route's `ListColoring.ecc_boxProd_pathG_of_seven`. The new case is
-`k = 6` (2026-10-21); `3 ≤ k ≤ 5` remains open. (The certificates below once covered
+`k = 6` (2026-10-21) and `k = 5` (2026-10-24, step 8); `3 ≤ k ≤ 4` remains open. (The certificates below once covered
 `7 ≤ k ≤ 15`, when the other route stopped at `16`; they were removed on 2026-10-17, 2026-10-18
 and 2026-10-22 as the gauge route reached `9`, `8` and then `7`.)
 
@@ -62,8 +62,19 @@ two-step inequality, a first-seam inequality and an initial inequality.
    capacity filter, and `Small6/Cert*.lean` check 79,439 column types (smallest LP margin
    `0.009`, at `(0,1,0)`).
 
-With exact per-state values the averaged inequality fails at `k = 5` (about `−0.019` at
-`(0,1,0)`), so `k = 5` needs a different argument.
+8. **`k = 5`** (`Pins5`, `Block5`, `State5`, `BitLP5k`, `BitCert5k/`, `BitAll5k`, `Zero5k`,
+   `Exact5k`, `Small5k/`, `Init5k`, `Five`). With exact per-state values the averaged inequality
+   of step 7 fails at `k = 5` (about `−0.019` at `(0,1,0)`), but the true one-column inequality
+   holds. The box edge is `118/125` (`rho_five`, `box_five`). New pins: an event-conditioned fibre
+   bound (`peel_chain`) and a marginal bound for one or two adjacent middle rows from the path
+   marginals on both sides (`block_core`). The mismatch triples split three ways (`cover5k`):
+   `(0,0,0)` pointwise by an injection into the unused colours (`seam_zero5k`); 201 triples by
+   dual certificates over the state bits in exponential form (`seam_bit_all5k`, smallest state
+   margin `0.0072`); fourteen small triples by exact certificates (`seam_exact5k`, 59 shapes,
+   62.5k column types, smallest LP margin `0.0026`). The initial inequality is analytic
+   (`init4Holds_five`).
+
+`k ≤ 4` is open at height four.
 
 ## Credits
 
