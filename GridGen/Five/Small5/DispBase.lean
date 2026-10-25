@@ -470,4 +470,35 @@ theorem dispatch_of_search {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (E : List (Li
       · omega
       · exact hk p hp e
 
+
+/-- The list sizes as `lsum`s of atom sizes. -/
+theorem lsum_rows (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) :
+    lsum (fun k => (atomSet B₁ B₂ B₃ B₄ B₅ k).card) [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23,
+        25, 27, 29, 31] = B₁.card ∧
+    lsum (fun k => (atomSet B₁ B₂ B₃ B₄ B₅ k).card) [2, 3, 6, 7, 10, 11, 14, 15, 18, 19, 22, 23,
+        26, 27, 30, 31] = B₂.card ∧
+    lsum (fun k => (atomSet B₁ B₂ B₃ B₄ B₅ k).card) [4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23,
+        28, 29, 30, 31] = B₃.card ∧
+    lsum (fun k => (atomSet B₁ B₂ B₃ B₄ B₅ k).card) [8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27,
+        28, 29, 30, 31] = B₄.card ∧
+    lsum (fun k => (atomSet B₁ B₂ B₃ B₄ B₅ k).card) [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+        27, 28, 29, 30, 31] = B₅.card := by
+  obtain ⟨l1, l2, l3, l4, l5, -, -, -, -⟩ := venn_lin B₁ B₂ B₃ B₄ B₅
+  simp only [lsum, Nat.add_zero, Nat.add_assoc] at l1 l2 l3 l4 l5 ⊢
+  exact ⟨l1.symm, l2.symm, l3.symm, l4.symm, l5.symm⟩
+
+/-- The atoms of five `6`-lists have fewer than `7` elements. -/
+theorem atoms_lt7 {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (hB₁ : B₁.card = 6) (hB₂ : B₂.card = 6)
+    (hB₃ : B₃.card = 6) (hB₄ : B₄.card = 6) (hB₅ : B₅.card = 6) :
+    ∀ k, 0 < k → k < 32 → (atomSet B₁ B₂ B₃ B₄ B₅ k).card < 7 := by
+  obtain ⟨l1, l2, l3, l4, l5, -, -, -, -⟩ := venn_lin B₁ B₂ B₃ B₄ B₅
+  intro k h0 h32
+  interval_cases k
+  all_goals first
+    | (clear l2 l3 l4 l5; omega)
+    | (clear l1 l3 l4 l5; omega)
+    | (clear l1 l2 l4 l5; omega)
+    | (clear l1 l2 l3 l5; omega)
+    | (clear l1 l2 l3 l4; omega)
+
 end GridGen.Five.Ex5

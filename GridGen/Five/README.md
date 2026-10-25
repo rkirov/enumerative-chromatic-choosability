@@ -46,7 +46,6 @@ the height-four method, whose credits, including Codex's (OpenAI), are in
 
 ## Build
 
-`lake build GridGen.Five.Main`. The thirteen dispatch modules `Small5/Disp_*.lean` take about five
-minutes each and the certificate modules `Small5/Cert0*.lean` one to two minutes each, about 1.5 h
-in all. The largest module needs about 1.2 GB above the import baseline; build them one at a time
+`lake build GridGen.Five.Main`. The certificate modules `Small5/Cert0*.lean` take one to two minutes
+each and the thirteen dispatch modules `Small5/Disp_*.lean` 10–20 s each, about 20 minutes in all. The largest module needs about 1.2 GB above the import baseline; build them one at a time
 on small machines.

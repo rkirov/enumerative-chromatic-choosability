@@ -75,13 +75,23 @@ theorem dispatch_0030 {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (hB₁ : B₁.card
     (c2 : (B₁ ∩ B₂).card + 0 = 6) (c3 : (B₂ ∩ B₃).card + 0 = 6)
     (c4 : (B₃ ∩ B₄).card + 3 = 6) (c5 : (B₄ ∩ B₅).card + 0 = 6) :
     ∃ sp ∈ table5, AtomsMatch sp B₁ B₂ B₃ B₄ B₅ := by
+  refine dispatch_of_search eqs_0030 ord_0030 dispatch_dec_0030 ?_ (atoms_lt7 hB₁ hB₂ hB₃ hB₄ hB₅)
   obtain ⟨l1, l2, l3, l4, l5, l12, l23, l34, l45⟩ := venn_lin B₁ B₂ B₃ B₄ B₅
-  refine dispatch_of_search eqs_0030 ord_0030 dispatch_dec_0030 ?_ ?_
-  · intro c hc
-    simp only [eqs_0030, List.mem_cons, List.not_mem_nil, or_false] at hc
-    rcases hc with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    all_goals (dsimp only [lsum]; omega)
-  · intro k h0 h32
-    interval_cases k <;> omega
+  intro c hc
+  simp only [eqs_0030, List.mem_cons, List.not_mem_nil, or_false] at hc
+  rcases hc with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+  · dsimp only [lsum]; clear * - l1 l12 hB₁ c2; omega
+  · dsimp only [lsum]; clear * - l2 l12 hB₂ c2; omega
+  · dsimp only [lsum]; clear * - l2 l23 hB₂ c3; omega
+  · dsimp only [lsum]; clear * - l3 l23 hB₃ c3; omega
+  · dsimp only [lsum]; clear * - l3 l34 hB₃ c4; omega
+  · dsimp only [lsum]; clear * - l4 l34 hB₄ c4; omega
+  · dsimp only [lsum]; clear * - l4 l45 hB₄ c5; omega
+  · dsimp only [lsum]; clear * - l5 l45 hB₅ c5; omega
+  · exact (lsum_rows B₁ B₂ B₃ B₄ B₅).1.trans hB₁
+  · exact (lsum_rows B₁ B₂ B₃ B₄ B₅).2.1.trans hB₂
+  · exact (lsum_rows B₁ B₂ B₃ B₄ B₅).2.2.1.trans hB₃
+  · exact (lsum_rows B₁ B₂ B₃ B₄ B₅).2.2.2.1.trans hB₄
+  · exact (lsum_rows B₁ B₂ B₃ B₄ B₅).2.2.2.2.trans hB₅
 
 end GridGen.Five.Ex5
