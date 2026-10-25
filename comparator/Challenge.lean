@@ -717,15 +717,14 @@ Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Pr
 relabelled by a vertically consistent bijection onto `{0, …, k-1}`, which makes the telescoped
 quantity a count of correspondence colourings. At each seam a deleted seam pair gains at least a
 box-bounded fraction; each label transposition loses at most an explicit `ε_k`, by a Kempe-chain
-swap and a crossing-path count. For `k ≥ 10` the gains win. At `k = 9` the constants are sharper
-(the labels unavailable next to the seam are treated separately, the two-cell crossing path is a
-4-cycle, crossing paths are counted exactly up to twelve cells). At `k = 8`, in addition:
+swap and a crossing-path count. For every `k ≥ 8`, in addition:
 * the next column's states are read as *relaxed* label states, and each relaxed diagonal pair
-  gains at least `152/27675`; a potential charges every transposition to a star or a vertical
-  list difference;
+  gains at least a box-bounded fraction (`152/27675` at `k = 8`); a potential charges every
+  transposition to a star or a vertical list difference;
 * the transpositions run through labels left unmatched by the deleted pairs, so the two-cell
   crossing path has one phase;
-* crossing paths are counted exactly up to eighteen cells.
+* crossing paths are counted exactly up to eighteen cells (the counts do not depend on `k`).
+The constants are sharper at `k = 8` and uniform in `k` for `k ≥ 9`.
 At `k = 7`, in addition, each transposition is charged to the star deleted just before it: the
 crossing paths with an end at the hole row, and the three-cell path through the star's own cell,
 are bounded against the star's hit event; shortest crossing paths are chordless and are counted

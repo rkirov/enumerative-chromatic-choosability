@@ -22,6 +22,9 @@ whichever exist.
   loses at most one colour. Each domino loses at most `α₂ + α₃` of its `τ` pairs.
 * **Arithmetic.** `α₁ ≥ k − 3` whenever `a₀` is available at `y₁`, and `α₆ ≥ k − 3`.
   On a domino `τ ≥ α₂(α₃ − 1)` with `α₂, α₃ ≥ k − 2`, which gives `2τ ≥ (k-3)(α₂+α₃)`.
+
+The last section splits the fibre by the centre values (`card_cls_le_sum`), for the sharper
+bounds of `Eight/Box8.lean` and `Seven/Box7.lean`, whose ratio factors depend on the centre values.
 -/
 
 open Finset
@@ -1054,5 +1057,169 @@ theorem box_bound (hk : 6 ≤ k) (hK : KeyInj k A N) (hA : ∀ v, (A v).card = k
     box_fibre hk hK hA hc v ha hx hN hPv ((CSP.mem_Ω _).mp hg)
 
 end Final
+
+/-! ### The fibre, split by the centre values -/
+
+theorem boxVals_injOn (hc : 1 ≤ c) (v : Fin m) (g : Cell c m → ℕ) :
+    Set.InjOn (boxVals hc v) ((slab c m k P A N).cls (boxB c v) g) := by
+  intro f hf f' hf' he
+  simp only [boxVals, Prod.mk.injEq] at he
+  obtain ⟨e1, e2, e3, e4, e5, e6⟩ := he
+  have hf1 := (CSP.mem_cls _).mp hf
+  have hf1' := (CSP.mem_cls _).mp hf'
+  funext y
+  by_cases hB : y ∈ boxB c v
+  · rcases (inB_iff hc).mp (mem_boxB.mp hB) with hY | rfl | rfl
+    · rcases inY_cases hc hY with rfl | ⟨h, rfl⟩ | ⟨h, rfl | rfl⟩ | ⟨h, rfl | rfl⟩
+      · exact e3
+      · simp only [dite_eq_left h, Option.some.injEq] at e4; exact e4
+      · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e5; exact e5.1
+      · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e5; exact e5.2
+      · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e6; exact e6.1
+      · simp only [dite_eq_left h, Option.some.injEq, Prod.mk.injEq] at e6; exact e6.2
+    · exact e1
+    · exact e2
+  · rw [hf1.2 y hB, hf1'.2 y hB]
+
+section Split
+
+variable (c k P A N) in
+/-- Options at `y₆` avoiding the label `b` of `z₂`. -/
+noncomputable def opt6b (v : Fin m) (g : Cell c m → ℕ) (b : ℕ) : Finset (Option ℕ) :=
+  if h : 2 ≤ c then (((slab c m k P A N).avail (boxB c v) g (y₆ h v)).erase b).map
+    Function.Embedding.some else {none}
+
+variable (c k P A N) in
+/-- Options on the upper domino whose future cell avoids `b`. -/
+noncomputable def optUb (hc : 1 ≤ c) (v : Fin m) (g : Cell c m → ℕ) (b : ℕ) :
+    Finset (Option (ℕ × ℕ)) :=
+  if h : 1 ≤ v.val then ((dom c k P A N (boxB c v) g (yU₁ h) (yU₂ hc h)).filter
+    (fun pq => pq.2 ≠ b)).map Function.Embedding.some else {none}
+
+variable (c k P A N) in
+/-- Options on the lower domino whose future cell avoids `b`. -/
+noncomputable def optDb (hc : 1 ≤ c) (v : Fin m) (g : Cell c m → ℕ) (b : ℕ) :
+    Finset (Option (ℕ × ℕ)) :=
+  if h : v.val + 1 < m then ((dom c k P A N (boxB c v) g (yD₁ h) (yD₂ hc h)).filter
+    (fun pq => pq.2 ≠ b)).map Function.Embedding.some else {none}
+
+theorem ne_of_eq_adj {f : Cell c m → ℕ} (hf : (slab c m k P A N).Valid f)
+    {x y : Cell c m} (h : slabAdj x y) (h1 : ¬ (x.1.val = 1 ∧ y.1.val = 2))
+    (h2 : ¬ (x.1.val = 2 ∧ y.1.val = 1)) : f x ≠ f y := by
+  have := hf.2 x y h
+  rwa [slab_conf_eq h1 h2] at this
+
+/-- **The fibre over fixed centre values.** -/
+theorem card_cls_ab_le (hc : 1 ≤ c) (v : Fin m) (g : Cell c m → ℕ) (a b : ℕ) :
+    (((slab c m k P A N).cls (boxB c v) g).filter
+        (fun f => f (z₁ v) = a ∧ f (z₂ hc v) = b)).card ≤
+      (((slab c m k P A N).avail (boxB c v) g (y₁ v)).erase a).card *
+        (opt6b c k P A N v g b).card * (optUb c k P A N hc v g b).card *
+          (optDb c k P A N hc v g b).card := by
+  set C := slab c m k P A N
+  have h1v : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
+  have hT : ({a} ×ˢ {b} ×ˢ (C.avail (boxB c v) g (y₁ v)).erase a ×ˢ opt6b c k P A N v g b ×ˢ
+      optUb c k P A N hc v g b ×ˢ optDb c k P A N hc v g b).card =
+        ((C.avail (boxB c v) g (y₁ v)).erase a).card * (opt6b c k P A N v g b).card *
+          (optUb c k P A N hc v g b).card * (optDb c k P A N hc v g b).card := by
+    simp only [card_product, card_singleton]; ring
+  rw [← hT]
+  refine card_le_card_of_injOn (boxVals hc v) ?_ (fun f hf f' hf' he =>
+    boxVals_injOn hc v g (mem_filter.mp hf).1 (mem_filter.mp hf').1 he)
+  intro f hf
+  rw [mem_coe, mem_filter] at hf
+  obtain ⟨hf, ha, hb⟩ := hf
+  have hv := ((CSP.mem_cls _).mp hf).1
+  simp only [coe_product, Set.mem_prod, mem_coe, boxVals, mem_singleton]
+  refine ⟨ha, hb, ?_, ?_, ?_, ?_⟩
+  · rw [mem_erase]
+    refine ⟨fun e => ?_, CSP.mem_avail_of_mem_cls _ hf (mem_boxB.mpr (y₁_inY v).1)⟩
+    refine ne_of_eq_adj hv (x := y₁ v) (y := z₁ v) (Or.inr ⟨rfl, Or.inl ?_⟩) ?_ ?_ (e.trans ha.symm)
+    · show (0 : Fin (c + 2)).val + 1 = (1 : Fin (c + 2)).val; rw [h1v]; rfl
+    · show ¬ ((0 : Fin (c + 2)).val = 1 ∧ _); simp
+    · show ¬ ((0 : Fin (c + 2)).val = 2 ∧ _); simp
+  · unfold opt6b
+    split_ifs with h
+    · refine mem_map_of_mem _ (mem_erase.mpr ⟨fun e => ?_,
+        CSP.mem_avail_of_mem_cls _ hf (mem_boxB.mpr (y₆_inY h v).1)⟩)
+      refine ne_of_eq_adj hv (x := y₆ h v) (y := z₂ hc v) (Or.inr ⟨rfl, Or.inr ?_⟩) ?_ ?_
+        (e.trans hb.symm)
+      · show (2 : ℕ) + 1 = 3; rfl
+      · show ¬ ((3 : ℕ) = 1 ∧ _); simp
+      · show ¬ ((3 : ℕ) = 2 ∧ _); simp
+    · exact mem_singleton_self _
+  · unfold optUb
+    split_ifs with h
+    · refine mem_map_of_mem _ (mem_filter.mpr ⟨mem_dom_of_valid hf (mem_boxB.mpr (yU₁_inY h).1)
+        (mem_boxB.mpr (yU₂_inY hc h).1) (slabAdj_dom₁ hc h), fun e => ?_⟩)
+      refine ne_of_eq_adj hv (x := yU₂ hc h) (y := z₂ hc v) (Or.inl ⟨rfl, Or.inl ?_⟩) ?_ ?_
+        (e.trans hb.symm)
+      · show v.val - 1 + 1 = v.val; omega
+      · show ¬ ((2 : ℕ) = 1 ∧ _); simp
+      · show ¬ (_ ∧ (2 : ℕ) = 1); simp
+    · exact mem_singleton_self _
+  · unfold optDb
+    split_ifs with h
+    · refine mem_map_of_mem _ (mem_filter.mpr ⟨mem_dom_of_valid hf (mem_boxB.mpr (yD₁_inY h).1)
+        (mem_boxB.mpr (yD₂_inY hc h).1) (slabAdj_dom₂ hc h), fun e => ?_⟩)
+      refine ne_of_eq_adj hv (x := yD₂ hc h) (y := z₂ hc v) (Or.inl ⟨rfl, Or.inr ?_⟩) ?_ ?_
+        (e.trans hb.symm)
+      · show v.val + 1 = v.val + 1; rfl
+      · show ¬ ((2 : ℕ) = 1 ∧ _); simp
+      · show ¬ (_ ∧ (2 : ℕ) = 1); simp
+    · exact mem_singleton_self _
+
+/-- **The fibre, summed over the centre values.** -/
+theorem card_cls_le_sum (hc : 1 ≤ c) (v : Fin m) (g : Cell c m → ℕ) :
+    ((slab c m k P A N).cls (boxB c v) g).card ≤ ∑ a ∈ A v, ∑ b ∈ range k,
+      (((slab c m k P A N).avail (boxB c v) g (y₁ v)).erase a).card *
+        (opt6b c k P A N v g b).card * (optUb c k P A N hc v g b).card *
+          (optDb c k P A N hc v g b).card := by
+  set C := slab c m k P A N
+  rw [card_eq_sum_card_fiberwise (f := fun f => (f (z₁ v), f (z₂ hc v))) (t := A v ×ˢ range k)]
+  · rw [sum_product]
+    refine sum_le_sum fun a _ => sum_le_sum fun b _ => le_trans (le_of_eq ?_)
+      (card_cls_ab_le hc v g a b)
+    congr 1
+  · intro f hf
+    have hv := ((CSP.mem_cls _).mp hf).1
+    rw [mem_coe, mem_product]
+    refine ⟨?_, ?_⟩
+    · have := hv.1 (z₁ v); rwa [slab_D_one (z₁_fst v)] at this
+    · have := hv.1 (z₂ hc v); rwa [slab_D_fut (by rw [z₂_fst])] at this
+
+end Split
+
+/-- Pairs of a domino whose future cell carries a given available label: all but at most one
+colour of the seam cell. -/
+theorem card_dom_eq_ge (hK : KeyInj k A N) {U : Finset (Cell c m)} {g : Cell c m → ℕ}
+    {y y' : Cell c m} {b : ℕ} (hb : b ∈ (slab c m k P A N).avail U g y') :
+    ((slab c m k P A N).avail U g y).card +
+        ((dom c k P A N U g y y').filter (fun pq => pq.2 ≠ b)).card ≤
+      (dom c k P A N U g y y').card + 1 := by
+  set C := slab c m k P A N
+  have hbad : ((C.avail U g y).filter (fun p => ¬ (¬ C.conf y y' p b ∧ ¬ C.conf y' y b p))).card
+      ≤ 1 := by
+    refine card_le_one.mpr fun p hp p' hp' => ?_
+    rw [mem_filter] at hp hp'
+    have hbD := (C.mem_avail.mp hb).1
+    refine slab_match hK y y' b hbD p p' (C.mem_avail.mp hp.1).1 (C.mem_avail.mp hp'.1).1 ?_ ?_
+    · by_contra hn; push Not at hn; exact hp.2 ⟨hn.1, hn.2⟩
+    · by_contra hn; push Not at hn; exact hp'.2 ⟨hn.1, hn.2⟩
+  have hsplit := card_filter_add_card_filter_not (s := C.avail U g y)
+    (fun p => ¬ C.conf y y' p b ∧ ¬ C.conf y' y b p)
+  have hsplit2 := card_filter_add_card_filter_not (s := dom c k P A N U g y y')
+    (fun pq => pq.2 = b)
+  have himg : ((C.avail U g y).filter (fun p => ¬ C.conf y y' p b ∧ ¬ C.conf y' y b p)).card ≤
+      ((dom c k P A N U g y y').filter (fun pq => pq.2 = b)).card := by
+    refine card_le_card_of_injOn (fun p => (p, b)) (fun p hp => ?_) (fun p _ p' _ e => by
+      simpa using e)
+    rw [mem_coe, mem_filter] at hp
+    rw [mem_coe, mem_filter, mem_dom_iff]
+    exact ⟨⟨⟨hp.1, hb⟩, hp.2⟩, rfl⟩
+  have e : (dom c k P A N U g y y').filter (fun pq => ¬ pq.2 = b) =
+      (dom c k P A N U g y y').filter (fun pq => pq.2 ≠ b) := rfl
+  rw [e] at hsplit2
+  omega
 
 end GridGen.Gauge

@@ -73,13 +73,12 @@ uniformly in the height. This supersedes the polymer route's grid corollaries (e
 the telescoped quantity counts correspondence colourings of an explicit cover. At a seam each
 leaving colour gains a box-bounded factor. The label transpositions that keep the gauge
 consistent (at most two per leaving colour) lose at most a Kempe-chain bad event, bounded by
-counting crossing paths. At `k = 9` the box bound separates the labels unavailable next to the
-seam, the shortest crossing path is charged as a 4-cycle, and crossing paths are counted exactly up
-to twelve cells. At `k = 8` three more things are needed: the next column's colour-proper but
-label-improper states are counted (a relaxation gain per vertical list difference, which pays for
+counting crossing paths. For every `k ≥ 8` three more things are needed: the next column's
+colour-proper but label-improper states are counted (a relaxation gain per vertical list difference, which pays for
 the transpositions); the transpositions run through labels left unmatched by the deleted pairs,
 so the 4-cycle bad event has one phase instead of two; and crossing paths are counted exactly up
-to eighteen cells by a kernel-checked dynamic program. At `k = 7` the losses of a transposition
+to eighteen cells by a kernel-checked dynamic program (at `k = 8`; for `k ≥ 9` the constants are
+uniform in `k`, since the path-shape counts do not depend on `k`). At `k = 7` the losses of a transposition
 are charged to the star deleted just before it, in the same cover: crossing paths with an end at
 the hole row, and the three-cell path through the star's own cell, are bounded against the star's
 hit event by box bounds, the other paths against the whole count, with chordless crossing paths

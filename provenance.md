@@ -132,14 +132,13 @@ published construction.
   telescope is run with each column relabelled by a vertically consistent bijection onto
   `{0, …, k−1}`, so the telescoped quantity counts DP-colourings of an explicit cover; at each seam
   a box bound gives the gain of a deleted seam pair, and a Kempe-chain swap with a crossing-path
-  count bounds the loss of each label transposition. At `k = 9` the box bound separates the labels
-  unavailable next to the seam, the shortest crossing path is charged as a 4-cycle, and crossing
-  paths are counted exactly up to twelve cells. At `k = 8` (`GridGen/Gauge/Eight/`): the next
-  column's colour-proper, label-improper states are counted as relaxed diagonal pairs, each with a
+  count bounds the loss of each label transposition. For every `k ≥ 8` (`GridGen/Gauge/Eight/`):
+  the next column's colour-proper, label-improper states are counted as relaxed diagonal pairs, each with a
   box-bounded gain, so a potential `(1 − ε)^{D_j} W_j` charges every transposition to a vertical
   list difference or a star; the transpositions run through labels that the deleted pairs leave
   unmatched, so the 4-cycle bad event has one phase; and crossing paths are counted exactly up to
-  eighteen cells by a kernel-checked dynamic program. At `k = 7` (`GridGen/Gauge/Seven/`): each
+  eighteen cells by a kernel-checked dynamic program (for `k ≥ 9` the constants are uniform in `k`,
+  since the path-shape counts do not depend on `k`). At `k = 7` (`GridGen/Gauge/Seven/`): each
   transposition is charged to the star deleted just before it, in the same cover, so crossing
   paths with an end at the hole row and the three-cell path through the star's own cell are bounded
   against the star's hit event by box bounds (`θ₂ ≤ 512/3969`, `7/81` per phase), the other paths

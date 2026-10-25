@@ -2,7 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import GridGen.Gauge.Nine.Bad9
+import GridGen.Gauge.Seam
 
 /-!
 # The bad event of a move through a hole
@@ -11,7 +11,8 @@ A crossing path of two cells is `(2, w+1), (2, w)`. Its prescribed event for the
 asks for a colour of row `w + 1` keyed `oth ℓ₀` and a colour of row `w` keyed `ℓ₀`. If one of the
 move's labels is a *hole* — no colour of row `w` or row `w + 1` carries it as a key — one of the two
 phases is impossible. The two-cell term of the bad event then counts once, not twice
-(`card_bad_le_hole`).
+(`card_bad_le_hole`). Two-cell paths close a 4-cycle with their seam cells: the first seam cell
+has two later neighbours, and the chain costs `(k-2)(k-3)²(k-4)` (`chainProd_two`).
 -/
 
 open Finset
@@ -22,6 +23,68 @@ set_option linter.unusedSectionVars false
 namespace GridGen.Gauge
 
 variable {c m k : ℕ} {P A : Fin m → Finset ℕ} {M : Fin m → ℕ → ℕ}
+
+/-- **The 4-cycle chain.** -/
+theorem chainProd_two {hc : 1 ≤ c} {w : ℕ} (hk : 4 ≤ k) (hA : ∀ v, (A v).card = k)
+    {l : List (Cell c m)} (hl : CrossPath hc w l) (hlen : l.length = 2) :
+    (k - 2) * ((k - 3) ^ 2 * (k - 4)) ≤ (slab c m k P A M).chainProd (chainOf l) := by
+  obtain ⟨hnd, hch, hfut, ⟨v₁, hw₁, h1⟩, ⟨v₂, hw₂, h2⟩⟩ := hl
+  obtain ⟨a, b, rfl⟩ : ∃ a b, l = [a, b] := by
+    match l, hlen with
+    | [a, b], _ => exact ⟨a, b, rfl⟩
+  simp only [List.head?_cons, Option.some.injEq] at h1
+  simp only [List.getLast?_cons_cons, List.getLast?_singleton, Option.some.injEq] at h2
+  subst h1; subst h2
+  have hadj : slabAdj (fut0 hc, v₁) (fut0 hc, v₂) := by
+    rw [List.isChain_cons_cons] at hch; exact hch.1
+  have hv : v₂.val + 1 = v₁.val := by unfold slabAdj at hadj; simp at hadj; omega
+  have hcl : chainOf [(fut0 hc, v₁), (fut0 hc, v₂)] =
+      (1, v₁) :: [(fut0 hc, v₁), (fut0 hc, v₂), (1, v₂)] := by
+    simp [chainOf, seamOf]
+  rw [hcl]
+  have hprops := chainOf_props (hc := hc) (w := w) (l := [(fut0 hc, v₁), (fut0 hc, v₂)])
+    ⟨hnd, hch, hfut, ⟨v₁, hw₁, rfl⟩, ⟨v₂, hw₂, rfl⟩⟩
+  rw [hcl] at hprops
+  obtain ⟨-, hnd', hch', -, hcol⟩ := hprops
+  rw [List.nodup_cons] at hnd'
+  rw [List.isChain_cons_cons] at hch'
+  have hD : ∀ z ∈ [(fut0 hc, v₁), (fut0 hc, v₂), ((1 : Fin (c + 2)), v₂)],
+      ((slab c m k P A M).D z).card = k := by
+    intro z hz
+    by_cases h1 : z.1.val = 1
+    · rw [slab_D_one h1, hA]
+    · rw [slab_D_fut (by have := hcol z (by simp at hz ⊢; tauto); omega), card_range]
+  have hrest := chainProd_ge (P := P) (A := A) (M := M) hk _ (by simp) hnd'.2 hch'.2 hD
+  simp only [List.length_cons, List.length_nil] at hrest
+  have h1v : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
+  have hout : ((slab c m k P A M).nbrsOut (1, v₁)
+      [(fut0 hc, v₁), (fut0 hc, v₂), ((1 : Fin (c + 2)), v₂)].toFinset).card ≤ 2 := by
+    refine card_le_of_coords _ [(0, v₁.val), (1, v₁.val + 1)] fun z hz => ?_
+    rw [CSP.mem_nbrsOut] at hz
+    have hcz := adj_coords (c := c) (k := k) (P := P) (A := A) (N := M) hz.1
+    have hz2 := hz.2
+    simp only [List.toFinset_cons, List.toFinset_nil, insert_empty_eq, mem_insert,
+      mem_singleton, not_or] at hz2
+    have e1 : ((1 : Fin (c + 2)), v₁).1.val = 1 := h1v
+    have e2 : ((1 : Fin (c + 2)), v₁).2.val = v₁.val := rfl
+    rw [e1, e2] at hcz
+    obtain ⟨n1, n2, n3⟩ := hz2
+    have n1' : ¬ (z.1.val = 2 ∧ z.2.val = v₁.val) := fun h =>
+      n1 (cell_eq (by rw [h.1]; rfl) h.2)
+    have n3' : ¬ (z.1.val = 1 ∧ z.2.val = v₂.val) := fun h =>
+      n3 (cell_eq (by rw [h.1, h1v]) h.2)
+    simp only [List.mem_cons, Prod.mk.injEq, List.not_mem_nil, or_false]
+    omega
+  simp only [CSP.chainProd]
+  have hDz : ((slab c m k P A M).D ((1 : Fin (c + 2)), v₁)).card = k := by
+    rw [slab_D_one h1v, hA]
+  rw [hDz]
+  calc (k - 2) * ((k - 3) ^ 2 * (k - 4))
+      ≤ (k - ((slab c m k P A M).nbrsOut (1, v₁)
+          [(fut0 hc, v₁), (fut0 hc, v₂), ((1 : Fin (c + 2)), v₂)].toFinset).card) *
+        (slab c m k P A M).chainProd [(fut0 hc, v₁), (fut0 hc, v₂), ((1 : Fin (c + 2)), v₂)] :=
+        Nat.mul_le_mul (by omega) (by simpa [CSP.chainProd] using hrest)
+    _ = _ := by simp [CSP.chainProd]
 
 /-- One of the labels `x, y` is a hole of row `w` or of row `w + 1`. -/
 def HoleAt (A : Fin m → Finset ℕ) (M : Fin m → ℕ → ℕ) (w x y : ℕ) : Prop :=

@@ -11,8 +11,9 @@ A bad solution of a lower-part move has a path of `x/y`-alternating future cells
 from a first future cell `(2, v₁)`, `v₁ > w`, to one `(2, v₂)`, `v₂ ≤ w`. Both ends sit next to
 seam cells whose keys are the other label. Prepending and appending those seam cells gives a
 chain of `|path| + 2` cells whose colours are prescribed up to a factor `2` (the first label).
-The chain bound of `GridGen.Gauge.CSP` makes each such chain cost `(k-3)^{|path|+1}(k-4)`. A union
-bound over the crossing paths gives `card_bad_le`.
+The chain bound of `GridGen.Gauge.CSP` makes each such chain cost `(k-3)^{|path|+1}(k-4)`
+(`chainProd_ge`). The union bound over the crossing paths is `card_bad_le_hole`
+(`Eight/Bad8.lean`), for moves through a hole.
 -/
 
 open Finset
@@ -331,85 +332,6 @@ theorem chainOf_props {l : List (Cell c m)} (hl : CrossPath hc w l) :
     · simp [hcol1]
     · have := hfut z hz; omega
     · simp [hcol1]
-
-/-- **The bad event is rare.** -/
-theorem card_bad_le (hk : 5 ≤ k) (hK : KeyInj k A M) (hA : ∀ v, (A v).card = k) (hxy : x ≠ y)
-    (hx : x < k) (hy : y < k) :
-    (((slab c m k P A M).Ω.filter (Bad hc M w x y)).card : ℚ) ≤
-      (slab c m k P A M).Ω.card *
-        ∑ l ∈ crossPaths (m := m) hc w,
-          (2 : ℚ) / (((k : ℚ) - 3) ^ (l.length + 1) * ((k : ℚ) - 4)) := by
-  set C := slab c m k P A M
-  set I := crossPaths (m := m) hc w ×ˢ ({x, y} : Finset ℕ)
-  have hsub : C.Ω.filter (Bad hc M w x y) ⊆
-      I.biUnion (fun i => C.Ω.filter (Event (A := A) M x y i.1 i.2)) := by
-    intro f hf
-    rw [mem_filter, CSP.mem_Ω] at hf
-    obtain ⟨l, hl, ℓ₀, hℓ, he⟩ := bad_event (P := P) hxy hf.1 hf.2
-    rw [mem_biUnion]
-    exact ⟨(l, ℓ₀), mem_product.mpr ⟨hl, hℓ⟩, mem_filter.mpr ⟨(CSP.mem_Ω _).mpr hf.1, he⟩⟩
-  have hk3 : (0 : ℚ) < (k : ℚ) - 3 := by
-    have : (5 : ℚ) ≤ k := by exact_mod_cast hk
-    linarith
-  have hk4 : (0 : ℚ) < (k : ℚ) - 4 := by
-    have : (5 : ℚ) ≤ k := by exact_mod_cast hk
-    linarith
-  -- one prescribed event
-  have hone : ∀ i ∈ I, ((C.Ω.filter (Event (A := A) M x y i.1 i.2)).card : ℚ) ≤
-      C.Ω.card / (((k : ℚ) - 3) ^ (i.1.length + 1) * ((k : ℚ) - 4)) := by
-    rintro ⟨l, ℓ₀⟩ hi
-    rw [mem_product] at hi
-    obtain ⟨hl, hℓ⟩ := hi
-    have hl' : CrossPath hc w l := (mem_filter.mp hl).2
-    have hℓ' : ℓ₀ = x ∨ ℓ₀ = y := by simpa using hℓ
-    obtain ⟨hne, hnd, hch, hlen, hcol⟩ := chainOf_props hl'
-    have hpresc : ∀ z ∈ chainOf l, (presc (A := A) M x y l ℓ₀ z).card ≤ 1 := by
-      intro z _
-      unfold presc
-      have hfil : ∀ t, (t = x ∨ t = y) → ((A z.2).filter (fun a => M z.2 a = t)).card ≤ 1 := by
-        intro t ht
-        refine card_le_one.mpr fun a ha a' ha' => ?_
-        rw [mem_filter] at ha ha'
-        exact hK z.2 a a' ha.1 ha'.1 (ha.2.trans ha'.2.symm) (by rcases ht with rfl | rfl <;>
-          rw [ha.2] <;> assumption)
-      split_ifs
-      · exact hfil _ (oth_mem hℓ')
-      · exact hfil _ (oth_mem (lab_mem hℓ' _))
-      · simp
-    have hD : ∀ z ∈ chainOf l, (C.D z).card = k := by
-      intro z hz
-      by_cases h1 : z.1.val = 1
-      · rw [slab_D_one h1, hA]
-      · rw [slab_D_fut (by have := hcol z hz; omega), card_range]
-    have hprod := C.card_prescribed_mul_le (slab_match hK) slab_irrefl (chainOf l) hnd
-      (presc (A := A) M x y l ℓ₀) hpresc
-    have hge := chainProd_ge (P := P) (A := A) (M := M) (by omega) (chainOf l) hne hnd hch hD
-    rw [hlen, show l.length + 2 - 1 = l.length + 1 by omega] at hge
-    have heq : C.Ω.filter (Event (A := A) M x y l ℓ₀) =
-        C.Ω.filter (fun f => ∀ z ∈ chainOf l, f z ∈ presc (A := A) M x y l ℓ₀ z) := by
-      ext f; simp only [mem_filter, Event]
-    have hq : ((C.Ω.filter (Event (A := A) M x y l ℓ₀)).card : ℚ) *
-        (((k - 3 : ℕ) : ℚ) ^ (l.length + 1) * ((k - 4 : ℕ) : ℚ)) ≤ C.Ω.card := by
-      have := le_trans (Nat.mul_le_mul_left _ hge) hprod
-      rw [heq]
-      exact_mod_cast this
-    rw [Nat.cast_sub (by omega), Nat.cast_sub (by omega)] at hq
-    push_cast at hq
-    rw [le_div_iff₀ (by positivity)]
-    exact hq
-  calc ((C.Ω.filter (Bad hc M w x y)).card : ℚ)
-      ≤ ∑ i ∈ I, ((C.Ω.filter (Event (A := A) M x y i.1 i.2)).card : ℚ) := by
-        exact_mod_cast le_trans (card_le_card hsub) card_biUnion_le
-    _ ≤ ∑ i ∈ I, (C.Ω.card : ℚ) / (((k : ℚ) - 3) ^ (i.1.length + 1) * ((k : ℚ) - 4)) :=
-        sum_le_sum hone
-    _ = ∑ l ∈ crossPaths (m := m) hc w, ∑ _ℓ ∈ ({x, y} : Finset ℕ),
-          (C.Ω.card : ℚ) / (((k : ℚ) - 3) ^ (l.length + 1) * ((k : ℚ) - 4)) := sum_product _ _ _
-    _ = _ := by
-        rw [mul_sum]
-        refine sum_congr rfl fun l _ => ?_
-        rw [sum_const, card_pair hxy]
-        simp only [nsmul_eq_mul]
-        ring
 
 end Union
 

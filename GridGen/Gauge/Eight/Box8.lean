@@ -2,12 +2,13 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import GridGen.Gauge.Nine.Box9
+import GridGen.Gauge.Seam
 
 /-!
 # The refined box bound at `k = 8`
 
-The scheme of `Nine/Box9.lean` with the constants of `k = 8`:
+The fibre split of `Box.lean` (`card_cls_le_sum`), with ratio factors that depend on the centre
+values. At `k = 8`:
 
 * `y₁`: the factors sum to at most `1 + 7 · 5/4 = 39/4`;
 * `y₆`: `α₆ - 1` when `b` is available at `y₆` (ratio `1`), `α₆` otherwise (ratio `5/4`);

@@ -2,13 +2,13 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import GridGen.Gauge.Nine.Box9
+import GridGen.Gauge.Seam
 
 /-!
 # The refined box bound at `k = 7`: the star constant `γ₇ = 432/69101`
 
-The scheme of `Nine/Box9.lean`, with the fibre split by the centre values `(a, b)` and the value
-`a = a₀` of the unpaired star colour treated on its own (`ai_research_notes/
+The scheme of `Eight/Box8.lean`, with the fibre split by the centre values `(a, b)` (`Box.lean`)
+and the value `a = a₀` of the unpaired star colour treated on its own (`ai_research_notes/
 GRID_K7_ABSORPTION_2026-10-20.md`, §6).
 
 * **The split.** For centre values `(a, b)` the dominoes keep the pairs whose seam colour avoids

@@ -1,12 +1,11 @@
 # `GridGen/Gauge/` — every grid is `k`-ECC for `k ≥ 7`
 
 `ListColoring.ecc_boxProd_pathG_of_seven : 7 ≤ k → (pathG r □ pathG n).ECCAt k`, for every height
-and width (`ecc_boxProd_pathG_of_eight` and `ecc_boxProd_pathG_of_nine` are the `k ≥ 8` and
-`k ≥ 9` steps). For `k ≥ 10` the proof uses the generic constants of `Seam.lean`
-(`ecc_rowG_boxProd`), for `k = 9` the sharper ones of `Nine/`, for `k = 8` the relaxed telescope of
-`Eight/`, and for `k = 7` the absorbing telescope of `Seven/`. It is complete (no unproved steps),
-its axioms are `[propext, Classical.choice, Quot.sound]`, and the comparator claims the `k ≥ 7`
-form (§18).
+and width (`ecc_boxProd_pathG_of_eight` is the `k ≥ 8` step). For every `k ≥ 8` the proof is the
+relaxed telescope of `Eight/`, with the constants of `Bounds8 k`: sharper ones at `k = 8`, uniform
+ones in `k` for `k ≥ 9`. For `k = 7` it is the absorbing telescope of `Seven/`. It is complete (no
+unproved steps), its axioms are `[propext, Classical.choice, Quot.sound]`, and the comparator
+claims the `k ≥ 7` form (§18).
 
 ## The argument
 
@@ -20,15 +19,17 @@ The telescoped quantity is
 
   `W j = ∑_{s ∈ column j} vec j s · F_{n-j}(gauge j ∘ s)`.
 
-That is the number of correspondence (DP) colourings of an explicit cover of the whole grid.
+That is the number of correspondence (DP) colourings of an explicit cover of the whole grid. The
+plain argument is as follows; the Lean proof is its refinement in `Eight/` (below), whose lemma
+names are given.
 
-* `W 0` is at least the uniform count: a VC labelling pulls uniform states back (`init_le`).
+* `W 0` is at least the uniform count: a VC labelling pulls uniform states back (`init_le8`).
 * `W n` is the list count.
-* Each seam satisfies `W j ≤ W (j+1)` (`W_le_succ`):
-  * **Stage (a).** The new column maps onto uniform states by its gauge (`stage_a`).
+* Each seam satisfies `W j ≤ W (j+1)` (`Pot_le_succ`, with a potential):
+  * **Stage (a).** The new column maps onto uniform states by its gauge (`stage_aR`).
   * **Stage (b).** Expand the chain one or two columns back into *slabs*: a past column, the seam
-    column, and the future (`Slab.lean`, `stage_b`). On each slab the old gauge's seam keys become
-    the new gauge's keys in two phases (`slab_core`):
+    column, and the future (`Slab.lean`, `stage_b8`). On each slab the old gauge's seam keys become
+    the new gauge's keys in two phases (`slab_core8`):
     * **Stars** (`Star.lean`, `Box.lean`). Each colour leaving its row deletes one seam pair. A
       fibre-by-fibre bound on the 2 + 6 cells around the pair shows that a
       `γ_k = (k-4)²(k-5)²/(k²(k-3)⁴)` fraction of solutions realizes the new pair.
@@ -40,8 +41,9 @@ That is the number of correspondence (DP) colourings of an explicit cover of the
       path is a chain whose prescribed colours cost `(k-3)^{L+1}(k-4)` (`CSP.lean`'s chain bound).
       Crossing paths are counted by their step shapes: `1, 2, 4, 10, 31, 76` exactly for `L ≤ 7`
       (`decide +kernel`), and at most `(L-1)3^{L-1}` beyond.
-* **Threshold.** `2ε_k ≤ γ_k` for every `k ≥ 10` (`two_epsK_le_gammaK`). After substituting
-  `k = 10 + u`, the difference is a polynomial in `u` with positive coefficients.
+* **Threshold.** The accounting above needs `2ε_k ≤ γ_k` (one star pays for two moves), which
+  fails at `k = 8`. The relaxation and the holes of `Eight/` bring the condition to `ε_k ≤ γ_k`,
+  `ε_k ≤ γ_V`, which holds for every `k ≥ 8` (below).
 
 ## Modules
 
@@ -50,39 +52,21 @@ That is the number of correspondence (DP) colourings of an explicit cover of the
 | `CSP.lean` | finite constraint systems, fibres, the chain bound |
 | `Slab.lean` | the slab model of a seam; `#Ω = ∑_p ∑_s F(keys ∘ s)` |
 | `Star.lean` | deleting a seam pair adds exactly the solutions that use it |
-| `Box.lean` | the box bound |
+| `Box.lean` | the box bound, and the fibre split by centre values |
 | `Kempe.lean` | the Kempe swap and the wall lemma |
 | `Bad.lean` | bad solutions realize prescribed chains; union bound |
 | `Paths.lean` | crossing-path shapes, their enumerator and counts, the series |
 | `Labelling.lean` | transposition realization, glueing VC labellings, the move list |
-| `Seam.lean` | `γ_k`, `ε_k`, the threshold, star and move steps, `slab_core` |
-| `Main.lean` | gauges of a chain, stages (a) and (b), the telescope, `ecc_rowG_boxProd` |
+| `Seam.lean` | the slab count `Z`, `γ_k` and the star step, stars and their keys |
+| `Main.lean` | the gauges of a chain, pulling label states back, the slab sums |
 | `Grid.lean` | `pathG r ≃g rowG (r+1)` |
-| `Nine/` | the sharper constants and `ecc_boxProd_pathG_of_nine` |
-| `Eight/` | relaxation gains, holes, exact counts to 18 cells, and `ecc_boxProd_pathG_of_eight` |
+| `Eight/` | relaxation gains, holes, exact counts to 18 cells, `Bounds8 k`, the telescope, and `ecc_boxProd_pathG_of_eight` |
 | `Seven/` | absorption into fresh stars, chordless paths, joint boxes, drift, and `ecc_boxProd_pathG_of_seven` |
 
-## `k = 9` (`Nine/`)
+## `k ≥ 8` (`Eight/`)
 
-The seam machinery is generic in the constants (`SlabBounds`, `GaugeBounds`). At `k = 9`:
-
-* **Box** (`Nine/Box9.lean`). The fibre is split by the centre values `(a, b)`. The `y₁` factors
-  sum to at most `53/5` lower-bound factors. For each label `b`, the `y₆` factor has ratio `1`
-  or `6/5`, and each domino factor has ratio `9/7` or `3/2`, depending on whether `b` is
-  available at that cell. At most `3, 2, 2` labels are unavailable, so the nine labels contribute
-  at most `8478/490`. The result is `γ₉ = 2450/449334`, against `400/104976` for the uniform
-  bound.
-* **Paths** (`Nine/Bad9.lean`, `Nine/Counts.lean`). A 2-cell crossing path closes a 4-cycle with
-  its seam cells; its first cell has two later neighbours, so its chain costs `7 · 6² · 5`. The
-  other chains cost `5 · 6^{L+1}`. Shape counts are exact up to twelve cells:
-  `212, 552, 1607, 4250, 12296` for `L = 8, …, 12`, by kernel evaluation of a count-only
-  enumerator (about 2.5 minutes). The `(L-1)3^{L-1}` tail covers longer paths.
-* **Threshold.** `(1 - ε₉)² ≥ 1 - γ₉` with a margin of about 3%.
-
-## `k = 8` (`Eight/`)
-
-At `k = 8` the method above fails: it needs `2ε ≤ γ`, and the path loss alone is about `0.0076`.
-Three changes bring the condition to `ε ≤ γ`, `ε ≤ γ_V`:
+At `k = 8` the plain accounting fails: it needs `2ε ≤ γ`, and the path loss alone is about
+`0.0076`. Three changes bring the condition to `ε ≤ γ`, `ε ≤ γ_V` (`Bounds8 k`, `Seam8.lean`):
 
 * **Relaxation** (`SlabR.lean`, `BoxV.lean`). The next column's states are coloured from lists, so
   read through its (vertically consistent) gauge two adjacent cells may share any label that no
@@ -97,11 +81,32 @@ Three changes bring the condition to `ε ≤ γ`, `ε ≤ γ_V`:
   holes, and a move through a hole leaves the two-cell crossing path one phase, so the 4-cycle term
   is `1/600` instead of `2/600`.
 
-The star gain is the `k = 9` box at `k = 8`, `γ₈ = 5184/960375` (`Box8.lean`). Crossing paths are
-counted exactly up to eighteen cells (`Counts8.lean`): a level-by-level dynamic program for `cntW`
-on a grid with a clamped bottom row, about 20 seconds of kernel evaluation. Then
-`ε₈ ≈ 0.00474 ≤ γ₈ ≈ 0.00540, γ_V ≈ 0.00549` (`Seam8.lean`). At `k = 7` this accounting fails by
-a factor of about four: the union bound over paths with `1/(k−3)` per step is the obstacle.
+At `k = 8` the constants are sharp:
+
+* **Box** (`Box8.lean`). The fibre is split by the centre values `(a, b)` (`Box.lean`). The `y₁`
+  factors sum to at most `39/4`. For each label `b`, the `y₆` factor has ratio `1` or `5/4`, and
+  each domino factor has ratio `25/18` or `5/3`, depending on whether `b` is available at that
+  cell; at most `3, 2, 2` labels are unavailable. So `γ₈ = 5184/960375`.
+* **Vertical box** (`BoxV.lean`). The future domino's ratio depends on whether the centre values
+  are available next to it, which gives `γ_V = 152/27675`.
+* **Paths** (`Counts8.lean`). Crossing paths are counted exactly from eight to eighteen cells by a
+  level-by-level dynamic program for `cntW` on a grid with a clamped bottom row, about 20 seconds
+  of kernel evaluation (`1, 2, 4, 10, 31, 76` below eight cells are `Paths.lean`'s).
+
+Then `ε₈ ≈ 0.00474 ≤ γ₈ ≈ 0.00540, γ_V ≈ 0.00549` (`Seam8.lean`).
+
+For `k ≥ 9` the constants are uniform in `k`:
+
+* **Box.** The uniform box bound `γ_k = (k-4)²(k-5)²/(k²(k-3)⁴)` (`box_bound`).
+* **Vertical box.** Every factor at its worst value (`boxV_bound_gen`): `(k-3)/(k-4)` for the cells
+  above and below, `a(a-1)/((a-1)² - a)` with `a = k - 2` for each domino, over `k²` centre values.
+* **Paths.** The chain weights are `(k-2)(k-3)²(k-4)` for two cells and `(k-4)(k-3)^{L+1}`
+  otherwise, and the shape counts do not depend on `k`. Each weight is at most `(5/(k-3))³` times
+  its value at `k = 8` (`wk_le`), so `ε_k ≤ (5/(k-3))³ ε₈`.
+
+Both conditions are polynomial inequalities in `k - 9` with positive coefficients; the margins
+are `39%` and `49%` at `k = 9` and grow like `k`. At `k = 7` this accounting fails by a factor
+of about four: the union bound over paths with `1/(k−3)` per step is the obstacle.
 
 ## `k = 7` (`Seven/`)
 

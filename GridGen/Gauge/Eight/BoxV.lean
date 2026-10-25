@@ -1096,4 +1096,211 @@ theorem boxV_bound (hA : ∀ v, (A v).card = 8) {ℓ : ℕ} (hℓ : ℓ < 8) (hR
 
 end Eight
 
+
+/-! ### The ratios at every `k` -/
+
+section General
+
+/-- A single cell's ratio: one label fewer out of at least `k - 3`. -/
+theorem ratio_arith1 {k α β : ℕ} (hk : 4 ≤ k) (hα : k - 3 ≤ α) (hβ : α ≤ β + 1) :
+    (k - 4) * α ≤ (k - 3) * β := by
+  obtain ⟨u, rfl⟩ : ∃ u, k = 4 + u := ⟨k - 4, by omega⟩
+  obtain ⟨r, rfl⟩ : ∃ r, α = u + 1 + r := ⟨α - (u + 1), by omega⟩
+  rw [show 4 + u - 4 = u by omega, show 4 + u - 3 = u + 1 by omega]
+  have h := Nat.mul_le_mul_left (u + 1) (show u + r ≤ β by omega)
+  nlinarith
+
+/-- A domino's ratio: from at least `a = k - 2` colours on each cell, each cell loses at most one
+colour and the diagonal pairs are excluded, so the ratio is at most `a(a-1)/((a-1)² - a)`. -/
+theorem dom_ratio_arith {k x y i j b₁ b₂ up low : ℕ} (hk : 5 ≤ k) (hx : k - 2 ≤ x)
+    (hy : k - 2 ≤ y) (hi : i ≤ x) (hup : up + i ≤ x * y) (hb₁ : x ≤ b₁ + 1) (hb₂ : y ≤ b₂ + 1)
+    (hj : j ≤ i) (hlow : low + j = b₁ * b₂) :
+    ((k - 3) ^ 2 - (k - 2)) * up ≤ (k - 2) * (k - 3) * low := by
+  obtain ⟨t, rfl⟩ : ∃ t, k = 5 + t := ⟨k - 5, by omega⟩
+  obtain ⟨p, rfl⟩ : ∃ p, x = 3 + t + p := ⟨x - (3 + t), by omega⟩
+  obtain ⟨q, rfl⟩ : ∃ q, y = 3 + t + q := ⟨y - (3 + t), by omega⟩
+  have e1 : (5 + t - 3) ^ 2 - (5 + t - 2) = t ^ 2 + 3 * t + 1 := by
+    rw [show 5 + t - 3 = 2 + t by omega, show 5 + t - 2 = 3 + t by omega]
+    have : (2 + t) ^ 2 = t ^ 2 + 3 * t + 1 + (3 + t) := by ring
+    omega
+  rw [e1, show 5 + t - 2 = 3 + t by omega, show 5 + t - 3 = 2 + t by omega]
+  have hb₁' : (2 + t + p : ℤ) ≤ b₁ := by omega
+  have hb₂' : (2 + t + q : ℤ) ≤ b₂ := by omega
+  zify at hup hlow hi hj ⊢
+  have h1 : ((2 + t + p : ℤ)) * (2 + t + q) ≤ (b₁ : ℤ) * b₂ :=
+    mul_le_mul hb₁' hb₂' (by positivity) (by omega)
+  have key : ((3 + t : ℤ) * (2 + t)) * (((3 + t + p : ℤ) - 1) * ((3 + t + q : ℤ) - 1) - i) -
+      ((t : ℤ) ^ 2 + 3 * t + 1) * ((3 + t + p : ℤ) * (3 + t + q) - i) =
+        (2 * (3 + t : ℤ) - 1) * ((3 + t + p : ℤ) - i) + (2 + t : ℤ) ^ 2 * p + (3 + t : ℤ) ^ 2 * q +
+          (2 * (3 + t : ℤ) - 1) * p * q := by ring
+  have hpos : 0 ≤ (2 * (3 + t : ℤ) - 1) * ((3 + t + p : ℤ) - i) + (2 + t : ℤ) ^ 2 * p +
+      (3 + t : ℤ) ^ 2 * q + (2 * (3 + t : ℤ) - 1) * p * q := by
+    have : (0 : ℤ) ≤ (3 + t + p : ℤ) - i := by linarith
+    have h2 : (0 : ℤ) ≤ 2 * (3 + t : ℤ) - 1 := by omega
+    exact add_nonneg (add_nonneg (add_nonneg (mul_nonneg h2 this) (by positivity)) (by positivity))
+      (mul_nonneg (mul_nonneg h2 (by positivity)) (by positivity))
+  have hD : (0 : ℤ) ≤ (t : ℤ) ^ 2 + 3 * t + 1 := by positivity
+  have hN : (0 : ℤ) ≤ (3 + t : ℤ) * (2 + t) := by positivity
+  calc ((t : ℤ) ^ 2 + 3 * t + 1) * up ≤ ((t : ℤ) ^ 2 + 3 * t + 1) * ((3 + t + p : ℤ) * (3 + t + q) - i) :=
+        mul_le_mul_of_nonneg_left (by linarith) hD
+    _ ≤ ((3 + t : ℤ) * (2 + t)) * (((3 + t + p : ℤ) - 1) * ((3 + t + q : ℤ) - 1) - i) := by linarith
+    _ ≤ (3 + t) * (2 + t) * low := mul_le_mul_of_nonneg_left (by nlinarith) hN
+
+variable (hK : KeyInj k A N) (hA : ∀ v, (A v).card = k) {g : Cell c m → ℕ}
+  (hg : (slabR c m k P A N R).Valid g) (hc : 1 ≤ c) {v : Fin m} (hv : v.val + 1 < m)
+include hK hg
+
+theorem ratio_U_gen (hk : 4 ≤ k) (ℓ : ℕ) :
+    (k - 4) * (optUv c k P A N R hc v g).card ≤ (k - 3) * (optUv' c k P A N R hc v ℓ g).card := by
+  unfold optUv optUv'
+  split_ifs with h
+  · rw [card_map, card_map]
+    have hav := avail_fut_ge (P := P) (A := A) (N := N) (R := R) hK hg (uC_inYV hc h).1
+      (show 2 ≤ (uC hc h).1.val from le_rfl)
+    have hn := nbrsOut_uC (k := k) (P := P) (A := A) (N := N) (R := R) hc h
+    have := pred_card_le_card_erase (s := (slabR c m k P A N R).avail (boxBV c v) g (uC hc h))
+      (a := ℓ)
+    exact ratio_arith1 hk (by omega) (by omega)
+  · simp only [card_singleton, mul_one]; omega
+
+theorem ratio_D_gen (hk : 4 ≤ k) (ℓ : ℕ) :
+    (k - 4) * (optDv c k P A N R hc v g).card ≤ (k - 3) * (optDv' c k P A N R hc v ℓ g).card := by
+  unfold optDv optDv'
+  split_ifs with h
+  · rw [card_map, card_map]
+    have hav := avail_fut_ge (P := P) (A := A) (N := N) (R := R) hK hg (dC_inYV hc h).1
+      (show 2 ≤ (dC hc h).1.val from le_rfl)
+    have hn := nbrsOut_dC (k := k) (P := P) (A := A) (N := N) (R := R) hc h
+    have := pred_card_le_card_erase (s := (slabR c m k P A N R).avail (boxBV c v) g (dC hc h))
+      (a := ℓ)
+    exact ratio_arith1 hk (by omega) (by omega)
+  · simp only [card_singleton, mul_one]; omega
+
+include hA in
+theorem ratio_L_gen (hk : 5 ≤ k) {ℓ : ℕ} (hℓ : ℓ < k) (a b : ℕ) :
+    ((k - 3) ^ 2 - (k - 2)) * (optLv c k P A N R hv g a b).card ≤
+      (k - 2) * (k - 3) * (optLv c k P A N R hv g ℓ ℓ).card := by
+  have h1v : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
+  have hα1 : k - 2 ≤ ((slabR c m k P A N R).avail (boxBV c v) g (lA v)).card := by
+    have := avail_list_ge (P := P) (A := A) (N := N) (R := R) hK hg hA (lA_inYV v).1 h1v
+    have := nbrsOut_lA (k := k) (P := P) (A := A) (N := N) (R := R) (c := c) v
+    omega
+  have hα2 : k - 2 ≤ ((slabR c m k P A N R).avail (boxBV c v) g (lB hv)).card := by
+    have := avail_list_ge (P := P) (A := A) (N := N) (R := R) hK hg hA (lB_inYV hv).1 h1v
+    have := nbrsOut_lB (k := k) (P := P) (A := A) (N := N) (R := R) (c := c) hv
+    omega
+  set C := slabR c m k P A N R
+  set A1 := C.avail (boxBV c v) g (lA v)
+  set A2 := C.avail (boxBV c v) g (lB hv)
+  have hkey : ∀ (X : Finset ℕ) (w : Fin m), X ⊆ A w →
+      X.card ≤ (X.filter (fun p => N w p ≠ ℓ)).card + 1 := by
+    intro X w hX
+    have hle : (X.filter (fun p => ¬ N w p ≠ ℓ)).card ≤ 1 := by
+      refine card_le_one.mpr fun p hp p' hp' => ?_
+      rw [mem_filter, not_not] at hp hp'
+      exact hK w p p' (hX hp.1) (hX hp'.1) (hp.2.trans hp'.2.symm) (by rw [hp.2]; exact hℓ)
+    have := card_filter_add_card_filter_not (s := X) (fun p => N w p ≠ ℓ)
+    omega
+  have hA1 : A1 ⊆ A v := fun p hp => by
+    have := (C.mem_avail.mp hp).1; rwa [slabR_D, slab_D_one h1v] at this
+  have hA2 : A2 ⊆ A ⟨v.val + 1, hv⟩ := fun p hp => by
+    have := (C.mem_avail.mp hp).1; rwa [slabR_D, slab_D_one h1v] at this
+  have hb1 := hkey A1 v hA1
+  have hb2 := hkey A2 ⟨v.val + 1, hv⟩ hA2
+  set B1 := A1.filter (fun p => N v p ≠ ℓ)
+  set B2 := A2.filter (fun p => N ⟨v.val + 1, hv⟩ p ≠ ℓ)
+  have hup : (optLv c k P A N R hv g a b).card ≤ (offd A1 A2).card :=
+    card_le_card (offd_mono (filter_subset _ _) (filter_subset _ _))
+  have e1 := card_offd A1 A2
+  have e2 := card_offd B1 B2
+  have hi : (B1 ∩ B2).card ≤ (A1 ∩ A2).card :=
+    card_le_card (inter_subset_inter (filter_subset _ _) (filter_subset _ _))
+  have hiA : (A1 ∩ A2).card ≤ A1.card := card_le_card inter_subset_left
+  change _ ≤ (k - 2) * (k - 3) * (offd B1 B2).card
+  exact dom_ratio_arith hk hα1 hα2 hiA (by omega) hb1 hb2 hi e2
+
+theorem ratio_R_gen (hk : 5 ≤ k) (ℓ a b : ℕ) :
+    ((k - 3) ^ 2 - (k - 2)) * (optRv c k P A N R hv g a b).card ≤
+      (k - 2) * (k - 3) * (optRv c k P A N R hv g ℓ ℓ).card := by
+  unfold optRv
+  by_cases h : 2 ≤ c
+  · rw [dite_eq_left h, dite_eq_left h, card_map, card_map]
+    have hα1 : k - 2 ≤ ((slabR c m k P A N R).avail (boxBV c v) g (rA h v)).card := by
+      have := avail_fut_ge (P := P) (A := A) (N := N) (R := R) hK hg (rA_inYV h v).1
+        (show 2 ≤ (rA (c := c) h v).1.val by simp [rA])
+      have := nbrsOut_rA (k := k) (P := P) (A := A) (N := N) (R := R) h v
+      omega
+    have hα2 : k - 2 ≤ ((slabR c m k P A N R).avail (boxBV c v) g (rB hv h)).card := by
+      have := avail_fut_ge (P := P) (A := A) (N := N) (R := R) hK hg (rB_inYV h hv).1
+        (show 2 ≤ (rB (c := c) hv h).1.val by simp [rB])
+      have := nbrsOut_rB (k := k) (P := P) (A := A) (N := N) (R := R) h hv
+      omega
+    set A1 := (slabR c m k P A N R).avail (boxBV c v) g (rA h v)
+    set A2 := (slabR c m k P A N R).avail (boxBV c v) g (rB hv h)
+    have hup : (offd (A1.erase a) (A2.erase b)).card ≤ (offd A1 A2).card :=
+      card_le_card (offd_mono (erase_subset _ _) (erase_subset _ _))
+    have e1 := card_offd A1 A2
+    have e2 := card_offd (A1.erase ℓ) (A2.erase ℓ)
+    have hi : ((A1.erase ℓ) ∩ (A2.erase ℓ)).card ≤ (A1 ∩ A2).card :=
+      card_le_card (inter_subset_inter (erase_subset _ _) (erase_subset _ _))
+    have hiA : (A1 ∩ A2).card ≤ A1.card := card_le_card inter_subset_left
+    have hb1 := pred_card_le_card_erase (s := A1) (a := ℓ)
+    have hb2 := pred_card_le_card_erase (s := A2) (a := ℓ)
+    exact dom_ratio_arith hk hα1 hα2 hiA (by omega) (by omega) (by omega) hi e2
+  · rw [dite_eq_right h, dite_eq_right h, card_singleton, mul_one, mul_one]
+    refine le_trans (Nat.sub_le _ _) ?_
+    rw [pow_two]
+    exact Nat.mul_le_mul_right _ (by omega)
+
+/-- **The vertical box inequality on one fibre**, at every `k ≥ 5`. -/
+theorem box_fibreV_gen (hk : 5 ≤ k) (hA : ∀ v, (A v).card = k) {ℓ : ℕ} (hℓ : ℓ < k)
+    (hR : ℓ ∈ R v) :
+    ((slabR c m k P A N R).cls (boxBV c v) g).card * ((k - 4) ^ 2 * ((k - 3) ^ 2 - (k - 2)) ^ 2) ≤
+      (((slabR c m k P A N R).cls (boxBV c v) g).filter (HitV hc hv ℓ)).card *
+        (k ^ 2 * (k - 3) ^ 2 * ((k - 2) * (k - 3)) ^ 2) := by
+  set D := (k - 3) ^ 2 - (k - 2)
+  set Q := (k - 2) * (k - 3)
+  set U' := (optUv' c k P A N R hc v ℓ g).card
+  set D' := (optDv' c k P A N R hc v ℓ g).card
+  set L' := (optLv c k P A N R hv g ℓ ℓ).card
+  set R' := (optRv c k P A N R hv g ℓ ℓ).card
+  have hup := card_cls_le_sumV (k := k) (P := P) (A := A) (N := N) (R := R) hc hv g
+  have hlo := card_hit_geV (P := P) (A := A) (N := N) (R := R) (hc := hc) (hv := hv) hg hℓ hR
+  have hU := ratio_U_gen (P := P) hK hg hc (v := v) (by omega) ℓ
+  have hD := ratio_D_gen (P := P) hK hg hc (v := v) (by omega) ℓ
+  calc ((slabR c m k P A N R).cls (boxBV c v) g).card * ((k - 4) ^ 2 * D ^ 2)
+      ≤ (∑ a ∈ range k, ∑ b ∈ range k,
+          (optUv c k P A N R hc v g).card * (optDv c k P A N R hc v g).card *
+            (optLv c k P A N R hv g a b).card * (optRv c k P A N R hv g a b).card) *
+          ((k - 4) ^ 2 * D ^ 2) := Nat.mul_le_mul_right _ hup
+    _ = ∑ a ∈ range k, ∑ b ∈ range k,
+          ((k - 4) * (optUv c k P A N R hc v g).card) * ((k - 4) * (optDv c k P A N R hc v g).card) *
+            (D * (optLv c k P A N R hv g a b).card) * (D * (optRv c k P A N R hv g a b).card) := by
+        rw [sum_mul]
+        refine sum_congr rfl fun a _ => ?_
+        rw [sum_mul]
+        refine sum_congr rfl fun b _ => ?_
+        ring
+    _ ≤ ∑ a ∈ range k, ∑ b ∈ range k, ((k - 3) * U') * ((k - 3) * D') * (Q * L') * (Q * R') :=
+        sum_le_sum fun a _ => sum_le_sum fun b _ =>
+          Nat.mul_le_mul (Nat.mul_le_mul (Nat.mul_le_mul hU hD)
+            (ratio_L_gen (P := P) hK hA hg hv hk hℓ a b)) (ratio_R_gen (P := P) hK hg hv hk ℓ a b)
+    _ = (U' * D' * L' * R') * (k ^ 2 * (k - 3) ^ 2 * Q ^ 2) := by
+        simp only [sum_const, card_range, smul_eq_mul]; ring
+    _ ≤ _ := Nat.mul_le_mul_right _ hlo
+
+omit hg in
+/-- **The vertical box bound at every `k ≥ 5`**: at least a
+`(k-4)²((k-3)² - (k-2))² / (k²(k-3)²((k-2)(k-3))²)` fraction of the relaxed-slab solutions put
+the relaxed label `ℓ` on both cells of its edge. -/
+theorem boxV_bound_gen (hk : 5 ≤ k) (hA : ∀ v, (A v).card = k) {ℓ : ℕ} (hℓ : ℓ < k)
+    (hR : ℓ ∈ R v) :
+    (slabR c m k P A N R).Ω.card * ((k - 4) ^ 2 * ((k - 3) ^ 2 - (k - 2)) ^ 2) ≤
+      ((slabR c m k P A N R).Ω.filter (HitV hc hv ℓ)).card *
+        (k ^ 2 * (k - 3) ^ 2 * ((k - 2) * (k - 3)) ^ 2) :=
+  (slabR c m k P A N R).fibre_sum_ge (boxBV c v) _ _ _ fun _ hg' =>
+    box_fibreV_gen hK ((CSP.mem_Ω _).mp hg') hc hv hk hA hℓ hR
+
+end General
+
 end GridGen.Gauge
