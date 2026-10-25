@@ -7,9 +7,9 @@ import GridGen.Gauge.Seven.Chordless
 /-!
 # Short chordless crossing paths are vertical
 
-A chordless crossing path of three or four cells runs straight down the first future column:
-any step into the next column must come back to the first column next to an earlier cell, which
-is a chord (or a repeated cell).
+A crossing path of two cells, and a chordless one of three cells, runs straight down the first
+future column: any step into the next column must come back to the first column next to an
+earlier cell, which is a chord (or a repeated cell).
 -/
 
 open Finset
@@ -46,11 +46,6 @@ def vert2 (hc : 1 ≤ c) (w : ℕ) (hw : w + 1 < m) : List (Cell c m) :=
 def vert3 (hc : 1 ≤ c) (v : ℕ) (hv : v + 2 < m) : List (Cell c m) :=
   [(fut0 hc, ⟨v + 2, hv⟩), (fut0 hc, ⟨v + 1, by omega⟩), (fut0 hc, ⟨v, by omega⟩)]
 
-/-- The vertical four-cell path from row `v + 3` down to row `v`. -/
-def vert4 (hc : 1 ≤ c) (v : ℕ) (hv : v + 3 < m) : List (Cell c m) :=
-  [(fut0 hc, ⟨v + 3, hv⟩), (fut0 hc, ⟨v + 2, by omega⟩), (fut0 hc, ⟨v + 1, by omega⟩),
-    (fut0 hc, ⟨v, by omega⟩)]
-
 /-- A crossing path has at least two cells. -/
 theorem two_le_length {hc : 1 ≤ c} {w : ℕ} {l : List (Cell c m)} (hl : CrossPath hc w l) :
     2 ≤ l.length := by
@@ -79,7 +74,7 @@ theorem vert_two {hc : 1 ≤ c} {w : ℕ} {l : List (Cell c m)} (hl : CrossPath 
   simp only [fut0] at hab
   have hv : v₁.val = w + 1 ∧ v₂.val = w := by omega
   refine ⟨by omega, ?_⟩
-  simp only [vert2, vert3, vert4, List.cons.injEq, and_true]
+  simp only [vert2, vert3, List.cons.injEq, and_true]
   exact ⟨cell_ext' rfl (by simp [hv.1]), cell_ext' rfl (by simp [hv.2])⟩
 
 /-- **Three cells: vertical.** -/
@@ -108,66 +103,8 @@ theorem vert_three {hc : 1 ≤ c} {w : ℕ} {l : List (Cell c m)} (hl : CrossPat
   have nad := ne_coords hnd.1.2
   have hrow : b.1.val = 2 ∧ b.2.val = v₂.val + 1 ∧ v₁.val = v₂.val + 2 := by omega
   refine ⟨v₂.val, by omega, ?_⟩
-  simp only [vert2, vert3, vert4, List.cons.injEq, and_true]
+  simp only [vert2, vert3, List.cons.injEq, and_true]
   exact ⟨cell_ext' ha1 (by simp; omega), cell_ext' (by simp [hrow.1]; rfl) (by simp; omega),
     cell_ext' hd1 (by simp; omega)⟩
-
-/-- **Four cells: vertical.** -/
-theorem vert_four {hc : 1 ≤ c} {w : ℕ} {l : List (Cell c m)} (hl : CrossPath hc w l)
-    (hch : Chordless l) (hL : l.length = 4) :
-    ∃ (v : ℕ) (hv : v + 3 < m), l = vert4 hc v hv := by
-  obtain ⟨hnd, hchain, hfut, ⟨v₁, hw₁, h1⟩, ⟨v₂, hw₂, h2⟩⟩ := hl
-  obtain ⟨a, b, b', d, rfl⟩ : ∃ a b b' d, l = [a, b, b', d] := by
-    match l, hL with
-    | [a, b, b', d], _ => exact ⟨a, b, b', d, rfl⟩
-  simp only [List.head?_cons, Option.some.injEq] at h1
-  simp only [List.getLast?_cons_cons, List.getLast?_singleton, Option.some.injEq] at h2
-  have ha1 : a.1.val = 2 := by rw [h1]; rfl
-  have ha2 : a.2.val = v₁.val := by rw [h1]
-  have hd1 : d.1.val = 2 := by rw [h2]; rfl
-  have hd2 : d.2.val = v₂.val := by rw [h2]
-  rw [List.isChain_cons_cons, List.isChain_cons_cons, List.isChain_cons_cons] at hchain
-  have hab := adj_iff_coords.mp hchain.1
-  have hbb := adj_iff_coords.mp hchain.2.1
-  have hbd := adj_iff_coords.mp hchain.2.2.1
-  have n02 := hch 0 2 (by simp) (by simp) (by omega)
-  have n03 := hch 0 3 (by simp) (by simp) (by omega)
-  have n13 := hch 1 3 (by simp) (by simp) (by omega)
-  simp only [List.getElem_cons_zero, List.getElem_cons_succ] at n02 n03 n13
-  rw [adj_iff_coords] at n02 n03 n13
-  have hb2 := hfut b (by simp)
-  have hb'2 := hfut b' (by simp)
-  simp only [List.nodup_cons, List.mem_cons, not_or, List.not_mem_nil, not_false_eq_true,
-    List.nodup_nil, and_true] at hnd
-  have nab' := ne_coords hnd.1.2.1
-  have nad := ne_coords hnd.1.2.2
-  have nbd := ne_coords hnd.2.1.2
-  have hb1 : b.1.val = 2 := by
-    rcases hab with ⟨h, -⟩ | ⟨hr, h | h⟩
-    · omega
-    · exfalso
-      clear n02 n13 nad nbd
-      rcases hbb with ⟨h1, h2 | h2⟩ | ⟨h1, h2 | h2⟩ <;>
-        rcases hbd with ⟨h3, h4 | h4⟩ | ⟨h3, h4 | h4⟩ <;> omega
-    · omega
-  have hb'1 : b'.1.val = 2 := by
-    rcases hbd with ⟨h, -⟩ | ⟨hr, h | h⟩
-    · omega
-    · omega
-    · exfalso
-      clear n02 n03 n13 nad nab'
-      rcases hbb with ⟨h1, h2 | h2⟩ | ⟨h1, h2 | h2⟩ <;> omega
-  have r1 : b.2.val + 1 = a.2.val ∨ a.2.val + 1 = b.2.val := by
-    clear n02 n03 n13 nad nab' nbd hbb hbd; rcases hab with h | h <;> omega
-  have r2 : b'.2.val + 1 = b.2.val ∨ b.2.val + 1 = b'.2.val := by
-    clear n02 n03 n13 nad nab' nbd hab hbd; rcases hbb with h | h <;> omega
-  have r3 : d.2.val + 1 = b'.2.val ∨ b'.2.val + 1 = d.2.val := by
-    clear n02 n03 n13 nad nab' nbd hab hbb; rcases hbd with h | h <;> omega
-  have hrow : b'.2.val = v₂.val + 1 ∧ b.2.val = v₂.val + 2 ∧ v₁.val = v₂.val + 3 := by
-    clear hab hbb hbd; omega
-  refine ⟨v₂.val, by omega, ?_⟩
-  simp only [vert2, vert3, vert4, List.cons.injEq, and_true]
-  exact ⟨cell_ext' ha1 (by simp; omega), cell_ext' (by simp [hb1]; rfl) (by simp; omega),
-    cell_ext' (by simp [hb'1]; rfl) (by simp; omega), cell_ext' hd1 (by simp; omega)⟩
 
 end GridGen.Gauge

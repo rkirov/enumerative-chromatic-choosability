@@ -12,8 +12,7 @@ import GridGen.Four.Relabel
 see the names of the colours. Applying one map `f`, injective on the colours in play, to all five
 lists maps the proper colourings bijectively onto the proper colourings of the image lists, and
 it preserves the six non-consecutive equalities `r1 = r3`, `r2 = r4`, `r3 = r5`, `r1 = r4`,
-`r2 = r5`, `r1 = r5` that the orbit `orb` reads (`orb_congr`, `gw_congr`). In particular every
-permutation of `ℕ` preserves `G w` (`G_perm`).
+`r2 = r5`, `r1 = r5` that the orbit `orb` reads (`orb_congr`, `gw_congr`).
 
 The consequence used by the uniform transfer and the bridge is the *realisation* lemma
 (`G_erase_eq`): the weighted number of successors of a proper column `s` inside a palette `P`,
@@ -52,15 +51,6 @@ theorem orb_congr {s t : T5} (h : SamePat s t) : orb s = orb t := by
 /-- The weight reads only the equality pattern. -/
 theorem gw_congr (w : Wt5) {s t : T5} (h : SamePat s t) : gw w s = gw w t := by
   unfold gw; rw [orb_congr h]
-
-/-- At the constant weight `1` every column weighs one. -/
-theorem gw_one (t : T5) : gw (fun _ => 1) t = 1 := rfl
-
-/-- The number of proper colourings is `G` at the constant weight `1`. -/
-theorem card_sts_eq_G (A B C D E : Finset ℕ) :
-    ((sts A B C D E).card : ℝ) = G (fun _ => 1) A B C D E := by
-  unfold G
-  simp only [gw_one, Finset.sum_const, nsmul_eq_mul, mul_one]
 
 /-! ### Relabelling by a map injective on the colours in play -/
 
@@ -134,11 +124,6 @@ theorem G_image (w : Wt5) {f : ℕ → ℕ} {A B C D E : Finset ℕ}
       rw [e1, e2, e3, e4, e5]
   · intro t ht
     exact (gw_congr w (samePat_mapT hf (hrows t ht))).symm
-
-/-- **Every permutation of the colours preserves `G w`.** -/
-theorem G_perm (w : Wt5) (σ : Equiv.Perm ℕ) (A B C D E : Finset ℕ) :
-    G w (A.image σ) (B.image σ) (C.image σ) (D.image σ) (E.image σ) = G w A B C D E :=
-  G_image w (σ.injective.injOn)
 
 /-! ### Realisation of a pattern inside a palette -/
 
@@ -285,17 +270,6 @@ theorem G_erase_eq (w : Wt5) {s s' : T5} (hs : Proper s) (hs' : Proper s') (h : 
   rw [← G_image w hU, Four.image_erase_of_injOn hg hP.1, Four.image_erase_of_injOn hg hP.2.1,
     Four.image_erase_of_injOn hg hP.2.2.1, Four.image_erase_of_injOn hg hP.2.2.2.1,
     Four.image_erase_of_injOn hg hP.2.2.2.2, hgP, g1, g2, g3, g4, g5]
-
-/-- The same for the number of proper colourings. -/
-theorem card_erase_eq {s s' : T5} (hs : Proper s) (hs' : Proper s') (h : SamePat s s')
-    {P P' : Finset ℕ} (hc : P.card = P'.card) (hP : RowsIn s P) (hP' : RowsIn s' P') :
-    (sts (P.erase (r1 s)) (P.erase (r2 s)) (P.erase (r3 s)) (P.erase (r4 s))
-        (P.erase (r5 s))).card
-      = (sts (P'.erase (r1 s')) (P'.erase (r2 s')) (P'.erase (r3 s')) (P'.erase (r4 s'))
-          (P'.erase (r5 s'))).card := by
-  have h' := G_erase_eq (fun _ => 1) hs hs' h hc hP hP'
-  rw [← card_sts_eq_G, ← card_sts_eq_G] at h'
-  exact_mod_cast h'
 
 /-! ### The canonical realisation -/
 

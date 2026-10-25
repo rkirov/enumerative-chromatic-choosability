@@ -22,7 +22,7 @@ Section 15 is proved in `TwoDegenerate/`: `K₂,₂₆` is not ECC at four
 (`TwoDegenerate/K2n/Main.lean`).
 Section 16 is proved in `TwoDegenerate/K2nSqrt/Main.lean`: `K₂,ₙ` is ECC at every `k ≥ 300`
 with `n ≤ k²`, so `τ(K₂,ₙ) = O(√n)`.
-Section 17 is proved in `GridGen/Four/Main.lean`: every `4 × (n+1)` grid is ECC at every `k ≥ 6`.
+Section 17 is proved in `GridGen/Four/Main.lean`: every `4 × (n+1)` grid is ECC at every `k ≥ 5`.
 Section 19 is proved in `GridGen/Five/Main.lean`: every `5 × (n+1)` grid is ECC at every `k ≥ 6`.
 Section 18 is proved in `GridGen/Gauge/Seven/Assemble7.lean`: every rectangular grid is ECC at every
 `k ≥ 7`.

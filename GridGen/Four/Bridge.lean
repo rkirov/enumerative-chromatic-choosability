@@ -11,8 +11,7 @@ import GridGen.Explicit
 The row graph `pathG 3` has four vertices, the rows `q1 — q2 — q3 — q4` of a path. A state of
 its column is a 4-tuple (`toT`, `ofT`), the proper colourings from lists `X` are
 `sts (X q1) (X q2) (X q3) (X q4)` (`mem_states4`), compatibility is `compat` (`compat4`), and sums
-over states are sums over tuples (`sum_states4`, `sum_states4_filter`). This is
-`GridGen/Three.lean` with four rows instead of three.
+over states are sums over tuples (`sum_states4`, `sum_states4_filter`).
 
 With these, GridGen's uniform futures `F (pathG 3) k i` are the height-four uniform futures
 `Fu k i` (`F_eq_Fu`), and the reference `Φ = F ∘ patCap` of a proper state is, by the uniform

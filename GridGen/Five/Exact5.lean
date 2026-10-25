@@ -770,8 +770,6 @@ theorem vecV_zero (b : ℕ) : vecV b 0 = zeroV := by
     rw [← Bool.not_eq_true, Nat.beq_eq]; omega
   rw [e1, e2, Bool.and_false]; rfl
 
-theorem packV_zeroV : packV zeroV = 0 := rfl
-
 theorem packV_vk (sp : Spec5) (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) (s : T5) (k : ℕ) :
     packV (vk B₁ B₂ B₃ B₄ B₅ s k) = (xch sp B₁ B₂ B₃ B₄ B₅ s k).2.2.1 := by
   unfold vk xch

@@ -187,16 +187,6 @@ theorem rowV_ratio {w : Wt5} (hw : InBox5 w) (i j : Fin 11) :
   push_cast at h959
   nlinarith
 
-theorem rowV_nonneg {w : Wt5} (hw : InBox5 w) (i : Fin 11) : 0 ≤ rowV i w := by
-  have hpos := rowV_pos hw
-  have hb := nextW_inBox hw
-  obtain ⟨hi, -⟩ := hb i
-  unfold nextW at hi
-  rw [le_div_iff₀ hpos] at hi
-  have h959 : ((959 / 1000 : ℚ) : ℝ) ≤ (lo5 i : ℝ) := by exact_mod_cast lo5_ge i
-  push_cast at h959
-  nlinarith
-
 theorem gw_nonneg {w : Wt5} (hw : InBox5 w) (t : T5) : 0 ≤ gw w t := by
   have h959 : ((959 / 1000 : ℚ) : ℝ) ≤ (lo5 (orb t) : ℝ) := by exact_mod_cast lo5_ge (orb t)
   have := (hw (orb t)).1
@@ -206,9 +196,6 @@ theorem G_nonneg {w : Wt5} (hw : InBox5 w) (A B C D E : Finset ℕ) : 0 ≤ G w 
   Finset.sum_nonneg fun t _ => gw_nonneg hw t
 
 theorem GU_nonneg {w : Wt5} (hw : InBox5 w) (s : T5) : 0 ≤ GU 6 w s := G_nonneg hw _ _ _ _ _
-
-theorem GB_nonneg {w : Wt5} (hw : InBox5 w) (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) (s : T5) :
-    0 ≤ GB w B₁ B₂ B₃ B₄ B₅ s := G_nonneg hw _ _ _ _ _
 
 theorem GU_ratio {w : Wt5} (hw : InBox5 w) {s t : T5} (hs : Proper s) (ht : Proper t) :
     GU 6 w s ≤ (1000 / 959) * GU 6 w t := by
@@ -271,8 +258,6 @@ theorem fibre_pair {w : Wt5} (hw : InBox5 w) {X₁ X₂ X₃ X₄ X₅ : Finset 
 
 /-- Reverse the rows of a column. -/
 def rev5 (t : T5) : T5 := (r5 t, r4 t, r3 t, r2 t, r1 t)
-
-theorem rev5_rev5 (t : T5) : rev5 (rev5 t) = t := rfl
 
 theorem samePat_rev {s t : T5} (h : SamePat s t) : SamePat (rev5 s) (rev5 t) := by
   obtain ⟨h13, h24, h35, h14, h25, h15⟩ := h

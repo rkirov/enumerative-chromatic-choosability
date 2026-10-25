@@ -65,9 +65,6 @@ noncomputable def keysH7 (L : Cols (Fin m)) (j : ℕ) : Fin m → ℕ → ℕ :=
 noncomputable def relH7 (L : Cols (Fin m)) (j : ℕ) : Fin m → Finset ℕ :=
   RT (Trel7 (L (j + 1)) (gaugeH7 L (j + 1)))
 
-/-- The relaxed labels of column `0`. -/
-noncomputable def rel07 (L : Cols (Fin m)) : Fin m → Finset ℕ := RT (Trel7 (L 0) (gaugeH7 L 0))
-
 /-! ### Pulling relaxed states back -/
 
 /-- **Pulling back relaxed states.** Under a VC labelling, every relaxed label state is the key

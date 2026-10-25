@@ -297,22 +297,6 @@ theorem chain_row2 (hQ : ∀ t x, Q (set2 t x) ↔ Q t) (hφ : ∀ t x, φ (set2
   exact count_of_fibre _ (fibre_row2 (fun _ => 1) (fun _ => zero_le_one) Q hQ _ φ hφ
     (fun _ h => h) hm hA one_pos (fun _ _ _ _ => by norm_num))
 
-theorem chain_row3 (hQ : ∀ t x, Q (set3 t x) ↔ Q t) (hφ : ∀ t x, φ (set3 t x) = φ t)
-    (hm : 1 ≤ m) (hA : m + 2 ≤ A₃.card) :
-    m * ((sts A₁ A₂ A₃ A₄ A₅).filter (fun t => Q t ∧ r3 t = φ t)).card
-      ≤ ((sts A₁ A₂ A₃ A₄ A₅).filter Q).card := by
-  rw [← filter_filter_and]
-  exact count_of_fibre _ (fibre_row3 (fun _ => 1) (fun _ => zero_le_one) Q hQ _ φ hφ
-    (fun _ h => h) hm hA one_pos (fun _ _ _ _ => by norm_num))
-
-theorem chain_row4 (hQ : ∀ t x, Q (set4 t x) ↔ Q t) (hφ : ∀ t x, φ (set4 t x) = φ t)
-    (hm : 1 ≤ m) (hA : m + 2 ≤ A₄.card) :
-    m * ((sts A₁ A₂ A₃ A₄ A₅).filter (fun t => Q t ∧ r4 t = φ t)).card
-      ≤ ((sts A₁ A₂ A₃ A₄ A₅).filter Q).card := by
-  rw [← filter_filter_and]
-  exact count_of_fibre _ (fibre_row4 (fun _ => 1) (fun _ => zero_le_one) Q hQ _ φ hφ
-    (fun _ h => h) hm hA one_pos (fun _ _ _ _ => by norm_num))
-
 theorem chain_row5 (hQ : ∀ t x, Q (set5 t x) ↔ Q t) (hφ : ∀ t x, φ (set5 t x) = φ t)
     (hm : 1 ≤ m) (hA : m + 1 ≤ A₅.card) :
     m * ((sts A₁ A₂ A₃ A₄ A₅).filter (fun t => Q t ∧ r5 t = φ t)).card

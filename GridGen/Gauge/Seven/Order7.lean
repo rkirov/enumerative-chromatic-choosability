@@ -16,8 +16,8 @@ with its colour, as `(colour, current lower label, upper label)`.
 
 * `realizeOrd_spec`: the moves are small, at most one per colour of the list, and they realize the
   permutation when the list contains every mismatched colour;
-* `realizeOrd_get`: the move of a colour is through that colour's *current* lower label, i.e. its
-  initial lower label moved by the moves applied before.
+* `proc`, `runEdge`: the lookahead process the `k = 7` gauge uses, edge by edge, with a colour
+  that is mismatched at both edges of its star moved at the lower edge first (`runEdge_spec`).
 -/
 
 open Finset
@@ -161,182 +161,6 @@ theorem realizeOrd_spec {k : ℕ} (C : Finset ℕ) (h : ℕ → ℕ) :
             have hcb : g t.1 ≠ b := fun e' => hne (hh htC hc₀ (e.symm.trans e'))
             rw [Equiv.swap_apply_of_ne_of_ne hca hcb, e]
 
-/-- The colours of the moves form a sublist of the order. -/
-theorem realizeOrd_sublist (h : ℕ → ℕ) :
-    ∀ (ord : List ℕ) (g : ℕ → ℕ), ((realizeOrd h ord g).map Prod.fst).Sublist ord := by
-  intro ord
-  induction ord with
-  | nil => intro g; simp [realizeOrd]
-  | cons c₀ rest ih =>
-      intro g
-      by_cases e₀ : g c₀ = h c₀
-      · simp only [realizeOrd, ite_eq_left e₀]
-        exact (ih g).cons c₀
-      · simp only [realizeOrd, ite_eq_right e₀, List.map_cons]
-        exact (ih _).cons_cons c₀
-
-/-- **Each move goes through the current lower label of its colour.** The `i`-th move is
-`(c, x, h c)` with `x` the initial lower label `g c` moved by the moves applied before. -/
-theorem realizeOrd_get (h : ℕ → ℕ) :
-    ∀ (ord : List ℕ) (g : ℕ → ℕ) (i : ℕ) (hi : i < (realizeOrd h ord g).length),
-      ((realizeOrd h ord g)[i]).2.1 =
-          compA (movesOf ((realizeOrd h ord g).take i)) (g (realizeOrd h ord g)[i].1) ∧
-        ((realizeOrd h ord g)[i]).2.2 = h (realizeOrd h ord g)[i].1 := by
-  intro ord
-  induction ord with
-  | nil => intro g i hi; simp [realizeOrd] at hi
-  | cons c₀ rest ih =>
-      intro g i hi
-      by_cases e₀ : g c₀ = h c₀
-      · simp only [realizeOrd, ite_eq_left e₀] at hi ⊢
-        exact ih g i hi
-      · simp only [realizeOrd, ite_eq_right e₀] at hi ⊢
-        cases i with
-        | zero => simp [movesOf, compA_nil]
-        | succ i =>
-            simp only [List.length_cons] at hi
-            have := ih (fun z => Equiv.swap (g c₀) (h c₀) (g z)) i (by omega)
-            simp only [List.getElem_cons_succ, List.take_succ_cons, movesOf, List.map_cons,
-              compA_cons] at this ⊢
-            exact this
-
-/-! ### The ordered gauge of a seam -/
-
-section GlueO
-
-open scoped Classical
-
-variable (k : ℕ) (Ax Bx : ℕ → Finset ℕ) (βx : ℕ → ℕ → ℕ)
-
-/-- A *double* of row `v`: a colour new in row `v`, shared with both neighbouring rows, mismatched
-at both edges of row `v`, and old in row `v + 1`. Its star in row `v` serves two moves. -/
-def Dbl (v c : ℕ) : Prop :=
-  1 ≤ v ∧ c ∈ Bx (v - 1) ∧ c ∈ Bx v ∧ c ∈ Bx (v + 1) ∧ c ∉ Ax v ∧ c ∈ Ax (v + 1) ∧
-    βx v c ≠ βx (v - 1) c ∧ βx (v + 1) c ≠ βx v c
-
-/-- The order of the shared colours at the edge below row `v`: the doubles of row `v` first, the
-doubles of row `v + 1` last, each part increasing. -/
-noncomputable def ordO (v : ℕ) : List ℕ :=
-  ((Bx v ∩ Bx (v + 1)).sort (· ≤ ·)).filter (fun c => Dbl Ax Bx βx v c) ++
-    ((Bx v ∩ Bx (v + 1)).sort (· ≤ ·)).filter
-      (fun c => ¬ Dbl Ax Bx βx v c ∧ ¬ Dbl Ax Bx βx (v + 1) c) ++
-    ((Bx v ∩ Bx (v + 1)).sort (· ≤ ·)).filter (fun c => Dbl Ax Bx βx (v + 1) c)
-
-/-- The moves at the edge below row `v`, in the order `ordO`, after the rows above have been
-conjugated by `comp pl`. In `comp` convention (the head applied last). -/
-noncomputable def rhoO (v : ℕ) (pl : List (ℕ × ℕ)) : List (ℕ × ℕ) :=
-  (movesOf (realizeOrd (fun c => comp pl (βx v c)) (ordO Ax Bx βx v)
-    (fun c => comp pl (βx (v + 1) c)))).reverse
-
-/-- The accumulated conjugation of row `v`. -/
-noncomputable def piLO : ℕ → List (ℕ × ℕ)
-  | 0 => []
-  | v + 1 => rhoO Ax Bx βx v (piLO v) ++ piLO v
-
-/-- **The glued labelling, in the prescribed order.** -/
-noncomputable def glueLabO (v : ℕ) (a : ℕ) : ℕ := comp (piLO Ax Bx βx v) (βx v a)
-
-variable {k Ax Bx βx}
-
-theorem not_dbl_and (v c : ℕ) : ¬ (Dbl Ax Bx βx v c ∧ Dbl Ax Bx βx (v + 1) c) := by
-  rintro ⟨h1, h2⟩
-  exact h2.2.2.2.2.1 h1.2.2.2.2.2.1
-
-theorem mem_ordO {v c : ℕ} : c ∈ ordO Ax Bx βx v ↔ c ∈ Bx v ∩ Bx (v + 1) := by
-  unfold ordO
-  simp only [List.mem_append, List.mem_filter, mem_sort, decide_eq_true_eq]
-  constructor
-  · rintro ((⟨h, -⟩ | ⟨h, -⟩) | ⟨h, -⟩) <;> exact h
-  · intro h
-    by_cases h1 : Dbl Ax Bx βx v c
-    · exact Or.inl (Or.inl ⟨h, h1⟩)
-    by_cases h2 : Dbl Ax Bx βx (v + 1) c
-    · exact Or.inr ⟨h, h2⟩
-    · exact Or.inl (Or.inr ⟨h, h1, h2⟩)
-
-theorem nodup_ordO (v : ℕ) : (ordO Ax Bx βx v).Nodup := by
-  have hL := sort_nodup (Bx v ∩ Bx (v + 1)) (· ≤ ·)
-  unfold ordO
-  refine List.Nodup.append (List.Nodup.append (hL.filter _) (hL.filter _) ?_) (hL.filter _) ?_
-  · intro a ha hb
-    simp only [List.mem_filter, decide_eq_true_eq] at ha hb
-    exact hb.2.1 ha.2
-  · intro a ha hb
-    simp only [List.mem_append, List.mem_filter, decide_eq_true_eq] at ha hb
-    rcases ha with ⟨-, h⟩ | ⟨-, -, h⟩
-    · exact not_dbl_and v a ⟨h, hb.2⟩
-    · exact h hb.2
-
-/-- **The moves at one edge, in order.** -/
-theorem rhoO_spec (hR : RowLab k Bx βx) {pl : List (ℕ × ℕ)} (hpl : Small k pl) (v : ℕ) :
-    (rhoO Ax Bx βx v pl).length ≤ ((Bx v ∩ Bx (v + 1)).filter
-        fun c => comp pl (βx (v + 1) c) ≠ comp pl (βx v c)).card ∧
-      Small k (rhoO Ax Bx βx v pl) ∧ (∀ c ∈ Bx v ∩ Bx (v + 1),
-        comp (rhoO Ax Bx βx v pl) (comp pl (βx (v + 1) c)) = comp pl (βx v c)) := by
-  obtain ⟨hg, hh, hgk, hhk⟩ := rgood hR hpl v
-  obtain ⟨h1, -, h3, h4⟩ := realizeOrd_spec (k := k) (Bx v ∩ Bx (v + 1))
-    (fun c => comp pl (βx v c)) (ordO Ax Bx βx v) (fun c => comp pl (βx (v + 1) c))
-    (nodup_ordO v) (fun c hc => mem_ordO.mp hc) hg hh hgk hhk
-    (fun c hc _ => mem_ordO.mpr hc)
-  set R := realizeOrd (fun c => comp pl (βx v c)) (ordO Ax Bx βx v)
-    (fun c => comp pl (βx (v + 1) c))
-  refine ⟨?_, fun p hp => h1 p (List.mem_reverse.mp hp), fun c hc => ?_⟩
-  · -- one move per mismatched colour
-    have hnd : (R.map Prod.fst).Nodup := (nodup_ordO v).sublist (realizeOrd_sublist _ _ _)
-    have hsub : (R.map Prod.fst).toFinset ⊆ (Bx v ∩ Bx (v + 1)).filter
-        fun c => comp pl (βx (v + 1) c) ≠ comp pl (βx v c) := by
-      intro c hc
-      rw [List.mem_toFinset, List.mem_map] at hc
-      obtain ⟨t, ht, rfl⟩ := hc
-      obtain ⟨ht1, ht2⟩ := h4 t ht
-      exact mem_filter.mpr ⟨mem_ordO.mp ht1, ht2⟩
-    have := card_le_card hsub
-    rw [List.toFinset_card_of_nodup hnd, List.length_map] at this
-    simp only [rhoO, movesOf, List.length_reverse, List.length_map]
-    exact this
-  · simp only [rhoO]
-    rw [comp_reverse]
-    exact h3 c hc
-
-theorem small_piLO (hR : RowLab k Bx βx) : ∀ v, Small k (piLO Ax Bx βx v)
-  | 0 => fun _ hp => by simp [piLO] at hp
-  | v + 1 => by
-      intro p hp
-      simp only [piLO, List.mem_append] at hp
-      rcases hp with hp | hp
-      · exact (rhoO_spec hR (small_piLO hR v) v).2.1 p hp
-      · exact small_piLO hR v p hp
-
-/-- **Vertical consistency of the ordered gauge.** -/
-theorem glueLabO_vc (hR : RowLab k Bx βx) (v : ℕ) {c : ℕ} (hc : c ∈ Bx v ∩ Bx (v + 1)) :
-    glueLabO Ax Bx βx (v + 1) c = glueLabO Ax Bx βx v c := by
-  unfold glueLabO
-  simp only [piLO]
-  rw [comp_append]
-  exact (rhoO_spec hR (small_piLO hR v) v).2.2 c hc
-
-theorem glueLabO_injOn (hR : RowLab k Bx βx) (v : ℕ) : Set.InjOn (glueLabO Ax Bx βx v) (Bx v) :=
-  fun _ ha _ ha' e => (hR v).1 ha ha' (comp_injective _ e)
-
-theorem glueLabO_lt (hR : RowLab k Bx βx) (v : ℕ) {a : ℕ} (ha : a ∈ Bx v) :
-    glueLabO Ax Bx βx v a < k :=
-  comp_lt (small_piLO hR v) ((hR v).2 a ha)
-
-/-- **The moves at one edge**: at most the new colours of the lower row plus the vertical
-difference of the old column. -/
-theorem length_rhoO_le (hR : RowLab k Bx βx) (hN : NewMis Ax Bx βx) (v : ℕ) :
-    (rhoO Ax Bx βx v (piLO Ax Bx βx v)).length ≤
-      (Bx (v + 1) \ Ax (v + 1)).card + (Ax (v + 1) \ Ax v).card := by
-  refine le_trans (rhoO_spec hR (small_piLO hR v) v).1 (le_trans (le_of_eq ?_)
-    (card_mismatchH_le hN v))
-  congr 1
-  ext c
-  simp only [mem_filter]
-  exact and_congr_right fun _ =>
-    ⟨fun h e => h (by rw [e]), fun h e => h (comp_injective _ e)⟩
-
-end GlueO
-
 /-! ### The lookahead process
 
 At the edge below row `e`, a colour `c` that is new in row `e + 1` and old in row `e + 2` uses the
@@ -383,9 +207,6 @@ noncomputable def runEdge (e : ℕ) (O : List GOp) : List GOp :=
 noncomputable def proc : ℕ → List GOp
   | 0 => []
   | e + 1 => runEdge Ax Bx βx e (proc e)
-
-/-- **The lookahead gauge.** -/
-noncomputable def glue7 (n v a : ℕ) : ℕ := curL (proc Ax Bx βx n) v (βx v a)
 
 variable {k : ℕ} {Ax Bx βx}
 

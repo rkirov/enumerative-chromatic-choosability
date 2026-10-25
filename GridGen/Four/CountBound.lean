@@ -12,7 +12,9 @@ The number of successors of a column factors into four row rates. With the data
 the pattern bits `c₁₃, c₂₄, c₁₄`, the rate bounds of `LogBounds.lean` combine into a lower bound
 on `log (N / Nᵁ)`: the main terms `log (1 + μᵢ/A) - zᵢ/(nℓ)`, the bonuses `β₀ h`, and the
 third- and fourth-row errors, which are charged either to the mismatches (`J₃, J₄`) or, when
-there are none, to the bonuses (`b₃`, `b₄`).
+there are none, to the bonuses (`b₃`, `b₄`). This file holds the pieces (`log_count_split`,
+`row3_charge`, `row4_charge`, `bonus_sum`); `CountBound6.lean` assembles them at `k = 6`
+(`count_log_bound6`).
 -/
 
 namespace GridGen.Four
@@ -44,13 +46,6 @@ theorem counts_pos {n n1 n2 n3 n4 e12 e23 t123 M4 : ℝ} (hn : 5 ≤ n) (hn1 : n
   have h3 : 0 < n3 * (n1 * n2 - e12) - (n1 * e23 - t123) := by nlinarith
   refine ⟨h2, h3, by nlinarith⟩
 
-/-- The uniform counts are positive. -/
-theorem counts_pos_unif {n c13 : ℝ} (hn : 5 ≤ n) (hc : c13 = 0 ∨ c13 = 1) :
-    0 < n * n - (n - 1) ∧ 0 < n * (n * n - (n - 1)) - (n * (n - 1) - (n - 2 + c13)) := by
-  constructor
-  · nlinarith
-  · rcases hc with rfl | rfl <;> nlinarith
-
 /-- **The count ratio as a sum of four row logs.** -/
 theorem log_count_split {n n1 N2 N3 N4 N2U N3U N4U : ℝ} (hn : 0 < n) (hn1 : 0 < n1)
     (h2 : 0 < N2) (h3 : 0 < N3) (h4 : 0 < N4) (h2U : 0 < N2U) (h3U : 0 < N3U) (h4U : 0 < N4U) :
@@ -75,14 +70,6 @@ noncomputable def kβ0 (n : ℝ) : ℝ := (n - 1) / (n * (n + 1)) - (n + 2) / (n
 /-- The mismatch indicators. -/
 noncomputable def J3 (μ2 μ3 : ℝ) : ℝ := if μ2 + μ3 = 0 then 0 else 1
 noncomputable def J4 (μ2 μ3 μ4 : ℝ) : ℝ := if μ2 + μ3 + μ4 = 0 then 0 else 1
-
-/-- **The count bound.** -/
-noncomputable def countBound (n μ2 μ3 μ4 z2 z3 z4 h1 h2 h3 h4 c13 c24 : ℝ) : ℝ :=
-  log (1 + μ2 / kA n) + log (1 + μ3 / kA n) + log (1 + μ4 / kA n)
-    - (z2 + z3 + z4) / (n * (n - 1))
-    - J3 μ2 μ3 * ((μ2 + 1) * (μ3 + 1) / (n ^ 2 * (n - 1) ^ 2) + ku3 n * c13)
-    - J4 μ2 μ3 μ4 * ((μ3 + 2) * (μ4 + 1) / (n * (n - 1) ^ 3) + ku4e n * c24 + ku4b n)
-    + (kβ0 n - kb3 n - kb4 n) * (h1 + h2 + h3 + h4)
 
 /-- The uniform fourth count is positive. -/
 theorem N4U_pos {n c13 c24 c14 : ℝ} (hn : 5 ≤ n) (hc13 : c13 = 0 ∨ c13 = 1)
@@ -332,107 +319,5 @@ theorem row4_charge {k : ℕ} (hk6 : 6 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : 
   · simp only [J4, hJ, ite_false, one_mul]
     have : 0 ≤ kb4 n * (h1 + h2 + h3 + h4) := mul_nonneg hkb4p (by linarith)
     linarith
-
-/-- **The log count ratio of one column.** -/
-theorem count_log_bound {k : ℕ} (hk6 : 6 ≤ k) (hkle : k ≤ 7) {n : ℝ} (hnk : n = (k : ℝ) - 1)
-    {n1 n2 n3 n4 e12 e23 e34 t123 t234 q h1 h2 h3 h4 μ2 μ3 μ4 z2 z3 z4 c13 c24 c14 : ℝ}
-    (hh1 : h1 = 0 ∨ h1 = 1) (hh2 : h2 = 0 ∨ h2 = 1) (hh3 : h3 = 0 ∨ h3 = 1) (hh4 : h4 = 0 ∨ h4 = 1)
-    (hn1 : n1 = n + h1) (hn2 : n2 = n + h2) (hn3 : n3 = n + h3) (hn4 : n4 = n + h4)
-    (hμ2 : 0 ≤ μ2) (hμ3 : 0 ≤ μ3) (hμ4 : 0 ≤ μ4)
-    (hμ2k : μ2 ≤ n + 1) (hμ3k : μ3 ≤ n + 1) (hμ4k : μ4 ≤ n + 1)
-    (hz2 : 0 ≤ z2) (hz3 : 0 ≤ z3) (hz4 : 0 ≤ z4)
-    (he12 : e12 = (n - 1 - μ2) + h1 + h2 + z2) (he23 : e23 = (n - 1 - μ3) + h2 + h3 + z3)
-    (he34 : e34 = (n - 1 - μ4) + h3 + h4 + z4)
-    (he12a : 0 ≤ e12) (he12b : e12 ≤ n1) (he12c : e12 ≤ n2)
-    (he23a : 0 ≤ e23) (he23b : e23 ≤ n2) (he23c : e23 ≤ n3)
-    (he34a : 0 ≤ e34) (he34b : e34 ≤ n3)
-    (ht123 : e12 + e23 - n2 ≤ t123) (ht0 : 0 ≤ t123) (ht1 : t123 ≤ n1)
-    (ht234 : e23 + e34 - n3 ≤ t234) (hq : q ≤ t123)
-    (hM30 : 0 ≤ n1 * e23 - t123) (hM3N : n1 * e23 - t123 ≤ n1 * n2 - e12)
-    (hM40 : 0 ≤ n1 * (n2 * e34 - t234) - e12 * e34 + q)
-    (hM4N : n1 * (n2 * e34 - t234) - e12 * e34 + q ≤ n3 * (n1 * n2 - e12) - (n1 * e23 - t123))
-    (hc13 : c13 = 0 ∨ c13 = 1) (hc24 : c24 = 0 ∨ c24 = 1) (hc14 : c14 = 0 ∨ c14 = 1)
-    (h1314 : c13 * c14 = 0) (h2414 : c24 * c14 = 0)
-    (hZ3 : μ2 = 0 → μ3 = 0 → h1 = 0 → h2 = 0 → h3 = 0 →
-      z2 = 0 ∧ z3 = 0 ∧ t123 = n - 2 + c13)
-    (hZ4 : μ2 = 0 → μ3 = 0 → μ4 = 0 → h2 = 0 → h3 = 0 → h4 = 0 →
-      z2 = 0 ∧ z3 = 0 ∧ z4 = 0 ∧ t234 = n - 2 + c24 ∧
-      (h1 = 0 → t123 = n - 2 + c13 ∧ q = n - 3 + c13 + c24 + c14) ∧
-      (h1 = 1 → t123 = n - 1 ∧ q = t234 ∧ c13 = 0 ∧ c14 = 0)) :
-    countBound n μ2 μ3 μ4 z2 z3 z4 h1 h2 h3 h4 c13 c24
-      ≤ log (N4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q / N4U n c13 c24 c14) := by
-  have hk6' : (6 : ℝ) ≤ k := by exact_mod_cast hk6
-  have hn : 5 ≤ n := by rw [hnk]; linarith
-  have hn0 : 0 < n := by linarith
-  have hh1' : 0 ≤ h1 ∧ h1 ≤ 1 := by rcases hh1 with rfl | rfl <;> norm_num
-  have hh2' : 0 ≤ h2 ∧ h2 ≤ 1 := by rcases hh2 with rfl | rfl <;> norm_num
-  have hh3' : 0 ≤ h3 ∧ h3 ≤ 1 := by rcases hh3 with rfl | rfl <;> norm_num
-  have hh4' : 0 ≤ h4 ∧ h4 ≤ 1 := by rcases hh4 with rfl | rfl <;> norm_num
-  have hn1p : 0 < n1 := by rw [hn1]; linarith
-  have hn2p : 0 < n2 := by rw [hn2]; linarith
-  have hn3p : 0 < n3 := by rw [hn3]; linarith
-  have hn4p : 5 ≤ n4 := by rw [hn4]; linarith
-  -- positivity of all counts
-  obtain ⟨hN2, hN3, hN4⟩ := counts_pos (n1 := n1) (n2 := n2) (n3 := n3) (n4 := n4) hn
-    (by rw [hn1]; linarith) (by rw [hn2]; linarith) (by rw [hn3]; linarith)
-    (by rw [hn4]; linarith) he12b hM3N hM4N
-  have hN2U : 0 < n ^ 2 - n + 1 := by nlinarith
-  have hN3U := N3U_pos hn hc13
-  have hN4U := N4U_pos hn hc13 hc24 hc14 h1314 h2414
-  have ht : 0 < (n ^ 2 - n + 1) / n := div_pos hN2U hn0
-  -- the four row logs
-  have hsplit := log_count_split (n := n) (n1 := n1) (N2 := n1 * n2 - e12)
-    (N3 := n3 * (n1 * n2 - e12) - (n1 * e23 - t123))
-    (N4 := N4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q) (N2U := n ^ 2 - n + 1)
-    (N3U := n * (n ^ 2 - n + 1) - (n * (n - 1) - (n - 2 + c13))) (N4U := N4U n c13 c24 c14)
-    hn0 hn1p hN2 hN3 hN4 hN2U hN3U hN4U
-  -- row one
-  have hL1 := rate_first hn hh1
-  rw [← hn1] at hL1
-  -- row two
-  have hL2 := rate_main hn hh1 hh2 hz2 hμ2 hμ2k he12 he12a (by rw [← hn1]; exact he12b)
-  have eR2 : (n1 * n2 - e12) / n1 / ((n ^ 2 - n + 1) / n)
-      = ((n + h2) - e12 / (n + h1)) / ((n ^ 2 - n + 1) / n) := by
-    rw [← hn1, ← hn2]
-    congr 1; field_simp
-  rw [← eR2] at hL2
-  -- row three
-  have hR3 : 0 < n3 - e23 / n2 := by
-    have : e23 / n2 ≤ 1 := by rw [div_le_one hn2p]; exact he23b
-    linarith
-  have hs3 := log_split (a := (n3 * (n1 * n2 - e12) - (n1 * e23 - t123)) / (n1 * n2 - e12))
-    (b := (n * (n ^ 2 - n + 1) - (n * (n - 1) - (n - 2 + c13))) / (n ^ 2 - n + 1))
-    (div_pos hN3 hN2) (div_pos hN3U hN2U) hR3 ht
-  have hm3 := rate_main hn hh2 hh3 hz3 hμ3 hμ3k he23 he23a (by rw [← hn2]; exact he23b)
-  rw [← hn2, ← hn3] at hm3
-  have hE3 := row3_charge hn hh1 hh2 hh3 hh4'.1 hn1 hn2 hn3 hμ2 hμ3 hz2 hz3 he12 he23 he12a he12b
-    he12c he23a he23b ht123 hM30 hM3N hc13 hZ3
-  -- row four
-  have hR4 : 0 < n4 - e34 / n3 := by
-    have : e34 / n3 ≤ 1 := by rw [div_le_one hn3p]; exact he34b
-    linarith
-  have hr4 : 0 < rate4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q := by
-    unfold rate4; exact div_pos hN4 hN3
-  have hr4U : 0 < r4U n c13 c24 c14 := by
-    have : r4U n c13 c24 c14 = N4U n c13 c24 c14 / (n * (n ^ 2 - n + 1) - (n * (n - 1) - (n - 2 + c13))) := by
-      unfold r4U rate4 N4U N4; ring
-    rw [this]; exact div_pos hN4U hN3U
-  have hs4 := log_split hr4 hr4U hR4 ht
-  have e4 : N4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q / (n3 * (n1 * n2 - e12) - (n1 * e23 - t123))
-      = rate4 n1 n2 n3 n4 e12 e23 e34 t123 t234 q := by unfold rate4 N4; rfl
-  have e4U : N4U n c13 c24 c14 / (n * (n ^ 2 - n + 1) - (n * (n - 1) - (n - 2 + c13)))
-      = r4U n c13 c24 c14 := by unfold r4U rate4 N4U N4; ring
-  rw [e4, e4U] at hsplit
-  have hm4 := rate_main hn hh3 hh4 hz4 hμ4 hμ4k he34 he34a (by rw [← hn3]; exact he34b)
-  rw [← hn3, ← hn4] at hm4
-  have hE4 := row4_charge hk6 hkle hnk hh1 hh2 hh3 hh4 hn1 hn2 hn3 hn4 hμ2 hμ3 hμ4 hz3 hz4
-    he12 he23 he34 he12a he12b he23c he34a he34b ht0 ht1 ht234 hq hM30 hM3N hM40 hM4N
-    hc13 hc24 hc14 h1314 h2414 hZ4
-  have hbon := bonus_sum hn hh1'.1 hh2'.1 hh3'.1 hh4'.1 hμ2k hμ3k hμ4k
-  have ez : (z2 + z3 + z4) / (n * (n - 1)) = z2 / (n * (n - 1)) + z3 / (n * (n - 1))
-      + z4 / (n * (n - 1)) := by ring
-  unfold countBound kA
-  rw [ez]
-  linarith
 
 end GridGen.Four

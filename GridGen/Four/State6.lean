@@ -10,7 +10,7 @@ import GridGen.Four.Seam
 # Height four, `k = 6`: the bound for one state
 
 * `count_data6`: `countBound6` (the chord costs and the minimum errors) bounds the log count ratio
-  of one state, as `count_data` does for `countBound`.
+  of one state.
 * **The pattern lemma** (`pattern_six`). Write the average pattern weight of the actual successor
   columns as `1 - (1-a)p₁ - (1-b)p₂ - (1-c)p₃`, where `p₁, p₂, p₃` are the shares of the classes
   `0102/0121`, `0120`, `0123`. The fibre bound gives `p₁ ≤ 2/3`, `p₂ ≤ 1/3`, and `p₁ + p₂ + p₃ ≤ 1`.

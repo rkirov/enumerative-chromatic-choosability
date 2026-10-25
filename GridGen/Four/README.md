@@ -4,7 +4,7 @@
 `(pathG 3 □ pathG n).ECCAt k`, i.e. every `4 × (n+1)` grid is ECC at list size `k`. The axioms
 are `[propext, Classical.choice, Quot.sound]` (`GridGen/PolymerAxiomAudit.lean`, comparator §17).
 For `k ≥ 7` this is the gauge route's `ListColoring.ecc_boxProd_pathG_of_seven`. The new case is
-`k = 6` (2026-10-21) and `k = 5` (2026-10-24, step 8); `3 ≤ k ≤ 4` remains open. (The certificates below once covered
+`k = 6` (2026-10-21) and `k = 5` (2026-10-24, step 7); `3 ≤ k ≤ 4` remains open. (The certificates below once covered
 `7 ≤ k ≤ 15`, when the other route stopped at `16`; they were removed on 2026-10-17, 2026-10-18
 and 2026-10-22 as the gauge route reached `9`, `8` and then `7`.)
 
@@ -22,26 +22,28 @@ two-step inequality, a first-seam inequality and an initial inequality.
    actual ones in the next lists `B`) and `Init4Holds k` (`ecc_pathG_three_of_holds`).
 2. **The initial inequality** (`Init`), with the box edge `487/500`, at `k = 6`
    (`init4Holds_six`).
+Steps 3–5 describe the shape of the seam argument; the lemmas they share live in the modules
+named, and the bounds themselves are stated at `k = 6` (step 6) and `k = 5` (step 7). (The
+generic versions, which were the `k = 7` instance, were removed on 2026-10-25.)
+
 3. **One previous column** (`Local`, `LogBounds`, `CountBound`, `Palette`, `Pattern`, `State`).
    With `Aᵢ = Bᵢ.erase sᵢ`, the count `|sts A|` is a product of four row rates. Each rate's log is
    bounded against the uniform rate by a main term `log (1 + μᵢ/A)` (with `μᵢ = k − |Bᵢ₋₁ ∩ Bᵢ|`),
    state-bit losses `zᵢ`, bonuses `hᵢ = [sᵢ ∉ Bᵢ]`, and one-sided errors in rows three and four
-   (`count_log_bound`). The pattern term is compared with a reference palette next to `B₂`
-   (`exists_palette`, `pattern_log_ge`), and is never below `log ρ`. Together: `GB ≥ GU · (1 + Λ)`
-   (`state_bound`, and `state_bound_cap` with the pattern term capped at `(1−ρ)/ρ`).
-4. **Averaging** (`Fibre`, `Seam`). Any two uniform weights `GU` are within `1/ρ`, so a row pinned
-   to a colour set `D` by the other rows carries at most `|D|/(ρ(k−3))` of the weight. This turns
-   `Σ GU · Λ` into `(Σ GU) · Fval k μ₂ μ₃ μ₄`, or `Fcap` with the cap (`seam_of_cert`).
-5. **The averaged gain** (`Cert`): `Fval` and the capped `Fcap`, as functions of the three
-   mismatches.
-6. **Exact certificates** (`Exact`). For a state `s`, every intersection of the lists
+   (`row3_charge`, `row4_charge`; at `k = 6`, `count_log_bound6`). The pattern term is compared
+   with a reference palette next to `B₂` (`exists_palette`, `pattern_log_ge`). Together:
+   `GB ≥ GU · (1 + Λ)` with the pattern term capped (`state_bound6`).
+4. **Averaging** (`Fibre`, `Seam`, `Cert`). Any two uniform weights `GU` are within `1/ρ`, so a
+   row pinned to a colour set `D` by the other rows carries at most `q |D|`, `q = 1/(ρ(k−3))`
+   (`qk`, `GU_ratio`, `fibre_mem`). This turns `Σ GU · Λ` into `(Σ GU)` times a function of the
+   three mismatches alone (`F6val`, `F6cap`, `seam_of_cert6`).
+5. **Exact certificates** (`Exact`). For a state `s`, every intersection of the lists
    `Bᵢ.erase sᵢ` is the corresponding intersection of the `Bᵢ` minus the distinct `sᵢ` in it, so
-   `GB` and `GU` are explicit integer functions of the Venn sizes, the membership bits `[sᵢ ∈ Bⱼ]`
-   and the pattern bits (`dat_eq`, `GB_cls`, `GU_urow`). For a list shape a `Spec` gives
-   multipliers for pins (a row in a small atom, `s₁ = s₃`, `s₂ = s₄`); a kernel evaluation checks
-   `(1 − y)·GB ≥ GU` on the whole box for every column type, and that the averaged gain is
-   nonnegative.
-7. **`k = 6`** (`CountBound6`, `Fibre6`, `State6`, `Seam6`, `Cert6`, `Exact6`, `Small6`, `Six`).
+   `GB` is an explicit integer function of the Venn sizes, the membership bits `[sᵢ ∈ Bⱼ]` and the
+   pattern bits (`dat_eq`, `GB_cls`). For a list shape a `Spec` gives multipliers for pins (a row
+   in a small atom, `s₁ = s₃`, `s₂ = s₄`), averaged by `pins_avg`; `Exact6` and `Exact5k` turn
+   this into kernel-checked certificates.
+6. **`k = 6`** (`CountBound6`, `Fibre6`, `State6`, `Seam6`, `Cert6`, `Exact6`, `Small6`, `Six`).
    The step-3 and step-4 bounds above fail at 101 of the 342 nonzero mismatch triples. Seven
    sharpenings bring that to sixteen:
    * the box edge `ρ = 487/500` (`rho_six`, `box_six`; `488/500` is not invariant);
@@ -62,9 +64,9 @@ two-step inequality, a first-seam inequality and an initial inequality.
    capacity filter, and `Small6/Cert*.lean` check 79,439 column types (smallest LP margin
    `0.009`, at `(0,1,0)`).
 
-8. **`k = 5`** (`Pins5`, `Block5`, `State5`, `BitLP5k`, `BitCert5k/`, `BitAll5k`, `Zero5k`,
+7. **`k = 5`** (`Pins5`, `Block5`, `State5`, `BitLP5k`, `BitCert5k/`, `BitAll5k`, `Zero5k`,
    `Exact5k`, `Small5k/`, `Init5k`, `Five`). With exact per-state values the averaged inequality
-   of step 7 fails at `k = 5` (about `−0.019` at `(0,1,0)`), but the true one-column inequality
+   of step 6 fails at `k = 5` (about `−0.019` at `(0,1,0)`), but the true one-column inequality
    holds. The box edge is `118/125` (`rho_five`, `box_five`). New pins: an event-conditioned fibre
    bound (`peel_chain`) and a marginal bound for one or two adjacent middle rows from the path
    marginals on both sides (`block_core`). The mismatch triples split three ways (`cover5k`):
@@ -88,7 +90,7 @@ three-row locality. See `provenance.md`.
 
 ## Build
 
-`lake build GridGen.Four.Main`. The numerical lemmas (`LogBounds`, `Cert`, `Seam`, `Cert6`) take a
+`lake build GridGen.Four.Main`. The numerical lemmas (`LogBounds`, `Cert6`) take a
 few minutes. The `k = 6` exact certificates dominate: eleven modules `Small6/Cert*.lean` of about
 2 minutes each (about 15 ms per column type, about 1 GB above the import baseline). The
 multipliers come from a linear program (`ai_research_notes/h4k6/gen6lean.py`, not tracked), but

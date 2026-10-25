@@ -61,9 +61,6 @@ theorem card_singleton_inter_le (x : ℕ) (X : Finset ℕ) : (({x} ∩ X).card :
   have := card_le_card (inter_subset_left (s₁ := ({x} : Finset ℕ)) (s₂ := X))
   rw [card_singleton] at this; exact_mod_cast this
 
-theorem card_inter_singleton_le (X : Finset ℕ) (x : ℕ) : ((X ∩ {x}).card : ℝ) ≤ 1 := by
-  rw [inter_comm]; exact card_singleton_inter_le x X
-
 theorem filt_r1 {A B C D : Finset ℕ} {x : ℕ} (hx : x ∈ A) :
     (sts A B C D).filter (fun t => rowfun 0 t = x) = sts {x} B C D := by
   ext t; simp only [mem_filter, mem_sts, mem_singleton]
@@ -319,15 +316,6 @@ theorem ev_setRow {b : Blk} {i : Fin 4} (h : b.reads i = false) (t : T4) (x : �
     simp only [ev, rowfun_setRow_ne h.1, rowfun_setRow_ne h.2]
 
 end Blk
-
-theorem βQ_nonneg (m M : ℕ) {ℓ : ℚ} (hℓ : 0 ≤ ℓ) : 0 ≤ βQ m M ℓ := by
-  unfold βQ; split_ifs with h
-  · apply div_nonneg (Nat.cast_nonneg m)
-    have : (0 : ℚ) ≤ (M : ℚ) - m := by
-      have : (m : ℚ) < M := by exact_mod_cast h
-      linarith
-    positivity
-  · norm_num
 
 /-- `block_core` with the bound `βQ`. -/
 theorem block_beta {α : Type*} [DecidableEq α] (Ω : Finset T4) (u : T4 → ℝ) (π : T4 → α)

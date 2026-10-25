@@ -33,13 +33,6 @@ theorem boxes7 : Boxes7 where
   absH := absHBound
   absD := absD_of_absH absHBound
 
-/-- **The seam bounds at `k = 7`.** -/
-theorem k7Bounds : K7Bounds := k7Bounds_of_boxes boxes7
-
-/-- **`rowG m □ P_{n+1}` is `7`-ECC.** -/
-theorem ecc_rowG_boxProd_seven' (m n : ℕ) : (rowG m □ pathG n).ECCAt 7 :=
-  ecc_rowG_boxProd_seven k7Bounds m n
-
 end GridGen.Gauge
 
 namespace ListColoring

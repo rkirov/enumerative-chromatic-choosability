@@ -126,10 +126,6 @@ theorem inT_cases (hc : 1 ≤ c) {r : Fin m} (hr : 1 ≤ r.val) {y : Cell c m} (
     have h2 : 2 ≤ r.val := by omega
     exact ⟨h2, cell_eq (by simp [cD, fut0, hcol]) (by simp [cD]; omega)⟩
 
-theorem z₁_inT (r : Fin m) : inT r (z₁ (c := c) r) := by
-  have h1 : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
-  unfold inT z₁; dsimp only; rw [h1]; omega
-
 theorem z₂_inT (hc : 1 ≤ c) (r : Fin m) : inT r (z₂ hc r) := by
   unfold inT z₂ fut0; dsimp only; omega
 
@@ -139,9 +135,6 @@ theorem y₁_inT (r : Fin m) : inT r (y₁ (c := c) r) := by
 theorem yU₁_inT {r : Fin m} (hr : 1 ≤ r.val) : inT r (yU₁ (c := c) hr) := by
   have h1 : (1 : Fin (c + 2)).val = 1 := Fin.val_one _
   unfold inT yU₁; dsimp only; rw [h1]; omega
-
-theorem yU₂_inT (hc : 1 ≤ c) {r : Fin m} (hr : 1 ≤ r.val) : inT r (yU₂ hc hr) := by
-  unfold inT yU₂ fut0; dsimp only; omega
 
 theorem cL2_inT {r : Fin m} (hr : 1 ≤ r.val) : inT r (cL2 (c := c) hr) := by
   have e1 : (cL2 (c := c) (m := m) hr).1.val = 0 := rfl
@@ -625,9 +618,6 @@ theorem adj_y₁_z₁ : slabAdj (y₁ (c := c) r) (z₁ r) := by
 
 theorem adj_cL2_y₁ (hr : 1 ≤ r.val) : slabAdj (cL2 (c := c) hr) (y₁ r) := by
   rw [slabAdj_iff, cL2_c1, cL2_c2, y₁_c1, y₁_c2]; omega
-
-theorem adj_cL2_yU₁ (hr : 1 ≤ r.val) : slabAdj (cL2 (c := c) hr) (yU₁ hr) := by
-  rw [slabAdj_iff, cL2_c1, cL2_c2, yU₁_c1, yU₁_c2]; omega
 
 theorem adj_yD₁_z₁ (h : r.val + 1 < m) : slabAdj (yD₁ (c := c) h) (z₁ r) := by
   rw [slabAdj_iff, yD₁_c1, yD₁_c2, z₁_c1, z₁_c2]; omega

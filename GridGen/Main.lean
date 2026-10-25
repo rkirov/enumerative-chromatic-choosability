@@ -18,9 +18,10 @@ both statements about at most three consecutive columns of `k`-lists:
   least the uniform count.
 
 Under them, `H □ pathG n` is `k`-ECC for every `n` (`ecc_of_twoStep`). Neither hypothesis is
-proved here for any `H` beyond what `Grid3/` establishes at height three; the conjecture that
-both hold for every path `H` and every `k ≥ 5` is `GeneralHeightConjecture`, a `Prop`, and
-`ecc_grid_of_conjecture` records that it implies that every grid is `k`-ECC for `k ≥ 5`.
+proved in this file; `Four/` and `Five/` establish their explicit forms (`Explicit.lean`) at
+heights four and five. The conjecture that both hold for every path `H` and every `k ≥ 5` is
+`GeneralHeightConjecture`, a `Prop`, and `ecc_grid_of_conjecture` records that it implies that
+every grid is `k`-ECC for `k ≥ 5`.
 -/
 
 namespace GridGen

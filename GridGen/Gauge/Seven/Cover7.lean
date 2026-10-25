@@ -42,12 +42,6 @@ theorem curL_lt {k : ℕ} {O : List GOp} (h : OpsSmall k O) (u : ℕ) {z : ℕ} 
   rw [← comp_reverse]
   exact comp_lt (fun p hp => small_actOn h u p (List.mem_reverse.mp hp)) hz
 
-theorem curL_ge {k : ℕ} {O : List GOp} (h : OpsSmall k O) (u : ℕ) {z : ℕ} (hz : k ≤ z) :
-    curL O u z = z := by
-  unfold curL
-  rw [← comp_reverse]
-  exact comp_of_ge (fun p hp => small_actOn h u p (List.mem_reverse.mp hp)) hz
-
 /-- **Appending a move is `moveKey`.** -/
 theorem cov_snoc {k : ℕ} (β : ℕ → ℕ → ℕ) (O : List GOp) (Del : Finset (Fin m × ℕ))
     {e x y : ℕ} (hx : x < k) (hy : y < k) :

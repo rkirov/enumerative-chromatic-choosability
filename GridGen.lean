@@ -4,7 +4,6 @@ Released under Apache 2.0 license.
 -/
 import GridGen.Main
 import GridGen.Explicit
-import GridGen.Three
 import GridGen.Polymer
 import GridGen.Four.Main
 import GridGen.Five.Main
