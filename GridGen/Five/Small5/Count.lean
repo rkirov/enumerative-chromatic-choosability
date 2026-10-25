@@ -4,7 +4,6 @@ Released under Apache 2.0 license.
 -/
 import GridGen.Five.Cone
 import GridGen.Five.Local
-import GridGen.Four.Cone
 
 /-!
 # Height five: counting proper colourings by their equalities
@@ -64,7 +63,7 @@ theorem card_triP (P S X Y : Finset ℕ) :
       - ((S ∩ P).card * (X.card * Y.card - (X ∩ Y).card)
         - ((X ∩ (S ∩ P)).card * Y.card - (X ∩ (S ∩ P) ∩ Y).card)
         - (X.card * (Y ∩ (S ∩ P)).card - (X ∩ (Y ∩ (S ∩ P))).card)) := by
-  rw [triP, Four.card_prepend P (tri S X Y) Prod.fst]
+  rw [triP, Lookback.card_prepend P (tri S X Y) Prod.fst]
   have h : (tri S X Y).filter (fun r => r.1 ∈ P) = tri (S ∩ P) X Y := by
     ext p; simp only [tri, Finset.mem_filter, Finset.mem_product, Finset.mem_inter]; tauto
   rw [h, tri, tri, Four.card_triangle, Four.card_triangle]
@@ -75,11 +74,11 @@ theorem card_starT (Z S X Y : Finset ℕ) :
         + (X ∩ Y ∩ S).card)
       - ((S ∩ Z).card * X.card * Y.card - (X ∩ (S ∩ Z)).card * Y.card
         - X.card * (Y ∩ (S ∩ Z)).card + (X ∩ Y ∩ (S ∩ Z)).card) := by
-  rw [starT, Four.card_prepend Z _ Prod.fst]
+  rw [starT, Lookback.card_prepend Z _ Prod.fst]
   have h : ((S ×ˢ (X ×ˢ Y)).filter (fun p => p.1 ≠ p.2.1 ∧ p.1 ≠ p.2.2)).filter
       (fun r => r.1 ∈ Z) = ((S ∩ Z) ×ˢ (X ×ˢ Y)).filter (fun p => p.1 ≠ p.2.1 ∧ p.1 ≠ p.2.2) := by
     ext p; simp only [Finset.mem_filter, Finset.mem_product, Finset.mem_inter]; tauto
-  rw [h, Four.card_star, Four.card_star]
+  rw [h, Lookback.card_star, Lookback.card_star]
 
 theorem card_c4 (S X Y Z : Finset ℕ) :
     ((c4 S X Y Z).card : ℤ) =
@@ -89,7 +88,7 @@ theorem card_c4 (S X Y Z : Finset ℕ) :
       - (X.card * (Y.card * (Z ∩ S).card - (Y ∩ (Z ∩ S)).card)
         - ((X ∩ Y).card * (Z ∩ S).card - (X ∩ Y ∩ (Z ∩ S)).card))
       + ((X ∩ Z ∩ S).card * Y.card - (X ∩ Z ∩ S ∩ Y).card) := by
-  rw [c4, Four.card_pairAvoid S (Four.sts3 X Y Z) Prod.fst (fun r => r.2.2)]
+  rw [c4, Lookback.card_pairAvoid S (Four.sts3 X Y Z) Prod.fst (fun r => r.2.2)]
   have h1 : (Four.sts3 X Y Z).filter (fun r => r.1 ∈ S) = Four.sts3 (X ∩ S) Y Z := by
     ext p; simp only [Finset.mem_filter, Four.mem_sts3, Finset.mem_inter]; tauto
   have h2 : (Four.sts3 X Y Z).filter (fun r => r.2.2 ∈ S) = Four.sts3 X Y (Z ∩ S) := by

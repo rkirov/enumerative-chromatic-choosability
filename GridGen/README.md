@@ -10,7 +10,9 @@ Two independent developments share this library.
    `Explicit`): `H □ P_n` is `k`-ECC from a two-step seam inequality and an initial
    inequality, both stated as `Prop`s; proved at height four
    for `k ≥ 5` in `Four/` (see [`Four/README.md`](Four/README.md)), and at height five for `k ≥ 6`
-   in `Five/`. (Height three is proved directly in `Grid3/`.)
+   in `Five/`. The helpers both heights use (list-level local data `hb`, `mu`, `zz`, counting
+   lemmas, the one-row rate bounds, the sharp fibre bound) are in `Lookback/Common.lean`.
+   (Height three is proved directly in `Grid3/`.)
    See `ai_research_notes/GRID_REVIEW_2026-09-02.md` §5.6.
 
 A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 7` (see

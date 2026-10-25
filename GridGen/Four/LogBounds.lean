@@ -2,14 +2,17 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import Mathlib
+import GridGen.Lookback.Common
 
 /-!
 # Height four: the logarithmic rate bounds, as real inequalities
 
-The successor count of a column factors into four row rates (`GridGen/Four/Rates.lean`). This file
-proves the per-row lower bounds on the logarithms of those rates against their uniform values,
-as statements about real numbers satisfying the counting constraints; no colourings appear here.
+The successor count of a column factors into four row rates (`card_sts_rates` in `Local.lean`).
+This file proves the lower bounds on the logarithms of the rates of rows three and four against
+their uniform values, as statements about real numbers satisfying the counting constraints; no
+colourings appear here. The bounds for the first row and the main term of a row (`rate_first`,
+`rate_main`, from the log comparison `log_ratio_ge`) do not depend on the height and are in
+`GridGen/Lookback/Common.lean`.
 
 Notation: `n = k - 1`, `ℓ = k - 2`, `A = ℓ² + ℓ + 1 = n² - ℓ`, `t = A / n` (the uniform rate of rows
 2 to 4 when the previous row is ignored). For a row, `h` is the bonus indicator (its state colour is
@@ -19,131 +22,13 @@ and `z ∈ {0, 1, 2}` counts state colours lying in the two difference sets.
 
 namespace GridGen.Four
 
-open Real
-
-/-- **The log comparison.** If `x - y ≥ P - Q` with `x, y` in `[ℓ, K]`, then
-`log (x / y) ≥ P / K - Q / ℓ`. -/
-theorem log_ratio_ge {x y l K P Q : ℝ} (hl : 0 < l) (hlx : l ≤ x) (hxK : x ≤ K) (hy : 0 < y)
-    (hP : 0 ≤ P) (hQ : 0 ≤ Q) (h : P - Q ≤ x - y) : P / K - Q / l ≤ log (x / y) := by
-  have hx : 0 < x := lt_of_lt_of_le hl hlx
-  have hK : 0 < K := lt_of_lt_of_le hx hxK
-  have hlog : 1 - y / x ≤ log (x / y) := by
-    have := Real.one_sub_inv_le_log_of_pos (div_pos hx hy)
-    rwa [inv_div] at this
-  refine le_trans ?_ hlog
-  have hyx : 1 - y / x = (x - y) / x := by field_simp
-  rw [hyx]
-  rcases le_or_gt y x with hxy | hxy
-  · -- nonnegative difference: divide by the larger `K`
-    have h1 : (x - y) / K ≤ (x - y) / x :=
-      div_le_div_of_nonneg_left (by linarith) hx hxK
-    have h2 : P / K - Q / l ≤ (P - Q) / K := by
-      rw [sub_div]
-      have : Q / K ≤ Q / l := div_le_div_of_nonneg_left hQ hl (by linarith)
-      linarith
-    have h3 : (P - Q) / K ≤ (x - y) / K := div_le_div_of_nonneg_right h hK.le
-    linarith
-  · -- negative difference: divide by the smaller `ℓ`
-    have h1 : (x - y) / l ≤ (x - y) / x := by
-      rw [div_le_div_iff₀ hl hx]
-      nlinarith
-    have h2 : P / K - Q / l ≤ (P - Q) / l := by
-      rw [sub_div]
-      have : P / K ≤ P / l := div_le_div_of_nonneg_left hP hl (by linarith)
-      linarith
-    have h3 : (P - Q) / l ≤ (x - y) / l := div_le_div_of_nonneg_right h hl.le
-    linarith
+open Real GridGen.Lookback
 
 /-- `log (1 + x) ≥ x - x²/2` for `x ≥ 0` (from Mathlib's `2x/(x+2) ≤ log (1 + x)`). -/
 theorem log_one_add_ge {x : ℝ} (hx : 0 ≤ x) : x - x ^ 2 / 2 ≤ log (1 + x) := by
   refine le_trans ?_ (Real.le_log_one_add_of_nonneg hx)
   rw [le_div_iff₀ (by linarith)]
   nlinarith [pow_nonneg hx 3]
-
-/-! ### The main term of one row
-
-From here on the base variable is `n = k - 1` (so `ℓ = n - 1`, `k = n + 1`), with
-`A = n² - n + 1 = ℓ² + ℓ + 1` and `t = A / n`. -/
-
-/-- **One row, main term.** If the previous row has bonus `h₀`, this row bonus `h₁`, list
-mismatch `μ` and `z` state colours in the difference sets, the punctured intersection has
-`e = (n - 1 - μ) + h₀ + h₁ + z` colours, and the uniform-on-list rate
-`r̃ = (n + h₁) - e/(n + h₀)` satisfies
-`log (r̃ / t) ≥ log (1 + μ/A) + ((n-1)/n) h₁/(n+1) - z/(n(n-1)) - (μ+1) h₀/(n(n+1)(n-1))`. -/
-theorem rate_main {n h0 h1 z μ e : ℝ} (hn : 5 ≤ n) (hh0 : h0 = 0 ∨ h0 = 1)
-    (hh1 : h1 = 0 ∨ h1 = 1) (hz : 0 ≤ z) (hμ : 0 ≤ μ) (hμk : μ ≤ n + 1)
-    (he : e = (n - 1 - μ) + h0 + h1 + z) (he0 : 0 ≤ e) (heN : e ≤ n + h0) :
-    log (1 + μ / (n ^ 2 - n + 1)) + ((n - 1) / n) * h1 / (n + 1)
-        - z / (n * (n - 1)) - (μ + 1) * h0 / (n * (n + 1) * (n - 1))
-      ≤ log (((n + h1) - e / (n + h0)) / ((n ^ 2 - n + 1) / n)) := by
-  have hn0 : 0 < n := by linarith
-  have hl0 : 0 < n - 1 := by linarith
-  have hA0 : 0 < n ^ 2 - n + 1 := by nlinarith
-  have hnne : n ≠ 0 := hn0.ne'
-  have hn1ne : n + 1 ≠ 0 := by linarith
-  have hlne : n - 1 ≠ 0 := hl0.ne'
-  have hden : 0 < n + h0 := by rcases hh0 with rfl | rfl <;> linarith
-  have ht0 : 0 < (n ^ 2 - n + 1) / n := div_pos hA0 hn0
-  have hr0 : 0 < (n ^ 2 - n + 1) / n + μ / n := by positivity
-  -- the rate lies in `[n - 1, n + 1]`
-  have hq : e / (n + h0) ≤ 1 := by rw [div_le_one hden]; exact heN
-  have hq0 : 0 ≤ e / (n + h0) := div_nonneg he0 hden.le
-  have hlo : n - 1 ≤ (n + h1) - e / (n + h0) := by
-    rcases hh1 with rfl | rfl <;> linarith
-  have hhi : (n + h1) - e / (n + h0) ≤ n + 1 := by
-    rcases hh1 with rfl | rfl <;> linarith
-  -- the comparison with `r₀ = t + μ/n`
-  have hdiff : ((n - 1) / n) * h1 - (z / n + (μ + 1) * h0 / (n * (n + 1)))
-      ≤ ((n + h1) - e / (n + h0)) - ((n ^ 2 - n + 1) / n + μ / n) := by
-    rw [he]
-    rcases hh0 with rfl | rfl
-    · have key : (n + h1) - (n - 1 - μ + 0 + h1 + z) / (n + 0) - ((n ^ 2 - n + 1) / n + μ / n)
-          = ((n - 1) / n) * h1 - z / n := by
-        field_simp; ring
-      rw [key]; simp
-    · have key : (n + h1) - (n - 1 - μ + 1 + h1 + z) / (n + 1) - ((n ^ 2 - n + 1) / n + μ / n)
-          = h1 * (n / (n + 1)) - z / (n + 1) - (1 + μ) / (n * (n + 1)) := by
-        field_simp; ring
-      rw [key]
-      have c1 : ((n - 1) / n) * h1 ≤ h1 * (n / (n + 1)) := by
-        rcases hh1 with rfl | rfl
-        · simp
-        · rw [mul_one, one_mul, div_le_div_iff₀ hn0 (by linarith)]; nlinarith
-      have c2 : z / (n + 1) ≤ z / n := div_le_div_of_nonneg_left hz hn0 (by linarith)
-      have c3 : (μ + 1) * 1 / (n * (n + 1)) = (1 + μ) / (n * (n + 1)) := by ring
-      linarith
-  have hP : 0 ≤ ((n - 1) / n) * h1 := by rcases hh1 with rfl | rfl <;> positivity
-  have hh0nn : 0 ≤ h0 := by rcases hh0 with rfl | rfl <;> norm_num
-  have hQ : 0 ≤ z / n + (μ + 1) * h0 / (n * (n + 1)) := by positivity
-  have hlog := log_ratio_ge hl0 hlo hhi hr0 hP hQ hdiff
-  -- split `log (r̃ / t) = log (r₀ / t) + log (r̃ / r₀)`
-  have hrpos : 0 < (n + h1) - e / (n + h0) := by linarith
-  have hsplit : log (((n + h1) - e / (n + h0)) / ((n ^ 2 - n + 1) / n))
-      = log (((n ^ 2 - n + 1) / n + μ / n) / ((n ^ 2 - n + 1) / n))
-        + log (((n + h1) - e / (n + h0)) / ((n ^ 2 - n + 1) / n + μ / n)) := by
-    rw [← Real.log_mul (div_pos hr0 ht0).ne' (div_pos hrpos hr0).ne']
-    congr 1; field_simp
-  have hr0t : ((n ^ 2 - n + 1) / n + μ / n) / ((n ^ 2 - n + 1) / n) = 1 + μ / (n ^ 2 - n + 1) := by
-    field_simp
-  rw [hsplit, hr0t]
-  have e1 : ((n - 1) / n) * h1 / (n + 1) - (z / n + (μ + 1) * h0 / (n * (n + 1))) / (n - 1)
-      = ((n - 1) / n) * h1 / (n + 1) - z / (n * (n - 1)) - (μ + 1) * h0 / (n * (n + 1) * (n - 1)) := by
-    field_simp; ring
-  rw [e1] at hlog
-  linarith
-
-/-- **Row one.** `log ((n + h₁)/n) ≥ ((n-1)/n) h₁ / (n+1)`. -/
-theorem rate_first {n h1 : ℝ} (hn : 5 ≤ n) (hh1 : h1 = 0 ∨ h1 = 1) :
-    ((n - 1) / n) * h1 / (n + 1) ≤ log ((n + h1) / n) := by
-  have hn0 : 0 < n := by linarith
-  rcases hh1 with rfl | rfl
-  · simp
-  · have hpos : 0 < (n + 1) / n := by positivity
-    refine le_trans ?_ (Real.one_sub_inv_le_log_of_pos hpos)
-    rw [inv_div, mul_one]
-    rw [show 1 - n / (n + 1) = 1 / (n + 1) by field_simp; ring]
-    apply div_le_div_of_nonneg_right _ (by linarith)
-    rw [div_le_one hn0]; linarith
 
 /-! ### The third row: the deviation of the actual rate -/
 

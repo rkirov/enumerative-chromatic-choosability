@@ -33,7 +33,7 @@ theorem seam_nonexact5 {w : Wt5} (hw : InBox5 w) {X₁ X₂ X₃ X₄ X₅ B₁ 
   by_cases hz : m2 + m3 + m4 + m5 = 0
   · have e : ∀ {B C : Finset ℕ} {m : ℕ}, B.card = 6 → C.card = 6 → (B ∩ C).card + m = 6 →
         m = 0 → B = C := fun hB hC h hm =>
-      Four.eq_of_mu_zero hB hC (by rw [mu_eq_of h, hm]; simp)
+      Lookback.eq_of_mu_zero hB hC (by rw [mu_eq_of h, hm]; simp)
     have e12 := e hB₁ hB₂ c2 (by omega)
     have e23 := e hB₂ hB₃ c3 (by omega)
     have e34 := e hB₃ hB₄ c4 (by omega)

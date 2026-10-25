@@ -19,7 +19,7 @@ there are none, to the bonuses (`b₃`, `b₄`). This file holds the pieces (`lo
 
 namespace GridGen.Four
 
-open Real
+open Real GridGen.Lookback
 
 /-- The count of four rows from its data. -/
 noncomputable def N4 (n1 n2 n3 n4 e12 e23 e34 t123 t234 q : ℝ) : ℝ :=

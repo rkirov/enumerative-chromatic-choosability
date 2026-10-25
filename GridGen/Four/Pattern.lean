@@ -17,7 +17,7 @@ columns mostly coincide have close averages:
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-- Lists of at least three colours have a proper column. -/
 theorem sts_nonempty {A₁ A₂ A₃ A₄ : Finset ℕ} (h₁ : 3 ≤ A₁.card) (h₂ : 3 ≤ A₂.card)

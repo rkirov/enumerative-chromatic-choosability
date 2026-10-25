@@ -9,6 +9,12 @@ For `k ≥ 7` this is the gauge route's `ListColoring.ecc_boxProd_pathG_of_seven
 ## Route
 
 The column-lookback route of [`GridGen/Four/`](../Four/README.md), with five rows.
+The model builds on height four's (a five-row column is a colour in front of a four-row column,
+`GridGen/Four/Defs.lean`), and the helpers that do not depend on the height (the local data
+`hb`, `mu`, `zz`, the counting lemmas, the one-row rate bounds `rate_first` and `rate_main_chord`,
+the sharp fibre bound `fibre_row_sharp`) are in
+[`GridGen/Lookback/Common.lean`](../Lookback/Common.lean). Nothing else of `GridGen/Four/` is
+imported, so `GridGen/Five/` builds without height four's certificates.
 
 1. **Reduction** (`Defs`, `Statement`, `Relabel`, `Uniform`, `Cone`, `Bridge`, `Final`). A
    five-row column has fifteen equality patterns in eleven reflection orbits. Their weights lie

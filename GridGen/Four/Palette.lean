@@ -19,7 +19,7 @@ import GridGen.Four.Relabel
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-- The pattern bits of a column. -/
 noncomputable def c13 (s : T4) : ℝ := if r1 s = r3 s then 1 else 0

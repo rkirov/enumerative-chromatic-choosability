@@ -27,7 +27,7 @@ proper colourings from `Aᵢ = Bᵢ.erase sᵢ` (`|Aᵢ| ≥ 4`).
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### The uniform side -/
 

@@ -20,7 +20,7 @@ set_option linter.unreachableTactic false
 
 namespace GridGen.Four
 
-open Real
+open Real GridGen.Lookback
 
 /-- The third-order upper bound for the logarithm near `1`. -/
 theorem log_le_cubic {y : ℝ} (h0 : 0 ≤ y) (h1 : y ≤ 1 / 5) :

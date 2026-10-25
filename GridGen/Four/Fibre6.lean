@@ -10,79 +10,14 @@ import GridGen.Four.Fibre
 `Fibre.lean` compares the pinned columns with their `m` images and gets `m · Σ_P w ≤ R · Σ w`.
 The images under the `m - 1` values other than the current one leave the pin, so they are
 disjoint from it, and so `(R + m - 1) · Σ_P w ≤ R · Σ w`. With `R = 1/ρ` this is
-`Σ_P ≤ Σ/(1 + (m-1)ρ)` in place of `Σ/(mρ)`. End rows have one neighbour in the column, hence
-`k - 2` admissible values instead of `k - 3` (`fibre_sts1_sharp`, `fibre_sts4_sharp`).
+`Σ_P ≤ Σ/(1 + (m-1)ρ)` in place of `Σ/(mρ)` (`GridGen.Lookback.fibre_row_sharp`, stated for any
+finite set). End rows have one neighbour in the column, hence `k - 2` admissible values instead
+of `k - 3` (`fibre_sts1_sharp`, `fibre_sts4_sharp`).
 -/
 
 namespace GridGen.Four
 
-open Finset
-
-/-- **The sharp one-row fibre bound.** -/
-theorem fibre_row_sharp {Ω : Finset T4} (w : T4 → ℝ) (hw : ∀ t, 0 ≤ w t) (P : T4 → Prop)
-    [DecidablePred P] (get : T4 → ℕ) (set : T4 → ℕ → T4) (φ : T4 → ℕ) (opts : T4 → Finset ℕ)
-    (m : ℕ) (hm : 1 ≤ m) (hopts : ∀ t ∈ Ω, m ≤ (opts t).card)
-    (hcur : ∀ t ∈ Ω, get t ∈ opts t)
-    (hmem : ∀ t ∈ Ω, ∀ x ∈ opts t, set t x ∈ Ω)
-    (hget : ∀ t x, get (set t x) = x)
-    (hset : ∀ t₁ t₂ x₁ x₂, set t₁ x₁ = set t₂ x₂ → get t₁ = get t₂ → t₁ = t₂)
-    (hφ : ∀ t x, φ (set t x) = φ t)
-    (hP : ∀ t, P t → get t = φ t)
-    {R : ℝ} (hR0 : 0 < R) (hR : ∀ t ∈ Ω, ∀ t' ∈ Ω, w t ≤ R * w t') :
-    (R + ((m : ℝ) - 1)) * ∑ t ∈ Ω.filter P, w t ≤ R * ∑ t ∈ Ω, w t := by
-  classical
-  set S := (Ω.filter P).sigma (fun t => (opts t).erase (get t)) with hS
-  -- every pinned column has at least `m - 1` other values
-  have h1 : ((m : ℝ) - 1) * ∑ t ∈ Ω.filter P, w t ≤ ∑ p ∈ S, w p.1 := by
-    rw [hS, Finset.sum_sigma, Finset.mul_sum]
-    refine Finset.sum_le_sum fun t ht => ?_
-    obtain ⟨htΩ, -⟩ := Finset.mem_filter.mp ht
-    show ((m : ℝ) - 1) * w t ≤ ∑ _x ∈ (opts t).erase (get t), w t
-    rw [Finset.sum_const, nsmul_eq_mul]
-    have hc : (m : ℝ) - 1 ≤ ((opts t).erase (get t)).card := by
-      rw [Finset.card_erase_of_mem (hcur t htΩ)]
-      have := hopts t htΩ
-      have h1 : 1 ≤ (opts t).card := le_trans hm this
-      rw [Nat.cast_sub h1]; push_cast
-      have : (m : ℝ) ≤ (opts t).card := by exact_mod_cast this
-      linarith
-    exact mul_le_mul_of_nonneg_right hc (hw t)
-  -- each is dominated by its image
-  have h2 : ∑ p ∈ S, w p.1 ≤ ∑ p ∈ S, R * w (set p.1 p.2) := by
-    refine Finset.sum_le_sum fun p hp => ?_
-    obtain ⟨ht, hx⟩ := Finset.mem_sigma.mp hp
-    obtain ⟨htΩ, -⟩ := Finset.mem_filter.mp ht
-    exact hR p.1 htΩ _ (hmem p.1 htΩ p.2 (Finset.mem_of_mem_erase hx))
-  -- the images are distinct unpinned columns
-  have hinjS : Set.InjOn (fun p : (_ : T4) × ℕ => set p.1 p.2) S := by
-    intro p hp q hq hpq
-    obtain ⟨hpt, hpx⟩ := Finset.mem_sigma.mp hp
-    obtain ⟨hqt, hqx⟩ := Finset.mem_sigma.mp hq
-    obtain ⟨-, hpP⟩ := Finset.mem_filter.mp hpt
-    obtain ⟨-, hqP⟩ := Finset.mem_filter.mp hqt
-    have hx : p.2 = q.2 := by
-      have := congrArg get hpq; simp only [hget] at this; exact this
-    have hg : get p.1 = get q.1 := by
-      rw [hP _ hpP, hP _ hqP, ← hφ p.1 p.2, ← hφ q.1 q.2]
-      exact congrArg φ hpq
-    exact Sigma.ext (hset _ _ _ _ hpq hg) (heq_of_eq hx)
-  have h3 : ∑ p ∈ S, w (set p.1 p.2) ≤ ∑ t ∈ Ω.filter (fun t => ¬ P t), w t := by
-    rw [← Finset.sum_image (f := w) hinjS]
-    refine Finset.sum_le_sum_of_subset_of_nonneg ?_ (fun t _ _ => hw t)
-    intro t ht
-    obtain ⟨p, hp, rfl⟩ := Finset.mem_image.mp ht
-    obtain ⟨hpt, hpx⟩ := Finset.mem_sigma.mp hp
-    obtain ⟨hpΩ, hpP⟩ := Finset.mem_filter.mp hpt
-    refine Finset.mem_filter.mpr ⟨hmem p.1 hpΩ p.2 (Finset.mem_of_mem_erase hpx), fun hP' => ?_⟩
-    have e1 := hP _ hP'
-    rw [hget, hφ, ← hP _ hpP] at e1
-    exact (Finset.ne_of_mem_erase hpx) e1
-  have h4 : ∑ t ∈ Ω, w t = ∑ t ∈ Ω.filter P, w t + ∑ t ∈ Ω.filter (fun t => ¬ P t), w t :=
-    (Finset.sum_filter_add_sum_filter_not Ω P w).symm
-  have h5 : ∑ p ∈ S, R * w (set p.1 p.2) = R * ∑ p ∈ S, w (set p.1 p.2) := by
-    rw [Finset.mul_sum]
-  have h6 := mul_le_mul_of_nonneg_left h3 hR0.le
-  nlinarith
+open Finset GridGen.Lookback
 
 variable {A₁ A₂ A₃ A₄ : Finset ℕ} {k : ℕ}
 

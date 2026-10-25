@@ -12,7 +12,7 @@ import GridGen.Five.Cone
 that pins one row to a function of the others has weight at most `q · Σ u`, with
 `q = 1000/3877` for an end row (four other admissible colours) and `q = 1000/2918` for a middle
 row (three): the weights of two proper columns differ by at most the factor `1000/959`
-(`GU_ratio`, from the invariant box), and the sharp double counting of `Four.fibre_row_sharp`
+(`GU_ratio`, from the invariant box), and the sharp double counting of `Lookback.fibre_row_sharp`
 applies (`fibre_row`). Pinning to a colour of a set `S` costs `q · |S|` (`fibre_set`), and an
 equality `sᵢ = sⱼ` is a pin of row `i` (`fibre_pair`).
 
@@ -24,68 +24,6 @@ inequality for reversed lists implies it for the original ones (`seam_of_rev`).
 namespace GridGen.Five.Ex5
 
 open Finset
-
-/-! ### The sharp one-row fibre bound, for any finite set -/
-
-theorem fibre_row_sharp {α : Type*} [DecidableEq α] {Ω : Finset α} (w : α → ℝ)
-    (hw : ∀ t, 0 ≤ w t) (P : α → Prop) [DecidablePred P] (get : α → ℕ) (set : α → ℕ → α)
-    (φ : α → ℕ) (opts : α → Finset ℕ) (m : ℕ) (hm : 1 ≤ m)
-    (hopts : ∀ t ∈ Ω, m ≤ (opts t).card) (hcur : ∀ t ∈ Ω, get t ∈ opts t)
-    (hmem : ∀ t ∈ Ω, ∀ x ∈ opts t, set t x ∈ Ω) (hget : ∀ t x, get (set t x) = x)
-    (hset : ∀ t₁ t₂ x₁ x₂, set t₁ x₁ = set t₂ x₂ → get t₁ = get t₂ → t₁ = t₂)
-    (hφ : ∀ t x, φ (set t x) = φ t) (hP : ∀ t, P t → get t = φ t)
-    {R : ℝ} (hR0 : 0 < R) (hR : ∀ t ∈ Ω, ∀ t' ∈ Ω, w t ≤ R * w t') :
-    (R + ((m : ℝ) - 1)) * ∑ t ∈ Ω.filter P, w t ≤ R * ∑ t ∈ Ω, w t := by
-  classical
-  set S := (Ω.filter P).sigma (fun t => (opts t).erase (get t)) with hS
-  have h1 : ((m : ℝ) - 1) * ∑ t ∈ Ω.filter P, w t ≤ ∑ p ∈ S, w p.1 := by
-    rw [hS, Finset.sum_sigma, Finset.mul_sum]
-    refine Finset.sum_le_sum fun t ht => ?_
-    obtain ⟨htΩ, -⟩ := Finset.mem_filter.mp ht
-    show ((m : ℝ) - 1) * w t ≤ ∑ _x ∈ (opts t).erase (get t), w t
-    rw [Finset.sum_const, nsmul_eq_mul]
-    have hc : (m : ℝ) - 1 ≤ ((opts t).erase (get t)).card := by
-      rw [Finset.card_erase_of_mem (hcur t htΩ)]
-      have := hopts t htΩ
-      have h1 : 1 ≤ (opts t).card := le_trans hm this
-      rw [Nat.cast_sub h1]; push_cast
-      have : (m : ℝ) ≤ (opts t).card := by exact_mod_cast this
-      linarith
-    exact mul_le_mul_of_nonneg_right hc (hw t)
-  have h2 : ∑ p ∈ S, w p.1 ≤ ∑ p ∈ S, R * w (set p.1 p.2) := by
-    refine Finset.sum_le_sum fun p hp => ?_
-    obtain ⟨ht, hx⟩ := Finset.mem_sigma.mp hp
-    obtain ⟨htΩ, -⟩ := Finset.mem_filter.mp ht
-    exact hR p.1 htΩ _ (hmem p.1 htΩ p.2 (Finset.mem_of_mem_erase hx))
-  have hinjS : Set.InjOn (fun p : (_ : α) × ℕ => set p.1 p.2) S := by
-    intro p hp q hq hpq
-    obtain ⟨hpt, hpx⟩ := Finset.mem_sigma.mp hp
-    obtain ⟨hqt, hqx⟩ := Finset.mem_sigma.mp hq
-    obtain ⟨-, hpP⟩ := Finset.mem_filter.mp hpt
-    obtain ⟨-, hqP⟩ := Finset.mem_filter.mp hqt
-    have hx : p.2 = q.2 := by
-      have := congrArg get hpq; simp only [hget] at this; exact this
-    have hg : get p.1 = get q.1 := by
-      rw [hP _ hpP, hP _ hqP, ← hφ p.1 p.2, ← hφ q.1 q.2]
-      exact congrArg φ hpq
-    exact Sigma.ext (hset _ _ _ _ hpq hg) (heq_of_eq hx)
-  have h3 : ∑ p ∈ S, w (set p.1 p.2) ≤ ∑ t ∈ Ω.filter (fun t => ¬ P t), w t := by
-    rw [← Finset.sum_image (f := w) hinjS]
-    refine Finset.sum_le_sum_of_subset_of_nonneg ?_ (fun t _ _ => hw t)
-    intro t ht
-    obtain ⟨p, hp, rfl⟩ := Finset.mem_image.mp ht
-    obtain ⟨hpt, hpx⟩ := Finset.mem_sigma.mp hp
-    obtain ⟨hpΩ, hpP⟩ := Finset.mem_filter.mp hpt
-    refine Finset.mem_filter.mpr ⟨hmem p.1 hpΩ p.2 (Finset.mem_of_mem_erase hpx), fun hP' => ?_⟩
-    have e1 := hP _ hP'
-    rw [hget, hφ, ← hP _ hpP] at e1
-    exact (Finset.ne_of_mem_erase hpx) e1
-  have h4 : ∑ t ∈ Ω, w t = ∑ t ∈ Ω.filter P, w t + ∑ t ∈ Ω.filter (fun t => ¬ P t), w t :=
-    (Finset.sum_filter_add_sum_filter_not Ω P w).symm
-  have h5 : ∑ p ∈ S, R * w (set p.1 p.2) = R * ∑ p ∈ S, w (set p.1 p.2) := by
-    rw [Finset.mul_sum]
-  have h6 := mul_le_mul_of_nonneg_left h3 hR0.le
-  nlinarith
 
 /-! ### Rows of a column by index -/
 
@@ -214,7 +152,8 @@ theorem fibre_row {w : Wt5} (hw : InBox5 w) {X₁ X₂ X₃ X₄ X₅ : Finset �
     (hφ : ∀ t x, φ (setAt i t x) = φ t) (hP : ∀ t, P t → rowAt i t = φ t) :
     ∑ t ∈ (sts X₁ X₂ X₃ X₄ X₅).filter P, GU 6 w t
       ≤ qrow i * ∑ t ∈ sts X₁ X₂ X₃ X₄ X₅, GU 6 w t := by
-  have h := fibre_row_sharp (Ω := sts X₁ X₂ X₃ X₄ X₅) (GU 6 w) (GU_nonneg hw) P (rowAt i) (setAt i) φ
+  have h := Lookback.fibre_row_sharp (Ω := sts X₁ X₂ X₃ X₄ X₅) (GU 6 w) (GU_nonneg hw) P (rowAt i)
+    (setAt i) φ
     (optsAt X₁ X₂ X₃ X₄ X₅ i) (nopt i) (by unfold nopt; split_ifs <;> norm_num)
     (fun t _ => optsAt_card hX₁ hX₂ hX₃ hX₄ hX₅ hi t) (fun t ht => optsAt_cur hi ht)
     (fun t ht x hx => optsAt_mem hi ht hx) (getAt_setAt i)

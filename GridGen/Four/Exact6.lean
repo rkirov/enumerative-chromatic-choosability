@@ -25,7 +25,7 @@ uniform class counts with `ℓ = 4` (`urow6`).
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### The uniform side at `k = 6` -/
 

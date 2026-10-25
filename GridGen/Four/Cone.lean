@@ -34,93 +34,9 @@ coefficients after clearing `ℓ³` or `ℓ⁶`.
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Counting colourings by their non-consecutive equalities -/
-
-theorem cast_card_erase (s : Finset ℕ) (a : ℕ) :
-    ((s.erase a).card : ℤ) = s.card - if a ∈ s then 1 else 0 := by
-  split_ifs with h
-  · have := Finset.card_erase_add_one h; omega
-  · rw [Finset.erase_eq_of_notMem h]; simp
-
-/-- Avoiding two colours `x, y` in a list. -/
-theorem card_filter_ne_ne (S : Finset ℕ) (x y : ℕ) :
-    ((S.filter (fun a => a ≠ x ∧ a ≠ y)).card : ℤ) =
-      S.card - (if x ∈ S then 1 else 0) - (if y ∈ S then 1 else 0)
-        + (if x ∈ S ∧ x = y then 1 else 0) := by
-  have h : S.filter (fun a => a ≠ x ∧ a ≠ y) = (S.erase x).erase y := by
-    ext a; simp only [Finset.mem_filter, Finset.mem_erase]; tauto
-  rw [h, cast_card_erase, cast_card_erase]
-  simp only [Finset.mem_erase]
-  by_cases hxy : x = y
-  · subst hxy; by_cases hx : x ∈ S <;> simp [hx]
-  · by_cases hx : x ∈ S <;> by_cases hy : y ∈ S <;> simp [hx, hy, hxy, Ne.symm hxy]
-
-/-- A colour of a list that avoids the two colours `f r`, `g r` of a tail `r`. -/
-theorem card_pairAvoid {β : Type*} [DecidableEq β] (S : Finset ℕ) (R : Finset β) (f g : β → ℕ) :
-    (((S ×ˢ R).filter (fun p => p.1 ≠ f p.2 ∧ p.1 ≠ g p.2)).card : ℤ) =
-      S.card * R.card - (R.filter (fun r => f r ∈ S)).card - (R.filter (fun r => g r ∈ S)).card
-        + (R.filter (fun r => f r ∈ S ∧ f r = g r)).card := by
-  have h := card_filter_prod S R (fun _ => True) (fun a r => a ≠ f r ∧ a ≠ g r)
-  simp only [true_and, Finset.filter_true] at h
-  rw [h]
-  have hswap : ∑ a ∈ S, (R.filter (fun r => a ≠ f r ∧ a ≠ g r)).card =
-      ∑ r ∈ R, (S.filter (fun a => a ≠ f r ∧ a ≠ g r)).card := by
-    simp only [Finset.card_filter]
-    exact Finset.sum_comm
-  rw [hswap]
-  push_cast
-  rw [Finset.sum_congr rfl (fun r _ => card_filter_ne_ne S (f r) (g r))]
-  simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib, Finset.sum_const, nsmul_eq_mul,
-    Finset.sum_boole]
-  ring
-
-/-- The diagonal of a product, restricted to a list. -/
-theorem card_diag (S X Y : Finset ℕ) :
-    ((X ×ˢ Y).filter (fun r => r.1 ∈ S ∧ r.1 = r.2)).card = (X ∩ Y ∩ S).card := by
-  refine Finset.card_nbij' (fun r => r.1) (fun x => (x, x)) ?_ ?_ ?_ ?_
-  · intro r hr
-    simp only [Finset.coe_filter, Finset.mem_product, Set.mem_ofPred_eq] at hr
-    simp only [Finset.coe_inter, Set.mem_inter_iff, Finset.mem_coe]
-    obtain ⟨⟨h1, h2⟩, h3, h4⟩ := hr
-    exact ⟨⟨h1, h4 ▸ h2⟩, h3⟩
-  · intro x hx
-    simp only [Finset.coe_inter, Set.mem_inter_iff, Finset.mem_coe] at hx
-    simp only [Finset.coe_filter, Finset.mem_product, Set.mem_ofPred_eq]
-    exact ⟨⟨hx.1.1, hx.1.2⟩, hx.2, trivial⟩
-  · intro r hr
-    simp only [Finset.coe_filter, Set.mem_ofPred_eq] at hr
-    obtain ⟨r1, r2⟩ := r
-    simp only at hr ⊢
-    rw [hr.2.2]
-  · intro x _; rfl
-
-/-- A star: a centre from `S` avoiding two leaves from `X` and `Y`. -/
-theorem card_star (S X Y : Finset ℕ) :
-    (((S ×ˢ (X ×ˢ Y)).filter (fun p => p.1 ≠ p.2.1 ∧ p.1 ≠ p.2.2)).card : ℤ) =
-      S.card * X.card * Y.card - (X ∩ S).card * Y.card - X.card * (Y ∩ S).card
-        + (X ∩ Y ∩ S).card := by
-  have h := card_pairAvoid S (X ×ˢ Y) Prod.fst Prod.snd
-  rw [Finset.filter_product_left (fun x => x ∈ S), Finset.filter_product_right (fun y => y ∈ S),
-    card_diag, Finset.card_product, Finset.card_product, Finset.card_product,
-    Finset.filter_mem_eq_inter, Finset.filter_mem_eq_inter] at h
-  rw [h]; push_cast; ring
-
-/-- A triangle with lists `S`, `X`, `Y`. -/
-theorem card_triangle (S X Y : Finset ℕ) :
-    (((S ×ˢ sts2 X Y).filter (fun p => p.1 ≠ p.2.1 ∧ p.1 ≠ p.2.2)).card : ℤ) =
-      S.card * (X.card * Y.card - (X ∩ Y).card) - ((X ∩ S).card * Y.card - (X ∩ S ∩ Y).card)
-        - (X.card * (Y ∩ S).card - (X ∩ (Y ∩ S)).card) := by
-  have h := card_pairAvoid S (sts2 X Y) Prod.fst Prod.snd
-  have e1 : (sts2 X Y).filter (fun r => r.1 ∈ S) = sts2 (X ∩ S) Y := by
-    ext p; simp only [Finset.mem_filter, mem_sts2, Finset.mem_inter]; tauto
-  have e2 : (sts2 X Y).filter (fun r => r.2 ∈ S) = sts2 X (Y ∩ S) := by
-    ext p; simp only [Finset.mem_filter, mem_sts2, Finset.mem_inter]; tauto
-  have e3 : (sts2 X Y).filter (fun r => r.1 ∈ S ∧ r.1 = r.2) = ∅ := by
-    ext p; simp only [Finset.mem_filter, mem_sts2, Finset.notMem_empty, iff_false]; tauto
-  rw [e1, e2, e3, Finset.card_empty, card_sts2, card_sts2, card_sts2] at h
-  rw [h]; push_cast; ring
 
 /-- Colourings with `r1 = r3`. -/
 theorem card_eq13 (A B C D : Finset ℕ) :

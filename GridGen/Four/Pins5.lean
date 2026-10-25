@@ -29,7 +29,7 @@ lie in `[ρ g, g]` with `g = vA 3 w`, `ρ = 118/125`.
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Rows by index -/
 

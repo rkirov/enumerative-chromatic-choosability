@@ -23,7 +23,7 @@ is `G` at the weight `(1, 1, 1)`.
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Properness, patterns, and the weight -/
 
@@ -227,17 +227,6 @@ theorem exists_palette_map {s s' : T4} (hs : Proper s) (hs' : Proper s') (h : Sa
   · rw [hrow _ (hrs (Or.inr (Or.inl rfl))) hP.2.1, m2]
   · rw [hrow _ (hrs (Or.inr (Or.inr (Or.inl rfl)))) hP.2.2.1, m3]
   · rw [hrow _ (hrs (Or.inr (Or.inr (Or.inr rfl)))) hP.2.2.2, m4]
-
-/-- The image of a punctured palette under a map injective on the palette. -/
-theorem image_erase_of_injOn {g : ℕ → ℕ} {P : Finset ℕ} (hg : Set.InjOn g ↑P) {x : ℕ}
-    (hx : x ∈ P) : (P.erase x).image g = (P.image g).erase (g x) := by
-  ext y
-  simp only [Finset.mem_image, Finset.mem_erase]
-  constructor
-  · rintro ⟨z, ⟨hzx, hz⟩, rfl⟩
-    exact ⟨fun h => hzx (hg hz hx h), z, hz, rfl⟩
-  · rintro ⟨hy, z, hz, rfl⟩
-    exact ⟨z, ⟨fun h => hy (by rw [h]), hz⟩, rfl⟩
 
 /-- **Realisation.** The weighted number of successors of a proper column inside a palette
 depends only on the size of the palette and the equality pattern of the column. -/

@@ -9,9 +9,10 @@ import GridGen.Four.CountBound
 
 Two refinements of `LogBounds.lean`, needed at `k = 6`:
 
-* **The chord in `z`.** The bonus-free rate of a row is `t + (μ - z)/n`, so its log against `t` is
-  `log (1 + (μ - z)/A)`. This is concave in `z`, and on `z ∈ [0, 2]` it lies above the chord
-  between `z = 0` and `z = 2`. The state colours in the difference sets therefore cost
+* **The chord in `z`** (in `GridGen/Lookback/Common.lean`, as height five uses it too). The
+  bonus-free rate of a row is `t + (μ - z)/n`, so its log against `t` is `log (1 + (μ - z)/A)`.
+  This is concave in `z`, and on `z ∈ [0, 2]` it lies above the chord between `z = 0` and `z = 2`.
+  The state colours in the difference sets therefore cost
   `zslope n μ = min (1/(n(n-1)), log ((A+μ)/(A+μ-2))/2)` each (`rate_main_chord`), which is less
   than `1/(n(n-1))` once `μ ≥ 1`.
 * **The error with a minimum.** The third-row deviation numerator is
@@ -22,108 +23,7 @@ Two refinements of `LogBounds.lean`, needed at `k = 6`:
 
 namespace GridGen.Four
 
-open Real
-
-/-! ### The chord in `z` -/
-
-/-- The cost of one state colour in a difference set of a row with mismatch `μ`. -/
-noncomputable def zslope (n μ : ℝ) : ℝ :=
-  min (1 / (n * (n - 1))) (log ((n ^ 2 - n + 1 + μ) / (n ^ 2 - n + 1 + μ - 2)) / 2)
-
-/-- **The chord of the logarithm.** For `z ∈ [0, 2]` and `B - 2 > 0`,
-`log (B - z) ≥ log B - z · log (B/(B-2))/2`. -/
-theorem log_chord {B z : ℝ} (hB : 0 < B - 2) (hz : 0 ≤ z) (hz2 : z ≤ 2) :
-    log B - z * (log (B / (B - 2)) / 2) ≤ log (B - z) := by
-  have hB0 : 0 < B := by linarith
-  have hc := (StrictConcaveOn.concaveOn strictConcaveOn_log_Ioi).2
-    (Set.mem_Ioi.mpr hB0) (Set.mem_Ioi.mpr hB) (show (0 : ℝ) ≤ 1 - z / 2 by linarith)
-    (show (0 : ℝ) ≤ z / 2 by linarith) (by ring)
-  have e : (1 - z / 2) • B + (z / 2) • (B - 2) = B - z := by simp only [smul_eq_mul]; ring
-  rw [e] at hc
-  simp only [smul_eq_mul] at hc
-  rw [Real.log_div hB0.ne' hB.ne']
-  nlinarith
-
-/-- **One row, main term, with the chord.** As `rate_main`, with `z ∈ [0, 2]` costing
-`zslope n μ` each. -/
-theorem rate_main_chord {n h0 h1 z μ e : ℝ} (hn : 5 ≤ n) (hh0 : h0 = 0 ∨ h0 = 1)
-    (hh1 : h1 = 0 ∨ h1 = 1) (hz : 0 ≤ z) (hz2 : z ≤ 2) (hμ : 0 ≤ μ) (hμk : μ ≤ n + 1)
-    (he : e = (n - 1 - μ) + h0 + h1 + z) (he0 : 0 ≤ e) (heN : e ≤ n + h0) :
-    log (1 + μ / (n ^ 2 - n + 1)) + ((n - 1) / n) * h1 / (n + 1)
-        - z * zslope n μ - (μ + 1) * h0 / (n * (n + 1) * (n - 1))
-      ≤ log (((n + h1) - e / (n + h0)) / ((n ^ 2 - n + 1) / n)) := by
-  have hn0 : 0 < n := by linarith
-  have hl0 : 0 < n - 1 := by linarith
-  have hA0 : 0 < n ^ 2 - n + 1 := by nlinarith
-  have hold := rate_main hn hh0 hh1 hz hμ hμk he he0 heN
-  -- the chord bound
-  have hchord : log (1 + μ / (n ^ 2 - n + 1)) + ((n - 1) / n) * h1 / (n + 1)
-        - z * (log ((n ^ 2 - n + 1 + μ) / (n ^ 2 - n + 1 + μ - 2)) / 2)
-        - (μ + 1) * h0 / (n * (n + 1) * (n - 1))
-      ≤ log (((n + h1) - e / (n + h0)) / ((n ^ 2 - n + 1) / n)) := by
-    set A := n ^ 2 - n + 1 with hA
-    have hden : 0 < n + h0 := by rcases hh0 with rfl | rfl <;> linarith
-    have ht0 : 0 < A / n := div_pos hA0 hn0
-    have hBz : 0 < A + μ - 2 := by nlinarith
-    -- the bonus-free rate `r₀ = t + (μ - z)/n`
-    set r0 := A / n + (μ - z) / n with hr0
-    have hr0p : 0 < r0 := by
-      rw [hr0, ← add_div]; apply div_pos _ hn0; linarith
-    have hq : e / (n + h0) ≤ 1 := by rw [div_le_one hden]; exact heN
-    have hq0 : 0 ≤ e / (n + h0) := div_nonneg he0 hden.le
-    have hlo : n - 1 ≤ (n + h1) - e / (n + h0) := by rcases hh1 with rfl | rfl <;> linarith
-    have hhi : (n + h1) - e / (n + h0) ≤ n + 1 := by rcases hh1 with rfl | rfl <;> linarith
-    have hdiff : ((n - 1) / n) * h1 - (μ + 1) * h0 / (n * (n + 1))
-        ≤ ((n + h1) - e / (n + h0)) - r0 := by
-      rw [he, hr0, hA]
-      rcases hh0 with rfl | rfl
-      · have key : (n + h1) - (n - 1 - μ + 0 + h1 + z) / (n + 0)
-            - ((n ^ 2 - n + 1) / n + (μ - z) / n) = ((n - 1) / n) * h1 := by
-          field_simp; ring
-        rw [key]; simp
-      · have key : (n + h1) - (n - 1 - μ + 1 + h1 + z) / (n + 1)
-            - ((n ^ 2 - n + 1) / n + (μ - z) / n)
-            = h1 * (n / (n + 1)) - (μ + 1 - z) / (n * (n + 1)) := by
-          field_simp; ring
-        rw [key]
-        have c1 : ((n - 1) / n) * h1 ≤ h1 * (n / (n + 1)) := by
-          rcases hh1 with rfl | rfl
-          · simp
-          · rw [mul_one, one_mul, div_le_div_iff₀ hn0 (by linarith)]; nlinarith
-        have c2 : (μ + 1 - z) / (n * (n + 1)) ≤ (μ + 1) * 1 / (n * (n + 1)) := by
-          apply div_le_div_of_nonneg_right _ (by positivity); linarith
-        linarith
-    have hP : 0 ≤ ((n - 1) / n) * h1 := by rcases hh1 with rfl | rfl <;> positivity
-    have hh0nn : 0 ≤ h0 := by rcases hh0 with rfl | rfl <;> norm_num
-    have hQ : 0 ≤ (μ + 1) * h0 / (n * (n + 1)) := by positivity
-    have hlog := log_ratio_ge hl0 hlo hhi hr0p hP hQ hdiff
-    have hrpos : 0 < (n + h1) - e / (n + h0) := by linarith
-    have hsplit : log (((n + h1) - e / (n + h0)) / (A / n))
-        = log (r0 / (A / n)) + log (((n + h1) - e / (n + h0)) / r0) := by
-      rw [← Real.log_mul (div_pos hr0p ht0).ne' (div_pos hrpos hr0p).ne']
-      congr 1; field_simp
-    have hr0t : r0 / (A / n) = (A + μ - z) / A := by
-      rw [hr0]; field_simp; ring
-    have hc := log_chord (B := A + μ) hBz hz hz2
-    have hlA : log (r0 / (A / n)) = log (A + μ - z) - log A := by
-      rw [hr0t, Real.log_div (by linarith) hA0.ne']
-    have hl1 : log (1 + μ / A) = log (A + μ) - log A := by
-      rw [show 1 + μ / A = (A + μ) / A by field_simp, Real.log_div (by linarith) hA0.ne']
-    have e1 : ((n - 1) / n) * h1 / (n + 1) - (μ + 1) * h0 / (n * (n + 1)) / (n - 1)
-        = ((n - 1) / n) * h1 / (n + 1) - (μ + 1) * h0 / (n * (n + 1) * (n - 1)) := by
-      field_simp
-    rw [e1] at hlog
-    rw [hsplit, hlA]
-    rw [hl1]
-    linarith
-  -- the better of the two slopes
-  unfold zslope
-  rcases le_total (1 / (n * (n - 1)))
-      (log ((n ^ 2 - n + 1 + μ) / (n ^ 2 - n + 1 + μ - 2)) / 2) with hm | hm
-  · rw [min_eq_left hm]
-    have : z * (1 / (n * (n - 1))) = z / (n * (n - 1)) := by ring
-    rw [this]; exact hold
-  · rw [min_eq_right hm]; exact hchord
+open Real GridGen.Lookback
 
 /-! ### The errors with a minimum -/
 

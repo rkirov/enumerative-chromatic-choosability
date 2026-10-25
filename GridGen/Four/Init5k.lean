@@ -23,7 +23,7 @@ import GridGen.Four.Init
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-- The class counts of the uniform column `sts (range 5)⁴`. -/
 theorem range5_counts :

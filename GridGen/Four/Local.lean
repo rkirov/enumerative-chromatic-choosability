@@ -8,113 +8,24 @@ import GridGen.Four.Defs
 # Height four: the local data of a column against the next lists
 
 For a column `s` and next lists `B₁, …, B₄` of `k` colours, the successor lists are
-`Aᵢ = Bᵢ.erase sᵢ`. This file expresses their sizes and consecutive intersections through three
-kinds of local data:
+`Aᵢ = Bᵢ.erase sᵢ`. Their sizes and consecutive intersections are expressed through three kinds of
+local data, defined with their basic lemmas in `GridGen/Lookback/Common.lean` (they serve every
+height):
 
 * `hb B c`: the bonus, `1` when the colour `c` is missing from `B`;
 * `mu k B C = k - |B ∩ C|`: the mismatch of two consecutive lists;
-* `zz B C a b`: how many of `a, b` lie in the difference sets `B ∖ C`, `C ∖ B`;
+* `zz B C a b`: how many of `a, b` lie in the difference sets `B ∖ C`, `C ∖ B`.
 
-and records the counting inequalities (inclusion–exclusion, and the monotonicity of colouring
-counts in the lists) that the rate bounds of `LogBounds.lean` take as hypotheses.
+This file records the four-row counting inequalities (inclusion–exclusion, and the monotonicity
+of colouring counts in the lists) that the rate bounds of `LogBounds.lean` take as hypotheses,
+and the sizes of a list punctured at two to four state colours.
 -/
 
 namespace GridGen.Four
 
-open Finset
-
-/-- The bonus of a colour against a list. -/
-noncomputable def hb (B : Finset ℕ) (c : ℕ) : ℝ := if c ∈ B then 0 else 1
-
-/-- The mismatch of two lists of `k` colours. -/
-noncomputable def mu (k : ℕ) (B C : Finset ℕ) : ℝ := (k : ℝ) - (B ∩ C).card
-
-/-- State colours in the difference sets: `a ∈ B ∖ C` and `b ∈ C ∖ B`. -/
-noncomputable def zz (B C : Finset ℕ) (a b : ℕ) : ℝ :=
-  (if a ∈ B ∧ a ∉ C then 1 else 0) + (if b ∈ C ∧ b ∉ B then 1 else 0)
-
-theorem hb_cases (B : Finset ℕ) (c : ℕ) : hb B c = 0 ∨ hb B c = 1 := by
-  unfold hb; split_ifs <;> simp
-
-theorem zz_nonneg (B C : Finset ℕ) (a b : ℕ) : 0 ≤ zz B C a b := by
-  unfold zz; split_ifs <;> norm_num
-
-theorem mu_nonneg {k : ℕ} {B C : Finset ℕ} (hB : B.card = k) : 0 ≤ mu k B C := by
-  unfold mu
-  have : (B ∩ C).card ≤ k := hB ▸ Finset.card_le_card Finset.inter_subset_left
-  have : ((B ∩ C).card : ℝ) ≤ k := by exact_mod_cast this
-  linarith
-
-theorem mu_le {k : ℕ} (B C : Finset ℕ) : mu k B C ≤ k := by
-  unfold mu; have : (0 : ℝ) ≤ (B ∩ C).card := Nat.cast_nonneg _; linarith
-
-/-- Equal lists from zero mismatch. -/
-theorem eq_of_mu_zero {k : ℕ} {B C : Finset ℕ} (hB : B.card = k) (hC : C.card = k)
-    (h : mu k B C = 0) : B = C := by
-  unfold mu at h
-  have hc : (B ∩ C).card = k := by
-    have : ((B ∩ C).card : ℝ) = k := by linarith
-    exact_mod_cast this
-  have h1 : B ∩ C = B := Finset.eq_of_subset_of_card_le Finset.inter_subset_left (by omega)
-  have h2 : B ∩ C = C := Finset.eq_of_subset_of_card_le Finset.inter_subset_right (by omega)
-  rw [← h1, h2]
-
-/-- The size of a punctured list. -/
-theorem card_erase_hb {k : ℕ} {B : Finset ℕ} (hB : B.card = k) (c : ℕ) :
-    ((B.erase c).card : ℝ) = (k : ℝ) - 1 + hb B c := by
-  unfold hb
-  split_ifs with h
-  · rw [Finset.card_erase_of_mem h, hB]
-    have : 1 ≤ k := hB ▸ Finset.card_pos.mpr ⟨c, h⟩
-    push_cast [Nat.cast_sub this]; ring
-  · rw [Finset.erase_eq_of_notMem h, hB]; ring
-
-/-- **Consecutive punctured lists.** -/
-theorem card_inter_erase {k : ℕ} {B C : Finset ℕ} (hB : B.card = k) (hC : C.card = k)
-    {a b : ℕ} (hab : a ≠ b) :
-    (((B.erase a) ∩ (C.erase b)).card : ℝ) = ((k : ℝ) - mu k B C - 2) + hb B a + hb C b + zz B C a b := by
-  have hset : (B.erase a) ∩ (C.erase b) = ((B ∩ C).erase a).erase b := by
-    ext x; simp only [Finset.mem_inter, Finset.mem_erase]; tauto
-  rw [hset]
-  have e1 : ((((B ∩ C).erase a).erase b).card : ℝ)
-      = (B ∩ C).card - (if a ∈ B ∩ C then 1 else 0) - (if b ∈ B ∩ C then 1 else 0) := by
-    have hb' : b ∈ (B ∩ C).erase a ↔ b ∈ B ∩ C := by
-      rw [Finset.mem_erase]; exact ⟨fun h => h.2, fun h => ⟨Ne.symm hab, h⟩⟩
-    by_cases ha : a ∈ B ∩ C <;> by_cases hbm : b ∈ B ∩ C
-    · rw [Finset.card_erase_of_mem (hb'.mpr hbm), Finset.card_erase_of_mem ha]
-      have h1 : 1 ≤ (B ∩ C).card := Finset.card_pos.mpr ⟨a, ha⟩
-      have h2 : 1 ≤ ((B ∩ C).erase a).card := Finset.card_pos.mpr ⟨b, hb'.mpr hbm⟩
-      rw [Finset.card_erase_of_mem ha] at h2
-      simp only [ha, hbm, if_true]; push_cast [Nat.cast_sub h1, Nat.cast_sub h2]; ring
-    · rw [Finset.erase_eq_of_notMem (fun h => hbm (hb'.mp h)), Finset.card_erase_of_mem ha]
-      have h1 : 1 ≤ (B ∩ C).card := Finset.card_pos.mpr ⟨a, ha⟩
-      simp only [ha, hbm, if_true, if_false]; push_cast [Nat.cast_sub h1]; ring
-    · rw [Finset.card_erase_of_mem (hb'.mpr hbm), Finset.erase_eq_of_notMem ha]
-      have h1 : 1 ≤ (B ∩ C).card := Finset.card_pos.mpr ⟨b, hbm⟩
-      simp only [ha, hbm, if_true, if_false]; push_cast [Nat.cast_sub h1]; ring
-    · rw [Finset.erase_eq_of_notMem (fun h => hbm (hb'.mp h)), Finset.erase_eq_of_notMem ha]
-      simp only [ha, hbm, if_false]; ring
-  rw [e1]
-  unfold mu hb zz
-  simp only [Finset.mem_inter]
-  by_cases haB : a ∈ B <;> by_cases haC : a ∈ C <;> by_cases hbB : b ∈ B <;> by_cases hbC : b ∈ C <;>
-    simp [haB, haC, hbB, hbC] <;> (try ring)
+open Finset GridGen.Lookback
 
 /-! ### Counting inequalities -/
-
-/-- Inclusion–exclusion inside the middle list. -/
-theorem triple_ge (X Y Z : Finset ℕ) :
-    ((X ∩ Y).card : ℝ) + (Y ∩ Z).card - Y.card ≤ (X ∩ Y ∩ Z).card := by
-  have h := Finset.card_union_add_card_inter (X ∩ Y) (Y ∩ Z)
-  have hsub : (X ∩ Y) ∪ (Y ∩ Z) ⊆ Y := Finset.union_subset Finset.inter_subset_right
-    Finset.inter_subset_left
-  have hle := Finset.card_le_card hsub
-  have heq : (X ∩ Y) ∩ (Y ∩ Z) = X ∩ Y ∩ Z := by ext; simp only [Finset.mem_inter]; tauto
-  rw [heq] at h
-  have : ((X ∩ Y).card : ℝ) + (Y ∩ Z).card = ((X ∩ Y) ∪ (Y ∩ Z)).card + (X ∩ Y ∩ Z).card := by
-    exact_mod_cast h.symm
-  have : (((X ∩ Y) ∪ (Y ∩ Z)).card : ℝ) ≤ Y.card := by exact_mod_cast hle
-  linarith
 
 /-- The colourings of three rows whose last row lies in a smaller list. -/
 theorem M3_bounds (A₁ A₂ A₃ : Finset ℕ) :

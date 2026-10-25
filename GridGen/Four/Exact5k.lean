@@ -25,7 +25,7 @@ the uniform class counts at `ℓ = 3` (`urow5`).
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Pins over atoms -/
 

@@ -4,8 +4,6 @@ Released under Apache 2.0 license.
 -/
 import GridGen.Five.Kappa5b
 import GridGen.Five.Pattern5
-import GridGen.Four.CountBound6
-import GridGen.Four.State6
 
 /-!
 # Height five, `k = 6`: the bound for one state
@@ -15,8 +13,8 @@ import GridGen.Four.State6
 
 * **The count** (`count_state`). By greedy minimality and the universal constant
   (`GridGen/Five/Count5.lean`, `Kappa5a/b.lean`), `|sts A| ≥ κ · n₁ ∏ⱼ r̃ⱼ` with
-  `r̃ⱼ = nⱼ - eⱼ/nⱼ₋₁`, `eⱼ = |Aⱼ₋₁ ∩ Aⱼ|`. Height four's row bounds (`GridGen.Four.rate_first`,
-  `GridGen.Four.rate_main_chord`) then give
+  `r̃ⱼ = nⱼ - eⱼ/nⱼ₋₁`, `eⱼ = |Aⱼ₋₁ ∩ Aⱼ|`. Height four's row bounds (`GridGen.Lookback.rate_first`,
+  `GridGen.Lookback.rate_main_chord`) then give
   `log (|sts A| / (5 t⁴)) ≥ log κ + Σⱼ [log (1 + μⱼ/21) - zⱼ · zslope μⱼ]`, `t = 21/5`; the bonuses
   of the rows with `hᵢ = 1` are dropped (each is at least `2/15 - 7/120 > 0`).
 * **The state bound** (`state_bound5`). With the pattern lemma (`GridGen/Five/Pattern5.lean`),
@@ -31,7 +29,7 @@ open Finset Real
 
 /-- The main term of one row, with the cost of the state colours in the difference sets. -/
 noncomputable def Lr (B C : Finset ℕ) (a b : ℕ) : ℝ :=
-  log (1 + Four.mu 6 B C / 21) - Four.zz B C a b * Four.zslope 5 (Four.mu 6 B C)
+  log (1 + Lookback.mu 6 B C / 21) - Lookback.zz B C a b * Lookback.zslope 5 (Lookback.mu 6 B C)
 
 /-- The constant part of the gain of a state in orbit `i`. -/
 noncomputable def Kr (i : Fin 11) : ℝ :=
@@ -45,7 +43,7 @@ theorem card_erase_56 {B : Finset ℕ} (hB : B.card = 6) (c : ℕ) :
 
 theorem inter3_ge (X Y Z : Finset ℕ) :
     ((X ∩ Y).card : ℤ) + (Y ∩ Z).card - Y.card ≤ (X ∩ Y ∩ Z).card := by
-  have h := Four.triple_ge X Y Z
+  have h := Lookback.triple_ge X Y Z
   have h' : (((X ∩ Y).card : ℤ) + (Y ∩ Z).card - Y.card : ℤ) ≤ (X ∩ Y ∩ Z).card := by
     exact_mod_cast h
   exact h'
@@ -111,26 +109,28 @@ theorem kappa_lists {A₁ A₂ A₃ A₄ A₅ : Finset ℕ} (h₁ : A₁.card = 
         (A₂ ∩ A₃).card (A₃ ∩ A₄).card (A₄ ∩ A₅).card * (A₂.card * A₃.card * A₄.card) := hk
     _ ≤ _ := by nlinarith
 
-theorem zmu5 (B C : Finset ℕ) (hB : B.card = 6) : 0 ≤ Four.mu 6 B C ∧ Four.mu 6 B C ≤ 5 + 1 := by
-  refine ⟨Four.mu_nonneg hB, ?_⟩
-  have := Four.mu_le (k := 6) B C
+theorem zmu5 (B C : Finset ℕ) (hB : B.card = 6) :
+    0 ≤ Lookback.mu 6 B C ∧ Lookback.mu 6 B C ≤ 5 + 1 := by
+  refine ⟨Lookback.mu_nonneg hB, ?_⟩
+  have := Lookback.mu_le (k := 6) B C
   norm_num at this ⊢; linarith
 
 /-- One row of the main term, from height four's chord bound (`n = 5`). -/
 theorem row5 (B C : Finset ℕ) (a b : ℕ) (hB : B.card = 6) (hC : C.card = 6) (hab : a ≠ b) :
-    Lr B C a b + 4 / 5 * Four.hb C b / 6 - (Four.mu 6 B C + 1) * Four.hb B a / 120
-      ≤ log (((5 + Four.hb C b) - (((B.erase a) ∩ (C.erase b)).card : ℝ) / (5 + Four.hb B a))
-        / (21 / 5)) := by
+    Lr B C a b + 4 / 5 * Lookback.hb C b / 6 - (Lookback.mu 6 B C + 1) * Lookback.hb B a / 120
+      ≤ log (((5 + Lookback.hb C b)
+          - (((B.erase a) ∩ (C.erase b)).card : ℝ) / (5 + Lookback.hb B a)) / (21 / 5)) := by
   obtain ⟨m0, m1⟩ := zmu5 B C hB
-  have he := Four.card_inter_erase hB hC hab
-  have hle : (((B.erase a) ∩ (C.erase b)).card : ℝ) ≤ 5 + Four.hb B a := by
+  have he := Lookback.card_inter_erase hB hC hab
+  have hle : (((B.erase a) ∩ (C.erase b)).card : ℝ) ≤ 5 + Lookback.hb B a := by
     have := Finset.card_le_card (inter_subset_left (s₁ := B.erase a) (s₂ := C.erase b))
     have h' : (((B.erase a) ∩ (C.erase b)).card : ℝ) ≤ (B.erase a).card := by exact_mod_cast this
-    rw [Four.card_erase_hb hB] at h'
-    have e6 : ((6 : ℕ) : ℝ) - 1 + Four.hb B a = 5 + Four.hb B a := by norm_num
+    rw [Lookback.card_erase_hb hB] at h'
+    have e6 : ((6 : ℕ) : ℝ) - 1 + Lookback.hb B a = 5 + Lookback.hb B a := by norm_num
     linarith
-  have h := Four.rate_main_chord (n := 5) (by norm_num) (Four.hb_cases B a) (Four.hb_cases C b)
-    (Four.zz_nonneg B C a b) (Four.zz_le_two B C a b) m0 m1
+  have h := Lookback.rate_main_chord (n := 5) (by norm_num) (Lookback.hb_cases B a)
+    (Lookback.hb_cases C b)
+    (Lookback.zz_nonneg B C a b) (Lookback.zz_le_two B C a b) m0 m1
     (e := (((B.erase a) ∩ (C.erase b)).card : ℝ)) (by rw [he]; ring) (Nat.cast_nonneg _) hle
   have e1 : (5 : ℝ) ^ 2 - 5 + 1 = 21 := by norm_num
   have e2 : ((5 : ℝ) - 1) / 5 = 4 / 5 := by norm_num
@@ -141,7 +141,7 @@ theorem row5 (B C : Finset ℕ) (a b : ℕ) (hB : B.card = 6) (hC : C.card = 6) 
   linarith
 
 theorem first5 {h : ℝ} (hh : h = 0 ∨ h = 1) : 4 / 5 * h / 6 ≤ log ((5 + h) / 5) := by
-  have f := Four.rate_first (n := 5) (h1 := h) (by norm_num) hh
+  have f := Lookback.rate_first (n := 5) (h1 := h) (by norm_num) hh
   have e2 : ((5 : ℝ) - 1) / 5 = 4 / 5 := by norm_num
   have e3 : (5 : ℝ) + 1 = 6 := by norm_num
   rw [e2, e3] at f
@@ -240,14 +240,14 @@ theorem count_state {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (hB₁ : B₁.card =
     (card_erase_56 hB₃ (r3 s)) (card_erase_56 hB₄ (r4 s)) (card_erase_56 hB₅ (r5 s))
   have hkR := (Int.cast_le (R := ℝ)).mpr hk
   push_cast at hkR
-  have n : ∀ (B : Finset ℕ) (c : ℕ), B.card = 6 → ((B.erase c).card : ℝ) = 5 + Four.hb B c :=
-    fun B c hB => by rw [Four.card_erase_hb hB]; norm_num
+  have n : ∀ (B : Finset ℕ) (c : ℕ), B.card = 6 → ((B.erase c).card : ℝ) = 5 + Lookback.hb B c :=
+    fun B c hB => by rw [Lookback.card_erase_hb hB]; norm_num
   have le : ∀ (B C : Finset ℕ) (a b : ℕ), B.card = 6 →
-      (((B.erase a) ∩ (C.erase b)).card : ℝ) ≤ 5 + Four.hb B a := fun B C a b hB => by
+      (((B.erase a) ∩ (C.erase b)).card : ℝ) ≤ 5 + Lookback.hb B a := fun B C a b hB => by
     rw [← n B a hB]; exact_mod_cast Finset.card_le_card inter_subset_left
   rw [n B₁ _ hB₁, n B₂ _ hB₂, n B₃ _ hB₃, n B₄ _ hB₄, n B₅ _ hB₅] at hkR
-  exact count_real (Four.hb_cases _ _) (Four.hb_cases _ _) (Four.hb_cases _ _)
-    (Four.hb_cases _ _) (Four.hb_cases _ _) (le B₁ B₂ _ _ hB₁) (le B₂ B₃ _ _ hB₂)
+  exact count_real (Lookback.hb_cases _ _) (Lookback.hb_cases _ _) (Lookback.hb_cases _ _)
+    (Lookback.hb_cases _ _) (Lookback.hb_cases _ _) (le B₁ B₂ _ _ hB₁) (le B₂ B₃ _ _ hB₂)
     (le B₃ B₄ _ _ hB₃) (le B₄ B₅ _ _ hB₄) (by linarith [(zmu5 B₁ B₂ hB₁).2])
     (by linarith [(zmu5 B₂ B₃ hB₂).2]) (by linarith [(zmu5 B₃ B₄ hB₃).2])
     (by linarith [(zmu5 B₄ B₅ hB₄).2]) hkR

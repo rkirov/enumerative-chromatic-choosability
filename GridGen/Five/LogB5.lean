@@ -208,12 +208,12 @@ noncomputable def qm5 : ℝ := 500 / 1459
 
 /-- One row of `F5`. -/
 noncomputable def hrow (qa qb μ : ℝ) : ℝ :=
-  log (1 + μ / 21) - Four.zslope 5 μ * (min (qa * μ) 1 + min (qb * μ) 1)
+  log (1 + μ / 21) - Lookback.zslope 5 μ * (min (qa * μ) 1 + min (qb * μ) 1)
 
 theorem zslope_le_series {m : ℝ} (hm : 0 ≤ m) :
-    Four.zslope 5 m ≤ (-(∑ i ∈ range 6, (-(2 / (19 + m))) ^ (i + 1) / ((i : ℝ) + 1))
+    Lookback.zslope 5 m ≤ (-(∑ i ∈ range 6, (-(2 / (19 + m))) ^ (i + 1) / ((i : ℝ) + 1))
       + (2 / (19 + m)) ^ (6 + 1) / (1 - 2 / (19 + m))) / 2 := by
-  unfold Four.zslope
+  unfold Lookback.zslope
   refine (min_le_right _ _).trans ?_
   have h19 : (19 + m) ≠ 0 := by linarith
   have e : ((5 : ℝ) ^ 2 - 5 + 1 + m) / ((5 : ℝ) ^ 2 - 5 + 1 + m - 2) = 1 + 2 / (19 + m) := by

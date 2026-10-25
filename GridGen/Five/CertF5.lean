@@ -184,8 +184,8 @@ theorem seam_zero5 {w : Wt5} (hw : InBox5 w) {X₁ X₂ X₃ X₄ X₅ B : Finse
 /-! ### The seam on the table quads -/
 
 theorem mu_eq_of {B C : Finset ℕ} {m : ℕ} (h : (B ∩ C).card + m = 6) :
-    Four.mu 6 B C = m := by
-  unfold Four.mu
+    Lookback.mu 6 B C = m := by
+  unfold Lookback.mu
   have : ((B ∩ C).card : ℝ) + m = 6 := by exact_mod_cast h
   push_cast; linarith
 

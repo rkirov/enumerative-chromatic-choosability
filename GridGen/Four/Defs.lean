@@ -2,7 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import Mathlib
+import GridGen.Lookback.Common
 
 /-!
 # Height four: columns of four rows as tuples
@@ -13,12 +13,16 @@ when they differ in every row. The proper colourings of the path from lists `A, 
 `sts A B C D`. Their number has an exact inclusion–exclusion form in the sizes of the lists and
 of their consecutive intersections (`card_sts`), obtained by prepending one row at a time:
 a new first row with list `A` multiplies the count by `|A|` and subtracts the colourings whose
-old first row already lies in `A`.
+old first row already lies in `A` (`GridGen.Lookback.card_prepend`). The count of a triangle, a
+row avoiding both rows of a two-row tail (`card_triangle`), and the lower bound
+`|sts X| ≥ k(k-1)³ + k(k-2)·Σ|Xᵢ₋₁ ∖ Xᵢ|` for `k`-lists (`card_sts_gain`) serve heights four and
+five alike. The helpers that do not mention the rows at all are in
+`GridGen/Lookback/Common.lean`.
 -/
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-- A column of four rows. -/
 abbrev T4 := ℕ × ℕ × ℕ × ℕ
@@ -28,18 +32,6 @@ abbrev T4 := ℕ × ℕ × ℕ × ℕ
 @[reducible] def r2 (t : T4) : ℕ := t.2.1
 @[reducible] def r3 (t : T4) : ℕ := t.2.2.1
 @[reducible] def r4 (t : T4) : ℕ := t.2.2.2
-
-/-- The card of a filtered product, as a sum over the first factor. -/
-theorem card_filter_prod {α β : Type*} [DecidableEq α] [DecidableEq β] (S : Finset α)
-    (C : Finset β) (P : α → Prop) [DecidablePred P] (Q : α → β → Prop) [∀ a b, Decidable (Q a b)] :
-    ((S ×ˢ C).filter (fun x => P x.1 ∧ Q x.1 x.2)).card =
-      ∑ a ∈ S.filter P, (C.filter (Q a)).card := by
-  rw [Finset.card_filter, Finset.sum_product, Finset.sum_filter]
-  refine Finset.sum_congr rfl fun a _ => ?_
-  rw [Finset.card_filter]
-  by_cases hP : P a
-  · simp only [hP, true_and, ite_true]
-  · simp only [hP, false_and, ite_false, Finset.sum_const_zero]
 
 /-! ### Proper colourings of paths of two, three and four rows -/
 
@@ -65,30 +57,6 @@ theorem mem_sts {A B C D : Finset ℕ} {t : T4} :
     t ∈ sts A B C D ↔ r1 t ∈ A ∧ r2 t ∈ B ∧ r3 t ∈ C ∧ r4 t ∈ D ∧
       r1 t ≠ r2 t ∧ r2 t ≠ r3 t ∧ r3 t ≠ r4 t := by
   simp [sts, mem_sts3]; tauto
-
-/-- Prepending a row: `#{(x, rest) : x ∈ A, x ≠ first rest} = |A|·#rest − #{rest : first ∈ A}`. -/
-theorem card_prepend {β : Type*} [DecidableEq β] (A : Finset ℕ) (R : Finset β) (f : β → ℕ) :
-    (((A ×ˢ R).filter (fun p => p.1 ≠ f p.2)).card : ℤ) =
-      A.card * R.card - (R.filter (fun r => f r ∈ A)).card := by
-  have h := card_filter_prod A R (fun _ => True) (fun a r => a ≠ f r)
-  simp only [true_and, Finset.filter_true] at h
-  rw [h]
-  have hswap : ∑ a ∈ A, (R.filter (fun r => a ≠ f r)).card =
-      ∑ r ∈ R, (A.filter (fun a => a ≠ f r)).card := by
-    simp only [Finset.card_filter]
-    exact Finset.sum_comm
-  rw [hswap]
-  have hterm : ∀ r ∈ R, ((A.filter (fun a => a ≠ f r)).card : ℤ) = A.card - if f r ∈ A then 1 else 0 := by
-    intro r _
-    rw [Finset.filter_ne' A (f r)]
-    split_ifs with h
-    · rw [Finset.card_erase_of_mem h]; push_cast [Nat.cast_sub (Finset.card_pos.mpr ⟨_, h⟩)]; ring
-    · rw [Finset.erase_eq_of_notMem h]; ring
-  push_cast
-  rw [Finset.sum_congr rfl hterm, Finset.sum_sub_distrib, Finset.sum_const, nsmul_eq_mul,
-    Finset.card_filter]
-  push_cast
-  ring
 
 theorem card_sts2 (C D : Finset ℕ) : ((sts2 C D).card : ℤ) = C.card * D.card - (C ∩ D).card := by
   have h := card_prepend C D id
@@ -119,6 +87,75 @@ theorem card_sts_formula (A B C D : Finset ℕ) :
         + (A ∩ B).card * (C ∩ D).card - (A ∩ B ∩ C ∩ D).card := by
   rw [card_sts, card_sts3, card_sts3, card_sts2, card_sts2, card_sts2]
   ring
+
+/-- A triangle with lists `S`, `X`, `Y`. -/
+theorem card_triangle (S X Y : Finset ℕ) :
+    (((S ×ˢ sts2 X Y).filter (fun p => p.1 ≠ p.2.1 ∧ p.1 ≠ p.2.2)).card : ℤ) =
+      S.card * (X.card * Y.card - (X ∩ Y).card) - ((X ∩ S).card * Y.card - (X ∩ S ∩ Y).card)
+        - (X.card * (Y ∩ S).card - (X ∩ (Y ∩ S)).card) := by
+  have h := card_pairAvoid S (sts2 X Y) Prod.fst Prod.snd
+  have e1 : (sts2 X Y).filter (fun r => r.1 ∈ S) = sts2 (X ∩ S) Y := by
+    ext p; simp only [Finset.mem_filter, mem_sts2, Finset.mem_inter]; tauto
+  have e2 : (sts2 X Y).filter (fun r => r.2 ∈ S) = sts2 X (Y ∩ S) := by
+    ext p; simp only [Finset.mem_filter, mem_sts2, Finset.mem_inter]; tauto
+  have e3 : (sts2 X Y).filter (fun r => r.1 ∈ S ∧ r.1 = r.2) = ∅ := by
+    ext p; simp only [Finset.mem_filter, mem_sts2, Finset.notMem_empty, iff_false]; tauto
+  rw [e1, e2, e3, Finset.card_empty, card_sts2, card_sts2, card_sts2] at h
+  rw [h]; push_cast; ring
+
+/-- **The count gain.** For `k`-lists, the number of proper columns exceeds the constant count
+`k(k-1)³` by at least `k(k-2)` per consecutive mismatch. -/
+theorem card_sts_gain {k : ℕ} {X₁ X₂ X₃ X₄ : Finset ℕ} (h₁ : X₁.card = k) (h₂ : X₂.card = k)
+    (h₃ : X₃.card = k) (h₄ : X₄.card = k) (hk : 1 ≤ k) :
+    (k : ℤ) * (k - 1) ^ 3 + k * (k - 2) * ((X₁ \ X₂).card + (X₂ \ X₃).card + (X₃ \ X₄).card)
+      ≤ (sts X₁ X₂ X₃ X₄).card := by
+  rw [card_sts_formula]
+  have e12 := Finset.card_sdiff_add_card_inter X₁ X₂
+  have e23 := Finset.card_sdiff_add_card_inter X₂ X₃
+  have e34 := Finset.card_sdiff_add_card_inter X₃ X₄
+  -- the triple intersections
+  have t123 : (X₁ ∩ X₂).card + (X₂ ∩ X₃).card ≤ (X₁ ∩ X₂ ∩ X₃).card + k := by
+    have h := Finset.card_union_add_card_inter (X₁ ∩ X₂) (X₂ ∩ X₃)
+    have hi : X₁ ∩ X₂ ∩ (X₂ ∩ X₃) = X₁ ∩ X₂ ∩ X₃ := by
+      ext x; simp only [mem_inter]; tauto
+    have hu : (X₁ ∩ X₂ ∪ X₂ ∩ X₃).card ≤ X₂.card :=
+      Finset.card_le_card (Finset.union_subset inter_subset_right inter_subset_left)
+    rw [hi] at h
+    omega
+  have t234 : (X₂ ∩ X₃).card + (X₃ ∩ X₄).card ≤ (X₂ ∩ X₃ ∩ X₄).card + k := by
+    have h := Finset.card_union_add_card_inter (X₂ ∩ X₃) (X₃ ∩ X₄)
+    have hi : X₂ ∩ X₃ ∩ (X₃ ∩ X₄) = X₂ ∩ X₃ ∩ X₄ := by
+      ext x; simp only [mem_inter]; tauto
+    have hu : (X₂ ∩ X₃ ∪ X₃ ∩ X₄).card ≤ X₃.card :=
+      Finset.card_le_card (Finset.union_subset inter_subset_right inter_subset_left)
+    rw [hi] at h
+    omega
+  have hq : (X₁ ∩ X₂ ∩ X₃ ∩ X₄).card ≤ (X₂ ∩ X₃ ∩ X₄).card := by
+    apply Finset.card_le_card
+    intro x; simp only [mem_inter]; tauto
+  rw [h₁, h₂, h₃, h₄]
+  set μ₂ := (X₁ \ X₂).card
+  set μ₃ := (X₂ \ X₃).card
+  set μ₄ := (X₃ \ X₄).card
+  set a₁₂ := (X₁ ∩ X₂).card
+  set a₂₃ := (X₂ ∩ X₃).card
+  set a₃₄ := (X₃ ∩ X₄).card
+  set t₁ := (X₁ ∩ X₂ ∩ X₃).card
+  set t₂ := (X₂ ∩ X₃ ∩ X₄).card
+  set q := (X₁ ∩ X₂ ∩ X₃ ∩ X₄).card
+  have z12 : (a₁₂ : ℤ) = k - μ₂ := by omega
+  have z23 : (a₂₃ : ℤ) = k - μ₃ := by omega
+  have z34 : (a₃₄ : ℤ) = k - μ₄ := by omega
+  have zt1 : (k : ℤ) - μ₂ - μ₃ ≤ t₁ := by omega
+  have zt2 : (k : ℤ) - μ₃ - μ₄ ≤ t₂ := by omega
+  have zq : (q : ℤ) ≤ t₂ := by exact_mod_cast hq
+  have hk1 : (1 : ℤ) ≤ k := by exact_mod_cast hk
+  rw [z12, z23, z34]
+  nlinarith [mul_nonneg (by positivity : (0 : ℤ) ≤ k) (by linarith : (0 : ℤ) ≤ t₁ - (k - μ₂ - μ₃)),
+    mul_nonneg (by linarith : (0 : ℤ) ≤ k - 1) (by linarith : (0 : ℤ) ≤ t₂ - (k - μ₃ - μ₄)),
+    mul_nonneg (by positivity : (0 : ℤ) ≤ μ₂) (by positivity : (0 : ℤ) ≤ μ₄),
+    mul_nonneg (by positivity : (0 : ℤ) ≤ μ₃) (by linarith : (0 : ℤ) ≤ k - 1),
+    mul_nonneg (by positivity : (0 : ℤ) ≤ μ₄) (by linarith : (0 : ℤ) ≤ k - 1)]
 
 /-! ### Compatibility and the successors of a state -/
 

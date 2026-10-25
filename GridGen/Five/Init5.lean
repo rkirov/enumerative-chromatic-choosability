@@ -3,7 +3,6 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import GridGen.Five.InitCert5
-import GridGen.Four.Init
 
 /-!
 # Height five, `k = 6`: the initial inequality

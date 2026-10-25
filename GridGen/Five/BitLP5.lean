@@ -149,14 +149,14 @@ theorem card_inter_code {B C : Finset ℕ} (hB : B.card = 6) (hC : C.card = 6) {
     ((B.erase x) ∩ (C.erase y)).card + m
       = 4 + cH (rowCode Bp B C x) + cX (rowCode Bp B C x) + cH (rowCode B C Cn y)
         + cM (rowCode B C Cn y) := by
-  have h := Four.card_inter_erase hB hC hxy
+  have h := Lookback.card_inter_erase hB hC hxy
   rw [mu_eq_of hm] at h
-  have e1 : Four.hb B x = (cH (rowCode Bp B C x) : ℝ) := by
-    rw [cH_code]; unfold Four.hb; split_ifs <;> simp
-  have e2 : Four.hb C y = (cH (rowCode B C Cn y) : ℝ) := by
-    rw [cH_code]; unfold Four.hb; split_ifs <;> simp
-  have e3 : Four.zz B C x y = (cX (rowCode Bp B C x) : ℝ) + (cM (rowCode B C Cn y) : ℝ) := by
-    rw [cX_code, cM_code, Four.zz_eq]; split_ifs <;> simp
+  have e1 : Lookback.hb B x = (cH (rowCode Bp B C x) : ℝ) := by
+    rw [cH_code]; unfold Lookback.hb; split_ifs <;> simp
+  have e2 : Lookback.hb C y = (cH (rowCode B C Cn y) : ℝ) := by
+    rw [cH_code]; unfold Lookback.hb; split_ifs <;> simp
+  have e3 : Lookback.zz B C x y = (cX (rowCode Bp B C x) : ℝ) + (cM (rowCode B C Cn y) : ℝ) := by
+    rw [cX_code, cM_code, Lookback.zz_eq]; split_ifs <;> simp
   rw [e1, e2, e3] at h
   push_cast at h
   have : (((B.erase x) ∩ (C.erase y)).card : ℝ) + m

@@ -26,7 +26,7 @@ weights `GU 5 w ∈ [ρ g, g]` this is `ai_research_notes/H4_K5_REVIEW_2026-10-2
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Counting with prescribed rows -/
 

@@ -16,7 +16,7 @@ term `209/14123`), functions of the three mismatches alone.
 
 namespace GridGen.Four
 
-open Finset Real
+open Finset Real GridGen.Lookback
 
 /-- The sharp fibre shares at `k = 6`: middle rows and end rows. -/
 noncomputable def qm6 : ℝ := 250 / 737
@@ -43,14 +43,6 @@ noncomputable def F6val (μ2 μ3 μ4 : ℝ) : ℝ :=
 
 /-- The averaged gain at `k = 6`, with the pattern term capped at `209/14123`. -/
 noncomputable def F6cap (μ2 μ3 μ4 : ℝ) : ℝ := F6core μ2 μ3 μ4 - 209 / 14123
-
-theorem zslope_nonneg {n μ : ℝ} (hn : 2 ≤ n) (hμ : 0 ≤ μ) : 0 ≤ zslope n μ := by
-  unfold zslope
-  have hA : 0 < n ^ 2 - n + 1 + μ - 2 := by nlinarith
-  refine le_min (by apply div_nonneg zero_le_one; nlinarith) ?_
-  apply div_nonneg _ zero_le_two
-  apply Real.log_nonneg
-  rw [le_div_iff₀ hA]; linarith
 
 /-- The gain at `k = 6` as a constant plus the state bits. -/
 theorem Lamc6_eq (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) :

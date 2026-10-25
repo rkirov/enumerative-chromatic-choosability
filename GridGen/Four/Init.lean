@@ -16,8 +16,8 @@ at least the uniform column `range k`.
 * **Count gain.** With `μ₂ = |X₁ ∖ X₂|`, `μ₃ = |X₂ ∖ X₃|`, `μ₄ = |X₃ ∖ X₄|` and `S = μ₂ + μ₃ + μ₄`,
   the exact count (`card_sts_formula`) and the bounds `|X₁ ∩ X₂ ∩ X₃| ≥ k - μ₂ - μ₃`,
   `|X₂ ∩ X₃ ∩ X₄| ≥ k - μ₃ - μ₄`, `|X₁ ∩ X₂ ∩ X₃ ∩ X₄| ≤ |X₂ ∩ X₃ ∩ X₄|` give
-  `|sts X| - k(k-1)³ ≥ k(k-2)·S` (`card_sts_gain`). As `|sts X| ≤ k⁴`, the log count ratio is at
-  least `(k-2)S/k³`.
+  `|sts X| - k(k-1)³ ≥ k(k-2)·S` (`card_sts_gain`, in `Defs`, as height five uses it too). As
+  `|sts X| ≤ k⁴`, the log count ratio is at least `(k-2)S/k³`.
 * **Pattern loss.** `pattern_log_ge` against `(P, P, P, P)` costs at most
   `(1-ρ)/ρ · 2S/(k-3) = 4S/(((k-2)³-2)(k-3))`, since `Σ|Xᵢ ∖ X₂| ≤ μ₂ + 2μ₃ + μ₄`.
 
@@ -26,7 +26,7 @@ At `k = 6`, with the box edge `ρ = 487/500`, the gain dominates the loss (`init
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Relabelling the uniform column -/
 
@@ -53,60 +53,6 @@ theorem G_range_eq (w : Wt) {k : ℕ} {P : Finset ℕ} (hP : P.card = k) :
   rw [← G_image w hinj', himg]
 
 /-! ### The count gain -/
-
-/-- **The count gain.** For `k`-lists, the number of proper columns exceeds the constant count
-`k(k-1)³` by at least `k(k-2)` per consecutive mismatch. -/
-theorem card_sts_gain {k : ℕ} {X₁ X₂ X₃ X₄ : Finset ℕ} (h₁ : X₁.card = k) (h₂ : X₂.card = k)
-    (h₃ : X₃.card = k) (h₄ : X₄.card = k) (hk : 1 ≤ k) :
-    (k : ℤ) * (k - 1) ^ 3 + k * (k - 2) * ((X₁ \ X₂).card + (X₂ \ X₃).card + (X₃ \ X₄).card)
-      ≤ (sts X₁ X₂ X₃ X₄).card := by
-  rw [card_sts_formula]
-  have e12 := Finset.card_sdiff_add_card_inter X₁ X₂
-  have e23 := Finset.card_sdiff_add_card_inter X₂ X₃
-  have e34 := Finset.card_sdiff_add_card_inter X₃ X₄
-  -- the triple intersections
-  have t123 : (X₁ ∩ X₂).card + (X₂ ∩ X₃).card ≤ (X₁ ∩ X₂ ∩ X₃).card + k := by
-    have h := Finset.card_union_add_card_inter (X₁ ∩ X₂) (X₂ ∩ X₃)
-    have hi : X₁ ∩ X₂ ∩ (X₂ ∩ X₃) = X₁ ∩ X₂ ∩ X₃ := by
-      ext x; simp only [mem_inter]; tauto
-    have hu : (X₁ ∩ X₂ ∪ X₂ ∩ X₃).card ≤ X₂.card :=
-      Finset.card_le_card (Finset.union_subset inter_subset_right inter_subset_left)
-    rw [hi] at h
-    omega
-  have t234 : (X₂ ∩ X₃).card + (X₃ ∩ X₄).card ≤ (X₂ ∩ X₃ ∩ X₄).card + k := by
-    have h := Finset.card_union_add_card_inter (X₂ ∩ X₃) (X₃ ∩ X₄)
-    have hi : X₂ ∩ X₃ ∩ (X₃ ∩ X₄) = X₂ ∩ X₃ ∩ X₄ := by
-      ext x; simp only [mem_inter]; tauto
-    have hu : (X₂ ∩ X₃ ∪ X₃ ∩ X₄).card ≤ X₃.card :=
-      Finset.card_le_card (Finset.union_subset inter_subset_right inter_subset_left)
-    rw [hi] at h
-    omega
-  have hq : (X₁ ∩ X₂ ∩ X₃ ∩ X₄).card ≤ (X₂ ∩ X₃ ∩ X₄).card := by
-    apply Finset.card_le_card
-    intro x; simp only [mem_inter]; tauto
-  rw [h₁, h₂, h₃, h₄]
-  set μ₂ := (X₁ \ X₂).card
-  set μ₃ := (X₂ \ X₃).card
-  set μ₄ := (X₃ \ X₄).card
-  set a₁₂ := (X₁ ∩ X₂).card
-  set a₂₃ := (X₂ ∩ X₃).card
-  set a₃₄ := (X₃ ∩ X₄).card
-  set t₁ := (X₁ ∩ X₂ ∩ X₃).card
-  set t₂ := (X₂ ∩ X₃ ∩ X₄).card
-  set q := (X₁ ∩ X₂ ∩ X₃ ∩ X₄).card
-  have z12 : (a₁₂ : ℤ) = k - μ₂ := by omega
-  have z23 : (a₂₃ : ℤ) = k - μ₃ := by omega
-  have z34 : (a₃₄ : ℤ) = k - μ₄ := by omega
-  have zt1 : (k : ℤ) - μ₂ - μ₃ ≤ t₁ := by omega
-  have zt2 : (k : ℤ) - μ₃ - μ₄ ≤ t₂ := by omega
-  have zq : (q : ℤ) ≤ t₂ := by exact_mod_cast hq
-  have hk1 : (1 : ℤ) ≤ k := by exact_mod_cast hk
-  rw [z12, z23, z34]
-  nlinarith [mul_nonneg (by positivity : (0 : ℤ) ≤ k) (by linarith : (0 : ℤ) ≤ t₁ - (k - μ₂ - μ₃)),
-    mul_nonneg (by linarith : (0 : ℤ) ≤ k - 1) (by linarith : (0 : ℤ) ≤ t₂ - (k - μ₃ - μ₄)),
-    mul_nonneg (by positivity : (0 : ℤ) ≤ μ₂) (by positivity : (0 : ℤ) ≤ μ₄),
-    mul_nonneg (by positivity : (0 : ℤ) ≤ μ₃) (by linarith : (0 : ℤ) ≤ k - 1),
-    mul_nonneg (by positivity : (0 : ℤ) ≤ μ₄) (by linarith : (0 : ℤ) ≤ k - 1)]
 
 /-- Proper columns of `k`-lists number at most `k⁴`. -/
 theorem card_sts_le {k : ℕ} {X₁ X₂ X₃ X₄ : Finset ℕ} (h₁ : X₁.card = k) (h₂ : X₂.card = k)

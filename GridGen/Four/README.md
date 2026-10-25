@@ -32,7 +32,9 @@ generic versions, which were the `k = 7` instance, were removed on 2026-10-25.)
    state-bit losses `zᵢ`, bonuses `hᵢ = [sᵢ ∉ Bᵢ]`, and one-sided errors in rows three and four
    (`row3_charge`, `row4_charge`; at `k = 6`, `count_log_bound6`). The pattern term is compared
    with a reference palette next to `B₂` (`exists_palette`, `pattern_log_ge`). Together:
-   `GB ≥ GU · (1 + Λ)` with the pattern term capped (`state_bound6`).
+   `GB ≥ GU · (1 + Λ)` with the pattern term capped (`state_bound6`). The local data `hb`, `mu`,
+   `zz`, the counting lemmas and the bounds for one row (`rate_first`, `rate_main`) do not
+   depend on the height; they are in `GridGen/Lookback/Common.lean`, shared with `GridGen/Five/`.
 4. **Averaging** (`Fibre`, `Seam`, `Cert`). Any two uniform weights `GU` are within `1/ρ`, so a
    row pinned to a colour set `D` by the other rows carries at most `q |D|`, `q = 1/(ρ(k−3))`
    (`qk`, `GU_ratio`, `fibre_mem`). This turns `Σ GU · Λ` into `(Σ GU)` times a function of the
@@ -53,16 +55,17 @@ generic versions, which were the `k = 7` instance, were removed on 2026-10-25.)
      pinned through them;
    * pinned sums capped at the whole weight, `min(q|D|, 1)`;
    * the row-three and row-four errors in `e`-min form (`rate3_err_emin`, `rate4_err_emin`);
-   * the chord of the logarithm for the state-bit loss (`zslope`, `log_chord`);
+   * the chord of the logarithm for the state-bit loss (`zslope`, `log_chord`, `rate_main_chord`;
+     with `fibre_row_sharp` these are in `GridGen/Lookback/Common.lean`);
    * a pattern lemma (`pattern_six`): the uniform class frequencies of a column with lists of size
      at least `5`, against the box corners, cap the pattern term at `209/14123` (about `0.55` of
      `(1−ρ)/ρ`).
    `F6cap` then holds at the other 326 triples (`cert6`, smallest value about `1.6·10⁻³`, at
    `(1,2,1)`; the chord slope is bounded through `log (1+y) ≤ y − y²/2 + y³/3`), and `(0,0,0)` uses
    `F6val`. The sixteen triples (`ExactTriple6`) force 69 list shapes (`dispatch6`, a kernel
-   enumeration of the atom-size equations); `Exact6` generalises `Exact` to atom sizes with a
-   capacity filter, and `Small6/Cert*.lean` check 79,439 column types (smallest LP margin
-   `0.009`, at `(0,1,0)`).
+   enumeration of the atom-size equations, `dispatchCheck` in `Dispatch`, shared with `k = 5`);
+   `Exact6` generalises `Exact` to atom sizes with a capacity filter, and `Small6/Cert*.lean`
+   check 79,439 column types (smallest LP margin `0.009`, at `(0,1,0)`).
 
 7. **`k = 5`** (`Pins5`, `Block5`, `State5`, `BitLP5k`, `BitCert5k/`, `BitAll5k`, `Zero5k`,
    `Exact5k`, `Small5k/`, `Init5k`, `Five`). With exact per-state values the averaged inequality

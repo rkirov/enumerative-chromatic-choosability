@@ -23,10 +23,7 @@ import GridGen.Four.Seam
 
 namespace GridGen.Four
 
-open Finset Real
-
-theorem zz_le_two (B C : Finset ℕ) (a b : ℕ) : zz B C a b ≤ 2 := by
-  unfold zz; split_ifs <;> norm_num
+open Finset Real GridGen.Lookback
 
 theorem count_data6 {k : ℕ} (hk6 : 6 ≤ k) (hkle : k ≤ 7) {B₁ B₂ B₃ B₄ : Finset ℕ}
     (hB₁ : B₁.card = k) (hB₂ : B₂.card = k) (hB₃ : B₃.card = k) (hB₄ : B₄.card = k)

@@ -73,7 +73,7 @@ theorem mem_sts {A B C D E : Finset ℕ} {t : T5} :
 theorem card_sts (A B C D E : Finset ℕ) :
     ((sts A B C D E).card : ℤ) =
       A.card * (Four.sts B C D E).card - (Four.sts (A ∩ B) C D E).card := by
-  rw [sts, Four.card_prepend A (Four.sts B C D E) Four.r1]
+  rw [sts, Lookback.card_prepend A (Four.sts B C D E) Four.r1]
   have h : (Four.sts B C D E).filter (fun r => Four.r1 r ∈ A) = Four.sts (A ∩ B) C D E := by
     ext p; simp only [Finset.mem_filter, Four.mem_sts, Finset.mem_inter]; tauto
   rw [h]

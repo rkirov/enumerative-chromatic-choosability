@@ -16,7 +16,7 @@ colour set `D` fixed by the others is weighed by the fibre bound (`fibre_mem`), 
 
 namespace GridGen.Four
 
-open Finset Real
+open Finset Real GridGen.Lookback
 
 /-- A sum against an indicator is a filtered sum. -/
 theorem sum_mul_ite {Ω : Finset T4} (w : T4 → ℝ) (p : T4 → Prop) [DecidablePred p] :
@@ -43,10 +43,6 @@ theorem fibre_mem {Ω : Finset T4} (w : T4 → ℝ) (g : T4 → ℕ) {m R : ℝ}
   calc ∑ c ∈ D, m * ∑ t ∈ Ω.filter (fun t => g t = c), w t
       ≤ ∑ c ∈ D, R * ∑ t ∈ Ω, w t := Finset.sum_le_sum (fun c _ => hc c)
     _ = R * D.card * ∑ t ∈ Ω, w t := by rw [Finset.sum_const, nsmul_eq_mul]; ring
-
-theorem zz_eq (B C : Finset ℕ) (a b : ℕ) :
-    zz B C a b = (if a ∈ B \ C then 1 else 0) + (if b ∈ C \ B then 1 else 0) := by
-  unfold zz; simp only [Finset.mem_sdiff]
 
 theorem xin_eq (B C : Finset ℕ) (c : ℕ) : xin B C c = if c ∈ B \ C then 1 else 0 := by
   unfold xin; simp only [Finset.mem_sdiff]

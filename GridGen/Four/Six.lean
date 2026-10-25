@@ -16,7 +16,7 @@ certificate holds (`cert6`).
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 theorem mu_nat6 {B C : Finset ℕ} (hB : B.card = 6) :
     ∃ m : ℕ, mu 6 B C = m ∧ m ≤ 6 ∧ (B ∩ C).card + m = 6 := by

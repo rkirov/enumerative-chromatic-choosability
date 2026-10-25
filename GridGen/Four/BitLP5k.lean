@@ -26,7 +26,7 @@ code vector and pattern, `V ≥ (L0 - Σ_{pins that fire} λ)/D` (in integers). 
 
 namespace GridGen.Four
 
-open Finset
+open Finset GridGen.Lookback
 
 /-! ### Lists and sets by row -/
 

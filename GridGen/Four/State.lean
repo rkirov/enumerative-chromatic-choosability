@@ -19,7 +19,7 @@ pattern sum `PS`, and the passage from a log bound to `GB ≥ GU · (1 + Λ)`
 
 namespace GridGen.Four
 
-open Finset Real
+open Finset Real GridGen.Lookback
 
 /-- The uniform count of a proper column. -/
 theorem card_sts_canon {k : ℕ} (hk : 4 ≤ k) {s : T4} (hs : Proper s) :
@@ -79,17 +79,6 @@ theorem G_pos {k : ℕ} (hk : 5 ≤ k) {w : Wt} (hw : InBox k w) {A₁ A₂ A₃
   exact Finset.sum_pos (fun t _ => (rho_pos' hk).trans_le (gw_mem hw t).1)
     (sts_nonempty h₁ h₂ h₃ h₄)
 
-theorem card_sdiff_mu {k : ℕ} {B : Finset ℕ} (hB : B.card = k) (C : Finset ℕ) :
-    ((B \ C).card : ℝ) = mu k B C := by
-  unfold mu
-  have := Finset.card_sdiff_add_card_inter B C
-  rw [hB] at this
-  have : ((B \ C).card : ℝ) + (B ∩ C).card = k := by exact_mod_cast this
-  linarith
-
-theorem mu_comm (k : ℕ) (B C : Finset ℕ) : mu k B C = mu k C B := by
-  unfold mu; rw [Finset.inter_comm]
-
 theorem card_sdiff_tri (X Y Z : Finset ℕ) :
     ((X \ Z).card : ℝ) ≤ (X \ Y).card + (Y \ Z).card := by
   have h : X \ Z ⊆ (X \ Y) ∪ (Y \ Z) := by
@@ -101,23 +90,10 @@ theorem notin_le (B C : Finset ℕ) (c : ℕ) :
     (if c ∈ C then (0 : ℝ) else 1) ≤ hb B c + xin B C c := by
   unfold hb xin; split_ifs <;> simp_all
 
-theorem card_ge_of_erase {k : ℕ} {B : Finset ℕ} (hB : B.card = k) (c : ℕ) :
-    k - 1 ≤ (B.erase c).card := by
-  have := Finset.pred_card_le_card_erase (s := B) (a := c); omega
-
 /-- The size of the difference from the reference palette. -/
 noncomputable def PS (k : ℕ) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : ℝ :=
   (mu k B₁ B₂ + 2 * mu k B₂ B₃ + mu k B₃ B₄)
     + 4 * (hb B₁ (r1 s) + hb B₂ (r2 s) + hb B₃ (r3 s) + hb B₄ (r4 s))
     + 4 * (xin B₁ B₂ (r1 s) + xin B₃ B₂ (r3 s) + xin B₄ B₂ (r4 s))
-
-/-- From a log gain to the product form `GB ≥ GU · (1 + λ)`. -/
-theorem mul_one_add_le_of_log {u b l : ℝ} (hu : 0 < u) (hb : 0 < b) (h : l ≤ log (b / u)) :
-    u * (1 + l) ≤ b := by
-  have hpos : 0 < b / u := div_pos hb hu
-  have h2 : exp l ≤ b / u := by rw [← Real.exp_log hpos]; exact Real.exp_le_exp.mpr h
-  have h3 : 1 + l ≤ b / u := (by rw [add_comm]; exact Real.add_one_le_exp _ : 1 + l ≤ _).trans h2
-  calc u * (1 + l) ≤ u * (b / u) := mul_le_mul_of_nonneg_left h3 hu.le
-    _ = b := mul_div_cancel₀ _ hu.ne'
 
 end GridGen.Four

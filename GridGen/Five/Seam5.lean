@@ -3,7 +3,6 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import GridGen.Five.LogB5
-import GridGen.Four.Seam6
 
 /-!
 # Height five, `k = 6`: the averaged certificate
@@ -91,7 +90,7 @@ theorem state_bound_of_count {w : Wt5} (hw : InBox5 w) {B₁ B₂ B₃ B₄ B₅
         (B₅.erase (r5 s))).card : ℝ) / (194481 / 125))) :
     GU 6 w s * (1 + (Kr (orb s) + L)) ≤ GB w B₁ B₂ B₃ B₄ B₅ s := by
   have c5 : ∀ (B : Finset ℕ) (c : ℕ), B.card = 6 → 5 ≤ (B.erase c).card := fun B c hB => by
-    have := Four.card_ge_of_erase hB c; omega
+    have := Lookback.card_ge_of_erase hB c; omega
   have hp := pattern5 hw (orb s) (c5 B₁ (r1 s) hB₁) (c5 B₂ (r2 s) hB₂) (c5 B₃ (r3 s) hB₃)
     (c5 B₄ (r4 s) hB₄) (c5 B₅ (r5 s) hB₅)
   set N : ℝ := ((sts (B₁.erase (r1 s)) (B₂.erase (r2 s)) (B₃.erase (r3 s)) (B₄.erase (r4 s))
@@ -107,7 +106,7 @@ theorem state_bound_of_count {w : Wt5} (hw : InBox5 w) {B₁ B₂ B₃ B₄ B₅
   have hGlow : 971038 / 1000000 * N * V / R ≤ Gv := by
     rw [div_le_iff₀ hR]; linarith
   have hG : 0 < Gv := lt_of_lt_of_le hlow hGlow
-  apply Four.mul_one_add_le_of_log hU hG
+  apply Lookback.mul_one_add_le_of_log hU hG
   have hratio : 971038 / 1000000 * N / R ≤ Gv / V := by
     rw [le_div_iff₀ hU]
     calc 971038 / 1000000 * N / R * V = 971038 / 1000000 * N * V / R := by ring
@@ -252,20 +251,20 @@ theorem sum_Lr {Ω : Finset T5} (u : T5 → ℝ) (hu0 : ∀ t, 0 ≤ u t) (ga gb
     {B C : Finset ℕ} (hB : B.card = 6) (hC : C.card = 6) {qa qb : ℝ}
     (hqa : ∀ c, ∑ t ∈ Ω.filter (fun t => ga t = c), u t ≤ qa * ∑ t ∈ Ω, u t)
     (hqb : ∀ c, ∑ t ∈ Ω.filter (fun t => gb t = c), u t ≤ qb * ∑ t ∈ Ω, u t) :
-    hrow qa qb (Four.mu 6 B C) * ∑ t ∈ Ω, u t ≤ ∑ t ∈ Ω, u t * Lr B C (ga t) (gb t) := by
+    hrow qa qb (Lookback.mu 6 B C) * ∑ t ∈ Ω, u t ≤ ∑ t ∈ Ω, u t * Lr B C (ga t) (gb t) := by
   have b1 := pin_min5 u hu0 ga hqa (B \ C)
   have b2 := pin_min5 u hu0 gb hqb (C \ B)
-  rw [Four.card_sdiff_mu hB] at b1
-  rw [Four.card_sdiff_mu hC, Four.mu_comm 6 C B] at b2
-  have hz : 0 ≤ Four.zslope 5 (Four.mu 6 B C) :=
-    Four.zslope_nonneg (by norm_num) (Four.mu_nonneg hB)
-  have e1 : ∀ t, u t * Lr B C (ga t) (gb t) = log (1 + Four.mu 6 B C / 21) * u t
-      - Four.zslope 5 (Four.mu 6 B C) * (u t * (if ga t ∈ B \ C then 1 else 0)
+  rw [Lookback.card_sdiff_mu hB] at b1
+  rw [Lookback.card_sdiff_mu hC, Lookback.mu_comm 6 C B] at b2
+  have hz : 0 ≤ Lookback.zslope 5 (Lookback.mu 6 B C) :=
+    Lookback.zslope_nonneg (by norm_num) (Lookback.mu_nonneg hB)
+  have e1 : ∀ t, u t * Lr B C (ga t) (gb t) = log (1 + Lookback.mu 6 B C / 21) * u t
+      - Lookback.zslope 5 (Lookback.mu 6 B C) * (u t * (if ga t ∈ B \ C then 1 else 0)
         + u t * (if gb t ∈ C \ B then 1 else 0)) := fun t => by
-    unfold Lr; rw [Four.zz_eq]; ring
+    unfold Lr; rw [Lookback.zz_eq]; ring
   have e : ∑ t ∈ Ω, u t * Lr B C (ga t) (gb t)
-      = log (1 + Four.mu 6 B C / 21) * ∑ t ∈ Ω, u t
-        - Four.zslope 5 (Four.mu 6 B C) * (∑ t ∈ Ω, u t * (if ga t ∈ B \ C then 1 else 0)
+      = log (1 + Lookback.mu 6 B C / 21) * ∑ t ∈ Ω, u t
+        - Lookback.zslope 5 (Lookback.mu 6 B C) * (∑ t ∈ Ω, u t * (if ga t ∈ B \ C then 1 else 0)
           + ∑ t ∈ Ω, u t * (if gb t ∈ C \ B then 1 else 0)) := by
     rw [Finset.sum_congr rfl (fun t _ => e1 t), Finset.sum_sub_distrib, ← Finset.mul_sum,
       ← Finset.mul_sum, Finset.sum_add_distrib]
@@ -384,7 +383,8 @@ theorem seam_of_F5 {w : Wt5} (hw : InBox5 w) {X₁ X₂ X₃ X₄ X₅ B₁ B₂
     (hX₁ : 5 ≤ X₁.card) (hX₂ : 5 ≤ X₂.card) (hX₃ : 5 ≤ X₃.card) (hX₄ : 5 ≤ X₄.card)
     (hX₅ : 5 ≤ X₅.card) (hB₁ : B₁.card = 6) (hB₂ : B₂.card = 6) (hB₃ : B₃.card = 6)
     (hB₄ : B₄.card = 6) (hB₅ : B₅.card = 6)
-    (hF : 0 ≤ F5 (Four.mu 6 B₁ B₂) (Four.mu 6 B₂ B₃) (Four.mu 6 B₃ B₄) (Four.mu 6 B₄ B₅)) :
+    (hF : 0 ≤ F5 (Lookback.mu 6 B₁ B₂) (Lookback.mu 6 B₂ B₃) (Lookback.mu 6 B₃ B₄)
+      (Lookback.mu 6 B₄ B₅)) :
     ∑ s ∈ sts X₁ X₂ X₃ X₄ X₅, GU 6 w s ≤ ∑ s ∈ sts X₁ X₂ X₃ X₄ X₅, GB w B₁ B₂ B₃ B₄ B₅ s := by
   set Ω := sts X₁ X₂ X₃ X₄ X₅ with hΩ
   set W := ∑ t ∈ Ω, GU 6 w t with hW

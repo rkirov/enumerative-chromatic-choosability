@@ -3,7 +3,6 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import GridGen.Five.Statement
-import GridGen.Four.Relabel
 
 /-!
 # Height five: relabelling colours
@@ -267,9 +266,10 @@ theorem G_erase_eq (w : Wt5) {s s' : T5} (hs : Proper s) (hs' : Proper s') (h : 
     simp only [Finset.coe_union, Set.mem_union, Finset.mem_coe, Finset.mem_erase] at hx
     simp only [Finset.mem_coe]
     rcases hx with (((h | h) | h) | h) | h <;> exact h.2
-  rw [← G_image w hU, Four.image_erase_of_injOn hg hP.1, Four.image_erase_of_injOn hg hP.2.1,
-    Four.image_erase_of_injOn hg hP.2.2.1, Four.image_erase_of_injOn hg hP.2.2.2.1,
-    Four.image_erase_of_injOn hg hP.2.2.2.2, hgP, g1, g2, g3, g4, g5]
+  rw [← G_image w hU, Lookback.image_erase_of_injOn hg hP.1,
+    Lookback.image_erase_of_injOn hg hP.2.1, Lookback.image_erase_of_injOn hg hP.2.2.1,
+    Lookback.image_erase_of_injOn hg hP.2.2.2.1,
+    Lookback.image_erase_of_injOn hg hP.2.2.2.2, hgP, g1, g2, g3, g4, g5]
 
 /-! ### The canonical realisation -/
 
