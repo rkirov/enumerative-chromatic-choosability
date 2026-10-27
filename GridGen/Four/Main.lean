@@ -8,11 +8,14 @@ import GridGen.Four.Init
 import GridGen.Four.Five
 import GridGen.Four.Init5k
 import GridGen.Gauge.Seven.Assemble7
+import GridGen.Four.K4.Data.Final
 
 /-!
-# Height four: `P₄ □ P_{n+1}` is `k`-ECC for every `k ≥ 5`
+# Height four: `P₄ □ P_{n+1}` is `k`-ECC for every `k ≥ 4`
 
-For `k = 5` and `k = 6` the height-four seam inequality (`seam4Holds_five`, `seam4Holds_six`) and
+At `k = 4` the one-column seam inequality fails; a depth-two lookback with an invariant cone and
+Codex's (OpenAI) four-bad-pattern classification gives the theorem (`GridGen/Four/K4/`,
+`K4.ecc_pathG_three_four`). For `k = 5` and `k = 6` the height-four seam inequality (`seam4Holds_five`, `seam4Holds_six`) and
 initial inequality (`init4Holds_five`, `init4Holds_six`) feed GridGen's telescoping
 (`ecc_pathG_three_of_holds`); for `k ≥ 7` every grid is `k`-ECC
 (`ListColoring.ecc_boxProd_pathG_of_seven`, the gauge route).
@@ -35,9 +38,10 @@ namespace GridGen.Four
 open SimpleGraph ListColoring
 open scoped SimpleGraph
 
-/-- **`P₄ □ P_{n+1}` is `k`-ECC for every `k ≥ 5`.** -/
-theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 3 □ pathG n).ECCAt k := by
-  rcases (show k = 5 ∨ k = 6 ∨ 7 ≤ k by omega) with rfl | rfl | hk7
+/-- **`P₄ □ P_{n+1}` is `k`-ECC for every `k ≥ 4`.** -/
+theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 4 ≤ k) (n : ℕ) : (pathG 3 □ pathG n).ECCAt k := by
+  rcases (show k = 4 ∨ k = 5 ∨ k = 6 ∨ 7 ≤ k by omega) with rfl | rfl | rfl | hk7
+  · exact K4.ecc_pathG_three_four n
   · exact ecc_pathG_three_of_holds (by norm_num) seam4Holds_five init4Holds_five n
   · exact ecc_pathG_three_of_holds (by norm_num) seam4Holds_six init4Holds_six n
   · exact ecc_boxProd_pathG_of_seven hk7 3 n

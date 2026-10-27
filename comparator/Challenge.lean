@@ -693,11 +693,12 @@ theorem completeBipartite_two_eccAt_of_sqrt_lt {k n : ℕ} (hk : 300 ≤ k) (hkn
 
 end SimpleGraph.TwoDegenerate.K2nSqrt
 
-/-! ### 17. Height-four grids at list sizes at least five
+/-! ### 17. Height-four grids at list sizes at least four
 
 Kirov–Naimi's Question 1 asks whether every grid is ECC at every list size. Proved in
-`GridGen/Four/` for the `4 × (n+1)` grids at every `k ≥ 5`: a seam inequality between consecutive
-columns for `k = 5` and `k = 6`, fed to GridGen's telescoping, and §18's `k ≥ 7` below.
+`GridGen/Four/` for the `4 × (n+1)` grids at every `k ≥ 4`: a seam inequality between consecutive
+columns for `k = 5` and `k = 6`, fed to GridGen's telescoping, and §18's `k ≥ 7` below; at `k = 4`
+a two-column lookback with an invariant cone and a classification of four bad list patterns.
 -/
 
 namespace GridGen.Four
@@ -705,8 +706,8 @@ namespace GridGen.Four
 open SimpleGraph ListColoring
 open scoped SimpleGraph
 
-/-- Every `4 × (n+1)` grid is ECC at every list size at least five. -/
-theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 3 □ pathG n).ECCAt k := sorry
+/-- Every `4 × (n+1)` grid is ECC at every list size at least four. -/
+theorem ecc_boxProd_pathG_three {k : ℕ} (hk : 4 ≤ k) (n : ℕ) : (pathG 3 □ pathG n).ECCAt k := sorry
 
 end GridGen.Four
 
