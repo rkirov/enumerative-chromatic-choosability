@@ -9,34 +9,6 @@ import GridGen.Four.K4.Data.Pw03
 import GridGen.Four.K4.Data.Pw04
 import GridGen.Four.K4.Data.Pw05
 import GridGen.Four.K4.Data.Pw06
-import GridGen.Four.K4.Data.Pw07
-import GridGen.Four.K4.Data.Pw08
-import GridGen.Four.K4.Data.Pw09
-import GridGen.Four.K4.Data.Pw10
-import GridGen.Four.K4.Data.Pw11
-import GridGen.Four.K4.Data.Pw12
-import GridGen.Four.K4.Data.Pw13
-import GridGen.Four.K4.Data.Pw14
-import GridGen.Four.K4.Data.Pw15
-import GridGen.Four.K4.Data.Pw16
-import GridGen.Four.K4.Data.Pw17
-import GridGen.Four.K4.Data.Pw18
-import GridGen.Four.K4.Data.Pw19
-import GridGen.Four.K4.Data.Pw20
-import GridGen.Four.K4.Data.Pw21
-import GridGen.Four.K4.Data.Pw22
-import GridGen.Four.K4.Data.Pw23
-import GridGen.Four.K4.Data.Pw24
-import GridGen.Four.K4.Data.Pw25
-import GridGen.Four.K4.Data.Pw26
-import GridGen.Four.K4.Data.Pw27
-import GridGen.Four.K4.Data.Pw28
-import GridGen.Four.K4.Data.Pw29
-import GridGen.Four.K4.Data.Pw30
-import GridGen.Four.K4.Data.Pw31
-import GridGen.Four.K4.Data.Pw32
-import GridGen.Four.K4.Data.Pw33
-import GridGen.Four.K4.Data.Pw34
 
 /-!
 # Height four at `k = 4`: reversed shapes
@@ -287,6 +259,966 @@ theorem cert_950 : CertAt [0, 2, 1, 1, 1, 1, 0, 1, 2, 0, 0, 1, 0, 0, 0] := certA
 theorem cert_952 : CertAt [0, 1, 1, 2, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_313)
 
 theorem cert_954 : CertAt [0, 0, 1, 2, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_420)
+
+theorem cert_955 : CertAt [0, 1, 1, 1, 1, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_156)
+
+theorem cert_956 : CertAt [0, 1, 1, 0, 1, 2, 0, 1, 2, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_831)
+
+theorem cert_957 : CertAt [0, 0, 1, 1, 1, 2, 0, 1, 2, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_318)
+
+theorem cert_959 : CertAt [0, 0, 1, 0, 1, 3, 0, 2, 2, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_161)
+
+theorem cert_969 : CertAt [1, 3, 1, 2, 2, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_10)
+
+theorem cert_970 : CertAt [1, 3, 1, 1, 2, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_720)
+
+theorem cert_972 : CertAt [1, 2, 1, 2, 2, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_207)
+
+theorem cert_973 : CertAt [1, 2, 1, 1, 2, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_867)
+
+theorem cert_975 : CertAt [1, 1, 1, 2, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_353)
+
+theorem cert_978 : CertAt [1, 0, 1, 2, 2, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_436)
+
+theorem cert_980 : CertAt [1, 2, 1, 1, 2, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_24)
+
+theorem cert_981 : CertAt [1, 2, 1, 0, 2, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_733)
+
+theorem cert_982 : CertAt [1, 1, 1, 1, 2, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_219)
+
+theorem cert_983 : CertAt [1, 1, 1, 0, 2, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_878)
+
+theorem cert_984 : CertAt [1, 0, 1, 1, 2, 1, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_363)
+
+theorem cert_986 : CertAt [1, 1, 1, 0, 2, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_35)
+
+theorem cert_987 : CertAt [1, 0, 1, 0, 2, 2, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_228)
+
+theorem cert_998 : CertAt [0, 3, 1, 2, 2, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_89)
+
+theorem cert_999 : CertAt [0, 3, 1, 1, 2, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_777)
+
+theorem cert_1001 : CertAt [0, 2, 1, 2, 2, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_265)
+
+theorem cert_1002 : CertAt [0, 2, 1, 1, 2, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_912)
+
+theorem cert_1004 : CertAt [0, 1, 1, 2, 2, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_389)
+
+theorem cert_1006 : CertAt [0, 0, 1, 2, 2, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_453)
+
+theorem cert_1007 : CertAt [0, 2, 1, 1, 2, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_99)
+
+theorem cert_1008 : CertAt [0, 2, 1, 0, 2, 1, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_787)
+
+theorem cert_1009 : CertAt [0, 1, 1, 1, 2, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_274)
+
+theorem cert_1010 : CertAt [0, 1, 1, 0, 2, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_921)
+
+theorem cert_1011 : CertAt [0, 0, 1, 1, 2, 1, 0, 1, 1, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_396)
+
+theorem cert_1013 : CertAt [0, 1, 1, 0, 2, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_108)
+
+theorem cert_1014 : CertAt [0, 0, 1, 0, 2, 2, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_281)
+
+theorem cert_1024 : CertAt [0, 3, 1, 1, 3, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_13)
+
+theorem cert_1025 : CertAt [0, 3, 1, 0, 3, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_723)
+
+theorem cert_1026 : CertAt [0, 2, 1, 1, 3, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_210)
+
+theorem cert_1027 : CertAt [0, 2, 1, 0, 3, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_870)
+
+theorem cert_1028 : CertAt [0, 1, 1, 1, 3, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_356)
+
+theorem cert_1029 : CertAt [0, 1, 1, 0, 3, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_979)
+
+theorem cert_1030 : CertAt [0, 0, 1, 1, 3, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_438)
+
+theorem cert_1032 : CertAt [0, 2, 1, 0, 3, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_27)
+
+theorem cert_1033 : CertAt [0, 1, 1, 0, 3, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_222)
+
+theorem cert_1034 : CertAt [0, 0, 1, 0, 3, 1, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_365)
+
+theorem cert_1219 : CertAt [2, 2, 2, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_2)
+
+theorem cert_1220 : CertAt [2, 2, 2, 3, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_712)
+
+theorem cert_1224 : CertAt [2, 1, 2, 4, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_200)
+
+theorem cert_1225 : CertAt [2, 1, 2, 3, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_860)
+
+theorem cert_1228 : CertAt [2, 0, 2, 4, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_348)
+
+theorem cert_1229 : CertAt [2, 0, 2, 3, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_971)
+
+theorem cert_1231 : CertAt [2, 1, 2, 3, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_17)
+
+theorem cert_1232 : CertAt [2, 1, 2, 2, 0, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_726)
+
+theorem cert_1235 : CertAt [2, 0, 2, 3, 0, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_214)
+
+theorem cert_1236 : CertAt [2, 0, 2, 2, 0, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_873)
+
+theorem cert_1239 : CertAt [2, 0, 2, 2, 0, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_30)
+
+theorem cert_1240 : CertAt [2, 0, 2, 1, 0, 2, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_737)
+
+theorem cert_1255 : CertAt [1, 2, 2, 4, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_83)
+
+theorem cert_1256 : CertAt [1, 2, 2, 3, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_771)
+
+theorem cert_1259 : CertAt [1, 1, 2, 4, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_259)
+
+theorem cert_1260 : CertAt [1, 1, 2, 3, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_906)
+
+theorem cert_1262 : CertAt [1, 0, 2, 4, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_384)
+
+theorem cert_1263 : CertAt [1, 0, 2, 3, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1000)
+
+theorem cert_1264 : CertAt [1, 1, 2, 3, 0, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_93)
+
+theorem cert_1265 : CertAt [1, 1, 2, 2, 0, 1, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_781)
+
+theorem cert_1268 : CertAt [1, 0, 2, 3, 0, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_269)
+
+theorem cert_1269 : CertAt [1, 0, 2, 2, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_916)
+
+theorem cert_1271 : CertAt [1, 0, 2, 2, 0, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_103)
+
+theorem cert_1272 : CertAt [1, 0, 2, 1, 0, 2, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_790)
+
+theorem cert_1284 : CertAt [0, 2, 2, 4, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_142)
+
+theorem cert_1285 : CertAt [0, 2, 2, 3, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_817)
+
+theorem cert_1287 : CertAt [0, 1, 2, 4, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_305)
+
+theorem cert_1288 : CertAt [0, 1, 2, 3, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_945)
+
+theorem cert_1289 : CertAt [0, 0, 2, 4, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_413)
+
+theorem cert_1290 : CertAt [0, 1, 2, 3, 0, 1, 0, 2, 2, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_148)
+
+theorem cert_1291 : CertAt [0, 1, 2, 2, 0, 1, 0, 1, 2, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_823)
+
+theorem cert_1293 : CertAt [0, 0, 2, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_311)
+
+theorem cert_1294 : CertAt [0, 0, 2, 2, 0, 1, 0, 0, 2, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_951)
+
+theorem cert_1295 : CertAt [0, 0, 2, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_154)
+
+theorem cert_1296 : CertAt [0, 0, 2, 1, 0, 2, 0, 1, 2, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_829)
+
+theorem cert_1304 : CertAt [1, 2, 2, 3, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_7)
+
+theorem cert_1305 : CertAt [1, 2, 2, 2, 1, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_717)
+
+theorem cert_1306 : CertAt [1, 2, 2, 1, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1226)
+
+theorem cert_1308 : CertAt [1, 1, 2, 3, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_204)
+
+theorem cert_1309 : CertAt [1, 1, 2, 2, 1, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_864)
+
+theorem cert_1312 : CertAt [1, 0, 2, 3, 1, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_351)
+
+theorem cert_1313 : CertAt [1, 0, 2, 2, 1, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_974)
+
+theorem cert_1315 : CertAt [1, 1, 2, 2, 1, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_21)
+
+theorem cert_1316 : CertAt [1, 1, 2, 1, 1, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_730)
+
+theorem cert_1318 : CertAt [1, 0, 2, 2, 1, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_217)
+
+theorem cert_1319 : CertAt [1, 0, 2, 1, 1, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_876)
+
+theorem cert_1321 : CertAt [1, 0, 2, 1, 1, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_33)
+
+theorem cert_1322 : CertAt [1, 0, 2, 0, 1, 2, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_740)
+
+theorem cert_1333 : CertAt [0, 2, 2, 3, 1, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_87)
+
+theorem cert_1334 : CertAt [0, 2, 2, 2, 1, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_775)
+
+theorem cert_1335 : CertAt [0, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1261)
+
+theorem cert_1337 : CertAt [0, 1, 2, 3, 1, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_263)
+
+theorem cert_1338 : CertAt [0, 1, 2, 2, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_910)
+
+theorem cert_1340 : CertAt [0, 0, 2, 3, 1, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_387)
+
+theorem cert_1341 : CertAt [0, 0, 2, 2, 1, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1003)
+
+theorem cert_1342 : CertAt [0, 1, 2, 2, 1, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_97)
+
+theorem cert_1343 : CertAt [0, 1, 2, 1, 1, 1, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_785)
+
+theorem cert_1345 : CertAt [0, 0, 2, 2, 1, 1, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_272)
+
+theorem cert_1346 : CertAt [0, 0, 2, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_919)
+
+theorem cert_1348 : CertAt [0, 0, 2, 1, 1, 2, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_106)
+
+theorem cert_1349 : CertAt [0, 0, 2, 0, 1, 2, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_793)
+
+theorem cert_1359 : CertAt [0, 2, 2, 2, 2, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_11)
+
+theorem cert_1360 : CertAt [0, 2, 2, 1, 2, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_721)
+
+theorem cert_1361 : CertAt [0, 2, 2, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1230)
+
+theorem cert_1362 : CertAt [0, 1, 2, 2, 2, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_208)
+
+theorem cert_1363 : CertAt [0, 1, 2, 1, 2, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_868)
+
+theorem cert_1364 : CertAt [0, 1, 2, 0, 2, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1314)
+
+theorem cert_1365 : CertAt [0, 0, 2, 2, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_354)
+
+theorem cert_1366 : CertAt [0, 0, 2, 1, 2, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_977)
+
+theorem cert_1368 : CertAt [0, 1, 2, 1, 2, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_25)
+
+theorem cert_1369 : CertAt [0, 1, 2, 0, 2, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_734)
+
+theorem cert_1370 : CertAt [0, 0, 2, 1, 2, 1, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_220)
+
+theorem cert_1371 : CertAt [0, 0, 2, 0, 2, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_879)
+
+theorem cert_1372 : CertAt [0, 0, 2, 0, 2, 2, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_36)
+
+theorem cert_1459 : CertAt [1, 1, 3, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_3)
+
+theorem cert_1460 : CertAt [1, 1, 3, 3, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_713)
+
+theorem cert_1461 : CertAt [1, 1, 3, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1222)
+
+theorem cert_1464 : CertAt [1, 0, 3, 4, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_201)
+
+theorem cert_1465 : CertAt [1, 0, 3, 3, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_861)
+
+theorem cert_1466 : CertAt [1, 0, 3, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1307)
+
+theorem cert_1468 : CertAt [1, 0, 3, 3, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_18)
+
+theorem cert_1469 : CertAt [1, 0, 3, 2, 0, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_727)
+
+theorem cert_1470 : CertAt [1, 0, 3, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1234)
+
+theorem cert_1476 : CertAt [0, 1, 3, 4, 0, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_84)
+
+theorem cert_1477 : CertAt [0, 1, 3, 3, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_772)
+
+theorem cert_1478 : CertAt [0, 1, 3, 2, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1258)
+
+theorem cert_1480 : CertAt [0, 0, 3, 4, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_260)
+
+theorem cert_1481 : CertAt [0, 0, 3, 3, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_907)
+
+theorem cert_1482 : CertAt [0, 0, 3, 2, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1336)
+
+theorem cert_1483 : CertAt [0, 0, 3, 3, 0, 1, 0, 3, 1, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_94)
+
+theorem cert_1484 : CertAt [0, 0, 3, 2, 0, 1, 0, 2, 1, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_782)
+
+theorem cert_1485 : CertAt [0, 0, 3, 1, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1267)
+
+theorem cert_1490 : CertAt [0, 1, 3, 3, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_8)
+
+theorem cert_1491 : CertAt [0, 1, 3, 2, 1, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_718)
+
+theorem cert_1492 : CertAt [0, 1, 3, 1, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1227)
+
+theorem cert_1494 : CertAt [0, 0, 3, 3, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_205)
+
+theorem cert_1495 : CertAt [0, 0, 3, 2, 1, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_865)
+
+theorem cert_1498 : CertAt [0, 0, 3, 2, 1, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_22)
+
+theorem cert_1499 : CertAt [0, 0, 3, 1, 1, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_731)
+
+theorem cert_1517 : CertAt [0, 0, 4, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0] := certAt_of_rev (by exact cert_4)
+
+theorem cert_1518 : CertAt [0, 0, 4, 3, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] := certAt_of_rev (by exact cert_714)
+
+theorem cert_1519 : CertAt [0, 0, 4, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1223)
+
+theorem cert_1520 : CertAt [0, 0, 4, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1463)
+
+theorem cert_1522 : CertAt [3, 3, 0, 4, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_467)
+
+theorem cert_1523 : CertAt [3, 3, 0, 3, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1038)
+
+theorem cert_1524 : CertAt [3, 3, 0, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1379)
+
+theorem cert_1525 : CertAt [3, 3, 0, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1504)
+
+theorem cert_1526 : CertAt [3, 2, 0, 4, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_560)
+
+theorem cert_1527 : CertAt [3, 2, 0, 3, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1116)
+
+theorem cert_1528 : CertAt [3, 2, 0, 2, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1424)
+
+theorem cert_1529 : CertAt [3, 1, 0, 4, 0, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_619)
+
+theorem cert_1530 : CertAt [3, 1, 0, 3, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1161)
+
+theorem cert_1531 : CertAt [3, 0, 0, 4, 0, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_643)
+
+theorem cert_1532 : CertAt [3, 2, 0, 3, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_477)
+
+theorem cert_1533 : CertAt [3, 2, 0, 2, 0, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1048)
+
+theorem cert_1534 : CertAt [3, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1388)
+
+theorem cert_1535 : CertAt [3, 2, 0, 0, 0, 1, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1511)
+
+theorem cert_1536 : CertAt [3, 1, 0, 3, 0, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_569)
+
+theorem cert_1537 : CertAt [3, 1, 0, 2, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1125)
+
+theorem cert_1538 : CertAt [3, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1432)
+
+theorem cert_1539 : CertAt [3, 0, 0, 3, 0, 1, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_626)
+
+theorem cert_1540 : CertAt [3, 0, 0, 2, 0, 1, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1168)
+
+theorem cert_1541 : CertAt [3, 1, 0, 2, 0, 2, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_486)
+
+theorem cert_1542 : CertAt [3, 1, 0, 1, 0, 2, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1056)
+
+theorem cert_1543 : CertAt [3, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1394)
+
+theorem cert_1544 : CertAt [3, 0, 0, 2, 0, 2, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_576)
+
+theorem cert_1545 : CertAt [3, 0, 0, 1, 0, 2, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1131)
+
+theorem cert_1546 : CertAt [3, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1436)
+
+theorem cert_1547 : CertAt [3, 0, 0, 1, 0, 3, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_492)
+
+theorem cert_1548 : CertAt [3, 0, 0, 0, 0, 3, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1060)
+
+theorem cert_1568 : CertAt [2, 3, 0, 4, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_513)
+
+theorem cert_1569 : CertAt [2, 3, 0, 3, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1077)
+
+theorem cert_1570 : CertAt [2, 3, 0, 2, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1405)
+
+theorem cert_1571 : CertAt [2, 2, 0, 4, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_589)
+
+theorem cert_1572 : CertAt [2, 2, 0, 3, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1142)
+
+theorem cert_1573 : CertAt [2, 1, 0, 4, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_633)
+
+theorem cert_1574 : CertAt [2, 2, 0, 3, 0, 1, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_519)
+
+theorem cert_1575 : CertAt [2, 2, 0, 2, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1083)
+
+theorem cert_1576 : CertAt [2, 2, 0, 1, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1411)
+
+theorem cert_1577 : CertAt [2, 1, 0, 3, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_595)
+
+theorem cert_1578 : CertAt [2, 1, 0, 2, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1148)
+
+theorem cert_1579 : CertAt [2, 0, 0, 3, 0, 1, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_638)
+
+theorem cert_1580 : CertAt [2, 1, 0, 2, 0, 2, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_525)
+
+theorem cert_1581 : CertAt [2, 1, 0, 1, 0, 2, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1089)
+
+theorem cert_1582 : CertAt [2, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1416)
+
+theorem cert_1583 : CertAt [2, 0, 0, 2, 0, 2, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_600)
+
+theorem cert_1584 : CertAt [2, 0, 0, 1, 0, 2, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1153)
+
+theorem cert_1585 : CertAt [2, 0, 0, 1, 0, 3, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_530)
+
+theorem cert_1586 : CertAt [2, 0, 0, 0, 0, 3, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1093)
+
+theorem cert_1597 : CertAt [1, 3, 0, 4, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_542)
+
+theorem cert_1598 : CertAt [1, 3, 0, 3, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1103)
+
+theorem cert_1599 : CertAt [1, 2, 0, 4, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_609)
+
+theorem cert_1600 : CertAt [1, 2, 0, 3, 0, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_545)
+
+theorem cert_1601 : CertAt [1, 2, 0, 2, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1106)
+
+theorem cert_1602 : CertAt [1, 1, 0, 3, 0, 1, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_612)
+
+theorem cert_1603 : CertAt [1, 1, 0, 2, 0, 2, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_548)
+
+theorem cert_1604 : CertAt [1, 1, 0, 1, 0, 2, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1109)
+
+theorem cert_1605 : CertAt [1, 0, 0, 2, 0, 2, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_615)
+
+theorem cert_1606 : CertAt [1, 0, 0, 1, 0, 3, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_551)
+
+theorem cert_1607 : CertAt [1, 0, 0, 0, 0, 3, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1112)
+
+theorem cert_1611 : CertAt [0, 3, 0, 4, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_556)
+
+theorem cert_1612 : CertAt [0, 2, 0, 3, 0, 1, 0, 0, 3, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_557)
+
+theorem cert_1613 : CertAt [0, 1, 0, 2, 0, 2, 0, 0, 3, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_558)
+
+theorem cert_1614 : CertAt [0, 0, 0, 1, 0, 3, 0, 0, 3, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_559)
+
+theorem cert_1615 : CertAt [2, 3, 0, 3, 1, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_471)
+
+theorem cert_1616 : CertAt [2, 3, 0, 2, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1042)
+
+theorem cert_1617 : CertAt [2, 3, 0, 1, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1383)
+
+theorem cert_1618 : CertAt [2, 3, 0, 0, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1508)
+
+theorem cert_1619 : CertAt [2, 2, 0, 3, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_563)
+
+theorem cert_1620 : CertAt [2, 2, 0, 2, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1119)
+
+theorem cert_1621 : CertAt [2, 2, 0, 1, 1, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1427)
+
+theorem cert_1622 : CertAt [2, 1, 0, 3, 1, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_621)
+
+theorem cert_1623 : CertAt [2, 1, 0, 2, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1163)
+
+theorem cert_1624 : CertAt [2, 0, 0, 3, 1, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_644)
+
+theorem cert_1625 : CertAt [2, 2, 0, 2, 1, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_480)
+
+theorem cert_1626 : CertAt [2, 2, 0, 1, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1051)
+
+theorem cert_1627 : CertAt [2, 2, 0, 0, 1, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1391)
+
+theorem cert_1628 : CertAt [2, 1, 0, 2, 1, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_571)
+
+theorem cert_1629 : CertAt [2, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1127)
+
+theorem cert_1630 : CertAt [2, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1434)
+
+theorem cert_1631 : CertAt [2, 0, 0, 2, 1, 1, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_627)
+
+theorem cert_1632 : CertAt [2, 0, 0, 1, 1, 1, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1169)
+
+theorem cert_1633 : CertAt [2, 1, 0, 1, 1, 2, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_488)
+
+theorem cert_1634 : CertAt [2, 1, 0, 0, 1, 2, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1058)
+
+theorem cert_1635 : CertAt [2, 0, 0, 1, 1, 2, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_577)
+
+theorem cert_1636 : CertAt [2, 0, 0, 0, 1, 2, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1132)
+
+theorem cert_1637 : CertAt [2, 0, 0, 0, 1, 3, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_493)
+
+theorem cert_1654 : CertAt [1, 3, 0, 3, 1, 0, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_516)
+
+theorem cert_1655 : CertAt [1, 3, 0, 2, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1080)
+
+theorem cert_1656 : CertAt [1, 3, 0, 1, 1, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1408)
+
+theorem cert_1657 : CertAt [1, 2, 0, 3, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_592)
+
+theorem cert_1658 : CertAt [1, 2, 0, 2, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1145)
+
+theorem cert_1659 : CertAt [1, 1, 0, 3, 1, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_635)
+
+theorem cert_1660 : CertAt [1, 2, 0, 2, 1, 1, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_522)
+
+theorem cert_1661 : CertAt [1, 2, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1086)
+
+theorem cert_1662 : CertAt [1, 2, 0, 0, 1, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1414)
+
+theorem cert_1663 : CertAt [1, 1, 0, 2, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_597)
+
+theorem cert_1664 : CertAt [1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1150)
+
+theorem cert_1665 : CertAt [1, 0, 0, 2, 1, 1, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_639)
+
+theorem cert_1666 : CertAt [1, 1, 0, 1, 1, 2, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_527)
+
+theorem cert_1667 : CertAt [1, 1, 0, 0, 1, 2, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1091)
+
+theorem cert_1668 : CertAt [1, 0, 0, 1, 1, 2, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_601)
+
+theorem cert_1669 : CertAt [1, 0, 0, 0, 1, 2, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1154)
+
+theorem cert_1670 : CertAt [1, 0, 0, 0, 1, 3, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_531)
+
+theorem cert_1680 : CertAt [0, 3, 0, 3, 1, 0, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_544)
+
+theorem cert_1681 : CertAt [0, 3, 0, 2, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1105)
+
+theorem cert_1682 : CertAt [0, 2, 0, 3, 1, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_611)
+
+theorem cert_1683 : CertAt [0, 2, 0, 2, 1, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_547)
+
+theorem cert_1684 : CertAt [0, 2, 0, 1, 1, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1108)
+
+theorem cert_1685 : CertAt [0, 1, 0, 2, 1, 1, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_614)
+
+theorem cert_1686 : CertAt [0, 1, 0, 1, 1, 2, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_550)
+
+theorem cert_1687 : CertAt [0, 1, 0, 0, 1, 2, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1111)
+
+theorem cert_1688 : CertAt [0, 0, 0, 1, 1, 2, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_616)
+
+theorem cert_1689 : CertAt [0, 0, 0, 0, 1, 3, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_552)
+
+theorem cert_1693 : CertAt [1, 3, 0, 2, 2, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_474)
+
+theorem cert_1694 : CertAt [1, 3, 0, 1, 2, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1045)
+
+theorem cert_1695 : CertAt [1, 3, 0, 0, 2, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1386)
+
+theorem cert_1696 : CertAt [1, 2, 0, 2, 2, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_566)
+
+theorem cert_1697 : CertAt [1, 2, 0, 1, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1122)
+
+theorem cert_1698 : CertAt [1, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1430)
+
+theorem cert_1699 : CertAt [1, 1, 0, 2, 2, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_623)
+
+theorem cert_1700 : CertAt [1, 1, 0, 1, 2, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1165)
+
+theorem cert_1701 : CertAt [1, 0, 0, 2, 2, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_645)
+
+theorem cert_1702 : CertAt [1, 2, 0, 1, 2, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_483)
+
+theorem cert_1703 : CertAt [1, 2, 0, 0, 2, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1054)
+
+theorem cert_1704 : CertAt [1, 1, 0, 1, 2, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_573)
+
+theorem cert_1705 : CertAt [1, 1, 0, 0, 2, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1129)
+
+theorem cert_1706 : CertAt [1, 0, 0, 1, 2, 1, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_628)
+
+theorem cert_1707 : CertAt [1, 0, 0, 0, 2, 1, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1170)
+
+theorem cert_1708 : CertAt [1, 1, 0, 0, 2, 2, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_490)
+
+theorem cert_1709 : CertAt [1, 0, 0, 0, 2, 2, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_578)
+
+theorem cert_1719 : CertAt [0, 3, 0, 2, 2, 0, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_518)
+
+theorem cert_1720 : CertAt [0, 3, 0, 1, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1082)
+
+theorem cert_1721 : CertAt [0, 3, 0, 0, 2, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1410)
+
+theorem cert_1722 : CertAt [0, 2, 0, 2, 2, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_594)
+
+theorem cert_1723 : CertAt [0, 2, 0, 1, 2, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1147)
+
+theorem cert_1724 : CertAt [0, 1, 0, 2, 2, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_637)
+
+theorem cert_1725 : CertAt [0, 2, 0, 1, 2, 1, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_524)
+
+theorem cert_1726 : CertAt [0, 2, 0, 0, 2, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1088)
+
+theorem cert_1727 : CertAt [0, 1, 0, 1, 2, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_599)
+
+theorem cert_1728 : CertAt [0, 1, 0, 0, 2, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1152)
+
+theorem cert_1729 : CertAt [0, 0, 0, 1, 2, 1, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_640)
+
+theorem cert_1730 : CertAt [0, 1, 0, 0, 2, 2, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_529)
+
+theorem cert_1731 : CertAt [0, 0, 0, 0, 2, 2, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_602)
+
+theorem cert_1738 : CertAt [0, 3, 0, 1, 3, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_476)
+
+theorem cert_1739 : CertAt [0, 3, 0, 0, 3, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1047)
+
+theorem cert_1740 : CertAt [0, 2, 0, 1, 3, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_568)
+
+theorem cert_1741 : CertAt [0, 2, 0, 0, 3, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1124)
+
+theorem cert_1742 : CertAt [0, 1, 0, 1, 3, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_625)
+
+theorem cert_1743 : CertAt [0, 1, 0, 0, 3, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1167)
+
+theorem cert_1744 : CertAt [0, 0, 0, 1, 3, 0, 0, 0, 0, 3, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_646)
+
+theorem cert_1745 : CertAt [0, 2, 0, 0, 3, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_485)
+
+theorem cert_1746 : CertAt [0, 1, 0, 0, 3, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_575)
+
+theorem cert_1747 : CertAt [0, 0, 0, 0, 3, 1, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_629)
+
+theorem cert_1794 : CertAt [1, 3, 0, 2, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1754)
+
+theorem cert_1800 : CertAt [1, 2, 0, 1, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1760)
+
+theorem cert_1805 : CertAt [1, 1, 0, 0, 1, 2, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1765)
+
+theorem cert_1813 : CertAt [0, 3, 0, 2, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1779)
+
+theorem cert_1816 : CertAt [0, 2, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1782)
+
+theorem cert_1819 : CertAt [0, 1, 0, 0, 1, 2, 0, 1, 1, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1785)
+
+theorem cert_1823 : CertAt [0, 3, 0, 1, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1756)
+
+theorem cert_1825 : CertAt [0, 2, 0, 1, 2, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1799)
+
+theorem cert_1828 : CertAt [0, 2, 0, 0, 2, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1762)
+
+theorem cert_1829 : CertAt [0, 1, 0, 0, 2, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1804)
+
+theorem cert_1854 : CertAt [2, 2, 1, 4, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_468)
+
+theorem cert_1855 : CertAt [2, 2, 1, 3, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1039)
+
+theorem cert_1856 : CertAt [2, 2, 1, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1380)
+
+theorem cert_1857 : CertAt [2, 2, 1, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1505)
+
+theorem cert_1858 : CertAt [2, 1, 1, 4, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_561)
+
+theorem cert_1859 : CertAt [2, 1, 1, 3, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1117)
+
+theorem cert_1860 : CertAt [2, 1, 1, 2, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1425)
+
+theorem cert_1861 : CertAt [2, 0, 1, 4, 0, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_620)
+
+theorem cert_1862 : CertAt [2, 0, 1, 3, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1162)
+
+theorem cert_1863 : CertAt [2, 1, 1, 3, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_478)
+
+theorem cert_1864 : CertAt [2, 1, 1, 2, 0, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1049)
+
+theorem cert_1865 : CertAt [2, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1389)
+
+theorem cert_1866 : CertAt [2, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1512)
+
+theorem cert_1867 : CertAt [2, 0, 1, 3, 0, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_570)
+
+theorem cert_1868 : CertAt [2, 0, 1, 2, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1126)
+
+theorem cert_1870 : CertAt [2, 0, 1, 2, 0, 2, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_487)
+
+theorem cert_1871 : CertAt [2, 0, 1, 1, 0, 2, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1057)
+
+theorem cert_1872 : CertAt [2, 0, 1, 0, 0, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1395)
+
+theorem cert_1883 : CertAt [1, 2, 1, 4, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_514)
+
+theorem cert_1884 : CertAt [1, 2, 1, 3, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1078)
+
+theorem cert_1885 : CertAt [1, 2, 1, 2, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1406)
+
+theorem cert_1886 : CertAt [1, 1, 1, 4, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_590)
+
+theorem cert_1887 : CertAt [1, 1, 1, 3, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1143)
+
+theorem cert_1888 : CertAt [1, 0, 1, 4, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_634)
+
+theorem cert_1889 : CertAt [1, 1, 1, 3, 0, 1, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_520)
+
+theorem cert_1890 : CertAt [1, 1, 1, 2, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1084)
+
+theorem cert_1891 : CertAt [1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1412)
+
+theorem cert_1892 : CertAt [1, 0, 1, 3, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_596)
+
+theorem cert_1893 : CertAt [1, 0, 1, 2, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1149)
+
+theorem cert_1894 : CertAt [1, 0, 1, 2, 0, 2, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_526)
+
+theorem cert_1895 : CertAt [1, 0, 1, 1, 0, 2, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1090)
+
+theorem cert_1896 : CertAt [1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1417)
+
+theorem cert_1903 : CertAt [0, 2, 1, 4, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_543)
+
+theorem cert_1904 : CertAt [0, 2, 1, 3, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1104)
+
+theorem cert_1905 : CertAt [0, 1, 1, 4, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_610)
+
+theorem cert_1906 : CertAt [0, 1, 1, 3, 0, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_546)
+
+theorem cert_1907 : CertAt [0, 1, 1, 2, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1107)
+
+theorem cert_1908 : CertAt [0, 0, 1, 3, 0, 1, 0, 0, 2, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_613)
+
+theorem cert_1909 : CertAt [0, 0, 1, 2, 0, 2, 0, 1, 2, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_549)
+
+theorem cert_1910 : CertAt [0, 0, 1, 1, 0, 2, 0, 0, 2, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1110)
+
+theorem cert_1913 : CertAt [1, 2, 1, 3, 1, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_472)
+
+theorem cert_1914 : CertAt [1, 2, 1, 2, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1043)
+
+theorem cert_1915 : CertAt [1, 2, 1, 1, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1384)
+
+theorem cert_1916 : CertAt [1, 2, 1, 0, 1, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1509)
+
+theorem cert_1917 : CertAt [1, 1, 1, 3, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_564)
+
+theorem cert_1918 : CertAt [1, 1, 1, 2, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1120)
+
+theorem cert_1919 : CertAt [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1428)
+
+theorem cert_1920 : CertAt [1, 0, 1, 3, 1, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_622)
+
+theorem cert_1921 : CertAt [1, 0, 1, 2, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1164)
+
+theorem cert_1922 : CertAt [1, 1, 1, 2, 1, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_481)
+
+theorem cert_1923 : CertAt [1, 1, 1, 1, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1052)
+
+theorem cert_1925 : CertAt [1, 0, 1, 2, 1, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_572)
+
+theorem cert_1926 : CertAt [1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1128)
+
+theorem cert_1928 : CertAt [1, 0, 1, 1, 1, 2, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_489)
+
+theorem cert_1929 : CertAt [1, 0, 1, 0, 1, 2, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1059)
+
+theorem cert_1939 : CertAt [0, 2, 1, 3, 1, 0, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_517)
+
+theorem cert_1940 : CertAt [0, 2, 1, 2, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1081)
+
+theorem cert_1941 : CertAt [0, 2, 1, 1, 1, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1409)
+
+theorem cert_1942 : CertAt [0, 1, 1, 3, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_593)
+
+theorem cert_1943 : CertAt [0, 1, 1, 2, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1146)
+
+theorem cert_1944 : CertAt [0, 0, 1, 3, 1, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_636)
+
+theorem cert_1945 : CertAt [0, 1, 1, 2, 1, 1, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_523)
+
+theorem cert_1946 : CertAt [0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1087)
+
+theorem cert_1948 : CertAt [0, 0, 1, 2, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_598)
+
+theorem cert_1949 : CertAt [0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1151)
+
+theorem cert_1950 : CertAt [0, 0, 1, 1, 1, 2, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_528)
+
+theorem cert_1951 : CertAt [0, 0, 1, 0, 1, 2, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1092)
+
+theorem cert_1958 : CertAt [0, 2, 1, 2, 2, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_475)
+
+theorem cert_1959 : CertAt [0, 2, 1, 1, 2, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1046)
+
+theorem cert_1960 : CertAt [0, 2, 1, 0, 2, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1387)
+
+theorem cert_1961 : CertAt [0, 1, 1, 2, 2, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_567)
+
+theorem cert_1962 : CertAt [0, 1, 1, 1, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1123)
+
+theorem cert_1963 : CertAt [0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1431)
+
+theorem cert_1964 : CertAt [0, 0, 1, 2, 2, 0, 0, 1, 0, 2, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_624)
+
+theorem cert_1965 : CertAt [0, 0, 1, 1, 2, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1166)
+
+theorem cert_1966 : CertAt [0, 1, 1, 1, 2, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_484)
+
+theorem cert_1967 : CertAt [0, 1, 1, 0, 2, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1055)
+
+theorem cert_1968 : CertAt [0, 0, 1, 1, 2, 1, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_574)
+
+theorem cert_1969 : CertAt [0, 0, 1, 0, 2, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1130)
+
+theorem cert_1970 : CertAt [0, 0, 1, 0, 2, 2, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_491)
+
+theorem cert_1977 : CertAt [1, 2, 1, 3, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1752)
+
+theorem cert_1980 : CertAt [1, 1, 1, 3, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1795)
+
+theorem cert_1982 : CertAt [1, 0, 1, 3, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1824)
+
+theorem cert_1983 : CertAt [1, 1, 1, 2, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1758)
+
+theorem cert_1986 : CertAt [1, 0, 1, 2, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1801)
+
+theorem cert_1988 : CertAt [1, 0, 1, 1, 0, 2, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1764)
+
+theorem cert_1996 : CertAt [0, 2, 1, 3, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1778)
+
+theorem cert_1998 : CertAt [0, 1, 1, 3, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1814)
+
+theorem cert_1999 : CertAt [0, 1, 1, 2, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1781)
+
+theorem cert_2001 : CertAt [0, 0, 1, 2, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1817)
+
+theorem cert_2002 : CertAt [0, 0, 1, 1, 0, 2, 0, 1, 1, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1784)
+
+theorem cert_2006 : CertAt [0, 2, 1, 2, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1755)
+
+theorem cert_2007 : CertAt [0, 2, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0] := certAt_of_rev (by exact cert_1981)
+
+theorem cert_2009 : CertAt [0, 1, 1, 2, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1798)
+
+theorem cert_2011 : CertAt [0, 0, 1, 2, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1826)
+
+theorem cert_2012 : CertAt [0, 1, 1, 1, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1761)
+
+theorem cert_2014 : CertAt [0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1803)
+
+theorem cert_2016 : CertAt [0, 0, 1, 0, 1, 2, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1766)
+
+theorem cert_2031 : CertAt [1, 1, 2, 4, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_469)
+
+theorem cert_2032 : CertAt [1, 1, 2, 3, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1040)
+
+theorem cert_2033 : CertAt [1, 1, 2, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1381)
+
+theorem cert_2035 : CertAt [1, 0, 2, 4, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_562)
+
+theorem cert_2036 : CertAt [1, 0, 2, 3, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1118)
+
+theorem cert_2037 : CertAt [1, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1426)
+
+theorem cert_2038 : CertAt [1, 0, 2, 3, 0, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_479)
+
+theorem cert_2039 : CertAt [1, 0, 2, 2, 0, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1050)
+
+theorem cert_2045 : CertAt [0, 1, 2, 4, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_515)
+
+theorem cert_2046 : CertAt [0, 1, 2, 3, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1079)
+
+theorem cert_2047 : CertAt [0, 1, 2, 2, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1407)
+
+theorem cert_2048 : CertAt [0, 0, 2, 4, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_591)
+
+theorem cert_2049 : CertAt [0, 0, 2, 3, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1144)
+
+theorem cert_2050 : CertAt [0, 0, 2, 3, 0, 1, 0, 2, 1, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_521)
+
+theorem cert_2051 : CertAt [0, 0, 2, 2, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1085)
+
+theorem cert_2055 : CertAt [0, 1, 2, 3, 1, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_473)
+
+theorem cert_2056 : CertAt [0, 1, 2, 2, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1044)
+
+theorem cert_2057 : CertAt [0, 1, 2, 1, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1385)
+
+theorem cert_2059 : CertAt [0, 0, 2, 3, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_565)
+
+theorem cert_2060 : CertAt [0, 0, 2, 2, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1121)
+
+theorem cert_2062 : CertAt [0, 0, 2, 2, 1, 1, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_482)
+
+theorem cert_2063 : CertAt [0, 0, 2, 1, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1053)
+
+theorem cert_2068 : CertAt [0, 1, 2, 3, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1753)
+
+theorem cert_2069 : CertAt [0, 1, 2, 2, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0] := certAt_of_rev (by exact cert_1979)
+
+theorem cert_2071 : CertAt [0, 0, 2, 3, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1796)
+
+theorem cert_2072 : CertAt [0, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0] := certAt_of_rev (by exact cert_2008)
+
+theorem cert_2073 : CertAt [0, 0, 2, 2, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0] := certAt_of_rev (by exact cert_1759)
+
+theorem cert_2078 : CertAt [0, 0, 3, 4, 0, 0, 0, 3, 0, 0, 1, 0, 0, 0, 0] := certAt_of_rev (by exact cert_470)
+
+theorem cert_2079 : CertAt [0, 0, 3, 3, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1041)
+
+theorem cert_2080 : CertAt [0, 0, 3, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1382)
+
+theorem cert_2081 : CertAt [0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0] := certAt_of_rev (by exact cert_1507)
+
+theorem cert_2082 : CertAt [2, 2, 0, 4, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_647)
+
+theorem cert_2083 : CertAt [2, 2, 0, 3, 0, 0, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1174)
+
+theorem cert_2084 : CertAt [2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1443)
+
+theorem cert_2085 : CertAt [2, 1, 0, 4, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_680)
+
+theorem cert_2086 : CertAt [2, 1, 0, 3, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1203)
+
+theorem cert_2087 : CertAt [2, 0, 0, 4, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_696)
+
+theorem cert_2088 : CertAt [2, 1, 0, 3, 0, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_653)
+
+theorem cert_2089 : CertAt [2, 1, 0, 2, 0, 1, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1180)
+
+theorem cert_2090 : CertAt [2, 1, 0, 1, 0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1449)
+
+theorem cert_2091 : CertAt [2, 0, 0, 3, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_685)
+
+theorem cert_2092 : CertAt [2, 0, 0, 2, 0, 1, 0, 0, 0, 1, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1208)
+
+theorem cert_2093 : CertAt [2, 0, 0, 2, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_658)
+
+theorem cert_2094 : CertAt [2, 0, 0, 1, 0, 2, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1185)
+
+theorem cert_2095 : CertAt [2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1453)
+
+theorem cert_2102 : CertAt [1, 2, 0, 4, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_667)
+
+theorem cert_2103 : CertAt [1, 2, 0, 3, 0, 0, 0, 0, 1, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1193)
+
+theorem cert_2104 : CertAt [1, 1, 0, 4, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_690)
+
+theorem cert_2105 : CertAt [1, 1, 0, 3, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_670)
+
+theorem cert_2106 : CertAt [1, 1, 0, 2, 0, 1, 0, 0, 1, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1196)
+
+theorem cert_2107 : CertAt [1, 0, 0, 3, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_693)
+
+theorem cert_2108 : CertAt [1, 0, 0, 2, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_673)
+
+theorem cert_2109 : CertAt [1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1199)
+
+theorem cert_2112 : CertAt [0, 2, 0, 4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_677)
+
+theorem cert_2113 : CertAt [0, 1, 0, 3, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_678)
+
+theorem cert_2114 : CertAt [0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_679)
+
+theorem cert_2115 : CertAt [1, 2, 0, 3, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_650)
+
+theorem cert_2116 : CertAt [1, 2, 0, 2, 1, 0, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1177)
+
+theorem cert_2117 : CertAt [1, 2, 0, 1, 1, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0] := certAt_of_rev (by exact cert_1446)
+
+theorem cert_2118 : CertAt [1, 1, 0, 3, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_682)
+
+theorem cert_2119 : CertAt [1, 1, 0, 2, 1, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1205)
+
+theorem cert_2120 : CertAt [1, 0, 0, 3, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_697)
+
+theorem cert_2121 : CertAt [1, 1, 0, 2, 1, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_655)
+
+theorem cert_2122 : CertAt [1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1182)
+
+theorem cert_2124 : CertAt [1, 0, 0, 2, 1, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_686)
+
+theorem cert_2125 : CertAt [1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1209)
+
+theorem cert_2126 : CertAt [1, 0, 0, 1, 1, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_659)
+
+theorem cert_2127 : CertAt [1, 0, 0, 0, 1, 2, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1186)
+
+theorem cert_2134 : CertAt [0, 2, 0, 3, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_669)
+
+theorem cert_2135 : CertAt [0, 2, 0, 2, 1, 0, 0, 0, 1, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1195)
+
+theorem cert_2136 : CertAt [0, 1, 0, 3, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_692)
+
+theorem cert_2137 : CertAt [0, 1, 0, 2, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_672)
+
+theorem cert_2138 : CertAt [0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1198)
+
+theorem cert_2139 : CertAt [0, 0, 0, 2, 1, 1, 0, 0, 1, 1, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_694)
+
+theorem cert_2140 : CertAt [0, 0, 0, 1, 1, 2, 0, 1, 1, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_674)
+
+theorem cert_2141 : CertAt [0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1200)
+
+theorem cert_2144 : CertAt [0, 2, 0, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0] := certAt_of_rev (by exact cert_652)
+
+theorem cert_2145 : CertAt [0, 2, 0, 1, 2, 0, 0, 1, 0, 0, 2, 1, 0, 0, 0] := certAt_of_rev (by exact cert_1179)
 
 
 end GridGen.Four.K4

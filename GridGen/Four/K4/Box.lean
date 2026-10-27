@@ -19,7 +19,7 @@ At a weight `w`, `⟪cls D, w⟫` is a polynomial in the intersection sizes whos
 
 Its minimum over the box separates: a linear term is smallest at an end of its interval
 (`smin_le`), a bilinear term `c_u u + c_v v + d uv` at a corner of its rectangle (`pmin_le`).
-`boxRay` computes this minimum minus `⟪hrow, w⟫`; `boxV` takes it at the four rays `F₀, …, F₃`
+`rayZ` computes this minimum minus `⟪hrow, w⟫`; `boxV` takes it at the four rays `F₀, …, F₃`
 and, for the tail valuation, at the centre `2c* = (20000, 18907, 17186, 17816)` of the doubled tail
 box minus `1280`: a seam vector has `|d₂|, |d₃|, |d₄| ≤ 256`, and the corners differ from `2c*` by
 `(0, ±1, ±2, ±2)` (`boxV_sound`). Codex's (OpenAI) classification
@@ -98,33 +98,35 @@ theorem dot_cls_poly (D : Dat) (w : Q) :
 structure X11 where
   (e12 e23 e34 a13 a24 a14 t123 t234 a124 a134 q : ℕ)
 
-/-- Minimum of `c x` over `x ∈ [lo, hi]`. -/
-def sminZ (c : Zp) (lo hi : ℕ) : Zp := Zp.min (Zp.smul lo c) (Zp.smul hi c)
+/-- `d u v - (a u + b v)` at a corner, as a pair. -/
+def cornN (a b d u v : ℕ) : Zp := ⟨Nat.mul d (Nat.mul u v), Nat.add (Nat.mul a u) (Nat.mul b v)⟩
 
-/-- `c_u u + c_v v + d u v` at a corner. -/
-def cornerZ (cu cv d : Zp) (u v : ℕ) : Zp :=
-  Zp.add (Zp.add (Zp.smul u cu) (Zp.smul v cv)) (Zp.smul (Nat.mul u v) d)
+/-- **Minimum over the corners of a rectangle** of `d u v - a u - b v` (`a, b, d ≥ 0`). -/
+def pminN (a b d u0 u1 v0 v1 : ℕ) : Zp :=
+  Zp.min (Zp.min (cornN a b d u0 v0) (cornN a b d u1 v0))
+    (Zp.min (cornN a b d u0 v1) (cornN a b d u1 v1))
 
-/-- Minimum over the corners of a rectangle. -/
-def pminZ (cu cv d : Zp) (u0 u1 v0 v1 : ℕ) : Zp :=
-  Zp.min (Zp.min (cornerZ cu cv d u0 v0) (cornerZ cu cv d u1 v0))
-    (Zp.min (cornerZ cu cv d u0 v1) (cornerZ cu cv d u1 v1))
-
-/-- **The box minimum at one weight**, given `α, β, γ, δ` of the weight and `hw = ⟪hrow, w⟫`. -/
-def boxRay (n1 n2 n3 n4 : ℕ) (al be ga de : Zp) (hw : ℕ) (lo hi : X11) : Zp :=
-  Zp.add
-    (Zp.add (Zp.sub (Zp.smul (Nat.mul (Nat.mul n1 n2) (Nat.mul n3 n4)) de) (Zp.ofN hw))
-      (Zp.add (pminZ (Zp.neg (Zp.smul (Nat.mul n3 n4) de)) (Zp.neg (Zp.smul (Nat.mul n1 n2) de)) de
-          lo.e12 hi.e12 lo.e34 hi.e34)
-        (Zp.add (pminZ (Zp.smul (Nat.mul n2 n4) be) (Zp.smul (Nat.mul n1 n3) be) al
-            lo.a13 hi.a13 lo.a24 hi.a24)
-          (pminZ (Zp.smul (Nat.mul n2 n3) ga) (Zp.neg (Zp.smul (Nat.mul n1 n4) de)) (Zp.neg ga)
-            lo.a14 hi.a14 lo.e23 hi.e23))))
-    (Zp.add (Zp.add (sminZ (Zp.smul n4 (Zp.sub de be)) lo.t123 hi.t123)
-        (sminZ (Zp.smul n1 (Zp.sub de be)) lo.t234 hi.t234))
-      (Zp.add (Zp.add (sminZ (Zp.neg (Zp.smul n3 (Zp.add be ga))) lo.a124 hi.a124)
-          (sminZ (Zp.neg (Zp.smul n2 (Zp.add be ga))) lo.a134 hi.a134))
-        (sminZ (Zp.sub (Zp.add (Zp.add be be) (Zp.add ga ga)) (Zp.add al de)) lo.q hi.q)))
+/-- **The box minimum at one weight**, minus `hw = ⟪hrow, w⟫` and `extra`, for a weight with
+`α = al`, `β = be`, `γ = -gm`, `δ = de` (all four nonnegative, `gm ≤ be ≤ de`). The signs fix where
+each separable term is smallest: the linear terms with nonnegative coefficient (`t₁₂₃, t₂₃₄`) and
+the product `βn₂n₄ a₁₃ + βn₁n₃ a₂₄ + α a₁₃a₂₄` at the lower ends, the other linear terms at the upper
+ends; only the two products with negative linear coefficients need all four corners. The value
+is a single pair of naturals (positive part, negative part), which keeps the kernel's work to a
+few dozen `Nat` operations. -/
+def rayZ (n1 n2 n3 n4 al be gm de hw extra : ℕ) (lo hi : X11) : Zp :=
+  let p1 := pminN (Nat.mul (Nat.mul n3 n4) de) (Nat.mul (Nat.mul n1 n2) de) de
+    lo.e12 hi.e12 lo.e34 hi.e34
+  let p3 := pminN (Nat.mul (Nat.mul n2 n3) gm) (Nat.mul (Nat.mul n1 n4) de) gm
+    lo.a14 hi.a14 lo.e23 hi.e23
+  let bg := Nat.sub be gm
+  let db := Nat.sub de be
+  ⟨Nat.add (Nat.add (Nat.mul (Nat.mul (Nat.mul n1 n2) (Nat.mul n3 n4)) de) (Nat.add p1.p p3.p))
+      (Nat.add (Nat.add (Nat.mul (Nat.mul (Nat.mul n2 n4) be) lo.a13)
+          (Nat.add (Nat.mul (Nat.mul (Nat.mul n1 n3) be) lo.a24) (Nat.mul (Nat.mul al lo.a13) lo.a24)))
+        (Nat.add (Nat.mul (Nat.mul n4 db) lo.t123) (Nat.mul (Nat.mul n1 db) lo.t234))),
+    Nat.add (Nat.add (Nat.add hw extra) (Nat.add p1.n p3.n))
+      (Nat.add (Nat.add (Nat.mul (Nat.mul n3 bg) hi.a124) (Nat.mul (Nat.mul n2 bg) hi.a134))
+        (Nat.mul (Nat.sub (Nat.add al de) (Nat.add bg bg)) hi.q))⟩
 
 /-- `⟪h, w⟫` for naturals. -/
 def dotNN (h : ℕ × ℕ × ℕ × ℕ) (w0 w1 w2 w3 : ℕ) : ℕ :=
@@ -132,13 +134,11 @@ def dotNN (h : ℕ × ℕ × ℕ × ℕ) (w0 w1 w2 w3 : ℕ) : ℕ :=
 
 /-- **The five box valuations**, for the class with transfer row `h`. -/
 def boxV (n1 n2 n3 n4 : ℕ) (h : ℕ × ℕ × ℕ × ℕ) (lo hi : X11) : V5 :=
-  ⟨boxRay n1 n2 n3 n4 ⟨0, 0⟩ ⟨0, 0⟩ ⟨0, 0⟩ ⟨1, 0⟩ (dotNN h 1 1 1 1) lo hi,
-    boxRay n1 n2 n3 n4 ⟨0, 0⟩ ⟨2, 0⟩ ⟨0, 1⟩ ⟨37, 0⟩ (dotNN h 41 39 36 37) lo hi,
-    boxRay n1 n2 n3 n4 ⟨0, 0⟩ ⟨85, 0⟩ ⟨0, 48⟩ ⟨1409, 0⟩ (dotNN h 1579 1494 1361 1409) lo hi,
-    boxRay n1 n2 n3 n4 ⟨0, 0⟩ ⟨3291, 0⟩ ⟨0, 1893⟩ ⟨53789, 0⟩ (dotNN h 60371 57080 51896 53789) lo hi,
-    Zp.sub (boxRay n1 n2 n3 n4 ⟨2, 0⟩ ⟨1091, 0⟩ ⟨0, 630⟩ ⟨17816, 0⟩ (dotNN h 20000 18907 17186 17816)
-      lo hi) ⟨1280, 0⟩⟩
-
+  ⟨rayZ n1 n2 n3 n4 0 0 0 1 (dotNN h 1 1 1 1) 0 lo hi,
+    rayZ n1 n2 n3 n4 0 2 1 37 (dotNN h 41 39 36 37) 0 lo hi,
+    rayZ n1 n2 n3 n4 0 85 48 1409 (dotNN h 1579 1494 1361 1409) 0 lo hi,
+    rayZ n1 n2 n3 n4 0 3291 1893 53789 (dotNN h 60371 57080 51896 53789) 0 lo hi,
+    rayZ n1 n2 n3 n4 2 1091 630 17816 (dotNN h 20000 18907 17186 17816) 1280 lo hi⟩
 /-! ### Soundness -/
 
 /-- A data vector in the box. -/
@@ -151,50 +151,80 @@ def InBox (n1 n2 n3 n4 : ℕ) (lo hi : X11) (D : Dat) : Prop :=
   (lo.a124 : ℤ) ≤ D.a124 ∧ D.a124 ≤ hi.a124 ∧ (lo.a134 : ℤ) ≤ D.a134 ∧ D.a134 ≤ hi.a134 ∧
   (lo.q : ℤ) ≤ D.q ∧ D.q ≤ hi.q
 
-theorem sminZ_le (c : Zp) (lo hi : ℕ) (x : ℤ) (h1 : (lo : ℤ) ≤ x) (h2 : x ≤ hi) :
-    (sminZ c lo hi).val ≤ c.val * x := by
-  simp only [sminZ, Zp.val_min, Zp.val_smul]
-  have := smin_le c.val lo hi x h1 h2
-  rw [mul_comm (lo : ℤ), mul_comm (hi : ℤ)]
-  exact this
-
-theorem pminZ_le (cu cv d : Zp) (u0 u1 v0 v1 : ℕ) (u v : ℤ) (hu1 : (u0 : ℤ) ≤ u)
-    (hu2 : u ≤ u1) (hv1 : (v0 : ℤ) ≤ v) (hv2 : v ≤ v1) :
-    (pminZ cu cv d u0 u1 v0 v1).val ≤ cu.val * u + cv.val * v + d.val * u * v := by
-  have key := pmin_le cu.val cv.val d.val u0 u1 v0 v1 u v hu1 hu2 hv1 hv2
-  have hc : ∀ a b : ℕ, (cornerZ cu cv d a b).val = cu.val * a + cv.val * b + d.val * a * b := by
-    intro a b
-    simp only [cornerZ, Zp.val_add, Zp.val_smul, Nat.mul_eq]
+theorem pminN_le (a b d u0 u1 v0 v1 : ℕ) (u v : ℤ) (hu1 : (u0 : ℤ) ≤ u) (hu2 : u ≤ u1)
+    (hv1 : (v0 : ℤ) ≤ v) (hv2 : v ≤ v1) :
+    ((pminN a b d u0 u1 v0 v1).p : ℤ) - (pminN a b d u0 u1 v0 v1).n
+      ≤ (-(a : ℤ)) * u + (-(b : ℤ)) * v + (d : ℤ) * u * v := by
+  have key := pmin_le (-(a : ℤ)) (-(b : ℤ)) d u0 u1 v0 v1 u v hu1 hu2 hv1 hv2
+  have hc : ∀ x y : ℕ, (cornN a b d x y).val = (-(a : ℤ)) * x + (-(b : ℤ)) * y + d * x * y := by
+    intro x y
+    simp only [cornN, Zp.val_mk, Nat.mul_eq, Nat.add_eq]
     push_cast; ring
-  simp only [pminZ, Zp.val_min, hc]
+  show (pminN a b d u0 u1 v0 v1).val ≤ _
+  simp only [pminN, Zp.val_min, hc]
   exact key
 
 /-- The box minimum bounds the polynomial on the box, at a weight with the given `α, β, γ, δ`. -/
-theorem boxRay_le (n1 n2 n3 n4 : ℕ) (al be ga de : Zp) (hw : ℕ) (lo hi : X11) (D : Dat)
-    (hD : InBox n1 n2 n3 n4 lo hi D) (w : Q) (hal : al.val = w.1 - 2 * w.2.1 + w.2.2.2)
-    (hbe : be.val = w.2.1 - w.2.2.2) (hga : ga.val = w.2.2.1 - w.2.2.2) (hde : de.val = w.2.2.2) :
-    (boxRay n1 n2 n3 n4 al be ga de hw lo hi).val ≤ dot (cls D) w - hw := by
+theorem rayZ_le (n1 n2 n3 n4 al be gm de hw extra : ℕ) (lo hi : X11) (D : Dat)
+    (hD : InBox n1 n2 n3 n4 lo hi D) (w : Q) (hal : (al : ℤ) = w.1 - 2 * w.2.1 + w.2.2.2)
+    (hbe : (be : ℤ) = w.2.1 - w.2.2.2) (hga : (gm : ℤ) = -(w.2.2.1 - w.2.2.2))
+    (hde : (de : ℤ) = w.2.2.2) (hgb : gm ≤ be) (hbd : be ≤ de) (hq : (be - gm) + (be - gm) ≤ al + de) :
+    (rayZ n1 n2 n3 n4 al be gm de hw extra lo hi).val ≤ dot (cls D) w - hw - extra := by
   obtain ⟨hn1, hn2, hn3, hn4, l1, u1, l2, u2, l3, u3, l4, u4, l5, u5, l6, u6, l7, u7, l8, u8, l9, u9,
     l10, u10, l11, u11⟩ := hD
-  have p1 := pminZ_le (Zp.neg (Zp.smul (Nat.mul n3 n4) de)) (Zp.neg (Zp.smul (Nat.mul n1 n2) de)) de
+  have p1 := pminN_le (Nat.mul (Nat.mul n3 n4) de) (Nat.mul (Nat.mul n1 n2) de) de
     lo.e12 hi.e12 lo.e34 hi.e34 D.e12 D.e34 l1 u1 l3 u3
-  have p2 := pminZ_le (Zp.smul (Nat.mul n2 n4) be) (Zp.smul (Nat.mul n1 n3) be) al
-    lo.a13 hi.a13 lo.a24 hi.a24 D.a13 D.a24 l4 u4 l5 u5
-  have p3 := pminZ_le (Zp.smul (Nat.mul n2 n3) ga) (Zp.neg (Zp.smul (Nat.mul n1 n4) de)) (Zp.neg ga)
+  have p3 := pminN_le (Nat.mul (Nat.mul n2 n3) gm) (Nat.mul (Nat.mul n1 n4) de) gm
     lo.a14 hi.a14 lo.e23 hi.e23 D.a14 D.e23 l6 u6 l2 u2
-  have s1 := sminZ_le (Zp.smul n4 (Zp.sub de be)) lo.t123 hi.t123 D.t123 l7 u7
-  have s2 := sminZ_le (Zp.smul n1 (Zp.sub de be)) lo.t234 hi.t234 D.t234 l8 u8
-  have s3 := sminZ_le (Zp.neg (Zp.smul n3 (Zp.add be ga))) lo.a124 hi.a124 D.a124 l9 u9
-  have s4 := sminZ_le (Zp.neg (Zp.smul n2 (Zp.add be ga))) lo.a134 hi.a134 D.a134 l10 u10
-  have s5 := sminZ_le (Zp.sub (Zp.add (Zp.add be be) (Zp.add ga ga)) (Zp.add al de)) lo.q hi.q D.q
-    l11 u11
+  -- the product term at the lower corner
+  have z4 : (0 : ℤ) ≤ lo.a13 := Nat.cast_nonneg _
+  have z5 : (0 : ℤ) ≤ lo.a24 := Nat.cast_nonneg _
+  have m45 : (lo.a13 : ℤ) * lo.a24 ≤ D.a13 * D.a24 := mul_le_mul l4 l5 z5 (z4.trans l4)
+  have q1 : ((n2 * n4 * be : ℕ) : ℤ) * lo.a13 ≤ ((n2 * n4 * be : ℕ) : ℤ) * D.a13 :=
+    mul_le_mul_of_nonneg_left l4 (Nat.cast_nonneg _)
+  have q2 : ((n1 * n3 * be : ℕ) : ℤ) * lo.a24 ≤ ((n1 * n3 * be : ℕ) : ℤ) * D.a24 :=
+    mul_le_mul_of_nonneg_left l5 (Nat.cast_nonneg _)
+  have q3 : (al : ℤ) * (lo.a13 * lo.a24) ≤ (al : ℤ) * (D.a13 * D.a24) :=
+    mul_le_mul_of_nonneg_left m45 (Nat.cast_nonneg _)
+  -- the linear terms
+  have s1 : ((n4 * (de - be) : ℕ) : ℤ) * lo.t123 ≤ ((n4 * (de - be) : ℕ) : ℤ) * D.t123 :=
+    mul_le_mul_of_nonneg_left l7 (Nat.cast_nonneg _)
+  have s2 : ((n1 * (de - be) : ℕ) : ℤ) * lo.t234 ≤ ((n1 * (de - be) : ℕ) : ℤ) * D.t234 :=
+    mul_le_mul_of_nonneg_left l8 (Nat.cast_nonneg _)
+  have s3 : ((n3 * (be - gm) : ℕ) : ℤ) * D.a124 ≤ ((n3 * (be - gm) : ℕ) : ℤ) * hi.a124 :=
+    mul_le_mul_of_nonneg_left u9 (Nat.cast_nonneg _)
+  have s4 : ((n2 * (be - gm) : ℕ) : ℤ) * D.a134 ≤ ((n2 * (be - gm) : ℕ) : ℤ) * hi.a134 :=
+    mul_le_mul_of_nonneg_left u10 (Nat.cast_nonneg _)
+  have s5 : ((al + de - ((be - gm) + (be - gm)) : ℕ) : ℤ) * D.q
+      ≤ ((al + de - ((be - gm) + (be - gm)) : ℕ) : ℤ) * hi.q :=
+    mul_le_mul_of_nonneg_left u11 (Nat.cast_nonneg _)
+  obtain ⟨w0, w1, w2, w3⟩ := w
+  simp only at hal hbe hga hde
+  have e3 : w3 = de := hde.symm
+  have e1 : w1 = be + de := by linarith
+  have e2 : w2 = de - gm := by linarith
+  have e0 : w0 = al + 2 * be + de := by linarith
   rw [dot_cls_poly, hn1, hn2, hn3, hn4]
-  simp only [Zp.val_neg, Zp.val_smul, Zp.val_sub, Zp.val_add, Nat.mul_eq, hal, hbe, hga, hde]
-    at p1 p2 p3 s1 s2 s3 s4 s5
-  simp only [boxRay, Zp.val_add, Zp.val_sub, Zp.val_smul, Zp.val_ofN, Nat.mul_eq, hde]
-  push_cast at p1 p2 p3 s1 s2 s3 s4 s5 ⊢
-  linarith
-
+  simp only [e0, e1, e2, e3]
+  have hv : (rayZ n1 n2 n3 n4 al be gm de hw extra lo hi).val
+      = ((n1 * n2 * (n3 * n4) * de : ℕ) : ℤ) + (((pminN (n3 * n4 * de) (n1 * n2 * de) de
+          lo.e12 hi.e12 lo.e34 hi.e34).p : ℤ) - (pminN (n3 * n4 * de) (n1 * n2 * de) de
+          lo.e12 hi.e12 lo.e34 hi.e34).n)
+        + (((pminN (n2 * n3 * gm) (n1 * n4 * de) gm lo.a14 hi.a14 lo.e23 hi.e23).p : ℤ)
+          - (pminN (n2 * n3 * gm) (n1 * n4 * de) gm lo.a14 hi.a14 lo.e23 hi.e23).n)
+        + ((n2 * n4 * be : ℕ) : ℤ) * lo.a13 + ((n1 * n3 * be : ℕ) : ℤ) * lo.a24
+        + (al : ℤ) * (lo.a13 * lo.a24)
+        + ((n4 * (de - be) : ℕ) : ℤ) * lo.t123 + ((n1 * (de - be) : ℕ) : ℤ) * lo.t234
+        - hw - extra
+        - ((n3 * (be - gm) : ℕ) : ℤ) * hi.a124 - ((n2 * (be - gm) : ℕ) : ℤ) * hi.a134
+        - ((al + de - ((be - gm) + (be - gm)) : ℕ) : ℤ) * hi.q := by
+    simp only [rayZ, Zp.val_mk, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
+    push_cast
+    ring
+  rw [hv]
+  simp only [Nat.mul_eq] at p1 p3
+  push_cast [Nat.cast_sub hgb, Nat.cast_sub hbd, Nat.cast_sub hq] at p1 p3 q1 q2 q3 s1 s2 s3 s4 s5 ⊢
+  linear_combination p1 + p3 + q1 + q2 + q3 + s1 + s2 + s3 + s4 + s5
 
 /-- A transfer row as a class vector. -/
 def hQ (h : ℕ × ℕ × ℕ × ℕ) : Q := ((h.1 : ℤ), (h.2.1 : ℤ), (h.2.2.1 : ℤ), (h.2.2.2 : ℤ))
@@ -213,40 +243,44 @@ theorem boxV_sound (n1 n2 n3 n4 : ℕ) (h : ℕ × ℕ × ℕ × ℕ) (lo hi : X
   have hsub : ∀ v : Q, dot (cls D - hQ h) v = dot (cls D) v - dot (hQ h) v := fun v => dot_sub _ _ _
   fin_cases k <;> simp only [famW, List.mem_cons, List.mem_nil_iff, or_false] at hw
   · subst hw
-    have := boxRay_le n1 n2 n3 n4 ⟨0, 0⟩ ⟨0, 0⟩ ⟨0, 0⟩ ⟨1, 0⟩ (dotNN h 1 1 1 1) lo hi D hD (1, 1, 1, 1)
-      (by simp) (by simp) (by simp) (by simp)
+    have := rayZ_le n1 n2 n3 n4 0 0 0 1 (dotNN h 1 1 1 1) 0 lo hi D hD (1, 1, 1, 1)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+      (by norm_num)
     rw [dotNN_eq] at this
     simpa [boxV, V5.get, hsub] using this
   · subst hw
-    have := boxRay_le n1 n2 n3 n4 ⟨0, 0⟩ ⟨2, 0⟩ ⟨0, 1⟩ ⟨37, 0⟩ (dotNN h 41 39 36 37) lo hi D hD
-      (41, 39, 36, 37) (by simp) (by simp) (by simp) (by simp)
+    have := rayZ_le n1 n2 n3 n4 0 2 1 37 (dotNN h 41 39 36 37) 0 lo hi D hD (41, 39, 36, 37)
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+      (by norm_num)
     rw [dotNN_eq] at this
     simpa [boxV, V5.get, hsub] using this
   · subst hw
-    have := boxRay_le n1 n2 n3 n4 ⟨0, 0⟩ ⟨85, 0⟩ ⟨0, 48⟩ ⟨1409, 0⟩ (dotNN h 1579 1494 1361 1409)
-      lo hi D hD (1579, 1494, 1361, 1409) (by simp) (by simp) (by simp) (by simp)
+    have := rayZ_le n1 n2 n3 n4 0 85 48 1409 (dotNN h 1579 1494 1361 1409) 0 lo hi D hD
+      (1579, 1494, 1361, 1409) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num) (by norm_num)
     rw [dotNN_eq] at this
     simpa [boxV, V5.get, hsub] using this
   · subst hw
-    have := boxRay_le n1 n2 n3 n4 ⟨0, 0⟩ ⟨3291, 0⟩ ⟨0, 1893⟩ ⟨53789, 0⟩
-      (dotNN h 60371 57080 51896 53789) lo hi D hD (60371, 57080, 51896, 53789)
-      (by simp) (by simp) (by simp) (by simp)
+    have := rayZ_le n1 n2 n3 n4 0 3291 1893 53789 (dotNN h 60371 57080 51896 53789) 0 lo hi D hD
+      (60371, 57080, 51896, 53789) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num) (by norm_num)
     rw [dotNN_eq] at this
     simpa [boxV, V5.get, hsub] using this
-  · have hc := boxRay_le n1 n2 n3 n4 ⟨2, 0⟩ ⟨1091, 0⟩ ⟨0, 630⟩ ⟨17816, 0⟩
-      (dotNN h 20000 18907 17186 17816) lo hi D hD (20000, 18907, 17186, 17816)
-      (by simp) (by simp) (by simp) (by simp)
+  · have hc := rayZ_le n1 n2 n3 n4 2 1091 630 17816 (dotNN h 20000 18907 17186 17816) 1280 lo hi D
+      hD (20000, 18907, 17186, 17816) (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num) (by norm_num)
     rw [dotNN_eq] at hc
-    replace hc := hc.trans_eq (show _ = dot (cls D - hQ h) (20000, 18907, 17186, 17816) by
+    replace hc := hc.trans_eq (show _ = dot (cls D - hQ h) (20000, 18907, 17186, 17816) - 1280 by
       rw [hsub]; norm_num)
-    simp only [boxV, V5.get, Zp.val_sub, Zp.val_mk]
+    simp only [boxV, V5.get]
     obtain ⟨b1, b2, b3⟩ := hb
     rw [abs_le] at b1 b2 b3
+    generalize (rayZ n1 n2 n3 n4 2 1091 630 17816 (dotNN h 20000 18907 17186 17816) 1280 lo hi).val
+      = r at hc ⊢
     generalize cls D - hQ h = d at hc b1 b2 b3 ⊢
     obtain ⟨d0, d1, d2, d3⟩ := d
     simp only [dot] at hc ⊢
     simp only at b1 b2 b3
-    push_cast at hc ⊢
     rcases hw with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl <;>
       simp only [dot] <;> nlinarith [b1.1, b1.2, b2.1, b2.2, b3.1, b3.2]
 

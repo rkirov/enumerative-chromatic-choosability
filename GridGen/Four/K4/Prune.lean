@@ -84,10 +84,25 @@ def clsT (o : ℕ) : List ℕ → ℕ
   | [] => 65535
   | r :: L => Nat.land (tset r (Nat.testBit o r)) (clsT o L)
 
-/-- The available masks: `0`, and every atom not used up by the placed colours. -/
+/-- The masks of the shape's atoms, and `0`. -/
+def availRoot (sh : Sh) : ℕ :=
+  (List.range' 1 15).foldl (fun acc m => cond (Nat.blt 0 (sh.na m)) (Nat.lor acc (Nat.pow 2 m)) acc) 1
+
+/-- Clear the mask of row `j` if the placed colours use its atom up (only the row that places a
+colour first, tag `j`, can). -/
+def availClr (sh : Sh) (nd : Node) (j : ℕ) (p : Pl) (acc : ℕ) : ℕ :=
+  match p with
+  | some (m, t) =>
+    cond (Nat.beq t j && !(Nat.beq m 0) && !(Nat.blt (usedM nd m) (sh.na m)))
+      (Nat.xor acc (Nat.land acc (Nat.pow 2 m))) acc
+  | none => acc
+
+/-- The available masks: `0`, and every atom not used up by the placed colours. Only the masks of
+the (at most four) placed rows can be used up, so the shape's mask set `availRoot sh`, the same
+for every node of a tree, is corrected at those masks. -/
 def avail (sh : Sh) (nd : Node) : ℕ :=
-  (List.range' 1 15).foldl
-    (fun acc m => cond (Nat.blt (usedM nd m) (sh.na m)) (Nat.lor acc (Nat.pow 2 m)) acc) 1
+  availClr sh nd 3 nd.r3 (availClr sh nd 2 nd.r2 (availClr sh nd 1 nd.r1
+    (availClr sh nd 0 nd.r0 (availRoot sh))))
 
 /-- The mask set of row `j`. -/
 def rsAt (av : ℕ) (nd : Node) (e13 e24 e14 : Bool) (o j : ℕ) : ℕ :=
@@ -95,11 +110,29 @@ def rsAt (av : ℕ) (nd : Node) (e13 e24 e14 : Bool) (o j : ℕ) : ℕ :=
   | some m => Nat.pow 2 m
   | none => Nat.land av (clsT o (cls e13 e24 e14 j))
 
+/-- `k n`, with `n` evaluated first: the kernel passes the same small term (`0` or `Nat.succ` of a
+literal) for equal values, and so shares the computations on it (its cache is keyed by terms). -/
+def natCase {α : Type} (n : ℕ) (k : ℕ → α) : α :=
+  match n with
+  | 0 => k 0
+  | p + 1 => k (Nat.succ p)
+
+theorem natCase_eq {α : Type} (n : ℕ) (k : ℕ → α) : natCase n k = k n := by
+  cases n <;> rfl
+
 /-- **The region of a pattern and own bits at a node**, for Venn sizes in `[vl, vh]` and
-available masks `av`. -/
+available masks `av`. The four mask sets are evaluated first, so that the bit computations of
+equal mask sets are shared by all the regions of a tree. -/
 def regionAt (vl vh : VN) (av : ℕ) (nd : Node) (e13 e24 e14 : Bool) (o : ℕ) : Option V5 :=
-  regionV vl vh (rsAt av nd e13 e24 e14 o 0) (rsAt av nd e13 e24 e14 o 1)
-    (rsAt av nd e13 e24 e14 o 2) (rsAt av nd e13 e24 e14 o 3) e13 e24 e14
+  natCase (rsAt av nd e13 e24 e14 o 0) fun r0 => natCase (rsAt av nd e13 e24 e14 o 1) fun r1 =>
+    natCase (rsAt av nd e13 e24 e14 o 2) fun r2 => natCase (rsAt av nd e13 e24 e14 o 3) fun r3 =>
+      regionV vl vh r0 r1 r2 r3 e13 e24 e14
+
+theorem regionAt_eq (vl vh : VN) (av : ℕ) (nd : Node) (e13 e24 e14 : Bool) (o : ℕ) :
+    regionAt vl vh av nd e13 e24 e14 o = regionV vl vh (rsAt av nd e13 e24 e14 o 0)
+      (rsAt av nd e13 e24 e14 o 1) (rsAt av nd e13 e24 e14 o 2) (rsAt av nd e13 e24 e14 o 3)
+      e13 e24 e14 := by
+  simp only [regionAt, natCase_eq]
 
 /-- A region whose valuations are nonnegative (or which is empty). -/
 def regionNN (r : Option V5) : Bool :=
@@ -118,12 +151,31 @@ def consistent (nd : Node) (e13 e24 e14 : Bool) : Bool :=
   pairOK nd 0 1 false && pairOK nd 1 2 false && pairOK nd 2 3 false && pairOK nd 0 2 e13 &&
     pairOK nd 1 3 e24 && pairOK nd 0 3 e14
 
-/-- The own bits agree with the fixed masks (other own bits only repeat a region). -/
+/-- Four bits as a number. -/
+def four (b0 b1 b2 b3 : Bool) : ℕ :=
+  Nat.add (Nat.add (bn b0) (Nat.mul 2 (bn b1))) (Nat.add (Nat.mul 4 (bn b2)) (Nat.mul 8 (bn b3)))
+
+/-- Bit `j` of a fixed mask, if any. -/
+def fmBit (p : Option ℕ) (j : ℕ) : Bool :=
+  match p with
+  | some m => Nat.testBit m j
+  | none => false
+
+/-- The own bits fixed by the placed rows: those of the rows whose class has a placed row. -/
+def ownM (nd : Node) (e13 e24 e14 : Bool) : ℕ :=
+  four (firstMask nd (cls e13 e24 e14 0)).isSome (firstMask nd (cls e13 e24 e14 1)).isSome
+    (firstMask nd (cls e13 e24 e14 2)).isSome (firstMask nd (cls e13 e24 e14 3)).isSome
+
+/-- Their values: bit `j` of the placed mask of row `j`'s class. -/
+def ownV (nd : Node) (e13 e24 e14 : Bool) : ℕ :=
+  four (fmBit (firstMask nd (cls e13 e24 e14 0)) 0) (fmBit (firstMask nd (cls e13 e24 e14 1)) 1)
+    (fmBit (firstMask nd (cls e13 e24 e14 2)) 2) (fmBit (firstMask nd (cls e13 e24 e14 3)) 3)
+
+/-- The own bits agree with the fixed masks (other own bits only repeat a region). The masks
+`ownM`, `ownV` are the same for the sixteen own-bit vectors of a pattern, so each costs the kernel
+one `land` and one `beq`. -/
 def ownCompat (nd : Node) (e13 e24 e14 : Bool) (o : ℕ) : Bool :=
-  let ok := fun (j : ℕ) => match firstMask nd (cls e13 e24 e14 j) with
-    | some m => Nat.testBit o j == Nat.testBit m j
-    | none => true
-  ok 0 && ok 1 && ok 2 && ok 3
+  Nat.beq (Nat.land o (ownM nd e13 e24 e14)) (ownV nd e13 e24 e14)
 
 /-- `f 0 && ⋯ && f (n - 1)`. -/
 def allBelow : ℕ → (ℕ → Bool) → Bool
@@ -263,17 +315,39 @@ theorem testBit_fold_avail (P : ℕ → Bool) (x : ℕ) :
           Nat.testBit_two_pow_self, Bool.or_true]
       · right; exact ⟨h, hp⟩
 
+theorem testBit_availClr {sh : Sh} {nd : Node} {j : ℕ} {p : Pl} {acc m : ℕ}
+    (h : m = 0 ∨ usedM nd m < sh.na m) (hacc : Nat.testBit acc m = true) :
+    Nat.testBit (availClr sh nd j p acc) m = true := by
+  unfold availClr
+  rcases p with _ | ⟨m', t⟩
+  · exact hacc
+  · simp only
+    cases hc : (Nat.beq t j && !(Nat.beq m' 0) && !(Nat.blt (usedM nd m') (sh.na m')))
+    · exact hacc
+    · simp only [Bool.cond_true]
+      have hne : m' ≠ m := by
+        rintro rfl
+        rcases h with rfl | h
+        · rw [Nat.beq_refl] at hc; simp at hc
+        · rw [Nat.blt_eq.mpr h] at hc; simp at hc
+      rw [show Nat.xor acc (Nat.land acc (Nat.pow 2 m')) = acc ^^^ (acc &&& 2 ^ m') from rfl,
+        Nat.testBit_xor, Nat.testBit_and, Nat.testBit_two_pow, hacc]
+      simp [hne]
+
 theorem testBit_avail {sh : Sh} {nd : Node} {m : ℕ} (hm : m < 16)
     (h : m = 0 ∨ usedM nd m < sh.na m) : Nat.testBit (avail sh nd) m = true := by
-  unfold avail
-  apply testBit_fold_avail
-  rcases h with rfl | h
-  · left; decide
-  · by_cases h0 : m = 0
+  have hroot : Nat.testBit (availRoot sh) m = true := by
+    unfold availRoot
+    apply testBit_fold_avail
+    by_cases h0 : m = 0
     · subst h0; left; decide
     · right
       refine ⟨List.mem_range'_1.mpr ⟨by omega, by omega⟩, ?_⟩
-      simp only [Nat.blt_eq]; exact h
+      rcases h with h | h
+      · exact absurd h h0
+      · simp only [Nat.blt_eq]; omega
+  unfold avail
+  exact testBit_availClr h (testBit_availClr h (testBit_availClr h (testBit_availClr h hroot)))
 
 theorem testBit_land' (a b i : ℕ) :
     Nat.testBit (Nat.land a b) i = (Nat.testBit a i && Nat.testBit b i) := Nat.testBit_and a b i
@@ -365,6 +439,7 @@ theorem regionAt_sound_gen {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} {
   obtain ⟨m1, u1⟩ := rsAt_mem hB hρ hav hs hc (j := 1) (by norm_num)
   obtain ⟨m2, u2⟩ := rsAt_mem hB hρ hav hs hc (j := 2) (by norm_num)
   obtain ⟨m3, u3⟩ := rsAt_mem hB hρ hav hs hc (j := 3) (by norm_num)
+  rw [regionAt_eq]
   exact regionV_sound B hB.1 sh.I hB.2.1 hl hh hs m0 m1 m2 m3 u0 u1 u2 u3
 
 /-- A proper completion lies in its region, which then bounds it. -/
@@ -406,23 +481,32 @@ theorem consistent_epat {B : Col} {nd : Node} {ρ : ℕ → ℕ} (hρ : nd.Real 
     pairOK_of hρ hc (by norm_num) (by norm_num) ?_⟩ <;>
     simp only [rowT, epat, decide_eq_true_eq] <;> simp_all
 
+theorem land_four : ∀ a0 a1 a2 a3 b0 b1 b2 b3 : Bool,
+    Nat.land (four a0 a1 a2 a3) (four b0 b1 b2 b3) = four (a0 && b0) (a1 && b1) (a2 && b2) (a3 && b3) := by
+  decide
+
 theorem ownCompat_own {B : Col} {nd : Node} {ρ : ℕ → ℕ} (hρ : nd.Real B ρ) {s : T4}
     (hs : Proper s) (hc : Completes nd ρ s) :
     ownCompat nd (epat s).1 (epat s).2.1 (epat s).2.2 (ownOf B s) = true := by
-  have key : ∀ j < 4, (match firstMask nd (cls (epat s).1 (epat s).2.1 (epat s).2.2 j) with
-      | some m => Nat.testBit (ownOf B s) j == Nat.testBit m j
-      | none => true) = true := by
+  have key : ∀ j < 4, (Nat.testBit (mv B (rowT s j)) j
+      && (firstMask nd (cls (epat s).1 (epat s).2.1 (epat s).2.2 j)).isSome)
+      = fmBit (firstMask nd (cls (epat s).1 (epat s).2.1 (epat s).2.2 j)) j := by
     intro j hj
+    unfold fmBit
     split
     · next m hm =>
       obtain ⟨r, hr, t, e⟩ := firstMask_some hm
       have hr4 := cls_lt hr
       have hmask : mv B (rowT s j) = m := by
         rw [← (mem_cls_iff hs hj hr4).mp hr, hc r hr4 m t e]; exact (hρ r hr4 m t e).2.2.1
-      rw [testBit_ownOf B s hj, hmask]; exact beq_self_eq_true _
-    · rfl
-  simp only [ownCompat, Bool.and_eq_true]
-  exact ⟨⟨⟨key 0 (by norm_num), key 1 (by norm_num)⟩, key 2 (by norm_num)⟩, key 3 (by norm_num)⟩
+      rw [hmask, hm, Option.isSome_some, Bool.and_true]
+    · next hn => rw [hn, Option.isSome_none, Bool.and_false]
+  have ho : ownOf B s = four (Nat.testBit (mv B (rowT s 0)) 0) (Nat.testBit (mv B (rowT s 1)) 1)
+      (Nat.testBit (mv B (rowT s 2)) 2) (Nat.testBit (mv B (rowT s 3)) 3) := rfl
+  unfold ownCompat ownM ownV
+  rw [ho, land_four, key 0 (by norm_num), key 1 (by norm_num), key 2 (by norm_num),
+    key 3 (by norm_num)]
+  exact Nat.beq_refl _
 
 /-- **A prunable node has the good value `0`.** -/
 theorem prune_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} (h : pruneOK sh nd = true) :

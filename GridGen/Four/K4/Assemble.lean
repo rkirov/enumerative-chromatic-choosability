@@ -38,6 +38,20 @@ theorem certAt_dispatch {a b c : ℕ} {keys : List (List ℕ)}
     exact hmem
   exact hk _ hx B ⟨⟨a1, a1'⟩, ⟨a2, a2'⟩, ⟨a3, a3'⟩, ⟨a4, a4'⟩⟩ rfl Y hY hbad
 
+/-- No keys. -/
+theorem certAll_nil : ∀ xs ∈ ([] : List (List ℕ)), CertAt xs :=
+  fun _ h => absurd h List.not_mem_nil
+
+/-- One more certified key. The generated dispatch modules chain these, so that elaborating the
+certificate list costs one unification per key (an `rcases` over the membership disjunction is
+quadratic). -/
+theorem certAll_cons {x : List ℕ} {l : List (List ℕ)} (h : CertAt x) (t : ∀ y ∈ l, CertAt y) :
+    ∀ y ∈ x :: l, CertAt y := by
+  intro y hy
+  rcases List.mem_cons.mp hy with rfl | hy
+  · exact h
+  · exact t y hy
+
 /-- **The classification from the 125 mismatch triples.** -/
 theorem classify4_of (h : ∀ a < 5, ∀ b < 5, ∀ c < 5, TripleOK a b c) : Classify4 := by
   intro Y B hY hB hbad

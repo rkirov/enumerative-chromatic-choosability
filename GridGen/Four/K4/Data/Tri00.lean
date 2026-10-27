@@ -2,6 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
+import GridGen.Four.K4.Lit
 import GridGen.Four.K4.Data.Pw00
 import GridGen.Four.K4.Data.Pw01
 import GridGen.Four.K4.Data.Pw02
@@ -9,34 +10,6 @@ import GridGen.Four.K4.Data.Pw03
 import GridGen.Four.K4.Data.Pw04
 import GridGen.Four.K4.Data.Pw05
 import GridGen.Four.K4.Data.Pw06
-import GridGen.Four.K4.Data.Pw07
-import GridGen.Four.K4.Data.Pw08
-import GridGen.Four.K4.Data.Pw09
-import GridGen.Four.K4.Data.Pw10
-import GridGen.Four.K4.Data.Pw11
-import GridGen.Four.K4.Data.Pw12
-import GridGen.Four.K4.Data.Pw13
-import GridGen.Four.K4.Data.Pw14
-import GridGen.Four.K4.Data.Pw15
-import GridGen.Four.K4.Data.Pw16
-import GridGen.Four.K4.Data.Pw17
-import GridGen.Four.K4.Data.Pw18
-import GridGen.Four.K4.Data.Pw19
-import GridGen.Four.K4.Data.Pw20
-import GridGen.Four.K4.Data.Pw21
-import GridGen.Four.K4.Data.Pw22
-import GridGen.Four.K4.Data.Pw23
-import GridGen.Four.K4.Data.Pw24
-import GridGen.Four.K4.Data.Pw25
-import GridGen.Four.K4.Data.Pw26
-import GridGen.Four.K4.Data.Pw27
-import GridGen.Four.K4.Data.Pw28
-import GridGen.Four.K4.Data.Pw29
-import GridGen.Four.K4.Data.Pw30
-import GridGen.Four.K4.Data.Pw31
-import GridGen.Four.K4.Data.Pw32
-import GridGen.Four.K4.Data.Pw33
-import GridGen.Four.K4.Data.Pw34
 import GridGen.Four.K4.Data.Ch00
 import GridGen.Four.K4.Data.Ch01
 import GridGen.Four.K4.Data.Ch02
@@ -46,41 +19,10 @@ import GridGen.Four.K4.Data.Ch05
 import GridGen.Four.K4.Data.Ch06
 import GridGen.Four.K4.Data.Ch07
 import GridGen.Four.K4.Data.Ch08
-import GridGen.Four.K4.Data.Ch09
-import GridGen.Four.K4.Data.Ch10
-import GridGen.Four.K4.Data.Ch11
-import GridGen.Four.K4.Data.Ch12
-import GridGen.Four.K4.Data.Ch13
-import GridGen.Four.K4.Data.Ch14
-import GridGen.Four.K4.Data.Ch15
-import GridGen.Four.K4.Data.Ch16
-import GridGen.Four.K4.Data.Ch17
-import GridGen.Four.K4.Data.Ch18
-import GridGen.Four.K4.Data.Ch19
-import GridGen.Four.K4.Data.Ch20
-import GridGen.Four.K4.Data.Ch21
-import GridGen.Four.K4.Data.Ch22
-import GridGen.Four.K4.Data.Ch23
-import GridGen.Four.K4.Data.Ch24
-import GridGen.Four.K4.Data.Ch25
-import GridGen.Four.K4.Data.Ch26
 import GridGen.Four.K4.Data.RevPw00
 import GridGen.Four.K4.Data.RevPw01
 import GridGen.Four.K4.Data.RevPw02
-import GridGen.Four.K4.Data.RevPw03
-import GridGen.Four.K4.Data.RevPw04
-import GridGen.Four.K4.Data.RevPw05
-import GridGen.Four.K4.Data.RevPw06
-import GridGen.Four.K4.Data.RevPw07
-import GridGen.Four.K4.Data.RevPw08
-import GridGen.Four.K4.Data.RevPw09
-import GridGen.Four.K4.Data.RevPw10
-import GridGen.Four.K4.Data.RevPw11
-import GridGen.Four.K4.Data.RevPw12
 import GridGen.Four.K4.Data.RevCh00
-import GridGen.Four.K4.Data.RevCh01
-import GridGen.Four.K4.Data.RevCh02
-import GridGen.Four.K4.Data.RevCh03
 import GridGen.Four.K4.Data.B3_00
 import GridGen.Four.K4.Data.B3_01
 import GridGen.Four.K4.Data.B3_02
@@ -93,44 +35,6 @@ import GridGen.Four.K4.Data.B3_08
 import GridGen.Four.K4.Data.B3_09
 import GridGen.Four.K4.Data.B3_10
 import GridGen.Four.K4.Data.B3_11
-import GridGen.Four.K4.Data.B3_12
-import GridGen.Four.K4.Data.B3_13
-import GridGen.Four.K4.Data.B3_14
-import GridGen.Four.K4.Data.B3_15
-import GridGen.Four.K4.Data.B3_16
-import GridGen.Four.K4.Data.B3_17
-import GridGen.Four.K4.Data.B3_18
-import GridGen.Four.K4.Data.B3_19
-import GridGen.Four.K4.Data.B3_20
-import GridGen.Four.K4.Data.B3_21
-import GridGen.Four.K4.Data.B3_22
-import GridGen.Four.K4.Data.B3_23
-import GridGen.Four.K4.Data.B3_24
-import GridGen.Four.K4.Data.B3_25
-import GridGen.Four.K4.Data.B3_26
-import GridGen.Four.K4.Data.B3_27
-import GridGen.Four.K4.Data.B3_28
-import GridGen.Four.K4.Data.B3_29
-import GridGen.Four.K4.Data.B3_30
-import GridGen.Four.K4.Data.B3_31
-import GridGen.Four.K4.Data.B3_32
-import GridGen.Four.K4.Data.B3_33
-import GridGen.Four.K4.Data.B3_34
-import GridGen.Four.K4.Data.B3_35
-import GridGen.Four.K4.Data.B3_36
-import GridGen.Four.K4.Data.B3_37
-import GridGen.Four.K4.Data.B3_38
-import GridGen.Four.K4.Data.B3_39
-import GridGen.Four.K4.Data.B3_40
-import GridGen.Four.K4.Data.B3_41
-import GridGen.Four.K4.Data.B3_42
-import GridGen.Four.K4.Data.B3_43
-import GridGen.Four.K4.Data.B3_44
-import GridGen.Four.K4.Data.B3_45
-import GridGen.Four.K4.Data.B3_46
-import GridGen.Four.K4.Data.B3_47
-import GridGen.Four.K4.Data.B3_48
-import GridGen.Four.K4.Data.B3_49
 import GridGen.Four.K4.Data.B3Rev
 
 /-!
@@ -144,228 +48,209 @@ namespace GridGen.Four.K4
 set_option maxRecDepth 100000
 
 theorem tri_0_0_0 : TripleOK 0 0 0 :=
-  certAt_dispatch (keys := [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4]])
+  certAt_dispatch (keys := natss% "[0,0,0,0,0,0,0,0,0,0,0,0,0,0,4]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_4078])
+    (certAll_cons cert_4078 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_0_1 : TripleOK 0 0 1 :=
-  certAt_dispatch (keys := [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3]])
+  certAt_dispatch (keys := natss% "[1,0,0,0,0,0,0,0,0,0,0,0,0,1,3]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_4068])
+    (certAll_cons cert_4068 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_0_2 : TripleOK 0 0 2 :=
-  certAt_dispatch (keys := [[2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2]])
+  certAt_dispatch (keys := natss% "[2,0,0,0,0,0,0,0,0,0,0,0,0,2,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_3955])
+    (certAll_cons cert_3955 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_0_3 : TripleOK 0 0 3 :=
-  certAt_dispatch (keys := [[3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1]])
+  certAt_dispatch (keys := natss% "[3,0,0,0,0,0,0,0,0,0,0,0,0,3,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_3255])
+    (certAll_cons cert_3255 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_0_4 : TripleOK 0 0 4 :=
-  certAt_dispatch (keys := [[4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]])
+  certAt_dispatch (keys := natss% "[4,0,0,0,0,0,0,0,0,0,0,0,0,4,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_80])
+    (certAll_cons cert_80 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_1_0 : TripleOK 0 1 0 :=
-  certAt_dispatch (keys := [[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3]])
+  certAt_dispatch (keys := natss% "[0,0,1,0,0,0,0,0,0,0,0,1,0,0,3]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_4075])
+    (certAll_cons cert_4075 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_1_1 : TripleOK 0 1 1 :=
-  certAt_dispatch (keys := [[1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2], [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3]])
+  certAt_dispatch (keys := natss% "[1,0,1,0,0,0,0,0,0,0,0,1,0,1,2][0,0,1,0,0,0,0,0,0,0,0,0,1,1,2][1,1,0,0,0,0,0,0,0,0,0,1,0,0,3][0,1,0,0,0,0,0,0,0,0,0,0,1,0,3]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_4005, cert_4022, cert_4065, cert_4073])
+    (certAll_cons cert_4005
+    (certAll_cons cert_4022
+    (certAll_cons cert_4065
+    (certAll_cons cert_4073 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_1_2 : TripleOK 0 1 2 :=
-  certAt_dispatch (keys := [[2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1], [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1], [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2], [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2]])
+  certAt_dispatch (keys := natss% "[2,0,1,0,0,0,0,0,0,0,0,1,0,2,1][1,0,1,0,0,0,0,0,0,0,0,0,1,2,1][2,1,0,0,0,0,0,0,0,0,0,1,0,1,2][1,1,0,0,0,0,0,0,0,0,0,0,1,1,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_3468, cert_3558, cert_3952, cert_3991])
+    (certAll_cons cert_3468
+    (certAll_cons cert_3558
+    (certAll_cons cert_3952
+    (certAll_cons cert_3991 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_1_3 : TripleOK 0 1 3 :=
-  certAt_dispatch (keys := [[3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0], [2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0], [3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1], [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1]])
+  certAt_dispatch (keys := natss% "[3,0,1,0,0,0,0,0,0,0,0,1,0,3,0][2,0,1,0,0,0,0,0,0,0,0,0,1,3,0][3,1,0,0,0,0,0,0,0,0,0,1,0,2,1][2,1,0,0,0,0,0,0,0,0,0,0,1,2,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_768, cert_1076, cert_3252, cert_3399])
+    (certAll_cons cert_768
+    (certAll_cons cert_1076
+    (certAll_cons cert_3252
+    (certAll_cons cert_3399 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_1_4 : TripleOK 0 1 4 :=
-  certAt_dispatch (keys := [[4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0], [3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0]])
+  certAt_dispatch (keys := natss% "[4,1,0,0,0,0,0,0,0,0,0,1,0,3,0][3,1,0,0,0,0,0,0,0,0,0,0,1,3,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl
-    exacts [cert_77, cert_512])
+    (certAll_cons cert_77
+    (certAll_cons cert_512 certAll_nil))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_2_0 : TripleOK 0 2 0 :=
-  certAt_dispatch (keys := [[0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[0,0,2,0,0,0,0,0,0,0,0,2,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_4025])
+    (certAll_cons cert_4025 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_2_1 : TripleOK 0 2 1 :=
-  certAt_dispatch (keys := [[1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1], [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1], [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2]])
+  certAt_dispatch (keys := natss% "[1,0,2,0,0,0,0,0,0,0,0,2,0,1,1][0,0,2,0,0,0,0,0,0,0,0,1,1,1,1][1,1,1,0,0,0,0,0,0,0,0,2,0,0,2][0,1,1,0,0,0,0,0,0,0,0,1,1,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_3595, cert_3624, cert_3999, cert_4019])
+    (certAll_cons cert_3595
+    (certAll_cons cert_3624
+    (certAll_cons cert_3999
+    (certAll_cons cert_4019 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_2_2 : TripleOK 0 2 2 :=
-  certAt_dispatch (keys := [[2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0], [1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0], [0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0], [2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1], [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1], [0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1], [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2], [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2], [0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2]])
+  certAt_dispatch (keys := natss% "[2,0,2,0,0,0,0,0,0,0,0,2,0,2,0][1,0,2,0,0,0,0,0,0,0,0,1,1,2,0][0,0,2,0,0,0,0,0,0,0,0,0,2,2,0][2,1,1,0,0,0,0,0,0,0,0,2,0,1,1][1,1,1,0,0,0,0,0,0,0,0,1,1,1,1][0,1,1,0,0,0,0,0,0,0,0,0,2,1,1][2,2,0,0,0,0,0,0,0,0,0,2,0,0,2][1,2,0,0,0,0,0,0,0,0,0,1,1,0,2][0,2,0,0,0,0,0,0,0,0,0,0,2,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1254, cert_1404, cert_1458, cert_3462, cert_3555, cert_3582, cert_3942, cert_3987, cert_3996])
+    (certAll_cons cert_1254
+    (certAll_cons cert_1404
+    (certAll_cons cert_1458
+    (certAll_cons cert_3462
+    (certAll_cons cert_3555
+    (certAll_cons cert_3582
+    (certAll_cons cert_3942
+    (certAll_cons cert_3987
+    (certAll_cons cert_3996 certAll_nil)))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_2_3 : TripleOK 0 2 3 :=
-  certAt_dispatch (keys := [[3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0], [2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0], [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0], [3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1], [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1], [1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1]])
+  certAt_dispatch (keys := natss% "[3,1,1,0,0,0,0,0,0,0,0,2,0,2,0][2,1,1,0,0,0,0,0,0,0,0,1,1,2,0][1,1,1,0,0,0,0,0,0,0,0,0,2,2,0][3,2,0,0,0,0,0,0,0,0,0,2,0,1,1][2,2,0,0,0,0,0,0,0,0,0,1,1,1,1][1,2,0,0,0,0,0,0,0,0,0,0,2,1,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_762, cert_1073, cert_1192, cert_3242, cert_3395, cert_3437])
+    (certAll_cons cert_762
+    (certAll_cons cert_1073
+    (certAll_cons cert_1192
+    (certAll_cons cert_3242
+    (certAll_cons cert_3395
+    (certAll_cons cert_3437 certAll_nil))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_2_4 : TripleOK 0 2 4 :=
-  certAt_dispatch (keys := [[4, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0], [3, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0], [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0]])
+  certAt_dispatch (keys := natss% "[4,2,0,0,0,0,0,0,0,0,0,2,0,2,0][3,2,0,0,0,0,0,0,0,0,0,1,1,2,0][2,2,0,0,0,0,0,0,0,0,0,0,2,2,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl
-    exacts [cert_67, cert_508, cert_666])
+    (certAll_cons cert_67
+    (certAll_cons cert_508
+    (certAll_cons cert_666 certAll_nil)))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_3_0 : TripleOK 0 3 0 :=
-  certAt_dispatch (keys := [[0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1]])
+  certAt_dispatch (keys := natss% "[0,0,3,0,0,0,0,0,0,0,0,3,0,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_3628])
+    (certAll_cons cert_3628 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_3_1 : TripleOK 0 3 1 :=
-  certAt_dispatch (keys := [[1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0], [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0], [1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1], [0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 1]])
+  certAt_dispatch (keys := natss% "[1,0,3,0,0,0,0,0,0,0,0,3,0,1,0][0,0,3,0,0,0,0,0,0,0,0,2,1,1,0][1,1,2,0,0,0,0,0,0,0,0,3,0,0,1][0,1,2,0,0,0,0,0,0,0,0,2,1,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_1475, cert_1516, cert_3586, cert_3618])
+    (certAll_cons cert_1475
+    (certAll_cons cert_1516
+    (certAll_cons cert_3586
+    (certAll_cons cert_3618 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_3_2 : TripleOK 0 3 2 :=
-  certAt_dispatch (keys := [[2, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0], [1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0], [0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0], [2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1], [1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 1], [0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1]])
+  certAt_dispatch (keys := natss% "[2,1,2,0,0,0,0,0,0,0,0,3,0,1,0][1,1,2,0,0,0,0,0,0,0,0,2,1,1,0][0,1,2,0,0,0,0,0,0,0,0,1,2,1,0][2,2,1,0,0,0,0,0,0,0,0,3,0,0,1][1,2,1,0,0,0,0,0,0,0,0,2,1,0,1][0,2,1,0,0,0,0,0,0,0,0,1,2,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1245, cert_1398, cert_1455, cert_3446, cert_3545, cert_3578])
+    (certAll_cons cert_1245
+    (certAll_cons cert_1398
+    (certAll_cons cert_1455
+    (certAll_cons cert_3446
+    (certAll_cons cert_3545
+    (certAll_cons cert_3578 certAll_nil))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_3_3 : TripleOK 0 3 3 :=
-  certAt_dispatch (keys := [[3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0], [2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0], [1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0], [0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0], [3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1], [2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 1], [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1], [0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1]])
+  certAt_dispatch (keys := natss% "[3,2,1,0,0,0,0,0,0,0,0,3,0,1,0][2,2,1,0,0,0,0,0,0,0,0,2,1,1,0][1,2,1,0,0,0,0,0,0,0,0,1,2,1,0][0,2,1,0,0,0,0,0,0,0,0,0,3,1,0][3,3,0,0,0,0,0,0,0,0,0,3,0,0,1][2,3,0,0,0,0,0,0,0,0,0,2,1,0,1][1,3,0,0,0,0,0,0,0,0,0,1,2,0,1][0,3,0,0,0,0,0,0,0,0,0,0,3,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_746, cert_1063, cert_1188, cert_1218, cert_3220, cert_3383, cert_3433, cert_3442])
+    (certAll_cons cert_746
+    (certAll_cons cert_1063
+    (certAll_cons cert_1188
+    (certAll_cons cert_1218
+    (certAll_cons cert_3220
+    (certAll_cons cert_3383
+    (certAll_cons cert_3433
+    (certAll_cons cert_3442 certAll_nil))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_3_4 : TripleOK 0 3 4 :=
-  certAt_dispatch (keys := [[4, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0], [3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0], [2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0], [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0]])
+  certAt_dispatch (keys := natss% "[4,3,0,0,0,0,0,0,0,0,0,3,0,1,0][3,3,0,0,0,0,0,0,0,0,0,2,1,1,0][2,3,0,0,0,0,0,0,0,0,0,1,2,1,0][1,3,0,0,0,0,0,0,0,0,0,0,3,1,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_45, cert_496, cert_662, cert_704])
+    (certAll_cons cert_45
+    (certAll_cons cert_496
+    (certAll_cons cert_662
+    (certAll_cons cert_704 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_4_0 : TripleOK 0 4 0 :=
-  certAt_dispatch (keys := [[0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0]])
+  certAt_dispatch (keys := natss% "[0,0,4,0,0,0,0,0,0,0,0,4,0,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_1521])
+    (certAll_cons cert_1521 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_4_1 : TripleOK 0 4 1 :=
-  certAt_dispatch (keys := [[1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0], [0, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0]])
+  certAt_dispatch (keys := natss% "[1,1,3,0,0,0,0,0,0,0,0,4,0,0,0][0,1,3,0,0,0,0,0,0,0,0,3,1,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl
-    exacts [cert_1463, cert_1507])
+    (certAll_cons cert_1463
+    (certAll_cons cert_1507 certAll_nil))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_4_2 : TripleOK 0 4 2 :=
-  certAt_dispatch (keys := [[2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0], [1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0], [0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0]])
+  certAt_dispatch (keys := natss% "[2,2,2,0,0,0,0,0,0,0,0,4,0,0,0][1,2,2,0,0,0,0,0,0,0,0,3,1,0,0][0,2,2,0,0,0,0,0,0,0,0,2,2,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl
-    exacts [cert_1223, cert_1382, cert_1445])
+    (certAll_cons cert_1223
+    (certAll_cons cert_1382
+    (certAll_cons cert_1445 certAll_nil)))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_4_3 : TripleOK 0 4 3 :=
-  certAt_dispatch (keys := [[3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0], [2, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0], [1, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0], [0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0]])
+  certAt_dispatch (keys := natss% "[3,3,1,0,0,0,0,0,0,0,0,4,0,0,0][2,3,1,0,0,0,0,0,0,0,0,3,1,0,0][1,3,1,0,0,0,0,0,0,0,0,2,2,0,0][0,3,1,0,0,0,0,0,0,0,0,1,3,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_714, cert_1041, cert_1176, cert_1214])
+    (certAll_cons cert_714
+    (certAll_cons cert_1041
+    (certAll_cons cert_1176
+    (certAll_cons cert_1214 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_0_4_4 : TripleOK 0 4 4 :=
-  certAt_dispatch (keys := [[4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0], [3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0, 0], [2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0], [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0], [0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0]])
+  certAt_dispatch (keys := natss% "[4,4,0,0,0,0,0,0,0,0,0,4,0,0,0][3,4,0,0,0,0,0,0,0,0,0,3,1,0,0][2,4,0,0,0,0,0,0,0,0,0,2,2,0,0][1,4,0,0,0,0,0,0,0,0,0,1,3,0,0][0,4,0,0,0,0,0,0,0,0,0,0,4,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl
-    exacts [cert_4, cert_470, cert_649, cert_700, cert_709])
+    (certAll_cons cert_4
+    (certAll_cons cert_470
+    (certAll_cons cert_649
+    (certAll_cons cert_700
+    (certAll_cons cert_709 certAll_nil)))))
     (by norm_num) (by norm_num) (by norm_num)
 
 

@@ -625,12 +625,12 @@ def GOKSh (sh : Sh) (nd : GNode) : Prop := ∀ B : Col, ShapeOf B sh → GOK B n
 
 mutual
 /-- **The check of a branching tree**; `given idx` refers to a node of `gs` proved separately. -/
-def evalGAT (sh : Sh) (gs : List GNode) (nd : GNode) : GAT → Bool
+def evalGAT (sh : Sh) (tab : BTab) (gs : List GNode) (nd : GNode) : GAT → Bool
   | .num t =>
-    match evalGCT sh nd t with
+    match evalGCT sh tab nd t with
     | some v => v.nonneg
     | none => false
-  | .split i ks => Nat.blt i 4 && (nd.get i).isNone && evalGATL sh gs nd i (ltypes sh nd) ks
+  | .split i ks => Nat.blt i 4 && (nd.get i).isNone && evalGATL sh tab gs nd i (ltypes sh nd) ks
   | .badF x y z a b => badFCheck sh nd x y z a b
   | .badM x y z a b => badMCheck sh nd x y z a b
   | .given idx =>
@@ -638,24 +638,24 @@ def evalGAT (sh : Sh) (gs : List GNode) (nd : GNode) : GAT → Bool
     | some nd' => gnodeBEq nd' nd
     | none => false
 /-- The check of the list children. -/
-def evalGATL (sh : Sh) (gs : List GNode) (nd : GNode) (i : ℕ) (tys : List (List ℕ × List ℕ)) :
-    GATL → Bool
+def evalGATL (sh : Sh) (tab : BTab) (gs : List GNode) (nd : GNode) (i : ℕ)
+    (tys : List (List ℕ × List ℕ)) : GATL → Bool
   | .nil => tys.isEmpty
   | .cons k ks =>
     match tys with
     | [] => false
-    | ty :: tys' => evalGAT sh gs (lchild nd i ty) k && evalGATL sh gs nd i tys' ks
+    | ty :: tys' => evalGAT sh tab gs (lchild nd i ty) k && evalGATL sh tab gs nd i tys' ks
 end
 
 mutual
 /-- **Soundness of a branching tree.** -/
-theorem evalGAT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List GNode}
-    (hgs : ∀ nd ∈ gs, GOK B nd) :
-    ∀ (T : GAT) (nd : GNode), evalGAT sh gs nd T = true → GOK B nd
+theorem evalGAT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : BTab}
+    (htab : BTabOK sh tab) {gs : List GNode} (hgs : ∀ nd ∈ gs, GOK B nd) :
+    ∀ (T : GAT) (nd : GNode), evalGAT sh tab gs nd T = true → GOK B nd
   | .num t, nd, h => by
     simp only [evalGAT] at h
     split at h
-    · next v hv => exact gok_of_good (evalGCT_sound hB t nd v hv) h
+    · next v hv => exact gok_of_good (evalGCT_sound hB htab t nd v hv) h
     · exact absurd h (by simp)
   | .split i ks, nd, h => by
     simp only [evalGAT, Bool.and_eq_true, Nat.blt_eq, Option.isNone_iff_eq_none] at h
@@ -669,7 +669,7 @@ theorem evalGAT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List GNode}
       · exact c3
       · exact c4
     obtain ⟨ty, hty, ρ', hreal, hfill⟩ := ltypes_cover hB hρ hi hfree Y hYi
-    have hchild := evalGATL_sound hB hgs ks nd i _ hk ty hty
+    have hchild := evalGATL_sound hB htab hgs ks nd i _ hk ty hty
     have := hchild ρ' hreal Y hY (by rw [hfill]; exact hbad)
     rwa [hfill] at this
   | .badF x y z a b, nd, h => by
@@ -686,10 +686,10 @@ theorem evalGAT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List GNode}
       exact hgs nd' (List.mem_of_getElem? hn)
     · exact absurd h (by simp)
 /-- Soundness of the list children. -/
-theorem evalGATL_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List GNode}
-    (hgs : ∀ nd ∈ gs, GOK B nd) :
+theorem evalGATL_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : BTab}
+    (htab : BTabOK sh tab) {gs : List GNode} (hgs : ∀ nd ∈ gs, GOK B nd) :
     ∀ (ks : GATL) (nd : GNode) (i : ℕ) (tys : List (List ℕ × List ℕ)),
-      evalGATL sh gs nd i tys ks = true → ∀ ty ∈ tys, GOK B (lchild nd i ty)
+      evalGATL sh tab gs nd i tys ks = true → ∀ ty ∈ tys, GOK B (lchild nd i ty)
   | .nil, nd, i, tys, h, ty, hty => by
     simp only [evalGATL, List.isEmpty_iff] at h; subst h; simp at hty
   | .cons k ks, nd, i, tys, h, ty, hty => by
@@ -698,21 +698,23 @@ theorem evalGATL_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List GNode}
     | cons a tys' =>
       simp only [evalGATL, Bool.and_eq_true] at h
       rcases List.mem_cons.mp hty with rfl | hty'
-      · exact evalGAT_sound hB hgs k _ h.1
-      · exact evalGATL_sound hB hgs ks nd i tys' h.2 ty hty'
+      · exact evalGAT_sound hB htab hgs k _ h.1
+      · exact evalGATL_sound hB htab hgs ks nd i tys' h.2 ty hty'
 end
 
 /-- **A separately checked branching node.** -/
-theorem gokSh_of_eval {sh : Sh} {gs : List GNode} (hgs : ∀ nd ∈ gs, GOKSh sh nd) {nd : GNode}
-    {T : GAT} (h : evalGAT sh gs nd T = true) : GOKSh sh nd := fun B hB =>
-  evalGAT_sound hB (fun nd' h' => hgs nd' h' B hB) T nd h
+theorem gokSh_of_eval {sh : Sh} {tab : BTab} (htab : BTabOK sh tab) {gs : List GNode}
+    (hgs : ∀ nd ∈ gs, GOKSh sh nd) {nd : GNode} {T : GAT} (h : evalGAT sh tab gs nd T = true) :
+    GOKSh sh nd := fun B hB =>
+  evalGAT_sound hB htab (fun nd' h' => hgs nd' h' B hB) T nd h
 
 /-- **A shape certified by explicit-list branching.** -/
-theorem certAt_of_b3 {xs : List ℕ} {gs : List GNode} (hgs : ∀ nd ∈ gs, GOKSh (shOf xs) nd)
-    {T : GAT} (h : evalGAT (shOf xs) gs GNode.root T = true) : CertAt xs := by
+theorem certAt_of_b3 {xs : List ℕ} {tab : BTab} (htab : BTabOK (shOf xs) tab)
+    {gs : List GNode} (hgs : ∀ nd ∈ gs, GOKSh (shOf xs) nd)
+    {T : GAT} (h : evalGAT (shOf xs) tab gs GNode.root T = true) : CertAt xs := by
   intro B hB hx Y hY hbad
   subst hx
-  have hok := gokSh_of_eval hgs h B (shapeOf_atoms hB) id (GNode.real_root B id) Y hY
+  have hok := gokSh_of_eval htab hgs h B (shapeOf_atoms hB) id (GNode.real_root B id) Y hY
   have hf : gfill GNode.root id Y = Y := by
     obtain ⟨Y1, Y2, Y3, Y4⟩ := Y; rfl
   rw [hf] at hok
@@ -732,5 +734,9 @@ abbrev Ae : GATL := GATL.nil
 abbrev Bf (x y z a b : ℕ) : GAT := GAT.badF x y z a b
 abbrev Bm (x y z a b : ℕ) : GAT := GAT.badM x y z a b
 abbrev Ag (i : ℕ) : GAT := GAT.given i
+abbrev Kl : KT := KT.leaf
+abbrev Kn (l : KT) (k : ℕ) (r : KT) : KT := KT.node l k r
+abbrev Vl : KV := KV.leaf
+abbrev Vn (l : KV) (k : ℕ) (v : V5) (r : KV) : KV := KV.node l k v r
 
 end GridGen.Four.K4

@@ -2,7 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import GridGen.Four.K4.GAnd
+import GridGen.Four.K4.Data.B3Tab
 import GridGen.Four.K4.Data.B3_00
 import GridGen.Four.K4.Data.B3_01
 
@@ -16,64 +16,352 @@ namespace GridGen.Four.K4
 
 set_option maxRecDepth 100000
 
-theorem b3_3884_16 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[11, 12, 14, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_1 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 0 [2,2,2,2,2] (GKs (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [2,2,2,2,2] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 2 [7,7,7,7,7] (GKs GPr (GKs (GNd 1 [2,2,2,2,2] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf GEn))))))) GLf) (GKs (GNd 1 [2,2,2,2,2] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf GEn))))))) GLf) GEn))))))) GPr) (GKs (GNd 2 [3,3,3,3,3] (GKs GPr (GKs (GNd 1 [2,2,2,2,2] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs (GNd 1 [2,2,2,2,2] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 2 [3,3,3,3,3] (GKs GPr (GKs (GNd 1 [2,2,2,2,2] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf GEn))))))) GLf) GEn))))))) GPr) GEn))))))) (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr))))
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klkpklklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklkpklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklelkpepkn3,[5,5,5,5,5]kn2,[5,5,5,5,5]kpklklklkpklklelkn2,[5,5,5,5,5]klkpklklkpklklelkpkpkn2,[0,0,0,0,0]klklklklkpklklelkpkn2,[6,6,6,6,6]klklklklkpkpklelepkn3,[5,5,5,5,5]kn2,[5,5,5,5,5]kpklklklkpklklelkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[5,5,5,5,5]klklklklkpklklelkpkn2,[0,0,0,0,0]klklklklkpkpklelepen3,[2,2,2,2,2]kpkpkpkpkpkpkn2,[6,6,6,6,6]klklklklkpkpklklelkpep")
     (by decide +kernel)
 
-theorem b3_3884_17 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[12, 14, 15, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_2 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 1 [2,2,2,2,2] (GKs GPr (GKs (GNd 0 [3,3,3,3,3] (GKs GPr (GKs GPr (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [4,4,4,4,4] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 2 [2,2,2,2,2] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [5,5,5,5,5] (GKs GPr (GKs (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [6,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) (GNd 2 [7,7,7,7,7] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf)) GEn))))))) (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr))))
+    (T := lit% "An1,[2,2,2,2,2]kpkpkpkpkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklklelkpkpepkn3,[3,3,3,3,3]kn2,[5,5,5,5,5]kpklklklkpklklklelkpkpkpkn2,[0,0,0,0,0]klklklklkpklklklelkpkn2,[6,6,6,6,6]klklklklkpkpklklelkn2,[6,6,6,6,6]klklklklkpkpklklelepkn3,[3,3,3,3,3]kn2,[5,5,5,5,5]kpklklklkpklklklelkpkpkpkn2,[5,5,5,5,5]klklklklkpklklklelkpkn2,[0,0,0,0,0]klklklklkpkpklklelkn2,[0,0,0,0,0]klklklklkpkpklklelepkn3,[2,2,2,2,2]kpkpkpkpkpkpkn2,[6,6,6,6,6]klklklklkpkpklklelkpepep")
     (by decide +kernel)
 
-theorem b3_3884_18 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[7, 12, 14, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_3 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 1 [2,2,2,2,2] (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [5,5,5,5,5] (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf)) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 2 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr GEn))))))) GPr) GEn))))))) (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr))))
+    (T := lit% "An2,[2,2,2,2,2]kpkn3,[2,2,2,2,2]kpkpkpkpkpkn1,[6,6,6,6,6]klkpklklklklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkpkpepkn3,[2,2,2,2,2]kpkpkpkpkpkpkpepkn3,[4,4,4,4,4]kn1,[6,6,6,6,6]klklklklkpklklelkn1,[6,6,6,6,6]klklklklkpklklelkpkpkpkn1,[6,6,6,6,6]klklklklkpklklelkpepkn3,[6,6,6,6,6]kn1,[6,6,6,6,6]klklklklkpklklelkn1,[6,6,6,6,6]klklklklkpklklelkn1,[6,6,6,6,6]klklklklkpklklelkn1,[6,6,6,6,6]klklklklkpklklelkpkpkpen1,[7,7,7,7,7]klklklklkpklklklelkpen3,[2,2,2,2,2]kpkpkpkpkpkpkpkpep")
     (by decide +kernel)
 
-theorem b3_3884_19 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[1, 12, 14, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_4 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 1 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 2 [4,4,4,4,4] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 2 [4,4,4,4,4] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 2 [2,2,2,2,2] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [0,0,0,0,0] (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) GEn))))))) (GNd 2 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf)) (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 2 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) GEn))))))) (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr))))
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklkpklkpklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklklelkpkpepkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[5,5,5,5,5]klklklklkpklklelkpkn2,[0,0,0,0,0]klklklklkpkpklelepkpkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[6,6,6,6,6]klklklklkpklklelkn2,[0,0,0,0,0]klklklklkpkpklelkpepen3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklklelkpkpep")
     (by decide +kernel)
 
-theorem b3_3884_20 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[1, 11, 0, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_5 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[14, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 0 [5,5,5,5,5] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs (GNd 1 [6,6,6,6,6] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs (GNd 1 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) GEn)))))))) GPr) (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [6,6,6,6,6] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs (GNd 1 [7,7,7,7,7] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) GEn)))))))) GPr) (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr) (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [7,7,7,7,7] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr) GEn)))))))) GPr)))
+    (T := lit% "An1,[2,2,2,2,2]kn3,[4,4,4,4,4]kn2,[6,6,6,6,6]kpklklklklklklelkn2,[4,4,4,4,4]kpkpklklklklklelkpkpkpkn2,[5,5,5,5,5]kpklklklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klkpklklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklkpklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklklelkpepkpkn3,[5,5,5,5,5]kn2,[5,5,5,5,5]kpklklklkpklklelkn2,[5,5,5,5,5]klkpklklkpklklelkpkpkn2,[6,6,6,6,6]klklklklkpklklelkpkpepkpen3,[2,2,2,2,2]kpkpkpkpkpkpkn2,[6,6,6,6,6]klklklklkpkpklklelkpep")
     (by decide +kernel)
 
-theorem b3_3884_21 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[14, 0, 0, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_6 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 2 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [6,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))))) GLf) (GKs (GNd 1 [0,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn))))))))) GLf) (GKs GPr (GKs GPr (GKs GPr GEn))))))))) GPr) (GKs GPr (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn))))))))) GLf) (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn))))))))) GLf) (GKs GPr (GKs GPr GEn))))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn))))))))) GLf) (GKs GPr (GKs GPr (GKs GPr GEn))))))))) GPr) GEn))))))))) GPr)))
+    (T := lit% "An1,[2,2,2,2,2]kpkpkpkpkn3,[2,2,2,2,2]kpkpkpkpkn2,[5,5,5,5,5]klklklklkpklklklelkpkn2,[0,0,0,0,0]klklklklkpkpklklelkn2,[0,0,0,0,0]klklklklkpkpklklelepkpkn3,[2,2,2,2,2]kpkpkpkpkn2,[6,0,0,0,0]klklklklkpklklklelkn2,[0,6,6,6,6]klklklklkpkpklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklklelkpkpepep")
     (by decide +kernel)
 
-theorem b3_3884_22 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[7, 11, 0, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_7 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 2 [2,2,2,2,2] (GKs (GNd 0 [5,5,5,5,5] (GKs (GNd 1 [6,6,6,6,6] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs (GNd 1 [6,6,6,6,6] (GKs GPr (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) GEn)))))))) GPr) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [6,6,6,6,6] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [6,6,6,6,6] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs (GNd 1 [7,7,7,7,7] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) GEn)))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr GEn)))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [7,7,7,7,7] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr GEn)))))))) GPr) GEn)))))))) GPr)))
+    (T := lit% "An1,[2,2,2,2,2]kn3,[4,4,4,4,4]kn2,[1,1,1,1,1]kpklklklklklklelkn2,[4,4,4,4,4]kpkpklklklklklelkpkpkpkn2,[5,5,5,5,5]kpklklklkpklklelkn2,[5,5,5,5,5]kpklklklkpklklelepkpkpkpkn3,[3,3,3,3,3]kn2,[1,1,1,1,1]kpklklklkpklklelkpkpkpkpkpkpepkn3,[5,5,5,5,5]kn2,[1,1,1,1,1]kpklklklkpklklelkn2,[5,5,5,5,5]klkpklklkpklklelkpkpkn2,[5,5,5,5,5]klklklklkpklklelkpkn2,[1,1,1,1,1]klklklklkpkpklelepkn3,[3,3,3,3,3]kn2,[5,5,5,5,5]kpklklklkpklklelkpkpkpkn2,[1,1,1,1,1]klklklklkpklklelkpkpepep")
     (by decide +kernel)
 
-theorem b3_3884_23 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[7, 14, 15, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_8 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 14, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 2 [2,2,2,2,2] (GKs (GNd 0 [5,5,5,5,5] (GKs (GNd 1 [5,5,5,5,5] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [6,6,6,6,6] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf GEn))))))) GLf) (GKs GPr GEn))))))) GPr) GEn))))))) (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr GEn)))))))) GPr))))
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpkpklklklklklelkn2,[4,4,4,4,4]klkpklklklklklelkpkpkpkn2,[0,0,0,0,0]klkpklklkpklklelkn2,[0,0,0,0,0]klkpklklkpklklelepkpkpkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklelkpepkn3,[5,5,5,5,5]kn2,[5,5,5,5,5]kpklklklkpklklelkn2,[5,5,5,5,5]klkpklklkpklklelkpkpkn2,[0,0,0,0,0]klklklklkpklklelkpkn2,[6,6,6,6,6]klklklklkpkpklelepkn3,[2,2,2,2,2]kpkpkpkpkpkpkn2,[6,6,6,6,6]klklklklkpkpklelepep")
     (by decide +kernel)
 
-theorem b3_3884_24 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[1, 14, 15, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_9 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 15, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 2 [2,2,2,2,2] (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [5,5,5,5,5] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn))))))) GPr) (GKs (GNd 0 [5,5,5,5,5] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [5,5,5,5,5] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs GPr GEn))))))) GPr) (GKs GPr (GKs (GNd 0 [6,6,6,6,6] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf GEn))))))) GLf) (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf GEn))))))) GLf) (GKs GPr GEn))))))) GPr) GEn))))))) (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr))))
+    (T := lit% "An1,[3,3,3,3,3]kn3,[2,2,2,2,2]kn2,[0,0,0,0,0]kpklklklklklelkn2,[4,4,4,4,4]kpkpklklklklelkn2,[4,4,4,4,4]kpklkpklklklelkn2,[1,1,1,1,1]kpklklkpklklelkn2,[1,1,1,1,1]kpklklklkpklelkn2,[5,5,5,5,5]kpklklklkpklelen2,[1,1,1,1,1]kpklklklkpklklelkpkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklkpklklklelkpkn2,[1,1,1,1,1]klklkpklklklelkpkpkpepkn3,[3,3,3,3,3]kn2,[4,4,4,4,4]kpklklkpklklelkpkpkpkpkpepkn3,[3,3,3,3,3]kn2,[1,1,1,1,1]kpklklklkpklelkpkpkpkpkpepkn3,[6,6,6,6,6]kn2,[1,1,1,1,1]kpklklklkpklelkn2,[5,5,5,5,5]klkpklklkpklelkn2,[1,1,1,1,1]klklkpklkpklelkpkn2,[5,1,1,1,1]klklklklkpklelkpepen3,[3,3,3,3,3]kn2,[5,5,5,5,5]kpklklklkpklklelkpkpkpkpkpkpep")
     (by decide +kernel)
 
-theorem b3_3884_25 : GOKSh (shOf [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1]) ⟨[11, 14, 0, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
-  gokSh_of_eval (gs := [])
+theorem b3_3913_10 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (An (GNd 2 [2,2,2,2,2] (GKs GPr (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr GEn)))))))) GPr) (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 0 [3,3,3,3,3] (GKs (GNd 1 [1,1,1,1,1] (GKs GPr (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GLf (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs (GNd 1 [0,0,0,0,0] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) GEn)))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) GEn)))))))) GPr) (GKs (GNd 0 [2,2,2,2,2] (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs GPr (GKs (GNd 1 [1,1,1,1,1] (GKs GLf (GKs GLf (GKs GLf (GKs GLf (GKs GPr (GKs GPr (GKs GLf (GKs GLf GEn)))))))) GLf) (GKs GPr (GKs GPr GEn)))))))) GPr) GEn)))))))) GPr)))
+    (T := lit% "An1,[2,2,2,2,2]kn3,[2,2,2,2,2]kpkpkpkpkn2,[1,1,1,1,1]kpklklklkpklklelkpkpepkpkpkpkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[1,1,1,1,1]klklklklkpklklelkn2,[0,0,0,0,0]klklklklkpkpklelkn2,[0,0,0,0,0]klklklklkpkpklelepkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[0,0,0,0,0]klklklklkpklklelkn2,[1,1,1,1,1]klklklklkpkpklelkn2,[1,1,1,1,1]klklklklkpkpklelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_11 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 15, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn3,[2,2,2,2,2]kpkpkpkpkn2,[1,1,1,1,1]kpklklklkpklelkpepkpkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklkpklkpklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpepkn3,[2,2,2,2,2]kn2,[1,1,1,1,1]kpklklklkpklelkn2,[0,0,0,0,0]klkpklklkpklelkn2,[0,0,0,0,0]klklkpklkpklelkn2,[1,1,1,1,1]klklklkpkpklelkn2,[4,4,4,4,4]klklklklkpklelkn2,[0,0,0,0,0]klklklklkpkpelen2,[1,1,1,1,1]klklklklkpkpklelkn3,[1,1,1,1,1]kn2,[1,1,1,1,1]kpklklklkpklelkn2,[0,0,0,0,0]klkpklklkpklelkn2,[1,1,1,1,1]klklkpklkpklelkn2,[1,1,1,1,1]klklklkpkpklelkn2,[0,0,0,0,0]klklklklkpklelkn2,[1,1,5,5,5]klklklklkpkpelen2,[1,1,1,1,1]klklklklkpkpklelen3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklelkpep")
+    (by decide +kernel)
+
+theorem b3_3913_12 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 14, 15, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[6,6,6,6,6]kn2,[4,4,4,4,4]kpkpklklklklelkn2,[4,4,4,4,4]klkpklklklklelkn2,[0,0,0,0,0]klkpkpklklklelkpkpkn2,[0,0,0,0,0]klkpklklkpklelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklkpklkpklelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpelepkn3,[6,6,6,6,6]kn2,[5,5,5,5,5]kpklklklkpklelkn2,[5,5,5,5,5]klkpklklkpklelkn2,[5,5,5,5,5]klklkpklkpklelkpkn2,[0,0,0,0,0]klklklklkpklelkpepen3,[2,2,2,2,2]kpkpkpkpkpkpkn2,[6,6,6,6,6]klklklklkpkpklelep")
+    (by decide +kernel)
+
+theorem b3_3913_13 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[0, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpkpkpepkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpkpkpepkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_14 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[3,3,3,3,3]kpkn2,[4,4,4,4,4]klkpklklklklklelkpkpkpkn2,[0,0,0,0,0]klkpklklkpklklelkn2,[0,0,0,0,0]klkpklklkpklklelepkpkpkpkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[5,5,5,5,5]klklklklkpklklelkpkn2,[0,0,0,0,0]klklklklkpkpklelepkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[5,5,5,5,5]klklklklkpklklelkpkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_15 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 15, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[4,4,4,4,4]kpkn2,[4,4,4,4,4]klkpklklklklelkn2,[0,0,0,0,0]klkpkpklklklelkpkpkn2,[0,0,0,0,0]klkpklklkpklelepkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpkpklklklelkn2,[4,4,4,4,4]klklkpklklklelkpkpkpepkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkpkpkpepkpkn3,[5,5,5,5,5]kpkn2,[0,0,0,0,0]klkpklklkpklelkn2,[0,0,0,0,0]klklkpklkpklelkpkn2,[5,5,5,5,5]klklklklkpklelkpepen3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_16 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 14, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[3,3,3,3,3]kpkn2,[5,0,0,0,0]klkpklklklklklelkpkpkn2,[0,5,5,5,5]klkpklklkpklklelkpkpepkpkpkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklklelkpkpkn2,[5,5,5,5,5]klklklklkpklklelkpkn2,[0,0,0,0,0]klklklklkpkpklelepkpkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_17 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[15, 0, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn3,[2,2,2,2,2]kpkpkpkpkn2,[4,4,4,4,4]kpklklkpklklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[4,4,4,4,4]klkpklkpklklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[4,4,4,4,4]klklkpkpklklklelkpkpepkpkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklklkpklklklelkpkpkn2,[5,5,5,5,5]klklklkpklklklelkpkpkn2,[5,5,5,5,5]klklklkpkpklklelepkpkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklklkpklklklelkpkpkn2,[6,6,6,6,6]klklklkpklklklelkpkn2,[5,5,5,5,5]klklklkpkpklklelkpepen3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklklklelkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_18 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkpkn3,[3,3,3,3,3]kn1,[6,6,6,6,6]klklklklkpklklklelkpkpkpkpkpkpkpepkn3,[3,3,3,3,3]kn1,[6,6,6,6,6]klklklklkpklklklelkpkpkpkpkpkpkpepkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_19 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 14, 15, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkn3,[2,2,2,2,2]kpkpkpkpkpkn1,[0,0,0,0,0]klklkpklklklelepkn3,[2,2,2,2,2]kpkpkpkpkpkpepkn3,[4,4,4,4,4]kn1,[1,1,1,1,1]klklklklkpklelkpkn1,[0,0,0,0,0]klklklklkpklelkpkpkn1,[0,0,0,0,0]klklklklkpklelepkn3,[5,5,5,5,5]kn1,[0,0,0,0,0]klklklklkpklelkpkn1,[0,0,0,0,0]klklklklkpklelkn1,[0,0,0,0,0]klklklklkpklelkpkpen1,[0,0,0,0,0]klklklklkpklklelen3,[2,2,2,2,2]kpkpkpkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_20 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 14, 15, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[5,5,5,5,5]kpkn2,[5,5,5,5,5]klkpklklklklelkn2,[0,0,0,0,0]klkpkpklklklelkpkn2,[0,0,0,0,0]klkpklklkpklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklkpklkpklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpepkn3,[5,5,5,5,5]kpkn2,[0,0,0,0,0]klkpklklkpklelkn2,[0,0,0,0,0]klklkpklkpklelkpkn2,[5,5,5,5,5]klklklklkpklelkpepkpen3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpklelkpep")
+    (by decide +kernel)
+
+theorem b3_3913_21 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 13, 15], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kn2,[3,3,3,3,3]kpkn3,[3,3,3,3,3]klkpklklklelkn3,[4,4,4,4,4]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkn3,[3,3,3,3,3]klklklklkpelen3,[5,5,5,5,5]klklklklkpklelkn2,[1,1,1,1,1]kn3,[4,4,4,4,4]kpklklklklelkpkn3,[4,4,4,4,4]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkn3,[3,3,3,3,3]klklklklkpelen3,[5,5,5,5,5]klklklklkpklelkn2,[3,3,3,3,3]kn3,[4,4,4,4,4]kpklklklklelkn3,[2,3,3,3,3]klkpklklklelkpkn3,[4,4,4,4,4]klklklkpklelkn3,[2,3,3,3,3]klklklklkpelen3,[5,5,5,5,5]klklklklkpklelkn2,[2,2,2,2,2]kn3,[4,4,4,4,4]kpklklklklelkn3,[3,3,3,3,3]klkpklklklelkn3,[4,4,4,4,4]klklkpklklelkpkn3,[3,3,3,3,3]klklklklkpelen3,[5,5,5,5,5]klklklklkpklelkn2,[2,0,0,0,0]kn3,[3,4,4,4,4]kpklklklklelkn3,[4,3,3,3,3]klkpklklklelkn3,[3,4,4,4,4]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkpen3,[3,4,4,4,4]klklklklklkpelen2,[2,2,2,2,2]kn3,[5,5,5,5,5]kpklklklklklelkn3,[3,3,3,3,3]klkpklklklklelkn3,[5,5,5,5,5]klklkpklklklelkn3,[5,5,5,5,5]klklklkpklklelkpkn3,[3,3,3,3,3]klklklklklkpelen3,[6,6,6,6,6]klklklklklkpklel")
+    (by decide +kernel)
+
+theorem b3_3913_22 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 13, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kn3,[3,3,3,3,3]kpkn2,[2,2,2,2,2]kpkpklklklklelkpkpkpkpepkn3,[5,5,5,5,5]kn2,[2,2,2,2,2]kpkpklklklklelkn2,[1,1,1,1,1]klkpklklklklelkn2,[0,0,0,0,0]klkpkpklklklelkn2,[2,2,2,2,2]klkpklkpklklelkn2,[0,0,0,0,0]klkpklklkpklelkn2,[0,0,0,0,0]klkpklklkpklelen2,[2,2,2,2,2]klkpklklkpklklelkpkpkn3,[6,6,6,6,6]kpkn2,[2,2,2,2,2]klkpklklkpklelkn2,[0,0,0,0,0]klklkpklkpklelkpkn2,[0,0,0,0,0]klklklklkpklelkn2,[2,2,2,2,2]klklklklkpkpelepkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklelkpkpkn2,[2,2,2,2,2]klklklklkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_23 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[14, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkpep")
+    (by decide +kernel)
+
+theorem b3_3913_24 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 14, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn3,[6,6,6,6,6]kn2,[1,1,1,1,1]kpklklklklklelkn2,[4,4,4,4,4]kpkpklklklklelkn2,[4,4,4,4,4]kpklkpklklklelkpkpkn2,[5,5,5,5,5]kpklklklkpklelepkpkn3,[6,6,6,6,6]kn2,[1,1,1,1,1]kpklkpklklklelkn2,[4,4,4,4,4]klkpkpklklklelkn2,[4,4,4,4,4]klklkpklklklelkpkpkn2,[1,1,1,1,1]klklkpklkpklelepkpkn3,[3,3,3,3,3]kn2,[1,1,1,1,1]kpklklklkpklelkpkpkpkpkpepkn3,[3,3,3,3,3]kn2,[5,5,5,5,5]kpklklklkpklelkpkpkpkn2,[1,1,1,1,1]klklklklkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_25 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 14, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn3,[2,2,2,2,2]kpkpkpkpkn2,[1,1,1,1,1]kpklklklkpklelkpepkpkn3,[6,6,6,6,6]kpkn2,[0,0,0,0,0]klkpkpklklklelkn2,[0,0,0,0,0]klklkpklklklelkpkn2,[1,1,1,1,1]klklkpklkpklelkn2,[1,1,1,1,1]klklkpklkpklelepkpkn3,[6,6,6,6,6]kpkn2,[0,0,0,0,0]klkpklklkpklelkn2,[0,0,0,0,0]klklkpklkpklelkpkn2,[1,1,1,1,1]klklklklkpklelkn2,[0,0,0,0,0]klklklklkpkpelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[0,0,0,0,0]klklklklkpkpelepep")
+    (by decide +kernel)
+
+theorem b3_3913_26 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 0, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkpkpkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklklelkpkpepkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklklkpklklklelkpkpkn2,[0,0,0,0,0]klklklkpklklklelkpkn2,[5,5,5,5,5]klklklkpkpklklelkn2,[5,5,5,5,5]klklklkpkpklklelepkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklklkpklklklelkpkpkn2,[4,4,4,4,4]klklklkpklklklelkpkn2,[0,0,0,0,0]klklklkpkpklklelkn2,[0,0,0,0,0]klklklkpkpklklelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_27 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 14, 0, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkpkn3,[3,3,3,3,3]kn1,[1,1,1,1,1]klklklklkpklklelkpkpkpkpkpkpepkn3,[3,3,3,3,3]kn1,[1,1,1,1,1]klklklklkpklklelkpkpkpkpkpkpepkpep")
+    (by decide +kernel)
+
+theorem b3_3913_28 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 15, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,4,4,4,4]klkpklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[4,4,4,4,4]klklkpkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpepkn3,[1,1,1,1,1]kn2,[4,4,4,4,4]kpklklkpklklelkn2,[4,4,4,4,4]klkpklkpklklelkn2,[0,0,0,0,0]klklkpkpklklelkn2,[3,3,3,3,3]klklklkpklklelkn2,[0,0,0,0,0]klklklkpkpklelkn2,[5,5,5,5,5]klklklkpkpklelen2,[0,0,0,0,0]klklklkpkpklklelkn3,[6,6,6,6,6]kn2,[4,4,4,4,4]kpklklkpklklelkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[4,4,4,4,4]klklklkpklklelkpkn2,[0,0,0,0,0]klklklkpkpklelepen3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklklelkpep")
+    (by decide +kernel)
+
+theorem b3_3913_29 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 14, 0], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[4,4,4,4,4]kpkn2,[4,4,4,4,4]klkpklklklklelkn2,[0,0,0,0,0]klkpkpklklklelkpkpkn2,[0,0,0,0,0]klkpklklkpklelepkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpkpklklklelkn2,[4,4,4,4,4]klklkpklklklelkpkpkn2,[0,0,0,0,0]klklkpklkpklelepkpkpkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklelkpkpkn2,[5,5,5,5,5]klklklklkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_30 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 14, 15], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[3,3,3,3,3]kpkn3,[2,2,2,2,2]kn1,[1,1,1,1,1]klkpklklklelkpkn1,[0,0,0,0,0]klkpklklklelkn1,[0,0,0,0,0]klkpklklklelkn1,[0,0,0,0,0]klkpklklklelen1,[0,0,0,0,0]klkpklklklklelkn3,[3,3,3,3,3]kn1,[3,3,3,3,3]klklkpklklelkpkpkpkpepkn3,[4,4,4,4,4]kn1,[0,0,0,0,0]klklklkpklelkn1,[0,0,0,0,0]klklklkpklelkpkpkpen1,[0,0,0,0,0]klklklkpklklelkn3,[2,2,2,2,2]kn1,[4,4,4,4,4]klklklklkpelkn1,[0,0,0,0,0]klklklklkpelkn1,[0,0,0,0,0]klklklklkpelkn1,[0,0,0,0,0]klklklklkpelkpen1,[0,0,0,0,0]klklklklkpklelen3,[2,2,2,2,2]kpkpkpkn1,[0,0,0,0,0]klklklklkpklelkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_31 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 14, 15], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[4,4,4,4,4]kn3,[2,2,2,2,2]kpkn1,[4,4,4,4,4]kpklklklklelkn1,[4,4,4,4,4]kpklklklklelkn1,[4,4,4,4,4]kpklklklklelkn1,[0,0,0,0,0]kpklklklklelen1,[5,5,5,5,5]kpklklklklklelkn3,[2,2,2,2,2]kn1,[4,4,4,4,4]klkpklklklelkpkn1,[4,4,4,4,4]klkpklklklelkn1,[4,4,4,4,4]klkpklklklelkn1,[1,1,1,1,1]klkpklklklelen1,[5,5,5,5,5]klkpklklklklelkn3,[2,2,2,2,2]kpkpkpkpkn1,[3,3,3,3,3]klklkpklklelepkn3,[3,3,3,3,3]kpkn1,[4,4,4,4,4]klklklkpklelkpkpkn1,[4,4,4,4,4]klklklkpklelen1,[5,5,5,5,5]klklklkpklklelkpen3,[2,2,2,2,2]kpkpkpkn1,[3,3,3,3,3]klklklklkpklelkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_32 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 0, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkpkpkn3,[2,2,2,2,2]kpkpkpkn2,[4,4,4,4,4]klklklkpklklklelkpkn2,[0,0,0,0,0]klklklkpkpklklelkn2,[0,0,0,0,0]klklklkpkpklklelepkpkn3,[2,2,2,2,2]kpkpkpkn2,[5,0,0,0,0]klklklkpklklklelkn2,[0,5,5,5,5]klklklkpkpklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklklelkpkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_33 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 15, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkn3,[2,2,2,2,2]kpkpkpkpkn1,[5,5,5,5,5]klkpklklklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkpkpepkn3,[5,5,5,5,5]kn1,[5,5,5,5,5]klklklkpklklelkn1,[5,5,5,5,5]klklklkpklklelkpkpkn1,[5,5,5,5,5]klklklkpklklelkpepkn3,[5,5,5,5,5]kn1,[5,5,5,5,5]klklklkpklklelkn1,[5,5,5,5,5]klklklkpklklelkn1,[1,1,1,1,1]klklklkpklklelkpkpkpen1,[1,1,1,1,1]klklklkpklklklelkpen3,[2,2,2,2,2]kpkpkpkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_34 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[14, 15, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn3,[5,5,5,5,5]kn2,[5,5,5,5,5]kpklklklklklelkn2,[3,3,3,3,3]kpkpklklklklelkpkpkn2,[4,4,4,4,4]kpklklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[4,4,4,4,4]klkpklkpklklelkpepkn3,[2,2,2,2,2]kpkpkpkpkn2,[4,4,4,4,4]klklkpkpklklelkpepkpkn3,[5,5,5,5,5]kn2,[4,4,4,4,4]kpklklkpklklelkn2,[4,4,4,4,4]klkpklkpklklelkpkn2,[5,5,5,5,5]klklklkpklklelkpkpepkpen3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklklelkpep")
+    (by decide +kernel)
+
+theorem b3_3913_35 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 15, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[2,2,2,2,2]kpkpkpkn2,[0,0,0,0,0]klkpklkpklklelkpkpepkn3,[2,2,2,2,2]kpkpkpkn2,[0,0,0,0,0]klklkpkpklklelkpkpepkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[4,4,4,4,4]klklklkpklklelkpkn2,[0,0,0,0,0]klklklkpkpklelepkpkn3,[5,5,5,5,5]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[5,5,5,5,5]klklklkpklklelkn2,[0,0,0,0,0]klklklkpkpklelkpepen3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklklelkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_36 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kn3,[5,5,5,5,5]kn2,[3,0,0,0,0]kpklklklklklelkn2,[3,3,3,3,3]kpkpklklklklelkn2,[1,1,1,1,1]kpklkpklklklelkn2,[1,1,1,1,1]kpklklkpklklelkn2,[1,4,4,4,4]kpklklkpklklelkn2,[1,4,4,4,4]kpklklkpklklelen2,[1,1,1,1,1]kpklklkpklklklelkpkpkn3,[3,3,3,3,3]kn2,[1,1,1,1,1]kpklklkpklklelkpkpkpkpkpepkn3,[6,6,6,6,6]kn2,[1,1,1,1,1]kpklklkpklklelkn2,[4,4,4,4,4]klkpklkpklklelkpkn2,[4,4,4,4,4]klklklkpklklelkpkn2,[1,1,1,1,1]klklklkpkpklelepkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklklkpklklelkpkpkn2,[1,1,1,1,1]klklklkpklklelkpkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_37 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 14, 15], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kpkn3,[5,5,5,5,5]kpkn2,[4,4,4,4,4]klkpklklklelkn2,[0,0,0,0,0]klkpkpklklelkn2,[0,0,0,0,0]klkpklkpklelkpepkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklkpklklelkn2,[2,2,1,1,1]klkpkpklklelkn2,[4,4,4,4,4]klklkpklklelkn2,[0,0,0,0,0]klklkpkpklelkn2,[0,0,0,0,0]klklkpklkpelen2,[5,5,5,5,5]klklkpklkpklelkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpklkpklelkpkn2,[4,4,4,4,4]klklklkpklelkpepkpen3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpklelkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_38 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 15], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn2,[0,0,0,0,0]kpkn3,[4,4,4,4,4]klkpklklklelkn3,[4,4,4,4,4]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkn3,[2,2,2,2,2]klklklkpklelen3,[5,5,5,5,5]klklklkpklklelkn2,[2,2,2,2,2]kn3,[1,2,2,2,2]kpklklklklelkpkn3,[4,4,4,4,4]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkn3,[1,2,2,2,2]klklklkpklelen3,[5,5,5,5,5]klklklkpklklelkn2,[1,1,1,1,1]kn3,[2,2,2,2,2]kpklklklklelkn3,[4,4,4,4,4]klkpklklklelkpkn3,[4,4,4,4,4]klklklkpklelkn3,[2,2,2,2,2]klklklkpklelen3,[5,5,5,5,5]klklklkpklklelkn2,[2,2,2,2,2]kn3,[2,2,2,2,2]kpklklklklelkn3,[4,4,4,4,4]klkpklklklelkn3,[4,4,4,4,4]klklkpklklelkpkn3,[2,2,2,2,2]klklklklkpelen3,[5,5,5,5,5]klklklklkpklelkn2,[4,4,4,4,4]kn3,[3,2,2,2,2]kpklklklklelkn3,[2,3,3,3,3]klkpklklklelkn3,[3,3,3,3,3]klklkpklklelkpkn3,[2,3,3,3,3]klklklklkpelen3,[2,3,3,3,3]klklklklkpklelen2,[1,1,1,1,1]kn3,[2,2,2,2,2]kpklklklklklelkn3,[5,5,5,5,5]klkpklklklklelkn3,[5,5,5,5,5]klklkpklklklelkpkn3,[5,5,5,5,5]klklklklkpklelkn3,[2,2,2,2,2]klklklklkpklelen3,[6,6,6,6,6]klklklklkpklklel")
+    (by decide +kernel)
+
+theorem b3_3913_39 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 15], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kn1,[4,0,0,0,0]kpkn3,[4,4,4,4,4]kpklklklklelkn3,[4,4,4,4,4]kpklklklklelkn3,[4,4,4,4,4]kpklklklklelkn3,[2,3,3,3,3]kpklklklklelen3,[5,5,5,5,5]kpklklklklklelkn1,[1,1,1,1,1]kn3,[4,4,4,4,4]klkpklklklelkpkn3,[4,4,4,4,4]klkpklklklelkn3,[4,4,4,4,4]klkpklklklelkn3,[2,3,3,3,3]klkpklklklelen3,[5,5,5,5,5]klkpklklklklelkn1,[4,3,3,3,3]kn3,[4,4,4,4,4]klklkpklklelkn3,[4,4,4,4,4]klklkpklklelkpkn3,[4,4,4,4,4]klklkpklklelkn3,[3,3,3,3,3]klklkpklklelen3,[5,5,5,5,5]klklkpklklklelkn1,[4,4,4,4,4]kn3,[2,2,2,2,2]klklklkpklelkn3,[1,2,2,2,2]klklklkpklelkn3,[2,2,2,2,2]klklklkpklelkpkn3,[4,2,2,2,2]klklklkpklelen3,[2,2,2,2,2]klklklkpklklelkn1,[2,2,2,2,2]kn3,[2,2,2,2,2]klklklkpklelkn3,[1,2,2,2,2]klklklkpklelkn3,[2,2,2,2,2]klklklkpklelkpkn3,[2,2,2,2,2]klklklkpklelen3,[2,2,2,2,2]klklklkpklklelen1,[5,5,5,5,5]kn3,[5,5,5,5,5]klklklkpklklelkn3,[5,5,5,5,5]klklklkpklklelkn3,[5,5,5,5,5]klklklkpklklelkpkn3,[5,5,5,5,5]klklklkpklklelkn3,[2,4,4,4,4]klklklkpklklelen3,[6,6,6,6,6]klklklkpklklklel")
+    (by decide +kernel)
+
+theorem b3_3913_40 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 13], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[4,4,4,4,4]kn2,[4,4,4,4,4]kpkn3,[4,4,4,4,4]klkpklklklelkn3,[3,3,3,3,3]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkn3,[4,4,4,4,4]klklklkpklelen3,[4,4,4,4,4]klklklkpklklelkn2,[1,1,1,1,1]kn3,[3,3,3,3,3]kpklklklklelkpkn3,[3,3,3,3,3]klklkpklklelkn3,[4,4,4,4,4]klklklkpklelkn3,[4,4,4,4,4]klklklkpklelen3,[4,4,4,4,4]klklklkpklklelkn2,[4,4,4,4,4]kn3,[3,3,3,3,3]kpklklklklelkn3,[2,4,4,4,4]klkpklklklelkpkn3,[2,2,2,2,4]klklklkpklelkn3,[4,4,4,4,4]klklklkpklelen3,[4,4,4,4,4]klklklkpklklelkn2,[0,0,0,0,0]kn3,[3,3,3,3,3]kpklklklklelkn3,[4,4,4,4,4]klkpklklklelkn3,[3,3,3,3,3]klklkpklklelkpkn3,[3,3,3,3,3]klklklklkpelen3,[3,3,3,3,3]klklklklkpklelkn2,[2,2,2,2,2]kn3,[4,4,4,4,4]kpklklklklelkn3,[3,3,3,3,3]klkpklklklelkn3,[4,4,4,4,4]klklkpklklelkpkn3,[3,3,3,3,3]klklklklkpelen3,[5,5,5,5,5]klklklklkpklelen2,[2,2,2,2,2]kn3,[4,4,4,4,4]kpklklklklklelkn3,[5,5,5,5,5]klkpklklklklelkn3,[4,4,4,4,4]klklkpklklklelkpkn3,[5,5,5,5,5]klklklklkpklelkn3,[5,5,5,5,5]klklklklkpklelen3,[5,5,5,5,5]klklklklkpklklel")
+    (by decide +kernel)
+
+theorem b3_3913_41 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 13, 14], some [0, 1, 2, 3], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[4,4,4,4,4]kn3,[3,3,3,3,3]kpkn2,[2,2,2,2,2]kpkpklklklelkpkpkpepkn3,[4,4,4,4,4]kn2,[2,2,2,2,2]kpkpklklklelkn2,[1,1,1,1,1]klkpklklklelkn2,[0,0,0,0,0]klkpkpklklelkn2,[0,0,0,0,0]klkpklkpklelkn2,[0,0,0,0,0]klkpklklkpelen2,[2,2,2,2,2]klkpklklkpklelkpkn3,[2,3,3,3,3]kn2,[2,2,2,2,2]kpklklkpklelkn2,[1,1,1,1,1]klkpklkpklelkn2,[0,0,0,0,0]klklkpkpklelkn2,[0,0,0,0,0]klklklkpklelkn2,[2,2,2,2,2]klklklkpkpelen2,[2,2,2,2,2]klklklkpkpklelkn3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklklkpelkpkpkn2,[2,2,2,2,2]klklklklkpelepep")
+    (by decide +kernel)
+
+theorem b3_3913_42 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[0, 0, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_43 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 14, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[6,6,6,6,6]kn2,[3,3,3,3,3]kpkpklklklklelkn2,[3,3,3,3,3]klkpklklklklelkpkpkn2,[0,0,0,0,0]klkpklkpklklelkn2,[0,0,0,0,0]klkpklkpklklelepkpkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpepkn3,[6,6,6,6,6]kn2,[4,4,4,4,4]kpklklkpklklelkn2,[4,4,4,4,4]klkpklkpklklelkpkn2,[0,0,0,0,0]klklklkpklklelkpkn2,[5,5,5,5,5]klklklkpkpklelepkn3,[2,2,2,2,2]kpkpkpkpkpkn2,[5,5,5,5,5]klklklkpkpklelepep")
+    (by decide +kernel)
+
+theorem b3_3913_44 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kn3,[2,2,2,2,2]kpkpkpkn2,[1,1,1,1,1]kpklklkpklklelkpkpepkpkpkn3,[5,5,5,5,5]kn2,[1,1,1,1,1]kpklklkpklklelkn2,[0,0,0,0,0]klkpklkpklklelkn2,[1,1,1,1,1]klklkpkpklklelkn2,[3,3,3,3,3]klklklkpklklelkn2,[0,0,0,0,0]klklklkpkpklelkn2,[0,0,0,0,0]klklklkpkpklelen2,[1,1,1,1,1]klklklkpkpklklelkn3,[6,6,6,6,6]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[0,0,0,0,0]klklklkpklklelkn2,[1,1,1,1,1]klklklkpkpklelkn2,[1,1,1,1,1]klklklkpkpklelepkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_45 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 0, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkn3,[3,3,3,3,3]kn1,[5,5,5,5,5]klklklkpklklklelkpkpkpkpkpkpepkn3,[3,3,3,3,3]kn1,[5,5,5,5,5]klklklkpklklklelkpkpkpkpkpkpepkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_46 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[3,3,3,3,3]kpkn2,[3,3,3,3,3]klkpklklklklelkpkpkn2,[0,0,0,0,0]klkpklkpklklelkn2,[0,0,0,0,0]klkpklkpklklelepkpkpkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[4,4,4,4,4]klklklkpklklelkpkn2,[0,0,0,0,0]klklklkpkpklelepkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[4,4,4,4,4]klklklkpklklelkpkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_47 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[14, 0, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[2,2,2,2,2]kpkpkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpepkpkn3,[2,2,2,2,2]kpkpkpkpkpkpkpepkpep")
+    (by decide +kernel)
+
+theorem b3_3913_48 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[13, 14, 15], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[4,4,4,4,4]kn3,[1,1,1,1,1]kpkn1,[4,4,4,4,4]kpklklklklelkn1,[4,4,4,4,4]kpklklklklelkn1,[2,2,2,2,2]kpklklklklelkn1,[0,0,0,0,0]kpklklklklelen1,[2,2,2,2,2]kpklklklklklelkn3,[2,2,2,2,2]kpkpkpkpkn1,[2,2,2,2,2]klkpklklklelepkn3,[3,3,3,3,3]kn1,[4,4,4,4,4]klklkpklklelkpkpkpkn1,[3,3,3,3,3]klklkpklklelen1,[5,5,5,5,5]klklkpklklklelkn3,[1,1,1,1,1]kn1,[4,4,4,4,4]klklklkpklelkn1,[4,4,4,4,4]klklklkpklelkn1,[4,4,4,4,4]klklklkpklelkpkn1,[3,3,3,3,3]klklklkpklelen1,[2,2,2,2,2]klklklkpklklelkpen3,[3,3,3,3,3]kpkpkn1,[2,2,2,2,2]klklklkpklklelkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_49 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 14, 0], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[2,2,2,2,2]kpkn3,[4,4,4,4,4]kpkn2,[4,0,0,0,0]klkpklklklklelkpkn2,[0,4,4,4,4]klkpklkpklklelkpkpepkpkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkn2,[4,4,4,4,4]klklklkpklklelkpkn2,[0,0,0,0,0]klklklkpkpklelepkpkn3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpepep")
+    (by decide +kernel)
+
+theorem b3_3913_50 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 13, 14], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An2,[4,4,4,4,4]kn3,[2,2,2,2,2]kpkn1,[3,3,3,3,3]kpklklklklelkn1,[3,3,3,3,3]kpklklklklelkn1,[0,0,0,0,0]kpklklklklelkn1,[4,4,4,4,4]kpklklklklelen1,[4,4,4,4,4]kpklklklklklelkn3,[2,2,2,2,2]kn1,[0,0,3,3,3]klkpklklklelkpkn1,[3,3,3,3,3]klkpklklklelkn1,[1,1,1,1,1]klkpklklklelkn1,[4,4,4,4,4]klkpklklklelen1,[4,4,4,4,4]klkpklklklklelkn3,[2,2,2,2,2]kpkpkpkn1,[0,0,0,0,0]klklkpklklelkpepkpkn3,[3,3,3,3,3]kpkn1,[4,4,4,4,4]klklklkpklelkpkpkn1,[4,4,4,4,4]klklklkpklelen1,[0,0,0,0,0]klklklkpklklelen3,[2,2,2,2,2]kpkpkpkpkpkn1,[0,0,0,0,0]klklklkpklklelep")
+    (by decide +kernel)
+
+theorem b3_3913_51 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 11, 15], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kpkn3,[2,2,2,2,2]kn2,[3,3,3,3,3]kpkpklklklelkn2,[1,1,1,1,1]klkpklklklelkn2,[0,0,0,0,0]klkpkpklklelkn2,[0,0,0,0,0]klkpklkpklelkn2,[0,0,0,0,0]klkpklkpklelen2,[4,4,4,4,4]klkpklkpklklelkn3,[4,4,4,4,4]kpkn2,[0,0,0,0,0]klkpkpklklelkn2,[3,3,3,3,3]klklkpklklelkpkpepkpkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpklklkpklelkn2,[3,3,1,1,1]klkpklkpklelkn2,[0,0,0,0,0]klklkpkpklelkn2,[4,4,4,4,4]klklklkpklelkn2,[0,0,0,0,0]klklklkpkpelen2,[5,5,5,5,5]klklklkpkpklelen3,[3,3,3,3,3]kpkn2,[0,0,0,0,0]klkpklkpklklelkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_3913_52 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[11, 13, 14], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[4,4,4,4,4]kn3,[4,4,4,4,4]kn2,[3,0,0,0,0]kpklklklklelkn2,[3,3,3,3,3]kpkpklklklelkn2,[1,3,3,3,3]kpklkpklklelkn2,[1,1,1,1,1]kpklklkpklelkn2,[1,4,4,4,4]kpklklkpklelen2,[1,1,1,1,1]kpklklkpklklelkpkn3,[2,2,2,2,2]kn2,[0,0,0,0,0]kpklkpklklelkn2,[3,3,3,3,3]klkpkpklklelkn2,[3,3,3,3,3]klklkpklklelkn2,[1,1,1,1,1]klklkpkpklelkn2,[1,1,1,1,1]klklkpkpklelen2,[1,1,1,1,1]klklkpkpklklelkn3,[3,3,3,3,3]kn2,[1,1,1,1,1]kpklklkpklelkpkpkpkn2,[1,1,1,1,1]klklklkpkpelepkn3,[5,5,5,5,5]kn2,[4,4,4,4,4]kpklklkpklelkpkpkn2,[1,1,1,1,1]klklklkpklelkn2,[1,1,1,1,1]klklklkpkpelepep")
+    (by decide +kernel)
+
+theorem b3_3913_53 : GOKSh (shOf [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1]) ⟨[7, 14, 15], some [0, 1, 2], none, none, none⟩ :=
+  gokSh_of_eval tab3913_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kpkn3,[4,4,4,4,4]kn2,[4,4,4,4,4]kpkpklklklelkn2,[4,4,4,4,4]klkpklklklelkn2,[0,0,0,0,0]klkpkpklklelkn2,[1,1,1,1,1]klkpklkpklelkn2,[0,0,0,0,0]klkpklkpklelen2,[5,5,5,5,5]klkpklkpklklelkn3,[2,2,2,2,2]kpkpkpkpkpepkn3,[5,5,5,5,5]kpkn2,[0,0,0,0,0]klkpklkpklelkn2,[0,0,0,0,0]klklkpkpklelkn2,[4,4,4,4,4]klklklkpklelkn2,[0,0,0,0,0]klklklkpkpelepkpen3,[2,2,2,2,2]kpkpkpkpkn2,[0,0,0,0,0]klklklkpkpklelkpep")
+    (by decide +kernel)
+
+theorem cert_3913 : CertAt [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1] :=
+  certAt_of_b3 tab3913_ok (gs := [⟨[0, 0, 0], some [0, 1, 2], none, none, none⟩, ⟨[0, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[15, 0, 0], some [0, 1, 2], none, none, none⟩, ⟨[15, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[14, 0, 0], some [0, 1, 2], none, none, none⟩, ⟨[14, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[14, 15, 0], some [0, 1, 2], none, none, none⟩, ⟨[14, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[13, 0, 0], some [0, 1, 2], none, none, none⟩, ⟨[13, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[13, 15, 0], some [0, 1, 2], none, none, none⟩, ⟨[13, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[13, 14, 0], some [0, 1, 2], none, none, none⟩, ⟨[13, 14, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[13, 14, 15], some [0, 1, 2], none, none, none⟩, ⟨[13, 14, 15, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 0, 0], some [0, 1, 2], none, none, none⟩, ⟨[11, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 15, 0], some [0, 1, 2], none, none, none⟩, ⟨[11, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 14, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 14, 15, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 13, 0], some [0, 1, 2], none, none, none⟩, ⟨[11, 13, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 13, 15], some [0, 1, 2], none, none, none⟩, ⟨[11, 13, 15, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 13, 14], some [0, 1, 2], none, none, none⟩, ⟨[11, 13, 14, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[11, 13, 14, 15], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 0, 0], some [0, 1, 2], none, none, none⟩, ⟨[7, 0, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 15, 0], some [0, 1, 2], none, none, none⟩, ⟨[7, 15, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 14, 0], some [0, 1, 2], none, none, none⟩, ⟨[7, 14, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 14, 15], some [0, 1, 2], none, none, none⟩, ⟨[7, 14, 15, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 13, 0], some [0, 1, 2], none, none, none⟩, ⟨[7, 13, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 13, 15], some [0, 1, 2], none, none, none⟩, ⟨[7, 13, 15, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 13, 14], some [0, 1, 2], none, none, none⟩, ⟨[7, 13, 14, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 13, 14, 15], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 0], some [0, 1, 2], none, none, none⟩, ⟨[7, 11, 0, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 15], some [0, 1, 2], none, none, none⟩, ⟨[7, 11, 15, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 14, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 14, 15], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 13], some [0, 1, 2], none, none, none⟩, ⟨[7, 11, 13, 0], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 13, 15], some [0, 1, 2, 3], none, none, none⟩, ⟨[7, 11, 13, 14], some [0, 1, 2, 3], none, none, none⟩])
+    (by intro p hp; simp only [List.mem_cons, List.mem_nil_iff, or_false] at hp; rcases hp with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl <;> first | exact b3_3913_42 | exact b3_3913_13 | exact b3_3913_17 | exact b3_3913_0 | exact b3_3913_47 | exact b3_3913_23 | exact b3_3913_34 | exact b3_3913_5 | exact b3_3913_26 | exact b3_3913_2 | exact b3_3913_28 | exact b3_3913_1 | exact b3_3913_43 | exact b3_3913_8 | exact b3_3913_48 | exact b3_3913_12 | exact b3_3913_45 | exact b3_3913_18 | exact b3_3913_33 | exact b3_3913_3 | exact b3_3913_27 | exact b3_3913_19 | exact b3_3913_36 | exact b3_3913_7 | exact b3_3913_38 | exact b3_3913_9 | exact b3_3913_52 | exact b3_3913_24 | exact b3_3913_30 | exact b3_3913_32 | exact b3_3913_6 | exact b3_3913_35 | exact b3_3913_4 | exact b3_3913_49 | exact b3_3913_16 | exact b3_3913_53 | exact b3_3913_20 | exact b3_3913_44 | exact b3_3913_10 | exact b3_3913_39 | exact b3_3913_11 | exact b3_3913_50 | exact b3_3913_25 | exact b3_3913_31 | exact b3_3913_46 | exact b3_3913_14 | exact b3_3913_51 | exact b3_3913_15 | exact b3_3913_29 | exact b3_3913_37 | exact b3_3913_40 | exact b3_3913_22 | exact b3_3913_21 | exact b3_3913_41)
+    (T := lit% "S0,cg0,cg1,cg2,cg3,cg4,cg5,cg6,cg7,cg8,cg9,cg10,cg11,cg12,cg13,cg14,cg15,cg16,cg17,cg18,cg19,cAn2,[2,2,2,2,2]kpkpkpkn3,[3,3,3,3,3]kn1,[0,0,0,0,0]klklklkpklklelkpkpkpkpkpepkn3,[3,3,3,3,3]kn1,[0,0,0,0,0]klklklkpklklelkpkpkpkpkpepkpepcg20,cAn2,[2,2,2,2,2]kpkpkn3,[2,2,2,2,2]kpkpkpkpkn1,[0,0,0,0,0]klklkpklklelepkn3,[5,5,5,5,5]kn1,[0,0,0,0,0]klklklkpklelkpkn1,[0,0,0,0,0]klklklkpklelkpkn1,[0,0,0,0,0]klklklkpklelepkn3,[4,4,4,4,4]kn1,[0,0,0,0,0]klklklkpklelkpkn1,[0,0,0,0,0]klklklkpklelkpkpen1,[0,0,0,0,0]klklklkpklklelen3,[2,2,2,2,2]kpkpkpkpkpkpepcg21,cg22,cg23,cg24,cg25,cg26,cg27,cg28,cg29,cg30,cg31,cg32,cg33,cg34,cg35,cg36,cg37,cg38,cg39,cg40,cg41,cg42,cg43,cg44,cg45,cg46,cg47,cAn1,[2,2,2,2,2]kpkn2,[4,4,4,4,4]kn3,[2,2,2,2,2]kpklklklklelkpkpkn3,[2,2,2,2,2]klklklkpklelkpepkn2,[4,4,4,4,4]kn3,[2,2,2,2,2]kpklklklklelkpkpkn3,[2,2,2,2,2]klklklkpklelkpepkpkn2,[5,5,5,5,5]kn3,[2,2,2,2,2]kpklklklklelkn3,[3,3,3,3,3]klkpklklklelkn3,[3,3,3,3,3]klklkpklklelkpkn3,[2,2,2,2,2]klklklklkpelepepcg48,cg49,cg50,cg51,cg52,cg53,z")
+    (by decide +kernel)
+
+theorem b3_4017_0 : GOKSh (shOf [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2]) ⟨[10, 15, 0, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
+  gokSh_of_eval tab4017_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An1,[3,3,3,3,3]kn0,[5,5,5,5,5]kpkn2,[6,6,6,6,6]kpklklklklklklklelkn2,[5,5,5,5,5]kpklklklklklklklelkn2,[5,5,5,5,5]kpklklklklklklklelkn2,[0,0,0,0,0]kpklklklklklklklelkn2,[4,4,4,4,4]kpklklklklklklklelkn2,[6,6,6,6,6]kpklklklklklklklelkn2,[7,7,7,7,7]kpklklklklklklklelen2,[6,6,6,6,6]kpklklklklklklklklelkn0,[2,2,2,2,2]kpkpkpkpkn2,[6,6,6,6,6]klkpklklklklklklelkn2,[4,4,4,4,4]klkpklklklklklklelkpkn2,[7,7,7,7,7]klkpklklklklklklelepkn0,[2,2,2,2,2]kpkpkpkpkn2,[1,1,1,1,1]klklkpklklklklklelkpkpkpepkn0,[2,2,2,2,2]kpkpkpkpkn2,[1,1,1,1,1]klklklkpklklklklelkpkpkpepkn0,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkn0,[2,2,2,2,2]kpkpkpkpkpkn2,[1,1,1,1,1]klklklklkpklklklelkpkpepkpkn0,[3,3,3,3,3]kpkn2,[7,7,7,7,7]klklklklkpklklklelkpkpkpkn2,[7,7,7,7,7]klklklklkpklklklelkn2,[5,5,5,5,5]klklklklkpklklklelkpepen0,[2,2,2,2,2]kpkpkpkpkpkn2,[1,1,1,1,1]klklklklkpklklklklelkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_4017_1 : GOKSh (shOf [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2]) ⟨[10, 0, 0, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
+  gokSh_of_eval tab4017_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An0,[2,2,2,2,2]kpkn2,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkn2,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkn2,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkn2,[7,7,7,7,7]kn1,[7,7,7,7,7]kpklklklkpklklklelkn1,[0,0,0,0,0]klkpklklkpklklklelkn1,[0,0,0,0,0]klklkpklkpklklklelkn1,[0,0,0,0,0]klklklkpkpklklklelkn1,[7,7,7,7,7]klklklklkpklklklelkn1,[0,0,0,0,0]klklklklkpkpklklelkn1,[5,5,5,5,5]klklklklkpkpklklelkn1,[0,0,0,0,0]klklklklkpkpklklklelen1,[0,0,0,0,0]klklklklkpkpklklklelkn2,[2,2,2,2,2]kpkpkpkpkn1,[7,7,7,7,7]klklklklkpklklklelkpkn1,[0,0,0,0,0]klklklklkpkpklklelkn1,[0,0,0,0,0]klklklklkpkpklklklelepkn2,[2,2,2,2,2]kpkpkpkpkpkpkpkpepkn2,[2,2,2,2,2]kpkpkpkpkn1,[8,8,8,8,8]klklklklkpklklklklelkpkn1,[0,0,0,0,0]klklklklkpkpklklklelkn1,[0,0,0,0,0]klklklklkpkpklklklelkn1,[0,0,0,0,0]klklklklkpkpklklklelepen2,[2,2,2,2,2]kpkpkpkpkpkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_4017_2 : GOKSh (shOf [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2]) ⟨[7, 10, 15, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
+  gokSh_of_eval tab4017_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An0,[2,2,2,2,2]kn1,[4,4,4,4,4]kpkn2,[5,5,5,5,5]klkpklklklklklelkn2,[5,5,5,5,5]klklkpklklklklelkpkpkpkn2,[6,6,6,6,6]klklklklkpklklelepkpkn1,[3,3,3,3,3]kpkn2,[5,5,5,5,5]klkpklklklklklelkpkpkpkpkn2,[6,6,6,6,6]klklklklkpklklelepkn1,[3,3,3,3,3]kpkn2,[5,5,5,5,5]klkpklklklklklelkpkpkpkpkpepkn1,[2,2,2,2,6]kn2,[2,2,2,2,2]kpklklklklklklelkn2,[1,1,1,1,1]klkpklklklklklelkn2,[5,5,5,5,5]klklkpklklklklelkn2,[2,2,2,2,2]klklklkpklklklelkpkn2,[2,2,2,2,2]klklklklklkpklelkn2,[6,6,6,6,6]klklklklklkpklelen2,[2,2,2,2,2]klklklklklkpklklelkn1,[3,3,3,3,3]kpkn2,[4,4,4,4,4]klkpklklklklklelkpkpkpkpkpepkn1,[4,4,4,4,4]kpkn2,[6,6,6,6,6]klkpklklklklklelkn2,[6,6,6,6,6]klklkpklklklklelkpkpkpkpepen1,[3,3,3,3,3]kpkn2,[6,6,6,6,6]klkpklklklklklklelkpkpkpkpkpkpep")
+    (by decide +kernel)
+
+theorem b3_4017_3 : GOKSh (shOf [0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 2]) ⟨[10, 15, 15, 0], none, none, none, some [0, 1, 2, 3]⟩ :=
+  gokSh_of_eval tab4017_ok (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "An0,[2,2,2,2,2]kpkn1,[4,4,4,4,4]kn2,[6,6,6,6,6]kpklklklklklklelkpkn2,[6,6,6,6,6]klklkpklklklklelkpkpkpkpepkn1,[4,4,4,4,4]kn2,[6,6,6,6,6]kpklklklklklklelkn2,[6,6,6,6,6]klkpklklklklklelkpkpkpkpkpepkn1,[3,3,3,3,3]kn2,[5,5,5,5,5]kpklklklklklklelkpkpkpkpkpkpepkn1,[1,1,1,1,1]kn2,[0,0,0,0,0]kpklklklklklklelkn2,[6,6,6,6,6]klkpklklklklklelkn2,[6,6,6,6,6]klklkpklklklklelkn2,[1,1,1,1,1]klklklkpklklklelkpkn2,[1,1,1,1,1]klklklklklkpklelkn2,[1,1,1,1,1]klklklklklkpklelen2,[1,1,1,1,1]klklklklklkpklklelkn1,[5,5,5,5,5]kn2,[4,4,4,4,4]kpklklklklklklelkn2,[6,6,6,6,6]klkpklklklklklelkn2,[6,6,6,6,6]klklkpklklklklelkpkpkpkpepkn1,[3,3,3,3,3]kn2,[6,6,6,6,6]kpklklklklklklelkpkpkpkpkpkpepen1,[3,3,3,3,3]kn2,[6,6,6,6,6]kpklklklklklklklelkpkpkpkpkpkpkpep")
     (by decide +kernel)
 
 

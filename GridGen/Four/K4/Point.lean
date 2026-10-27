@@ -326,14 +326,28 @@ inductive PC where
 /-- The pattern of index `p`. -/
 def patOf (p : ℕ) : Bool × Bool × Bool := pats.getD p (false, false, false)
 
-/-- The check of one certificate, for region `q = 16 p + o`. -/
-def pcOK (sh : Sh) (ctab : ℕ → List (VN × VN)) (q : ℕ) : PC → Bool
+/-- Entry `idx` of a row of the cluster table. -/
+def rowGet : List (VN × VN) → ℕ → Option (VN × VN)
+  | [], _ => none
+  | c :: _, 0 => some c
+  | _ :: L, n + 1 => rowGet L n
+
+theorem mem_of_rowGet : ∀ {L : List (VN × VN)} {n : ℕ} {c : VN × VN}, rowGet L n = some c → c ∈ L
+  | [], _, _, h => by simp [rowGet] at h
+  | a :: L, 0, c, h => by simp only [rowGet, Option.some.injEq] at h; subst h; exact List.mem_cons_self
+  | a :: L, n + 1, c, h => List.mem_cons_of_mem _ (mem_of_rowGet h)
+
+/-- The check of one certificate for region `q`, given the cluster rows `row` of the region. -/
+def pcRow (sh : Sh) (row : List (VN × VN)) (q : ℕ) : PC → Bool
   | .tree t => evalPT sh Node.root (patOf (q / 16)).1 (patOf (q / 16)).2.1 (patOf (q / 16)).2.2
       (q % 16) t
   | .cl idx =>
-    match (ctab q)[idx]? with
+    match rowGet row idx with
     | some c => vleB c.1 sh.I && vleB sh.I c.2
     | none => false
+
+/-- The check of one certificate, for region `q = 16 p + o`. -/
+def pcOK (sh : Sh) (ctab : ℕ → List (VN × VN)) (q : ℕ) (c : PC) : Bool := pcRow sh (ctab q) q c
 
 /-- A verified cluster table. -/
 def CtabOK (ctab : ℕ → List (VN × VN)) : Prop :=
@@ -350,11 +364,11 @@ theorem pcOK_pgood {B : Col} {sh : Sh} (hB : ShapeOf B sh) {ctab : ℕ → List 
   cases c with
   | tree t => exact evalPT_sound hB t Node.root h
   | cl idx =>
-    simp only [pcOK] at h
+    simp only [pcOK, pcRow] at h
     split at h
     · next c hc =>
       simp only [Bool.and_eq_true] at h
-      exact cluster_pgood hB (hct q hq c (List.mem_of_getElem? hc)) (VLe_of_vleB h.1)
+      exact cluster_pgood hB (hct q hq c (mem_of_rowGet hc)) (VLe_of_vleB h.1)
         (VLe_of_vleB h.2)
     · exact absurd h (by simp)
 
@@ -367,6 +381,27 @@ theorem pats_patOf {e : Bool × Bool × Bool} (he : e ∈ pats) : ∃ p < 5, pat
   · exact ⟨3, by norm_num, rfl⟩
   · exact ⟨4, by norm_num, rfl⟩
 
+/-- **The pointwise check, walking the cluster rows and the certificates together** (no index
+lookups): the certificates of regions `q, q + 1, …, 79`. -/
+def pwGo (sh : Sh) (q : ℕ) : List (List (VN × VN)) → List PC → Bool
+  | _, [] => Nat.beq q 80
+  | row :: rows, c :: cs => pcRow sh row q c && pwGo sh (Nat.succ q) rows cs
+  | [], _ :: _ => false
+
+theorem pwGo_spec (sh : Sh) : ∀ (cs : List PC) (q : ℕ) (rows : List (List (VN × VN))),
+    pwGo sh q rows cs = true → ∀ r, q ≤ r → r < 80 →
+      pcRow sh (rows.getD (r - q) []) r (cs.getD (r - q) (PC.cl 0)) = true
+  | [], q, rows, h, r, h1, h2 => by
+    simp only [pwGo, Nat.beq_eq] at h; omega
+  | c :: cs, q, [], h, r, _, _ => by simp [pwGo] at h
+  | c :: cs, q, row :: rows, h, r, h1, h2 => by
+    simp only [pwGo, Bool.and_eq_true] at h
+    rcases Nat.eq_or_lt_of_le h1 with rfl | h1
+    · simpa using h.1
+    · have := pwGo_spec sh cs (Nat.succ q) rows h.2 r h1 h2
+      have e : r - q = (r - Nat.succ q) + 1 := by omega
+      rw [e]; simpa using this
+
 /-- **A pointwise-certified shape** has nonnegative seam vectors for every `Y`. -/
 theorem raysOK_of_pwOK {B : Col} {sh : Sh} (hB : ShapeOf B sh) {ctab : ℕ → List (VN × VN)}
     (hct : CtabOK ctab) {certs : List PC} (h : pwOK sh ctab certs = true) (Y : Col) :
@@ -377,6 +412,24 @@ theorem raysOK_of_pwOK {B : Col} {sh : Sh} (hB : ShapeOf B sh) {ctab : ℕ → L
   have hq : 16 * p + o < 80 := by omega
   have h1 := allBelow_spec h hq
   have := pcOK_pgood hB hct hq h1
+  have e1 : (16 * p + o) / 16 = p := by omega
+  have e2 : (16 * p + o) % 16 = o := by omega
+  rw [e1, e2] at this
+  exact this
+
+
+/-- **The pointwise check of a shape**, walking the cluster table `rows` (whose entry `q` is the
+row of region `q`) together with the eighty certificates. -/
+theorem raysOK_of_pwGo {B : Col} {sh : Sh} (hB : ShapeOf B sh) {ctab : ℕ → List (VN × VN)}
+    (hct : CtabOK ctab) {rows : List (List (VN × VN))} (hrows : ∀ q < 80, ctab q = rows.getD q [])
+    {certs : List PC} (h : pwGo sh 0 rows certs = true) (Y : Col) : RaysOK (dvec Y B) := by
+  apply raysOK_of_pointwise
+  intro e he o ho
+  obtain ⟨p, hp, rfl⟩ := pats_patOf he
+  have hq : 16 * p + o < 80 := by omega
+  have h1 := pwGo_spec sh certs 0 rows h (16 * p + o) (Nat.zero_le _) hq
+  rw [Nat.sub_zero, ← hrows _ hq] at h1
+  have := pcOK_pgood hB hct hq (c := certs.getD (16 * p + o) (PC.cl 0)) h1
   have e1 : (16 * p + o) / 16 = p := by omega
   have e2 : (16 * p + o) % 16 = o := by omega
   rw [e1, e2] at this

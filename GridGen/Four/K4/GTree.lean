@@ -42,18 +42,125 @@ theorem vsumL_get (L : List ℕ) (f : ℕ → V5) (k : Fin 5) :
   | nil => simp [vsumL, V5.get_zero]
   | cons a L ih => simp only [vsumL, List.foldr_cons] at ih ⊢; rw [V5.get_add, ih]; simp
 
+theorem nat_mod_eq' (a b : ℕ) : Nat.mod a b = a % b := rfl
+
+theorem nat_div_eq' (a b : ℕ) : Nat.div a b = a / b := rfl
+
+/-! ### A table of leaf values
+
+The column types summed at the leaves of a shape's trees repeat across all of its theorems. Their
+values are proved once, in the shape's table (`GridGen/Four/K4/Data/B3Tab.lean`), and a tuple looks
+its type up by key. -/
+
+/-- A search tree of values by key. -/
+inductive KV where
+  | leaf : KV
+  | node : KV → ℕ → V5 → KV → KV
+
+/-- The value of a key, if any. -/
+def KV.get : KV → ℕ → Option V5
+  | .leaf, _ => none
+  | .node l k v r, x => cond (Nat.beq x k) (some v) (cond (Nat.blt x k) (l.get x) (r.get x))
+
+/-- Every entry satisfies `f`. -/
+def KV.all (f : ℕ → V5 → Bool) : KV → Bool
+  | .leaf => true
+  | .node l k v r => l.all f && f k v && r.all f
+
+theorem KV.of_get {f : ℕ → V5 → Bool} : ∀ {t : KV}, t.all f = true → ∀ {x : ℕ} {v : V5},
+    t.get x = some v → f x v = true
+  | .leaf, _, _, _, hx => by simp [KV.get] at hx
+  | .node l k w r, h, x, v, hx => by
+    simp only [KV.all, Bool.and_eq_true] at h
+    simp only [KV.get] at hx
+    cases e : Nat.beq x k
+    · rw [e, Bool.cond_false] at hx
+      cases e' : Nat.blt x k
+      · rw [e', Bool.cond_false] at hx; exact KV.of_get h.2 hx
+      · rw [e', Bool.cond_true] at hx; exact KV.of_get h.1.1 hx
+    · rw [e, Bool.cond_true, Option.some.injEq] at hx
+      rw [Nat.beq_eq] at e; subst e; subst hx; exact h.1.2
+
+/-- A value table: search trees with the largest key of each, in increasing order. -/
+def lvGet : List (ℕ × KV) → ℕ → Option V5
+  | [], _ => none
+  | p :: L, x => cond (Nat.ble x p.1) (p.2.get x) (lvGet L x)
+
+theorem lvGet_spec : ∀ {L : List (ℕ × KV)} {x : ℕ} {v : V5}, lvGet L x = some v →
+    ∃ p ∈ L, p.2.get x = some v
+  | [], _, _, h => by simp [lvGet] at h
+  | p :: L, x, v, h => by
+    simp only [lvGet] at h
+    cases e : Nat.ble x p.1
+    · rw [e, Bool.cond_false] at h
+      obtain ⟨q, hq, hm⟩ := lvGet_spec h
+      exact ⟨q, List.mem_cons_of_mem _ hq, hm⟩
+    · rw [e, Bool.cond_true] at h; exact ⟨p, List.mem_cons_self, h⟩
+
+/-- The key of a column type. -/
+def leafKey (m0 m1 m2 m3 : ℕ) (e13 e24 e14 : Bool) : ℕ :=
+  Nat.add (Nat.add (Nat.add m0 (Nat.mul 16 m1)) (Nat.add (Nat.mul 256 m2) (Nat.mul 4096 m3)))
+    (Nat.mul 65536 (Nat.add (bn e13) (Nat.add (Nat.mul 2 (bn e24)) (Nat.mul 4 (bn e14)))))
+
+/-- The values of the column type of a key. -/
+def leafOfKey (I : VN) (k : ℕ) : V5 :=
+  leafV I (Nat.mod k 16) (Nat.mod (Nat.div k 16) 16) (Nat.mod (Nat.div k 256) 16)
+    (Nat.mod (Nat.div k 4096) 16) (Nat.beq (Nat.mod (Nat.div k 65536) 2) 1)
+    (Nat.beq (Nat.mod (Nat.div k 131072) 2) 1) (Nat.beq (Nat.div k 262144) 1)
+
+theorem leafOfKey_leafKey (I : VN) {m0 m1 m2 m3 : ℕ} (e13 e24 e14 : Bool) (h0 : m0 < 16)
+    (h1 : m1 < 16) (h2 : m2 < 16) (h3 : m3 < 16) :
+    leafOfKey I (leafKey m0 m1 m2 m3 e13 e24 e14) = leafV I m0 m1 m2 m3 e13 e24 e14 := by
+  unfold leafOfKey leafKey
+  simp only [Nat.add_eq, Nat.mul_eq, nat_mod_eq', nat_div_eq']
+  cases e13 <;> cases e24 <;> cases e14 <;> simp only [bn, cond_true, cond_false] <;>
+    congr 1 <;> first | omega | (rw [Nat.beq_eq]; omega) | (rw [Bool.eq_false_iff]; intro h; rw [Nat.beq_eq] at h; omega)
+
+/-- A verified value table: each entry is at most the values of its column type. -/
+def LvOK (I : VN) (lv : List (ℕ × KV)) : Prop :=
+  ∀ p ∈ lv, p.2.all (fun k v => V5.leB v (leafOfKey I k)) = true
+
+theorem lvOK_nil (I : VN) : LvOK I [] := fun _ h => absurd h List.not_mem_nil
+
+theorem lvOK_cons {I : VN} {mx : ℕ} {t : KV} {lv : List (ℕ × KV)}
+    (h : t.all (fun k v => V5.leB v (leafOfKey I k)) = true) (ht : LvOK I lv) :
+    LvOK I ((mx, t) :: lv) := by
+  intro p hp
+  rcases List.mem_cons.mp hp with rfl | hp
+  · exact h
+  · exact ht p hp
+
+/-- The values of a column type, from the table when it is there. -/
+def leafT (I : VN) (lv : List (ℕ × KV)) (m0 m1 m2 m3 : ℕ) (e13 e24 e14 : Bool) : V5 :=
+  match lvGet lv (leafKey m0 m1 m2 m3 e13 e24 e14) with
+  | some v => v
+  | none => leafV I m0 m1 m2 m3 e13 e24 e14
+
+theorem leafT_le {I : VN} {lv : List (ℕ × KV)} (hlv : LvOK I lv) {m0 m1 m2 m3 : ℕ}
+    (e13 e24 e14 : Bool) (h0 : m0 < 16) (h1 : m1 < 16) (h2 : m2 < 16) (h3 : m3 < 16) (k : Fin 5) :
+    ((leafT I lv m0 m1 m2 m3 e13 e24 e14).get k).val
+      ≤ ((leafV I m0 m1 m2 m3 e13 e24 e14).get k).val := by
+  unfold leafT
+  split
+  · next v hv =>
+    obtain ⟨p, hp, hg⟩ := lvGet_spec hv
+    have := KV.of_get (hlv p hp) hg
+    rw [leafOfKey_leafKey I e13 e24 e14 h0 h1 h2 h3] at this
+    exact V5.le_of_leB this k
+  · exact le_refl _
+
 /-- The value of one tuple of colour ids. -/
-def tupV (sh : Sh) (cols : List ℕ) (a b c d : ℕ) : V5 :=
+def tupV (sh : Sh) (lv : List (ℕ × KV)) (cols : List ℕ) (a b c d : ℕ) : V5 :=
   cond (Nat.beq a b || Nat.beq b c || Nat.beq c d) V5.zero
-    (leafV sh.I (cols.getD a 0) (cols.getD b 0) (cols.getD c 0) (cols.getD d 0) (Nat.beq a c)
+    (leafT sh.I lv (cols.getD a 0) (cols.getD b 0) (cols.getD c 0) (cols.getD d 0) (Nat.beq a c)
       (Nat.beq b d) (Nat.beq a d))
 
 /-- **The value of a fully placed general node.** -/
-def gleafV (sh : Sh) (nd : GNode) : Option V5 :=
+def gleafV (sh : Sh) (lv : List (ℕ × KV)) (nd : GNode) : Option V5 :=
   match nd.r0, nd.r1, nd.r2, nd.r3 with
   | some L0, some L1, some L2, some L3 =>
     some (vsumL L0 fun a => vsumL L1 fun b => vsumL L2 fun c => vsumL L3 fun d =>
-      tupV sh nd.cols a b c d)
+      tupV sh lv nd.cols a b c d)
   | _, _, _, _ => none
 
 /-! ### The sum over a column with explicit rows -/
@@ -65,8 +172,8 @@ theorem sum_toFinset_map {ρ : ℕ → ℕ} {L : List ℕ} (hL : L.Nodup)
   rfl
 
 /-- **Soundness of a leaf** of a general node. -/
-theorem gleaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {v : V5}
-    (h : gleafV sh nd = some v) : GGood B nd v := by
+theorem gleaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {lv : List (ℕ × KV)}
+    (hlv : LvOK sh.I lv) {nd : GNode} {v : V5} (h : gleafV sh lv nd = some v) : GGood B nd v := by
   obtain ⟨cols, q0, q1, q2, q3⟩ := nd
   unfold gleafV at h
   split at h
@@ -117,7 +224,9 @@ theorem gleaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {v : V5}
       have d03 : decide (ρ a = ρ d) = Nat.beq a d := by
         rw [Bool.eq_iff_iff, decide_eq_true_iff, Nat.beq_eq]; exact eqv a d ha' hd'
       rw [d02, d13, d03] at this
-      exact this
+      have mlt : ∀ x, x < cols.length → cols.getD x 0 < 16 := fun x hx => by
+        rw [← hm x hx]; exact mv_lt B _
+      exact le_trans (leafT_le hlv _ _ _ (mlt a ha') (mlt b hb') (mlt c hc') (mlt d hd') k) this
     · rw [cond_true, V5.get_zero]
       apply le_of_eq; symm
       apply gw_improper
@@ -215,10 +324,161 @@ def optAll (p : Option (List ℕ)) (f : Option ℕ → Bool) : Bool :=
   | some L => L.all fun a => f (some a)
   | none => f none
 
+/-! ### A table of prunable ordinary nodes
+
+The same ordinary node is pruned many times in the trees of one shape (from different general
+nodes and different choices of ids). A shape's prunable nodes are therefore proved once, in a table
+(`GridGen/Four/K4/Data/B3Tab.lean`), and a choice is looked up there by the key of its node. -/
+
+/-- A search tree of naturals. -/
+inductive KT where
+  | leaf : KT
+  | node : KT → ℕ → KT → KT
+
+/-- Membership (the search order is only for speed: a `true` answer is always a key of the tree). -/
+def KT.mem : KT → ℕ → Bool
+  | .leaf, _ => false
+  | .node l k r, x => cond (Nat.beq x k) true (cond (Nat.blt x k) (l.mem x) (r.mem x))
+
+/-- Every key satisfies `f`. -/
+def KT.all (f : ℕ → Bool) : KT → Bool
+  | .leaf => true
+  | .node l k r => l.all f && f k && r.all f
+
+theorem KT.of_mem {f : ℕ → Bool} : ∀ {t : KT}, t.all f = true → ∀ {x : ℕ}, t.mem x = true → f x = true
+  | .leaf, _, _, hx => by simp [KT.mem] at hx
+  | .node l k r, h, x, hx => by
+    simp only [KT.all, Bool.and_eq_true] at h
+    simp only [KT.mem] at hx
+    cases e : Nat.beq x k
+    · rw [e, Bool.cond_false] at hx
+      cases e' : Nat.blt x k
+      · rw [e', Bool.cond_false] at hx; exact KT.of_mem h.2 hx
+      · rw [e', Bool.cond_true] at hx; exact KT.of_mem h.1.1 hx
+    · rw [Nat.beq_eq] at e; subst e; exact h.1.2
+
+/-- A table: search trees with the largest key of each, in increasing order. -/
+def tabMem : List (ℕ × KT) → ℕ → Bool
+  | [], _ => false
+  | p :: L, x => cond (Nat.ble x p.1) (p.2.mem x) (tabMem L x)
+
+theorem tabMem_spec : ∀ {L : List (ℕ × KT)} {x : ℕ}, tabMem L x = true → ∃ p ∈ L, p.2.mem x = true
+  | [], _, h => by simp [tabMem] at h
+  | p :: L, x, h => by
+    simp only [tabMem] at h
+    cases e : Nat.ble x p.1
+    · rw [e, Bool.cond_false] at h
+      obtain ⟨q, hq, hm⟩ := tabMem_spec h
+      exact ⟨q, List.mem_cons_of_mem _ hq, hm⟩
+    · rw [e, Bool.cond_true] at h; exact ⟨p, List.mem_cons_self, h⟩
+
+/-- The key of a placed row. -/
+def plKey (p : Pl) : ℕ :=
+  match p with
+  | some (m, t) => Nat.add 1 (Nat.add m (Nat.mul 16 t))
+  | none => 0
+
+/-- The key of an ordinary node. -/
+def nodeKey (nd : Node) : ℕ :=
+  Nat.add (Nat.add (plKey nd.r0) (Nat.mul 128 (plKey nd.r1)))
+    (Nat.add (Nat.mul 16384 (plKey nd.r2)) (Nat.mul 2097152 (plKey nd.r3)))
+
+/-- The placed row of a key. -/
+def plOfKey (c : ℕ) : Pl :=
+  cond (Nat.beq c 0) none (some (Nat.mod (Nat.sub c 1) 16, Nat.div (Nat.sub c 1) 16))
+
+/-- The ordinary node of a key. -/
+def nodeOfKey (k : ℕ) : Node :=
+  ⟨plOfKey (Nat.mod k 128), plOfKey (Nat.mod (Nat.div k 128) 128),
+    plOfKey (Nat.mod (Nat.div k 16384) 128), plOfKey (Nat.div k 2097152)⟩
+
+/-- A placed row with a mask and a tag in range. -/
+def plValid (p : Pl) : Bool :=
+  match p with
+  | some (m, t) => Nat.blt m 16 && Nat.blt t 4
+  | none => true
+
+/-- An ordinary node with masks and tags in range: its key determines it. -/
+def nodeValid (nd : Node) : Bool :=
+  plValid nd.r0 && plValid nd.r1 && plValid nd.r2 && plValid nd.r3
+
+theorem plKey_lt {p : Pl} (h : plValid p = true) : plKey p < 128 := by
+  rcases p with _ | ⟨m, t⟩
+  · simp [plKey]
+  · simp only [plValid, Bool.and_eq_true, Nat.blt_eq] at h
+    simp only [plKey, Nat.add_eq, Nat.mul_eq]; omega
+
+theorem plOfKey_plKey {p : Pl} (h : plValid p = true) : plOfKey (plKey p) = p := by
+  rcases p with _ | ⟨m, t⟩
+  · rfl
+  · simp only [plValid, Bool.and_eq_true, Nat.blt_eq] at h
+    have h1 : Nat.beq (plKey (some (m, t))) 0 = false := by
+      cases e : Nat.beq (plKey (some (m, t))) 0
+      · rfl
+      · rw [Nat.beq_eq] at e; simp only [plKey, Nat.add_eq, Nat.mul_eq] at e; omega
+    simp only [plOfKey, h1, Bool.cond_false, Option.some.injEq, Prod.mk.injEq]
+    simp only [plKey, Nat.add_eq, Nat.mul_eq, Nat.sub_eq, nat_mod_eq', nat_div_eq']
+    omega
+
+theorem nodeOfKey_nodeKey {nd : Node} (h : nodeValid nd = true) : nodeOfKey (nodeKey nd) = nd := by
+  obtain ⟨p0, p1, p2, p3⟩ := nd
+  simp only [nodeValid, Bool.and_eq_true] at h
+  obtain ⟨⟨⟨h0, h1⟩, h2⟩, h3⟩ := h
+  have l0 := plKey_lt h0
+  have l1 := plKey_lt h1
+  have l2 := plKey_lt h2
+  have l3 := plKey_lt h3
+  simp only [nodeOfKey, nodeKey, Nat.add_eq, Nat.mul_eq, nat_mod_eq', nat_div_eq']
+  have e0 : (plKey p0 + 128 * plKey p1 + (16384 * plKey p2 + 2097152 * plKey p3)) % 128
+      = plKey p0 := by omega
+  have e1 : (plKey p0 + 128 * plKey p1 + (16384 * plKey p2 + 2097152 * plKey p3)) / 128 % 128
+      = plKey p1 := by omega
+  have e2 : (plKey p0 + 128 * plKey p1 + (16384 * plKey p2 + 2097152 * plKey p3)) / 16384 % 128
+      = plKey p2 := by omega
+  have e3 : (plKey p0 + 128 * plKey p1 + (16384 * plKey p2 + 2097152 * plKey p3)) / 2097152
+      = plKey p3 := by omega
+  rw [e0, e1, e2, e3, plOfKey_plKey h0, plOfKey_plKey h1, plOfKey_plKey h2, plOfKey_plKey h3]
+
+/-- **A table of prunable nodes** of a shape. -/
+def TabOK (sh : Sh) (tab : List (ℕ × KT)) : Prop :=
+  ∀ p ∈ tab, p.2.all (fun k => pruneOK sh (nodeOfKey k)) = true
+
+theorem tabOK_nil (sh : Sh) : TabOK sh [] := fun _ h => absurd h List.not_mem_nil
+
+theorem tabOK_cons {sh : Sh} {mx : ℕ} {t : KT} {tab : List (ℕ × KT)}
+    (h : t.all (fun k => pruneOK sh (nodeOfKey k)) = true) (ht : TabOK sh tab) :
+    TabOK sh ((mx, t) :: tab) := by
+  intro p hp
+  rcases List.mem_cons.mp hp with rfl | hp
+  · exact h
+  · exact ht p hp
+
+/-- A node found in the table is prunable; otherwise it is checked directly. -/
+def pruneTab (sh : Sh) (tab : List (ℕ × KT)) (nd : Node) : Bool :=
+  (nodeValid nd && tabMem tab (nodeKey nd)) || pruneOK sh nd
+
+theorem pruneOK_of_tab {sh : Sh} {tab : List (ℕ × KT)} (htab : TabOK sh tab) {nd : Node}
+    (h : pruneTab sh tab nd = true) : pruneOK sh nd = true := by
+  unfold pruneTab at h
+  rcases Bool.or_eq_true_iff.mp h with h | h
+  · rw [Bool.and_eq_true] at h
+    obtain ⟨p, hp, hm⟩ := tabMem_spec h.2
+    have := KT.of_mem (htab p hp) hm
+    rwa [nodeOfKey_nodeKey h.1] at this
+  · exact h
+
 /-- **A prunable general node**: every choice gives a prunable ordinary node. -/
-def gpruneOK (sh : Sh) (nd : GNode) : Bool :=
+def gpruneOK (sh : Sh) (tab : List (ℕ × KT)) (nd : GNode) : Bool :=
   optAll nd.r0 fun c0 => optAll nd.r1 fun c1 => optAll nd.r2 fun c2 => optAll nd.r3 fun c3 =>
-    pruneOK sh (ordNode nd.cols c0 c1 c2 c3)
+    pruneTab sh tab (ordNode nd.cols c0 c1 c2 c3)
+
+/-- **The tables of a shape**: its prunable nodes and its leaf values. -/
+structure BTab where
+  pr : List (ℕ × KT)
+  lv : List (ℕ × KV)
+
+/-- Verified tables. -/
+def BTabOK (sh : Sh) (t : BTab) : Prop := TabOK sh t.pr ∧ LvOK sh.I t.lv
 
 theorem optAll_spec {p : Option (List ℕ)} {f : Option ℕ → Bool} (h : optAll p f = true)
     {ρ : ℕ → ℕ} {Y : Finset ℕ} {x : ℕ} (hx : x ∈ gfr p ρ Y) :
@@ -233,8 +493,8 @@ theorem optAll_spec {p : Option (List ℕ)} {f : Option ℕ → Bool} (h : optAl
       simp only [Option.some.injEq] at e; subst e; exact ⟨rfl, L, rfl, ha⟩, fun e => absurd e (by simp)⟩
 
 /-- **Soundness of pruning** a general node. -/
-theorem gprune_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode}
-    (h : gpruneOK sh nd = true) : GGood B nd V5.zero := by
+theorem gprune_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : List (ℕ × KT)}
+    (htab : TabOK sh tab) {nd : GNode} (h : gpruneOK sh tab nd = true) : GGood B nd V5.zero := by
   intro ρ hρ Y _ k w hw
   rw [V5.get_zero]
   apply Finset.sum_nonneg; intro a ha
@@ -304,7 +564,7 @@ theorem gprune_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode}
         simp only [Option.some.injEq, Prod.mk.injEq] at e
         obtain ⟨-, rfl⟩ := e
         rw [← (hS j hj a' hcj).1, ← (hS _ ot4 a' (oc.trans hcj)).1]
-    exact prune_pt hB h3 hO hs hC k w hw
+    exact prune_pt hB (pruneOK_of_tab htab h3) hO hs hC k w hw
   · exact le_of_eq (gw_improper B w hs).symm
 
 
@@ -333,9 +593,9 @@ def gadj (nd : GNode) (i t : ℕ) : Bool :=
 used up (the outside colour excluded). -/
 def gopts (sh : Sh) (nd : GNode) (i : ℕ) : List GOpt :=
   (List.range nd.cols.length).map (fun t => GOpt.old t (gadj nd i t)) ++
-    (List.range' 1 15).filterMap fun m =>
-      let μ := Nat.sub (sh.na m) (gcnt nd.cols m)
-      cond (Nat.blt 0 μ) (some (GOpt.fresh m μ)) none
+    (shAtoms sh).filterMap fun p =>
+      let μ := Nat.sub p.2 (gcnt nd.cols p.1)
+      cond (Nat.blt 0 μ) (some (GOpt.fresh p.1 μ)) none
 
 /-- The node after choosing an option. -/
 def GOpt.child (nd : GNode) (i : ℕ) : GOpt → GNode
@@ -367,17 +627,18 @@ end
 
 mutual
 /-- **The value of a numeric certificate tree** at a general node. -/
-def evalGCT (sh : Sh) (nd : GNode) : GCT → Option V5
-  | .leaf => gleafV sh nd
-  | .prune => cond (gpruneOK sh nd) (some V5.zero) none
+def evalGCT (sh : Sh) (tab : BTab) (nd : GNode) : GCT → Option V5
+  | .leaf => gleafV sh tab.lv nd
+  | .prune => cond (gpruneOK sh tab.pr nd) (some V5.zero) none
   | .node i ts kids ok =>
     cond (Nat.blt i 4 && (nd.get i).isNone)
-      (match evalGKids sh nd i (gopts sh nd i) kids, evalGCT sh (goutChild nd i) ok with
+      (match evalGKids sh tab nd i (gopts sh nd i) kids, evalGCT sh tab (goutChild nd i) ok with
         | some L, some vo => some (tcombV L vo ts)
         | _, _ => none)
       none
 /-- The values of the options of a free row. -/
-def evalGKids (sh : Sh) (nd : GNode) (i : ℕ) (os : List GOpt) : GCTL → Option (List (V5 × ℕ))
+def evalGKids (sh : Sh) (tab : BTab) (nd : GNode) (i : ℕ) (os : List GOpt) :
+    GCTL → Option (List (V5 × ℕ))
   | .nil =>
     match os with
     | [] => some []
@@ -386,7 +647,7 @@ def evalGKids (sh : Sh) (nd : GNode) (i : ℕ) (os : List GOpt) : GCTL → Optio
     match os with
     | [] => none
     | o :: os' =>
-      match cond o.imp (some V5.zero) (evalGCT sh (o.child nd i) k), evalGKids sh nd i os' ks with
+      match cond o.imp (some V5.zero) (evalGCT sh tab (o.child nd i) k), evalGKids sh tab nd i os' ks with
       | some v, some L => some ((v, o.mult) :: L)
       | _, _ => none
 end
@@ -509,12 +770,12 @@ theorem mem_gopts {sh : Sh} {nd : GNode} {i : ℕ} {o : GOpt} (h : o ∈ gopts s
   · obtain ⟨t, ht, rfl⟩ := List.mem_map.mp h
     exact Or.inl ⟨t, List.mem_range.mp ht, rfl⟩
   · right
-    obtain ⟨m, hm, e⟩ := List.mem_filterMap.mp h
-    obtain ⟨h1, h2⟩ := List.mem_range'_1.mp hm
-    cases hb : Nat.blt 0 (Nat.sub (sh.na m) (gcnt nd.cols m))
-    · simp only [hb, cond_false] at e; exact absurd e (by simp)
-    · simp only [hb, cond_true, Option.some.injEq] at e
-      exact ⟨m, _, by omega, by omega, rfl, e.symm⟩
+    obtain ⟨p, hp, e⟩ := List.mem_filterMap.mp h
+    obtain ⟨h1, h2, h3⟩ := mem_shAtoms hp
+    cases hb : Nat.blt 0 (Nat.sub p.2 (gcnt nd.cols p.1))
+    · simp only [hb, Bool.cond_false] at e; exact absurd e (by simp)
+    · simp only [hb, Bool.cond_true, Option.some.injEq] at e
+      exact ⟨p.1, _, h1, h2, by rw [h3], e.symm⟩
 
 theorem old_mem_gopts (sh : Sh) (nd : GNode) (i : ℕ) {t : ℕ} (ht : t < nd.cols.length) :
     GOpt.old t (gadj nd i t) ∈ gopts sh nd i :=
@@ -523,9 +784,10 @@ theorem old_mem_gopts (sh : Sh) (nd : GNode) (i : ℕ) {t : ℕ} (ht : t < nd.co
 theorem fresh_mem_gopts (sh : Sh) (nd : GNode) (i : ℕ) {m : ℕ} (h0 : 0 < m) (h16 : m < 16)
     (hpos : 0 < Nat.sub (sh.na m) (gcnt nd.cols m)) :
     GOpt.fresh m (Nat.sub (sh.na m) (gcnt nd.cols m)) ∈ gopts sh nd i := by
-  refine List.mem_append_right _ (List.mem_filterMap.mpr ⟨m, List.mem_range'_1.mpr ⟨by omega, by omega⟩, ?_⟩)
+  refine List.mem_append_right _ (List.mem_filterMap.mpr ⟨(m, sh.na m),
+    atom_mem_shAtoms sh h0 h16 (by simp only [Nat.sub_eq] at hpos; omega), ?_⟩)
   have : Nat.blt 0 (Nat.sub (sh.na m) (gcnt nd.cols m)) = true := by rw [Nat.blt_eq]; exact hpos
-  simp only [this, cond_true]
+  simp only [this, Bool.cond_true]
 
 /-- **Soundness of a branching** of a general node. -/
 theorem gtnode_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {i : ℕ} (hi : i < 4)
@@ -547,13 +809,13 @@ theorem gtnode_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {i : �
   have hsplit : sumP (gw B w) Z = ∑ x ∈ Yi, h x := by
     rw [sumP_split _ _ i hi, rowC_gfill _ _ _ hi, hfree]; rfl
   set Lk := L.map fun p => (p.1.get k, p.2)
-  set tZ := Zp.min (Lk.getD (ts.getD k 0) (vo.get k, 0)).1 (vo.get k)
+  set tZ := Zp.min (nthV (fun v => v.get k) (vo.get k) L (ts.getD k 0)) (vo.get k)
   set t := tZ.val
   have ht : t ≤ (vo.get k).val := by simp only [t, tZ, Zp.val_min]; exact min_le_right _ _
   have hval : ((tcombV L vo ts).get k).val = 3 * t + min 0 t
       + (Lk.map fun p => (p.2 : ℤ) * min 0 (p.1.val - t)).sum := by
     rw [tcombV_get]
-    simp only [tcomb1, Zp.val_add, Zp.val_smul, Zp.val_negPart, tb1_val]
+    simp only [tcomb1, tcF, Zp.val_add, Zp.val_smul, Zp.val_negPart, tbF_val]
     push_cast; ring
   rw [hval, hsplit]
   have hagree : ∀ x, ∀ t' < nd.cols.length, Function.update ρ nd.cols.length x t' = ρ t' :=
@@ -642,14 +904,15 @@ theorem gtnode_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {i : �
 
 mutual
 /-- **Soundness of a numeric certificate tree** of a general node. -/
-theorem evalGCT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) :
-    ∀ (T : GCT) (nd : GNode) (v : V5), evalGCT sh nd T = some v → GGood B nd v
-  | .leaf, nd, v, h => gleaf_good hB h
+theorem evalGCT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : BTab}
+    (htab : BTabOK sh tab) :
+    ∀ (T : GCT) (nd : GNode) (v : V5), evalGCT sh tab nd T = some v → GGood B nd v
+  | .leaf, nd, v, h => gleaf_good hB htab.2 h
   | .prune, nd, v, h => by
     simp only [evalGCT] at h
-    cases hp : gpruneOK sh nd
+    cases hp : gpruneOK sh tab.pr nd
     · rw [hp, cond_false] at h; exact absurd h (by simp)
-    · rw [hp, cond_true, Option.some.injEq] at h; subst h; exact gprune_good hB hp
+    · rw [hp, cond_true, Option.some.injEq] at h; subst h; exact gprune_good hB htab.1 hp
   | .node i ts kids ok, nd, v, h => by
     simp only [evalGCT] at h
     cases hc : (Nat.blt i 4 && (nd.get i).isNone)
@@ -659,13 +922,14 @@ theorem evalGCT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) :
       split at h
       · next L vo hk ho =>
         rw [Option.some.injEq] at h; subst h
-        exact gtnode_good hB hc.1 hc.2 (evalGKids_sound hB kids nd i _ L hk)
-          (evalGCT_sound hB ok _ vo ho) ts
+        exact gtnode_good hB hc.1 hc.2 (evalGKids_sound hB htab kids nd i _ L hk)
+          (evalGCT_sound hB htab ok _ vo ho) ts
       · exact absurd h (by simp)
 /-- Soundness of the option values of a general node. -/
-theorem evalGKids_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) :
+theorem evalGKids_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : BTab}
+    (htab : BTabOK sh tab) :
     ∀ (ks : GCTL) (nd : GNode) (i : ℕ) (os : List GOpt) (L : List (V5 × ℕ)),
-      evalGKids sh nd i os ks = some L → List.Forall₂ (GOptVal B nd i) os L
+      evalGKids sh tab nd i os ks = some L → List.Forall₂ (GOptVal B nd i) os L
   | .nil, nd, i, os, L, h => by
     cases os with
     | nil => simp only [evalGKids, Option.some.injEq] at h; subst h; exact .nil
@@ -678,9 +942,9 @@ theorem evalGKids_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) :
       split at h
       · next v L' hv hL' =>
         rw [Option.some.injEq] at h; subst h
-        refine .cons ⟨rfl, ?_, ?_⟩ (evalGKids_sound hB ks nd i os' L' hL')
+        refine .cons ⟨rfl, ?_, ?_⟩ (evalGKids_sound hB htab ks nd i os' L' hL')
         · intro himp; rw [himp, cond_true, Option.some.injEq] at hv; exact hv.symm
-        · intro himp; rw [himp, cond_false] at hv; exact evalGCT_sound hB k _ v hv
+        · intro himp; rw [himp, cond_false] at hv; exact evalGCT_sound hB htab k _ v hv
       · exact absurd h (by simp)
 end
 

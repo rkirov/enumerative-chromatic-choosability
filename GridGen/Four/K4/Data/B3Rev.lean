@@ -14,44 +14,6 @@ import GridGen.Four.K4.Data.B3_08
 import GridGen.Four.K4.Data.B3_09
 import GridGen.Four.K4.Data.B3_10
 import GridGen.Four.K4.Data.B3_11
-import GridGen.Four.K4.Data.B3_12
-import GridGen.Four.K4.Data.B3_13
-import GridGen.Four.K4.Data.B3_14
-import GridGen.Four.K4.Data.B3_15
-import GridGen.Four.K4.Data.B3_16
-import GridGen.Four.K4.Data.B3_17
-import GridGen.Four.K4.Data.B3_18
-import GridGen.Four.K4.Data.B3_19
-import GridGen.Four.K4.Data.B3_20
-import GridGen.Four.K4.Data.B3_21
-import GridGen.Four.K4.Data.B3_22
-import GridGen.Four.K4.Data.B3_23
-import GridGen.Four.K4.Data.B3_24
-import GridGen.Four.K4.Data.B3_25
-import GridGen.Four.K4.Data.B3_26
-import GridGen.Four.K4.Data.B3_27
-import GridGen.Four.K4.Data.B3_28
-import GridGen.Four.K4.Data.B3_29
-import GridGen.Four.K4.Data.B3_30
-import GridGen.Four.K4.Data.B3_31
-import GridGen.Four.K4.Data.B3_32
-import GridGen.Four.K4.Data.B3_33
-import GridGen.Four.K4.Data.B3_34
-import GridGen.Four.K4.Data.B3_35
-import GridGen.Four.K4.Data.B3_36
-import GridGen.Four.K4.Data.B3_37
-import GridGen.Four.K4.Data.B3_38
-import GridGen.Four.K4.Data.B3_39
-import GridGen.Four.K4.Data.B3_40
-import GridGen.Four.K4.Data.B3_41
-import GridGen.Four.K4.Data.B3_42
-import GridGen.Four.K4.Data.B3_43
-import GridGen.Four.K4.Data.B3_44
-import GridGen.Four.K4.Data.B3_45
-import GridGen.Four.K4.Data.B3_46
-import GridGen.Four.K4.Data.B3_47
-import GridGen.Four.K4.Data.B3_48
-import GridGen.Four.K4.Data.B3_49
 
 /-!
 # Height four at `k = 4`: reversed shapes of layer B3

@@ -3,6 +3,7 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import GridGen.Four.K4.Assemble
+import GridGen.Four.K4.Lit
 
 /-!
 # Height four at `k = 4`: chain certificates, part 01
@@ -14,190 +15,418 @@ namespace GridGen.Four.K4
 
 set_option maxRecDepth 100000
 
-theorem cert_1212 : CertAt [0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0] :=
+theorem cert_1875 : CertAt [2, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr))
+    (T := lit% "N0,[1,1,1,1,1]KPKPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKN1,[3,3,3,3,3]KPKN2,[5,5,5,5,5]KLKPKLKLKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLELEN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELKPEPEP")
     (by decide +kernel)
 
-theorem cert_1237 : CertAt [2, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0] :=
+theorem cert_1882 : CertAt [2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [3,3,3,3,3] (Ks (Nd 1 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[3,3,3,3,3]KPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKPKPKPKPKPEPKPKPEPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[3,3,3,3,3]KPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKPKPKPEPKPEPKN3,[2,2,2,2,2]KPKPKPKPKN1,[3,3,3,3,3]KPKN0,[4,4,4,4,4]KLKPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPEPEPEP")
     (by decide +kernel)
 
-theorem cert_1238 : CertAt [2, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0] :=
+theorem cert_1932 : CertAt [1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [0,0,0,0,0] (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks (Nd 3 [4,0,0,0,0] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks (Nd 3 [5,5,5,5,5] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 3 [4,4,4,4,4] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 3 [6,6,6,6,6] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 3 [5,5,5,5,5] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 3 [5,5,5,5,5] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks Pr (Ks Pr (Ks Pr En))))) Pr) (Ks Pr (Ks Pr (Ks Pr En))))) Pr))
+    (T := lit% "N3,[1,1,1,1,1]KPKPKPKN0,[1,1,1,1,1]KPKPKPKPKPKPKN1,[2,2,2,2,2]KPKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELEPKN0,[1,1,1,1,1]KPKN1,[3,3,3,3,3]KPKN2,[4,4,4,4,4]KLKPKLKLKLKLKLKLELKPKPKPKPKPKPEPKPKN1,[2,2,2,2,2]KPKN2,[0,6,6,6,6]KLKPKLKLKLKLKLELKPKPKPKPKPEPKPKPKN1,[2,2,2,2,2]KPKN2,[0,1,1,1,1]KLKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELEPKN0,[1,1,1,1,1]KPKPKPKPKPKPKPEPKPEP")
     (by decide +kernel)
 
-theorem cert_1244 : CertAt [2, 1, 2, 1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 1, 0] :=
+theorem cert_1936 : CertAt [1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf) En)))))))) (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf)) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KN2,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKPKPEPKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKPKN2,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKN3,[6,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[6,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[6,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[6,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[6,6,6,6,6]KPKLKLKLKLKLKLKLELKN3,[6,6,6,6,6]KPKLKLKLKLKLKLKLELKN3,[7,6,6,6,6]KPKLKLKLKLKLKLKLELEN3,[7,6,6,6,6]KPKLKLKLKLKLKLKLKLELKPKPKPKN1,[2,2,2,2,2]KPKPKPKPKPKPKN3,[6,6,6,6,6]KLKLKPKLKLKLKLKLELKPEPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1248 : CertAt [2, 0, 2, 1, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0] :=
+theorem cert_1938 : CertAt [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [4,4,4,4,4] (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks (Nd 2 [3,3,3,3,3] (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr En)))))) Pr))
+    (T := lit% "N2,[1,1,1,1,1]KPKN3,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKPEPKN1,[2,2,2,2,2]KPKN0,[3,1,1,1,1]KLKPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKPKPEPKPKPKN3,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLELKPEPKN1,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPEPKN3,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPEPEPEP")
     (by decide +kernel)
 
-theorem cert_1253 : CertAt [2, 0, 2, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0] :=
+theorem cert_1956 : CertAt [0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [4,4,4,4,4] (Ks Pr (Ks (Nd 0 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [6,6,6,6,6] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [6,6,6,6,6] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf) En)))))))) (Nd 0 [6,6,6,6,6] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf)) (Ks Pr En))))))) Pr) (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) En))))))) Pr) En)))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN3,[0,0,0,0,0]KLKLKPKLKLKLKLELKPKPEPKPKPKPEPKPKPKN2,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKN3,[5,4,4,4,4]KPKLKLKLKLKLKLELKN3,[5,4,4,4,4]KPKLKLKLKLKLKLELKN3,[5,4,4,4,4]KPKLKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLKLELKN3,[6,5,5,5,5]KPKLKLKLKLKLKLELEN3,[6,5,5,5,5]KPKLKLKLKLKLKLKLELKPKPKN1,[2,2,2,2,2]KPKPKPKPKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKPEPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1270 : CertAt [1, 0, 2, 1, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0] :=
+theorem cert_1985 : CertAt [1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 2, 1, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[1,1,1,1,1]KPKPKPKPKPKPKN1,[1,1,1,1,1]KPKPKPKPKPKN3,[2,2,2,2,2]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLELKPKPKPKPKPEPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1276 : CertAt [1, 1, 2, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1, 0] :=
+theorem cert_1987 : CertAt [1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [4,4,4,4,4] (Ks (Nd 3 [6,6,6,6,6] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 3 [0,0,0,0,0] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 3 [2,2,2,2,2] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 3 [0,0,0,0,0] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 3 [6,6,6,6,6] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 3 [0,0,0,0,0] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 3 [0,0,0,0,0] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKPKN2,[2,2,2,2,2]KN3,[2,2,2,2,2]KPKPKPKPKN1,[3,5,5,5,5]KPKLKLKLKLKLKLKLELKN1,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKPKPEPKPKPKPKPKPKPKPEPKPKPKPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1283 : CertAt [1, 0, 2, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 0] :=
+theorem cert_1991 : CertAt [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [2,2,2,2,2] (Ks (Nd 2 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks (Nd 3 [5,5,5,5,5] (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) En)))))) Pr) (Ks (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKPKPKPKPKPKPKN1,[3,3,3,3,3]KPKN3,[7,7,7,7,7]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN2,[0,0,0,0,0]KLKPKLKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKPKPKPKPKN3,[3,3,3,3,3]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLKLELKPKPKPKPKPKPEPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1311 : CertAt [1, 1, 2, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0] :=
+theorem cert_1994 : CertAt [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [0,0,0,0,0] (Ks Pr (Ks Pr (Ks (Nd 3 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [3,3,3,3,3] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr En)))))) Pr))
+    (T := lit% "N1,[2,2,2,2,2]KN0,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKPKPEPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKPEPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKPEPEPKPKPKN0,[2,2,2,2,2]KPKN3,[3,3,3,3,3]KPKN2,[5,6,6,6,6]KLKPKLKLKLKLKLELKPKPKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKPKPEPKPKN3,[3,3,3,3,3]KPKN2,[5,6,6,6,6]KLKPKLKLKLKLKLELKPKPKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKPKPEPKPKPKN3,[6,6,6,6,6]KN2,[4,4,4,4,4]KPKPKLKLKLKLKLELKN2,[4,1,1,1,1]KLKPKLKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLKLELEN2,[0,0,0,0,0]KLKPKPKLKLKLKLKLELEPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1320 : CertAt [1, 0, 2, 0, 1, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0] :=
+theorem cert_1995 : CertAt [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [6,6,6,6,6] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 2 [6,6,6,6,6] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [4,4,4,4,4] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [0,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr En))))))) Pr) (Ks Pr En))))))) Pr))
+    (T := lit% "N2,[1,1,1,1,1]KPKN3,[2,2,2,2,2]KPKPKPKN1,[3,3,3,3,3]KPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKPKPKPEPKN1,[4,4,4,4,4]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKPKPKPEPKPKPEPKPKPKN3,[2,2,2,2,2]KPKPKPKN1,[3,3,3,3,3]KPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPEPKN1,[3,3,3,3,3]KPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPEPKPEPKN3,[2,2,2,2,2]KPKPKPKN1,[4,4,4,4,4]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN1,[1,1,1,1,1]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPEPEPEP")
     (by decide +kernel)
 
-theorem cert_1325 : CertAt [1, 1, 2, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 1, 0] :=
+theorem cert_2015 : CertAt [0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 3 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [0,0,0,0,0] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr En))))))) Pr))
+    (T := lit% "N1,[2,2,2,2,2]KPKPKPKN3,[2,2,2,2,2]KN0,[3,3,3,3,3]KPKPKN2,[5,6,6,6,6]KLKPKLKLKLKLKLELKPKPKPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLELEPKPKPKPKN0,[6,6,6,6,6]KPKN2,[3,3,3,3,3]KPKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[0,2,2,2,2]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPKPEPKPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1328 : CertAt [1, 0, 2, 0, 1, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0] :=
+theorem cert_2018 : CertAt [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 2 [1,1,1,1,1] (Ks Pr (Ks (Nd 3 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 0 [3,3,3,3,3] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 0 [3,1,1,1,1] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr En))))))) Pr) En)))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KN3,[2,2,2,2,2]KPKPKPKN1,[3,3,3,3,3]KPKN2,[3,3,3,3,3]KLKPKLKLKLKLKLELKPKPKPKPKPEPKPKPKPEPKPKN3,[2,2,2,2,2]KPKPKPKN1,[3,3,3,3,3]KPKN2,[0,6,6,6,6]KLKPKLKLKLKLKLELKPKPKPKPKPEPKPKPKPEPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[2,5,5,5,5]KPKN2,[0,1,1,1,1]KLKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPEPEP")
     (by decide +kernel)
 
-theorem cert_1330 : CertAt [1, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0] :=
-  certAt_of_chain (gs := [])
+theorem sub_2020_0 : GoodSh (shOf [0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0]) ⟨none, none, none, some (11, 3)⟩ ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩ :=
+  goodSh_of_subOK (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [1,1,1,1,1] (Ks Pr (Ks (Nd 2 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks (Nd 3 [6,6,6,6,6] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) En))))))) Pr) (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPKN2,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKLKLKLKLKLKLELKPKPKPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1332 : CertAt [1, 0, 2, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0] :=
-  certAt_of_chain (gs := [])
-    (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 0 [4,1,1,1,1] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En))))))) (Nd 0 [5,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) En))))))) Pr) En)))))) Pr))
+theorem cert_2020 : CertAt [0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0] :=
+  certAt_of_chain (gs := [(⟨none, none, none, some (11, 3)⟩, ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩)])
+    (by intro p hp; simp only [List.mem_cons, List.mem_nil_iff, or_false] at hp; rcases hp with rfl <;> first | exact sub_2020_0)
+    (T := lit% "N3,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKN2,[5,6,6,6,6]KN1,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,1,1,1]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELEN1,[2,2,2,2,2]KPKPKLKLKLKLKLKLELKPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKN2,[6,6,6,6,6]KN1,[5,5,5,5,5]KPKLKLKLKLKLKLELKPKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,1,1,1,1]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELEN1,[2,2,2,2,2]KPKPKLKLKLKLKLKLELEPKG0,KN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1347 : CertAt [0, 0, 2, 0, 1, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0] :=
+theorem cert_2021 : CertAt [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [1,1,1,1,1] (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks (Nd 2 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [0,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr))
+    (T := lit% "N2,[1,1,1,1,1]KN3,[3,3,3,3,3]KPKPKN1,[3,3,3,3,3]KPKN0,[2,2,1,1,1]KLKPKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPEPKPKPEPKPKPKN3,[1,1,1,1,1]KPKPKN1,[3,3,3,3,3]KPKN0,[2,2,2,2,2]KLKPKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEPKPEPKN3,[1,1,1,1,1]KPKPKN1,[3,3,3,3,3]KPKN0,[2,2,2,2,2]KLKPKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLELKN1,[1,1,1,1,1]KPKN0,[2,2,2,2,2]KLKPKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEPEPEP")
     (by decide +kernel)
 
-theorem cert_1352 : CertAt [0, 1, 2, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 1, 0] :=
+theorem cert_2026 : CertAt [0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 1, 2, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks (Nd 2 [3,3,3,3,3] (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [3,0,0,0,0] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[3,3,3,3,3]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLELKPKPKPKPKPEPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1356 : CertAt [0, 0, 2, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
+theorem cert_2027 : CertAt [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks (Nd 3 [5,5,5,5,5] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks (Nd 3 [0,0,0,0,0] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) En))))))) Pr) (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKN2,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKLKLKLKLKLKLELKPKPKPKPKPKPEPKPKPEPKPKPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1358 : CertAt [0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 2, 0] :=
+theorem cert_2029 : CertAt [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 2, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 2 [1,1,1,1,1] (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr En)))))) Pr) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 0 [3,1,1,1,1] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr En)))))) Pr) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 0 [3,3,3,3,3] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) En)))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) En)))))) Pr) En))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[5,5,5,5,5]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPEPEP")
     (by decide +kernel)
 
-theorem cert_1390 : CertAt [1, 1, 2, 0, 0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 0] :=
+theorem cert_2030 : CertAt [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [1,1,1,1,1] (Ks (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [6,6,6,6,6] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N1,[2,2,2,2,2]KN0,[2,2,2,2,2]KPKPKPKPKN3,[2,2,2,2,2]KPKPKPKN2,[0,0,0,0,0]KLKPKPKLKLKLELKPEPEPKPKN0,[2,2,2,2,2]KPKPKN3,[4,4,4,4,4]KPKN2,[4,5,5,5,5]KLKPKLKLKLKLELKPKN2,[0,0,0,0,0]KLKPKPKLKLKLELKPKPEPKN3,[3,3,3,3,3]KPKN2,[4,5,5,5,5]KLKPKLKLKLKLELKPKPKPKPEPKPKN3,[5,5,5,5,5]KN2,[3,3,3,3,3]KPKPKLKLKLKLELKN2,[3,1,1,1,1]KLKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLELEN2,[0,0,0,0,0]KLKPKPKLKLKLKLELEPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1392 : CertAt [1, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0] :=
+theorem cert_2044 : CertAt [1, 0, 2, 1, 0, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [4,6,6,6,6] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr En)))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr))
+    (T := lit% "N0,[1,1,1,1,1]KPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPKPKN2,[2,2,2,2,2]KN1,[2,2,2,2,2]KPKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[6,6,6,6,6]KPKLKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[1,1,1,1,1]KPKLKLKLKLKLKLELEN3,[6,6,6,6,6]KPKLKLKLKLKLKLELKPKPKN1,[3,3,3,3,3]KPKPKN3,[5,5,5,5,5]KLKLKPKLKLKLELKPKPKPEPKPKN1,[3,3,3,3,3]KPKPKN3,[6,6,6,6,6]KLKLKPKLKLKLKLELKPKPKPKPEPEPEP")
     (by decide +kernel)
 
-theorem cert_1393 : CertAt [1, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1, 0, 0] :=
+theorem cert_2067 : CertAt [0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 1, 2, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [1,1,1,1,1] (Ks Pr (Ks (Nd 3 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks (Nd 1 [2,0,0,0,0] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks (Nd 1 [4,4,4,4,4] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,4,4,4,4] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 1 [4,4,4,4,4] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 1 [3,5,5,5,5] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 1 [4,4,4,4,4] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks (Nd 2 [5,5,5,5,5] (Ks (Nd 1 [2,0,0,0,0] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) En)))))) (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf)) (Ks (Nd 2 [2,2,2,2,2] (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr))
+    (T := lit% "N1,[1,1,1,1,1]KN2,[2,2,2,2,2]KPKPKPKPKPKPEPKPKN2,[1,1,1,1,1]KPKPKN0,[1,1,1,1,1]KPKN3,[3,3,3,3,3]KLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLELEN3,[4,4,4,4,4]KLKLKPKLKLKLELKN0,[2,2,2,2,2]KPKPKPKN3,[4,4,4,4,4]KLKLKPKLKLKLELKPKN3,[5,5,5,5,5]KLKLKPKLKLKLELEPKN0,[3,3,3,3,3]KPKN3,[4,4,4,4,4]KLKPKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLELEPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1397 : CertAt [1, 1, 2, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0] :=
+theorem cert_2070 : CertAt [0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 3 [7,7,7,7,7] (Ks (Nd 2 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [7,7,7,7,7] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [3,3,3,3,3] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [7,7,7,7,7] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf) En)))))))) (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))))) Lf)) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks Pr En)))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr))
+    (T := lit% "N0,[1,1,1,1,1]KPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[3,3,3,3,3]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLELKN2,[0,0,0,0,0]KLKPKPKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLELEN2,[5,5,5,5,5]KLKPKPKLKLKLKLELKPEPEP")
     (by decide +kernel)
 
-theorem cert_1398 : CertAt [1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0] :=
+theorem cert_2075 : CertAt [0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 1, 2, 1, 0, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 3 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [1,1,1,1,1] (Ks (Nd 2 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr))
+    (T := lit% "N2,[1,1,1,1,1]KPKPKPKN0,[1,1,1,1,1]KPKPKPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN3,[5,5,5,5,5]KLKLKPKLKLKLELKPEPEPKN0,[1,1,1,1,1]KN1,[4,4,4,4,4]KPKN3,[5,5,5,5,5]KLKPKLKLKLKLELKPKN3,[4,4,4,4,4]KLKPKLKLKLELKPEPKPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1400 : CertAt [1, 0, 2, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0] :=
+theorem cert_2077 : CertAt [0, 0, 2, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 2 [4,4,4,4,4] (Ks (Nd 1 [3,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 1 [3,5,5,5,5] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks (Nd 2 [4,4,4,4,4] (Ks (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 1 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks (Nd 2 [3,3,3,3,3] (Ks (Nd 1 [3,6,6,6,6] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KPKPKPKPKPKPEPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPEPKPKN2,[3,3,3,3,3]KN1,[4,4,4,4,4]KPKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[5,5,5,5,5]KPKLKLKLKLKLELKN3,[1,1,1,1,1]KPKLKLKLKLKLKLELEN3,[6,6,6,6,6]KPKLKLKLKLKLKLELKPKPKN1,[3,3,3,3,3]KPKPKN3,[5,5,5,5,5]KLKLKPKLKLKLELKPKPKPEPKPKN1,[3,3,3,3,3]KPKPKN3,[6,6,6,6,6]KLKLKPKLKLKLKLELKPKPKPKPEPEPEP")
     (by decide +kernel)
 
-theorem cert_1402 : CertAt [1, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0] :=
+theorem cert_2132 : CertAt [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks (Nd 0 [2,2,2,2,2] (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [5,5,5,5,5] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks Pr (Ks (Nd 1 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) (Ks Pr (Ks Pr (Ks Pr En)))))))) Pr) En))))))) Pr))
+    (T := lit% "N3,[2,2,2,2,2]KPKPKPKN0,[2,2,2,2,2]KPKPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPEPKPKN2,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKPKPKPKPKPEPEPKN0,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KPKPKPKPKPKPEPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPEPKPKN2,[6,6,6,6,6]KN1,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,1,1,1,1]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLELEN1,[2,2,2,2,2]KPKPKLKLKLKLKLKLELEPKN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1403 : CertAt [1, 0, 2, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 2, 0] :=
+theorem cert_2181 : CertAt [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [3,3,3,3,3] (Ks Pr (Ks Pr (Ks (Nd 3 [5,4,4,4,4] (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks (Nd 0 [3,3,3,3,3] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) En)))))) Pr) (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [3,3,3,3,3] (Ks (Nd 0 [4,4,4,4,4] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr))
+    (T := lit% "N3,[2,2,2,2,2]KPKPKN0,[2,2,2,2,2]KPKPKN2,[2,2,2,2,2]KPKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKPKPEPKN2,[5,5,5,5,5]KN1,[4,4,4,4,4]KPKLKLKLKLKLELKPKN1,[2,2,2,2,2]KPKPKLKLKLKLELKN1,[2,2,1,1,1]KPKPKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLELEN1,[2,2,2,2,2]KPKPKLKLKLKLKLELEPKN0,[2,2,2,2,2]KPKPKN2,[2,2,2,2,2]KPKPKPKPKPEPKPKN2,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKLKLKLKLKLELKPKPKPKPKPEPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPEPEP")
     (by decide +kernel)
 
-theorem cert_1404 : CertAt [1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 0] :=
+theorem cert_2280 : CertAt [3, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 1 [1,1,1,1,1] (Ks (Nd 2 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))) Pr) (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [4,4,4,4,4] (Ks Lf (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr En))))) Pr) (Ks Pr En))))) Pr))
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN1,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPEPKPKPKN3,[3,3,3,3,3]KN0,[4,4,4,4,4]KPKLKLKLKLKLELKPKPKPKPKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEPEPKN1,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPKPKPEPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1413 : CertAt [0, 1, 2, 0, 0, 1, 0, 0, 1, 0, 0, 2, 1, 0, 0] :=
+theorem cert_2281 : CertAt [3, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En)))))) Pr) (Ks Pr En)))))) Pr) (Ks Pr (Ks Pr En)))))) Pr))
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN0,[5,5,5,5,5]KN1,[6,6,6,6,6]KPKLKLKLKLKLKLELKPKN1,[3,3,3,3,3]KPKPKLKLKLKLKLELKPKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKPKPEPKN0,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKLKLKLKLKLELKPKPKPKPKPEPEPKPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1415 : CertAt [0, 0, 2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0] :=
+theorem cert_2282 : CertAt [3, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 2, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks (Nd 2 [2,2,2,2,2] (Ks (Nd 3 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [3,5,5,5,5] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 1 [1,1,1,1,1] (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N2,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKN0,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKLKLKLKLKLELKPKPKPKPKPEPKN0,[3,3,3,3,3]KN1,[0,0,0,0,0]KPKLKLKLKLKLELKN1,[2,5,5,5,5]KPKPKLKLKLKLELKN1,[5,5,5,5,5]KPKPKLKLKLKLELKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKN1,[3,6,6,6,6]KPKPKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLELEN1,[3,6,6,6,6]KPKPKLKLKLKLKLELKN0,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKLKLKLKLELKPKPKPKPEPEN0,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKLKLKLKLKLELKPKPKPKPKPEPKN3,[2,2,2,2,2]KPKPKPKPKN0,[4,4,4,4,4]KN1,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKPKPEPKPEPKPKPEP")
     (by decide +kernel)
 
-theorem cert_1419 : CertAt [0, 1, 2, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0] :=
+theorem cert_2284 : CertAt [3, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3, 0] :=
   certAt_of_chain (gs := [])
     (fun _ h => absurd h List.not_mem_nil)
-    (T := (Nd 0 [2,2,2,2,2] (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 1 [3,3,3,3,3] (Ks Pr (Ks (Nd 3 [6,6,6,6,6] (Ks (Nd 2 [3,1,1,1,1] (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [6,6,6,6,6] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [3,3,3,3,3] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [6,6,6,6,6] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [2,2,2,2,2] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf) En))))))) (Nd 2 [4,4,4,4,4] (Ks Lf (Ks Pr (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En)))))))) Lf)) (Ks Pr (Ks Pr (Ks Pr (Ks (Nd 3 [3,3,3,3,3] (Ks Pr (Ks (Nd 2 [5,5,5,5,5] (Ks Lf (Ks Pr (Ks Lf (Ks Lf (Ks Lf (Ks Lf (Ks Lf En))))))) Lf) (Ks Pr (Ks Pr (Ks Pr (Ks Pr (Ks Pr En))))))) Pr) (Ks Pr En))))))) Pr) (Ks Pr (Ks Pr En))))))) Pr))
+    (T := lit% "N0,[1,1,1,1,1]KN3,[1,1,1,1,1]KPKPKN1,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KLKPKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLELKN2,[1,1,1,1,1]KLKPKPKLKLELEN2,[3,3,3,3,3]KLKPKPKLKLKLELKPEPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2320 : CertAt [2, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKN1,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKPEPKPKPKPKN3,[3,3,3,3,3]KN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEPEPKN1,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPKPKPKPEPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2321 : CertAt [2, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKN0,[2,2,2,2,2]KN3,[2,2,2,2,2]KPKPKPKN1,[6,6,6,6,6]KPKLKLKLKLKLKLELKN1,[5,5,5,5,5]KPKLKLKLKLKLELKN1,[1,1,1,1,1]KPKLKLKLKLKLELEPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLELKPEPKPKN3,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKPKLKLKLKLELKPKPKPKN1,[3,3,3,3,3]KPKPKLKLKLKLKLELKPEPKPEPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2323 : CertAt [2, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 3, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N0,[0,0,0,0,0]KPKPKN3,[1,1,1,1,1]KN1,[1,1,1,1,1]KPKN2,[2,2,2,2,2]KPKPKLKLKLELKN2,[2,2,2,2,2]KPKPKLKLKLELKN2,[2,0,0,0,0]KPKPKLKLELEN2,[2,2,2,2,2]KPKPKLKLKLELKPKN1,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KLKPKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLELKN2,[1,1,1,1,1]KLKPKPKLKLELEN2,[3,3,3,3,3]KLKPKPKLKLKLELKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2390 : CertAt [2, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKPKPKPKN0,[1,1,1,1,1]KPKN3,[3,3,3,3,3]KPKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKPKPKPKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPEPKPKN3,[2,2,2,2,2]KPKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKPKPKPKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPEPKPKPEPKN0,[1,1,1,1,1]KPKPKPKPKPKPEPEP")
+    (by decide +kernel)
+
+theorem cert_2391 : CertAt [2, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KPKPKPKPKN0,[3,3,3,3,3]KPKN2,[3,3,3,3,3]KN3,[4,4,4,4,4]KPKLKLKLKLKLELKPKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN2,[3,3,3,3,3]KN3,[0,0,0,0,0]KPKLKLKLKLKLELKPKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2416 : CertAt [1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KPKPKPKPKPKN0,[2,2,2,2,2]KPKN3,[3,3,3,3,3]KPKN2,[3,3,3,3,3]KLKPKLKLKLKLKLELKPKPKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKPEPKPKN3,[3,3,3,3,3]KPKN2,[4,4,4,4,4]KLKPKLKLKLKLKLKLELKPKPKPKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPEPKPKN3,[4,4,4,4,4]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKPKPKPKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKPEPKPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPEP")
+    (by decide +kernel)
+
+theorem cert_2417 : CertAt [1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKPKPKPKN0,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KN3,[0,0,0,0,0]KPKLKLKLKLKLELKPKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELEN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKN2,[3,3,3,3,3]KN3,[4,4,4,4,4]KPKLKLKLKLKLELKPKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[0,0,0,0,0]KLKLKPKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2436 : CertAt [0, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKPKPKN0,[2,2,2,2,2]KPKPKN3,[3,3,3,3,3]KPKN2,[3,3,3,3,3]KLKPKLKLKLKLELKPKPKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKPEPKN3,[3,3,3,3,3]KN2,[2,2,2,2,2]KPKPKLKLKLKLELKN2,[3,3,3,3,3]KLKPKLKLKLKLELKPKPKN2,[3,3,3,3,3]KLKPKPKLKLKLELKPEPKPEPKN0,[2,2,2,2,2]KPKPKPKPKPEPEP")
+    (by decide +kernel)
+
+theorem cert_2492 : CertAt [2, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKN1,[2,2,2,2,2]KPKPKPKPKN3,[3,3,3,3,3]KN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPEPKN3,[3,3,3,3,3]KN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEPEPKN1,[2,2,2,2,2]KPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPEPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2493 : CertAt [2, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KN1,[3,3,3,3,3]KPKN3,[3,3,3,3,3]KN0,[2,2,2,2,2]KPKLKLKLKLKLELKPKN0,[2,2,2,2,2]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN3,[3,4,4,4,4]KN0,[2,2,2,2,2]KPKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN3,[3,3,3,3,3]KN0,[2,2,2,2,2]KPKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLELKN3,[3,1,1,1,1]KN0,[2,2,2,2,2]KPKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLELEN3,[3,3,3,3,3]KN0,[2,2,2,2,2]KPKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPEPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2512 : CertAt [1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[1,1,1,1,1]KN1,[1,1,1,1,1]KPKPKPKPKN3,[2,2,2,2,2]KN0,[2,2,2,2,2]KPKLKLKLKLKLELKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPEPKN3,[2,2,2,2,2]KN0,[2,2,2,2,2]KPKLKLKLKLKLELKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELEPEPKN1,[2,2,2,2,2]KPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPEPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2591 : CertAt [2, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKN0,[3,3,3,3,3]KPKN3,[8,8,8,8,8]KN2,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKLKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKPKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELKN2,[5,2,2,2,2]KLKPKPKLKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELEN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLKLELKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKPEPKN0,[1,1,1,1,1]KPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPKPEPKPKPKPKPKPKPEPKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2592 : CertAt [2, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKN0,[3,3,3,3,3]KPKN3,[7,7,7,7,7]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN2,[6,6,6,6,6]KLKPKLKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKN2,[6,6,6,6,6]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,2,2,2,2]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKPEPKPKPKPKPKN0,[2,2,2,2,2]KPKN3,[6,6,6,6,6]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[6,6,6,6,6]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPKPKPKPKPEPEP")
+    (by decide +kernel)
+
+theorem cert_2594 : CertAt [2, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKN0,[5,5,5,5,5]KN1,[8,8,8,8,8]KPKLKLKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLKLELKN1,[3,1,1,1,1]KPKPKLKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELEN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKPKPKPKPKPKPKPEPKN0,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKPKPKPKPKPKPKPEPEPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2595 : CertAt [2, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 2, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N0,[2,2,2,2,2]KN1,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN1,[1,1,1,1,1]KPKN2,[3,3,3,3,3]KN3,[0,0,0,0,0]KPKLKLKLKLKLKLELKPKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN3,[7,7,7,7,7]KLKLKPKLKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKN2,[4,4,4,4,4]KN3,[3,3,3,3,3]KPKLKLKLKLKLELKPKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN3,[6,6,6,6,6]KLKLKPKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELEN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN2,[3,3,3,3,3]KN3,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN3,[6,6,6,6,6]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKN2,[3,3,3,3,3]KN3,[4,4,4,4,4]KPKLKLKLKLKLELKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[6,6,6,6,6]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN2,[3,3,3,3,3]KN3,[0,0,0,0,0]KPKLKLKLKLKLELKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLELKN3,[1,1,1,1,1]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLELEN2,[3,3,3,3,3]KN3,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKN3,[7,7,7,7,7]KLKLKPKLKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELEN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKN1,[1,1,1,1,1]KPKN2,[2,2,2,2,2]KPKPKPKN3,[4,4,4,4,4]KLKLKPKLKLKLKLELKPKPKPEPKPKPKPKPEPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2598 : CertAt [2, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[1,1,1,1,1]KPKPKN3,[1,1,1,1,1]KPKPKPKPKN0,[4,4,4,4,4]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[4,1,1,1,1]KPKPKLKLKLKLKLKLKLELKN1,[7,7,7,7,7]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELEN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPEPKPKN3,[1,1,1,1,1]KPKPKPKPKN0,[3,3,3,3,3]KPKPKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKPKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKPKPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPEPEPKPEP")
+    (by decide +kernel)
+
+theorem sub_2599_0 : GoodSh (shOf [2, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 2, 0]) ⟨none, none, some (7, 2), none⟩ ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩ :=
+  goodSh_of_subOK (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N3,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKPKPKPKPEPKPKPKN0,[3,3,3,3,3]KN1,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[1,0,0,0,0]KPKPKLKLKLKLKLKLELKN1,[7,7,7,7,7]KPKPKLKLKLKLKLKLELKN1,[7,7,7,7,7]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELEN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KN1,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKPEPKN0,[2,2,2,2,2]KPKPKPKPKPKPKPEPEN0,[3,3,3,3,3]KPKPKN1,[7,7,7,7,7]KPKPKLKLKLKLKLKLELKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem sub_2599_1 : GoodSh (shOf [2, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 2, 0]) ⟨none, none, some (12, 2), none⟩ ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩ :=
+  goodSh_of_subOK (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N3,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KPKN1,[5,5,5,5,5]KPKPKLKLKLKLELKPKPKPKPEPKPKN0,[3,3,3,3,3]KPKPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKPKPKPEPKN0,[4,4,4,4,4]KN1,[6,3,3,3,3]KPKLKLKLKLKLKLELKN1,[3,6,6,6,6]KPKPKLKLKLKLKLELKN1,[1,1,1,1,1]KPKPKLKLKLKLKLELKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKN1,[7,7,7,7,7]KPKPKLKLKLKLKLKLELKN1,[4,6,6,6,6]KPKPKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLELEN1,[4,7,7,7,7]KPKPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKPKPKPKPKPEPEN0,[3,3,3,3,3]KPKPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2599 : CertAt [2, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 2, 0] :=
+  certAt_of_chain (gs := [(⟨none, none, some (7, 2), none⟩, ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩), (⟨none, none, some (12, 2), none⟩, ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩)])
+    (by intro p hp; simp only [List.mem_cons, List.mem_nil_iff, or_false] at hp; rcases hp with rfl | rfl <;> first | exact sub_2599_0 | exact sub_2599_1)
+    (T := lit% "N2,[2,2,2,2,2]KN3,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KN1,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKPKPKPKPKPEPKPKPEPKPKG0,KN3,[2,2,2,2,2]KPKPKPKPKN0,[3,3,3,3,3]KPKPKN1,[6,6,6,6,6]KPKPKLKLKLKLKLELKPKPKPKPEPKPKPEPKG1,KPEN3,[2,2,2,2,2]KPKPKPKPKN0,[3,3,3,3,3]KPKPKN1,[7,7,7,7,7]KPKPKLKLKLKLKLKLELKPKPKPKPKPEPKPKPEP")
+    (by decide +kernel)
+
+theorem sub_2618_0 : GoodSh (shOf [1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0]) ⟨none, some (2, 1), none, none⟩ ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩ :=
+  goodSh_of_subOK (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N0,[3,3,3,3,3]KPKN3,[8,8,8,8,8]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKLKLKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[4,2,2,2,2]KLKPKPKLKLKLKLKLKLELKN2,[4,2,2,2,2]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLKLELKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPKPEPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPKPEPKPKN3,[8,8,8,8,8]KN2,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKLKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKPKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELKN2,[5,2,2,2,2]KLKPKPKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLELEN2,[5,5,5,5,5]KLKPKPKLKLKLKLKLKLKLELKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2618 : CertAt [1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [(⟨none, some (2, 1), none, none⟩, ⟨⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩, ⟨0, 0⟩⟩)])
+    (by intro p hp; simp only [List.mem_cons, List.mem_nil_iff, or_false] at hp; rcases hp with rfl <;> first | exact sub_2618_0)
+    (T := lit% "N1,[2,2,2,2,2]KPKG0,KN0,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPKPEPKPKPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPKPEPKPKPEPKPKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2619 : CertAt [1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KN2,[2,2,2,2,2]KPKPKN0,[2,2,2,2,2]KPKPKPKN3,[5,5,5,5,5]KLKLKPKLKLKLKLKLELKPKN3,[0,0,0,0,0]KLKLKPKLKLKLKLKLELKPKPEPKPKPKPKN0,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPEPKPKPKPKPKPKN2,[1,1,1,1,1]KPKPKN0,[3,3,3,3,3]KPKN3,[5,5,5,5,5]KLKPKLKLKLKLKLELKN3,[6,6,6,6,6]KLKLKPKLKLKLKLKLELKN3,[5,5,5,5,5]KLKLKPKLKLKLKLELKN3,[0,0,0,0,0]KLKLKPKLKLKLKLELKN3,[2,2,2,2,2]KLKLKPKLKLKLKLELKN3,[6,6,6,6,6]KLKLKPKLKLKLKLELEN3,[6,6,6,6,6]KLKLKPKLKLKLKLKLELKPKPKPKPEPEP")
+    (by decide +kernel)
+
+theorem cert_2621 : CertAt [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN0,[4,4,4,4,4]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,1,1,1,1]KPKPKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELEN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLKLELKPKPKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKPKPKPEPKN0,[3,3,3,3,3]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKPKPKPKPKPKPKPEPKN0,[3,3,3,3,3]KN1,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKPKPKPKPKPKPKPEPEPKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2624 : CertAt [1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[7,7,7,7,7]KPKN0,[5,5,5,5,5]KLKPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[5,0,0,0,0]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[6,6,6,6,6]KPKLKLKLKLKLKLKLELKN0,[6,6,6,6,6]KPKLKLKLKLKLKLKLELEN0,[6,6,6,6,6]KPKLKLKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKN0,[2,2,2,2,2]KPKLKLKLKLKLKLKLELKPKPKPKPEPKN1,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKN1,[2,2,2,2,2]KPKPKPKN0,[6,6,6,6,6]KPKLKLKLKLKLKLKLELKPKPKPKPEPEPKPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[2,2,2,2,2]KPKPKPKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKPKPKPEPKN1,[2,2,2,2,2]KPKPKPKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKPKPEPKN1,[2,2,2,2,2]KPKPKPKPKPKPKPEPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2625 : CertAt [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[1,1,1,1,1]KPKN1,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELEPKPKPKPKPKN3,[5,5,5,5,5]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELEPKN1,[2,2,2,2,2]KPKPKPKPKPKPEPKN1,[2,2,2,2,2]KPKPKPKPKPKPEPKN1,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPEPKPKPKPKN3,[3,3,3,3,3]KN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEPEPKPEN1,[2,2,2,2,2]KPKPKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2640 : CertAt [0, 1, 1, 1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KN3,[2,2,2,2,2]KPKPKPKPKN2,[2,2,2,2,2]KPKPKPKN0,[2,2,2,2,2]KPKLKLKLKLKLKLKLELKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKPKPKPEPEPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2644 : CertAt [0, 0, 1, 1, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[1,1,1,1,1]KPKN1,[2,2,2,2,2]KPKN0,[4,4,4,4,4]KPKPKN3,[3,3,3,3,3]KLKLKPKLKLKLELKN3,[0,0,0,0,0]KLKLKPKLKLKLKLELKPKPEPKPKPKPKPEPKPKN1,[2,2,2,2,2]KPKN0,[2,2,2,2,2]KPKPKPKN3,[0,0,0,0,0]KLKLKPKLKLKLELKN3,[4,4,4,4,4]KLKLKPKLKLELEPKPKPKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2662 : CertAt [1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN1,[7,7,7,7,7]KPKN0,[2,2,2,2,2]KLKPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,0,0,0,0]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLKLELKN1,[7,7,7,7,7]KPKN0,[1,1,1,1,1]KLKPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKN1,[2,2,2,2,2]KPKPKPKPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKPEPEPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2664 : CertAt [1, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[1,1,1,1,1]KPKN3,[1,1,1,1,1]KPKPKPKN1,[6,6,6,6,6]KPKN0,[2,2,2,2,2]KLKPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,0,0,0,0]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKN1,[6,6,6,6,6]KPKN0,[1,1,1,1,1]KLKPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLKLELKPKN1,[2,2,2,2,2]KPKPKPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPEPEPKPKPKN3,[1,1,1,1,1]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLELKPEPKN1,[5,5,5,5,5]KPKN0,[1,1,1,1,1]KLKPKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELEN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPEPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2681 : CertAt [0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[3,3,3,3,3]KPKN3,[3,3,3,3,3]KPKN1,[1,1,1,1,1]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN1,[6,6,6,6,6]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN1,[6,6,6,6,6]KPKN0,[3,3,3,3,3]KLKPKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELEN0,[2,2,2,2,2]KPKLKLKLKLKLKLKLELKN1,[6,6,6,6,6]KPKN0,[1,1,1,1,1]KLKPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN1,[6,6,6,6,6]KPKN0,[4,4,4,4,4]KLKPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN1,[1,1,1,1,1]KPKN0,[4,4,4,4,4]KLKPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELEN1,[7,7,7,7,7]KPKN0,[4,4,4,4,4]KLKPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLKLELKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2683 : CertAt [0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[1,1,1,1,1]KPKN3,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKPKPEPKN1,[6,6,6,6,6]KPKN0,[1,1,1,1,1]KLKPKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKPKN1,[2,2,2,2,2]KPKPKPKPKPKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKPEPEPKPKPKN3,[2,2,2,2,2]KPKPKPKN1,[2,2,2,2,2]KPKPKPKPKN0,[2,2,2,2,2]KPKLKLKLKLKLELKPEPKN1,[5,5,5,5,5]KPKN0,[1,1,1,1,1]KLKPKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKPKPKPKPEPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2707 : CertAt [1, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKN0,[3,3,3,3,3]KPKN3,[8,8,8,8,8]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKLKLKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[4,2,2,2,2]KLKPKPKLKLKLKLKLKLELKN2,[4,2,2,2,2]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLKLELKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKPKPEPKPKPKPKN0,[1,1,1,1,1]KPKN3,[3,3,3,3,3]KPKN2,[5,5,5,5,5]KLKPKLKLKLKLKLKLKLELKPKPKPKPKPKPKPEPKPKPKPKPKPKPEPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2708 : CertAt [1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KPKN3,[7,7,7,7,7]KN2,[2,2,2,2,2]KPKPKLKLKLKLKLKLELKN2,[6,6,6,6,6]KLKPKLKLKLKLKLKLELKN2,[6,6,6,6,6]KLKPKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKN2,[3,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[3,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELEN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLKLELKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKPKPEPKPKPKPKN0,[3,3,3,3,3]KPKN3,[7,7,7,7,7]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKLKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKN2,[6,6,6,6,6]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKN3,[3,3,3,3,3]KPKN2,[4,4,4,4,4]KLKPKLKLKLKLKLKLELKPKPKPKPKPKPEPKPKN3,[3,3,3,3,3]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLKLELKPKPKPKPKPKPEPKPKPKPEPKPKN0,[3,3,3,3,3]KPKN3,[7,7,7,7,7]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKLKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKN2,[7,7,7,7,7]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLKLELKPKPKPKPKPKPEPEP")
+    (by decide +kernel)
+
+theorem cert_2709 : CertAt [1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N2,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKN0,[4,4,4,4,4]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,1,1,1,1]KPKPKLKLKLKLKLKLELKN1,[5,5,5,5,5]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELEN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN0,[4,4,4,4,4]KN1,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKN1,[3,1,1,1,1]KPKPKLKLKLKLKLKLELKN1,[2,2,2,2,2]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELKN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLELEN1,[4,4,4,4,4]KPKPKLKLKLKLKLKLKLELKN0,[3,3,3,3,3]KN1,[7,7,7,7,7]KPKLKLKLKLKLKLKLELKPKPKPKPKPKPKPEPKN0,[4,4,4,4,4]KN1,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKPKN1,[3,3,3,3,3]KPKPKLKLKLKLKLKLELKPKPKPKPKPEPEPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPEP")
+    (by decide +kernel)
+
+theorem cert_2710 : CertAt [1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KN2,[2,2,2,2,2]KPKN3,[2,2,2,2,2]KPKPKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKPEPKPKPKPKPKPEPKPKPKPKN2,[3,3,3,3,3]KPKN3,[4,4,4,4,4]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN3,[4,4,1,1,1]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN3,[4,4,4,4,4]KN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKPKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELEN0,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKN3,[6,6,6,6,6]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[5,5,5,5,5]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[5,5,5,5,5]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELEN3,[5,5,5,5,5]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLKLELKPKN2,[3,3,3,3,3]KPKN3,[5,4,4,4,4]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN3,[5,1,1,1,1]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN3,[5,4,4,4,4]KN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKPKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELKN0,[1,1,1,1,1]KPKLKLKLKLKLKLELEN0,[1,1,1,1,1]KPKLKLKLKLKLKLKLELKN3,[0,0,0,0,0]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[0,0,0,0,0]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN3,[6,5,5,5,5]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELEN3,[6,5,5,5,5]KN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKPKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELKN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLELEN0,[5,5,5,5,5]KPKLKLKLKLKLKLKLKLELEP")
+    (by decide +kernel)
+
+theorem cert_2712 : CertAt [1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 2, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[1,1,1,1,1]KPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKPKPKPEPKN2,[3,3,3,3,3]KPKPKN3,[4,4,4,4,4]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKPKN3,[3,3,3,3,3]KN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLELKPEPKPEPKPKN2,[3,3,3,3,3]KPKPKN3,[5,4,4,4,4]KN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKPKN0,[3,3,3,3,3]KPKLKLKLKLKLKLELKN0,[2,2,2,2,2]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLKLELEN0,[4,4,4,4,4]KPKLKLKLKLKLKLKLELKPKPKN3,[3,3,3,3,3]KN0,[3,3,3,3,3]KPKLKLKLKLKLELKPKPKPKN0,[4,4,4,4,4]KPKLKLKLKLKLELKN0,[4,4,4,4,4]KPKLKLKLKLKLELEPEPEN2,[2,2,2,2,2]KPKPKPKPKPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2724 : CertAt [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KPKN0,[3,3,3,3,3]KPKN2,[3,3,3,3,3]KN3,[5,4,4,4,4]KPKLKLKLKLKLKLKLELKPKN3,[5,2,2,2,2]KLKLKPKLKLKLKLKLELKN3,[5,4,4,4,4]KLKLKPKLKLKLKLKLELKN3,[7,7,7,7,7]KLKLKPKLKLKLKLKLELKN3,[7,7,7,7,7]KLKLKPKLKLKLKLKLELKN3,[6,5,5,5,5]KLKLKPKLKLKLKLKLELKN3,[6,5,5,5,5]KLKLKPKLKLKLKLKLELEN3,[6,5,5,5,5]KLKLKPKLKLKLKLKLKLELKPKN2,[2,2,2,2,2]KPKPKPKN3,[5,4,4,4,4]KLKLKPKLKLKLKLKLELKPKPKPKPEPKN2,[2,2,2,2,2]KPKPKPKN3,[0,0,0,0,0]KLKLKPKLKLKLKLKLELKPKPKPKPEPKPKPKPEPKPKPKPKN0,[2,2,2,2,2]KPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPKPKN2,[2,2,2,2,2]KPKPKPKPKPKPKPKPEPKPKPEPKPKPEP")
+    (by decide +kernel)
+
+theorem cert_2725 : CertAt [0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0] :=
+  certAt_of_chain (gs := [])
+    (fun _ h => absurd h List.not_mem_nil)
+    (T := lit% "N1,[2,2,2,2,2]KN0,[2,2,2,2,2]KPKPKN3,[2,2,2,2,2]KPKPKPKPKPKPKPEPKN3,[6,6,6,6,6]KN2,[2,2,2,2,2]KPKPKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKLKLKLKLKLELKN2,[5,5,5,5,5]KLKPKPKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[3,2,2,2,2]KLKPKPKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELEN2,[3,3,3,3,3]KLKPKPKLKLKLKLKLELKPKPKPEPKPKPKPKN0,[2,2,2,2,2]KPKN3,[3,3,3,3,3]KPKN2,[3,3,3,3,3]KLKPKLKLKLKLKLELKPKPKPKPKPEPKPKN3,[3,3,3,3,3]KPKN2,[0,0,0,0,0]KLKPKLKLKLKLKLELKPKPKPKPKPEPKN3,[4,4,4,4,4]KN2,[3,3,3,3,3]KPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKPKPKPKPKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEPKPKPEPKPKN0,[2,2,2,2,2]KPKPKPKPKN3,[6,6,6,6,6]KN2,[3,1,1,1,1]KPKPKLKLKLKLKLELKN2,[4,4,4,4,4]KLKPKLKLKLKLKLELKN2,[3,3,3,3,3]KLKPKPKLKLKLKLELKN2,[6,6,6,6,6]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELKN2,[2,2,2,2,2]KLKPKPKLKLKLKLELKN2,[4,4,4,4,4]KLKPKPKLKLKLKLELEN2,[4,4,4,4,4]KLKPKPKLKLKLKLKLELKPKPEPEP")
     (by decide +kernel)
 
 

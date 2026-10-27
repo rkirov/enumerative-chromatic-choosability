@@ -46,22 +46,36 @@ def leafNode (sh : Sh) (nd : Node) : Option V5 :=
       (some (leafV sh.I m0 m1 m2 m3 (Nat.beq t0 t2) (Nat.beq t1 t3) (Nat.beq t0 t3)))
   | _, _, _, _ => none
 
-/-- `∑ μ · min(0, v - t)` over a list of values with multiplicities. -/
-def tb1 (t : Zp) : List (Zp × ℕ) → Zp
-  | [] => ⟨0, 0⟩
-  | p :: L => Zp.add (Zp.smul p.2 (Zp.negPart (Zp.sub p.1 t))) (tb1 t L)
+/-- The value of entry `idx` of a list of option values at the valuation `f`, or `d`. -/
+def nthV (f : V5 → Zp) (d : Zp) : List (V5 × ℕ) → ℕ → Zp
+  | [], _ => d
+  | p :: _, 0 => f p.1
+  | _ :: L, n + 1 => nthV f d L n
 
-/-- The `t`-bound at one valuation; the threshold is the value of the option `idx` (or of the
+/-- `∑ μ · max(0, t - f v)` over a list of values with multiplicities, in `Nat` operations. -/
+def tbN (f : V5 → Zp) (t : Zp) : List (V5 × ℕ) → ℕ
+  | [] => 0
+  | p :: L => Nat.add (Nat.mul p.2 (Nat.sub (Nat.add (f p.1).n t.p) (Nat.add (f p.1).p t.n)))
+      (tbN f t L)
+
+/-- `∑ μ · min(0, f v - t)` over a list of values with multiplicities. -/
+def tbF (f : V5 → Zp) (t : Zp) (L : List (V5 × ℕ)) : Zp := ⟨0, tbN f t L⟩
+
+/-- The `t`-bound at the valuation `f`; the threshold is the value of the option `idx` (or of the
 outside colour), capped by the outside value. -/
-def tcomb1 (L : List (V5 × ℕ)) (vo : V5) (k : Fin 5) (idx : ℕ) : Zp :=
-  let Lk := L.map fun p => (p.1.get k, p.2)
-  let t := Zp.min (Lk.getD idx (vo.get k, 0)).1 (vo.get k)
-  Zp.add (Zp.add (Zp.smul 3 t) (Zp.negPart t)) (tb1 t Lk)
+def tcF (f : V5 → Zp) (L : List (V5 × ℕ)) (vo : V5) (idx : ℕ) : Zp :=
+  let t := Zp.min (nthV f (f vo) L idx) (f vo)
+  Zp.add (Zp.add (Zp.smul 3 t) (Zp.negPart t)) (tbF f t L)
 
-/-- The `t`-bound at the five valuations. -/
+/-- The `t`-bound at one valuation. -/
+def tcomb1 (L : List (V5 × ℕ)) (vo : V5) (k : Fin 5) (idx : ℕ) : Zp :=
+  tcF (fun v => v.get k) L vo idx
+
+/-- The `t`-bound at the five valuations (each read off by its projection, which the kernel
+evaluates in one step). -/
 def tcombV (L : List (V5 × ℕ)) (vo : V5) (ts : List ℕ) : V5 :=
-  ⟨tcomb1 L vo 0 (ts.getD 0 0), tcomb1 L vo 1 (ts.getD 1 0), tcomb1 L vo 2 (ts.getD 2 0),
-    tcomb1 L vo 3 (ts.getD 3 0), tcomb1 L vo 4 (ts.getD 4 0)⟩
+  ⟨tcF V5.a L vo (ts.getD 0 0), tcF V5.b L vo (ts.getD 1 0), tcF V5.c L vo (ts.getD 2 0),
+    tcF V5.d L vo (ts.getD 3 0), tcF V5.e L vo (ts.getD 4 0)⟩
 
 /-- Equality of placed rows, as a check. -/
 def plBEq : Pl → Pl → Bool
@@ -192,15 +206,32 @@ theorem mem_oldOpt {nd : Node} {i j : ℕ} {o : Opt} (h : o ∈ oldOpt nd i j) :
       exact ⟨m, e, h⟩
   · simp at h
 
+theorem mem_shAtoms {sh : Sh} {p : ℕ × ℕ} (h : p ∈ shAtoms sh) :
+    0 < p.1 ∧ p.1 < 16 ∧ p.2 = sh.na p.1 := by
+  unfold shAtoms at h
+  obtain ⟨m, hm, e⟩ := List.mem_filterMap.mp h
+  obtain ⟨h1, h2⟩ := List.mem_range'_1.mp hm
+  cases hb : Nat.blt 0 (sh.na m)
+  · simp only [hb, Bool.cond_false] at e; exact absurd e (by simp)
+  · simp only [hb, Bool.cond_true, Option.some.injEq] at e
+    subst e; exact ⟨by omega, by omega, rfl⟩
+
+theorem atom_mem_shAtoms (sh : Sh) {m : ℕ} (h0 : 0 < m) (h16 : m < 16) (hpos : 0 < sh.na m) :
+    (m, sh.na m) ∈ shAtoms sh := by
+  unfold shAtoms
+  refine List.mem_filterMap.mpr ⟨m, List.mem_range'_1.mpr ⟨by omega, by omega⟩, ?_⟩
+  have : Nat.blt 0 (sh.na m) = true := by rw [Nat.blt_eq]; exact hpos
+  simp only [this, Bool.cond_true]
+
 theorem mem_freshOpts {sh : Sh} {nd : Node} {o : Opt} (h : o ∈ freshOpts sh nd) :
     ∃ m μ, 0 < m ∧ m < 16 ∧ μ = Nat.sub (sh.na m) (usedM nd m) ∧ o = Opt.fresh m μ := by
   unfold freshOpts at h
-  obtain ⟨m, hm, e⟩ := List.mem_filterMap.mp h
-  obtain ⟨h1, h2⟩ := List.mem_range'_1.mp hm
-  cases hb : Nat.blt 0 (Nat.sub (sh.na m) (usedM nd m))
-  · simp only [hb, cond_false] at e; exact absurd e (by simp)
-  · simp only [hb, cond_true, Option.some.injEq] at e
-    exact ⟨m, _, by omega, by omega, rfl, e.symm⟩
+  obtain ⟨p, hp, e⟩ := List.mem_filterMap.mp h
+  obtain ⟨h1, h2, h3⟩ := mem_shAtoms hp
+  cases hb : Nat.blt 0 (Nat.sub p.2 (usedM nd p.1))
+  · simp only [hb, Bool.cond_false] at e; exact absurd e (by simp)
+  · simp only [hb, Bool.cond_true, Option.some.injEq] at e
+    exact ⟨p.1, _, h1, h2, by rw [h3], e.symm⟩
 
 theorem mem_opts {sh : Sh} {nd : Node} {i : ℕ} {o : Opt} (h : o ∈ opts sh nd i) :
     (∃ j < 4, ∃ m, nd.get j = some (m, j) ∧ o = Opt.old m j (adjTag nd i j)) ∨
@@ -230,9 +261,10 @@ theorem fresh_mem_opts (sh : Sh) (nd : Node) (i : ℕ) {m : ℕ} (h0 : 0 < m) (h
   simp only [opts, List.mem_append]
   right
   unfold freshOpts
-  refine List.mem_filterMap.mpr ⟨m, List.mem_range'_1.mpr ⟨by omega, by omega⟩, ?_⟩
+  refine List.mem_filterMap.mpr ⟨(m, sh.na m), atom_mem_shAtoms sh h0 h16
+    (by simp only [Nat.sub_eq] at hpos; omega), ?_⟩
   have : Nat.blt 0 (Nat.sub (sh.na m) (usedM nd m)) = true := by rw [Nat.blt_eq]; exact hpos
-  simp only [this, cond_true]
+  simp only [this, Bool.cond_true]
 
 /-- The colours an option stands for. -/
 def predOf (B : Col) (nd : Node) (ρ : ℕ → ℕ) : Opt → ℕ → Bool
@@ -308,10 +340,23 @@ theorem adj_zero {B : Col} (w : Q) {nd : Node} {ρ : ℕ → ℕ} (Y : Col) {i t
 def OptVal (B : Col) (nd : Node) (i : ℕ) (o : Opt) (p : V5 × ℕ) : Prop :=
   p.2 = o.mult ∧ (o.imp = true → p.1 = V5.zero) ∧ (o.imp = false → Good B (o.child nd i) p.1)
 
-theorem tb1_val (t : Zp) : ∀ L : List (Zp × ℕ),
-    (tb1 t L).val = (L.map fun p => (p.2 : ℤ) * min 0 (p.1.val - t.val)).sum
-  | [] => rfl
-  | p :: L => by simp [tb1, tb1_val t L]
+theorem tbF_val (f : V5 → Zp) (t : Zp) : ∀ L : List (V5 × ℕ),
+    (tbF f t L).val = ((L.map fun p => (f p.1, p.2)).map
+      fun p => (p.2 : ℤ) * min 0 (p.1.val - t.val)).sum
+  | [] => by simp [tbF, tbN]
+  | p :: L => by
+    have ih := tbF_val f t L
+    simp only [tbF, Zp.val_mk, Nat.cast_zero, zero_sub] at ih ⊢
+    simp only [tbN, Nat.add_eq, Nat.mul_eq, Nat.sub_eq, List.map_cons, List.sum_cons]
+    push_cast
+    rw [neg_add, ih]
+    congr 1
+    simp only [Zp.val]
+    rcases le_total ((f p.1).n + t.p) ((f p.1).p + t.n) with h | h
+    · rw [Nat.sub_eq_zero_of_le h]; push_cast
+      rw [min_eq_left (by push_cast at h ⊢; linarith)]; ring
+    · rw [Nat.cast_sub h]; push_cast
+      rw [min_eq_right (by push_cast at h ⊢; linarith)]; ring
 
 theorem forall₂_map_snd {α β γ : Type*} {R : α → β → Prop} (F : β → γ) :
     ∀ {os : List α} {L : List β}, List.Forall₂ R os L → (List.zip os L).map (fun q => F q.2) = L.map F
@@ -360,13 +405,13 @@ theorem tnode_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} {i : ℕ}
     rw [sumP_split _ _ i hi, rowC_fill _ _ _ hi, hfree]; rfl
   -- the threshold
   set Lk := L.map fun p => (p.1.get k, p.2)
-  set tZ := Zp.min (Lk.getD (ts.getD k 0) (vo.get k, 0)).1 (vo.get k)
+  set tZ := Zp.min (nthV (fun v => v.get k) (vo.get k) L (ts.getD k 0)) (vo.get k)
   set t := tZ.val
   have ht : t ≤ (vo.get k).val := by simp only [t, tZ, Zp.val_min]; exact min_le_right _ _
   have hval : ((tcombV L vo ts).get k).val = 3 * t + min 0 t
       + (Lk.map fun p => (p.2 : ℤ) * min 0 (p.1.val - t)).sum := by
     rw [tcombV_get]
-    simp only [tcomb1, Zp.val_add, Zp.val_smul, Zp.val_negPart, tb1_val]
+    simp only [tcomb1, tcF, Zp.val_add, Zp.val_smul, Zp.val_negPart, tbF_val]
     push_cast; ring
   rw [hval, hsplit]
   -- the outside colours

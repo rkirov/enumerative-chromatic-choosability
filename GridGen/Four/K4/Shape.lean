@@ -129,6 +129,13 @@ theorem certAt_of_chain {xs : List ℕ} {gs : List (Node × V5)}
   subst hx
   exact raysOK_of_chainOK (shapeOf_atoms hB) hgs h hY
 
+theorem certAt_of_pwGo {xs : List ℕ} {ctab : ℕ → List (VN × VN)} (hct : CtabOK ctab)
+    {rows : List (List (VN × VN))} (hrows : ∀ q < 80, ctab q = rows.getD q [])
+    {certs : List PC} (h : pwGo (shOf xs) 0 rows certs = true) : CertAt xs := by
+  intro B hB hx Y _ _
+  subst hx
+  exact raysOK_of_pwGo (shapeOf_atoms hB) hct hrows h Y
+
 theorem certAt_of_pw {xs : List ℕ} {ctab : ℕ → List (VN × VN)} (hct : CtabOK ctab)
     {certs : List PC} (h : pwOK (shOf xs) ctab certs = true) : CertAt xs := by
   intro B hB hx Y _ _

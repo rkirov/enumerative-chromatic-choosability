@@ -2,6 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
+import GridGen.Four.K4.Lit
 import GridGen.Four.K4.Data.Pw00
 import GridGen.Four.K4.Data.Pw01
 import GridGen.Four.K4.Data.Pw02
@@ -9,34 +10,6 @@ import GridGen.Four.K4.Data.Pw03
 import GridGen.Four.K4.Data.Pw04
 import GridGen.Four.K4.Data.Pw05
 import GridGen.Four.K4.Data.Pw06
-import GridGen.Four.K4.Data.Pw07
-import GridGen.Four.K4.Data.Pw08
-import GridGen.Four.K4.Data.Pw09
-import GridGen.Four.K4.Data.Pw10
-import GridGen.Four.K4.Data.Pw11
-import GridGen.Four.K4.Data.Pw12
-import GridGen.Four.K4.Data.Pw13
-import GridGen.Four.K4.Data.Pw14
-import GridGen.Four.K4.Data.Pw15
-import GridGen.Four.K4.Data.Pw16
-import GridGen.Four.K4.Data.Pw17
-import GridGen.Four.K4.Data.Pw18
-import GridGen.Four.K4.Data.Pw19
-import GridGen.Four.K4.Data.Pw20
-import GridGen.Four.K4.Data.Pw21
-import GridGen.Four.K4.Data.Pw22
-import GridGen.Four.K4.Data.Pw23
-import GridGen.Four.K4.Data.Pw24
-import GridGen.Four.K4.Data.Pw25
-import GridGen.Four.K4.Data.Pw26
-import GridGen.Four.K4.Data.Pw27
-import GridGen.Four.K4.Data.Pw28
-import GridGen.Four.K4.Data.Pw29
-import GridGen.Four.K4.Data.Pw30
-import GridGen.Four.K4.Data.Pw31
-import GridGen.Four.K4.Data.Pw32
-import GridGen.Four.K4.Data.Pw33
-import GridGen.Four.K4.Data.Pw34
 import GridGen.Four.K4.Data.Ch00
 import GridGen.Four.K4.Data.Ch01
 import GridGen.Four.K4.Data.Ch02
@@ -46,41 +19,10 @@ import GridGen.Four.K4.Data.Ch05
 import GridGen.Four.K4.Data.Ch06
 import GridGen.Four.K4.Data.Ch07
 import GridGen.Four.K4.Data.Ch08
-import GridGen.Four.K4.Data.Ch09
-import GridGen.Four.K4.Data.Ch10
-import GridGen.Four.K4.Data.Ch11
-import GridGen.Four.K4.Data.Ch12
-import GridGen.Four.K4.Data.Ch13
-import GridGen.Four.K4.Data.Ch14
-import GridGen.Four.K4.Data.Ch15
-import GridGen.Four.K4.Data.Ch16
-import GridGen.Four.K4.Data.Ch17
-import GridGen.Four.K4.Data.Ch18
-import GridGen.Four.K4.Data.Ch19
-import GridGen.Four.K4.Data.Ch20
-import GridGen.Four.K4.Data.Ch21
-import GridGen.Four.K4.Data.Ch22
-import GridGen.Four.K4.Data.Ch23
-import GridGen.Four.K4.Data.Ch24
-import GridGen.Four.K4.Data.Ch25
-import GridGen.Four.K4.Data.Ch26
 import GridGen.Four.K4.Data.RevPw00
 import GridGen.Four.K4.Data.RevPw01
 import GridGen.Four.K4.Data.RevPw02
-import GridGen.Four.K4.Data.RevPw03
-import GridGen.Four.K4.Data.RevPw04
-import GridGen.Four.K4.Data.RevPw05
-import GridGen.Four.K4.Data.RevPw06
-import GridGen.Four.K4.Data.RevPw07
-import GridGen.Four.K4.Data.RevPw08
-import GridGen.Four.K4.Data.RevPw09
-import GridGen.Four.K4.Data.RevPw10
-import GridGen.Four.K4.Data.RevPw11
-import GridGen.Four.K4.Data.RevPw12
 import GridGen.Four.K4.Data.RevCh00
-import GridGen.Four.K4.Data.RevCh01
-import GridGen.Four.K4.Data.RevCh02
-import GridGen.Four.K4.Data.RevCh03
 import GridGen.Four.K4.Data.B3_00
 import GridGen.Four.K4.Data.B3_01
 import GridGen.Four.K4.Data.B3_02
@@ -93,44 +35,6 @@ import GridGen.Four.K4.Data.B3_08
 import GridGen.Four.K4.Data.B3_09
 import GridGen.Four.K4.Data.B3_10
 import GridGen.Four.K4.Data.B3_11
-import GridGen.Four.K4.Data.B3_12
-import GridGen.Four.K4.Data.B3_13
-import GridGen.Four.K4.Data.B3_14
-import GridGen.Four.K4.Data.B3_15
-import GridGen.Four.K4.Data.B3_16
-import GridGen.Four.K4.Data.B3_17
-import GridGen.Four.K4.Data.B3_18
-import GridGen.Four.K4.Data.B3_19
-import GridGen.Four.K4.Data.B3_20
-import GridGen.Four.K4.Data.B3_21
-import GridGen.Four.K4.Data.B3_22
-import GridGen.Four.K4.Data.B3_23
-import GridGen.Four.K4.Data.B3_24
-import GridGen.Four.K4.Data.B3_25
-import GridGen.Four.K4.Data.B3_26
-import GridGen.Four.K4.Data.B3_27
-import GridGen.Four.K4.Data.B3_28
-import GridGen.Four.K4.Data.B3_29
-import GridGen.Four.K4.Data.B3_30
-import GridGen.Four.K4.Data.B3_31
-import GridGen.Four.K4.Data.B3_32
-import GridGen.Four.K4.Data.B3_33
-import GridGen.Four.K4.Data.B3_34
-import GridGen.Four.K4.Data.B3_35
-import GridGen.Four.K4.Data.B3_36
-import GridGen.Four.K4.Data.B3_37
-import GridGen.Four.K4.Data.B3_38
-import GridGen.Four.K4.Data.B3_39
-import GridGen.Four.K4.Data.B3_40
-import GridGen.Four.K4.Data.B3_41
-import GridGen.Four.K4.Data.B3_42
-import GridGen.Four.K4.Data.B3_43
-import GridGen.Four.K4.Data.B3_44
-import GridGen.Four.K4.Data.B3_45
-import GridGen.Four.K4.Data.B3_46
-import GridGen.Four.K4.Data.B3_47
-import GridGen.Four.K4.Data.B3_48
-import GridGen.Four.K4.Data.B3_49
 import GridGen.Four.K4.Data.B3Rev
 
 /-!
@@ -144,228 +48,1437 @@ namespace GridGen.Four.K4
 set_option maxRecDepth 100000
 
 theorem tri_2_0_0 : TripleOK 2 0 0 :=
-  certAt_dispatch (keys := [[0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[0,0,0,0,0,0,2,2,0,0,0,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl
-    exacts [cert_4063])
+    (certAll_cons cert_4063 certAll_nil)
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_0_1 : TripleOK 2 0 1 :=
-  certAt_dispatch (keys := [[1, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[1,0,0,0,0,0,2,2,0,0,0,0,0,1,1][0,0,0,0,0,0,2,1,1,0,0,0,0,1,1][1,0,0,0,0,1,1,2,0,0,0,0,0,0,2][0,0,0,0,0,1,1,1,1,0,0,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_3924, cert_3930, cert_4048, cert_4053])
+    (certAll_cons cert_3924
+    (certAll_cons cert_3930
+    (certAll_cons cert_4048
+    (certAll_cons cert_4053 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_0_2 : TripleOK 2 0 2 :=
-  certAt_dispatch (keys := [[2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0], [1, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 0, 2, 0], [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0], [2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 1, 1], [1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1], [0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1], [2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2], [1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[2,0,0,0,0,0,2,2,0,0,0,0,0,2,0][1,0,0,0,0,0,2,1,1,0,0,0,0,2,0][0,0,0,0,0,0,2,0,2,0,0,0,0,2,0][2,0,0,0,0,1,1,2,0,0,0,0,0,1,1][1,0,0,0,0,1,1,1,1,0,0,0,0,1,1][0,0,0,0,0,1,1,0,2,0,0,0,0,1,1][2,0,0,0,0,2,0,2,0,0,0,0,0,0,2][1,0,0,0,0,2,0,1,1,0,0,0,0,0,2][0,0,0,0,0,2,0,0,2,0,0,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_3040, cert_3059, cert_3075, cert_3785, cert_3801, cert_3811, cert_3950, cert_3962, cert_3967])
+    (certAll_cons cert_3040
+    (certAll_cons cert_3059
+    (certAll_cons cert_3075
+    (certAll_cons cert_3785
+    (certAll_cons cert_3801
+    (certAll_cons cert_3811
+    (certAll_cons cert_3950
+    (certAll_cons cert_3962
+    (certAll_cons cert_3967 certAll_nil)))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_0_3 : TripleOK 2 0 3 :=
-  certAt_dispatch (keys := [[3, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 2, 0], [2, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0], [1, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 2, 0], [3, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 1, 1], [2, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1]])
+  certAt_dispatch (keys := natss% "[3,0,0,0,0,1,1,2,0,0,0,0,0,2,0][2,0,0,0,0,1,1,1,1,0,0,0,0,2,0][1,0,0,0,0,1,1,0,2,0,0,0,0,2,0][3,0,0,0,0,2,0,2,0,0,0,0,0,1,1][2,0,0,0,0,2,0,1,1,0,0,0,0,1,1][1,0,0,0,0,2,0,0,2,0,0,0,0,1,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_2283, cert_2322, cert_2349, cert_3250, cert_3279, cert_3294])
+    (certAll_cons cert_2283
+    (certAll_cons cert_2322
+    (certAll_cons cert_2349
+    (certAll_cons cert_3250
+    (certAll_cons cert_3279
+    (certAll_cons cert_3294 certAll_nil))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_0_4 : TripleOK 2 0 4 :=
-  certAt_dispatch (keys := [[4, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0], [3, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0], [2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0]])
+  certAt_dispatch (keys := natss% "[4,0,0,0,0,2,0,2,0,0,0,0,0,2,0][3,0,0,0,0,2,0,1,1,0,0,0,0,2,0][2,0,0,0,0,2,0,0,2,0,0,0,0,2,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl
-    exacts [cert_75, cert_137, cert_175])
+    (certAll_cons cert_75
+    (certAll_cons cert_137
+    (certAll_cons cert_175 certAll_nil)))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_1_0 : TripleOK 2 1 0 :=
-  certAt_dispatch (keys := [[0, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0, 1, 0, 0, 1], [0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1, 0, 0, 1], [0, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2], [0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[0,0,1,0,0,0,2,2,0,0,0,1,0,0,1][0,0,0,0,0,0,2,1,0,0,1,1,0,0,1][0,0,1,1,0,0,1,2,0,0,0,0,0,0,2][0,0,0,1,0,0,1,1,0,0,1,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl
-    exacts [cert_3936, cert_3938, cert_4059, cert_4061])
+    (certAll_cons cert_3936
+    (certAll_cons cert_3938
+    (certAll_cons cert_4059
+    (certAll_cons cert_4061 certAll_nil))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_1_1 : TripleOK 2 1 1 :=
-  certAt_dispatch (keys := [[1, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 0], [0, 0, 1, 0, 0, 0, 2, 1, 1, 0, 0, 1, 0, 1, 0], [0, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1, 0, 1, 0], [0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 1, 1, 0, 1, 0], [0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1], [1, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1], [0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1], [0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1], [0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1], [0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1], [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1], [1, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1, 0, 0, 1], [1, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0, 1, 0, 0, 1], [0, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 1, 0, 0, 1], [0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 1, 0, 0, 1], [0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 0, 1], [0, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 1, 0, 1], [1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2], [0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 2], [0, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2], [1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 2], [0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 2], [0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 2], [1, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2], [1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 2], [0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2], [0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 2], [0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[1,0,1,0,0,0,2,2,0,0,0,1,0,1,0][0,0,1,0,0,0,2,1,1,0,0,1,0,1,0][0,0,1,0,0,0,2,2,0,0,0,0,1,1,0][1,0,0,0,0,0,2,1,0,0,1,1,0,1,0][0,0,0,0,0,0,2,0,1,0,1,1,0,1,0][0,0,0,0,0,0,2,1,0,0,1,0,1,1,0][1,0,1,0,0,1,1,2,0,0,0,1,0,0,1][1,0,1,1,0,0,1,2,0,0,0,0,0,1,1][0,0,1,0,0,1,1,1,1,0,0,1,0,0,1][0,0,1,1,0,0,1,1,1,0,0,0,0,1,1][0,0,1,0,1,0,1,2,0,0,0,0,0,1,1][0,0,1,0,0,1,1,2,0,0,0,0,1,0,1][1,0,0,0,0,1,1,1,0,0,1,1,0,0,1][1,0,0,1,0,0,1,1,0,0,1,0,0,1,1][0,0,0,0,0,1,1,0,1,0,1,1,0,0,1][0,0,0,1,0,0,1,0,1,0,1,0,0,1,1][0,0,0,0,1,0,1,1,0,0,1,0,0,1,1][0,0,0,0,0,1,1,1,0,0,1,0,1,0,1][1,1,0,0,0,0,2,2,0,0,0,1,0,0,1][1,0,0,0,0,0,2,1,0,1,0,1,0,0,1][0,1,0,0,0,0,2,1,1,0,0,1,0,0,1][0,0,0,0,0,0,2,0,1,1,0,1,0,0,1][0,1,0,0,0,0,2,2,0,0,0,0,1,0,1][0,0,0,0,0,0,2,1,0,1,0,0,1,0,1][1,0,1,1,0,1,0,2,0,0,0,0,0,0,2][0,0,1,1,0,1,0,1,1,0,0,0,0,0,2][0,0,1,0,1,1,0,2,0,0,0,0,0,0,2][1,0,0,1,0,1,0,1,0,0,1,0,0,0,2][0,0,0,1,0,1,0,0,1,0,1,0,0,0,2][0,0,0,0,1,1,0,1,0,0,1,0,0,0,2][1,1,0,1,0,0,1,2,0,0,0,0,0,0,2][1,0,0,1,0,0,1,1,0,1,0,0,0,0,2][0,1,0,1,0,0,1,1,1,0,0,0,0,0,2][0,0,0,1,0,0,1,0,1,1,0,0,0,0,2][0,1,0,0,1,0,1,2,0,0,0,0,0,0,2][0,0,0,0,1,0,1,1,0,1,0,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_3133, cert_3143, cert_3155, cert_3168, cert_3177, cert_3189, cert_3861, cert_3862, cert_3870, cert_3871, cert_3878, cert_3883, cert_3894, cert_3895, cert_3901, cert_3902, cert_3908, cert_3912, cert_3920, cert_3922, cert_3926, cert_3928, cert_3933, cert_3934, cert_4002, cert_4009, cert_4016, cert_4029, cert_4033, cert_4037, cert_4044, cert_4046, cert_4050, cert_4052, cert_4055, cert_4056])
+    (certAll_cons cert_3133
+    (certAll_cons cert_3143
+    (certAll_cons cert_3155
+    (certAll_cons cert_3168
+    (certAll_cons cert_3177
+    (certAll_cons cert_3189
+    (certAll_cons cert_3861
+    (certAll_cons cert_3862
+    (certAll_cons cert_3870
+    (certAll_cons cert_3871
+    (certAll_cons cert_3878
+    (certAll_cons cert_3883
+    (certAll_cons cert_3894
+    (certAll_cons cert_3895
+    (certAll_cons cert_3901
+    (certAll_cons cert_3902
+    (certAll_cons cert_3908
+    (certAll_cons cert_3912
+    (certAll_cons cert_3920
+    (certAll_cons cert_3922
+    (certAll_cons cert_3926
+    (certAll_cons cert_3928
+    (certAll_cons cert_3933
+    (certAll_cons cert_3934
+    (certAll_cons cert_4002
+    (certAll_cons cert_4009
+    (certAll_cons cert_4016
+    (certAll_cons cert_4029
+    (certAll_cons cert_4033
+    (certAll_cons cert_4037
+    (certAll_cons cert_4044
+    (certAll_cons cert_4046
+    (certAll_cons cert_4050
+    (certAll_cons cert_4052
+    (certAll_cons cert_4055
+    (certAll_cons cert_4056 certAll_nil))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_1_2 : TripleOK 2 1 2 :=
-  certAt_dispatch (keys := [[2, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0], [2, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0], [1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0], [1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0], [0, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0], [0, 0, 1, 1, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0], [1, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0], [0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0], [1, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0], [0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0], [2, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0], [2, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 2, 0], [1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0], [1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0], [1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 2, 0], [0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0], [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0], [0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0], [2, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 0], [2, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0], [1, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 1, 0, 1, 0], [1, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 1, 0, 1, 0], [0, 1, 0, 0, 0, 0, 2, 0, 2, 0, 0, 1, 0, 1, 0], [1, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0, 0, 1, 1, 0], [0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 1, 1, 0], [2, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 0, 1], [2, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1], [1, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 1, 0, 0, 1], [0, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1], [1, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0, 0, 1, 0, 1], [0, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0, 1, 0, 1], [2, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1, 1, 0, 0, 1], [2, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1], [1, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 1, 0, 0, 1], [1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1], [0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1], [1, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1, 0, 1, 0, 1], [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1], [2, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1], [2, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1], [2, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1], [2, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1], [1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1], [1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1], [0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0, 1, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1, 0, 2, 0, 0, 0, 0, 1, 1], [1, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1], [1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1], [0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1], [0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1], [1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1], [0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1], [0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1], [2, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2], [2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 2], [1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 2], [1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2], [0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 2], [1, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2], [1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 2], [0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 2], [0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[2,0,1,0,0,1,1,2,0,0,0,1,0,1,0][2,0,1,1,0,0,1,2,0,0,0,0,0,2,0][1,0,1,0,0,1,1,1,1,0,0,1,0,1,0][1,0,1,1,0,0,1,1,1,0,0,0,0,2,0][0,0,1,0,0,1,1,0,2,0,0,1,0,1,0][0,0,1,1,0,0,1,0,2,0,0,0,0,2,0][1,0,1,0,1,0,1,2,0,0,0,0,0,2,0][0,0,1,0,1,0,1,1,1,0,0,0,0,2,0][1,0,1,0,0,1,1,2,0,0,0,0,1,1,0][0,0,1,0,0,1,1,1,1,0,0,0,1,1,0][2,0,0,0,0,1,1,1,0,0,1,1,0,1,0][2,0,0,1,0,0,1,1,0,0,1,0,0,2,0][1,0,0,0,0,1,1,0,1,0,1,1,0,1,0][1,0,0,1,0,0,1,0,1,0,1,0,0,2,0][1,0,0,0,1,0,1,1,0,0,1,0,0,2,0][0,0,0,0,1,0,1,0,1,0,1,0,0,2,0][1,0,0,0,0,1,1,1,0,0,1,0,1,1,0][0,0,0,0,0,1,1,0,1,0,1,0,1,1,0][2,1,0,0,0,0,2,2,0,0,0,1,0,1,0][2,0,0,0,0,0,2,1,0,1,0,1,0,1,0][1,1,0,0,0,0,2,1,1,0,0,1,0,1,0][1,0,0,0,0,0,2,0,1,1,0,1,0,1,0][0,1,0,0,0,0,2,0,2,0,0,1,0,1,0][1,1,0,0,0,0,2,2,0,0,0,0,1,1,0][1,0,0,0,0,0,2,1,0,1,0,0,1,1,0][0,1,0,0,0,0,2,1,1,0,0,0,1,1,0][0,0,0,0,0,0,2,0,1,1,0,0,1,1,0][2,0,1,0,0,2,0,2,0,0,0,1,0,0,1][2,0,1,1,0,1,0,2,0,0,0,0,0,1,1][1,0,1,0,0,2,0,1,1,0,0,1,0,0,1][1,0,1,1,0,1,0,1,1,0,0,0,0,1,1][0,0,1,0,0,2,0,0,2,0,0,1,0,0,1][0,0,1,1,0,1,0,0,2,0,0,0,0,1,1][1,0,1,0,1,1,0,2,0,0,0,0,0,1,1][0,0,1,0,1,1,0,1,1,0,0,0,0,1,1][1,0,1,0,0,2,0,2,0,0,0,0,1,0,1][0,0,1,0,0,2,0,1,1,0,0,0,1,0,1][2,0,0,0,0,2,0,1,0,0,1,1,0,0,1][2,0,0,1,0,1,0,1,0,0,1,0,0,1,1][1,0,0,0,0,2,0,0,1,0,1,1,0,0,1][1,0,0,1,0,1,0,0,1,0,1,0,0,1,1][1,0,0,0,1,1,0,1,0,0,1,0,0,1,1][0,0,0,0,1,1,0,0,1,0,1,0,0,1,1][1,0,0,0,0,2,0,1,0,0,1,0,1,0,1][0,0,0,0,0,2,0,0,1,0,1,0,1,0,1][2,1,0,0,0,1,1,2,0,0,0,1,0,0,1][2,0,0,0,0,1,1,1,0,1,0,1,0,0,1][2,1,0,1,0,0,1,2,0,0,0,0,0,1,1][2,0,0,1,0,0,1,1,0,1,0,0,0,1,1][1,1,0,0,0,1,1,1,1,0,0,1,0,0,1][1,0,0,0,0,1,1,0,1,1,0,1,0,0,1][1,1,0,1,0,0,1,1,1,0,0,0,0,1,1][1,0,0,1,0,0,1,0,1,1,0,0,0,1,1][0,1,0,0,0,1,1,0,2,0,0,1,0,0,1][0,1,0,1,0,0,1,0,2,0,0,0,0,1,1][1,1,0,0,1,0,1,2,0,0,0,0,0,1,1][1,0,0,0,1,0,1,1,0,1,0,0,0,1,1][0,1,0,0,1,0,1,1,1,0,0,0,0,1,1][0,0,0,0,1,0,1,0,1,1,0,0,0,1,1][1,1,0,0,0,1,1,2,0,0,0,0,1,0,1][1,0,0,0,0,1,1,1,0,1,0,0,1,0,1][0,1,0,0,0,1,1,1,1,0,0,0,1,0,1][0,0,0,0,0,1,1,0,1,1,0,0,1,0,1][2,1,0,1,0,1,0,2,0,0,0,0,0,0,2][2,0,0,1,0,1,0,1,0,1,0,0,0,0,2][1,1,0,1,0,1,0,1,1,0,0,0,0,0,2][1,0,0,1,0,1,0,0,1,1,0,0,0,0,2][0,1,0,1,0,1,0,0,2,0,0,0,0,0,2][1,1,0,0,1,1,0,2,0,0,0,0,0,0,2][1,0,0,0,1,1,0,1,0,1,0,0,0,0,2][0,1,0,0,1,1,0,1,1,0,0,0,0,0,2][0,0,0,0,1,1,0,0,1,1,0,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_2597, cert_2598, cert_2623, cert_2624, cert_2643, cert_2644, cert_2664, cert_2683, cert_2711, cert_2727, cert_2822, cert_2823, cert_2842, cert_2843, cert_2872, cert_2888, cert_2913, cert_2923, cert_3036, cert_3038, cert_3055, cert_3057, cert_3072, cert_3107, cert_3108, cert_3116, cert_3117, cert_3459, cert_3465, cert_3481, cert_3485, cert_3495, cert_3497, cert_3515, cert_3531, cert_3553, cert_3565, cert_3641, cert_3645, cert_3655, cert_3657, cert_3675, cert_3685, cert_3701, cert_3706, cert_3777, cert_3779, cert_3781, cert_3783, cert_3794, cert_3796, cert_3798, cert_3800, cert_3807, cert_3810, cert_3820, cert_3821, cert_3829, cert_3830, cert_3839, cert_3840, cert_3846, cert_3847, cert_3946, cert_3948, cert_3959, cert_3961, cert_3966, cert_3973, cert_3974, cert_3980, cert_3981])
+    (certAll_cons cert_2597
+    (certAll_cons cert_2598
+    (certAll_cons cert_2623
+    (certAll_cons cert_2624
+    (certAll_cons cert_2643
+    (certAll_cons cert_2644
+    (certAll_cons cert_2664
+    (certAll_cons cert_2683
+    (certAll_cons cert_2711
+    (certAll_cons cert_2727
+    (certAll_cons cert_2822
+    (certAll_cons cert_2823
+    (certAll_cons cert_2842
+    (certAll_cons cert_2843
+    (certAll_cons cert_2872
+    (certAll_cons cert_2888
+    (certAll_cons cert_2913
+    (certAll_cons cert_2923
+    (certAll_cons cert_3036
+    (certAll_cons cert_3038
+    (certAll_cons cert_3055
+    (certAll_cons cert_3057
+    (certAll_cons cert_3072
+    (certAll_cons cert_3107
+    (certAll_cons cert_3108
+    (certAll_cons cert_3116
+    (certAll_cons cert_3117
+    (certAll_cons cert_3459
+    (certAll_cons cert_3465
+    (certAll_cons cert_3481
+    (certAll_cons cert_3485
+    (certAll_cons cert_3495
+    (certAll_cons cert_3497
+    (certAll_cons cert_3515
+    (certAll_cons cert_3531
+    (certAll_cons cert_3553
+    (certAll_cons cert_3565
+    (certAll_cons cert_3641
+    (certAll_cons cert_3645
+    (certAll_cons cert_3655
+    (certAll_cons cert_3657
+    (certAll_cons cert_3675
+    (certAll_cons cert_3685
+    (certAll_cons cert_3701
+    (certAll_cons cert_3706
+    (certAll_cons cert_3777
+    (certAll_cons cert_3779
+    (certAll_cons cert_3781
+    (certAll_cons cert_3783
+    (certAll_cons cert_3794
+    (certAll_cons cert_3796
+    (certAll_cons cert_3798
+    (certAll_cons cert_3800
+    (certAll_cons cert_3807
+    (certAll_cons cert_3810
+    (certAll_cons cert_3820
+    (certAll_cons cert_3821
+    (certAll_cons cert_3829
+    (certAll_cons cert_3830
+    (certAll_cons cert_3839
+    (certAll_cons cert_3840
+    (certAll_cons cert_3846
+    (certAll_cons cert_3847
+    (certAll_cons cert_3946
+    (certAll_cons cert_3948
+    (certAll_cons cert_3959
+    (certAll_cons cert_3961
+    (certAll_cons cert_3966
+    (certAll_cons cert_3973
+    (certAll_cons cert_3974
+    (certAll_cons cert_3980
+    (certAll_cons cert_3981 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_1_3 : TripleOK 2 1 3 :=
-  certAt_dispatch (keys := [[3, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0], [3, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0], [2, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0], [2, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0], [1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0], [1, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0], [2, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0], [1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0], [0, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0], [2, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0], [0, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0], [3, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1, 1, 0, 1, 0], [3, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 2, 0], [2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 1, 0, 1, 0], [2, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0], [2, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 2, 0], [1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0], [2, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 1, 0], [3, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0], [3, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0], [3, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0], [3, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0], [2, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0], [2, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0], [2, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0], [2, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0], [1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0], [1, 1, 0, 1, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0], [2, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0], [2, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0], [1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0], [1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0], [0, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0], [2, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0], [2, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0], [1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0], [1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0], [3, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 0, 1], [3, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1], [3, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1], [3, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1], [2, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1], [2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 1, 0, 0, 1], [2, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1], [2, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1], [1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 1, 0, 0, 1], [1, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1], [2, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1], [2, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1], [1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1], [0, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1], [2, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 1, 0, 1], [2, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 1, 0, 1], [1, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 1, 0, 1], [1, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 1], [0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 1]])
+  certAt_dispatch (keys := natss% "[3,0,1,0,0,2,0,2,0,0,0,1,0,1,0][3,0,1,1,0,1,0,2,0,0,0,0,0,2,0][2,0,1,0,0,2,0,1,1,0,0,1,0,1,0][2,0,1,1,0,1,0,1,1,0,0,0,0,2,0][1,0,1,0,0,2,0,0,2,0,0,1,0,1,0][1,0,1,1,0,1,0,0,2,0,0,0,0,2,0][2,0,1,0,1,1,0,2,0,0,0,0,0,2,0][1,0,1,0,1,1,0,1,1,0,0,0,0,2,0][0,0,1,0,1,1,0,0,2,0,0,0,0,2,0][2,0,1,0,0,2,0,2,0,0,0,0,1,1,0][1,0,1,0,0,2,0,1,1,0,0,0,1,1,0][0,0,1,0,0,2,0,0,2,0,0,0,1,1,0][3,0,0,0,0,2,0,1,0,0,1,1,0,1,0][3,0,0,1,0,1,0,1,0,0,1,0,0,2,0][2,0,0,0,0,2,0,0,1,0,1,1,0,1,0][2,0,0,1,0,1,0,0,1,0,1,0,0,2,0][2,0,0,0,1,1,0,1,0,0,1,0,0,2,0][1,0,0,0,1,1,0,0,1,0,1,0,0,2,0][2,0,0,0,0,2,0,1,0,0,1,0,1,1,0][1,0,0,0,0,2,0,0,1,0,1,0,1,1,0][3,1,0,0,0,1,1,2,0,0,0,1,0,1,0][3,0,0,0,0,1,1,1,0,1,0,1,0,1,0][3,1,0,1,0,0,1,2,0,0,0,0,0,2,0][3,0,0,1,0,0,1,1,0,1,0,0,0,2,0][2,1,0,0,0,1,1,1,1,0,0,1,0,1,0][2,0,0,0,0,1,1,0,1,1,0,1,0,1,0][2,1,0,1,0,0,1,1,1,0,0,0,0,2,0][2,0,0,1,0,0,1,0,1,1,0,0,0,2,0][1,1,0,0,0,1,1,0,2,0,0,1,0,1,0][1,1,0,1,0,0,1,0,2,0,0,0,0,2,0][2,1,0,0,1,0,1,2,0,0,0,0,0,2,0][2,0,0,0,1,0,1,1,0,1,0,0,0,2,0][1,1,0,0,1,0,1,1,1,0,0,0,0,2,0][1,0,0,0,1,0,1,0,1,1,0,0,0,2,0][0,1,0,0,1,0,1,0,2,0,0,0,0,2,0][2,1,0,0,0,1,1,2,0,0,0,0,1,1,0][2,0,0,0,0,1,1,1,0,1,0,0,1,1,0][1,1,0,0,0,1,1,1,1,0,0,0,1,1,0][1,0,0,0,0,1,1,0,1,1,0,0,1,1,0][0,1,0,0,0,1,1,0,2,0,0,0,1,1,0][3,1,0,0,0,2,0,2,0,0,0,1,0,0,1][3,0,0,0,0,2,0,1,0,1,0,1,0,0,1][3,1,0,1,0,1,0,2,0,0,0,0,0,1,1][3,0,0,1,0,1,0,1,0,1,0,0,0,1,1][2,1,0,0,0,2,0,1,1,0,0,1,0,0,1][2,0,0,0,0,2,0,0,1,1,0,1,0,0,1][2,1,0,1,0,1,0,1,1,0,0,0,0,1,1][2,0,0,1,0,1,0,0,1,1,0,0,0,1,1][1,1,0,0,0,2,0,0,2,0,0,1,0,0,1][1,1,0,1,0,1,0,0,2,0,0,0,0,1,1][2,1,0,0,1,1,0,2,0,0,0,0,0,1,1][2,0,0,0,1,1,0,1,0,1,0,0,0,1,1][1,1,0,0,1,1,0,1,1,0,0,0,0,1,1][1,0,0,0,1,1,0,0,1,1,0,0,0,1,1][0,1,0,0,1,1,0,0,2,0,0,0,0,1,1][2,1,0,0,0,2,0,2,0,0,0,0,1,0,1][2,0,0,0,0,2,0,1,0,1,0,0,1,0,1][1,1,0,0,0,2,0,1,1,0,0,0,1,0,1][1,0,0,0,0,2,0,0,1,1,0,0,1,0,1][0,1,0,0,0,2,0,0,2,0,0,0,1,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_759, cert_765, cert_808, cert_812, cert_841, cert_843, cert_902, cert_941, cert_968, cert_1071, cert_1100, cert_1115, cert_1561, cert_1565, cert_1594, cert_1596, cert_1652, cert_1679, cert_1774, cert_1789, cert_2275, cert_2277, cert_2279, cert_2281, cert_2315, cert_2317, cert_2319, cert_2321, cert_2345, cert_2348, cert_2390, cert_2391, cert_2416, cert_2417, cert_2436, cert_2490, cert_2491, cert_2510, cert_2511, cert_2522, cert_3236, cert_3238, cert_3246, cert_3248, cert_3269, cert_3271, cert_3276, cert_3278, cert_3289, cert_3293, cert_3321, cert_3322, cert_3341, cert_3342, cert_3353, cert_3392, cert_3393, cert_3406, cert_3407, cert_3412])
+    (certAll_cons cert_759
+    (certAll_cons cert_765
+    (certAll_cons cert_808
+    (certAll_cons cert_812
+    (certAll_cons cert_841
+    (certAll_cons cert_843
+    (certAll_cons cert_902
+    (certAll_cons cert_941
+    (certAll_cons cert_968
+    (certAll_cons cert_1071
+    (certAll_cons cert_1100
+    (certAll_cons cert_1115
+    (certAll_cons cert_1561
+    (certAll_cons cert_1565
+    (certAll_cons cert_1594
+    (certAll_cons cert_1596
+    (certAll_cons cert_1652
+    (certAll_cons cert_1679
+    (certAll_cons cert_1774
+    (certAll_cons cert_1789
+    (certAll_cons cert_2275
+    (certAll_cons cert_2277
+    (certAll_cons cert_2279
+    (certAll_cons cert_2281
+    (certAll_cons cert_2315
+    (certAll_cons cert_2317
+    (certAll_cons cert_2319
+    (certAll_cons cert_2321
+    (certAll_cons cert_2345
+    (certAll_cons cert_2348
+    (certAll_cons cert_2390
+    (certAll_cons cert_2391
+    (certAll_cons cert_2416
+    (certAll_cons cert_2417
+    (certAll_cons cert_2436
+    (certAll_cons cert_2490
+    (certAll_cons cert_2491
+    (certAll_cons cert_2510
+    (certAll_cons cert_2511
+    (certAll_cons cert_2522
+    (certAll_cons cert_3236
+    (certAll_cons cert_3238
+    (certAll_cons cert_3246
+    (certAll_cons cert_3248
+    (certAll_cons cert_3269
+    (certAll_cons cert_3271
+    (certAll_cons cert_3276
+    (certAll_cons cert_3278
+    (certAll_cons cert_3289
+    (certAll_cons cert_3293
+    (certAll_cons cert_3321
+    (certAll_cons cert_3322
+    (certAll_cons cert_3341
+    (certAll_cons cert_3342
+    (certAll_cons cert_3353
+    (certAll_cons cert_3392
+    (certAll_cons cert_3393
+    (certAll_cons cert_3406
+    (certAll_cons cert_3407
+    (certAll_cons cert_3412 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_1_4 : TripleOK 2 1 4 :=
-  certAt_dispatch (keys := [[4, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0], [4, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0, 1, 0, 1, 0], [4, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0], [4, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 2, 0], [3, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0], [3, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0], [3, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0], [3, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0], [2, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0], [2, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0], [3, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0], [3, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0, 2, 0], [2, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0], [2, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0], [1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0], [3, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0], [3, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 1, 1, 0], [2, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0], [2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0], [1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0]])
+  certAt_dispatch (keys := natss% "[4,1,0,0,0,2,0,2,0,0,0,1,0,1,0][4,0,0,0,0,2,0,1,0,1,0,1,0,1,0][4,1,0,1,0,1,0,2,0,0,0,0,0,2,0][4,0,0,1,0,1,0,1,0,1,0,0,0,2,0][3,1,0,0,0,2,0,1,1,0,0,1,0,1,0][3,0,0,0,0,2,0,0,1,1,0,1,0,1,0][3,1,0,1,0,1,0,1,1,0,0,0,0,2,0][3,0,0,1,0,1,0,0,1,1,0,0,0,2,0][2,1,0,0,0,2,0,0,2,0,0,1,0,1,0][2,1,0,1,0,1,0,0,2,0,0,0,0,2,0][3,1,0,0,1,1,0,2,0,0,0,0,0,2,0][3,0,0,0,1,1,0,1,0,1,0,0,0,2,0][2,1,0,0,1,1,0,1,1,0,0,0,0,2,0][2,0,0,0,1,1,0,0,1,1,0,0,0,2,0][1,1,0,0,1,1,0,0,2,0,0,0,0,2,0][3,1,0,0,0,2,0,2,0,0,0,0,1,1,0][3,0,0,0,0,2,0,1,0,1,0,0,1,1,0][2,1,0,0,0,2,0,1,1,0,0,0,1,1,0][2,0,0,0,0,2,0,0,1,1,0,0,1,1,0][1,1,0,0,0,2,0,0,2,0,0,0,1,1,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_61, cert_63, cert_71, cert_73, cert_127, cert_129, cert_134, cert_136, cert_170, cert_174, cert_253, cert_254, cert_300, cert_301, cert_331, cert_505, cert_506, cert_538, cert_539, cert_555])
+    (certAll_cons cert_61
+    (certAll_cons cert_63
+    (certAll_cons cert_71
+    (certAll_cons cert_73
+    (certAll_cons cert_127
+    (certAll_cons cert_129
+    (certAll_cons cert_134
+    (certAll_cons cert_136
+    (certAll_cons cert_170
+    (certAll_cons cert_174
+    (certAll_cons cert_253
+    (certAll_cons cert_254
+    (certAll_cons cert_300
+    (certAll_cons cert_301
+    (certAll_cons cert_331
+    (certAll_cons cert_505
+    (certAll_cons cert_506
+    (certAll_cons cert_538
+    (certAll_cons cert_539
+    (certAll_cons cert_555 certAll_nil))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_2_0 : TripleOK 2 2 0 :=
-  certAt_dispatch (keys := [[0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0], [0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0], [0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0], [0, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1], [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0, 1], [0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2], [0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2], [0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[0,0,2,0,0,0,2,2,0,0,0,2,0,0,0][0,0,1,0,0,0,2,1,0,0,1,2,0,0,0][0,0,0,0,0,0,2,0,0,0,2,2,0,0,0][0,0,2,1,0,0,1,2,0,0,0,1,0,0,1][0,0,1,1,0,0,1,1,0,0,1,1,0,0,1][0,0,0,1,0,0,1,0,0,0,2,1,0,0,1][0,0,2,2,0,0,0,2,0,0,0,0,0,0,2][0,0,1,2,0,0,0,1,0,0,1,0,0,0,2][0,0,0,2,0,0,0,0,0,0,2,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_3158, cert_3192, cert_3195, cert_3886, cert_3915, cert_3918, cert_4023, cert_4041, cert_4043])
+    (certAll_cons cert_3158
+    (certAll_cons cert_3192
+    (certAll_cons cert_3195
+    (certAll_cons cert_3886
+    (certAll_cons cert_3915
+    (certAll_cons cert_3918
+    (certAll_cons cert_4023
+    (certAll_cons cert_4041
+    (certAll_cons cert_4043 certAll_nil)))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_2_1 : TripleOK 2 2 1 :=
-  certAt_dispatch (keys := [[1, 0, 2, 0, 0, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0], [1, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0], [0, 0, 2, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0], [0, 0, 2, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0], [0, 0, 2, 0, 1, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0], [0, 0, 2, 0, 0, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0], [0, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0], [1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0], [0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 2, 0, 0, 0], [0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0], [0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0], [0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 2, 0, 0, 0], [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 1, 0, 1, 0], [0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 0], [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 1, 1, 0, 0], [0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 1, 1, 0], [1, 1, 1, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0], [1, 0, 1, 0, 0, 0, 2, 1, 0, 1, 0, 2, 0, 0, 0], [0, 1, 1, 0, 0, 0, 2, 1, 1, 0, 0, 2, 0, 0, 0], [0, 0, 1, 0, 0, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0], [0, 1, 1, 0, 0, 0, 2, 2, 0, 0, 0, 1, 1, 0, 0], [0, 0, 1, 0, 0, 0, 2, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 0, 0, 0, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0], [1, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 2, 0, 0, 0], [0, 1, 0, 0, 0, 0, 2, 0, 1, 0, 1, 2, 0, 0, 0], [0, 1, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 1, 1, 0, 0], [1, 0, 2, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1], [1, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 2, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 0, 2, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1], [0, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1], [0, 0, 2, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 2, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1], [1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1], [0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1], [0, 0, 1, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1], [0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1], [0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1], [0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1], [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2, 1, 0, 0, 1], [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1], [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 1, 0, 0, 1], [0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1], [0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2, 0, 1, 0, 1], [1, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1], [1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1], [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1], [0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1], [0, 1, 1, 0, 1, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1], [0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1], [0, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 1, 0, 1], [0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1], [1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1], [0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1], [0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1], [0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1], [0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1], [1, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2], [1, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2], [0, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2], [0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2], [0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2], [0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2], [1, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2], [1, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2], [0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2], [0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2], [0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[1,0,2,0,0,1,1,2,0,0,0,2,0,0,0][1,0,2,1,0,0,1,2,0,0,0,1,0,1,0][0,0,2,0,0,1,1,1,1,0,0,2,0,0,0][0,0,2,1,0,0,1,1,1,0,0,1,0,1,0][0,0,2,0,1,0,1,2,0,0,0,1,0,1,0][0,0,2,0,0,1,1,2,0,0,0,1,1,0,0][0,0,2,1,0,0,1,2,0,0,0,0,1,1,0][1,0,1,0,0,1,1,1,0,0,1,2,0,0,0][1,0,1,1,0,0,1,1,0,0,1,1,0,1,0][0,0,1,0,0,1,1,0,1,0,1,2,0,0,0][0,0,1,1,0,0,1,0,1,0,1,1,0,1,0][0,0,1,0,1,0,1,1,0,0,1,1,0,1,0][0,0,1,0,0,1,1,1,0,0,1,1,1,0,0][0,0,1,1,0,0,1,1,0,0,1,0,1,1,0][1,0,0,0,0,1,1,0,0,0,2,2,0,0,0][1,0,0,1,0,0,1,0,0,0,2,1,0,1,0][0,0,0,0,1,0,1,0,0,0,2,1,0,1,0][0,0,0,0,0,1,1,0,0,0,2,1,1,0,0][0,0,0,1,0,0,1,0,0,0,2,0,1,1,0][1,1,1,0,0,0,2,2,0,0,0,2,0,0,0][1,0,1,0,0,0,2,1,0,1,0,2,0,0,0][0,1,1,0,0,0,2,1,1,0,0,2,0,0,0][0,0,1,0,0,0,2,0,1,1,0,2,0,0,0][0,1,1,0,0,0,2,2,0,0,0,1,1,0,0][0,0,1,0,0,0,2,1,0,1,0,1,1,0,0][1,1,0,0,0,0,2,1,0,0,1,2,0,0,0][1,0,0,0,0,0,2,0,0,1,1,2,0,0,0][0,1,0,0,0,0,2,0,1,0,1,2,0,0,0][0,1,0,0,0,0,2,1,0,0,1,1,1,0,0][0,0,0,0,0,0,2,0,0,1,1,1,1,0,0][1,0,2,1,0,1,0,2,0,0,0,1,0,0,1][1,0,2,2,0,0,0,2,0,0,0,0,0,1,1][0,0,2,1,0,1,0,1,1,0,0,1,0,0,1][0,0,2,2,0,0,0,1,1,0,0,0,0,1,1][0,0,2,0,1,1,0,2,0,0,0,1,0,0,1][0,0,2,1,1,0,0,2,0,0,0,0,0,1,1][0,0,2,1,0,1,0,2,0,0,0,0,1,0,1][1,0,1,1,0,1,0,1,0,0,1,1,0,0,1][1,0,1,2,0,0,0,1,0,0,1,0,0,1,1][0,0,1,1,0,1,0,0,1,0,1,1,0,0,1][0,0,1,2,0,0,0,0,1,0,1,0,0,1,1][0,0,1,0,1,1,0,1,0,0,1,1,0,0,1][0,0,1,1,1,0,0,1,0,0,1,0,0,1,1][0,0,1,1,0,1,0,1,0,0,1,0,1,0,1][1,0,0,1,0,1,0,0,0,0,2,1,0,0,1][1,0,0,2,0,0,0,0,0,0,2,0,0,1,1][0,0,0,0,1,1,0,0,0,0,2,1,0,0,1][0,0,0,1,1,0,0,0,0,0,2,0,0,1,1][0,0,0,1,0,1,0,0,0,0,2,0,1,0,1][1,1,1,1,0,0,1,2,0,0,0,1,0,0,1][1,0,1,1,0,0,1,1,0,1,0,1,0,0,1][0,1,1,1,0,0,1,1,1,0,0,1,0,0,1][0,0,1,1,0,0,1,0,1,1,0,1,0,0,1][0,1,1,0,1,0,1,2,0,0,0,1,0,0,1][0,0,1,0,1,0,1,1,0,1,0,1,0,0,1][0,1,1,1,0,0,1,2,0,0,0,0,1,0,1][0,0,1,1,0,0,1,1,0,1,0,0,1,0,1][1,1,0,1,0,0,1,1,0,0,1,1,0,0,1][1,0,0,1,0,0,1,0,0,1,1,1,0,0,1][0,1,0,1,0,0,1,0,1,0,1,1,0,0,1][0,1,0,0,1,0,1,1,0,0,1,1,0,0,1][0,0,0,0,1,0,1,0,0,1,1,1,0,0,1][0,1,0,1,0,0,1,1,0,0,1,0,1,0,1][0,0,0,1,0,0,1,0,0,1,1,0,1,0,1][1,1,1,2,0,0,0,2,0,0,0,0,0,0,2][1,0,1,2,0,0,0,1,0,1,0,0,0,0,2][0,1,1,2,0,0,0,1,1,0,0,0,0,0,2][0,0,1,2,0,0,0,0,1,1,0,0,0,0,2][0,1,1,1,1,0,0,2,0,0,0,0,0,0,2][0,0,1,1,1,0,0,1,0,1,0,0,0,0,2][1,1,0,2,0,0,0,1,0,0,1,0,0,0,2][1,0,0,2,0,0,0,0,0,1,1,0,0,0,2][0,1,0,2,0,0,0,0,1,0,1,0,0,0,2][0,1,0,1,1,0,0,1,0,0,1,0,0,0,2][0,0,0,1,1,0,0,0,0,1,1,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_2758, cert_2760, cert_2771, cert_2773, cert_2784, cert_2792, cert_2793, cert_2948, cert_2950, cert_2959, cert_2961, cert_2971, cert_2978, cert_2979, cert_2992, cert_2994, cert_3009, cert_3014, cert_3015, cert_3126, cert_3129, cert_3136, cert_3139, cert_3151, cert_3153, cert_3161, cert_3164, cert_3171, cert_3185, cert_3187, cert_3591, cert_3593, cert_3602, cert_3604, cert_3613, cert_3614, cert_3621, cert_3721, cert_3723, cert_3729, cert_3730, cert_3737, cert_3738, cert_3743, cert_3753, cert_3754, cert_3761, cert_3762, cert_3764, cert_3855, cert_3858, cert_3865, cert_3868, cert_3874, cert_3876, cert_3879, cert_3881, cert_3889, cert_3892, cert_3898, cert_3904, cert_3906, cert_3909, cert_3911, cert_3997, cert_4000, cert_4006, cert_4008, cert_4012, cert_4014, cert_4026, cert_4028, cert_4032, cert_4034, cert_4036])
+    (certAll_cons cert_2758
+    (certAll_cons cert_2760
+    (certAll_cons cert_2771
+    (certAll_cons cert_2773
+    (certAll_cons cert_2784
+    (certAll_cons cert_2792
+    (certAll_cons cert_2793
+    (certAll_cons cert_2948
+    (certAll_cons cert_2950
+    (certAll_cons cert_2959
+    (certAll_cons cert_2961
+    (certAll_cons cert_2971
+    (certAll_cons cert_2978
+    (certAll_cons cert_2979
+    (certAll_cons cert_2992
+    (certAll_cons cert_2994
+    (certAll_cons cert_3009
+    (certAll_cons cert_3014
+    (certAll_cons cert_3015
+    (certAll_cons cert_3126
+    (certAll_cons cert_3129
+    (certAll_cons cert_3136
+    (certAll_cons cert_3139
+    (certAll_cons cert_3151
+    (certAll_cons cert_3153
+    (certAll_cons cert_3161
+    (certAll_cons cert_3164
+    (certAll_cons cert_3171
+    (certAll_cons cert_3185
+    (certAll_cons cert_3187
+    (certAll_cons cert_3591
+    (certAll_cons cert_3593
+    (certAll_cons cert_3602
+    (certAll_cons cert_3604
+    (certAll_cons cert_3613
+    (certAll_cons cert_3614
+    (certAll_cons cert_3621
+    (certAll_cons cert_3721
+    (certAll_cons cert_3723
+    (certAll_cons cert_3729
+    (certAll_cons cert_3730
+    (certAll_cons cert_3737
+    (certAll_cons cert_3738
+    (certAll_cons cert_3743
+    (certAll_cons cert_3753
+    (certAll_cons cert_3754
+    (certAll_cons cert_3761
+    (certAll_cons cert_3762
+    (certAll_cons cert_3764
+    (certAll_cons cert_3855
+    (certAll_cons cert_3858
+    (certAll_cons cert_3865
+    (certAll_cons cert_3868
+    (certAll_cons cert_3874
+    (certAll_cons cert_3876
+    (certAll_cons cert_3879
+    (certAll_cons cert_3881
+    (certAll_cons cert_3889
+    (certAll_cons cert_3892
+    (certAll_cons cert_3898
+    (certAll_cons cert_3904
+    (certAll_cons cert_3906
+    (certAll_cons cert_3909
+    (certAll_cons cert_3911
+    (certAll_cons cert_3997
+    (certAll_cons cert_4000
+    (certAll_cons cert_4006
+    (certAll_cons cert_4008
+    (certAll_cons cert_4012
+    (certAll_cons cert_4014
+    (certAll_cons cert_4026
+    (certAll_cons cert_4028
+    (certAll_cons cert_4032
+    (certAll_cons cert_4034
+    (certAll_cons cert_4036 certAll_nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_2_2 : TripleOK 2 2 2 :=
-  certAt_dispatch (keys := [[2, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0], [2, 0, 2, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0], [2, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [1, 0, 2, 0, 0, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0], [1, 0, 2, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0], [1, 0, 2, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0], [0, 0, 2, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0], [0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0], [1, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0], [1, 0, 2, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [0, 0, 2, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0], [0, 0, 2, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [1, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0], [1, 0, 2, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0], [0, 0, 2, 0, 0, 2, 0, 1, 1, 0, 0, 1, 1, 0, 0], [0, 0, 2, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0], [0, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0], [0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0], [2, 0, 1, 0, 0, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0], [2, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0], [2, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0], [1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0], [1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], [1, 0, 1, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0], [1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0], [1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0], [0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], [0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0], [0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0], [1, 0, 1, 0, 0, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0], [1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0], [0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0], [0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [0, 0, 1, 0, 0, 2, 0, 1, 0, 0, 1, 0, 2, 0, 0], [2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0], [2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0], [2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0], [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0], [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0], [0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0], [1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 1, 1, 0, 0], [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0], [0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0], [0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0], [2, 1, 1, 0, 0, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0], [2, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0], [2, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0], [2, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0], [1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0], [1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0], [1, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0], [1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0], [0, 1, 1, 0, 0, 1, 1, 0, 2, 0, 0, 2, 0, 0, 0], [0, 1, 1, 1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0], [1, 1, 1, 0, 1, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0], [1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0], [0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0], [0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0], [1, 1, 1, 0, 0, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0], [1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0], [0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0], [0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0], [0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 1, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0], [0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 1, 1, 2, 0, 0, 0, 0, 2, 0, 0], [0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 2, 0, 0], [2, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 2, 0, 0, 0], [2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 2, 0, 0, 0], [2, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0], [2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0], [1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 2, 0, 0, 0], [1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0], [1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0], [1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0], [0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0], [1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0], [1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0], [1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0], [0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 0], [0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0], [0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0], [0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0], [0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 0, 2, 0, 0], [0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 2, 0, 0], [2, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 2, 0, 0, 0], [2, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0, 2, 0, 0, 0], [2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0], [1, 2, 0, 0, 0, 0, 2, 1, 1, 0, 0, 2, 0, 0, 0], [1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 2, 0, 0, 0], [0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0], [1, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 1, 1, 0, 0], [1, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 1, 1, 0, 0], [0, 2, 0, 0, 0, 0, 2, 1, 1, 0, 0, 1, 1, 0, 0], [0, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 1, 1, 0, 0], [0, 2, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0], [0, 1, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 2, 0, 0], [0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0], [2, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1], [2, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1], [2, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [2, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1], [1, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1], [0, 1, 1, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1], [0, 1, 1, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1], [1, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1], [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1], [1, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1], [0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1], [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1], [0, 1, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [0, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [1, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1], [1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1], [0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1], [0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], [0, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1], [0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1], [2, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1], [2, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1], [2, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1], [2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1], [1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1], [1, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1], [1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1], [1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1], [1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1], [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1], [0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1], [0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1], [0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1], [1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1], [1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1], [0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1], [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1], [0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1], [2, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1], [2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1], [2, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 1, 0, 0, 1], [1, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1], [1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1], [0, 2, 0, 1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0, 1], [1, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0, 1, 0, 0, 1], [1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1], [1, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 1, 0, 0, 1], [0, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 1], [0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1], [1, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 1, 0, 1], [1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1], [1, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1], [0, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1], [0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1], [0, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 1, 0, 1], [0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1], [0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1], [2, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2], [2, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2], [2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2], [1, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2], [1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2], [0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2], [1, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2], [1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2], [1, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2], [0, 2, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 2], [0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2], [0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2], [0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2], [0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2]])
+  certAt_dispatch (keys := natss% "[2,0,2,0,0,2,0,2,0,0,0,2,0,0,0][2,0,2,1,0,1,0,2,0,0,0,1,0,1,0][2,0,2,2,0,0,0,2,0,0,0,0,0,2,0][1,0,2,0,0,2,0,1,1,0,0,2,0,0,0][1,0,2,1,0,1,0,1,1,0,0,1,0,1,0][1,0,2,2,0,0,0,1,1,0,0,0,0,2,0][0,0,2,0,0,2,0,0,2,0,0,2,0,0,0][0,0,2,1,0,1,0,0,2,0,0,1,0,1,0][0,0,2,2,0,0,0,0,2,0,0,0,0,2,0][1,0,2,0,1,1,0,2,0,0,0,1,0,1,0][1,0,2,1,1,0,0,2,0,0,0,0,0,2,0][0,0,2,0,1,1,0,1,1,0,0,1,0,1,0][0,0,2,1,1,0,0,1,1,0,0,0,0,2,0][0,0,2,0,2,0,0,2,0,0,0,0,0,2,0][1,0,2,0,0,2,0,2,0,0,0,1,1,0,0][1,0,2,1,0,1,0,2,0,0,0,0,1,1,0][0,0,2,0,0,2,0,1,1,0,0,1,1,0,0][0,0,2,1,0,1,0,1,1,0,0,0,1,1,0][0,0,2,0,1,1,0,2,0,0,0,0,1,1,0][0,0,2,0,0,2,0,2,0,0,0,0,2,0,0][2,0,1,0,0,2,0,1,0,0,1,2,0,0,0][2,0,1,1,0,1,0,1,0,0,1,1,0,1,0][2,0,1,2,0,0,0,1,0,0,1,0,0,2,0][1,0,1,0,0,2,0,0,1,0,1,2,0,0,0][1,0,1,1,0,1,0,0,1,0,1,1,0,1,0][1,0,1,2,0,0,0,0,1,0,1,0,0,2,0][1,0,1,0,1,1,0,1,0,0,1,1,0,1,0][1,0,1,1,1,0,0,1,0,0,1,0,0,2,0][0,0,1,0,1,1,0,0,1,0,1,1,0,1,0][0,0,1,1,1,0,0,0,1,0,1,0,0,2,0][0,0,1,0,2,0,0,1,0,0,1,0,0,2,0][1,0,1,0,0,2,0,1,0,0,1,1,1,0,0][1,0,1,1,0,1,0,1,0,0,1,0,1,1,0][0,0,1,0,0,2,0,0,1,0,1,1,1,0,0][0,0,1,1,0,1,0,0,1,0,1,0,1,1,0][0,0,1,0,1,1,0,1,0,0,1,0,1,1,0][0,0,1,0,0,2,0,1,0,0,1,0,2,0,0][2,0,0,0,0,2,0,0,0,0,2,2,0,0,0][2,0,0,1,0,1,0,0,0,0,2,1,0,1,0][2,0,0,2,0,0,0,0,0,0,2,0,0,2,0][1,0,0,0,1,1,0,0,0,0,2,1,0,1,0][1,0,0,1,1,0,0,0,0,0,2,0,0,2,0][0,0,0,0,2,0,0,0,0,0,2,0,0,2,0][1,0,0,0,0,2,0,0,0,0,2,1,1,0,0][1,0,0,1,0,1,0,0,0,0,2,0,1,1,0][0,0,0,0,1,1,0,0,0,0,2,0,1,1,0][0,0,0,0,0,2,0,0,0,0,2,0,2,0,0][2,1,1,0,0,1,1,2,0,0,0,2,0,0,0][2,0,1,0,0,1,1,1,0,1,0,2,0,0,0][2,1,1,1,0,0,1,2,0,0,0,1,0,1,0][2,0,1,1,0,0,1,1,0,1,0,1,0,1,0][1,1,1,0,0,1,1,1,1,0,0,2,0,0,0][1,0,1,0,0,1,1,0,1,1,0,2,0,0,0][1,1,1,1,0,0,1,1,1,0,0,1,0,1,0][1,0,1,1,0,0,1,0,1,1,0,1,0,1,0][0,1,1,0,0,1,1,0,2,0,0,2,0,0,0][0,1,1,1,0,0,1,0,2,0,0,1,0,1,0][1,1,1,0,1,0,1,2,0,0,0,1,0,1,0][1,0,1,0,1,0,1,1,0,1,0,1,0,1,0][0,1,1,0,1,0,1,1,1,0,0,1,0,1,0][0,0,1,0,1,0,1,0,1,1,0,1,0,1,0][1,1,1,0,0,1,1,2,0,0,0,1,1,0,0][1,0,1,0,0,1,1,1,0,1,0,1,1,0,0][1,1,1,1,0,0,1,2,0,0,0,0,1,1,0][1,0,1,1,0,0,1,1,0,1,0,0,1,1,0][0,1,1,0,0,1,1,1,1,0,0,1,1,0,0][0,0,1,0,0,1,1,0,1,1,0,1,1,0,0][0,1,1,1,0,0,1,1,1,0,0,0,1,1,0][0,0,1,1,0,0,1,0,1,1,0,0,1,1,0][0,1,1,0,1,0,1,2,0,0,0,0,1,1,0][0,0,1,0,1,0,1,1,0,1,0,0,1,1,0][0,1,1,0,0,1,1,2,0,0,0,0,2,0,0][0,0,1,0,0,1,1,1,0,1,0,0,2,0,0][2,1,0,0,0,1,1,1,0,0,1,2,0,0,0][2,0,0,0,0,1,1,0,0,1,1,2,0,0,0][2,1,0,1,0,0,1,1,0,0,1,1,0,1,0][2,0,0,1,0,0,1,0,0,1,1,1,0,1,0][1,1,0,0,0,1,1,0,1,0,1,2,0,0,0][1,1,0,1,0,0,1,0,1,0,1,1,0,1,0][1,1,0,0,1,0,1,1,0,0,1,1,0,1,0][1,0,0,0,1,0,1,0,0,1,1,1,0,1,0][0,1,0,0,1,0,1,0,1,0,1,1,0,1,0][1,1,0,0,0,1,1,1,0,0,1,1,1,0,0][1,0,0,0,0,1,1,0,0,1,1,1,1,0,0][1,1,0,1,0,0,1,1,0,0,1,0,1,1,0][1,0,0,1,0,0,1,0,0,1,1,0,1,1,0][0,1,0,0,0,1,1,0,1,0,1,1,1,0,0][0,1,0,1,0,0,1,0,1,0,1,0,1,1,0][0,1,0,0,1,0,1,1,0,0,1,0,1,1,0][0,0,0,0,1,0,1,0,0,1,1,0,1,1,0][0,1,0,0,0,1,1,1,0,0,1,0,2,0,0][0,0,0,0,0,1,1,0,0,1,1,0,2,0,0][2,2,0,0,0,0,2,2,0,0,0,2,0,0,0][2,1,0,0,0,0,2,1,0,1,0,2,0,0,0][2,0,0,0,0,0,2,0,0,2,0,2,0,0,0][1,2,0,0,0,0,2,1,1,0,0,2,0,0,0][1,1,0,0,0,0,2,0,1,1,0,2,0,0,0][0,2,0,0,0,0,2,0,2,0,0,2,0,0,0][1,2,0,0,0,0,2,2,0,0,0,1,1,0,0][1,1,0,0,0,0,2,1,0,1,0,1,1,0,0][1,0,0,0,0,0,2,0,0,2,0,1,1,0,0][0,2,0,0,0,0,2,1,1,0,0,1,1,0,0][0,1,0,0,0,0,2,0,1,1,0,1,1,0,0][0,2,0,0,0,0,2,2,0,0,0,0,2,0,0][0,1,0,0,0,0,2,1,0,1,0,0,2,0,0][0,0,0,0,0,0,2,0,0,2,0,0,2,0,0][2,1,1,1,0,1,0,2,0,0,0,1,0,0,1][2,0,1,1,0,1,0,1,0,1,0,1,0,0,1][2,1,1,2,0,0,0,2,0,0,0,0,0,1,1][2,0,1,2,0,0,0,1,0,1,0,0,0,1,1][1,1,1,1,0,1,0,1,1,0,0,1,0,0,1][1,0,1,1,0,1,0,0,1,1,0,1,0,0,1][1,1,1,2,0,0,0,1,1,0,0,0,0,1,1][1,0,1,2,0,0,0,0,1,1,0,0,0,1,1][0,1,1,1,0,1,0,0,2,0,0,1,0,0,1][0,1,1,2,0,0,0,0,2,0,0,0,0,1,1][1,1,1,0,1,1,0,2,0,0,0,1,0,0,1][1,0,1,0,1,1,0,1,0,1,0,1,0,0,1][1,1,1,1,1,0,0,2,0,0,0,0,0,1,1][1,0,1,1,1,0,0,1,0,1,0,0,0,1,1][0,1,1,0,1,1,0,1,1,0,0,1,0,0,1][0,0,1,0,1,1,0,0,1,1,0,1,0,0,1][0,1,1,1,1,0,0,1,1,0,0,0,0,1,1][0,0,1,1,1,0,0,0,1,1,0,0,0,1,1][0,1,1,0,2,0,0,2,0,0,0,0,0,1,1][0,0,1,0,2,0,0,1,0,1,0,0,0,1,1][1,1,1,1,0,1,0,2,0,0,0,0,1,0,1][1,0,1,1,0,1,0,1,0,1,0,0,1,0,1][0,1,1,1,0,1,0,1,1,0,0,0,1,0,1][0,0,1,1,0,1,0,0,1,1,0,0,1,0,1][0,1,1,0,1,1,0,2,0,0,0,0,1,0,1][0,0,1,0,1,1,0,1,0,1,0,0,1,0,1][2,1,0,1,0,1,0,1,0,0,1,1,0,0,1][2,0,0,1,0,1,0,0,0,1,1,1,0,0,1][2,1,0,2,0,0,0,1,0,0,1,0,0,1,1][2,0,0,2,0,0,0,0,0,1,1,0,0,1,1][1,1,0,1,0,1,0,0,1,0,1,1,0,0,1][1,1,0,2,0,0,0,0,1,0,1,0,0,1,1][1,1,0,0,1,1,0,1,0,0,1,1,0,0,1][1,0,0,0,1,1,0,0,0,1,1,1,0,0,1][1,1,0,1,1,0,0,1,0,0,1,0,0,1,1][1,0,0,1,1,0,0,0,0,1,1,0,0,1,1][0,1,0,0,1,1,0,0,1,0,1,1,0,0,1][0,1,0,1,1,0,0,0,1,0,1,0,0,1,1][0,1,0,0,2,0,0,1,0,0,1,0,0,1,1][0,0,0,0,2,0,0,0,0,1,1,0,0,1,1][1,1,0,1,0,1,0,1,0,0,1,0,1,0,1][1,0,0,1,0,1,0,0,0,1,1,0,1,0,1][0,1,0,1,0,1,0,0,1,0,1,0,1,0,1][0,1,0,0,1,1,0,1,0,0,1,0,1,0,1][0,0,0,0,1,1,0,0,0,1,1,0,1,0,1][2,2,0,1,0,0,1,2,0,0,0,1,0,0,1][2,1,0,1,0,0,1,1,0,1,0,1,0,0,1][2,0,0,1,0,0,1,0,0,2,0,1,0,0,1][1,2,0,1,0,0,1,1,1,0,0,1,0,0,1][1,1,0,1,0,0,1,0,1,1,0,1,0,0,1][0,2,0,1,0,0,1,0,2,0,0,1,0,0,1][1,2,0,0,1,0,1,2,0,0,0,1,0,0,1][1,1,0,0,1,0,1,1,0,1,0,1,0,0,1][1,0,0,0,1,0,1,0,0,2,0,1,0,0,1][0,2,0,0,1,0,1,1,1,0,0,1,0,0,1][0,1,0,0,1,0,1,0,1,1,0,1,0,0,1][1,2,0,1,0,0,1,2,0,0,0,0,1,0,1][1,1,0,1,0,0,1,1,0,1,0,0,1,0,1][1,0,0,1,0,0,1,0,0,2,0,0,1,0,1][0,2,0,1,0,0,1,1,1,0,0,0,1,0,1][0,1,0,1,0,0,1,0,1,1,0,0,1,0,1][0,2,0,0,1,0,1,2,0,0,0,0,1,0,1][0,1,0,0,1,0,1,1,0,1,0,0,1,0,1][0,0,0,0,1,0,1,0,0,2,0,0,1,0,1][2,2,0,2,0,0,0,2,0,0,0,0,0,0,2][2,1,0,2,0,0,0,1,0,1,0,0,0,0,2][2,0,0,2,0,0,0,0,0,2,0,0,0,0,2][1,2,0,2,0,0,0,1,1,0,0,0,0,0,2][1,1,0,2,0,0,0,0,1,1,0,0,0,0,2][0,2,0,2,0,0,0,0,2,0,0,0,0,0,2][1,2,0,1,1,0,0,2,0,0,0,0,0,0,2][1,1,0,1,1,0,0,1,0,1,0,0,0,0,2][1,0,0,1,1,0,0,0,0,2,0,0,0,0,2][0,2,0,1,1,0,0,1,1,0,0,0,0,0,2][0,1,0,1,1,0,0,0,1,1,0,0,0,0,2][0,2,0,0,2,0,0,2,0,0,0,0,0,0,2][0,1,0,0,2,0,0,1,0,1,0,0,0,0,2][0,0,0,0,2,0,0,0,0,2,0,0,0,0,2]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1241, cert_1250, cert_1252, cert_1273, cert_1280, cert_1282, cert_1297, cert_1302, cert_1303, cert_1330, cert_1331, cert_1356, cert_1357, cert_1378, cert_1395, cert_1401, cert_1417, cert_1421, cert_1441, cert_1453, cert_1872, cert_1879, cert_1881, cert_1896, cert_1901, cert_1902, cert_1936, cert_1937, cert_1956, cert_1957, cert_1976, cert_1989, cert_1993, cert_2003, cert_2005, cert_2020, cert_2028, cert_2095, cert_2100, cert_2101, cert_2132, cert_2133, cert_2159, cert_2167, cert_2169, cert_2181, cert_2184, cert_2584, cert_2587, cert_2591, cert_2594, cert_2611, cert_2614, cert_2618, cert_2621, cert_2634, cert_2640, cert_2660, cert_2662, cert_2679, cert_2681, cert_2703, cert_2705, cert_2707, cert_2709, cert_2720, cert_2722, cert_2724, cert_2726, cert_2737, cert_2738, cert_2744, cert_2745, cert_2810, cert_2813, cert_2817, cert_2820, cert_2833, cert_2839, cert_2868, cert_2870, cert_2885, cert_2906, cert_2908, cert_2910, cert_2912, cert_2919, cert_2922, cert_2931, cert_2932, cert_2936, cert_2937, cert_3023, cert_3026, cert_3029, cert_3043, cert_3046, cert_3062, cert_3100, cert_3102, cert_3104, cert_3110, cert_3112, cert_3121, cert_3122, cert_3123, cert_3453, cert_3456, cert_3460, cert_3463, cert_3476, cert_3479, cert_3482, cert_3484, cert_3492, cert_3496, cert_3507, cert_3509, cert_3511, cert_3513, cert_3524, cert_3526, cert_3528, cert_3530, cert_3541, cert_3542, cert_3549, cert_3551, cert_3562, cert_3564, cert_3573, cert_3574, cert_3636, cert_3639, cert_3642, cert_3644, cert_3652, cert_3656, cert_3668, cert_3670, cert_3672, cert_3674, cert_3681, cert_3684, cert_3693, cert_3694, cert_3698, cert_3700, cert_3705, cert_3710, cert_3711, cert_3769, cert_3772, cert_3775, cert_3788, cert_3791, cert_3804, cert_3813, cert_3815, cert_3817, cert_3823, cert_3825, cert_3834, cert_3836, cert_3838, cert_3843, cert_3845, cert_3849, cert_3850, cert_3851, cert_3940, cert_3943, cert_3945, cert_3956, cert_3958, cert_3965, cert_3968, cert_3970, cert_3972, cert_3977, cert_3979, cert_3983, cert_3984, cert_3985])
+    (certAll_cons cert_1241
+    (certAll_cons cert_1250
+    (certAll_cons cert_1252
+    (certAll_cons cert_1273
+    (certAll_cons cert_1280
+    (certAll_cons cert_1282
+    (certAll_cons cert_1297
+    (certAll_cons cert_1302
+    (certAll_cons cert_1303
+    (certAll_cons cert_1330
+    (certAll_cons cert_1331
+    (certAll_cons cert_1356
+    (certAll_cons cert_1357
+    (certAll_cons cert_1378
+    (certAll_cons cert_1395
+    (certAll_cons cert_1401
+    (certAll_cons cert_1417
+    (certAll_cons cert_1421
+    (certAll_cons cert_1441
+    (certAll_cons cert_1453
+    (certAll_cons cert_1872
+    (certAll_cons cert_1879
+    (certAll_cons cert_1881
+    (certAll_cons cert_1896
+    (certAll_cons cert_1901
+    (certAll_cons cert_1902
+    (certAll_cons cert_1936
+    (certAll_cons cert_1937
+    (certAll_cons cert_1956
+    (certAll_cons cert_1957
+    (certAll_cons cert_1976
+    (certAll_cons cert_1989
+    (certAll_cons cert_1993
+    (certAll_cons cert_2003
+    (certAll_cons cert_2005
+    (certAll_cons cert_2020
+    (certAll_cons cert_2028
+    (certAll_cons cert_2095
+    (certAll_cons cert_2100
+    (certAll_cons cert_2101
+    (certAll_cons cert_2132
+    (certAll_cons cert_2133
+    (certAll_cons cert_2159
+    (certAll_cons cert_2167
+    (certAll_cons cert_2169
+    (certAll_cons cert_2181
+    (certAll_cons cert_2184
+    (certAll_cons cert_2584
+    (certAll_cons cert_2587
+    (certAll_cons cert_2591
+    (certAll_cons cert_2594
+    (certAll_cons cert_2611
+    (certAll_cons cert_2614
+    (certAll_cons cert_2618
+    (certAll_cons cert_2621
+    (certAll_cons cert_2634
+    (certAll_cons cert_2640
+    (certAll_cons cert_2660
+    (certAll_cons cert_2662
+    (certAll_cons cert_2679
+    (certAll_cons cert_2681
+    (certAll_cons cert_2703
+    (certAll_cons cert_2705
+    (certAll_cons cert_2707
+    (certAll_cons cert_2709
+    (certAll_cons cert_2720
+    (certAll_cons cert_2722
+    (certAll_cons cert_2724
+    (certAll_cons cert_2726
+    (certAll_cons cert_2737
+    (certAll_cons cert_2738
+    (certAll_cons cert_2744
+    (certAll_cons cert_2745
+    (certAll_cons cert_2810
+    (certAll_cons cert_2813
+    (certAll_cons cert_2817
+    (certAll_cons cert_2820
+    (certAll_cons cert_2833
+    (certAll_cons cert_2839
+    (certAll_cons cert_2868
+    (certAll_cons cert_2870
+    (certAll_cons cert_2885
+    (certAll_cons cert_2906
+    (certAll_cons cert_2908
+    (certAll_cons cert_2910
+    (certAll_cons cert_2912
+    (certAll_cons cert_2919
+    (certAll_cons cert_2922
+    (certAll_cons cert_2931
+    (certAll_cons cert_2932
+    (certAll_cons cert_2936
+    (certAll_cons cert_2937
+    (certAll_cons cert_3023
+    (certAll_cons cert_3026
+    (certAll_cons cert_3029
+    (certAll_cons cert_3043
+    (certAll_cons cert_3046
+    (certAll_cons cert_3062
+    (certAll_cons cert_3100
+    (certAll_cons cert_3102
+    (certAll_cons cert_3104
+    (certAll_cons cert_3110
+    (certAll_cons cert_3112
+    (certAll_cons cert_3121
+    (certAll_cons cert_3122
+    (certAll_cons cert_3123
+    (certAll_cons cert_3453
+    (certAll_cons cert_3456
+    (certAll_cons cert_3460
+    (certAll_cons cert_3463
+    (certAll_cons cert_3476
+    (certAll_cons cert_3479
+    (certAll_cons cert_3482
+    (certAll_cons cert_3484
+    (certAll_cons cert_3492
+    (certAll_cons cert_3496
+    (certAll_cons cert_3507
+    (certAll_cons cert_3509
+    (certAll_cons cert_3511
+    (certAll_cons cert_3513
+    (certAll_cons cert_3524
+    (certAll_cons cert_3526
+    (certAll_cons cert_3528
+    (certAll_cons cert_3530
+    (certAll_cons cert_3541
+    (certAll_cons cert_3542
+    (certAll_cons cert_3549
+    (certAll_cons cert_3551
+    (certAll_cons cert_3562
+    (certAll_cons cert_3564
+    (certAll_cons cert_3573
+    (certAll_cons cert_3574
+    (certAll_cons cert_3636
+    (certAll_cons cert_3639
+    (certAll_cons cert_3642
+    (certAll_cons cert_3644
+    (certAll_cons cert_3652
+    (certAll_cons cert_3656
+    (certAll_cons cert_3668
+    (certAll_cons cert_3670
+    (certAll_cons cert_3672
+    (certAll_cons cert_3674
+    (certAll_cons cert_3681
+    (certAll_cons cert_3684
+    (certAll_cons cert_3693
+    (certAll_cons cert_3694
+    (certAll_cons cert_3698
+    (certAll_cons cert_3700
+    (certAll_cons cert_3705
+    (certAll_cons cert_3710
+    (certAll_cons cert_3711
+    (certAll_cons cert_3769
+    (certAll_cons cert_3772
+    (certAll_cons cert_3775
+    (certAll_cons cert_3788
+    (certAll_cons cert_3791
+    (certAll_cons cert_3804
+    (certAll_cons cert_3813
+    (certAll_cons cert_3815
+    (certAll_cons cert_3817
+    (certAll_cons cert_3823
+    (certAll_cons cert_3825
+    (certAll_cons cert_3834
+    (certAll_cons cert_3836
+    (certAll_cons cert_3838
+    (certAll_cons cert_3843
+    (certAll_cons cert_3845
+    (certAll_cons cert_3849
+    (certAll_cons cert_3850
+    (certAll_cons cert_3851
+    (certAll_cons cert_3940
+    (certAll_cons cert_3943
+    (certAll_cons cert_3945
+    (certAll_cons cert_3956
+    (certAll_cons cert_3958
+    (certAll_cons cert_3965
+    (certAll_cons cert_3968
+    (certAll_cons cert_3970
+    (certAll_cons cert_3972
+    (certAll_cons cert_3977
+    (certAll_cons cert_3979
+    (certAll_cons cert_3983
+    (certAll_cons cert_3984
+    (certAll_cons cert_3985 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_2_3 : TripleOK 2 2 3 :=
-  certAt_dispatch (keys := [[3, 1, 1, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0], [3, 0, 1, 0, 0, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0], [3, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0], [3, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], [3, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [3, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0], [2, 1, 1, 0, 0, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0], [2, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0], [2, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0], [2, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0], [2, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [2, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0], [1, 1, 1, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0], [1, 1, 1, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0], [1, 1, 1, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0], [2, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0], [2, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], [2, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [2, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0], [1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0], [1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0], [1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0], [0, 1, 1, 0, 1, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0], [0, 1, 1, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0], [1, 1, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [1, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0], [0, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [0, 0, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0], [2, 1, 1, 0, 0, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0], [2, 0, 1, 0, 0, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0], [2, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0], [2, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0], [1, 1, 1, 0, 0, 2, 0, 1, 1, 0, 0, 1, 1, 0, 0], [1, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0], [1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0], [1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 0, 2, 0, 0, 2, 0, 0, 1, 1, 0, 0], [0, 1, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0], [1, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0], [0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [1, 1, 1, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0], [1, 0, 1, 0, 0, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0], [0, 1, 1, 0, 0, 2, 0, 1, 1, 0, 0, 0, 2, 0, 0], [0, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0], [3, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0], [3, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 2, 0, 0, 0], [3, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0], [3, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0], [3, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0], [3, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0], [2, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0], [2, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], [2, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0], [2, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0], [2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0], [2, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0], [2, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0], [1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0], [1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0], [1, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0], [1, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0], [0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0], [2, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0], [2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 1, 1, 0, 0], [2, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [2, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0], [1, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0], [1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0], [1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0], [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0], [1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1, 0, 2, 0, 0], [1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 2, 0, 0], [0, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0, 2, 0, 0], [3, 2, 0, 0, 0, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0], [3, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0], [3, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 2, 0, 0, 0], [3, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0], [3, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0], [3, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 1, 0, 1, 0], [2, 2, 0, 0, 0, 1, 1, 1, 1, 0, 0, 2, 0, 0, 0], [2, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 2, 0, 0, 0], [2, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0], [2, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0], [1, 2, 0, 0, 0, 1, 1, 0, 2, 0, 0, 2, 0, 0, 0], [1, 2, 0, 1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0], [2, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0], [2, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0], [2, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 1, 0, 1, 0], [1, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0], [1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0], [0, 2, 0, 0, 1, 0, 1, 0, 2, 0, 0, 1, 0, 1, 0], [2, 2, 0, 0, 0, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0], [2, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0], [2, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 1, 1, 0, 0], [2, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0], [2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0], [2, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0], [1, 2, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0], [1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0], [1, 2, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0], [1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0], [0, 2, 0, 0, 0, 1, 1, 0, 2, 0, 0, 1, 1, 0, 0], [0, 2, 0, 1, 0, 0, 1, 0, 2, 0, 0, 0, 1, 1, 0], [1, 2, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0], [1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0], [1, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0], [0, 2, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0], [0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0], [1, 2, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 2, 0, 0], [1, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 2, 0, 0], [1, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 2, 0, 0], [0, 2, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 2, 0, 0], [0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 2, 0, 0], [3, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1], [3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1], [3, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1], [3, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [3, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [3, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1], [2, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [2, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1], [2, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1], [2, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1], [1, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1], [1, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1], [2, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 0, 1], [2, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1], [2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 0, 1], [2, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [2, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [2, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1], [1, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1], [1, 2, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1], [1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1], [0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 1, 0, 0, 1], [0, 2, 0, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1], [1, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 1], [1, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1], [1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1], [0, 2, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1], [0, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1], [2, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1], [2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1], [2, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1], [1, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1], [1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1], [0, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1], [1, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 0, 1], [1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1], [1, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1], [0, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1], [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1]])
+  certAt_dispatch (keys := natss% "[3,1,1,0,0,2,0,2,0,0,0,2,0,0,0][3,0,1,0,0,2,0,1,0,1,0,2,0,0,0][3,1,1,1,0,1,0,2,0,0,0,1,0,1,0][3,0,1,1,0,1,0,1,0,1,0,1,0,1,0][3,1,1,2,0,0,0,2,0,0,0,0,0,2,0][3,0,1,2,0,0,0,1,0,1,0,0,0,2,0][2,1,1,0,0,2,0,1,1,0,0,2,0,0,0][2,0,1,0,0,2,0,0,1,1,0,2,0,0,0][2,1,1,1,0,1,0,1,1,0,0,1,0,1,0][2,0,1,1,0,1,0,0,1,1,0,1,0,1,0][2,1,1,2,0,0,0,1,1,0,0,0,0,2,0][2,0,1,2,0,0,0,0,1,1,0,0,0,2,0][1,1,1,0,0,2,0,0,2,0,0,2,0,0,0][1,1,1,1,0,1,0,0,2,0,0,1,0,1,0][1,1,1,2,0,0,0,0,2,0,0,0,0,2,0][2,1,1,0,1,1,0,2,0,0,0,1,0,1,0][2,0,1,0,1,1,0,1,0,1,0,1,0,1,0][2,1,1,1,1,0,0,2,0,0,0,0,0,2,0][2,0,1,1,1,0,0,1,0,1,0,0,0,2,0][1,1,1,0,1,1,0,1,1,0,0,1,0,1,0][1,0,1,0,1,1,0,0,1,1,0,1,0,1,0][1,1,1,1,1,0,0,1,1,0,0,0,0,2,0][1,0,1,1,1,0,0,0,1,1,0,0,0,2,0][0,1,1,0,1,1,0,0,2,0,0,1,0,1,0][0,1,1,1,1,0,0,0,2,0,0,0,0,2,0][1,1,1,0,2,0,0,2,0,0,0,0,0,2,0][1,0,1,0,2,0,0,1,0,1,0,0,0,2,0][0,1,1,0,2,0,0,1,1,0,0,0,0,2,0][0,0,1,0,2,0,0,0,1,1,0,0,0,2,0][2,1,1,0,0,2,0,2,0,0,0,1,1,0,0][2,0,1,0,0,2,0,1,0,1,0,1,1,0,0][2,1,1,1,0,1,0,2,0,0,0,0,1,1,0][2,0,1,1,0,1,0,1,0,1,0,0,1,1,0][1,1,1,0,0,2,0,1,1,0,0,1,1,0,0][1,0,1,0,0,2,0,0,1,1,0,1,1,0,0][1,1,1,1,0,1,0,1,1,0,0,0,1,1,0][1,0,1,1,0,1,0,0,1,1,0,0,1,1,0][0,1,1,0,0,2,0,0,2,0,0,1,1,0,0][0,1,1,1,0,1,0,0,2,0,0,0,1,1,0][1,1,1,0,1,1,0,2,0,0,0,0,1,1,0][1,0,1,0,1,1,0,1,0,1,0,0,1,1,0][0,1,1,0,1,1,0,1,1,0,0,0,1,1,0][0,0,1,0,1,1,0,0,1,1,0,0,1,1,0][1,1,1,0,0,2,0,2,0,0,0,0,2,0,0][1,0,1,0,0,2,0,1,0,1,0,0,2,0,0][0,1,1,0,0,2,0,1,1,0,0,0,2,0,0][0,0,1,0,0,2,0,0,1,1,0,0,2,0,0][3,1,0,0,0,2,0,1,0,0,1,2,0,0,0][3,0,0,0,0,2,0,0,0,1,1,2,0,0,0][3,1,0,1,0,1,0,1,0,0,1,1,0,1,0][3,0,0,1,0,1,0,0,0,1,1,1,0,1,0][3,1,0,2,0,0,0,1,0,0,1,0,0,2,0][3,0,0,2,0,0,0,0,0,1,1,0,0,2,0][2,1,0,0,0,2,0,0,1,0,1,2,0,0,0][2,1,0,1,0,1,0,0,1,0,1,1,0,1,0][2,1,0,2,0,0,0,0,1,0,1,0,0,2,0][2,1,0,0,1,1,0,1,0,0,1,1,0,1,0][2,0,0,0,1,1,0,0,0,1,1,1,0,1,0][2,1,0,1,1,0,0,1,0,0,1,0,0,2,0][2,0,0,1,1,0,0,0,0,1,1,0,0,2,0][1,1,0,0,1,1,0,0,1,0,1,1,0,1,0][1,1,0,1,1,0,0,0,1,0,1,0,0,2,0][1,1,0,0,2,0,0,1,0,0,1,0,0,2,0][1,0,0,0,2,0,0,0,0,1,1,0,0,2,0][0,1,0,0,2,0,0,0,1,0,1,0,0,2,0][2,1,0,0,0,2,0,1,0,0,1,1,1,0,0][2,0,0,0,0,2,0,0,0,1,1,1,1,0,0][2,1,0,1,0,1,0,1,0,0,1,0,1,1,0][2,0,0,1,0,1,0,0,0,1,1,0,1,1,0][1,1,0,0,0,2,0,0,1,0,1,1,1,0,0][1,1,0,1,0,1,0,0,1,0,1,0,1,1,0][1,1,0,0,1,1,0,1,0,0,1,0,1,1,0][1,0,0,0,1,1,0,0,0,1,1,0,1,1,0][0,1,0,0,1,1,0,0,1,0,1,0,1,1,0][1,1,0,0,0,2,0,1,0,0,1,0,2,0,0][1,0,0,0,0,2,0,0,0,1,1,0,2,0,0][0,1,0,0,0,2,0,0,1,0,1,0,2,0,0][3,2,0,0,0,1,1,2,0,0,0,2,0,0,0][3,1,0,0,0,1,1,1,0,1,0,2,0,0,0][3,0,0,0,0,1,1,0,0,2,0,2,0,0,0][3,2,0,1,0,0,1,2,0,0,0,1,0,1,0][3,1,0,1,0,0,1,1,0,1,0,1,0,1,0][3,0,0,1,0,0,1,0,0,2,0,1,0,1,0][2,2,0,0,0,1,1,1,1,0,0,2,0,0,0][2,1,0,0,0,1,1,0,1,1,0,2,0,0,0][2,2,0,1,0,0,1,1,1,0,0,1,0,1,0][2,1,0,1,0,0,1,0,1,1,0,1,0,1,0][1,2,0,0,0,1,1,0,2,0,0,2,0,0,0][1,2,0,1,0,0,1,0,2,0,0,1,0,1,0][2,2,0,0,1,0,1,2,0,0,0,1,0,1,0][2,1,0,0,1,0,1,1,0,1,0,1,0,1,0][2,0,0,0,1,0,1,0,0,2,0,1,0,1,0][1,2,0,0,1,0,1,1,1,0,0,1,0,1,0][1,1,0,0,1,0,1,0,1,1,0,1,0,1,0][0,2,0,0,1,0,1,0,2,0,0,1,0,1,0][2,2,0,0,0,1,1,2,0,0,0,1,1,0,0][2,1,0,0,0,1,1,1,0,1,0,1,1,0,0][2,0,0,0,0,1,1,0,0,2,0,1,1,0,0][2,2,0,1,0,0,1,2,0,0,0,0,1,1,0][2,1,0,1,0,0,1,1,0,1,0,0,1,1,0][2,0,0,1,0,0,1,0,0,2,0,0,1,1,0][1,2,0,0,0,1,1,1,1,0,0,1,1,0,0][1,1,0,0,0,1,1,0,1,1,0,1,1,0,0][1,2,0,1,0,0,1,1,1,0,0,0,1,1,0][1,1,0,1,0,0,1,0,1,1,0,0,1,1,0][0,2,0,0,0,1,1,0,2,0,0,1,1,0,0][0,2,0,1,0,0,1,0,2,0,0,0,1,1,0][1,2,0,0,1,0,1,2,0,0,0,0,1,1,0][1,1,0,0,1,0,1,1,0,1,0,0,1,1,0][1,0,0,0,1,0,1,0,0,2,0,0,1,1,0][0,2,0,0,1,0,1,1,1,0,0,0,1,1,0][0,1,0,0,1,0,1,0,1,1,0,0,1,1,0][1,2,0,0,0,1,1,2,0,0,0,0,2,0,0][1,1,0,0,0,1,1,1,0,1,0,0,2,0,0][1,0,0,0,0,1,1,0,0,2,0,0,2,0,0][0,2,0,0,0,1,1,1,1,0,0,0,2,0,0][0,1,0,0,0,1,1,0,1,1,0,0,2,0,0][3,2,0,1,0,1,0,2,0,0,0,1,0,0,1][3,1,0,1,0,1,0,1,0,1,0,1,0,0,1][3,0,0,1,0,1,0,0,0,2,0,1,0,0,1][3,2,0,2,0,0,0,2,0,0,0,0,0,1,1][3,1,0,2,0,0,0,1,0,1,0,0,0,1,1][3,0,0,2,0,0,0,0,0,2,0,0,0,1,1][2,2,0,1,0,1,0,1,1,0,0,1,0,0,1][2,1,0,1,0,1,0,0,1,1,0,1,0,0,1][2,2,0,2,0,0,0,1,1,0,0,0,0,1,1][2,1,0,2,0,0,0,0,1,1,0,0,0,1,1][1,2,0,1,0,1,0,0,2,0,0,1,0,0,1][1,2,0,2,0,0,0,0,2,0,0,0,0,1,1][2,2,0,0,1,1,0,2,0,0,0,1,0,0,1][2,1,0,0,1,1,0,1,0,1,0,1,0,0,1][2,0,0,0,1,1,0,0,0,2,0,1,0,0,1][2,2,0,1,1,0,0,2,0,0,0,0,0,1,1][2,1,0,1,1,0,0,1,0,1,0,0,0,1,1][2,0,0,1,1,0,0,0,0,2,0,0,0,1,1][1,2,0,0,1,1,0,1,1,0,0,1,0,0,1][1,1,0,0,1,1,0,0,1,1,0,1,0,0,1][1,2,0,1,1,0,0,1,1,0,0,0,0,1,1][1,1,0,1,1,0,0,0,1,1,0,0,0,1,1][0,2,0,0,1,1,0,0,2,0,0,1,0,0,1][0,2,0,1,1,0,0,0,2,0,0,0,0,1,1][1,2,0,0,2,0,0,2,0,0,0,0,0,1,1][1,1,0,0,2,0,0,1,0,1,0,0,0,1,1][1,0,0,0,2,0,0,0,0,2,0,0,0,1,1][0,2,0,0,2,0,0,1,1,0,0,0,0,1,1][0,1,0,0,2,0,0,0,1,1,0,0,0,1,1][2,2,0,1,0,1,0,2,0,0,0,0,1,0,1][2,1,0,1,0,1,0,1,0,1,0,0,1,0,1][2,0,0,1,0,1,0,0,0,2,0,0,1,0,1][1,2,0,1,0,1,0,1,1,0,0,0,1,0,1][1,1,0,1,0,1,0,0,1,1,0,0,1,0,1][0,2,0,1,0,1,0,0,2,0,0,0,1,0,1][1,2,0,0,1,1,0,2,0,0,0,0,1,0,1][1,1,0,0,1,1,0,1,0,1,0,0,1,0,1][1,0,0,0,1,1,0,0,0,2,0,0,1,0,1][0,2,0,0,1,1,0,1,1,0,0,0,1,0,1][0,1,0,0,1,1,0,0,1,1,0,0,1,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_737, cert_740, cert_753, cert_756, cert_760, cert_763, cert_790, cert_793, cert_803, cert_806, cert_809, cert_811, cert_829, cert_838, cert_842, cert_894, cert_896, cert_898, cert_900, cert_934, cert_936, cert_938, cert_940, cert_964, cert_967, cert_996, cert_997, cert_1022, cert_1023, cert_1057, cert_1059, cert_1067, cert_1069, cert_1090, cert_1092, cert_1097, cert_1099, cert_1110, cert_1114, cert_1138, cert_1139, cert_1158, cert_1159, cert_1185, cert_1186, cert_1199, cert_1200, cert_1543, cert_1546, cert_1556, cert_1559, cert_1562, cert_1564, cert_1582, cert_1591, cert_1595, cert_1645, cert_1647, cert_1649, cert_1651, cert_1675, cert_1678, cert_1717, cert_1718, cert_1737, cert_1764, cert_1766, cert_1771, cert_1773, cert_1784, cert_1788, cert_1810, cert_1811, cert_1822, cert_1839, cert_1840, cert_1845, cert_2254, cert_2257, cert_2260, cert_2267, cert_2270, cert_2273, cert_2297, cert_2300, cert_2309, cert_2312, cert_2332, cert_2342, cert_2383, cert_2385, cert_2387, cert_2410, cert_2412, cert_2432, cert_2478, cert_2480, cert_2482, cert_2485, cert_2487, cert_2489, cert_2501, cert_2503, cert_2507, cert_2509, cert_2517, cert_2521, cert_2533, cert_2534, cert_2535, cert_2544, cert_2545, cert_2555, cert_2556, cert_2557, cert_2563, cert_2564, cert_3228, cert_3231, cert_3234, cert_3240, cert_3243, cert_3245, cert_3263, cert_3266, cert_3273, cert_3275, cert_3286, cert_3292, cert_3309, cert_3311, cert_3313, cert_3316, cert_3318, cert_3320, cert_3332, cert_3334, cert_3338, cert_3340, cert_3348, cert_3352, cert_3364, cert_3365, cert_3366, cert_3375, cert_3376, cert_3387, cert_3389, cert_3391, cert_3403, cert_3405, cert_3411, cert_3418, cert_3419, cert_3420, cert_3426, cert_3427])
+    (certAll_cons cert_737
+    (certAll_cons cert_740
+    (certAll_cons cert_753
+    (certAll_cons cert_756
+    (certAll_cons cert_760
+    (certAll_cons cert_763
+    (certAll_cons cert_790
+    (certAll_cons cert_793
+    (certAll_cons cert_803
+    (certAll_cons cert_806
+    (certAll_cons cert_809
+    (certAll_cons cert_811
+    (certAll_cons cert_829
+    (certAll_cons cert_838
+    (certAll_cons cert_842
+    (certAll_cons cert_894
+    (certAll_cons cert_896
+    (certAll_cons cert_898
+    (certAll_cons cert_900
+    (certAll_cons cert_934
+    (certAll_cons cert_936
+    (certAll_cons cert_938
+    (certAll_cons cert_940
+    (certAll_cons cert_964
+    (certAll_cons cert_967
+    (certAll_cons cert_996
+    (certAll_cons cert_997
+    (certAll_cons cert_1022
+    (certAll_cons cert_1023
+    (certAll_cons cert_1057
+    (certAll_cons cert_1059
+    (certAll_cons cert_1067
+    (certAll_cons cert_1069
+    (certAll_cons cert_1090
+    (certAll_cons cert_1092
+    (certAll_cons cert_1097
+    (certAll_cons cert_1099
+    (certAll_cons cert_1110
+    (certAll_cons cert_1114
+    (certAll_cons cert_1138
+    (certAll_cons cert_1139
+    (certAll_cons cert_1158
+    (certAll_cons cert_1159
+    (certAll_cons cert_1185
+    (certAll_cons cert_1186
+    (certAll_cons cert_1199
+    (certAll_cons cert_1200
+    (certAll_cons cert_1543
+    (certAll_cons cert_1546
+    (certAll_cons cert_1556
+    (certAll_cons cert_1559
+    (certAll_cons cert_1562
+    (certAll_cons cert_1564
+    (certAll_cons cert_1582
+    (certAll_cons cert_1591
+    (certAll_cons cert_1595
+    (certAll_cons cert_1645
+    (certAll_cons cert_1647
+    (certAll_cons cert_1649
+    (certAll_cons cert_1651
+    (certAll_cons cert_1675
+    (certAll_cons cert_1678
+    (certAll_cons cert_1717
+    (certAll_cons cert_1718
+    (certAll_cons cert_1737
+    (certAll_cons cert_1764
+    (certAll_cons cert_1766
+    (certAll_cons cert_1771
+    (certAll_cons cert_1773
+    (certAll_cons cert_1784
+    (certAll_cons cert_1788
+    (certAll_cons cert_1810
+    (certAll_cons cert_1811
+    (certAll_cons cert_1822
+    (certAll_cons cert_1839
+    (certAll_cons cert_1840
+    (certAll_cons cert_1845
+    (certAll_cons cert_2254
+    (certAll_cons cert_2257
+    (certAll_cons cert_2260
+    (certAll_cons cert_2267
+    (certAll_cons cert_2270
+    (certAll_cons cert_2273
+    (certAll_cons cert_2297
+    (certAll_cons cert_2300
+    (certAll_cons cert_2309
+    (certAll_cons cert_2312
+    (certAll_cons cert_2332
+    (certAll_cons cert_2342
+    (certAll_cons cert_2383
+    (certAll_cons cert_2385
+    (certAll_cons cert_2387
+    (certAll_cons cert_2410
+    (certAll_cons cert_2412
+    (certAll_cons cert_2432
+    (certAll_cons cert_2478
+    (certAll_cons cert_2480
+    (certAll_cons cert_2482
+    (certAll_cons cert_2485
+    (certAll_cons cert_2487
+    (certAll_cons cert_2489
+    (certAll_cons cert_2501
+    (certAll_cons cert_2503
+    (certAll_cons cert_2507
+    (certAll_cons cert_2509
+    (certAll_cons cert_2517
+    (certAll_cons cert_2521
+    (certAll_cons cert_2533
+    (certAll_cons cert_2534
+    (certAll_cons cert_2535
+    (certAll_cons cert_2544
+    (certAll_cons cert_2545
+    (certAll_cons cert_2555
+    (certAll_cons cert_2556
+    (certAll_cons cert_2557
+    (certAll_cons cert_2563
+    (certAll_cons cert_2564
+    (certAll_cons cert_3228
+    (certAll_cons cert_3231
+    (certAll_cons cert_3234
+    (certAll_cons cert_3240
+    (certAll_cons cert_3243
+    (certAll_cons cert_3245
+    (certAll_cons cert_3263
+    (certAll_cons cert_3266
+    (certAll_cons cert_3273
+    (certAll_cons cert_3275
+    (certAll_cons cert_3286
+    (certAll_cons cert_3292
+    (certAll_cons cert_3309
+    (certAll_cons cert_3311
+    (certAll_cons cert_3313
+    (certAll_cons cert_3316
+    (certAll_cons cert_3318
+    (certAll_cons cert_3320
+    (certAll_cons cert_3332
+    (certAll_cons cert_3334
+    (certAll_cons cert_3338
+    (certAll_cons cert_3340
+    (certAll_cons cert_3348
+    (certAll_cons cert_3352
+    (certAll_cons cert_3364
+    (certAll_cons cert_3365
+    (certAll_cons cert_3366
+    (certAll_cons cert_3375
+    (certAll_cons cert_3376
+    (certAll_cons cert_3387
+    (certAll_cons cert_3389
+    (certAll_cons cert_3391
+    (certAll_cons cert_3403
+    (certAll_cons cert_3405
+    (certAll_cons cert_3411
+    (certAll_cons cert_3418
+    (certAll_cons cert_3419
+    (certAll_cons cert_3420
+    (certAll_cons cert_3426
+    (certAll_cons cert_3427 certAll_nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_2_4 : TripleOK 2 2 4 :=
-  certAt_dispatch (keys := [[4, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0], [4, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0], [4, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0], [4, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0], [4, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], [4, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0], [4, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [4, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0], [4, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0], [3, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0], [3, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0], [3, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0], [3, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0], [3, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [3, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0], [2, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0], [2, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0], [2, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0], [3, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0], [3, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], [3, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0], [3, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [3, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0], [3, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0], [2, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0], [2, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0], [2, 2, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [2, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0], [1, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0], [1, 2, 0, 1, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0], [2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0], [2, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0], [2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0], [1, 2, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0], [1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0], [0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0], [3, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0], [3, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0], [3, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0], [3, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0], [3, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0], [3, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0], [2, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0, 1, 1, 0, 0], [2, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0], [2, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0], [2, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [1, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 1, 1, 0, 0], [1, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0], [2, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0], [2, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0], [2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0], [1, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0], [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0], [2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0], [2, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0], [2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0], [1, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 2, 0, 0], [1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0], [0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0]])
+  certAt_dispatch (keys := natss% "[4,2,0,0,0,2,0,2,0,0,0,2,0,0,0][4,1,0,0,0,2,0,1,0,1,0,2,0,0,0][4,0,0,0,0,2,0,0,0,2,0,2,0,0,0][4,2,0,1,0,1,0,2,0,0,0,1,0,1,0][4,1,0,1,0,1,0,1,0,1,0,1,0,1,0][4,0,0,1,0,1,0,0,0,2,0,1,0,1,0][4,2,0,2,0,0,0,2,0,0,0,0,0,2,0][4,1,0,2,0,0,0,1,0,1,0,0,0,2,0][4,0,0,2,0,0,0,0,0,2,0,0,0,2,0][3,2,0,0,0,2,0,1,1,0,0,2,0,0,0][3,1,0,0,0,2,0,0,1,1,0,2,0,0,0][3,2,0,1,0,1,0,1,1,0,0,1,0,1,0][3,1,0,1,0,1,0,0,1,1,0,1,0,1,0][3,2,0,2,0,0,0,1,1,0,0,0,0,2,0][3,1,0,2,0,0,0,0,1,1,0,0,0,2,0][2,2,0,0,0,2,0,0,2,0,0,2,0,0,0][2,2,0,1,0,1,0,0,2,0,0,1,0,1,0][2,2,0,2,0,0,0,0,2,0,0,0,0,2,0][3,2,0,0,1,1,0,2,0,0,0,1,0,1,0][3,1,0,0,1,1,0,1,0,1,0,1,0,1,0][3,0,0,0,1,1,0,0,0,2,0,1,0,1,0][3,2,0,1,1,0,0,2,0,0,0,0,0,2,0][3,1,0,1,1,0,0,1,0,1,0,0,0,2,0][3,0,0,1,1,0,0,0,0,2,0,0,0,2,0][2,2,0,0,1,1,0,1,1,0,0,1,0,1,0][2,1,0,0,1,1,0,0,1,1,0,1,0,1,0][2,2,0,1,1,0,0,1,1,0,0,0,0,2,0][2,1,0,1,1,0,0,0,1,1,0,0,0,2,0][1,2,0,0,1,1,0,0,2,0,0,1,0,1,0][1,2,0,1,1,0,0,0,2,0,0,0,0,2,0][2,2,0,0,2,0,0,2,0,0,0,0,0,2,0][2,1,0,0,2,0,0,1,0,1,0,0,0,2,0][2,0,0,0,2,0,0,0,0,2,0,0,0,2,0][1,2,0,0,2,0,0,1,1,0,0,0,0,2,0][1,1,0,0,2,0,0,0,1,1,0,0,0,2,0][0,2,0,0,2,0,0,0,2,0,0,0,0,2,0][3,2,0,0,0,2,0,2,0,0,0,1,1,0,0][3,1,0,0,0,2,0,1,0,1,0,1,1,0,0][3,0,0,0,0,2,0,0,0,2,0,1,1,0,0][3,2,0,1,0,1,0,2,0,0,0,0,1,1,0][3,1,0,1,0,1,0,1,0,1,0,0,1,1,0][3,0,0,1,0,1,0,0,0,2,0,0,1,1,0][2,2,0,0,0,2,0,1,1,0,0,1,1,0,0][2,1,0,0,0,2,0,0,1,1,0,1,1,0,0][2,2,0,1,0,1,0,1,1,0,0,0,1,1,0][2,1,0,1,0,1,0,0,1,1,0,0,1,1,0][1,2,0,0,0,2,0,0,2,0,0,1,1,0,0][1,2,0,1,0,1,0,0,2,0,0,0,1,1,0][2,2,0,0,1,1,0,2,0,0,0,0,1,1,0][2,1,0,0,1,1,0,1,0,1,0,0,1,1,0][2,0,0,0,1,1,0,0,0,2,0,0,1,1,0][1,2,0,0,1,1,0,1,1,0,0,0,1,1,0][1,1,0,0,1,1,0,0,1,1,0,0,1,1,0][0,2,0,0,1,1,0,0,2,0,0,0,1,1,0][2,2,0,0,0,2,0,2,0,0,0,0,2,0,0][2,1,0,0,0,2,0,1,0,1,0,0,2,0,0][2,0,0,0,0,2,0,0,0,2,0,0,2,0,0][1,2,0,0,0,2,0,1,1,0,0,0,2,0,0][1,1,0,0,0,2,0,0,1,1,0,0,2,0,0][0,2,0,0,0,2,0,0,2,0,0,0,2,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_30, cert_33, cert_36, cert_53, cert_56, cert_59, cert_65, cert_68, cert_70, cert_103, cert_106, cert_121, cert_124, cert_131, cert_133, cert_154, cert_167, cert_173, cert_241, cert_243, cert_245, cert_248, cert_250, cert_252, cert_291, cert_293, cert_297, cert_299, cert_326, cert_330, cert_379, cert_380, cert_381, cert_409, cert_410, cert_430, cert_487, cert_489, cert_491, cert_500, cert_502, cert_504, cert_526, cert_528, cert_535, cert_537, cert_549, cert_554, cert_584, cert_585, cert_586, cert_606, cert_607, cert_618, cert_658, cert_659, cert_660, cert_673, cert_674, cert_679])
+    (certAll_cons cert_30
+    (certAll_cons cert_33
+    (certAll_cons cert_36
+    (certAll_cons cert_53
+    (certAll_cons cert_56
+    (certAll_cons cert_59
+    (certAll_cons cert_65
+    (certAll_cons cert_68
+    (certAll_cons cert_70
+    (certAll_cons cert_103
+    (certAll_cons cert_106
+    (certAll_cons cert_121
+    (certAll_cons cert_124
+    (certAll_cons cert_131
+    (certAll_cons cert_133
+    (certAll_cons cert_154
+    (certAll_cons cert_167
+    (certAll_cons cert_173
+    (certAll_cons cert_241
+    (certAll_cons cert_243
+    (certAll_cons cert_245
+    (certAll_cons cert_248
+    (certAll_cons cert_250
+    (certAll_cons cert_252
+    (certAll_cons cert_291
+    (certAll_cons cert_293
+    (certAll_cons cert_297
+    (certAll_cons cert_299
+    (certAll_cons cert_326
+    (certAll_cons cert_330
+    (certAll_cons cert_379
+    (certAll_cons cert_380
+    (certAll_cons cert_381
+    (certAll_cons cert_409
+    (certAll_cons cert_410
+    (certAll_cons cert_430
+    (certAll_cons cert_487
+    (certAll_cons cert_489
+    (certAll_cons cert_491
+    (certAll_cons cert_500
+    (certAll_cons cert_502
+    (certAll_cons cert_504
+    (certAll_cons cert_526
+    (certAll_cons cert_528
+    (certAll_cons cert_535
+    (certAll_cons cert_537
+    (certAll_cons cert_549
+    (certAll_cons cert_554
+    (certAll_cons cert_584
+    (certAll_cons cert_585
+    (certAll_cons cert_586
+    (certAll_cons cert_606
+    (certAll_cons cert_607
+    (certAll_cons cert_618
+    (certAll_cons cert_658
+    (certAll_cons cert_659
+    (certAll_cons cert_660
+    (certAll_cons cert_673
+    (certAll_cons cert_674
+    (certAll_cons cert_679 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_3_0 : TripleOK 2 3 0 :=
-  certAt_dispatch (keys := [[0, 0, 3, 1, 0, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [0, 0, 2, 1, 0, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0], [0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0], [0, 0, 3, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [0, 0, 2, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1]])
+  certAt_dispatch (keys := natss% "[0,0,3,1,0,0,1,2,0,0,0,2,0,0,0][0,0,2,1,0,0,1,1,0,0,1,2,0,0,0][0,0,1,1,0,0,1,0,0,0,2,2,0,0,0][0,0,3,2,0,0,0,2,0,0,0,1,0,0,1][0,0,2,2,0,0,0,1,0,0,1,1,0,0,1][0,0,1,2,0,0,0,0,0,0,2,1,0,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_2797, cert_2983, cert_3018, cert_3626, cert_3747, cert_3766])
+    (certAll_cons cert_2797
+    (certAll_cons cert_2983
+    (certAll_cons cert_3018
+    (certAll_cons cert_3626
+    (certAll_cons cert_3747
+    (certAll_cons cert_3766 certAll_nil))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_3_1 : TripleOK 2 3 1 :=
-  certAt_dispatch (keys := [[1, 0, 3, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [1, 0, 3, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [0, 0, 3, 1, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [0, 0, 3, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [0, 0, 3, 0, 1, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [0, 0, 3, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [0, 0, 3, 1, 0, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [0, 0, 3, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 2, 1, 0, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0], [1, 0, 2, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [0, 0, 2, 1, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0], [0, 0, 2, 2, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0], [0, 0, 2, 0, 1, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0], [0, 0, 2, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [0, 0, 2, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 2, 2, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0], [1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0], [0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0], [0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0], [0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0], [1, 1, 2, 1, 0, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [1, 0, 2, 1, 0, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0], [0, 1, 2, 1, 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0], [0, 0, 2, 1, 0, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0], [0, 1, 2, 0, 1, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [0, 0, 2, 0, 1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0], [0, 1, 2, 1, 0, 0, 1, 2, 0, 0, 0, 1, 1, 0, 0], [0, 0, 2, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0], [1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0], [0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0], [0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0], [0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0], [0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0], [1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0], [0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 2, 2, 0, 0, 0], [0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 2, 1, 1, 0, 0], [1, 1, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [1, 0, 2, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [0, 1, 2, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1], [0, 1, 2, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [0, 0, 2, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [0, 1, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1], [0, 0, 2, 2, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1], [1, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [1, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1], [0, 1, 1, 2, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], [0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1], [0, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1], [0, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1], [1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1], [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1], [0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 1]])
+  certAt_dispatch (keys := natss% "[1,0,3,1,0,1,0,2,0,0,0,2,0,0,0][1,0,3,2,0,0,0,2,0,0,0,1,0,1,0][0,0,3,1,0,1,0,1,1,0,0,2,0,0,0][0,0,3,2,0,0,0,1,1,0,0,1,0,1,0][0,0,3,0,1,1,0,2,0,0,0,2,0,0,0][0,0,3,1,1,0,0,2,0,0,0,1,0,1,0][0,0,3,1,0,1,0,2,0,0,0,1,1,0,0][0,0,3,2,0,0,0,2,0,0,0,0,1,1,0][1,0,2,1,0,1,0,1,0,0,1,2,0,0,0][1,0,2,2,0,0,0,1,0,0,1,1,0,1,0][0,0,2,1,0,1,0,0,1,0,1,2,0,0,0][0,0,2,2,0,0,0,0,1,0,1,1,0,1,0][0,0,2,0,1,1,0,1,0,0,1,2,0,0,0][0,0,2,1,1,0,0,1,0,0,1,1,0,1,0][0,0,2,1,0,1,0,1,0,0,1,1,1,0,0][0,0,2,2,0,0,0,1,0,0,1,0,1,1,0][1,0,1,1,0,1,0,0,0,0,2,2,0,0,0][1,0,1,2,0,0,0,0,0,0,2,1,0,1,0][0,0,1,0,1,1,0,0,0,0,2,2,0,0,0][0,0,1,1,1,0,0,0,0,0,2,1,0,1,0][0,0,1,1,0,1,0,0,0,0,2,1,1,0,0][0,0,1,2,0,0,0,0,0,0,2,0,1,1,0][1,1,2,1,0,0,1,2,0,0,0,2,0,0,0][1,0,2,1,0,0,1,1,0,1,0,2,0,0,0][0,1,2,1,0,0,1,1,1,0,0,2,0,0,0][0,0,2,1,0,0,1,0,1,1,0,2,0,0,0][0,1,2,0,1,0,1,2,0,0,0,2,0,0,0][0,0,2,0,1,0,1,1,0,1,0,2,0,0,0][0,1,2,1,0,0,1,2,0,0,0,1,1,0,0][0,0,2,1,0,0,1,1,0,1,0,1,1,0,0][1,1,1,1,0,0,1,1,0,0,1,2,0,0,0][1,0,1,1,0,0,1,0,0,1,1,2,0,0,0][0,1,1,1,0,0,1,0,1,0,1,2,0,0,0][0,1,1,0,1,0,1,1,0,0,1,2,0,0,0][0,0,1,0,1,0,1,0,0,1,1,2,0,0,0][0,1,1,1,0,0,1,1,0,0,1,1,1,0,0][0,0,1,1,0,0,1,0,0,1,1,1,1,0,0][1,1,0,1,0,0,1,0,0,0,2,2,0,0,0][0,1,0,0,1,0,1,0,0,0,2,2,0,0,0][0,1,0,1,0,0,1,0,0,0,2,1,1,0,0][1,1,2,2,0,0,0,2,0,0,0,1,0,0,1][1,0,2,2,0,0,0,1,0,1,0,1,0,0,1][0,1,2,2,0,0,0,1,1,0,0,1,0,0,1][0,0,2,2,0,0,0,0,1,1,0,1,0,0,1][0,1,2,1,1,0,0,2,0,0,0,1,0,0,1][0,0,2,1,1,0,0,1,0,1,0,1,0,0,1][0,1,2,2,0,0,0,2,0,0,0,0,1,0,1][0,0,2,2,0,0,0,1,0,1,0,0,1,0,1][1,1,1,2,0,0,0,1,0,0,1,1,0,0,1][1,0,1,2,0,0,0,0,0,1,1,1,0,0,1][0,1,1,2,0,0,0,0,1,0,1,1,0,0,1][0,1,1,1,1,0,0,1,0,0,1,1,0,0,1][0,0,1,1,1,0,0,0,0,1,1,1,0,0,1][0,1,1,2,0,0,0,1,0,0,1,0,1,0,1][0,0,1,2,0,0,0,0,0,1,1,0,1,0,1][1,1,0,2,0,0,0,0,0,0,2,1,0,0,1][0,1,0,1,1,0,0,0,0,0,2,1,0,0,1][0,1,0,2,0,0,0,0,0,0,2,0,1,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1470, cert_1473, cert_1485, cert_1488, cert_1500, cert_1502, cert_1512, cert_1514, cert_2040, cert_2043, cert_2052, cert_2054, cert_2064, cert_2066, cert_2074, cert_2076, cert_2192, cert_2194, cert_2208, cert_2210, cert_2215, cert_2216, cert_2750, cert_2754, cert_2764, cert_2768, cert_2777, cert_2780, cert_2786, cert_2789, cert_2941, cert_2945, cert_2954, cert_2964, cert_2967, cert_2973, cert_2976, cert_2987, cert_3003, cert_3011, cert_3584, cert_3588, cert_3597, cert_3600, cert_3607, cert_3610, cert_3616, cert_3619, cert_3716, cert_3719, cert_3726, cert_3732, cert_3735, cert_3740, cert_3742, cert_3750, cert_3758, cert_3763])
+    (certAll_cons cert_1470
+    (certAll_cons cert_1473
+    (certAll_cons cert_1485
+    (certAll_cons cert_1488
+    (certAll_cons cert_1500
+    (certAll_cons cert_1502
+    (certAll_cons cert_1512
+    (certAll_cons cert_1514
+    (certAll_cons cert_2040
+    (certAll_cons cert_2043
+    (certAll_cons cert_2052
+    (certAll_cons cert_2054
+    (certAll_cons cert_2064
+    (certAll_cons cert_2066
+    (certAll_cons cert_2074
+    (certAll_cons cert_2076
+    (certAll_cons cert_2192
+    (certAll_cons cert_2194
+    (certAll_cons cert_2208
+    (certAll_cons cert_2210
+    (certAll_cons cert_2215
+    (certAll_cons cert_2216
+    (certAll_cons cert_2750
+    (certAll_cons cert_2754
+    (certAll_cons cert_2764
+    (certAll_cons cert_2768
+    (certAll_cons cert_2777
+    (certAll_cons cert_2780
+    (certAll_cons cert_2786
+    (certAll_cons cert_2789
+    (certAll_cons cert_2941
+    (certAll_cons cert_2945
+    (certAll_cons cert_2954
+    (certAll_cons cert_2964
+    (certAll_cons cert_2967
+    (certAll_cons cert_2973
+    (certAll_cons cert_2976
+    (certAll_cons cert_2987
+    (certAll_cons cert_3003
+    (certAll_cons cert_3011
+    (certAll_cons cert_3584
+    (certAll_cons cert_3588
+    (certAll_cons cert_3597
+    (certAll_cons cert_3600
+    (certAll_cons cert_3607
+    (certAll_cons cert_3610
+    (certAll_cons cert_3616
+    (certAll_cons cert_3619
+    (certAll_cons cert_3716
+    (certAll_cons cert_3719
+    (certAll_cons cert_3726
+    (certAll_cons cert_3732
+    (certAll_cons cert_3735
+    (certAll_cons cert_3740
+    (certAll_cons cert_3742
+    (certAll_cons cert_3750
+    (certAll_cons cert_3758
+    (certAll_cons cert_3763 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_3_2 : TripleOK 2 3 2 :=
-  certAt_dispatch (keys := [[2, 1, 2, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [2, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0], [2, 1, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [2, 0, 2, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [1, 1, 2, 1, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [1, 0, 2, 1, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0], [1, 1, 2, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [1, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [0, 1, 2, 1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0], [0, 1, 2, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0], [1, 1, 2, 0, 1, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [1, 0, 2, 0, 1, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0], [1, 1, 2, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [1, 0, 2, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [0, 1, 2, 0, 1, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [0, 0, 2, 0, 1, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0], [0, 1, 2, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [0, 0, 2, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [0, 1, 2, 0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [0, 0, 2, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [1, 1, 2, 1, 0, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [1, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [1, 0, 2, 2, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 2, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0], [0, 0, 2, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0], [0, 1, 2, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0], [0, 0, 2, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 1, 2, 0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [0, 0, 2, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0], [0, 1, 2, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [0, 0, 2, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [0, 1, 2, 1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0], [0, 0, 2, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0], [2, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0], [2, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0], [2, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [2, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0], [1, 1, 1, 2, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0], [1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0], [1, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0], [1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0], [0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0], [0, 1, 1, 0, 2, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [0, 0, 1, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0], [1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0], [1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0], [1, 1, 1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0], [1, 0, 1, 2, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0], [0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0], [0, 1, 1, 2, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0], [0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0], [0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0], [0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 0, 2, 0, 0], [0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0], [2, 1, 0, 1, 0, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0], [2, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0], [1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2, 2, 0, 0, 0], [1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0], [0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 2, 1, 0, 1, 0], [1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0], [1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0], [0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 2, 1, 1, 0, 0], [0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0], [0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 2, 0, 2, 0, 0], [2, 2, 1, 1, 0, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [2, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0], [2, 0, 1, 1, 0, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0], [1, 2, 1, 1, 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0], [1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0], [0, 2, 1, 1, 0, 0, 1, 0, 2, 0, 0, 2, 0, 0, 0], [1, 2, 1, 0, 1, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0], [1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0], [0, 2, 1, 0, 1, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0], [0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0], [1, 2, 1, 1, 0, 0, 1, 2, 0, 0, 0, 1, 1, 0, 0], [1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 1, 1, 0, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0], [0, 2, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0], [0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0], [0, 2, 1, 0, 1, 0, 1, 2, 0, 0, 0, 1, 1, 0, 0], [0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0], [0, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0], [0, 2, 1, 1, 0, 0, 1, 2, 0, 0, 0, 0, 2, 0, 0], [0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0], [0, 0, 1, 1, 0, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0], [2, 2, 0, 1, 0, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0], [2, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0], [1, 2, 0, 1, 0, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0], [1, 2, 0, 0, 1, 0, 1, 1, 0, 0, 1, 2, 0, 0, 0], [1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 2, 0, 0, 0], [0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 2, 0, 0, 0], [1, 2, 0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0], [1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0], [0, 2, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0], [0, 2, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0], [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 0], [0, 2, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 2, 0, 0], [0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0], [2, 2, 1, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [2, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [2, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1], [1, 2, 1, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1], [0, 2, 1, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 1], [1, 2, 1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1], [0, 2, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1], [0, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [0, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1], [1, 2, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1], [1, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1], [1, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1], [0, 2, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1], [0, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1], [0, 2, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1], [0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1], [0, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1], [2, 2, 0, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [2, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1], [1, 2, 0, 2, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], [1, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1], [0, 2, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1], [0, 2, 0, 0, 2, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1], [0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1], [1, 2, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1], [1, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1], [0, 2, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1], [0, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1], [0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1]])
+  certAt_dispatch (keys := natss% "[2,1,2,1,0,1,0,2,0,0,0,2,0,0,0][2,0,2,1,0,1,0,1,0,1,0,2,0,0,0][2,1,2,2,0,0,0,2,0,0,0,1,0,1,0][2,0,2,2,0,0,0,1,0,1,0,1,0,1,0][1,1,2,1,0,1,0,1,1,0,0,2,0,0,0][1,0,2,1,0,1,0,0,1,1,0,2,0,0,0][1,1,2,2,0,0,0,1,1,0,0,1,0,1,0][1,0,2,2,0,0,0,0,1,1,0,1,0,1,0][0,1,2,1,0,1,0,0,2,0,0,2,0,0,0][0,1,2,2,0,0,0,0,2,0,0,1,0,1,0][1,1,2,0,1,1,0,2,0,0,0,2,0,0,0][1,0,2,0,1,1,0,1,0,1,0,2,0,0,0][1,1,2,1,1,0,0,2,0,0,0,1,0,1,0][1,0,2,1,1,0,0,1,0,1,0,1,0,1,0][0,1,2,0,1,1,0,1,1,0,0,2,0,0,0][0,0,2,0,1,1,0,0,1,1,0,2,0,0,0][0,1,2,1,1,0,0,1,1,0,0,1,0,1,0][0,0,2,1,1,0,0,0,1,1,0,1,0,1,0][0,1,2,0,2,0,0,2,0,0,0,1,0,1,0][0,0,2,0,2,0,0,1,0,1,0,1,0,1,0][1,1,2,1,0,1,0,2,0,0,0,1,1,0,0][1,0,2,1,0,1,0,1,0,1,0,1,1,0,0][1,1,2,2,0,0,0,2,0,0,0,0,1,1,0][1,0,2,2,0,0,0,1,0,1,0,0,1,1,0][0,1,2,1,0,1,0,1,1,0,0,1,1,0,0][0,0,2,1,0,1,0,0,1,1,0,1,1,0,0][0,1,2,2,0,0,0,1,1,0,0,0,1,1,0][0,0,2,2,0,0,0,0,1,1,0,0,1,1,0][0,1,2,0,1,1,0,2,0,0,0,1,1,0,0][0,0,2,0,1,1,0,1,0,1,0,1,1,0,0][0,1,2,1,1,0,0,2,0,0,0,0,1,1,0][0,0,2,1,1,0,0,1,0,1,0,0,1,1,0][0,1,2,1,0,1,0,2,0,0,0,0,2,0,0][0,0,2,1,0,1,0,1,0,1,0,0,2,0,0][2,1,1,1,0,1,0,1,0,0,1,2,0,0,0][2,0,1,1,0,1,0,0,0,1,1,2,0,0,0][2,1,1,2,0,0,0,1,0,0,1,1,0,1,0][2,0,1,2,0,0,0,0,0,1,1,1,0,1,0][1,1,1,1,0,1,0,0,1,0,1,2,0,0,0][1,1,1,2,0,0,0,0,1,0,1,1,0,1,0][1,1,1,0,1,1,0,1,0,0,1,2,0,0,0][1,0,1,0,1,1,0,0,0,1,1,2,0,0,0][1,1,1,1,1,0,0,1,0,0,1,1,0,1,0][1,0,1,1,1,0,0,0,0,1,1,1,0,1,0][0,1,1,0,1,1,0,0,1,0,1,2,0,0,0][0,1,1,1,1,0,0,0,1,0,1,1,0,1,0][0,1,1,0,2,0,0,1,0,0,1,1,0,1,0][0,0,1,0,2,0,0,0,0,1,1,1,0,1,0][1,1,1,1,0,1,0,1,0,0,1,1,1,0,0][1,0,1,1,0,1,0,0,0,1,1,1,1,0,0][1,1,1,2,0,0,0,1,0,0,1,0,1,1,0][1,0,1,2,0,0,0,0,0,1,1,0,1,1,0][0,1,1,1,0,1,0,0,1,0,1,1,1,0,0][0,1,1,2,0,0,0,0,1,0,1,0,1,1,0][0,1,1,0,1,1,0,1,0,0,1,1,1,0,0][0,0,1,0,1,1,0,0,0,1,1,1,1,0,0][0,1,1,1,1,0,0,1,0,0,1,0,1,1,0][0,0,1,1,1,0,0,0,0,1,1,0,1,1,0][0,1,1,1,0,1,0,1,0,0,1,0,2,0,0][0,0,1,1,0,1,0,0,0,1,1,0,2,0,0][2,1,0,1,0,1,0,0,0,0,2,2,0,0,0][2,1,0,2,0,0,0,0,0,0,2,1,0,1,0][1,1,0,0,1,1,0,0,0,0,2,2,0,0,0][1,1,0,1,1,0,0,0,0,0,2,1,0,1,0][0,1,0,0,2,0,0,0,0,0,2,1,0,1,0][1,1,0,1,0,1,0,0,0,0,2,1,1,0,0][1,1,0,2,0,0,0,0,0,0,2,0,1,1,0][0,1,0,0,1,1,0,0,0,0,2,1,1,0,0][0,1,0,1,1,0,0,0,0,0,2,0,1,1,0][0,1,0,1,0,1,0,0,0,0,2,0,2,0,0][2,2,1,1,0,0,1,2,0,0,0,2,0,0,0][2,1,1,1,0,0,1,1,0,1,0,2,0,0,0][2,0,1,1,0,0,1,0,0,2,0,2,0,0,0][1,2,1,1,0,0,1,1,1,0,0,2,0,0,0][1,1,1,1,0,0,1,0,1,1,0,2,0,0,0][0,2,1,1,0,0,1,0,2,0,0,2,0,0,0][1,2,1,0,1,0,1,2,0,0,0,2,0,0,0][1,1,1,0,1,0,1,1,0,1,0,2,0,0,0][1,0,1,0,1,0,1,0,0,2,0,2,0,0,0][0,2,1,0,1,0,1,1,1,0,0,2,0,0,0][0,1,1,0,1,0,1,0,1,1,0,2,0,0,0][1,2,1,1,0,0,1,2,0,0,0,1,1,0,0][1,1,1,1,0,0,1,1,0,1,0,1,1,0,0][1,0,1,1,0,0,1,0,0,2,0,1,1,0,0][0,2,1,1,0,0,1,1,1,0,0,1,1,0,0][0,1,1,1,0,0,1,0,1,1,0,1,1,0,0][0,2,1,0,1,0,1,2,0,0,0,1,1,0,0][0,1,1,0,1,0,1,1,0,1,0,1,1,0,0][0,0,1,0,1,0,1,0,0,2,0,1,1,0,0][0,2,1,1,0,0,1,2,0,0,0,0,2,0,0][0,1,1,1,0,0,1,1,0,1,0,0,2,0,0][0,0,1,1,0,0,1,0,0,2,0,0,2,0,0][2,2,0,1,0,0,1,1,0,0,1,2,0,0,0][2,1,0,1,0,0,1,0,0,1,1,2,0,0,0][1,2,0,1,0,0,1,0,1,0,1,2,0,0,0][1,2,0,0,1,0,1,1,0,0,1,2,0,0,0][1,1,0,0,1,0,1,0,0,1,1,2,0,0,0][0,2,0,0,1,0,1,0,1,0,1,2,0,0,0][1,2,0,1,0,0,1,1,0,0,1,1,1,0,0][1,1,0,1,0,0,1,0,0,1,1,1,1,0,0][0,2,0,1,0,0,1,0,1,0,1,1,1,0,0][0,2,0,0,1,0,1,1,0,0,1,1,1,0,0][0,1,0,0,1,0,1,0,0,1,1,1,1,0,0][0,2,0,1,0,0,1,1,0,0,1,0,2,0,0][0,1,0,1,0,0,1,0,0,1,1,0,2,0,0][2,2,1,2,0,0,0,2,0,0,0,1,0,0,1][2,1,1,2,0,0,0,1,0,1,0,1,0,0,1][2,0,1,2,0,0,0,0,0,2,0,1,0,0,1][1,2,1,2,0,0,0,1,1,0,0,1,0,0,1][1,1,1,2,0,0,0,0,1,1,0,1,0,0,1][0,2,1,2,0,0,0,0,2,0,0,1,0,0,1][1,2,1,1,1,0,0,2,0,0,0,1,0,0,1][1,1,1,1,1,0,0,1,0,1,0,1,0,0,1][1,0,1,1,1,0,0,0,0,2,0,1,0,0,1][0,2,1,1,1,0,0,1,1,0,0,1,0,0,1][0,1,1,1,1,0,0,0,1,1,0,1,0,0,1][0,2,1,0,2,0,0,2,0,0,0,1,0,0,1][0,1,1,0,2,0,0,1,0,1,0,1,0,0,1][0,0,1,0,2,0,0,0,0,2,0,1,0,0,1][1,2,1,2,0,0,0,2,0,0,0,0,1,0,1][1,1,1,2,0,0,0,1,0,1,0,0,1,0,1][1,0,1,2,0,0,0,0,0,2,0,0,1,0,1][0,2,1,2,0,0,0,1,1,0,0,0,1,0,1][0,1,1,2,0,0,0,0,1,1,0,0,1,0,1][0,2,1,1,1,0,0,2,0,0,0,0,1,0,1][0,1,1,1,1,0,0,1,0,1,0,0,1,0,1][0,0,1,1,1,0,0,0,0,2,0,0,1,0,1][2,2,0,2,0,0,0,1,0,0,1,1,0,0,1][2,1,0,2,0,0,0,0,0,1,1,1,0,0,1][1,2,0,2,0,0,0,0,1,0,1,1,0,0,1][1,2,0,1,1,0,0,1,0,0,1,1,0,0,1][1,1,0,1,1,0,0,0,0,1,1,1,0,0,1][0,2,0,1,1,0,0,0,1,0,1,1,0,0,1][0,2,0,0,2,0,0,1,0,0,1,1,0,0,1][0,1,0,0,2,0,0,0,0,1,1,1,0,0,1][1,2,0,2,0,0,0,1,0,0,1,0,1,0,1][1,1,0,2,0,0,0,0,0,1,1,0,1,0,1][0,2,0,2,0,0,0,0,1,0,1,0,1,0,1][0,2,0,1,1,0,0,1,0,0,1,0,1,0,1][0,1,0,1,1,0,0,0,0,1,1,0,1,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1233, cert_1237, cert_1243, cert_1247, cert_1266, cert_1270, cert_1275, cert_1278, cert_1292, cert_1299, cert_1317, cert_1320, cert_1324, cert_1327, cert_1344, cert_1347, cert_1351, cert_1354, cert_1374, cert_1376, cert_1389, cert_1392, cert_1396, cert_1399, cert_1412, cert_1415, cert_1418, cert_1420, cert_1433, cert_1435, cert_1437, cert_1439, cert_1449, cert_1451, cert_1865, cert_1869, cert_1874, cert_1877, cert_1891, cert_1898, cert_1924, cert_1927, cert_1931, cert_1934, cert_1947, cert_1953, cert_1972, cert_1974, cert_1984, cert_1987, cert_1990, cert_1992, cert_2000, cert_2004, cert_2013, cert_2015, cert_2017, cert_2019, cert_2025, cert_2027, cert_2090, cert_2097, cert_2123, cert_2129, cert_2156, cert_2164, cert_2168, cert_2177, cert_2180, cert_2183, cert_2573, cert_2577, cert_2581, cert_2602, cert_2606, cert_2628, cert_2647, cert_2650, cert_2653, cert_2667, cert_2670, cert_2695, cert_2698, cert_2701, cert_2714, cert_2717, cert_2730, cert_2732, cert_2734, cert_2739, cert_2741, cert_2743, cert_2801, cert_2805, cert_2827, cert_2856, cert_2859, cert_2875, cert_2900, cert_2903, cert_2916, cert_2925, cert_2927, cert_2933, cert_2935, cert_3444, cert_3448, cert_3451, cert_3470, cert_3473, cert_3489, cert_3499, cert_3502, cert_3505, cert_3518, cert_3521, cert_3534, cert_3536, cert_3538, cert_3543, cert_3546, cert_3548, cert_3559, cert_3561, cert_3568, cert_3570, cert_3572, cert_3630, cert_3633, cert_3649, cert_3662, cert_3665, cert_3678, cert_3687, cert_3689, cert_3695, cert_3697, cert_3704, cert_3707, cert_3709])
+    (certAll_cons cert_1233
+    (certAll_cons cert_1237
+    (certAll_cons cert_1243
+    (certAll_cons cert_1247
+    (certAll_cons cert_1266
+    (certAll_cons cert_1270
+    (certAll_cons cert_1275
+    (certAll_cons cert_1278
+    (certAll_cons cert_1292
+    (certAll_cons cert_1299
+    (certAll_cons cert_1317
+    (certAll_cons cert_1320
+    (certAll_cons cert_1324
+    (certAll_cons cert_1327
+    (certAll_cons cert_1344
+    (certAll_cons cert_1347
+    (certAll_cons cert_1351
+    (certAll_cons cert_1354
+    (certAll_cons cert_1374
+    (certAll_cons cert_1376
+    (certAll_cons cert_1389
+    (certAll_cons cert_1392
+    (certAll_cons cert_1396
+    (certAll_cons cert_1399
+    (certAll_cons cert_1412
+    (certAll_cons cert_1415
+    (certAll_cons cert_1418
+    (certAll_cons cert_1420
+    (certAll_cons cert_1433
+    (certAll_cons cert_1435
+    (certAll_cons cert_1437
+    (certAll_cons cert_1439
+    (certAll_cons cert_1449
+    (certAll_cons cert_1451
+    (certAll_cons cert_1865
+    (certAll_cons cert_1869
+    (certAll_cons cert_1874
+    (certAll_cons cert_1877
+    (certAll_cons cert_1891
+    (certAll_cons cert_1898
+    (certAll_cons cert_1924
+    (certAll_cons cert_1927
+    (certAll_cons cert_1931
+    (certAll_cons cert_1934
+    (certAll_cons cert_1947
+    (certAll_cons cert_1953
+    (certAll_cons cert_1972
+    (certAll_cons cert_1974
+    (certAll_cons cert_1984
+    (certAll_cons cert_1987
+    (certAll_cons cert_1990
+    (certAll_cons cert_1992
+    (certAll_cons cert_2000
+    (certAll_cons cert_2004
+    (certAll_cons cert_2013
+    (certAll_cons cert_2015
+    (certAll_cons cert_2017
+    (certAll_cons cert_2019
+    (certAll_cons cert_2025
+    (certAll_cons cert_2027
+    (certAll_cons cert_2090
+    (certAll_cons cert_2097
+    (certAll_cons cert_2123
+    (certAll_cons cert_2129
+    (certAll_cons cert_2156
+    (certAll_cons cert_2164
+    (certAll_cons cert_2168
+    (certAll_cons cert_2177
+    (certAll_cons cert_2180
+    (certAll_cons cert_2183
+    (certAll_cons cert_2573
+    (certAll_cons cert_2577
+    (certAll_cons cert_2581
+    (certAll_cons cert_2602
+    (certAll_cons cert_2606
+    (certAll_cons cert_2628
+    (certAll_cons cert_2647
+    (certAll_cons cert_2650
+    (certAll_cons cert_2653
+    (certAll_cons cert_2667
+    (certAll_cons cert_2670
+    (certAll_cons cert_2695
+    (certAll_cons cert_2698
+    (certAll_cons cert_2701
+    (certAll_cons cert_2714
+    (certAll_cons cert_2717
+    (certAll_cons cert_2730
+    (certAll_cons cert_2732
+    (certAll_cons cert_2734
+    (certAll_cons cert_2739
+    (certAll_cons cert_2741
+    (certAll_cons cert_2743
+    (certAll_cons cert_2801
+    (certAll_cons cert_2805
+    (certAll_cons cert_2827
+    (certAll_cons cert_2856
+    (certAll_cons cert_2859
+    (certAll_cons cert_2875
+    (certAll_cons cert_2900
+    (certAll_cons cert_2903
+    (certAll_cons cert_2916
+    (certAll_cons cert_2925
+    (certAll_cons cert_2927
+    (certAll_cons cert_2933
+    (certAll_cons cert_2935
+    (certAll_cons cert_3444
+    (certAll_cons cert_3448
+    (certAll_cons cert_3451
+    (certAll_cons cert_3470
+    (certAll_cons cert_3473
+    (certAll_cons cert_3489
+    (certAll_cons cert_3499
+    (certAll_cons cert_3502
+    (certAll_cons cert_3505
+    (certAll_cons cert_3518
+    (certAll_cons cert_3521
+    (certAll_cons cert_3534
+    (certAll_cons cert_3536
+    (certAll_cons cert_3538
+    (certAll_cons cert_3543
+    (certAll_cons cert_3546
+    (certAll_cons cert_3548
+    (certAll_cons cert_3559
+    (certAll_cons cert_3561
+    (certAll_cons cert_3568
+    (certAll_cons cert_3570
+    (certAll_cons cert_3572
+    (certAll_cons cert_3630
+    (certAll_cons cert_3633
+    (certAll_cons cert_3649
+    (certAll_cons cert_3662
+    (certAll_cons cert_3665
+    (certAll_cons cert_3678
+    (certAll_cons cert_3687
+    (certAll_cons cert_3689
+    (certAll_cons cert_3695
+    (certAll_cons cert_3697
+    (certAll_cons cert_3704
+    (certAll_cons cert_3707
+    (certAll_cons cert_3709 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_3_3 : TripleOK 2 3 3 :=
-  certAt_dispatch (keys := [[3, 2, 1, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [3, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0], [3, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0], [3, 2, 1, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [3, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [3, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0], [2, 2, 1, 1, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [2, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0], [2, 2, 1, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [2, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [1, 2, 1, 1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0], [1, 2, 1, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0], [2, 2, 1, 0, 1, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [2, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0], [2, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0], [2, 2, 1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [2, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [2, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0], [1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0], [1, 2, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [0, 2, 1, 0, 1, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0], [0, 2, 1, 1, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0], [1, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [1, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0], [0, 2, 1, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [2, 2, 1, 1, 0, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [2, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0], [2, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0], [2, 2, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [2, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [2, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0], [1, 2, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0], [1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0], [1, 2, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0], [1, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 2, 1, 1, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0], [0, 2, 1, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0], [1, 2, 1, 0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0], [1, 2, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [1, 0, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0], [0, 2, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0], [0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0], [0, 2, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0], [0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 2, 1, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [0, 1, 1, 0, 2, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0], [1, 2, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0], [1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0], [1, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0], [0, 2, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0, 0], [0, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0], [0, 2, 1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0], [0, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0], [0, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0], [3, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0], [3, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0], [3, 2, 0, 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [3, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0], [2, 2, 0, 1, 0, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0], [2, 2, 0, 2, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0], [2, 2, 0, 0, 1, 1, 0, 1, 0, 0, 1, 2, 0, 0, 0], [2, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 2, 0, 0, 0], [2, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [2, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0], [1, 2, 0, 0, 1, 1, 0, 0, 1, 0, 1, 2, 0, 0, 0], [1, 2, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0], [1, 2, 0, 0, 2, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0], [1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0], [0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0], [2, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0], [2, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0], [2, 2, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0], [2, 1, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0], [1, 2, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0], [1, 2, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0], [1, 2, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0], [1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0], [1, 2, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0], [1, 1, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0], [0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0], [0, 2, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0], [0, 2, 0, 0, 2, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0], [0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0], [1, 2, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 2, 0, 0], [1, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0], [0, 2, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0], [0, 2, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 2, 0, 0], [0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0], [3, 3, 0, 1, 0, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [3, 2, 0, 1, 0, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0], [3, 1, 0, 1, 0, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0], [2, 3, 0, 1, 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0], [2, 2, 0, 1, 0, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0], [1, 3, 0, 1, 0, 0, 1, 0, 2, 0, 0, 2, 0, 0, 0], [2, 3, 0, 0, 1, 0, 1, 2, 0, 0, 0, 2, 0, 0, 0], [2, 2, 0, 0, 1, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0], [2, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0], [1, 3, 0, 0, 1, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0], [1, 2, 0, 0, 1, 0, 1, 0, 1, 1, 0, 2, 0, 0, 0], [0, 3, 0, 0, 1, 0, 1, 0, 2, 0, 0, 2, 0, 0, 0], [2, 3, 0, 1, 0, 0, 1, 2, 0, 0, 0, 1, 1, 0, 0], [2, 2, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0], [2, 1, 0, 1, 0, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0], [1, 3, 0, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0], [1, 2, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0], [0, 3, 0, 1, 0, 0, 1, 0, 2, 0, 0, 1, 1, 0, 0], [1, 3, 0, 0, 1, 0, 1, 2, 0, 0, 0, 1, 1, 0, 0], [1, 2, 0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0], [0, 3, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0], [0, 2, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0], [1, 3, 0, 1, 0, 0, 1, 2, 0, 0, 0, 0, 2, 0, 0], [1, 2, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0], [1, 1, 0, 1, 0, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0], [0, 3, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 2, 0, 0], [0, 2, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0], [0, 3, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 2, 0, 0], [0, 2, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0], [0, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0], [3, 3, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [3, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [3, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1], [2, 3, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [2, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1], [1, 3, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 1], [2, 3, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [2, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [2, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1], [1, 3, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1], [0, 3, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 0, 0, 1], [1, 3, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 0, 1], [1, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1], [1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 1, 0, 0, 1], [0, 3, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1], [2, 3, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1], [2, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1], [2, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1], [1, 3, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1], [1, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1], [0, 3, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1], [1, 3, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1], [1, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1], [1, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1], [0, 3, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1], [0, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1], [0, 3, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 0, 1], [0, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1], [0, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1]])
+  certAt_dispatch (keys := natss% "[3,2,1,1,0,1,0,2,0,0,0,2,0,0,0][3,1,1,1,0,1,0,1,0,1,0,2,0,0,0][3,0,1,1,0,1,0,0,0,2,0,2,0,0,0][3,2,1,2,0,0,0,2,0,0,0,1,0,1,0][3,1,1,2,0,0,0,1,0,1,0,1,0,1,0][3,0,1,2,0,0,0,0,0,2,0,1,0,1,0][2,2,1,1,0,1,0,1,1,0,0,2,0,0,0][2,1,1,1,0,1,0,0,1,1,0,2,0,0,0][2,2,1,2,0,0,0,1,1,0,0,1,0,1,0][2,1,1,2,0,0,0,0,1,1,0,1,0,1,0][1,2,1,1,0,1,0,0,2,0,0,2,0,0,0][1,2,1,2,0,0,0,0,2,0,0,1,0,1,0][2,2,1,0,1,1,0,2,0,0,0,2,0,0,0][2,1,1,0,1,1,0,1,0,1,0,2,0,0,0][2,0,1,0,1,1,0,0,0,2,0,2,0,0,0][2,2,1,1,1,0,0,2,0,0,0,1,0,1,0][2,1,1,1,1,0,0,1,0,1,0,1,0,1,0][2,0,1,1,1,0,0,0,0,2,0,1,0,1,0][1,2,1,0,1,1,0,1,1,0,0,2,0,0,0][1,1,1,0,1,1,0,0,1,1,0,2,0,0,0][1,2,1,1,1,0,0,1,1,0,0,1,0,1,0][1,1,1,1,1,0,0,0,1,1,0,1,0,1,0][0,2,1,0,1,1,0,0,2,0,0,2,0,0,0][0,2,1,1,1,0,0,0,2,0,0,1,0,1,0][1,2,1,0,2,0,0,2,0,0,0,1,0,1,0][1,1,1,0,2,0,0,1,0,1,0,1,0,1,0][1,0,1,0,2,0,0,0,0,2,0,1,0,1,0][0,2,1,0,2,0,0,1,1,0,0,1,0,1,0][0,1,1,0,2,0,0,0,1,1,0,1,0,1,0][2,2,1,1,0,1,0,2,0,0,0,1,1,0,0][2,1,1,1,0,1,0,1,0,1,0,1,1,0,0][2,0,1,1,0,1,0,0,0,2,0,1,1,0,0][2,2,1,2,0,0,0,2,0,0,0,0,1,1,0][2,1,1,2,0,0,0,1,0,1,0,0,1,1,0][2,0,1,2,0,0,0,0,0,2,0,0,1,1,0][1,2,1,1,0,1,0,1,1,0,0,1,1,0,0][1,1,1,1,0,1,0,0,1,1,0,1,1,0,0][1,2,1,2,0,0,0,1,1,0,0,0,1,1,0][1,1,1,2,0,0,0,0,1,1,0,0,1,1,0][0,2,1,1,0,1,0,0,2,0,0,1,1,0,0][0,2,1,2,0,0,0,0,2,0,0,0,1,1,0][1,2,1,0,1,1,0,2,0,0,0,1,1,0,0][1,1,1,0,1,1,0,1,0,1,0,1,1,0,0][1,0,1,0,1,1,0,0,0,2,0,1,1,0,0][1,2,1,1,1,0,0,2,0,0,0,0,1,1,0][1,1,1,1,1,0,0,1,0,1,0,0,1,1,0][1,0,1,1,1,0,0,0,0,2,0,0,1,1,0][0,2,1,0,1,1,0,1,1,0,0,1,1,0,0][0,1,1,0,1,1,0,0,1,1,0,1,1,0,0][0,2,1,1,1,0,0,1,1,0,0,0,1,1,0][0,1,1,1,1,0,0,0,1,1,0,0,1,1,0][0,2,1,0,2,0,0,2,0,0,0,0,1,1,0][0,1,1,0,2,0,0,1,0,1,0,0,1,1,0][0,0,1,0,2,0,0,0,0,2,0,0,1,1,0][1,2,1,1,0,1,0,2,0,0,0,0,2,0,0][1,1,1,1,0,1,0,1,0,1,0,0,2,0,0][1,0,1,1,0,1,0,0,0,2,0,0,2,0,0][0,2,1,1,0,1,0,1,1,0,0,0,2,0,0][0,1,1,1,0,1,0,0,1,1,0,0,2,0,0][0,2,1,0,1,1,0,2,0,0,0,0,2,0,0][0,1,1,0,1,1,0,1,0,1,0,0,2,0,0][0,0,1,0,1,1,0,0,0,2,0,0,2,0,0][3,2,0,1,0,1,0,1,0,0,1,2,0,0,0][3,1,0,1,0,1,0,0,0,1,1,2,0,0,0][3,2,0,2,0,0,0,1,0,0,1,1,0,1,0][3,1,0,2,0,0,0,0,0,1,1,1,0,1,0][2,2,0,1,0,1,0,0,1,0,1,2,0,0,0][2,2,0,2,0,0,0,0,1,0,1,1,0,1,0][2,2,0,0,1,1,0,1,0,0,1,2,0,0,0][2,1,0,0,1,1,0,0,0,1,1,2,0,0,0][2,2,0,1,1,0,0,1,0,0,1,1,0,1,0][2,1,0,1,1,0,0,0,0,1,1,1,0,1,0][1,2,0,0,1,1,0,0,1,0,1,2,0,0,0][1,2,0,1,1,0,0,0,1,0,1,1,0,1,0][1,2,0,0,2,0,0,1,0,0,1,1,0,1,0][1,1,0,0,2,0,0,0,0,1,1,1,0,1,0][0,2,0,0,2,0,0,0,1,0,1,1,0,1,0][2,2,0,1,0,1,0,1,0,0,1,1,1,0,0][2,1,0,1,0,1,0,0,0,1,1,1,1,0,0][2,2,0,2,0,0,0,1,0,0,1,0,1,1,0][2,1,0,2,0,0,0,0,0,1,1,0,1,1,0][1,2,0,1,0,1,0,0,1,0,1,1,1,0,0][1,2,0,2,0,0,0,0,1,0,1,0,1,1,0][1,2,0,0,1,1,0,1,0,0,1,1,1,0,0][1,1,0,0,1,1,0,0,0,1,1,1,1,0,0][1,2,0,1,1,0,0,1,0,0,1,0,1,1,0][1,1,0,1,1,0,0,0,0,1,1,0,1,1,0][0,2,0,0,1,1,0,0,1,0,1,1,1,0,0][0,2,0,1,1,0,0,0,1,0,1,0,1,1,0][0,2,0,0,2,0,0,1,0,0,1,0,1,1,0][0,1,0,0,2,0,0,0,0,1,1,0,1,1,0][1,2,0,1,0,1,0,1,0,0,1,0,2,0,0][1,1,0,1,0,1,0,0,0,1,1,0,2,0,0][0,2,0,1,0,1,0,0,1,0,1,0,2,0,0][0,2,0,0,1,1,0,1,0,0,1,0,2,0,0][0,1,0,0,1,1,0,0,0,1,1,0,2,0,0][3,3,0,1,0,0,1,2,0,0,0,2,0,0,0][3,2,0,1,0,0,1,1,0,1,0,2,0,0,0][3,1,0,1,0,0,1,0,0,2,0,2,0,0,0][2,3,0,1,0,0,1,1,1,0,0,2,0,0,0][2,2,0,1,0,0,1,0,1,1,0,2,0,0,0][1,3,0,1,0,0,1,0,2,0,0,2,0,0,0][2,3,0,0,1,0,1,2,0,0,0,2,0,0,0][2,2,0,0,1,0,1,1,0,1,0,2,0,0,0][2,1,0,0,1,0,1,0,0,2,0,2,0,0,0][1,3,0,0,1,0,1,1,1,0,0,2,0,0,0][1,2,0,0,1,0,1,0,1,1,0,2,0,0,0][0,3,0,0,1,0,1,0,2,0,0,2,0,0,0][2,3,0,1,0,0,1,2,0,0,0,1,1,0,0][2,2,0,1,0,0,1,1,0,1,0,1,1,0,0][2,1,0,1,0,0,1,0,0,2,0,1,1,0,0][1,3,0,1,0,0,1,1,1,0,0,1,1,0,0][1,2,0,1,0,0,1,0,1,1,0,1,1,0,0][0,3,0,1,0,0,1,0,2,0,0,1,1,0,0][1,3,0,0,1,0,1,2,0,0,0,1,1,0,0][1,2,0,0,1,0,1,1,0,1,0,1,1,0,0][1,1,0,0,1,0,1,0,0,2,0,1,1,0,0][0,3,0,0,1,0,1,1,1,0,0,1,1,0,0][0,2,0,0,1,0,1,0,1,1,0,1,1,0,0][1,3,0,1,0,0,1,2,0,0,0,0,2,0,0][1,2,0,1,0,0,1,1,0,1,0,0,2,0,0][1,1,0,1,0,0,1,0,0,2,0,0,2,0,0][0,3,0,1,0,0,1,1,1,0,0,0,2,0,0][0,2,0,1,0,0,1,0,1,1,0,0,2,0,0][0,3,0,0,1,0,1,2,0,0,0,0,2,0,0][0,2,0,0,1,0,1,1,0,1,0,0,2,0,0][0,1,0,0,1,0,1,0,0,2,0,0,2,0,0][3,3,0,2,0,0,0,2,0,0,0,1,0,0,1][3,2,0,2,0,0,0,1,0,1,0,1,0,0,1][3,1,0,2,0,0,0,0,0,2,0,1,0,0,1][2,3,0,2,0,0,0,1,1,0,0,1,0,0,1][2,2,0,2,0,0,0,0,1,1,0,1,0,0,1][1,3,0,2,0,0,0,0,2,0,0,1,0,0,1][2,3,0,1,1,0,0,2,0,0,0,1,0,0,1][2,2,0,1,1,0,0,1,0,1,0,1,0,0,1][2,1,0,1,1,0,0,0,0,2,0,1,0,0,1][1,3,0,1,1,0,0,1,1,0,0,1,0,0,1][1,2,0,1,1,0,0,0,1,1,0,1,0,0,1][0,3,0,1,1,0,0,0,2,0,0,1,0,0,1][1,3,0,0,2,0,0,2,0,0,0,1,0,0,1][1,2,0,0,2,0,0,1,0,1,0,1,0,0,1][1,1,0,0,2,0,0,0,0,2,0,1,0,0,1][0,3,0,0,2,0,0,1,1,0,0,1,0,0,1][0,2,0,0,2,0,0,0,1,1,0,1,0,0,1][2,3,0,2,0,0,0,2,0,0,0,0,1,0,1][2,2,0,2,0,0,0,1,0,1,0,0,1,0,1][2,1,0,2,0,0,0,0,0,2,0,0,1,0,1][1,3,0,2,0,0,0,1,1,0,0,0,1,0,1][1,2,0,2,0,0,0,0,1,1,0,0,1,0,1][0,3,0,2,0,0,0,0,2,0,0,0,1,0,1][1,3,0,1,1,0,0,2,0,0,0,0,1,0,1][1,2,0,1,1,0,0,1,0,1,0,0,1,0,1][1,1,0,1,1,0,0,0,0,2,0,0,1,0,1][0,3,0,1,1,0,0,1,1,0,0,0,1,0,1][0,2,0,1,1,0,0,0,1,1,0,0,1,0,1][0,3,0,0,2,0,0,2,0,0,0,0,1,0,1][0,2,0,0,2,0,0,1,0,1,0,0,1,0,1][0,1,0,0,2,0,0,0,0,2,0,0,1,0,1]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_726, cert_730, cert_734, cert_744, cert_748, cert_751, cert_781, cert_785, cert_797, cert_800, cert_823, cert_835, cert_873, cert_876, cert_879, cert_886, cert_889, cert_892, cert_916, cert_919, cert_928, cert_931, cert_951, cert_961, cert_989, cert_991, cert_993, cert_1016, cert_1018, cert_1049, cert_1052, cert_1055, cert_1061, cert_1064, cert_1066, cert_1084, cert_1087, cert_1094, cert_1096, cert_1107, cert_1113, cert_1126, cert_1128, cert_1130, cert_1133, cert_1135, cert_1137, cert_1149, cert_1151, cert_1155, cert_1157, cert_1171, cert_1172, cert_1173, cert_1180, cert_1182, cert_1184, cert_1196, cert_1198, cert_1208, cert_1209, cert_1210, cert_1534, cert_1538, cert_1550, cert_1553, cert_1576, cert_1588, cert_1627, cert_1630, cert_1639, cert_1642, cert_1662, cert_1672, cert_1711, cert_1713, cert_1733, cert_1758, cert_1761, cert_1768, cert_1770, cert_1781, cert_1787, cert_1801, cert_1803, cert_1807, cert_1809, cert_1817, cert_1821, cert_1831, cert_1832, cert_1836, cert_1838, cert_1844, cert_1849, cert_1850, cert_2241, cert_2245, cert_2249, cert_2287, cert_2291, cert_2326, cert_2365, cert_2368, cert_2371, cert_2394, cert_2397, cert_2420, cert_2469, cert_2472, cert_2475, cert_2495, cert_2498, cert_2514, cert_2524, cert_2526, cert_2528, cert_2537, cert_2539, cert_2550, cert_2552, cert_2554, cert_2560, cert_2562, cert_2566, cert_2567, cert_2568, cert_3218, cert_3222, cert_3225, cert_3257, cert_3260, cert_3283, cert_3300, cert_3303, cert_3306, cert_3326, cert_3329, cert_3345, cert_3355, cert_3357, cert_3359, cert_3368, cert_3370, cert_3381, cert_3384, cert_3386, cert_3400, cert_3402, cert_3410, cert_3413, cert_3415, cert_3417, cert_3423, cert_3425, cert_3429, cert_3430, cert_3431])
+    (certAll_cons cert_726
+    (certAll_cons cert_730
+    (certAll_cons cert_734
+    (certAll_cons cert_744
+    (certAll_cons cert_748
+    (certAll_cons cert_751
+    (certAll_cons cert_781
+    (certAll_cons cert_785
+    (certAll_cons cert_797
+    (certAll_cons cert_800
+    (certAll_cons cert_823
+    (certAll_cons cert_835
+    (certAll_cons cert_873
+    (certAll_cons cert_876
+    (certAll_cons cert_879
+    (certAll_cons cert_886
+    (certAll_cons cert_889
+    (certAll_cons cert_892
+    (certAll_cons cert_916
+    (certAll_cons cert_919
+    (certAll_cons cert_928
+    (certAll_cons cert_931
+    (certAll_cons cert_951
+    (certAll_cons cert_961
+    (certAll_cons cert_989
+    (certAll_cons cert_991
+    (certAll_cons cert_993
+    (certAll_cons cert_1016
+    (certAll_cons cert_1018
+    (certAll_cons cert_1049
+    (certAll_cons cert_1052
+    (certAll_cons cert_1055
+    (certAll_cons cert_1061
+    (certAll_cons cert_1064
+    (certAll_cons cert_1066
+    (certAll_cons cert_1084
+    (certAll_cons cert_1087
+    (certAll_cons cert_1094
+    (certAll_cons cert_1096
+    (certAll_cons cert_1107
+    (certAll_cons cert_1113
+    (certAll_cons cert_1126
+    (certAll_cons cert_1128
+    (certAll_cons cert_1130
+    (certAll_cons cert_1133
+    (certAll_cons cert_1135
+    (certAll_cons cert_1137
+    (certAll_cons cert_1149
+    (certAll_cons cert_1151
+    (certAll_cons cert_1155
+    (certAll_cons cert_1157
+    (certAll_cons cert_1171
+    (certAll_cons cert_1172
+    (certAll_cons cert_1173
+    (certAll_cons cert_1180
+    (certAll_cons cert_1182
+    (certAll_cons cert_1184
+    (certAll_cons cert_1196
+    (certAll_cons cert_1198
+    (certAll_cons cert_1208
+    (certAll_cons cert_1209
+    (certAll_cons cert_1210
+    (certAll_cons cert_1534
+    (certAll_cons cert_1538
+    (certAll_cons cert_1550
+    (certAll_cons cert_1553
+    (certAll_cons cert_1576
+    (certAll_cons cert_1588
+    (certAll_cons cert_1627
+    (certAll_cons cert_1630
+    (certAll_cons cert_1639
+    (certAll_cons cert_1642
+    (certAll_cons cert_1662
+    (certAll_cons cert_1672
+    (certAll_cons cert_1711
+    (certAll_cons cert_1713
+    (certAll_cons cert_1733
+    (certAll_cons cert_1758
+    (certAll_cons cert_1761
+    (certAll_cons cert_1768
+    (certAll_cons cert_1770
+    (certAll_cons cert_1781
+    (certAll_cons cert_1787
+    (certAll_cons cert_1801
+    (certAll_cons cert_1803
+    (certAll_cons cert_1807
+    (certAll_cons cert_1809
+    (certAll_cons cert_1817
+    (certAll_cons cert_1821
+    (certAll_cons cert_1831
+    (certAll_cons cert_1832
+    (certAll_cons cert_1836
+    (certAll_cons cert_1838
+    (certAll_cons cert_1844
+    (certAll_cons cert_1849
+    (certAll_cons cert_1850
+    (certAll_cons cert_2241
+    (certAll_cons cert_2245
+    (certAll_cons cert_2249
+    (certAll_cons cert_2287
+    (certAll_cons cert_2291
+    (certAll_cons cert_2326
+    (certAll_cons cert_2365
+    (certAll_cons cert_2368
+    (certAll_cons cert_2371
+    (certAll_cons cert_2394
+    (certAll_cons cert_2397
+    (certAll_cons cert_2420
+    (certAll_cons cert_2469
+    (certAll_cons cert_2472
+    (certAll_cons cert_2475
+    (certAll_cons cert_2495
+    (certAll_cons cert_2498
+    (certAll_cons cert_2514
+    (certAll_cons cert_2524
+    (certAll_cons cert_2526
+    (certAll_cons cert_2528
+    (certAll_cons cert_2537
+    (certAll_cons cert_2539
+    (certAll_cons cert_2550
+    (certAll_cons cert_2552
+    (certAll_cons cert_2554
+    (certAll_cons cert_2560
+    (certAll_cons cert_2562
+    (certAll_cons cert_2566
+    (certAll_cons cert_2567
+    (certAll_cons cert_2568
+    (certAll_cons cert_3218
+    (certAll_cons cert_3222
+    (certAll_cons cert_3225
+    (certAll_cons cert_3257
+    (certAll_cons cert_3260
+    (certAll_cons cert_3283
+    (certAll_cons cert_3300
+    (certAll_cons cert_3303
+    (certAll_cons cert_3306
+    (certAll_cons cert_3326
+    (certAll_cons cert_3329
+    (certAll_cons cert_3345
+    (certAll_cons cert_3355
+    (certAll_cons cert_3357
+    (certAll_cons cert_3359
+    (certAll_cons cert_3368
+    (certAll_cons cert_3370
+    (certAll_cons cert_3381
+    (certAll_cons cert_3384
+    (certAll_cons cert_3386
+    (certAll_cons cert_3400
+    (certAll_cons cert_3402
+    (certAll_cons cert_3410
+    (certAll_cons cert_3413
+    (certAll_cons cert_3415
+    (certAll_cons cert_3417
+    (certAll_cons cert_3423
+    (certAll_cons cert_3425
+    (certAll_cons cert_3429
+    (certAll_cons cert_3430
+    (certAll_cons cert_3431 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_3_4 : TripleOK 2 3 4 :=
-  certAt_dispatch (keys := [[4, 3, 0, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [4, 2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0], [4, 1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0], [4, 3, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [4, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [4, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0], [3, 3, 0, 1, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [3, 2, 0, 1, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0], [3, 3, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [3, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [2, 3, 0, 1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0], [2, 3, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0], [3, 3, 0, 0, 1, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0], [3, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0], [3, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0], [3, 3, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [3, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [3, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0], [2, 3, 0, 0, 1, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0], [2, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0], [2, 3, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [2, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [1, 3, 0, 0, 1, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0], [1, 3, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0], [2, 3, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0], [2, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0], [2, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0], [1, 3, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0], [1, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0], [0, 3, 0, 0, 2, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0], [3, 3, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [3, 2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0], [3, 1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0], [3, 3, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [3, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [3, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0], [2, 3, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0], [2, 2, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0], [2, 3, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0], [2, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [1, 3, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0], [1, 3, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0], [2, 3, 0, 0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0], [2, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0], [2, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0], [2, 3, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [2, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [2, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0], [1, 3, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0], [1, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0], [1, 3, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0], [1, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [0, 3, 0, 0, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0], [0, 3, 0, 1, 1, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0], [1, 3, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0], [1, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0], [1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0], [0, 3, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0], [0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0], [2, 3, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0], [2, 2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0], [2, 1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0], [1, 3, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0, 0], [1, 2, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0], [0, 3, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0], [1, 3, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0], [1, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0], [1, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0], [0, 3, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 2, 0, 0], [0, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0]])
+  certAt_dispatch (keys := natss% "[4,3,0,1,0,1,0,2,0,0,0,2,0,0,0][4,2,0,1,0,1,0,1,0,1,0,2,0,0,0][4,1,0,1,0,1,0,0,0,2,0,2,0,0,0][4,3,0,2,0,0,0,2,0,0,0,1,0,1,0][4,2,0,2,0,0,0,1,0,1,0,1,0,1,0][4,1,0,2,0,0,0,0,0,2,0,1,0,1,0][3,3,0,1,0,1,0,1,1,0,0,2,0,0,0][3,2,0,1,0,1,0,0,1,1,0,2,0,0,0][3,3,0,2,0,0,0,1,1,0,0,1,0,1,0][3,2,0,2,0,0,0,0,1,1,0,1,0,1,0][2,3,0,1,0,1,0,0,2,0,0,2,0,0,0][2,3,0,2,0,0,0,0,2,0,0,1,0,1,0][3,3,0,0,1,1,0,2,0,0,0,2,0,0,0][3,2,0,0,1,1,0,1,0,1,0,2,0,0,0][3,1,0,0,1,1,0,0,0,2,0,2,0,0,0][3,3,0,1,1,0,0,2,0,0,0,1,0,1,0][3,2,0,1,1,0,0,1,0,1,0,1,0,1,0][3,1,0,1,1,0,0,0,0,2,0,1,0,1,0][2,3,0,0,1,1,0,1,1,0,0,2,0,0,0][2,2,0,0,1,1,0,0,1,1,0,2,0,0,0][2,3,0,1,1,0,0,1,1,0,0,1,0,1,0][2,2,0,1,1,0,0,0,1,1,0,1,0,1,0][1,3,0,0,1,1,0,0,2,0,0,2,0,0,0][1,3,0,1,1,0,0,0,2,0,0,1,0,1,0][2,3,0,0,2,0,0,2,0,0,0,1,0,1,0][2,2,0,0,2,0,0,1,0,1,0,1,0,1,0][2,1,0,0,2,0,0,0,0,2,0,1,0,1,0][1,3,0,0,2,0,0,1,1,0,0,1,0,1,0][1,2,0,0,2,0,0,0,1,1,0,1,0,1,0][0,3,0,0,2,0,0,0,2,0,0,1,0,1,0][3,3,0,1,0,1,0,2,0,0,0,1,1,0,0][3,2,0,1,0,1,0,1,0,1,0,1,1,0,0][3,1,0,1,0,1,0,0,0,2,0,1,1,0,0][3,3,0,2,0,0,0,2,0,0,0,0,1,1,0][3,2,0,2,0,0,0,1,0,1,0,0,1,1,0][3,1,0,2,0,0,0,0,0,2,0,0,1,1,0][2,3,0,1,0,1,0,1,1,0,0,1,1,0,0][2,2,0,1,0,1,0,0,1,1,0,1,1,0,0][2,3,0,2,0,0,0,1,1,0,0,0,1,1,0][2,2,0,2,0,0,0,0,1,1,0,0,1,1,0][1,3,0,1,0,1,0,0,2,0,0,1,1,0,0][1,3,0,2,0,0,0,0,2,0,0,0,1,1,0][2,3,0,0,1,1,0,2,0,0,0,1,1,0,0][2,2,0,0,1,1,0,1,0,1,0,1,1,0,0][2,1,0,0,1,1,0,0,0,2,0,1,1,0,0][2,3,0,1,1,0,0,2,0,0,0,0,1,1,0][2,2,0,1,1,0,0,1,0,1,0,0,1,1,0][2,1,0,1,1,0,0,0,0,2,0,0,1,1,0][1,3,0,0,1,1,0,1,1,0,0,1,1,0,0][1,2,0,0,1,1,0,0,1,1,0,1,1,0,0][1,3,0,1,1,0,0,1,1,0,0,0,1,1,0][1,2,0,1,1,0,0,0,1,1,0,0,1,1,0][0,3,0,0,1,1,0,0,2,0,0,1,1,0,0][0,3,0,1,1,0,0,0,2,0,0,0,1,1,0][1,3,0,0,2,0,0,2,0,0,0,0,1,1,0][1,2,0,0,2,0,0,1,0,1,0,0,1,1,0][1,1,0,0,2,0,0,0,0,2,0,0,1,1,0][0,3,0,0,2,0,0,1,1,0,0,0,1,1,0][0,2,0,0,2,0,0,0,1,1,0,0,1,1,0][2,3,0,1,0,1,0,2,0,0,0,0,2,0,0][2,2,0,1,0,1,0,1,0,1,0,0,2,0,0][2,1,0,1,0,1,0,0,0,2,0,0,2,0,0][1,3,0,1,0,1,0,1,1,0,0,0,2,0,0][1,2,0,1,0,1,0,0,1,1,0,0,2,0,0][0,3,0,1,0,1,0,0,2,0,0,0,2,0,0][1,3,0,0,1,1,0,2,0,0,0,0,2,0,0][1,2,0,0,1,1,0,1,0,1,0,0,2,0,0][1,1,0,0,1,1,0,0,0,2,0,0,2,0,0][0,3,0,0,1,1,0,1,1,0,0,0,2,0,0][0,2,0,0,1,1,0,0,1,1,0,0,2,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_17, cert_21, cert_25, cert_43, cert_47, cert_50, cert_93, cert_97, cert_115, cert_118, cert_148, cert_164, cert_214, cert_217, cert_220, cert_232, cert_235, cert_238, cert_269, cert_272, cert_285, cert_288, cert_311, cert_323, cert_370, cert_372, cert_374, cert_402, cert_404, cert_426, cert_478, cert_481, cert_484, cert_494, cert_497, cert_499, cert_520, cert_523, cert_532, cert_534, cert_546, cert_553, cert_570, cert_572, cert_574, cert_579, cert_581, cert_583, cert_596, cert_598, cert_603, cert_605, cert_613, cert_617, cert_630, cert_631, cert_632, cert_641, cert_642, cert_653, cert_655, cert_657, cert_670, cert_672, cert_678, cert_685, cert_686, cert_687, cert_693, cert_694])
+    (certAll_cons cert_17
+    (certAll_cons cert_21
+    (certAll_cons cert_25
+    (certAll_cons cert_43
+    (certAll_cons cert_47
+    (certAll_cons cert_50
+    (certAll_cons cert_93
+    (certAll_cons cert_97
+    (certAll_cons cert_115
+    (certAll_cons cert_118
+    (certAll_cons cert_148
+    (certAll_cons cert_164
+    (certAll_cons cert_214
+    (certAll_cons cert_217
+    (certAll_cons cert_220
+    (certAll_cons cert_232
+    (certAll_cons cert_235
+    (certAll_cons cert_238
+    (certAll_cons cert_269
+    (certAll_cons cert_272
+    (certAll_cons cert_285
+    (certAll_cons cert_288
+    (certAll_cons cert_311
+    (certAll_cons cert_323
+    (certAll_cons cert_370
+    (certAll_cons cert_372
+    (certAll_cons cert_374
+    (certAll_cons cert_402
+    (certAll_cons cert_404
+    (certAll_cons cert_426
+    (certAll_cons cert_478
+    (certAll_cons cert_481
+    (certAll_cons cert_484
+    (certAll_cons cert_494
+    (certAll_cons cert_497
+    (certAll_cons cert_499
+    (certAll_cons cert_520
+    (certAll_cons cert_523
+    (certAll_cons cert_532
+    (certAll_cons cert_534
+    (certAll_cons cert_546
+    (certAll_cons cert_553
+    (certAll_cons cert_570
+    (certAll_cons cert_572
+    (certAll_cons cert_574
+    (certAll_cons cert_579
+    (certAll_cons cert_581
+    (certAll_cons cert_583
+    (certAll_cons cert_596
+    (certAll_cons cert_598
+    (certAll_cons cert_603
+    (certAll_cons cert_605
+    (certAll_cons cert_613
+    (certAll_cons cert_617
+    (certAll_cons cert_630
+    (certAll_cons cert_631
+    (certAll_cons cert_632
+    (certAll_cons cert_641
+    (certAll_cons cert_642
+    (certAll_cons cert_653
+    (certAll_cons cert_655
+    (certAll_cons cert_657
+    (certAll_cons cert_670
+    (certAll_cons cert_672
+    (certAll_cons cert_678
+    (certAll_cons cert_685
+    (certAll_cons cert_686
+    (certAll_cons cert_687
+    (certAll_cons cert_693
+    (certAll_cons cert_694 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_4_0 : TripleOK 2 4 0 :=
-  certAt_dispatch (keys := [[0, 0, 4, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [0, 0, 3, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0]])
+  certAt_dispatch (keys := natss% "[0,0,4,2,0,0,0,2,0,0,0,2,0,0,0][0,0,3,2,0,0,0,1,0,0,1,2,0,0,0][0,0,2,2,0,0,0,0,0,0,2,2,0,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl
-    exacts [cert_1519, cert_2080, cert_2219])
+    (certAll_cons cert_1519
+    (certAll_cons cert_2080
+    (certAll_cons cert_2219 certAll_nil)))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_4_1 : TripleOK 2 4 1 :=
-  certAt_dispatch (keys := [[1, 1, 3, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [1, 0, 3, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [0, 1, 3, 2, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [0, 0, 3, 2, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [0, 1, 3, 1, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [0, 0, 3, 1, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [0, 1, 3, 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [0, 0, 3, 2, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 2, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [1, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [0, 1, 2, 2, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0], [0, 1, 2, 1, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [0, 0, 2, 1, 1, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [0, 1, 2, 2, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0], [0, 0, 2, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0], [1, 1, 1, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0]])
+  certAt_dispatch (keys := natss% "[1,1,3,2,0,0,0,2,0,0,0,2,0,0,0][1,0,3,2,0,0,0,1,0,1,0,2,0,0,0][0,1,3,2,0,0,0,1,1,0,0,2,0,0,0][0,0,3,2,0,0,0,0,1,1,0,2,0,0,0][0,1,3,1,1,0,0,2,0,0,0,2,0,0,0][0,0,3,1,1,0,0,1,0,1,0,2,0,0,0][0,1,3,2,0,0,0,2,0,0,0,1,1,0,0][0,0,3,2,0,0,0,1,0,1,0,1,1,0,0][1,1,2,2,0,0,0,1,0,0,1,2,0,0,0][1,0,2,2,0,0,0,0,0,1,1,2,0,0,0][0,1,2,2,0,0,0,0,1,0,1,2,0,0,0][0,1,2,1,1,0,0,1,0,0,1,2,0,0,0][0,0,2,1,1,0,0,0,0,1,1,2,0,0,0][0,1,2,2,0,0,0,1,0,0,1,1,1,0,0][0,0,2,2,0,0,0,0,0,1,1,1,1,0,0][1,1,1,2,0,0,0,0,0,0,2,2,0,0,0][0,1,1,1,1,0,0,0,0,0,2,2,0,0,0][0,1,1,2,0,0,0,0,0,0,2,1,1,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1461, cert_1466, cert_1478, cert_1482, cert_1492, cert_1496, cert_1505, cert_1509, cert_2033, cert_2037, cert_2047, cert_2057, cert_2061, cert_2069, cert_2072, cert_2187, cert_2203, cert_2212])
+    (certAll_cons cert_1461
+    (certAll_cons cert_1466
+    (certAll_cons cert_1478
+    (certAll_cons cert_1482
+    (certAll_cons cert_1492
+    (certAll_cons cert_1496
+    (certAll_cons cert_1505
+    (certAll_cons cert_1509
+    (certAll_cons cert_2033
+    (certAll_cons cert_2037
+    (certAll_cons cert_2047
+    (certAll_cons cert_2057
+    (certAll_cons cert_2061
+    (certAll_cons cert_2069
+    (certAll_cons cert_2072
+    (certAll_cons cert_2187
+    (certAll_cons cert_2203
+    (certAll_cons cert_2212 certAll_nil))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_4_2 : TripleOK 2 4 2 :=
-  certAt_dispatch (keys := [[2, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [2, 1, 2, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [2, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [1, 2, 2, 2, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [1, 1, 2, 2, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [0, 2, 2, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0], [1, 2, 2, 1, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [1, 1, 2, 1, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [1, 0, 2, 1, 1, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [0, 2, 2, 1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [0, 1, 2, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [0, 2, 2, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [0, 1, 2, 0, 2, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [1, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [1, 1, 2, 2, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [0, 2, 2, 2, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0], [0, 1, 2, 2, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0], [0, 2, 2, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [0, 1, 2, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [0, 0, 2, 1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [0, 2, 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0], [0, 1, 2, 2, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0], [0, 0, 2, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0], [2, 2, 1, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [2, 1, 1, 2, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [1, 2, 1, 2, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0], [1, 2, 1, 1, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [0, 2, 1, 1, 1, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0], [0, 2, 1, 0, 2, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [1, 2, 1, 2, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0], [1, 1, 1, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0], [0, 2, 1, 2, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0], [0, 2, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0], [0, 2, 1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 2, 0, 0], [0, 1, 1, 2, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0], [2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [1, 2, 0, 1, 1, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 0, 0], [1, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0], [0, 2, 0, 1, 1, 0, 0, 0, 0, 0, 2, 1, 1, 0, 0], [0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0]])
+  certAt_dispatch (keys := natss% "[2,2,2,2,0,0,0,2,0,0,0,2,0,0,0][2,1,2,2,0,0,0,1,0,1,0,2,0,0,0][2,0,2,2,0,0,0,0,0,2,0,2,0,0,0][1,2,2,2,0,0,0,1,1,0,0,2,0,0,0][1,1,2,2,0,0,0,0,1,1,0,2,0,0,0][0,2,2,2,0,0,0,0,2,0,0,2,0,0,0][1,2,2,1,1,0,0,2,0,0,0,2,0,0,0][1,1,2,1,1,0,0,1,0,1,0,2,0,0,0][1,0,2,1,1,0,0,0,0,2,0,2,0,0,0][0,2,2,1,1,0,0,1,1,0,0,2,0,0,0][0,1,2,1,1,0,0,0,1,1,0,2,0,0,0][0,2,2,0,2,0,0,2,0,0,0,2,0,0,0][0,1,2,0,2,0,0,1,0,1,0,2,0,0,0][0,0,2,0,2,0,0,0,0,2,0,2,0,0,0][1,2,2,2,0,0,0,2,0,0,0,1,1,0,0][1,1,2,2,0,0,0,1,0,1,0,1,1,0,0][1,0,2,2,0,0,0,0,0,2,0,1,1,0,0][0,2,2,2,0,0,0,1,1,0,0,1,1,0,0][0,1,2,2,0,0,0,0,1,1,0,1,1,0,0][0,2,2,1,1,0,0,2,0,0,0,1,1,0,0][0,1,2,1,1,0,0,1,0,1,0,1,1,0,0][0,0,2,1,1,0,0,0,0,2,0,1,1,0,0][0,2,2,2,0,0,0,2,0,0,0,0,2,0,0][0,1,2,2,0,0,0,1,0,1,0,0,2,0,0][0,0,2,2,0,0,0,0,0,2,0,0,2,0,0][2,2,1,2,0,0,0,1,0,0,1,2,0,0,0][2,1,1,2,0,0,0,0,0,1,1,2,0,0,0][1,2,1,2,0,0,0,0,1,0,1,2,0,0,0][1,2,1,1,1,0,0,1,0,0,1,2,0,0,0][1,1,1,1,1,0,0,0,0,1,1,2,0,0,0][0,2,1,1,1,0,0,0,1,0,1,2,0,0,0][0,2,1,0,2,0,0,1,0,0,1,2,0,0,0][0,1,1,0,2,0,0,0,0,1,1,2,0,0,0][1,2,1,2,0,0,0,1,0,0,1,1,1,0,0][1,1,1,2,0,0,0,0,0,1,1,1,1,0,0][0,2,1,2,0,0,0,0,1,0,1,1,1,0,0][0,2,1,1,1,0,0,1,0,0,1,1,1,0,0][0,1,1,1,1,0,0,0,0,1,1,1,1,0,0][0,2,1,2,0,0,0,1,0,0,1,0,2,0,0][0,1,1,2,0,0,0,0,0,1,1,0,2,0,0][2,2,0,2,0,0,0,0,0,0,2,2,0,0,0][1,2,0,1,1,0,0,0,0,0,2,2,0,0,0][0,2,0,0,2,0,0,0,0,0,2,2,0,0,0][1,2,0,2,0,0,0,0,0,0,2,1,1,0,0][0,2,0,1,1,0,0,0,0,0,2,1,1,0,0][0,2,0,2,0,0,0,0,0,0,2,0,2,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_1221, cert_1226, cert_1230, cert_1257, cert_1261, cert_1286, cert_1306, cert_1310, cert_1314, cert_1335, cert_1339, cert_1361, cert_1364, cert_1367, cert_1380, cert_1384, cert_1387, cert_1406, cert_1409, cert_1425, cert_1428, cert_1431, cert_1443, cert_1446, cert_1448, cert_1856, cert_1860, cert_1885, cert_1915, cert_1919, cert_1941, cert_1960, cert_1963, cert_1978, cert_1981, cert_1997, cert_2007, cert_2010, cert_2022, cert_2024, cert_2084, cert_2117, cert_2146, cert_2161, cert_2174, cert_2182])
+    (certAll_cons cert_1221
+    (certAll_cons cert_1226
+    (certAll_cons cert_1230
+    (certAll_cons cert_1257
+    (certAll_cons cert_1261
+    (certAll_cons cert_1286
+    (certAll_cons cert_1306
+    (certAll_cons cert_1310
+    (certAll_cons cert_1314
+    (certAll_cons cert_1335
+    (certAll_cons cert_1339
+    (certAll_cons cert_1361
+    (certAll_cons cert_1364
+    (certAll_cons cert_1367
+    (certAll_cons cert_1380
+    (certAll_cons cert_1384
+    (certAll_cons cert_1387
+    (certAll_cons cert_1406
+    (certAll_cons cert_1409
+    (certAll_cons cert_1425
+    (certAll_cons cert_1428
+    (certAll_cons cert_1431
+    (certAll_cons cert_1443
+    (certAll_cons cert_1446
+    (certAll_cons cert_1448
+    (certAll_cons cert_1856
+    (certAll_cons cert_1860
+    (certAll_cons cert_1885
+    (certAll_cons cert_1915
+    (certAll_cons cert_1919
+    (certAll_cons cert_1941
+    (certAll_cons cert_1960
+    (certAll_cons cert_1963
+    (certAll_cons cert_1978
+    (certAll_cons cert_1981
+    (certAll_cons cert_1997
+    (certAll_cons cert_2007
+    (certAll_cons cert_2010
+    (certAll_cons cert_2022
+    (certAll_cons cert_2024
+    (certAll_cons cert_2084
+    (certAll_cons cert_2117
+    (certAll_cons cert_2146
+    (certAll_cons cert_2161
+    (certAll_cons cert_2174
+    (certAll_cons cert_2182 certAll_nil))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_4_3 : TripleOK 2 4 3 :=
-  certAt_dispatch (keys := [[3, 3, 1, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [3, 2, 1, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [3, 1, 1, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [2, 3, 1, 2, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [2, 2, 1, 2, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [1, 3, 1, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0], [2, 3, 1, 1, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [2, 2, 1, 1, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [2, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [1, 3, 1, 1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [1, 2, 1, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [0, 3, 1, 1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0], [1, 3, 1, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [1, 2, 1, 0, 2, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [1, 1, 1, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [0, 3, 1, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [0, 2, 1, 0, 2, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [2, 3, 1, 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [2, 2, 1, 2, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [2, 1, 1, 2, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [1, 3, 1, 2, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0], [1, 2, 1, 2, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0], [0, 3, 1, 2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0], [1, 3, 1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [1, 2, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [0, 3, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0], [0, 2, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0], [0, 3, 1, 0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [0, 2, 1, 0, 2, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [0, 1, 1, 0, 2, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [1, 3, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0], [1, 2, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0], [1, 1, 1, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0], [0, 3, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0], [0, 2, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0], [0, 3, 1, 1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0], [0, 2, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0], [0, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0], [3, 3, 0, 2, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [3, 2, 0, 2, 0, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [2, 3, 0, 2, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0], [2, 3, 0, 1, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [2, 2, 0, 1, 1, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [1, 3, 0, 1, 1, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0], [1, 3, 0, 0, 2, 0, 0, 1, 0, 0, 1, 2, 0, 0, 0], [1, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 2, 0, 0, 0], [0, 3, 0, 0, 2, 0, 0, 0, 1, 0, 1, 2, 0, 0, 0], [2, 3, 0, 2, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0], [2, 2, 0, 2, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0], [1, 3, 0, 2, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0], [1, 3, 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0], [1, 2, 0, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0], [0, 3, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0], [0, 3, 0, 0, 2, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0], [0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0], [1, 3, 0, 2, 0, 0, 0, 1, 0, 0, 1, 0, 2, 0, 0], [1, 2, 0, 2, 0, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0], [0, 3, 0, 2, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0], [0, 3, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 2, 0, 0], [0, 2, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0]])
+  certAt_dispatch (keys := natss% "[3,3,1,2,0,0,0,2,0,0,0,2,0,0,0][3,2,1,2,0,0,0,1,0,1,0,2,0,0,0][3,1,1,2,0,0,0,0,0,2,0,2,0,0,0][2,3,1,2,0,0,0,1,1,0,0,2,0,0,0][2,2,1,2,0,0,0,0,1,1,0,2,0,0,0][1,3,1,2,0,0,0,0,2,0,0,2,0,0,0][2,3,1,1,1,0,0,2,0,0,0,2,0,0,0][2,2,1,1,1,0,0,1,0,1,0,2,0,0,0][2,1,1,1,1,0,0,0,0,2,0,2,0,0,0][1,3,1,1,1,0,0,1,1,0,0,2,0,0,0][1,2,1,1,1,0,0,0,1,1,0,2,0,0,0][0,3,1,1,1,0,0,0,2,0,0,2,0,0,0][1,3,1,0,2,0,0,2,0,0,0,2,0,0,0][1,2,1,0,2,0,0,1,0,1,0,2,0,0,0][1,1,1,0,2,0,0,0,0,2,0,2,0,0,0][0,3,1,0,2,0,0,1,1,0,0,2,0,0,0][0,2,1,0,2,0,0,0,1,1,0,2,0,0,0][2,3,1,2,0,0,0,2,0,0,0,1,1,0,0][2,2,1,2,0,0,0,1,0,1,0,1,1,0,0][2,1,1,2,0,0,0,0,0,2,0,1,1,0,0][1,3,1,2,0,0,0,1,1,0,0,1,1,0,0][1,2,1,2,0,0,0,0,1,1,0,1,1,0,0][0,3,1,2,0,0,0,0,2,0,0,1,1,0,0][1,3,1,1,1,0,0,2,0,0,0,1,1,0,0][1,2,1,1,1,0,0,1,0,1,0,1,1,0,0][1,1,1,1,1,0,0,0,0,2,0,1,1,0,0][0,3,1,1,1,0,0,1,1,0,0,1,1,0,0][0,2,1,1,1,0,0,0,1,1,0,1,1,0,0][0,3,1,0,2,0,0,2,0,0,0,1,1,0,0][0,2,1,0,2,0,0,1,0,1,0,1,1,0,0][0,1,1,0,2,0,0,0,0,2,0,1,1,0,0][1,3,1,2,0,0,0,2,0,0,0,0,2,0,0][1,2,1,2,0,0,0,1,0,1,0,0,2,0,0][1,1,1,2,0,0,0,0,0,2,0,0,2,0,0][0,3,1,2,0,0,0,1,1,0,0,0,2,0,0][0,2,1,2,0,0,0,0,1,1,0,0,2,0,0][0,3,1,1,1,0,0,2,0,0,0,0,2,0,0][0,2,1,1,1,0,0,1,0,1,0,0,2,0,0][0,1,1,1,1,0,0,0,0,2,0,0,2,0,0][3,3,0,2,0,0,0,1,0,0,1,2,0,0,0][3,2,0,2,0,0,0,0,0,1,1,2,0,0,0][2,3,0,2,0,0,0,0,1,0,1,2,0,0,0][2,3,0,1,1,0,0,1,0,0,1,2,0,0,0][2,2,0,1,1,0,0,0,0,1,1,2,0,0,0][1,3,0,1,1,0,0,0,1,0,1,2,0,0,0][1,3,0,0,2,0,0,1,0,0,1,2,0,0,0][1,2,0,0,2,0,0,0,0,1,1,2,0,0,0][0,3,0,0,2,0,0,0,1,0,1,2,0,0,0][2,3,0,2,0,0,0,1,0,0,1,1,1,0,0][2,2,0,2,0,0,0,0,0,1,1,1,1,0,0][1,3,0,2,0,0,0,0,1,0,1,1,1,0,0][1,3,0,1,1,0,0,1,0,0,1,1,1,0,0][1,2,0,1,1,0,0,0,0,1,1,1,1,0,0][0,3,0,1,1,0,0,0,1,0,1,1,1,0,0][0,3,0,0,2,0,0,1,0,0,1,1,1,0,0][0,2,0,0,2,0,0,0,0,1,1,1,1,0,0][1,3,0,2,0,0,0,1,0,0,1,0,2,0,0][1,2,0,2,0,0,0,0,0,1,1,0,2,0,0][0,3,0,2,0,0,0,0,1,0,1,0,2,0,0][0,3,0,1,1,0,0,1,0,0,1,0,2,0,0][0,2,0,1,1,0,0,0,0,1,1,0,2,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_712, cert_717, cert_721, cert_771, cert_775, cert_817, cert_860, cert_864, cert_868, cert_906, cert_910, cert_945, cert_971, cert_974, cert_977, cert_1000, cert_1003, cert_1039, cert_1043, cert_1046, cert_1078, cert_1081, cert_1104, cert_1117, cert_1120, cert_1123, cert_1143, cert_1146, cert_1162, cert_1164, cert_1166, cert_1174, cert_1177, cert_1179, cert_1193, cert_1195, cert_1203, cert_1205, cert_1207, cert_1524, cert_1528, cert_1570, cert_1617, cert_1621, cert_1656, cert_1695, cert_1698, cert_1721, cert_1752, cert_1755, cert_1778, cert_1795, cert_1798, cert_1814, cert_1824, cert_1826, cert_1833, cert_1835, cert_1843, cert_1846, cert_1848])
+    (certAll_cons cert_712
+    (certAll_cons cert_717
+    (certAll_cons cert_721
+    (certAll_cons cert_771
+    (certAll_cons cert_775
+    (certAll_cons cert_817
+    (certAll_cons cert_860
+    (certAll_cons cert_864
+    (certAll_cons cert_868
+    (certAll_cons cert_906
+    (certAll_cons cert_910
+    (certAll_cons cert_945
+    (certAll_cons cert_971
+    (certAll_cons cert_974
+    (certAll_cons cert_977
+    (certAll_cons cert_1000
+    (certAll_cons cert_1003
+    (certAll_cons cert_1039
+    (certAll_cons cert_1043
+    (certAll_cons cert_1046
+    (certAll_cons cert_1078
+    (certAll_cons cert_1081
+    (certAll_cons cert_1104
+    (certAll_cons cert_1117
+    (certAll_cons cert_1120
+    (certAll_cons cert_1123
+    (certAll_cons cert_1143
+    (certAll_cons cert_1146
+    (certAll_cons cert_1162
+    (certAll_cons cert_1164
+    (certAll_cons cert_1166
+    (certAll_cons cert_1174
+    (certAll_cons cert_1177
+    (certAll_cons cert_1179
+    (certAll_cons cert_1193
+    (certAll_cons cert_1195
+    (certAll_cons cert_1203
+    (certAll_cons cert_1205
+    (certAll_cons cert_1207
+    (certAll_cons cert_1524
+    (certAll_cons cert_1528
+    (certAll_cons cert_1570
+    (certAll_cons cert_1617
+    (certAll_cons cert_1621
+    (certAll_cons cert_1656
+    (certAll_cons cert_1695
+    (certAll_cons cert_1698
+    (certAll_cons cert_1721
+    (certAll_cons cert_1752
+    (certAll_cons cert_1755
+    (certAll_cons cert_1778
+    (certAll_cons cert_1795
+    (certAll_cons cert_1798
+    (certAll_cons cert_1814
+    (certAll_cons cert_1824
+    (certAll_cons cert_1826
+    (certAll_cons cert_1833
+    (certAll_cons cert_1835
+    (certAll_cons cert_1843
+    (certAll_cons cert_1846
+    (certAll_cons cert_1848 certAll_nil)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 theorem tri_2_4_4 : TripleOK 2 4 4 :=
-  certAt_dispatch (keys := [[4, 4, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [4, 3, 0, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [4, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [3, 4, 0, 2, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [3, 3, 0, 2, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [2, 4, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0], [3, 4, 0, 1, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [3, 3, 0, 1, 1, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [3, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [2, 4, 0, 1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [2, 3, 0, 1, 1, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [1, 4, 0, 1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0], [2, 4, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0], [2, 3, 0, 0, 2, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0], [2, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0], [1, 4, 0, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0], [1, 3, 0, 0, 2, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0], [0, 4, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0], [3, 4, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [3, 3, 0, 2, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [3, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [2, 4, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0], [2, 3, 0, 2, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0], [1, 4, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0], [2, 4, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [2, 3, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [2, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [1, 4, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0], [1, 3, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0], [0, 4, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0], [1, 4, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0], [1, 3, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [1, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0], [0, 4, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0], [0, 3, 0, 0, 2, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0], [2, 4, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0], [2, 3, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0], [2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0], [1, 4, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0], [1, 3, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0], [0, 4, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0], [1, 4, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0], [1, 3, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0], [1, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0], [0, 4, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0], [0, 3, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0], [0, 4, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0], [0, 3, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0], [0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0]])
+  certAt_dispatch (keys := natss% "[4,4,0,2,0,0,0,2,0,0,0,2,0,0,0][4,3,0,2,0,0,0,1,0,1,0,2,0,0,0][4,2,0,2,0,0,0,0,0,2,0,2,0,0,0][3,4,0,2,0,0,0,1,1,0,0,2,0,0,0][3,3,0,2,0,0,0,0,1,1,0,2,0,0,0][2,4,0,2,0,0,0,0,2,0,0,2,0,0,0][3,4,0,1,1,0,0,2,0,0,0,2,0,0,0][3,3,0,1,1,0,0,1,0,1,0,2,0,0,0][3,2,0,1,1,0,0,0,0,2,0,2,0,0,0][2,4,0,1,1,0,0,1,1,0,0,2,0,0,0][2,3,0,1,1,0,0,0,1,1,0,2,0,0,0][1,4,0,1,1,0,0,0,2,0,0,2,0,0,0][2,4,0,0,2,0,0,2,0,0,0,2,0,0,0][2,3,0,0,2,0,0,1,0,1,0,2,0,0,0][2,2,0,0,2,0,0,0,0,2,0,2,0,0,0][1,4,0,0,2,0,0,1,1,0,0,2,0,0,0][1,3,0,0,2,0,0,0,1,1,0,2,0,0,0][0,4,0,0,2,0,0,0,2,0,0,2,0,0,0][3,4,0,2,0,0,0,2,0,0,0,1,1,0,0][3,3,0,2,0,0,0,1,0,1,0,1,1,0,0][3,2,0,2,0,0,0,0,0,2,0,1,1,0,0][2,4,0,2,0,0,0,1,1,0,0,1,1,0,0][2,3,0,2,0,0,0,0,1,1,0,1,1,0,0][1,4,0,2,0,0,0,0,2,0,0,1,1,0,0][2,4,0,1,1,0,0,2,0,0,0,1,1,0,0][2,3,0,1,1,0,0,1,0,1,0,1,1,0,0][2,2,0,1,1,0,0,0,0,2,0,1,1,0,0][1,4,0,1,1,0,0,1,1,0,0,1,1,0,0][1,3,0,1,1,0,0,0,1,1,0,1,1,0,0][0,4,0,1,1,0,0,0,2,0,0,1,1,0,0][1,4,0,0,2,0,0,2,0,0,0,1,1,0,0][1,3,0,0,2,0,0,1,0,1,0,1,1,0,0][1,2,0,0,2,0,0,0,0,2,0,1,1,0,0][0,4,0,0,2,0,0,1,1,0,0,1,1,0,0][0,3,0,0,2,0,0,0,1,1,0,1,1,0,0][2,4,0,2,0,0,0,2,0,0,0,0,2,0,0][2,3,0,2,0,0,0,1,0,1,0,0,2,0,0][2,2,0,2,0,0,0,0,0,2,0,0,2,0,0][1,4,0,2,0,0,0,1,1,0,0,0,2,0,0][1,3,0,2,0,0,0,0,1,1,0,0,2,0,0][0,4,0,2,0,0,0,0,2,0,0,0,2,0,0][1,4,0,1,1,0,0,2,0,0,0,0,2,0,0][1,3,0,1,1,0,0,1,0,1,0,0,2,0,0][1,2,0,1,1,0,0,0,0,2,0,0,2,0,0][0,4,0,1,1,0,0,1,1,0,0,0,2,0,0][0,3,0,1,1,0,0,0,1,1,0,0,2,0,0][0,4,0,0,2,0,0,2,0,0,0,0,2,0,0][0,3,0,0,2,0,0,1,0,1,0,0,2,0,0][0,2,0,0,2,0,0,0,0,2,0,0,2,0,0]")
     (by decide +kernel)
-    (fun xs hxs => by
-    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hxs
-    rcases hxs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
-    exacts [cert_2, cert_7, cert_11, cert_83, cert_87, cert_142, cert_200, cert_204, cert_208, cert_259, cert_263, cert_305, cert_348, cert_351, cert_354, cert_384, cert_387, cert_413, cert_468, cert_472, cert_475, cert_514, cert_517, cert_543, cert_561, cert_564, cert_567, cert_590, cert_593, cert_610, cert_620, cert_622, cert_624, cert_634, cert_636, cert_647, cert_650, cert_652, cert_667, cert_669, cert_677, cert_680, cert_682, cert_684, cert_690, cert_692, cert_696, cert_697, cert_698])
+    (certAll_cons cert_2
+    (certAll_cons cert_7
+    (certAll_cons cert_11
+    (certAll_cons cert_83
+    (certAll_cons cert_87
+    (certAll_cons cert_142
+    (certAll_cons cert_200
+    (certAll_cons cert_204
+    (certAll_cons cert_208
+    (certAll_cons cert_259
+    (certAll_cons cert_263
+    (certAll_cons cert_305
+    (certAll_cons cert_348
+    (certAll_cons cert_351
+    (certAll_cons cert_354
+    (certAll_cons cert_384
+    (certAll_cons cert_387
+    (certAll_cons cert_413
+    (certAll_cons cert_468
+    (certAll_cons cert_472
+    (certAll_cons cert_475
+    (certAll_cons cert_514
+    (certAll_cons cert_517
+    (certAll_cons cert_543
+    (certAll_cons cert_561
+    (certAll_cons cert_564
+    (certAll_cons cert_567
+    (certAll_cons cert_590
+    (certAll_cons cert_593
+    (certAll_cons cert_610
+    (certAll_cons cert_620
+    (certAll_cons cert_622
+    (certAll_cons cert_624
+    (certAll_cons cert_634
+    (certAll_cons cert_636
+    (certAll_cons cert_647
+    (certAll_cons cert_650
+    (certAll_cons cert_652
+    (certAll_cons cert_667
+    (certAll_cons cert_669
+    (certAll_cons cert_677
+    (certAll_cons cert_680
+    (certAll_cons cert_682
+    (certAll_cons cert_684
+    (certAll_cons cert_690
+    (certAll_cons cert_692
+    (certAll_cons cert_696
+    (certAll_cons cert_697
+    (certAll_cons cert_698 certAll_nil)))))))))))))))))))))))))))))))))))))))))))))))))
     (by norm_num) (by norm_num) (by norm_num)
 
 

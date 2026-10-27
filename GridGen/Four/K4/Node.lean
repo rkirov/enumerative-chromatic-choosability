@@ -170,11 +170,16 @@ def oldOpt (nd : Node) (i j : ℕ) : List Opt :=
   | some (m, t) => cond (Nat.beq t j) [Opt.old m j (adjTag nd i j)] []
   | none => []
 
+/-- The nonempty atoms of a shape, with their sizes, by ascending mask. The same for every node of
+a tree, so the kernel evaluates it once per declaration. -/
+def shAtoms (sh : Sh) : List (ℕ × ℕ) :=
+  (List.range' 1 15).filterMap fun m => cond (Nat.blt 0 (sh.na m)) (some (m, sh.na m)) none
+
 /-- The fresh options. -/
 def freshOpts (sh : Sh) (nd : Node) : List Opt :=
-  (List.range' 1 15).filterMap fun m =>
-    let μ := Nat.sub (sh.na m) (usedM nd m)
-    cond (Nat.blt 0 μ) (some (Opt.fresh m μ)) none
+  (shAtoms sh).filterMap fun p =>
+    let μ := Nat.sub p.2 (usedM nd p.1)
+    cond (Nat.blt 0 μ) (some (Opt.fresh p.1 μ)) none
 
 /-- **The options for row `i`** (the outside colour excluded). -/
 def opts (sh : Sh) (nd : Node) (i : ℕ) : List Opt :=

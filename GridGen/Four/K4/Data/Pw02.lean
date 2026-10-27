@@ -3,6 +3,7 @@ Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
 import GridGen.Four.K4.Data.Ctab
+import GridGen.Four.K4.Lit
 
 /-!
 # Height four at `k = 4`: pointwise certificates, part 02
@@ -14,155 +15,1005 @@ namespace GridGen.Four.K4
 
 set_option maxRecDepth 100000
 
-theorem cert_102 : CertAt [3, 2, 0, 1, 0, 2, 0, 2, 1, 0, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 6, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 7, Cl 9, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 7, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 6, Cl 5, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 5, Cl 11]) (by decide +kernel)
+theorem cert_560 : CertAt [2, 4, 0, 2, 1, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_103 : CertAt [3, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 20, Cl 0, Cl 1, Cl 4, Cl 10, Cl 10, Cl 14, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 7, Cl 13, Cl 17, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 4, Cl 9, Cl 8, Cl 16, Cl 21, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 9, Cl 0, Cl 0, Cl 1, Cl 9, Cl 7, Cl 12, Cl 12, Cl 24, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 3, Cl 8, Cl 7, Cl 12, Cl 10, Cl 36]) (by decide +kernel)
+theorem cert_561 : CertAt [2, 4, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
 
-theorem cert_104 : CertAt [3, 1, 0, 2, 0, 2, 0, 2, 1, 1, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2]) (by decide +kernel)
+theorem cert_562 : CertAt [2, 4, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
 
-theorem cert_105 : CertAt [3, 1, 0, 1, 0, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 6, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 7, Cl 9, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 7, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 6, Cl 5, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 5, Cl 11]) (by decide +kernel)
+theorem cert_563 : CertAt [2, 3, 0, 2, 1, 0, 0, 2, 0, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_106 : CertAt [3, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 20, Cl 0, Cl 1, Cl 4, Cl 10, Cl 10, Cl 14, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 7, Cl 13, Cl 17, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 4, Cl 9, Cl 8, Cl 16, Cl 21, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 9, Cl 0, Cl 0, Cl 1, Cl 9, Cl 7, Cl 12, Cl 12, Cl 24, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 3, Cl 8, Cl 7, Cl 12, Cl 10, Cl 36]) (by decide +kernel)
+theorem cert_564 : CertAt [2, 3, 0, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
 
-theorem cert_107 : CertAt [3, 0, 0, 2, 0, 2, 0, 1, 1, 2, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2]) (by decide +kernel)
+theorem cert_565 : CertAt [2, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 2, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
 
-theorem cert_108 : CertAt [3, 0, 0, 1, 0, 2, 0, 0, 1, 2, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 6, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 7, Cl 9, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 7, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 6, Cl 5, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 5, Cl 11]) (by decide +kernel)
+theorem cert_566 : CertAt [2, 2, 0, 2, 1, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_109 : CertAt [3, 1, 0, 1, 0, 3, 0, 3, 1, 0, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 3]) (by decide +kernel)
+theorem cert_567 : CertAt [2, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
 
-theorem cert_110 : CertAt [3, 1, 0, 0, 0, 3, 0, 2, 1, 0, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 10, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 8, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 7, Cl 10, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 9, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 6, Cl 0, Cl 0, Cl 0, Cl 4, Cl 4, Cl 8, Cl 6, Cl 17, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 6, Cl 6, Cl 20]) (by decide +kernel)
+theorem cert_568 : CertAt [2, 1, 0, 2, 1, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_111 : CertAt [3, 0, 0, 1, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 3, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 3]) (by decide +kernel)
+theorem cert_569 : CertAt [2, 3, 0, 1, 1, 1, 0, 3, 0, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_112 : CertAt [3, 0, 0, 0, 0, 3, 0, 1, 1, 1, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 10, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 8, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 7, Cl 10, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 9, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 6, Cl 0, Cl 0, Cl 0, Cl 4, Cl 4, Cl 8, Cl 6, Cl 17, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 6, Cl 6, Cl 20]) (by decide +kernel)
+theorem cert_570 : CertAt [2, 3, 0, 0, 1, 1, 0, 2, 0, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_113 : CertAt [3, 0, 0, 0, 0, 4, 0, 3, 1, 0, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 4, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 4, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 3, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 3, Cl 4]) (by decide +kernel)
+theorem cert_571 : CertAt [2, 2, 0, 1, 1, 1, 0, 2, 0, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_114 : CertAt [3, 3, 0, 3, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 5, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 4, Cl 6]) (by decide +kernel)
+theorem cert_572 : CertAt [2, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_115 : CertAt [3, 3, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 17, Cl 0, Cl 1, Cl 4, Cl 9, Cl 10, Cl 13, Cl 15, Cl 10, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 8, Cl 0, Cl 0, Cl 4, Cl 7, Cl 7, Cl 11, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 8, Cl 14, Cl 20, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 8, Cl 0, Cl 0, Cl 1, Cl 8, Cl 7, Cl 11, Cl 9, Cl 23, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 3, Cl 7, Cl 7, Cl 9, Cl 9, Cl 22]) (by decide +kernel)
+theorem cert_573 : CertAt [2, 1, 0, 1, 1, 1, 0, 1, 0, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_116 : CertAt [3, 3, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 12, Cl 24, Cl 0, Cl 3, Cl 6, Cl 18, Cl 14, Cl 22, Cl 25, Cl 13, Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 10, Cl 15, Cl 0, Cl 3, Cl 6, Cl 12, Cl 9, Cl 20, Cl 21, Cl 17, Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 11, Cl 18, Cl 0, Cl 3, Cl 6, Cl 15, Cl 10, Cl 22, Cl 25, Cl 17, Cl 0, Cl 0, Cl 0, Cl 3, Cl 1, Cl 3, Cl 9, Cl 13, Cl 0, Cl 1, Cl 3, Cl 13, Cl 9, Cl 16, Cl 16, Cl 30, Cl 0, Cl 0, Cl 0, Cl 3, Cl 1, Cl 6, Cl 11, Cl 14, Cl 0, Cl 1, Cl 5, Cl 12, Cl 9, Cl 16, Cl 14, Cl 42]) (by decide +kernel)
+theorem cert_574 : CertAt [2, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_117 : CertAt [3, 2, 0, 3, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 5, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 4, Cl 6]) (by decide +kernel)
+theorem cert_575 : CertAt [2, 0, 0, 1, 1, 1, 0, 0, 0, 3, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_118 : CertAt [3, 2, 0, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 17, Cl 0, Cl 1, Cl 4, Cl 9, Cl 10, Cl 13, Cl 15, Cl 10, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 8, Cl 0, Cl 0, Cl 4, Cl 7, Cl 7, Cl 11, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 8, Cl 14, Cl 20, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 8, Cl 0, Cl 0, Cl 1, Cl 8, Cl 7, Cl 11, Cl 9, Cl 23, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 3, Cl 7, Cl 7, Cl 9, Cl 9, Cl 22]) (by decide +kernel)
+theorem cert_576 : CertAt [2, 2, 0, 0, 1, 2, 0, 3, 0, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
 
-theorem cert_119 : CertAt [3, 1, 0, 3, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 5, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 4, Cl 6]) (by decide +kernel)
+theorem cert_577 : CertAt [2, 1, 0, 0, 1, 2, 0, 2, 0, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
 
-theorem cert_120 : CertAt [3, 2, 0, 2, 0, 1, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 6, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 7, Cl 9, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 7, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 6, Cl 5, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 5, Cl 11]) (by decide +kernel)
+theorem cert_578 : CertAt [2, 0, 0, 0, 1, 2, 0, 1, 0, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
 
-theorem cert_121 : CertAt [3, 2, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 20, Cl 0, Cl 1, Cl 4, Cl 10, Cl 10, Cl 14, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 7, Cl 13, Cl 17, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 4, Cl 9, Cl 8, Cl 16, Cl 21, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 9, Cl 0, Cl 0, Cl 1, Cl 9, Cl 7, Cl 12, Cl 12, Cl 24, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 3, Cl 8, Cl 7, Cl 12, Cl 10, Cl 36]) (by decide +kernel)
+theorem cert_579 : CertAt [2, 3, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_122 : CertAt [3, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 13, Cl 25, Cl 0, Cl 3, Cl 6, Cl 20, Cl 15, Cl 24, Cl 26, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 11, Cl 17, Cl 0, Cl 3, Cl 6, Cl 13, Cl 10, Cl 21, Cl 23, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 12, Cl 20, Cl 0, Cl 3, Cl 6, Cl 16, Cl 11, Cl 23, Cl 27, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 3, Cl 1, Cl 3, Cl 9, Cl 14, Cl 0, Cl 1, Cl 3, Cl 16, Cl 9, Cl 17, Cl 17, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)), Cl 0, Cl 0, Cl 0, Cl 3, Cl 1, Cl 6, Cl 12, Cl 15, Cl 0, Cl 1, Cl 5, Cl 14, Cl 10, Cl 17, Cl 15, Tr (Sp (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe))))]) (by decide +kernel)
+theorem cert_580 : CertAt [2, 3, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
 
-theorem cert_123 : CertAt [3, 1, 0, 2, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 6, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 7, Cl 9, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 7, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 6, Cl 5, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 5, Cl 11]) (by decide +kernel)
+theorem cert_581 : CertAt [2, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_124 : CertAt [3, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 20, Cl 0, Cl 1, Cl 4, Cl 10, Cl 10, Cl 14, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 7, Cl 13, Cl 17, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 4, Cl 9, Cl 8, Cl 16, Cl 21, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 9, Cl 0, Cl 0, Cl 1, Cl 9, Cl 7, Cl 12, Cl 12, Cl 24, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 3, Cl 8, Cl 7, Cl 12, Cl 10, Cl 36]) (by decide +kernel)
+theorem cert_582 : CertAt [2, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
 
-theorem cert_125 : CertAt [3, 0, 0, 2, 0, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 6, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 7, Cl 9, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 7, Cl 6, Cl 7, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 6, Cl 5, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 5, Cl 11]) (by decide +kernel)
+theorem cert_583 : CertAt [2, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_126 : CertAt [3, 1, 0, 1, 0, 2, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 10, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 8, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 7, Cl 10, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 9, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 6, Cl 0, Cl 0, Cl 0, Cl 4, Cl 4, Cl 8, Cl 6, Cl 17, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 6, Cl 6, Cl 20]) (by decide +kernel)
+theorem cert_584 : CertAt [2, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
 
-theorem cert_127 : CertAt [3, 1, 0, 0, 0, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 22, Cl 0, Cl 1, Cl 5, Cl 12, Cl 13, Cl 16, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 8, Cl 10, Cl 0, Cl 1, Cl 5, Cl 9, Cl 8, Cl 16, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 11, Cl 0, Cl 1, Cl 5, Cl 11, Cl 9, Cl 18, Cl 22, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 7, Cl 11, Cl 0, Cl 0, Cl 1, Cl 11, Cl 8, Cl 13, Cl 13, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)), Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 9, Cl 12, Cl 0, Cl 0, Cl 3, Cl 9, Cl 8, Cl 13, Cl 11, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)))))]) (by decide +kernel)
+theorem cert_585 : CertAt [2, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
 
-theorem cert_128 : CertAt [3, 0, 0, 1, 0, 2, 0, 1, 1, 1, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 10, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 8, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 6, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 7, Cl 10, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 9, Cl 12, Cl 8, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 6, Cl 0, Cl 0, Cl 0, Cl 4, Cl 4, Cl 8, Cl 6, Cl 17, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 4, Cl 7, Cl 0, Cl 0, Cl 1, Cl 4, Cl 4, Cl 6, Cl 6, Cl 20]) (by decide +kernel)
+theorem cert_586 : CertAt [2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
 
-theorem cert_129 : CertAt [3, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 22, Cl 0, Cl 1, Cl 5, Cl 12, Cl 13, Cl 16, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 8, Cl 10, Cl 0, Cl 1, Cl 5, Cl 9, Cl 8, Cl 16, Cl 18, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) (Pk Bx Pe))), Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 11, Cl 0, Cl 1, Cl 5, Cl 11, Cl 9, Cl 18, Cl 22, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 7, Cl 11, Cl 0, Cl 0, Cl 1, Cl 11, Cl 8, Cl 13, Cl 13, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)), Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 9, Cl 12, Cl 0, Cl 0, Cl 3, Cl 9, Cl 8, Cl 13, Cl 11, Tr (Sp (Pk Bx (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)))))]) (by decide +kernel)
+theorem cert_587 : CertAt [2, 2, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,C25,C0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TBC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TYRYRYRXRXQRBQRBRBQC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TBC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRYRBRBRBQRBRBQ") (by decide +kernel)
 
-theorem cert_130 : CertAt [3, 0, 0, 0, 0, 3, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 2, Cl 6, Cl 15, Cl 0, Cl 0, Cl 2, Cl 7, Cl 8, Cl 10, Cl 13, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 2, Cl 6, Cl 7, Cl 0, Cl 0, Cl 2, Cl 6, Cl 6, Cl 8, Cl 14, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 2, Cl 6, Cl 8, Cl 0, Cl 0, Cl 2, Cl 6, Cl 6, Cl 11, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 4, Cl 7, Cl 0, Cl 0, Cl 0, Cl 6, Cl 6, Cl 10, Cl 7, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 2, Cl 6, Cl 8, Cl 0, Cl 0, Cl 2, Cl 6, Cl 6, Cl 8, Cl 7, Tr Bx]) (by decide +kernel)
+theorem cert_588 : CertAt [2, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,C25,C0,C3,C6,C20,C15,C24,C26,TYRBRBQC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TYRYRBRBRBQRBQC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TYRYRYRXRXQRBQRBRBQC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TBC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRYRBRBRBQRBRBQ") (by decide +kernel)
 
-theorem cert_131 : CertAt [3, 2, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 20, Cl 0, Cl 1, Cl 4, Cl 10, Cl 10, Cl 14, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 7, Cl 13, Cl 17, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 4, Cl 9, Cl 8, Cl 16, Cl 21, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 9, Cl 0, Cl 0, Cl 1, Cl 9, Cl 7, Cl 12, Cl 12, Cl 24, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 3, Cl 8, Cl 7, Cl 12, Cl 10, Cl 36]) (by decide +kernel)
+theorem cert_589 : CertAt [1, 4, 0, 2, 1, 0, 0, 2, 1, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_132 : CertAt [3, 2, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 13, Cl 25, Cl 0, Cl 3, Cl 6, Cl 20, Cl 15, Cl 24, Cl 26, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 11, Cl 17, Cl 0, Cl 3, Cl 6, Cl 13, Cl 10, Cl 21, Cl 23, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 3, Cl 1, Cl 6, Cl 12, Cl 20, Cl 0, Cl 3, Cl 6, Cl 16, Cl 11, Cl 23, Cl 27, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 3, Cl 1, Cl 3, Cl 9, Cl 14, Cl 0, Cl 1, Cl 3, Cl 16, Cl 9, Cl 17, Cl 17, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)), Cl 0, Cl 0, Cl 0, Cl 3, Cl 1, Cl 6, Cl 12, Cl 15, Cl 0, Cl 1, Cl 5, Cl 14, Cl 10, Cl 17, Cl 15, Tr (Sp (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe))))]) (by decide +kernel)
+theorem cert_590 : CertAt [1, 4, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
 
-theorem cert_133 : CertAt [3, 1, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 20, Cl 0, Cl 1, Cl 4, Cl 10, Cl 10, Cl 14, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 7, Cl 13, Cl 17, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 4, Cl 9, Cl 8, Cl 16, Cl 21, Cl 14, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 9, Cl 0, Cl 0, Cl 1, Cl 9, Cl 7, Cl 12, Cl 12, Cl 24, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 10, Cl 0, Cl 0, Cl 3, Cl 8, Cl 7, Cl 12, Cl 10, Cl 36]) (by decide +kernel)
+theorem cert_591 : CertAt [1, 4, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
 
-theorem cert_134 : CertAt [3, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 22, Cl 0, Cl 1, Cl 5, Cl 12, Cl 13, Cl 16, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 8, Cl 10, Cl 0, Cl 1, Cl 5, Cl 9, Cl 8, Cl 16, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 11, Cl 0, Cl 1, Cl 5, Cl 11, Cl 9, Cl 18, Cl 22, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 7, Cl 11, Cl 0, Cl 0, Cl 1, Cl 11, Cl 8, Cl 13, Cl 13, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)), Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 9, Cl 12, Cl 0, Cl 0, Cl 3, Cl 9, Cl 8, Cl 13, Cl 11, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe))))]) (by decide +kernel)
+theorem cert_592 : CertAt [1, 3, 0, 2, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_135 : CertAt [3, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 1, Cl 4, Cl 1, Cl 7, Cl 14, Tr Bx, Cl 0, Cl 4, Cl 7, Cl 22, Cl 15, Cl 26, Cl 27, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 4, Cl 1, Cl 7, Cl 11, Tr Bx, Cl 0, Cl 3, Cl 7, Cl 15, Cl 10, Cl 22, Cl 24, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 4, Cl 1, Cl 7, Cl 13, Tr (Sp (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)))), Cl 0, Cl 3, Cl 7, Cl 20, Cl 11, Cl 24, Cl 28, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 4, Cl 1, Cl 4, Cl 10, Tr Bx, Cl 0, Cl 1, Cl 4, Cl 17, Cl 10, Cl 18, Cl 19, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)), Cl 0, Cl 0, Cl 0, Cl 4, Cl 1, Cl 7, Cl 12, Tr (Sp (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe)))), Cl 0, Cl 1, Cl 6, Cl 15, Cl 10, Cl 18, Cl 17, Tr (Sp (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe))))]) (by decide +kernel)
+theorem cert_593 : CertAt [1, 3, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
 
-theorem cert_136 : CertAt [3, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 22, Cl 0, Cl 1, Cl 5, Cl 12, Cl 13, Cl 16, Cl 18, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 8, Cl 10, Cl 0, Cl 1, Cl 5, Cl 9, Cl 8, Cl 16, Cl 18, Tr (Sp (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) (Pk Bx Pe))), Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 5, Cl 9, Cl 11, Cl 0, Cl 1, Cl 5, Cl 11, Cl 9, Cl 18, Cl 22, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 7, Cl 11, Cl 0, Cl 0, Cl 1, Cl 11, Cl 8, Cl 13, Cl 13, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 9, Cl 12, Cl 0, Cl 0, Cl 3, Cl 9, Cl 8, Cl 13, Cl 11, Tr (Sp (Pk Bx (Pk Bx (Pk (Sp (Pk Bx (Pk Bx (Pk Bx Pe)))) Pe))))]) (by decide +kernel)
+theorem cert_594 : CertAt [1, 2, 0, 2, 1, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
 
-theorem cert_137 : CertAt [3, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 2, Cl 0, Cl 5, Cl 10, Tr Bx, Cl 0, Cl 2, Cl 5, Cl 16, Cl 13, Cl 20, Cl 23, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 2, Cl 0, Cl 5, Cl 9, Tr Bx, Cl 0, Cl 2, Cl 5, Cl 10, Cl 8, Cl 18, Cl 19, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 2, Cl 0, Cl 5, Cl 10, Tr Bx, Cl 0, Cl 2, Cl 5, Cl 13, Cl 9, Cl 20, Cl 23, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 2, Cl 0, Cl 2, Cl 8, Tr Bx, Cl 0, Cl 0, Cl 2, Cl 12, Cl 8, Cl 14, Cl 14, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 2, Cl 0, Cl 5, Cl 10, Tr Bx, Cl 0, Cl 0, Cl 4, Cl 10, Cl 8, Cl 14, Cl 12, Tr Bx]) (by decide +kernel)
+theorem cert_595 : CertAt [1, 3, 0, 1, 1, 1, 0, 2, 1, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_139 : CertAt [3, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 3, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 2, Cl 4, Cl 2, Cl 7, Cl 15, Tr Bx, Cl 0, Cl 4, Cl 7, Cl 24, Cl 15, Cl 27, Tr Bx, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 4, Cl 2, Cl 7, Cl 12, Tr Bx, Cl 0, Cl 4, Cl 7, Cl 16, Cl 10, Cl 23, Tr Bx, Tr Bx, Cl 0, Cl 0, Cl 1, Cl 4, Cl 2, Cl 7, Cl 14, Tr Bx, Cl 0, Cl 4, Cl 7, Tr Bx, Cl 12, Cl 25, Tr Bx, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 4, Cl 1, Cl 4, Cl 11, Tr Bx, Cl 0, Cl 2, Cl 4, Cl 18, Cl 10, Cl 19, Tr Bx, Tr Bx, Cl 0, Cl 0, Cl 0, Cl 4, Cl 2, Cl 7, Cl 13, Tr Bx, Cl 0, Cl 2, Cl 6, Cl 16, Cl 10, Cl 19, Tr Bx, Tr (Sp (Pk Bx (Pk Bx Pe)))]) (by decide +kernel)
+theorem cert_596 : CertAt [1, 3, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_140 : CertAt [2, 4, 0, 4, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0]) (by decide +kernel)
+theorem cert_597 : CertAt [1, 2, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_141 : CertAt [2, 4, 0, 3, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 4, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 3, Cl 5]) (by decide +kernel)
+theorem cert_598 : CertAt [1, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_142 : CertAt [2, 4, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 16, Cl 0, Cl 1, Cl 4, Cl 9, Cl 10, Cl 12, Cl 14, Cl 9, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 8, Cl 0, Cl 0, Cl 4, Cl 7, Cl 7, Cl 10, Cl 14, Cl 9, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 8, Cl 13, Cl 18, Cl 9, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 8, Cl 0, Cl 0, Cl 1, Cl 8, Cl 7, Cl 11, Cl 8, Cl 22, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 3, Cl 7, Cl 7, Cl 9, Cl 8, Cl 21]) (by decide +kernel)
+theorem cert_599 : CertAt [1, 1, 0, 1, 1, 1, 0, 0, 1, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
 
-theorem cert_143 : CertAt [2, 3, 0, 4, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0]) (by decide +kernel)
+theorem cert_600 : CertAt [1, 2, 0, 0, 1, 2, 0, 2, 1, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
 
-theorem cert_144 : CertAt [2, 3, 0, 3, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 4, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 3, Cl 5]) (by decide +kernel)
+theorem cert_601 : CertAt [1, 1, 0, 0, 1, 2, 0, 1, 1, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
 
-theorem cert_145 : CertAt [2, 2, 0, 4, 0, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0]) (by decide +kernel)
+theorem cert_602 : CertAt [1, 0, 0, 0, 1, 2, 0, 0, 1, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
 
-theorem cert_146 : CertAt [2, 3, 0, 3, 0, 1, 0, 2, 2, 0, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1]) (by decide +kernel)
+theorem cert_603 : CertAt [1, 3, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_147 : CertAt [2, 3, 0, 2, 0, 1, 0, 1, 2, 0, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 5, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 4, Cl 6]) (by decide +kernel)
+theorem cert_604 : CertAt [1, 3, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
 
-theorem cert_148 : CertAt [2, 3, 0, 1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 17, Cl 0, Cl 1, Cl 4, Cl 9, Cl 10, Cl 13, Cl 15, Cl 10, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 7, Cl 8, Cl 0, Cl 0, Cl 4, Cl 7, Cl 7, Cl 11, Cl 16, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 4, Cl 8, Cl 8, Cl 14, Cl 20, Cl 11, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 1, Cl 6, Cl 8, Cl 0, Cl 0, Cl 1, Cl 8, Cl 7, Cl 11, Cl 9, Cl 23, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 4, Cl 8, Cl 9, Cl 0, Cl 0, Cl 3, Cl 7, Cl 7, Cl 9, Cl 9, Cl 22]) (by decide +kernel)
+theorem cert_605 : CertAt [1, 2, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
 
-theorem cert_149 : CertAt [2, 2, 0, 3, 0, 1, 0, 1, 2, 1, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1]) (by decide +kernel)
+theorem cert_606 : CertAt [1, 2, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
 
-theorem cert_150 : CertAt [2, 2, 0, 2, 0, 1, 0, 0, 2, 1, 0, 1, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 0, Cl 0, Cl 1, Cl 3, Cl 5, Cl 6, Cl 5, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 3, Cl 4, Cl 0, Cl 0, Cl 1, Cl 3, Cl 3, Cl 6, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 5, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 5, Cl 4, Cl 6, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 3, Cl 4, Cl 0, Cl 0, Cl 0, Cl 3, Cl 3, Cl 4, Cl 4, Cl 6]) (by decide +kernel)
+theorem cert_607 : CertAt [1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
 
-theorem cert_151 : CertAt [2, 1, 0, 3, 0, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1]) (by decide +kernel)
+theorem cert_608 : CertAt [1, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,C25,C0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TBC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TYRBRYRYRXRXQRBQRBQC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TYRYRBRBRBQRBQC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRBRYRBRBRBQRBQ") (by decide +kernel)
 
-theorem cert_152 : CertAt [2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0] :=
-  certAt_of_pw ctab_ok (certs := [Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 0, Cl 1, Cl 2]) (by decide +kernel)
+theorem cert_609 : CertAt [0, 4, 0, 2, 1, 0, 0, 1, 2, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_610 : CertAt [0, 4, 0, 1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_611 : CertAt [0, 3, 0, 2, 1, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_612 : CertAt [0, 3, 0, 1, 1, 1, 0, 1, 2, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_613 : CertAt [0, 3, 0, 0, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_614 : CertAt [0, 2, 0, 1, 1, 1, 0, 0, 2, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_615 : CertAt [0, 2, 0, 0, 1, 2, 0, 1, 2, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_616 : CertAt [0, 1, 0, 0, 1, 2, 0, 0, 2, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_617 : CertAt [0, 3, 0, 1, 1, 0, 0, 0, 2, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_618 : CertAt [0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_619 : CertAt [1, 4, 0, 1, 2, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_620 : CertAt [1, 4, 0, 0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_621 : CertAt [1, 3, 0, 1, 2, 0, 0, 2, 0, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_622 : CertAt [1, 3, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_623 : CertAt [1, 2, 0, 1, 2, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_624 : CertAt [1, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_625 : CertAt [1, 1, 0, 1, 2, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_626 : CertAt [1, 3, 0, 0, 2, 1, 0, 3, 0, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_627 : CertAt [1, 2, 0, 0, 2, 1, 0, 2, 0, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_628 : CertAt [1, 1, 0, 0, 2, 1, 0, 1, 0, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_629 : CertAt [1, 0, 0, 0, 2, 1, 0, 0, 0, 3, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_630 : CertAt [1, 3, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_631 : CertAt [1, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_632 : CertAt [1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_633 : CertAt [0, 4, 0, 1, 2, 0, 0, 2, 1, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_634 : CertAt [0, 4, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_635 : CertAt [0, 3, 0, 1, 2, 0, 0, 1, 1, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_636 : CertAt [0, 3, 0, 0, 2, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_637 : CertAt [0, 2, 0, 1, 2, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_638 : CertAt [0, 3, 0, 0, 2, 1, 0, 2, 1, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_639 : CertAt [0, 2, 0, 0, 2, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_640 : CertAt [0, 1, 0, 0, 2, 1, 0, 0, 1, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_641 : CertAt [0, 3, 0, 0, 2, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_642 : CertAt [0, 2, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_643 : CertAt [0, 4, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_644 : CertAt [0, 3, 0, 0, 3, 0, 0, 2, 0, 1, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_645 : CertAt [0, 2, 0, 0, 3, 0, 0, 1, 0, 2, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_646 : CertAt [0, 1, 0, 0, 3, 0, 0, 0, 0, 3, 0, 0, 1, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_647 : CertAt [2, 4, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_648 : CertAt [2, 4, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_649 : CertAt [2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C2,C5,C2,C8,C16,C29,C0,C4,C8,C25,C16,C28,C28,C14,C0,C0,C2,C5,C2,C8,C13,C23,C0,C4,C8,C17,C11,C24,C25,C18,C0,C0,C2,C5,C2,C8,C15,C26,C0,C4,C8,C21,C12,C26,C29,C18,C0,C0,C1,C5,C2,C4,C12,C15,C0,C2,C4,C19,C10,C20,C21,C34,C0,C0,C1,C5,C2,C8,C14,C16,C0,C2,C7,C17,C11,C20,C18,C51,") (by decide +kernel)
+
+theorem cert_650 : CertAt [2, 3, 0, 2, 0, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_651 : CertAt [2, 3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_652 : CertAt [2, 2, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_653 : CertAt [2, 3, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_654 : CertAt [2, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_655 : CertAt [2, 2, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_656 : CertAt [2, 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_657 : CertAt [2, 1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_658 : CertAt [2, 2, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_659 : CertAt [2, 1, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_660 : CertAt [2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_661 : CertAt [2, 3, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_662 : CertAt [2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C3,C5,C3,C8,C16,C30,C0,C5,C8,C27,C16,C29,C29,TBC0,C0,C2,C5,C3,C8,C13,C24,C0,C5,C8,C18,C11,C25,C26,TBC0,C0,C2,C5,C3,C8,C15,C27,C0,C5,C8,C22,C13,C27,C30,TBC0,C0,C1,C5,C2,C5,C12,C16,C0,C3,C5,C20,C11,C21,C22,TBC0,C0,C1,C5,C3,C8,C14,C17,C0,C3,C7,C19,C11,C22,C19,TB") (by decide +kernel)
+
+theorem cert_663 : CertAt [2, 2, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_664 : CertAt [2, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,C25,C0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TBC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TBC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TBC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRYRBRBRBQRBRBQ") (by decide +kernel)
+
+theorem cert_665 : CertAt [2, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,C25,C0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TYRYRBRBRBQRBQC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TBC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TBC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRYRBRBRBQRBRBQ") (by decide +kernel)
+
+theorem cert_666 : CertAt [2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C3,C6,C3,C9,C17,TBC0,C6,C9,C28,C17,C30,C32,TBC0,C0,C2,C6,C3,C9,C14,TBC0,C5,C9,C20,C12,C26,C27,TBC0,C0,C2,C6,C3,C9,C16,TBC0,C5,C9,C24,C14,C28,C31,TBC0,C0,C1,C6,C2,C5,C13,TBC0,C3,C5,C21,C12,C23,C23,TBC0,C0,C1,C6,C3,C9,C15,TBC0,C3,C8,C21,C12,C24,C20,TB") (by decide +kernel)
+
+theorem cert_667 : CertAt [1, 4, 0, 2, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_668 : CertAt [1, 4, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_669 : CertAt [1, 3, 0, 2, 0, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_670 : CertAt [1, 3, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_671 : CertAt [1, 3, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_672 : CertAt [1, 2, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_673 : CertAt [1, 2, 0, 0, 0, 2, 0, 1, 1, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_674 : CertAt [1, 1, 0, 0, 0, 2, 0, 0, 1, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_675 : CertAt [1, 3, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_676 : CertAt [1, 2, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,C25,C0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TBC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TBC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TYRYRBRBRBQRBQC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRBRYRBRBRBQRBQ") (by decide +kernel)
+
+theorem cert_677 : CertAt [0, 4, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_678 : CertAt [0, 3, 0, 1, 0, 1, 0, 0, 2, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_679 : CertAt [0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,C11,C0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,C14,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,C14,C0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C36,") (by decide +kernel)
+
+theorem cert_680 : CertAt [1, 4, 0, 1, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_681 : CertAt [1, 4, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_682 : CertAt [1, 3, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_683 : CertAt [1, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_684 : CertAt [1, 2, 0, 1, 1, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_685 : CertAt [1, 3, 0, 0, 1, 1, 0, 2, 0, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_686 : CertAt [1, 2, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_687 : CertAt [1, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_688 : CertAt [1, 3, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_689 : CertAt [1, 2, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_690 : CertAt [0, 4, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_691 : CertAt [0, 4, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_692 : CertAt [0, 3, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_693 : CertAt [0, 3, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_694 : CertAt [0, 2, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_695 : CertAt [0, 3, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 2, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_696 : CertAt [0, 4, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_697 : CertAt [0, 3, 0, 0, 2, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_698 : CertAt [0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C14,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C18,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_699 : CertAt [1, 4, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_700 : CertAt [1, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C2,C5,C2,C8,C16,C29,C0,C4,C8,C25,C16,C28,C28,C14,C0,C0,C2,C5,C2,C8,C13,C23,C0,C4,C8,C17,C11,C24,C25,C18,C0,C0,C2,C5,C2,C8,C15,C26,C0,C4,C8,C21,C12,C26,C29,C18,C0,C0,C1,C5,C2,C4,C12,C15,C0,C2,C4,C19,C10,C20,C21,C34,C0,C0,C1,C5,C2,C8,C14,C16,C0,C2,C7,C17,C11,C20,C18,C51,") (by decide +kernel)
+
+theorem cert_701 : CertAt [1, 3, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_702 : CertAt [1, 3, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_703 : CertAt [1, 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_704 : CertAt [1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C3,C5,C3,C8,C16,C30,C0,C5,C8,C27,C16,C29,C29,TBC0,C0,C2,C5,C3,C8,C13,C24,C0,C5,C8,C18,C11,C25,C26,TBC0,C0,C2,C5,C3,C8,C15,C27,C0,C5,C8,C22,C13,C27,C30,TBC0,C0,C1,C5,C2,C5,C12,C16,C0,C3,C5,C20,C11,C21,C22,TBC0,C0,C1,C5,C3,C8,C14,C17,C0,C3,C7,C19,C11,C22,C19,TB") (by decide +kernel)
+
+theorem cert_705 : CertAt [0, 4, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_706 : CertAt [0, 3, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,C13,C0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,C17,C0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,C17,C0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C42,") (by decide +kernel)
+
+theorem cert_707 : CertAt [0, 4, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_708 : CertAt [0, 3, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_709 : CertAt [0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C2,C5,C2,C8,C16,C29,C0,C4,C8,C25,C16,C28,C28,C14,C0,C0,C2,C5,C2,C8,C13,C23,C0,C4,C8,C17,C11,C24,C25,C18,C0,C0,C2,C5,C2,C8,C15,C26,C0,C4,C8,C21,C12,C26,C29,C18,C0,C0,C1,C5,C2,C4,C12,C15,C0,C2,C4,C19,C10,C20,C21,C34,C0,C0,C1,C5,C2,C8,C14,C16,C0,C2,C7,C17,C11,C20,C18,C51,") (by decide +kernel)
+
+theorem cert_711 : CertAt [3, 3, 1, 3, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_712 : CertAt [3, 3, 1, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C15,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C19,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_713 : CertAt [3, 3, 1, 1, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_714 : CertAt [3, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C2,C5,C2,C8,C16,C29,C0,C4,C8,C25,C16,C28,C28,TBC0,C0,C2,C5,C2,C8,C13,C23,C0,C4,C8,C17,C11,C24,C25,TBC0,C0,C2,C5,C2,C8,C15,C26,C0,C4,C8,C21,C12,C26,C29,TBC0,C0,C1,C5,C2,C4,C12,C15,C0,C2,C4,C19,C10,C20,C21,C34,C0,C0,C1,C5,C2,C8,C14,C16,C0,C2,C7,C17,C11,C20,C18,C51,") (by decide +kernel)
+
+theorem cert_716 : CertAt [3, 2, 1, 3, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_717 : CertAt [3, 2, 1, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C15,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C19,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_718 : CertAt [3, 2, 1, 1, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_720 : CertAt [3, 1, 1, 3, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_721 : CertAt [3, 1, 1, 2, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C15,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C19,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_723 : CertAt [3, 0, 1, 3, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_725 : CertAt [3, 2, 1, 2, 0, 1, 0, 3, 0, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_726 : CertAt [3, 2, 1, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_727 : CertAt [3, 2, 1, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,TBC0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,TBC0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,TBC0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C43,") (by decide +kernel)
+
+theorem cert_729 : CertAt [3, 1, 1, 2, 0, 1, 0, 2, 0, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_730 : CertAt [3, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_731 : CertAt [3, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,TBC0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,TYRYRBRBQQC0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,TBC0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C45,") (by decide +kernel)
+
+theorem cert_733 : CertAt [3, 0, 1, 2, 0, 1, 0, 1, 0, 2, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_734 : CertAt [3, 0, 1, 1, 0, 1, 0, 0, 0, 2, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C10,C9,C22,") (by decide +kernel)
+
+theorem cert_736 : CertAt [3, 1, 1, 1, 0, 2, 0, 3, 0, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_737 : CertAt [3, 1, 1, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRYRBRBQRBQ") (by decide +kernel)
+
+theorem cert_739 : CertAt [3, 0, 1, 1, 0, 2, 0, 2, 0, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_740 : CertAt [3, 0, 1, 0, 0, 2, 0, 1, 0, 1, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TYRYRBRBQQC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRYRBRBQRBRYRBRBQQ") (by decide +kernel)
+
+theorem cert_742 : CertAt [3, 0, 1, 0, 0, 3, 0, 3, 0, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C4,C10,C0,C0,C1,C4,C6,C8,C12,TBC0,C0,C0,C0,C0,C1,C4,C6,C0,C0,C1,C4,C4,C7,C10,TBC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C9,C12,TBC0,C0,C0,C0,C0,C0,C3,C6,C0,C0,C0,C4,C4,C8,C6,C18,C0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C6,C6,TYRYRBRBQRBQ") (by decide +kernel)
+
+theorem cert_743 : CertAt [3, 2, 1, 3, 0, 0, 0, 3, 0, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_744 : CertAt [3, 2, 1, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_745 : CertAt [3, 2, 1, 1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,TBC0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,TBC0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,TBC0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C45,") (by decide +kernel)
+
+theorem cert_746 : CertAt [3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C3,C5,C3,C8,C16,C31,C0,C5,C8,C27,C16,C29,C29,TBC0,C0,C2,C5,C3,C8,C13,C24,C0,C5,C8,C18,C11,C25,C26,TBC0,C0,C2,C5,C3,C8,C15,C27,C0,C5,C8,C22,C13,C27,C30,TBC0,C0,C1,C5,C2,C5,C12,C16,C0,C3,C5,C20,C11,C21,C22,TBC0,C0,C1,C5,C3,C8,C14,C17,C0,C3,C7,C19,C11,C22,C19,TB") (by decide +kernel)
+
+theorem cert_747 : CertAt [3, 1, 1, 3, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_748 : CertAt [3, 1, 1, 2, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C10,C9,C22,") (by decide +kernel)
+
+theorem cert_749 : CertAt [3, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,TBC0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,TYRYRBRBRBQRBQC0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,TBC0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C14,C9,C16,C16,C33,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C48,") (by decide +kernel)
+
+theorem cert_750 : CertAt [3, 0, 1, 3, 0, 0, 0, 1, 0, 2, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_751 : CertAt [3, 0, 1, 2, 0, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C10,C9,C22,") (by decide +kernel)
+
+theorem cert_752 : CertAt [3, 1, 1, 2, 0, 1, 0, 3, 0, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_753 : CertAt [3, 1, 1, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRYRYRBRBRBRBQRBRBRBQRBRBQ") (by decide +kernel)
+
+theorem cert_754 : CertAt [3, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,TBC0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TBC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TBC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TBC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRYRYRBRBRBRBQRBRBQRYRBRBRBQRYRBRBQQ") (by decide +kernel)
+
+theorem cert_755 : CertAt [3, 0, 1, 2, 0, 1, 0, 2, 0, 1, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_756 : CertAt [3, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TYRYRBRBRBRBQRBQC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C26,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRBRYRYRBRBRBQRBRBRBQRBQ") (by decide +kernel)
+
+theorem cert_757 : CertAt [3, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,TYRYRXRXRXQRBQC0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C22,C0,C3,C6,C13,C10,C21,C23,TYRYRBRBRBQRBQC0,C0,C1,C3,C1,C6,C12,C23,C0,C3,C6,C16,C11,C23,C27,TBC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TBC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRBRYRYRBRBRBQRBRBQRYRBRBQQ") (by decide +kernel)
+
+theorem cert_758 : CertAt [3, 0, 1, 1, 0, 2, 0, 3, 0, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C4,C10,C0,C0,C1,C4,C6,C8,C12,TBC0,C0,C0,C0,C0,C1,C4,C6,C0,C0,C1,C4,C4,C7,C10,TBC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C9,C12,TBC0,C0,C0,C0,C0,C0,C3,C6,C0,C0,C0,C4,C4,C8,C6,C18,C0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C6,C6,TYRYRYRBRBRBQRBRBQRBQ") (by decide +kernel)
+
+theorem cert_759 : CertAt [3, 0, 1, 0, 0, 2, 0, 2, 0, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C5,C9,TBC0,C1,C5,C12,C13,C16,C18,TBC0,C0,C0,C1,C0,C5,C8,C11,C0,C1,C5,C9,C8,C16,C18,TBC0,C0,C0,C1,C0,C5,C9,C12,C0,C1,C5,C11,C9,C18,C22,TBC0,C0,C0,C1,C0,C1,C7,C11,C0,C0,C1,C11,C8,C13,C13,TBC0,C0,C0,C1,C0,C4,C9,C12,C0,C0,C3,C9,C8,C13,C11,TYRYRYRBRBRBQRYRBRBRBQRBQRBRYRBRBQQ") (by decide +kernel)
+
+theorem cert_760 : CertAt [3, 1, 1, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C26,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRBQ") (by decide +kernel)
+
+theorem cert_762 : CertAt [3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C3,C6,C3,C9,C17,TBC0,C6,C9,TBC17,C30,C32,TBC0,C0,C2,C6,C3,C9,C14,TBC0,C5,C9,C21,C12,C26,C27,TBC0,C0,C2,C6,C3,C9,C16,TBC0,C5,C9,TBC14,C28,TBTBC0,C0,C1,C6,C2,C5,C13,TBC0,C3,C5,C21,C12,C23,C23,TBC0,C0,C1,C6,C3,C9,C15,TBC0,C3,C8,TBC12,C24,C20,TYRBRYRYRBRBRBQRBQQ") (by decide +kernel)
+
+theorem cert_763 : CertAt [3, 0, 1, 2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TYRBRBQC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C28,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C37,") (by decide +kernel)
+
+theorem cert_765 : CertAt [3, 0, 1, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C5,C9,TBC0,C1,C5,C12,C13,C16,C22,TBC0,C0,C0,C1,C0,C5,C8,C13,C0,C1,C5,C9,C8,C16,C18,TBC0,C0,C0,C1,C0,C5,C9,C14,C0,C1,C5,C11,C9,C18,C22,TBC0,C0,C0,C1,C0,C1,C7,C11,C0,C0,C1,C11,C8,C13,C13,TBC0,C0,C0,C1,C0,C4,C9,C12,C0,C0,C3,C9,C8,C13,C11,TYRYRYRBRBRBQRBRBQRYRYRBRBRBQRBRBQQ") (by decide +kernel)
+
+theorem cert_766 : CertAt [3, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C4,C1,C7,C14,TBC0,C4,C7,TBC15,C26,TBTBC0,C0,C1,C4,C1,C7,C11,TBC0,C3,C7,C15,C10,C22,TYRBRBQTYRYRBRBRBQQC0,C0,C1,C4,C1,C7,C13,TYRYRBRBRBQRBRBQC0,C3,C7,TBC11,C24,TBTBC0,C0,C0,C4,C1,C4,C10,TYRYRBRBRBQRBRBQC0,C1,C4,C17,C10,C18,TYRYRBRBRBQRBQTBC0,C0,C0,C4,C1,C7,C12,TYRYRBRBRBQRBRBQC0,C1,C6,C15,C10,C18,TYRYRBRBRBQRBRYRBRBRBQRBQTYRYRYRBRBRBQRYRBRBQRBQRBRYRYRBRBRBQRYRBRBQRBQQ") (by decide +kernel)
+
+theorem cert_768 : CertAt [3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C3,C7,C3,C9,C18,TBC0,C6,C9,TBC17,C31,TBTBC0,C0,C2,C7,C3,C9,C15,TBC0,C6,C9,TBC12,C28,TBTBC0,C0,C2,C7,C3,C9,C17,TBC0,C6,C9,TBC14,TBTBTBC0,C0,C1,C7,C2,C6,C14,TBC0,C4,C6,TBC12,C25,TBTBC0,C0,C1,C7,C3,C9,C16,TBC0,C4,C8,TBC12,C25,TBTYRBRYRYRBRBQRBQQ") (by decide +kernel)
+
+theorem cert_770 : CertAt [2, 3, 1, 3, 0, 0, 0, 2, 1, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_771 : CertAt [2, 3, 1, 2, 0, 0, 0, 1, 1, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C15,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C19,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_772 : CertAt [2, 3, 1, 1, 0, 0, 0, 0, 1, 0, 0, 3, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C23,C0,C2,C6,C17,C14,C21,C24,C12,C0,C0,C1,C3,C1,C6,C10,C14,C0,C2,C6,C11,C9,C19,C20,C15,C0,C0,C1,C3,C1,C6,C11,C17,C0,C2,C6,C14,C10,C21,C24,C15,C0,C0,C0,C3,C1,C2,C9,C12,C0,C1,C2,C13,C8,C15,C15,C29,C0,C0,C0,C3,C1,C5,C11,C13,C0,C1,C4,C11,C8,C15,C13,C41,") (by decide +kernel)
+
+theorem cert_774 : CertAt [2, 2, 1, 3, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_775 : CertAt [2, 2, 1, 2, 0, 0, 0, 0, 1, 1, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C15,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C19,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_777 : CertAt [2, 1, 1, 3, 0, 0, 0, 0, 1, 2, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_780 : CertAt [2, 2, 1, 2, 0, 1, 0, 2, 1, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_781 : CertAt [2, 2, 1, 1, 0, 1, 0, 1, 1, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_782 : CertAt [2, 2, 1, 0, 0, 1, 0, 0, 1, 0, 0, 3, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,TBC0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,TBC0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,TBC0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C43,") (by decide +kernel)
+
+theorem cert_784 : CertAt [2, 1, 1, 2, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_785 : CertAt [2, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_787 : CertAt [2, 0, 1, 2, 0, 1, 0, 0, 1, 2, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_789 : CertAt [2, 1, 1, 1, 0, 2, 0, 2, 1, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_790 : CertAt [2, 1, 1, 0, 0, 2, 0, 1, 1, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRYRBRBQRBRYRBRBQQ") (by decide +kernel)
+
+theorem cert_792 : CertAt [2, 0, 1, 1, 0, 2, 0, 1, 1, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_793 : CertAt [2, 0, 1, 0, 0, 2, 0, 0, 1, 1, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TYRYRBRBQQC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRYRBRBQRYRBRBQQ") (by decide +kernel)
+
+theorem cert_795 : CertAt [2, 0, 1, 0, 0, 3, 0, 2, 1, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C4,C10,C0,C0,C1,C4,C6,C8,C12,TBC0,C0,C0,C0,C0,C1,C4,C6,C0,C0,C1,C4,C4,C7,C10,TBC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C9,C12,TBC0,C0,C0,C0,C0,C0,C3,C6,C0,C0,C0,C4,C4,C8,C6,C18,C0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C6,C6,TYRYRBRBQRBRYRBRBQQ") (by decide +kernel)
+
+theorem cert_796 : CertAt [2, 2, 1, 3, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_797 : CertAt [2, 2, 1, 2, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_798 : CertAt [2, 2, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C12,C24,C0,C3,C6,C18,C14,C22,C25,TBC0,C0,C1,C3,C1,C6,C10,C15,C0,C3,C6,C12,C9,C20,C21,TBC0,C0,C1,C3,C1,C6,C11,C18,C0,C3,C6,C15,C10,C22,C25,TBC0,C0,C0,C3,C1,C3,C9,C13,C0,C1,C3,C13,C9,C16,C16,C30,C0,C0,C0,C3,C1,C6,C11,C14,C0,C1,C5,C12,C9,C16,C14,C45,") (by decide +kernel)
+
+theorem cert_799 : CertAt [2, 1, 1, 3, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_800 : CertAt [2, 1, 1, 2, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C10,C9,C22,") (by decide +kernel)
+
+theorem cert_801 : CertAt [2, 0, 1, 3, 0, 0, 0, 0, 1, 2, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_802 : CertAt [2, 1, 1, 2, 0, 1, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_803 : CertAt [2, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRYRYRBRBRBRBQRBRBRBQRBRBRYRYRBRBRBRBQRBRBRBQQ") (by decide +kernel)
+
+theorem cert_804 : CertAt [2, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 2, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C3,C1,C6,C13,TBC0,C3,C6,C20,C15,C24,C26,TBC0,C0,C1,C3,C1,C6,C11,C17,C0,C3,C6,C13,C10,C21,C23,TBC0,C0,C1,C3,C1,C6,C12,C20,C0,C3,C6,C16,C11,C23,C27,TBC0,C0,C0,C3,C1,C3,C9,C14,C0,C1,C3,C16,C9,C17,C17,TYRYRBRBRBQQC0,C0,C0,C3,C1,C6,C12,C15,C0,C1,C5,C14,C10,C17,C15,TYRYRBRBRBQRYRBRBQRYRYRBRBRBRBQRBRBQQ") (by decide +kernel)
+
+theorem cert_805 : CertAt [2, 0, 1, 2, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_806 : CertAt [2, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TYRYRBRBRBRBQRBQC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C26,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRYRYRBRBRBQRBRBRBQRBRBQ") (by decide +kernel)
+
+theorem cert_807 : CertAt [2, 0, 1, 1, 0, 2, 0, 2, 1, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C4,C10,C0,C0,C1,C4,C6,C8,C12,TBC0,C0,C0,C0,C0,C1,C4,C6,C0,C0,C1,C4,C4,C7,C10,TBC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C9,C12,TBC0,C0,C0,C0,C0,C0,C3,C6,C0,C0,C0,C4,C4,C8,C6,C19,C0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C6,C6,TYRYRYRBRBRBQRBRBQRBRYRYRBRBRBQRBRBQQ") (by decide +kernel)
+
+theorem cert_808 : CertAt [2, 0, 1, 0, 0, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C5,C9,TBC0,C1,C5,C12,C13,C16,C18,TBC0,C0,C0,C1,C0,C5,C8,C11,C0,C1,C5,C9,C8,C16,C18,TBC0,C0,C0,C1,C0,C5,C9,C12,C0,C1,C5,C11,C9,C18,C22,TBC0,C0,C0,C1,C0,C1,C7,C11,C0,C0,C1,C11,C8,C13,C13,TYRYRBRBRBQQC0,C0,C0,C1,C0,C4,C9,C12,C0,C0,C3,C9,C8,C13,C11,TYRYRYRBRBRBQRYRBRBRBQRBQRBRYRBRBQRYRYRBRBRBQRYRBRBRBQRBQQ") (by decide +kernel)
+
+theorem cert_809 : CertAt [2, 1, 1, 2, 0, 0, 0, 1, 1, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C26,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRBRBQ") (by decide +kernel)
+
+theorem cert_811 : CertAt [2, 0, 1, 2, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TYRBRBQC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C28,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,C37,") (by decide +kernel)
+
+theorem cert_812 : CertAt [2, 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C5,C9,TBC0,C1,C5,C12,C13,C16,C22,TBC0,C0,C0,C1,C0,C5,C8,C13,C0,C1,C5,C9,C8,C16,C18,TBC0,C0,C0,C1,C0,C5,C9,C14,C0,C1,C5,C11,C9,C18,C22,TBC0,C0,C0,C1,C0,C1,C7,C11,C0,C0,C1,C11,C8,C13,C13,TYRYRYRXRXRXQRBRBQQC0,C0,C0,C1,C0,C4,C9,C12,C0,C0,C3,C9,C8,C13,C11,TYRYRYRBRBRBQRBRBQRYRYRBRBRBQRBRBQRYRYRBRBRBQRBRBQQ") (by decide +kernel)
+
+theorem cert_813 : CertAt [2, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C1,C4,C1,C7,C14,TBC0,C4,C7,TBC15,C26,TBTBC0,C0,C1,C4,C1,C7,C11,TBC0,C3,C7,C15,C10,C22,TYRBRBQTYRYRBRBRBQQC0,C0,C1,C4,C1,C7,C13,TYRBRBRYRBRBRBQQC0,C3,C7,TBC11,C24,TBTBC0,C0,C0,C4,C1,C4,C10,TBC0,C1,C4,C17,C10,C18,TYRYRBRBRBQRBQTYRYRYRXRXRXQRYRXRXQRBQQC0,C0,C0,C4,C1,C7,C12,TYRBRBRYRBRBRBQQC0,C1,C6,C15,C10,C18,TYRYRBRBRBQRBRYRBRBRBQRBQTYRBRYRYRBRBRBQRYRBRBQRBQRYRYRBRBRBQRYRBRBQRBQQ") (by decide +kernel)
+
+theorem cert_816 : CertAt [1, 3, 1, 3, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_817 : CertAt [1, 3, 1, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C16,C0,C1,C4,C9,C10,C12,C14,C9,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C10,C15,C9,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C13,C19,C9,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C8,C22,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C8,C21,") (by decide +kernel)
+
+theorem cert_819 : CertAt [1, 2, 1, 3, 0, 0, 0, 0, 2, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C4,C5,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C5,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C5,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C3,C5,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C3,C5,") (by decide +kernel)
+
+theorem cert_822 : CertAt [1, 2, 1, 2, 0, 1, 0, 1, 2, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_823 : CertAt [1, 2, 1, 1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_825 : CertAt [1, 1, 1, 2, 0, 1, 0, 0, 2, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_828 : CertAt [1, 1, 1, 1, 0, 2, 0, 1, 2, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_829 : CertAt [1, 1, 1, 0, 0, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRYRBRBQQ") (by decide +kernel)
+
+theorem cert_831 : CertAt [1, 0, 1, 1, 0, 2, 0, 0, 2, 1, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_833 : CertAt [1, 0, 1, 0, 0, 3, 0, 1, 2, 0, 0, 1, 0, 0, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C4,C10,C0,C0,C1,C4,C6,C8,C12,TBC0,C0,C0,C0,C0,C1,C4,C6,C0,C0,C1,C4,C4,C7,C10,TBC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C9,C12,TBC0,C0,C0,C0,C0,C0,C3,C6,C0,C0,C0,C4,C4,C8,C6,TYRYRBRBQQC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C6,C6,TYRYRBRBQRBRYRBRBQQ") (by decide +kernel)
+
+theorem cert_834 : CertAt [1, 2, 1, 3, 0, 0, 0, 1, 2, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C0,C3,C4,C0,C0,C0,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_835 : CertAt [1, 2, 1, 2, 0, 0, 0, 0, 2, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C17,C0,C1,C4,C9,C10,C13,C15,C10,C0,C0,C0,C1,C0,C4,C7,C8,C0,C0,C4,C7,C7,C11,C16,C11,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C4,C8,C8,C14,C20,C11,C0,C0,C0,C1,C0,C1,C6,C8,C0,C0,C1,C8,C7,C11,C9,C23,C0,C0,C0,C1,C0,C4,C8,C9,C0,C0,C3,C7,C7,C9,C9,C22,") (by decide +kernel)
+
+theorem cert_836 : CertAt [1, 1, 1, 3, 0, 0, 0, 0, 2, 1, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C5,C6,C5,C6,C0,C0,C0,C0,C0,C1,C3,C3,C0,C0,C1,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C4,C6,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C5,C4,C6,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C4,C4,C6,") (by decide +kernel)
+
+theorem cert_837 : CertAt [1, 1, 1, 2, 0, 1, 0, 1, 2, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_838 : CertAt [1, 1, 1, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C24,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRBRYRYRBRBRBRBQRBRBRBQQ") (by decide +kernel)
+
+theorem cert_839 : CertAt [1, 0, 1, 2, 0, 1, 0, 0, 2, 1, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C3,C6,C0,C0,C1,C3,C5,C7,C9,C7,C0,C0,C0,C0,C0,C1,C3,C4,C0,C0,C1,C3,C3,C6,C6,C7,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C7,C6,C7,C0,C0,C0,C0,C0,C0,C3,C5,C0,C0,C0,C3,C3,C6,C5,C8,C0,C0,C0,C0,C0,C1,C3,C5,C0,C0,C1,C3,C3,C5,C5,C11,") (by decide +kernel)
+
+theorem cert_840 : CertAt [1, 0, 1, 1, 0, 2, 0, 1, 2, 0, 0, 0, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C0,C0,C1,C4,C10,C0,C0,C1,C4,C6,C8,C12,TBC0,C0,C0,C0,C0,C1,C4,C6,C0,C0,C1,C4,C4,C7,C10,TBC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C9,C12,TBC0,C0,C0,C0,C0,C0,C3,C6,C0,C0,C0,C4,C4,C8,C6,TYRYRYRXRXRXQRBRBQQC0,C0,C0,C0,C0,C1,C4,C7,C0,C0,C1,C4,C4,C6,C6,TYRYRYRBRBRBQRBRBQRBRYRYRBRBRBQRBRBQQ") (by decide +kernel)
+
+theorem cert_841 : CertAt [1, 0, 1, 0, 0, 2, 0, 0, 2, 0, 0, 1, 0, 1, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C5,C9,TBC0,C1,C5,C12,C13,C16,C18,TBC0,C0,C0,C1,C0,C5,C8,TBC0,C1,C5,C9,C8,C16,C18,TBC0,C0,C0,C1,C0,C5,C9,TYRBRBRBQC0,C1,C5,C11,C9,C18,C22,TBC0,C0,C0,C1,C0,C1,C7,C11,C0,C0,C1,C11,C8,C13,C13,TYRYRYRXRXRXQRBRBQQC0,C0,C0,C1,C0,C4,C9,C12,C0,C0,C3,C9,C8,C13,C11,TYRBRYRBRBQRYRYRBRBRBQRYRBRBRBQRBQQ") (by decide +kernel)
+
+theorem cert_842 : CertAt [1, 1, 1, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C4,C8,C20,C0,C1,C4,C10,C10,C14,C16,TBC0,C0,C0,C1,C0,C4,C7,C9,C0,C0,C4,C8,C7,C13,C17,TBC0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C4,C9,C8,C16,C21,TBC0,C0,C0,C1,C0,C1,C6,C9,C0,C0,C1,C9,C7,C12,C12,C26,C0,C0,C0,C1,C0,C4,C8,C10,C0,C0,C3,C8,C7,C12,C10,TYRBRBQ") (by decide +kernel)
+
+theorem cert_843 : CertAt [1, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 2, 0] :=
+  certAt_of_pwGo ctab_ok (fun _ _ => rfl) (rows := ctabList)
+    (certs := lits% PC "C0,C0,C0,C1,C0,C5,C9,TBC0,C1,C5,C12,C13,C16,C22,TBC0,C0,C0,C1,C0,C5,C8,C13,C0,C1,C5,C9,C8,C16,C18,TBC0,C0,C0,C1,C0,C5,C9,TYRBRBQC0,C1,C5,C11,C9,C18,C22,TBC0,C0,C0,C1,C0,C1,C7,C11,C0,C0,C1,C11,C8,C13,C13,TYRYRYRXRXRXQRBRBQQC0,C0,C0,C1,C0,C4,C9,C12,C0,C0,C3,C9,C8,C13,C11,TYRYRYRBRBRBQRBRBQRYRYRBRBRBQRBRBQQ") (by decide +kernel)
 
 
 end GridGen.Four.K4
