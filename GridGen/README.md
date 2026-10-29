@@ -9,7 +9,7 @@ Two independent developments share this library.
 2. **The column-lookback reduction** (`Column`, `Graph`, `Telescope`, `Uniform`, `Main`,
    `Explicit`): `H □ P_n` is `k`-ECC from a two-step seam inequality and an initial
    inequality, both stated as `Prop`s; proved at height four
-   for `k ≥ 4` in `Four/` (see [`Four/README.md`](Four/README.md)), and at height five for `k ≥ 6`
+   for `k ≥ 4` in `Four/` (see [`Four/README.md`](Four/README.md)), and at height five for `k ≥ 5`
    in `Five/`. The helpers both heights use (list-level local data `hb`, `mu`, `zz`, counting
    lemmas, the one-row rate bounds, the sharp fibre bound) are in `Lookback/Common.lean`.
    (Height three is proved directly in `Grid3/`.)
@@ -37,8 +37,8 @@ transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
 is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 7`); the list sizes
-`k = 3` stays open at height four (`Four/` proves `k ≥ 4`), `3 ≤ k ≤ 5` at height five (`Five/`
-proves `k ≥ 6`) and `3 ≤ k ≤ 6`
+`k = 3` stays open at height four (`Four/` proves `k ≥ 4`), `3 ≤ k ≤ 4` at height five (`Five/`
+proves `k ≥ 5`) and `3 ≤ k ≤ 6`
 at heights `≥ 6`.
 
 ## The argument

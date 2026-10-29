@@ -150,10 +150,10 @@ published construction.
   the grid corollaries of the maximum-degree items below (`k ≥ 20`, then `17`, then `16`), which
   have been removed, and the height-four item's range above `k = 6`. Not checked against the
   literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 6`,
-  `3 ≤ k ≤ 5` at height five and `k = 3` at height four.
+  `3 ≤ k ≤ 4` at height five and `k = 3` at height four.
 
-* **Height-five grids at `k ≥ 6` (`GridGen/Five/`).** Every `5 × (n+1)` grid is ECC at every
-  `k ≥ 6` (`GridGen.Five.ecc_boxProd_pathG_four`); before this, height five was known at `k ≥ 7`
+* **Height-five grids at `k ≥ 5` (`GridGen/Five/`).** Every `5 × (n+1)` grid is ECC at every
+  `k ≥ 5` (`GridGen.Five.ecc_boxProd_pathG_four`); before this, height five was known at `k ≥ 7`
   (the gauge item above). The route is the height-four item's, with five rows: an invariant
   per-pattern box of the fifteen pattern weights (eleven reflection orbits); a universal lower
   bound `|sts A| ≥ κ·n₁·∏ r̃ⱼ`, `κ = 123125/128018`, from greedy interval profiles; a chain-fibre
@@ -164,8 +164,14 @@ published construction.
   height-five box, count, pattern and bit-level certificates, the exact-layer reductions and the
   Lean development are this repository's (Claude, 2026-10-23), built on the height-four method
   (whose credits, including Codex's, are in the next item). Not checked against the literature
-  beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 5` remains open at height five, and the method
-  degrades with height (the single-mismatch margin at height six is about `0.0036`).
+  beyond Kirov–Naimi's Question 1. **`k = 5` (Codex, OpenAI, 2026-10-27; review and Lean by
+  Claude, 2026-10-28/29).** The box of the `k = 6` argument is too loose at `k = 5`; Codex's route
+  replaces it by a cone of five transient rays and a narrow invariant box around the Perron vector
+  (pattern term `0.025`), with the bit-level and exact certificates of the earlier items (16
+  exact classes, 227 shapes, 813,495 column types). The independent review
+  (`ai_research_notes/H5_K5_REVIEW_2026-10-28.md`) completed Codex's unfinished exact checks.
+  `3 ≤ k ≤ 4` remains open at height five, and the method degrades with height (the
+  single-mismatch margin at height six is about `0.0036`).
 
 * **Height-four grids at `k ≥ 4` (`GridGen/Four/`).** Every `4 × (n+1)` grid is ECC at every
   `k ≥ 4` (`GridGen.Four.ecc_boxProd_pathG_three`); before this, height four was known only at

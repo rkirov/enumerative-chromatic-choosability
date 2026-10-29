@@ -744,11 +744,12 @@ theorem ecc_boxProd_pathG_of_seven {k : ℕ} (hk : 7 ≤ k) (r n : ℕ) :
 
 end ListColoring
 
-/-! ### 19. Height-five grids at list sizes at least six
+/-! ### 19. Height-five grids at list sizes at least five
 
-Kirov–Naimi's Question 1 for the `5 × (n+1)` grids at every `k ≥ 6`, proved in `GridGen/Five/`:
+Kirov–Naimi's Question 1 for the `5 × (n+1)` grids at every `k ≥ 5`, proved in `GridGen/Five/`:
 the column-lookback route of §17 with five rows, a per-pattern invariant box of pattern weights,
-an analytic certificate for all but 24 small list mismatches, and exact certificates for those;
+an analytic certificate for all but 24 small list mismatches, and exact certificates for those
+(`k = 6`); at `k = 5` a cone of five transient rays and a narrow invariant box instead of the box;
 §18's `k ≥ 7` for the rest.
 -/
 
@@ -757,7 +758,7 @@ namespace GridGen.Five
 open SimpleGraph ListColoring
 open scoped SimpleGraph
 
-/-- Every `5 × (n+1)` grid is ECC at every list size at least six. -/
-theorem ecc_boxProd_pathG_four {k : ℕ} (hk : 6 ≤ k) (n : ℕ) : (pathG 4 □ pathG n).ECCAt k := sorry
+/-- Every `5 × (n+1)` grid is ECC at every list size at least five. -/
+theorem ecc_boxProd_pathG_four {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 4 □ pathG n).ECCAt k := sorry
 
 end GridGen.Five

@@ -1,10 +1,11 @@
-# `GridGen/Five/`: height-five grids at `k ≥ 6`
+# `GridGen/Five/`: height-five grids at `k ≥ 5`
 
-**`GridGen.Five.ecc_boxProd_pathG_four`**: for every `k ≥ 6` and every `n`,
+**`GridGen.Five.ecc_boxProd_pathG_four`**: for every `k ≥ 5` and every `n`,
 `(pathG 4 □ pathG n).ECCAt k`, i.e. every `5 × (n+1)` grid is ECC at list size `k`. The axioms
 are `[propext, Classical.choice, Quot.sound]` (`GridGen/PolymerAxiomAudit.lean`, comparator §19).
 For `k ≥ 7` this is the gauge route's `ListColoring.ecc_boxProd_pathG_of_seven`; the new case is
-`k = 6`. `3 ≤ k ≤ 5` remains open.
+`k = 6`, and `k = 5` (`K5/`, with its own README: Codex's (OpenAI) cone of five transient rays and a
+narrow invariant box). `3 ≤ k ≤ 4` remains open.
 
 ## Route
 
