@@ -4,22 +4,7 @@ Released under Apache 2.0 license.
 -/
 import GridGen.Five.K5.BitAll
 import GridGen.Five.K5.Zero
-import GridGen.Five.K5.ExClass.C0001
-import GridGen.Five.K5.ExClass.C0010
-import GridGen.Five.K5.ExClass.C0002
-import GridGen.Five.K5.ExClass.C0011
-import GridGen.Five.K5.ExClass.C0020
-import GridGen.Five.K5.ExClass.C0101
-import GridGen.Five.K5.ExClass.C0110
-import GridGen.Five.K5.ExClass.C1001
-import GridGen.Five.K5.ExClass.C0012
-import GridGen.Five.K5.ExClass.C0021
-import GridGen.Five.K5.ExClass.C0102
-import GridGen.Five.K5.ExClass.C0111
-import GridGen.Five.K5.ExClass.C0120
-import GridGen.Five.K5.ExClass.C0201
-import GridGen.Five.K5.ExClass.C1011
-import GridGen.Five.K5.ExClass.C1111
+import GridGen.Five.K5.ExClass.All
 
 /-!
 # Height five at `k = 5`: the seam inequality
