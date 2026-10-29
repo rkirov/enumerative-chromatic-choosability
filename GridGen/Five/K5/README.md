@@ -1,0 +1,45 @@
+# `GridGen/Five/K5/`: height-five grids at `k = 5`
+
+**`GridGen.Five.K5.seam55Holds`** and **`GridGen.Five.K5.init55Holds`**, fed to GridGen's
+telescoping by `GridGen.Five.K5.ecc_pathG_four_of_holds5`, give `(pathG 4 □ pathG n).ECCAt 5`;
+`GridGen.Five.ecc_boxProd_pathG_four` (`GridGen/Five/Main.lean`) now covers every `k ≥ 5`.
+
+## Route
+
+The one-column lookback route of `GridGen/Five/` (height five, `k = 6`), with the weights in a
+cone instead of a box. The cone is Codex's (OpenAI), `ai_research_notes/cx/h5k5/NOTE.md`; the
+independent review `ai_research_notes/H5_K5_REVIEW_2026-10-28.md` re-derived every number and
+completed the exact checks. The Lean development and all certificates were regenerated from the
+review's scripts (`ai_research_notes/h5k5review/`) by the generators in
+`ai_research_notes/h5k5lean/` (not tracked).
+
+1. **Reduction** (`Cone`, `Bridge`). The uniform transfer `Vmat5` at `k = 5`; the cone
+   `InCone5`: the five normalised transient rays `T^d 1` (`d ≤ 4`) and a narrow invariant box `Q`
+   around the Perron vector (`nextW5_inQ`, `wseq5_inCone`). A linear form is nonnegative on the
+   cone when its five ray values and its separable minimum on `Q` are (`lin_cone`); this gives the
+   uniform ratio `911/1000` (`rowV5_ratio`).
+2. **Pins** (`Peel`, `Block`, `Pins`). Event-conditioned fibre peels with per-row free counts
+   (`FibOK`, `peel_chain5`); Lemma B for blocks of one to three consecutive rows with the sharp
+   side factors `3/4, 9/13, 27/40, 81/121` (`step_frac`, `blk_bound5`); pins as blocks times peels
+   (`pin_sum5`).
+3. **One state** (`PatLP`, `PatData`, `Pattern`, `State`). The chain polytope at each size vector
+   `n ∈ {4,5}⁵` with dual certificates at the five rays and the midpoint of `Q` gives the pattern
+   ratio `R(n, o) ≤ 1.0255783` (`pattern55`); with greedy minimality of the count
+   (`N5g_le_card4`), `GB ≥ GU · (1 + V)`, `V = 10⁹ N5g / (R · NU) - 1` (`state55`).
+4. **State-bit certificates** (`BitLP`, `RowMask`, `BitSound`, `BitCert/`, `BitAll`): 493 pointwise
+   classes (`ptOK5`) and 156 classes closed by a dual certificate over the code vectors and
+   patterns, with pins as bit masks over the 3125 code indices (`bitOK5`, `seam_of_bit55`).
+5. **Exact certificates** (`ExactDefs`, `ExactSound`, `ExactDisp`, `ExCert/`, `ExClass/`): the
+   sixteen residual classes, 227 list shapes, 813,495 touching column types, each checked against
+   the cone (`okc55`), with pins on atom unions (`XPin`, `penL_le`), split into groups by the first
+   two rows (`subOK`, `xpass_of`); a pruned search dispatches a list system to its shape or its
+   reflection (`dispatch_of_searchX`, `seam_cls_*`).
+6. **The class `(0,0,0,0)`** (`Zero`), **the initial inequality** (`Init`: `|sts X| ≥ 1344` and
+   `R_init = 1.019305484`), and **the covering** (`Seam`: `cover55`, `seam55Holds`).
+
+## Credits
+
+The cone route, its certificates and the analytic Init are Codex's (OpenAI); the review, the
+completion of the rational coverage and the Lean development are this repository's (Claude).
+The lookback method, the box, the pins and the type machinery are those of `GridGen/Four/` and
+`GridGen/Five/`.
