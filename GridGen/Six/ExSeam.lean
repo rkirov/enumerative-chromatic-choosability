@@ -31,27 +31,6 @@ theorem mskL_lt (j : ℕ) (l : List ℕ) : ∀ r, (mskL j l).getD r 0 < 256 := b
   | 5 => exact h _ _
   | _ + 6 => simp [mskL]
 
-theorem tab_eq (ms : List ℕ) (hms : ∀ r, ms.getD r 0 < 256) :
-    dblF (dblF (dblF (dblF (dblF (dblF 255 (ms.getD 0 0) 0) (ms.getD 1 0) 1) (ms.getD 2 0) 2)
-      (ms.getD 3 0) 3) (ms.getD 4 0) 4) (ms.getD 5 0) 5 = pk 8 (atL ms 6) := by
-  have h0 : (255 : ℕ) = pk 8 (atL ms 0) := by simp [atL, pk]
-  have st : ∀ r < 6, dblF (pk 8 (atL ms r)) (ms.getD r 0) r = pk 8 (atL ms (r + 1)) :=
-    fun r hr => by rw [dblF_eq hr, dblT_eq ms hms]
-  rw [h0, st 0 (by norm_num), st 1 (by norm_num), st 2 (by norm_num), st 3 (by norm_num),
-    st 4 (by norm_num), st 5 (by norm_num)]
-
-theorem hor_eq (ms : List ℕ) : horF (pk 8 (atL ms 6)) 0 64 = itab ms := by
-  have hlen : (atL ms 6).length = 64 := by rw [atL_length]; norm_num
-  rw [horF_eq, itab, pk_eq_pkF 4, List.length_map, hlen]
-  apply pkF_congr
-  intro i hi
-  rw [zero_add, getD_map_lt (by rw [hlen]; exact hi), pk_eq_pkF 8, lane_pkF _ (by rw [hlen]; exact hi)]
-  intro k hk
-  rw [hlen] at hk
-  have := atL_lt ms 6 ((atL ms 6).getD k 0) (by
-    rw [List.getD_eq_getElem _ _ (by rw [hlen]; exact hk)]; exact List.getElem_mem _)
-  norm_num; exact this
-
 /-- **The leaf, unfolded.** -/
 theorem leafX_eq (D K j : ℕ) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) (p : T6)
     (k : ℕ → ℕ) :

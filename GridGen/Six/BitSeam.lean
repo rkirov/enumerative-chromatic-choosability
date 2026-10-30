@@ -272,11 +272,26 @@ theorem point_arith {U Gb : ℝ} {R NU Nm P M P' M' : ℕ} (hU : 0 ≤ U) (hR : 
   have key : U * (NU * R) ≤ Gb * (NU * R) := by nlinarith
   exact le_of_mul_le_mul_right key hpos
 
-/-- **The seam inequality for a pointwise class.** -/
+/-- A mismatch `a` dominates `m`: the same support and `a ≤ m`. -/
+def domR (a m : ℕ) : Bool := (Nat.beq a 0 && Nat.beq m 0) || (Nat.blt 0 a && Nat.ble a m)
+
+theorem emax_dom {a m : ℕ} (h : domR a m = true) (hh hh' : ℕ) : emax m hh hh' ≤ emax a hh hh' := by
+  unfold domR at h
+  rw [beq_eq_decide, beq_eq_decide, blt_eq_decide, ble_eq_decide] at h
+  simp only [Bool.or_eq_true, Bool.and_eq_true, decide_eq_true_eq] at h
+  unfold emax
+  rcases h with ⟨rfl, rfl⟩ | ⟨h0, hle⟩
+  · exact le_refl _
+  · split_ifs <;> omega
+
+/-- **The seam inequality for a pointwise class**, checked at a dominating class `a` (by
+`N6g_anti`, the check at `a` covers `m`). -/
 theorem seam_point {w : Wt6} (hw : InCone6 w) {X₁ X₂ X₃ X₄ X₅ X₆ B₁ B₂ B₃ B₄ B₅ B₆ : Finset ℕ}
     (hB₁ : B₁.card = 6) (hB₂ : B₂.card = 6) (hB₃ : B₃.card = 6) (hB₄ : B₄.card = 6)
-    (hB₅ : B₅.card = 6) (hB₆ : B₆.card = 6) {m1 m2 m3 m4 m5 : ℕ}
-    (hm : MOK B₁ B₂ B₃ B₄ B₅ B₆ [m1, m2, m3, m4, m5]) (hC : ptChk NML m1 m2 m3 m4 m5 = true) :
+    (hB₅ : B₅.card = 6) (hB₆ : B₆.card = 6) {m1 m2 m3 m4 m5 a1 a2 a3 a4 a5 : ℕ}
+    (hm : MOK B₁ B₂ B₃ B₄ B₅ B₆ [m1, m2, m3, m4, m5]) (hC : ptChk NML a1 a2 a3 a4 a5 = true)
+    (d1 : domR a1 m1 = true) (d2 : domR a2 m2 = true) (d3 : domR a3 m3 = true)
+    (d4 : domR a4 m4 = true) (d5 : domR a5 m5 = true) :
     ∑ s ∈ sts X₁ X₂ X₃ X₄ X₅ X₆, GU 6 w s
       ≤ ∑ s ∈ sts X₁ X₂ X₃ X₄ X₅ X₆, GB w B₁ B₂ B₃ B₄ B₅ B₆ s := by
   refine Finset.sum_le_sum fun s hs' => ?_
@@ -293,23 +308,26 @@ theorem seam_point {w : Wt6} (hw : InCone6 w) {X₁ X₂ X₃ X₄ X₅ X₆ B�
     (h4 := kH (r4 c)) (h5 := kH (r5 c)) (h6 := kH (r6 c)) (by omega) (by omega) (by omega)
     (by omega) (by omega) (by omega)
   -- the worst state of the bonuses
-  have a1 := eR_le_emax p1; have a2 := eR_le_emax p2; have a3 := eR_le_emax p3
-  have a4 := eR_le_emax p4; have a5 := eR_le_emax p5
-  have b1 := emax_le (m := m1) l1 l2; have b2 := emax_le (m := m2) l2 l3
-  have b3 := emax_le (m := m3) l3 l4; have b4 := emax_le (m := m4) l4 l5
-  have b5 := emax_le (m := m5) l5 l6
+  have ea1 := (eR_le_emax p1).trans (emax_dom d1 _ _)
+  have ea2 := (eR_le_emax p2).trans (emax_dom d2 _ _)
+  have ea3 := (eR_le_emax p3).trans (emax_dom d3 _ _)
+  have ea4 := (eR_le_emax p4).trans (emax_dom d4 _ _)
+  have ea5 := (eR_le_emax p5).trans (emax_dom d5 _ _)
+  have b1 := emax_le (m := a1) l1 l2; have b2 := emax_le (m := a2) l2 l3
+  have b3 := emax_le (m := a3) l3 l4; have b4 := emax_le (m := a4) l4 l5
+  have b5 := emax_le (m := a5) l5 l6
   have hanti := N6g_anti (n1 := ((5 + kH (r1 c) : ℕ) : ℤ)) (n2 := ((5 + kH (r2 c) : ℕ) : ℤ))
     (n3 := ((5 + kH (r3 c) : ℕ) : ℤ)) (n4 := ((5 + kH (r4 c) : ℕ) : ℤ))
     (n5 := ((5 + kH (r5 c) : ℕ) : ℤ)) (n6 := ((5 + kH (r6 c) : ℕ) : ℤ))
     (by push_cast; omega) (by push_cast; omega) (by push_cast; omega) (by push_cast; omega)
     (by push_cast; omega) (by push_cast; omega)
-    (e1 := (eR m1 (r1 c) (r2 c) : ℤ)) (e1' := (emax m1 (kH (r1 c)) (kH (r2 c)) : ℤ))
-    (e2 := (eR m2 (r2 c) (r3 c) : ℤ)) (e2' := (emax m2 (kH (r2 c)) (kH (r3 c)) : ℤ))
-    (e3 := (eR m3 (r3 c) (r4 c) : ℤ)) (e3' := (emax m3 (kH (r3 c)) (kH (r4 c)) : ℤ))
-    (e4 := (eR m4 (r4 c) (r5 c) : ℤ)) (e4' := (emax m4 (kH (r4 c)) (kH (r5 c)) : ℤ))
-    (e5 := (eR m5 (r5 c) (r6 c) : ℤ)) (e5' := (emax m5 (kH (r5 c)) (kH (r6 c)) : ℤ))
-    (by exact_mod_cast a1) (by exact_mod_cast a2) (by exact_mod_cast a3) (by exact_mod_cast a4)
-    (by exact_mod_cast a5) (by push_cast; omega) (by push_cast; omega) (by push_cast; omega)
+    (e1 := (eR m1 (r1 c) (r2 c) : ℤ)) (e1' := (emax a1 (kH (r1 c)) (kH (r2 c)) : ℤ))
+    (e2 := (eR m2 (r2 c) (r3 c) : ℤ)) (e2' := (emax a2 (kH (r2 c)) (kH (r3 c)) : ℤ))
+    (e3 := (eR m3 (r3 c) (r4 c) : ℤ)) (e3' := (emax a3 (kH (r3 c)) (kH (r4 c)) : ℤ))
+    (e4 := (eR m4 (r4 c) (r5 c) : ℤ)) (e4' := (emax a4 (kH (r4 c)) (kH (r5 c)) : ℤ))
+    (e5 := (eR m5 (r5 c) (r6 c) : ℤ)) (e5' := (emax a5 (kH (r5 c)) (kH (r6 c)) : ℤ))
+    (by exact_mod_cast ea1) (by exact_mod_cast ea2) (by exact_mod_cast ea3) (by exact_mod_cast ea4)
+    (by exact_mod_cast ea5) (by push_cast; omega) (by push_cast; omega) (by push_cast; omega)
     (by push_cast; omega) (by push_cast; omega) (by push_cast; omega) (by push_cast; omega)
     (by push_cast; omega)
   rw [← N6gPM_eq, ← N6gPM_eq] at hanti
@@ -335,13 +353,13 @@ theorem seam_point {w : Wt6} (hw : InCone6 w) {X₁ X₂ X₃ X₄ X₅ X₆ B�
     (5 + kH (r6 c)) (eR m1 (r1 c) (r2 c)) (eR m2 (r2 c) (r3 c)) (eR m3 (r3 c) (r4 c))
     (eR m4 (r4 c) (r5 c)) (eR m5 (r5 c) (r6 c)) = M at hst hanti
   generalize N6gP (5 + kH (r1 c)) (5 + kH (r2 c)) (5 + kH (r3 c)) (5 + kH (r4 c)) (5 + kH (r5 c))
-    (5 + kH (r6 c)) (emax m1 (kH (r1 c)) (kH (r2 c))) (emax m2 (kH (r2 c)) (kH (r3 c)))
-    (emax m3 (kH (r3 c)) (kH (r4 c))) (emax m4 (kH (r4 c)) (kH (r5 c)))
-    (emax m5 (kH (r5 c)) (kH (r6 c))) = P' at hpt hanti
+    (5 + kH (r6 c)) (emax a1 (kH (r1 c)) (kH (r2 c))) (emax a2 (kH (r2 c)) (kH (r3 c)))
+    (emax a3 (kH (r3 c)) (kH (r4 c))) (emax a4 (kH (r4 c)) (kH (r5 c)))
+    (emax a5 (kH (r5 c)) (kH (r6 c))) = P' at hpt hanti
   generalize N6gM (5 + kH (r1 c)) (5 + kH (r2 c)) (5 + kH (r3 c)) (5 + kH (r4 c)) (5 + kH (r5 c))
-    (5 + kH (r6 c)) (emax m1 (kH (r1 c)) (kH (r2 c))) (emax m2 (kH (r2 c)) (kH (r3 c)))
-    (emax m3 (kH (r3 c)) (kH (r4 c))) (emax m4 (kH (r4 c)) (kH (r5 c)))
-    (emax m5 (kH (r5 c)) (kH (r6 c))) = M' at hpt hanti
+    (5 + kH (r6 c)) (emax a1 (kH (r1 c)) (kH (r2 c))) (emax a2 (kH (r2 c)) (kH (r3 c)))
+    (emax a3 (kH (r3 c)) (kH (r4 c))) (emax a4 (kH (r4 c)) (kH (r5 c)))
+    (emax a5 (kH (r5 c)) (kH (r6 c))) = M' at hpt hanti
   generalize hNU0 : NUo (orb s) = NU at hst hNM
   have hNU : 0 < NU := by rw [← hNU0]; exact NUo_pos _
   exact point_arith (GU_nonneg hw s) hR hNU hNM hpt hanti (by push_cast at hst ⊢; linarith)

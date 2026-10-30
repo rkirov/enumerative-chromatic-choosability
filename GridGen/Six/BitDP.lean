@@ -289,18 +289,28 @@ theorem lastLists_getD (P : List BPin6) {j : ℕ} (hj : j < 7) :
 
 /-! ### The enumeration with the pins summed at their last row -/
 
-def ew6 (B DK m5 : ℕ) (R5 lams L6 : List ℕ) (Q6 : List (ℕ × ℕ)) (t : D1) (msk F c5 n5 e4 t3 q2 p1
-    g5p g5m g4p g4m g3p g3m g2p g2m g1p : ℕ) : Bool :=
-  all5k fun c6 => !(Nat.beq (kXr c6) 0 && pairR m5 c5 c6) ||
-    fN (Nat.add 5 (kHr c6)) fun n6 => fN (eR m5 c5 c6) fun e5 =>
-    fN (Nat.sub (Nat.add e4 e5) n5) fun t4 => fN (minR t3 t4) fun q3 =>
-    fN (Nat.sub (Nat.add q2 q3) t3) fun p2 => fN (minR p1 p2) fun x =>
-    fN (Nat.add F (fmS (Nat.land msk (getR R5 c6)) Q6)) fun F6 =>
-    Nat.ble (Nat.add (Nat.mul (Nat.sub DK F6) (sel (kHr c6) t))
+/-- The leaf inequality, from the values of the last row. The leaf functions pass values as
+arguments rather than through `fN`: the kernel then evaluates each shared argument once (its
+`whnf` cache) and avoids instantiating long continuations, which is about a third faster. -/
+def lf2 (B DK den F6 n6 e5 t4 q3 p2 x g5p g5m g4p g4m g3p g3m g2p g2m g1p : ℕ) : Bool :=
+  Nat.ble (Nat.add (Nat.mul (Nat.sub DK F6) den)
       (Nat.mul B (Nat.add (Nat.add (Nat.add (Nat.add (Nat.add (Nat.mul n6 g5m) (Nat.mul e5 g4p))
         (Nat.mul t4 g3m)) (Nat.mul q3 g2p)) (Nat.mul p2 0)) x)))
       (Nat.mul B (Nat.add (Nat.add (Nat.add (Nat.add (Nat.mul n6 g5p) (Nat.mul e5 g4m))
         (Nat.mul t4 g3p)) (Nat.mul q3 g2m)) (Nat.mul p2 g1p)))
+
+def lf1 (B DK den F6 n6 e5 t4 t3 q2 p1 g5p g5m g4p g4m g3p g3m g2p g2m g1p : ℕ) : Bool :=
+  lf2 B DK den F6 n6 e5 t4 (minR t3 t4) (Nat.sub (Nat.add q2 (minR t3 t4)) t3)
+    (minR p1 (Nat.sub (Nat.add q2 (minR t3 t4)) t3)) g5p g5m g4p g4m g3p g3m g2p g2m g1p
+
+def lf0 (B DK den F6 n6 e5 e4 n5 t3 q2 p1 g5p g5m g4p g4m g3p g3m g2p g2m g1p : ℕ) : Bool :=
+  lf1 B DK den F6 n6 e5 (Nat.sub (Nat.add e4 e5) n5) t3 q2 p1 g5p g5m g4p g4m g3p g3m g2p g2m g1p
+
+def ew6 (B DK m5 : ℕ) (R5 _lams _L6 : List ℕ) (Q6 : List (ℕ × ℕ)) (t : D1) (msk F c5 n5 e4 t3 q2 p1
+    g5p g5m g4p g4m g3p g3m g2p g2m g1p : ℕ) : Bool :=
+  all5k fun c6 => !(Nat.beq (kXr c6) 0 && pairR m5 c5 c6) ||
+    lf0 B DK (sel (kHr c6) t) (Nat.add F (fmS (Nat.land msk (getR R5 c6)) Q6)) (Nat.add 5 (kHr c6))
+      (eR m5 c5 c6) e4 n5 t3 q2 p1 g5p g5m g4p g4m g3p g3m g2p g2m g1p
 
 def ew5 (B DK m4 m5 : ℕ) (R4 R5 lams L6 : List ℕ) (Q5 Q6 : List (ℕ × ℕ)) (t : D2) (msk F c4 n4
     e3 t2 q1 g4p g4m g3p g3m g2p g2m g1p : ℕ) : Bool :=
@@ -477,7 +487,8 @@ theorem chkW_spec {m1 m2 m3 m4 m5 D K : ℕ} {t : D6} {den : List ℕ} {P : List
     fN_eq, fN_eq] at k5
   unfold ew6 at k5
   have k6 := all5k_spec k5 l6
-  rw [g6, Bool.not_true, Bool.false_or, fN_eq, fN_eq, fN_eq, fN_eq, fN_eq, fN_eq, fN_eq] at k6
+  rw [g6, Bool.not_true, Bool.false_or] at k6
+  unfold lf0 lf1 lf2 at k6
   -- the pins
   rw [rowTable_getD P (by norm_num) l1, rowTable_getD P (by norm_num) l2,
     rowTable_getD P (by norm_num) l3, rowTable_getD P (by norm_num) l4,

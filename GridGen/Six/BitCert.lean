@@ -50,6 +50,18 @@ def certOKpat (C : BCert6) (a b : ℕ) : Bool :=
       C.D C.K (DRT.getD (orb (canons.getD i (0, 0, 0, 0, 0, 0))) default) C.rt C.qs
       (maskOf (fun q => eqOKp q (canons.getD i (0, 0, 0, 0, 0, 0))) C.pins)
 
+/-- All checks of a pattern-aware certificate. -/
+def ppOK (C : BCert6) : Bool :=
+  certStatic C && certOKpat C 0 13 && certOKpat C 13 13 && certOKpat C 26 13 && certOKpat C 39 13
+
+/-- A group of pointwise classes: the check at its dominating class `g.1`, which dominates every
+class of `g.2` (`domR`, `seam_point`). -/
+def pwgOK (g : List ℕ × List (List ℕ)) : Bool :=
+  ptChk NML (g.1.getD 0 0) (g.1.getD 1 0) (g.1.getD 2 0) (g.1.getD 3 0) (g.1.getD 4 0) &&
+    g.2.all fun m => domR (g.1.getD 0 0) (m.getD 0 0) && domR (g.1.getD 1 0) (m.getD 1 0) &&
+      domR (g.1.getD 2 0) (m.getD 2 0) && domR (g.1.getD 3 0) (m.getD 3 0) &&
+      domR (g.1.getD 4 0) (m.getD 4 0)
+
 theorem mu_five {C : BCert6} (h : C.mu.length = 5) :
     C.mu = [C.mu.getD 0 0, C.mu.getD 1 0, C.mu.getD 2 0, C.mu.getD 3 0, C.mu.getD 4 0] := by
   match C.mu, h with

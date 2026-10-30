@@ -161,26 +161,26 @@ theorem pairK_true {pa pb ka kb : ℕ}
 theorem kap_five {s : T6} {r : ℕ} (h : kap j U V s r = 5) : rowAt r s ∈ U \ V := by
   unfold kap kapC at h
   by_cases h1 : rowAt r s ∈ U ∩ V
-  · rw [if_pos h1] at h; omega
-  rw [if_neg h1] at h
+  · rw [ite_eq_left h1] at h; omega
+  rw [ite_eq_right h1] at h
   by_cases h2 : r < j ∧ rowAt r s ∈ U
   · simp only [Finset.mem_inter, not_and] at h1
     exact Finset.mem_sdiff.mpr ⟨h2.2, h1 h2.2⟩
-  rw [if_neg h2] at h
+  rw [ite_eq_right h2] at h
   split_ifs at h <;> omega
 
 theorem kap_six {s : T6} {r : ℕ} (h : kap j U V s r = 6) : rowAt r s ∈ V \ U := by
   unfold kap kapC at h
   by_cases h1 : rowAt r s ∈ U ∩ V
-  · rw [if_pos h1] at h; omega
-  rw [if_neg h1] at h
+  · rw [ite_eq_left h1] at h; omega
+  rw [ite_eq_right h1] at h
   by_cases h2 : r < j ∧ rowAt r s ∈ U
-  · rw [if_pos h2] at h; omega
-  rw [if_neg h2] at h
+  · rw [ite_eq_left h2] at h; omega
+  rw [ite_eq_right h2] at h
   by_cases h3 : j ≤ r ∧ rowAt r s ∈ V
   · simp only [Finset.mem_inter, not_and] at h1
     exact Finset.mem_sdiff.mpr ⟨h3.2, fun hU => h1 hU h3.2⟩
-  rw [if_neg h3] at h; omega
+  rw [ite_eq_right h3] at h; omega
 
 theorem eq_of_sdiff {x y : ℕ} {A B : Finset ℕ} (h1 : (A \ B).card = 1) (hx : x ∈ A \ B)
     (hy : y ∈ A \ B) : x = y :=

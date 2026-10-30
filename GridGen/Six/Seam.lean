@@ -5,9 +5,9 @@ Released under Apache 2.0 license.
 import GridGen.Six.CoverData
 import GridGen.Six.Bridge
 import GridGen.Six.Zero
-import GridGen.Six.ExData.A3
-import GridGen.Six.ExData.A4
-import GridGen.Six.ExData.A5
+import GridGen.Six.ExData.X3
+import GridGen.Six.ExData.X4
+import GridGen.Six.ExData.X5
 
 /-!
 # Height six at `k = 6`: the seam inequality
@@ -145,9 +145,9 @@ theorem seam_rep (hw : InCone6 w) (h₁ : 5 ≤ X₁.card) (h₂ : 5 ≤ X₂.ca
     rw [← he] at hm
     obtain ⟨s1, s2, s3, s4, s5⟩ := ppAll_ok C hC
     exact seam_certp hw h₁ h₂ h₃ h₄ h₅ h₆ hB₁ hB₂ hB₃ hB₄ hB₅ hB₆ hm s1 s2 s3 s4 s5
-  · have h := pwAll_ok [m1, m2, m3, m4, m5] hr
-    simp only [List.getD_cons_zero, List.getD_cons_succ] at h
-    exact seam_point hw hB₁ hB₂ hB₃ hB₄ hB₅ hB₆ hm h
+  · obtain ⟨a, hC, d1, d2, d3, d4, d5⟩ := pwAll_ok [m1, m2, m3, m4, m5] hr
+    simp only [List.getD_cons_zero, List.getD_cons_succ] at d1 d2 d3 d4 d5
+    exact seam_point hw hB₁ hB₂ hB₃ hB₄ hB₅ hB₆ hm hC d1 d2 d3 d4 d5
 
 end seams
 

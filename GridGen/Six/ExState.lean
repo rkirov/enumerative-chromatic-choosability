@@ -125,7 +125,7 @@ theorem exists_W_map {W : Finset ℕ} (hW : W.card = 5) (c l : ℕ → ℕ)
   have hR : ∀ x r, r ∈ R x ↔ r < 6 ∧ c r = x.1 := fun x r => by simp [R]
   let f : {x // x ∈ W} → ℕ := fun x => if h : (R x).Nonempty then l ((R x).min' h) else 0
   let S : Finset {x // x ∈ W} := Finset.univ.filter (fun x => (R x).Nonempty)
-  have hf : ∀ x (h : (R x).Nonempty), f x = l ((R x).min' h) := fun x h => dif_pos h
+  have hf : ∀ x (h : (R x).Nonempty), f x = l ((R x).min' h) := fun x h => dite_eq_left h
   have hmin : ∀ x (h : (R x).Nonempty), (R x).min' h < 6 ∧ c ((R x).min' h) = x.1 :=
     fun x h => (hR x _).mp (Finset.min'_mem _ h)
   have hfS : S.image f ⊆ range 5 := by
@@ -148,7 +148,7 @@ theorem exists_W_map {W : Finset ℕ} (hW : W.card = 5) (c l : ℕ → ℕ)
   obtain ⟨e, he⟩ :=
     Finset.exists_equiv_extend_of_card_eq (by rw [Fintype.card_coe, hW, card_range]) hfS hfinj
   let g : ℕ → ℕ := fun x => if hx : x ∈ W then (e ⟨x, hx⟩ : ℕ) else x
-  have hg : ∀ x (hx : x ∈ W), g x = e ⟨x, hx⟩ := fun x hx => dif_pos hx
+  have hg : ∀ x (hx : x ∈ W), g x = e ⟨x, hx⟩ := fun x hx => dite_eq_left hx
   refine ⟨g, ?_, ?_, ?_⟩
   · intro x hx y hy hxy
     rw [hg x hx, hg y hy] at hxy
@@ -237,18 +237,18 @@ theorem exists_sigma (hU : U.card = 6) (hV : V.card = 6) (hW : (U ∩ V).card = 
     have : g x ∈ (U ∩ V).image g := Finset.mem_image_of_mem g hx
     rw [hgim] at this; simpa using this
   let σ : ℕ → ℕ := fun x => if x ∈ U ∩ V then g x else if x = a then 5 else if x = b then 6 else x + 7
-  have σW : ∀ x ∈ U ∩ V, σ x = g x := fun x hx => if_pos hx
+  have σW : ∀ x ∈ U ∩ V, σ x = g x := fun x hx => ite_eq_left hx
   have haW : a ∉ U ∩ V := fun h => haV (Finset.mem_inter.mp h).2
   have hbW : b ∉ U ∩ V := fun h => hbU (Finset.mem_inter.mp h).1
   have hab : b ≠ a := fun h => hbU (h ▸ haU)
-  have σa : σ a = 5 := by simp only [σ, if_neg haW, if_true]
-  have σb : σ b = 6 := by simp only [σ, if_neg hbW, if_neg hab, if_true]
+  have σa : σ a = 5 := by simp only [σ, ite_eq_right haW, ite_true]
+  have σb : σ b = 6 := by simp only [σ, ite_eq_right hbW, ite_eq_right hab, ite_true]
   have σo : ∀ x, x ∉ U ∪ V → σ x = x + 7 := by
     intro x hx
     have h1 : x ∉ U ∩ V := fun h => hx (Finset.mem_union_left _ (Finset.mem_inter.mp h).1)
     have h2 : x ≠ a := fun h => hx (Finset.mem_union_left _ (h ▸ haU))
     have h3 : x ≠ b := fun h => hx (Finset.mem_union_right _ (h ▸ hbV))
-    simp only [σ, if_neg h1, if_neg h2, if_neg h3]
+    simp only [σ, ite_eq_right h1, ite_eq_right h2, ite_eq_right h3]
   have hinj : Set.InjOn σ ↑(U ∪ V) := by
     intro x hx y hy hxy
     have hx' : x ∈ U ∪ V := hx
@@ -283,8 +283,8 @@ theorem exists_sigma (hU : U.card = 6) (hV : V.card = 6) (hW : (U ∩ V).card = 
     unfold bj bmJ
     rw [nblt]
     by_cases h : r < j
-    · simp only [h, if_true, decide_true, Bool.cond_true]; exact himU
-    · simp only [h, if_false, decide_false, Bool.cond_false]; exact himV
+    · simp only [h, ite_true, decide_true, Bool.cond_true]; exact himU
+    · simp only [h, ite_false, decide_false, Bool.cond_false]; exact himV
   refine ⟨σ, hinj, himB, fun r hr => ?_⟩
   have hBsub : (bj j U V r) ⊆ U ∪ V := by
     unfold bj; split_ifs
@@ -299,18 +299,18 @@ theorem exists_sigma (hU : U.card = 6) (hV : V.card = 6) (hW : (U ∩ V).card = 
       · rw [lab_other hr (fun h => h0 ((kap_zero_iff s r).mp h))]
         unfold bj at hin
         unfold kap kapC
-        rw [if_neg h0]
+        rw [ite_eq_right h0]
         split_ifs at hin with hrj
         · have hx : rowAt r s = a := by
             have : rowAt r s ∈ U \ V := Finset.mem_sdiff.mpr ⟨hin, fun hV' => h0
               (Finset.mem_inter.mpr ⟨hin, hV'⟩)⟩
             rw [ha] at this; simpa using this
-          rw [if_pos ⟨hrj, hin⟩, hx, σa]
+          rw [ite_eq_left ⟨hrj, hin⟩, hx, σa]
         · have hx : rowAt r s = b := by
             have : rowAt r s ∈ V \ U := Finset.mem_sdiff.mpr ⟨hin, fun hU' => h0
               (Finset.mem_inter.mpr ⟨hU', hin⟩)⟩
             rw [hb] at this; simpa using this
-          rw [if_neg (fun h => hrj h.1), if_pos ⟨by omega, hin⟩, hx, σb]
+          rw [ite_eq_right (fun h => hrj h.1), ite_eq_left ⟨by omega, hin⟩, hx, σb]
     rw [hlab, setOf_em _ _ (lab_lt8 hW hs hr)]
   · rw [Finset.erase_eq_of_notMem hin, himB r hr]
     have h7 : (labL (canon s) (kap j U V s)).getD r 7 = 7 := by
@@ -322,10 +322,10 @@ theorem exists_sigma (hU : U.card = 6) (hV : V.card = 6) (hW : (U ∩ V).card = 
       rw [lab_other hr h0]
       unfold kap kapC
       unfold bj at hin
-      rw [if_neg (fun h => h0 ((kap_zero_iff s r).mpr h))]
+      rw [ite_eq_right (fun h => h0 ((kap_zero_iff s r).mpr h))]
       split_ifs at hin with hrj
-      · rw [if_neg (fun h => hin h.2), if_neg (fun h => by omega)]
-      · rw [if_neg (fun h => hrj h.1), if_neg (fun h => hin h.2)]
+      · rw [ite_eq_right (fun h => hin h.2), ite_eq_right (fun h => by omega)]
+      · rw [ite_eq_right (fun h => hrj h.1), ite_eq_right (fun h => hin h.2)]
     rw [h7, setOf_em _ _ (by norm_num), Finset.erase_eq_of_notMem
       (not_mem_setOf_bmJ j r 7 le_rfl)]
 

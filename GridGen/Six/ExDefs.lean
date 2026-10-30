@@ -132,54 +132,6 @@ def xbnd (q : XP) : ℚ := (q.peels.map XF.bnd).prod * blkBnd q.r0 q.bs
 def certOK (D K : ℕ) (P : List XP) : Bool :=
   Nat.blt 0 D && P.all XP.okb && decide ((P.map fun q => (q.lam : ℚ) * xbnd q).sum ≤ K)
 
-/-! ### Primitive versions of the counting -/
-
-/-- `pk 8` of `2^r` ones. -/
-def ones8 : ℕ → ℕ
-  | 0 => 1
-  | 1 => 257
-  | 2 => 16843009
-  | 3 => 72340172838076673
-  | 4 => 1334440654591915542993625911497130241
-  | _ => 454086624460063511464984254936031011189294057512315937409637584344757371137
-
-theorem ones8_eq : ∀ r < 6, ones8 r = pk 8 (List.replicate (2 ^ r) 1) := by decide +kernel
-
-/-- One doubling step, primitive. -/
-def dblF (T m r : ℕ) : ℕ :=
-  Nat.add T (Nat.mul (Nat.pow 2 (Nat.mul 8 (Nat.pow 2 r))) (Nat.land T (Nat.mul m (ones8 r))))
-
-theorem dblF_eq {r : ℕ} (hr : r < 6) (T m : ℕ) : dblF T m r = dblT T m r := by
-  unfold dblF dblT; rw [ones8_eq r hr]
-
-/-- Byte `i`. -/
-def lane8 (x i : ℕ) : ℕ := Nat.land (Nat.shiftRight x (Nat.mul 8 i)) 255
-
-theorem lane8_eq (x i : ℕ) : lane8 x i = lane 8 x i := by
-  unfold lane8 lane
-  rw [show (255 : ℕ) = 2 ^ 8 - 1 by norm_num]
-  rw [show Nat.land (Nat.shiftRight x (Nat.mul 8 i)) (2 ^ 8 - 1)
-      = (x >>> (8 * i)) &&& (2 ^ 8 - 1) from rfl, Nat.and_two_pow_sub_one_eq_mod,
-    Nat.shiftRight_eq_div_pow]
-
-/-- The packed sizes from the packed intersections, in Horner form from byte `S`. -/
-def horF (T : ℕ) : ℕ → ℕ → ℕ
-  | _, 0 => 0
-  | S, n + 1 => Nat.add (lane4 PT (lane8 T S)) (Nat.mul 16 (horF T (S + 1) n))
-
-theorem horF_eq (T : ℕ) : ∀ n S, horF T S n = pkF 4 (fun i => lane 4 PT (lane 8 T (S + i))) n
-  | 0, _ => rfl
-  | n + 1, S => by
-    rw [horF, pkF, horF_eq T n (S + 1), lane4_eq, lane8_eq]
-    simp only [Nat.add_zero, show (2 : ℕ) ^ 4 = 16 by norm_num]
-    congr 2
-    exact pkF_congr fun i _ => by rw [show S + 1 + i = S + (i + 1) by ring]
-
-/-- The packed intersections of six masks. -/
-def tabF (m0 m1 m2 m3 m4 m5 : ℕ) (k : ℕ → Bool) : Bool :=
-  xN (dblF 255 m0 0) fun t1 => xN (dblF t1 m1 1) fun t2 => xN (dblF t2 m2 2) fun t3 =>
-  xN (dblF t3 m3 3) fun t4 => xN (dblF t4 m4 4) fun t5 => xN (dblF t5 m5 5) fun t6 => k t6
-
 /-- A lane of `96` bits. -/
 def lane96 (x i : ℕ) : ℕ :=
   Nat.land (Nat.shiftRight x (Nat.mul 96 i)) 79228162514264337593543950335
@@ -277,5 +229,78 @@ def patK (D K j : ℕ) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) 
 /-- The data of one pattern are right: its values `Ψ` and its compiled pins. -/
 def patS (P : List XP) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) (p : T6) : Bool :=
   decide (psiL p = psi) && decide (compileX p P = cps)
+
+/-! ### The accumulations in a table
+
+The accumulation of a type depends only on its labels, and the `16,814` types of the three
+shapes have only `4,501` label vectors. So the accumulations are computed once per label vector
+into a search tree (`XT`, checked by `xtAll (tabE j)`), and the leaf looks its value up
+(`leafT`, `patKT`; soundness `patK_of_T` in `GridGen/Six/ExShape.lean`). The checks on the tree are
+evaluated by the kernel only, so they are `noncomputable` (the code generator has no recursor
+for `XT`). -/
+
+/-- A binary search tree of keyed values. -/
+inductive XT where
+  | tip
+  | bin (l : XT) (key val : ℕ) (r : XT)
+
+/-- The value at key `k`, plus one, or `0` if there is none. -/
+noncomputable def xtGet (k : ℕ) (t : XT) : ℕ :=
+  XT.rec (motive := fun _ => ℕ) 0
+    (fun _ key val _ il ir => cond (Nat.blt k key) il (cond (Nat.beq k key) (Nat.succ val) ir)) t
+
+/-- Every entry of a tree satisfies `f`. -/
+noncomputable def xtAll (f : ℕ → ℕ → Bool) (t : XT) : Bool :=
+  XT.rec (motive := fun _ => Bool) true (fun _ key val _ il ir => il && f key val && ir) t
+
+/-- The key of six labels below `16`: four bits each. -/
+def lkey (l0 l1 l2 l3 l4 l5 : ℕ) : ℕ :=
+  Nat.add l0 (Nat.mul 16 (Nat.add l1 (Nat.mul 16 (Nat.add l2 (Nat.mul 16 (Nat.add l3
+    (Nat.mul 16 (Nat.add l4 (Nat.mul 16 l5)))))))))
+
+/-- A table entry is right: `val` is the accumulation of the masks of the labels of `key`. The
+intermediate values are passed as arguments, not through `xN`: each is used once, or evaluated
+once by the kernel's cache. -/
+def tabE (j key val : ℕ) : Bool :=
+  Nat.beq (accG (horF (dblF (dblF (dblF (dblF (dblF (dblF 255 (em (bmJ j 0) (lane4 key 0)) 0)
+    (em (bmJ j 1) (lane4 key 1)) 1) (em (bmJ j 2) (lane4 key 2)) 2) (em (bmJ j 3) (lane4 key 3)) 3)
+    (em (bmJ j 4) (lane4 key 4)) 4) (em (bmJ j 5) (lane4 key 5)) 5) 0 64)) val
+
+/-- The cone test with the value `v` found in the table and the penalty `pe`. -/
+def leafT3 (D K : ℕ) (psi : List ℕ) (v pe : ℕ) : Bool :=
+  !(Nat.beq v 0) && okc6 D (Nat.sub (Nat.add D K) pe) (Nat.sub v 1) psi
+
+/-- The leaf from the labels. -/
+noncomputable def leafT2 (D K : ℕ) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) (t : XT)
+    (l0 l1 l2 l3 l4 l5 : ℕ) : Bool :=
+  Nat.blt l0 16 && Nat.blt l1 16 && Nat.blt l2 16 && Nat.blt l3 16 && Nat.blt l4 16 &&
+  Nat.blt l5 16 &&
+  leafT3 D K psi (xtGet (lkey l0 l1 l2 l3 l4 l5) t) (penC cps [l0, l1, l2, l3, l4, l5])
+
+/-- The leaf from the common pattern values. -/
+noncomputable def leafT1 (D K : ℕ) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) (p : T6)
+    (t : XT) (wm k0 k1 k2 k3 k4 k5 : ℕ) : Bool :=
+  leafT2 D K cps psi t (lab wm (r1 p) k0) (lab wm (r2 p) k1) (lab wm (r3 p) k2) (lab wm (r4 p) k3)
+    (lab wm (r5 p) k4) (lab wm (r6 p) k5)
+
+/-- **The test of one column type with the accumulation from the table.** -/
+noncomputable def leafT (D K _j : ℕ) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) (p : T6)
+    (t : XT) (k0 k1 k2 k3 k4 k5 : ℕ) : Bool :=
+  leafT1 D K cps psi p t (wmask p k0 k1 k2 k3 k4 k5) k0 k1 k2 k3 k4 k5
+
+/-- **The check of one pattern and one kind of the first row**, with the table. -/
+noncomputable def patKT (D K j : ℕ) (cps : List (List (ℕ × ℕ) × ℕ)) (psi : List ℕ) (p : T6) (t : XT)
+    (k0 : ℕ) : Bool :=
+  (kopts j 1).all fun k1 => (kopts j 2).all fun k2 =>
+  (kopts j 3).all fun k3 => (kopts j 4).all fun k4 => (kopts j 5).all fun k5 =>
+    !(admK p k0 k1 k2 k3 k4 k5 && Nat.ble (popc (wmask p k0 k1 k2 k3 k4 k5)) 5) ||
+      leafT D K j cps psi p t k0 k1 k2 k3 k4 k5
+
+/-- **The checks of the canonical patterns `a, …, a + b - 1`**: their data and their kinds. -/
+noncomputable def patChunk (D K j : ℕ) (P : List XP) (CPS : List (List (List (ℕ × ℕ) × ℕ)))
+    (PSI : List (List ℕ)) (t : XT) (a b : ℕ) : Bool :=
+  (List.range' a b).all fun i =>
+    patS P (CPS.getD i []) (PSI.getD i []) (canons.getD i (0, 0, 0, 0, 0, 0)) &&
+      (kopts j 0).all (patKT D K j (CPS.getD i []) (PSI.getD i []) (canons.getD i (0, 0, 0, 0, 0, 0)) t)
 
 end GridGen.Six
