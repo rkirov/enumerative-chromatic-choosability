@@ -67,6 +67,30 @@ result. Deferred to an optional milestone.
 
 ## Progress log
 
+**2026-10-07 to 2026-10-30 — Question 1 for grids (beyond the paper).** `P_m □ P_n` is now
+`k`-ECC for
+* every `k ≥ 7` and every height (`ListColoring.ecc_boxProd_pathG_of_seven`, `GridGen/Gauge/`);
+* height four at every `k ≥ 4` (`GridGen/Four/`), height five at every `k ≥ 5` (`GridGen/Five/`)
+  and height six at every `k ≥ 6` (`GridGen/Six/`), by the column-lookback route.
+
+The open cases are exactly `k < m`: `k = 3` at height four, `3 ≤ k ≤ 4` at height five,
+`3 ≤ k ≤ 5` at height six, `3 ≤ k ≤ 6` at heights `≥ 7`. That is where the lookback reference
+stops: its pattern map needs the height to be at most `k`. The gauge route stops at `k = 7`.
+
+Several routes and certificates are Codex's (OpenAI):
+* the depth-two argument at height four, `k = 4`;
+* the cones at height five, `k = 5`, and height six, `k = 6`.
+
+Each was reviewed independently here before it was formalized. Credits are in `provenance.md`.
+The research notes are in `ai_research_notes/` (not tracked). On 2026-10-25/26, a
+simplification pass removed about 2.5k lines: dead code, the generic `k ≥ 10` and `k = 9`
+gauge layers (Eight/ now covers every `k ≥ 8`), and a shared `GridGen/Lookback/Common.lean`.
+
+**Build hygiene (2026-10-23 to 2026-10-24).** This 7 GB machine OOM-killed the session twice.
+* Build heavy certificate modules one at a time, under `systemd-run --user -p MemoryMax=4500M`.
+* Never let Lake build two kernel-decide modules in parallel.
+* The CI placeholder grep scans prose too.
+
 **2026-10-01 — Lean 4.35.0-rc3.** Toolchain `v4.33.0 → v4.35.0-rc3` in the root, `comparator/` and
 `book/`; Mathlib `db584cd6 → 516d3125` (master, after the `v4.35.0-rc3` tag) and all eight
 transitive packages to the revisions the sibling TauCeti project pins, whose toolchain is the same.
