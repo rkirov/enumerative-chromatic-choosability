@@ -46,7 +46,7 @@ certificates (`GridGen/PolymerCertificate.lean` and its degree-sensitive and nei
 `P(G,L)`. Its positivity half coincides, constants included, with Dong–Koh's 2008 bound on real
 chromatic roots. The comparison with list assignments improves Zhang–Dong's `k ≥ 23.41Δ`
 (September 2026). [`GridGen/README.md`](GridGen/README.md) has the argument, the certificate
-table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 35 guarded axiom checks. None
+table and the credit. `lake build GridGen.PolymerAxiomAudit` runs 36 guarded axiom checks. None
 of this is ECC at every list size.
 
 **Height four.** `P₄ □ Pₙ` is `k`-ECC for every `k ≥ 4` (`GridGen.Four.ecc_boxProd_pathG_three`,
@@ -74,6 +74,12 @@ narrow invariant box around the Perron vector, which cuts the pattern term to `0
 certificates and exact certificates for 16 mismatch classes (813,495 column types) finish it
 (`GridGen/Five/K5/`).
 
+**Height six.** `P₆ □ Pₙ` is `k`-ECC for every `k ≥ 6` (`GridGen.Six.ecc_boxProd_pathG_five`,
+[`GridGen/Six/`](GridGen/Six/README.md)): the same route with six rows and Codex's cone, a
+chain-fibre pattern bound of `0.0122`, 7,768 mismatch classes pointwise, 803 by dual certificates
+over the state bits and three by exact certificates. The route needs the height to be at most `k`,
+so it stops here at `k = 6`.
+
 **Every grid, `k ≥ 7`.** Every rectangle `P_m □ P_n` is `k`-ECC for every `k ≥ 7`
 (`ListColoring.ecc_boxProd_pathG_of_seven`, [`GridGen/Gauge/`](GridGen/Gauge/README.md)),
 uniformly in the height. This supersedes the polymer route's grid corollaries (every grid at
@@ -92,8 +98,8 @@ the hole row, and the three-cell path through the star's own cell, are bounded a
 hit event by box bounds, the other paths against the whole count, with chordless crossing paths
 counted to twenty cells; the growth of the hit event between a colour's two transpositions is
 bounded by the chain bound inside the hit event.
-The open grid cases are now `k = 3` at height four, `3 ≤ k ≤ 4` at height five and `3 ≤ k ≤ 6`
-at heights `≥ 6`.
+The open grid cases are now `k = 3` at height four, `3 ≤ k ≤ 4` at height five, `3 ≤ k ≤ 5` at height six and `3 ≤ k ≤ 6`
+at heights `≥ 7`.
 
 ## Layout
 
@@ -395,12 +401,12 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirty-four keystone theorems** — ten from the
+  `comparator/Challenge.lean`, which claims **thirty-five keystone theorems** — ten from the
   paper, three of the cactus classification, two of Zhang–Dong's non-persistence theorem, four
   ladder and height-three results, five maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `11`, maximum degree four at `16`, and the equality case), five on `K₂,ₙ`
   (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact thresholds at list sizes three,
-  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 4`, height-five grids at `k ≥ 5`, and every grid at
+  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 4`, height-five grids at `k ≥ 5`, height-six grids at `k ≥ 6`, and every grid at
   `k ≥ 7` — superseded statements are not claimed —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,

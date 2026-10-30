@@ -13,6 +13,7 @@ isolate the kernel-decided certificates, whose replay dominates the running time
 * grid5: the height-five grid theorem (the k = 6 exact certificates in GridGen/Five/Small5/ and the
   k = 5 certificates in GridGen/Five/K5/,
   137,717 column types, and the dispatch modules);
+* grid6: the height-six grid theorem (the k = 6 certificates in GridGen/Six/BitData/ and ExData/);
 * rest: every other claim, including any claim added to config.json later.
 
 config.json stays the single source of truth; `rest` is its complement, so the union of the
@@ -40,6 +41,9 @@ SHARDS = {
     ],
     "grid5": [
         "GridGen.Five.ecc_boxProd_pathG_four",
+    ],
+    "grid6": [
+        "GridGen.Six.ecc_boxProd_pathG_five",
     ],
 }
 ALL_SHARDS = list(SHARDS) + ["rest"]

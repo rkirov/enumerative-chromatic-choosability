@@ -762,3 +762,21 @@ open scoped SimpleGraph
 theorem ecc_boxProd_pathG_four {k : ℕ} (hk : 5 ≤ k) (n : ℕ) : (pathG 4 □ pathG n).ECCAt k := sorry
 
 end GridGen.Five
+
+/-! ### 20. Height-six grids at list sizes at least six
+
+Kirov–Naimi's Question 1 for the `6 × (n+1)` grids at every `k ≥ 6`, proved in `GridGen/Six/`: the
+column-lookback route with six rows, a cone of five transient rays and a narrow invariant box of
+pattern weights, a chain-fibre pattern bound, and certificates over every list-mismatch class;
+§18's `k ≥ 7` for the rest.
+-/
+
+namespace GridGen.Six
+
+open SimpleGraph ListColoring
+open scoped SimpleGraph
+
+/-- Every `6 × (n+1)` grid is ECC at every list size at least six. -/
+theorem ecc_boxProd_pathG_five {k : ℕ} (hk : 6 ≤ k) (n : ℕ) : (pathG 5 □ pathG n).ECCAt k := sorry
+
+end GridGen.Six

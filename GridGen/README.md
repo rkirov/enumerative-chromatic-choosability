@@ -10,7 +10,7 @@ Two independent developments share this library.
    `Explicit`): `H □ P_n` is `k`-ECC from a two-step seam inequality and an initial
    inequality, both stated as `Prop`s; proved at height four
    for `k ≥ 4` in `Four/` (see [`Four/README.md`](Four/README.md)), and at height five for `k ≥ 5`
-   in `Five/`. The helpers both heights use (list-level local data `hb`, `mu`, `zz`, counting
+   in `Five/`, and at height six for `k ≥ 6` in `Six/`. The helpers both heights use (list-level local data `hb`, `mu`, `zz`, counting
    lemmas, the one-row rate bounds, the sharp fibre bound) are in `Lookback/Common.lean`.
    (Height three is proved directly in `Grid3/`.)
    See `ai_research_notes/GRID_REVIEW_2026-09-02.md` §5.6.
@@ -32,14 +32,14 @@ A third, `Gauge/`, proves every rectangular grid ECC at `k ≥ 7` (see
 `PolymerStability.lean` restates the last two at the uniform threshold under the names
 `SimpleGraph.colConst_lt_col_of_degree_bound_of_adj_lists_ne` and
 `SimpleGraph.col_eq_colConst_iff_constant_of_degree_bound`. For comparison, the ceiling bound gives
-18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 35 guarded
+18, 23, 29, 35, 40, 46 at `Δ = 3, …, 8`. `lake build GridGen.PolymerAxiomAudit` runs 36 guarded
 transitive axiom checks, each exactly `[propext, Classical.choice, Quot.sound]`.
 
 None of this is ECC at *every* list size (`K₂,₄ ⊂` degree-four graphs fails at 2), and no threshold
 is claimed optimal. For grids the polymer route is superseded by `Gauge/` (`k ≥ 7`); the list sizes
 `k = 3` stays open at height four (`Four/` proves `k ≥ 4`), `3 ≤ k ≤ 4` at height five (`Five/`
-proves `k ≥ 5`) and `3 ≤ k ≤ 6`
-at heights `≥ 6`.
+proves `k ≥ 5`), `3 ≤ k ≤ 5` at height six (`Six/` proves `k ≥ 6`) and `3 ≤ k ≤ 6`
+at heights `≥ 7`.
 
 ## The argument
 
@@ -174,7 +174,7 @@ comparison stated. The literature check is targeted, not exhaustive
 
 ```sh
 lake build GridGen                     # everything, including the polymer route
-lake build GridGen.PolymerAxiomAudit   # 35 guarded axiom checks
+lake build GridGen.PolymerAxiomAudit   # 36 guarded axiom checks
 python3 GridGen/polymer_audit.py --max-n 5 --grids   # independent exact-arithmetic bug detector
 python3 GridGen/parity_budget_review.py --explore    # rational certificates and numerical minima
 ```

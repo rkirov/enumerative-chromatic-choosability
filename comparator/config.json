@@ -86,6 +86,7 @@
     "SimpleGraph.TwoDegenerate.K2nSqrt.completeBipartite_two_eccAt_of_sqrt_lt",
     "GridGen.Four.ecc_boxProd_pathG_three",
     "GridGen.Five.ecc_boxProd_pathG_four",
+    "GridGen.Six.ecc_boxProd_pathG_five",
     "ListColoring.ecc_boxProd_pathG_of_seven"
   ],
   "permitted_axioms": [

@@ -59,7 +59,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shard: [grid3-three, k2n, grid4, grid5, rest]
+        shard: [grid3-three, k2n, grid4, grid5, grid6, rest]
     steps:
       - uses: actions/checkout@v4
 

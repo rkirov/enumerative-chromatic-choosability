@@ -149,8 +149,20 @@ published construction.
   2026-10-22 for `k = 7`); DP-colourings are Dvořák–Postle's and the swap is Kempe's. It supersedes
   the grid corollaries of the maximum-degree items below (`k ≥ 20`, then `17`, then `16`), which
   have been removed, and the height-four item's range above `k = 6`. Not checked against the
-  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 6`,
-  `3 ≤ k ≤ 4` at height five and `k = 3` at height four.
+  literature beyond Kirov–Naimi's Question 1; `3 ≤ k ≤ 6` remains open at heights `≥ 7`,
+  `3 ≤ k ≤ 5` at height six, `3 ≤ k ≤ 4` at height five and `k = 3` at height four.
+
+* **Height-six grids at `k ≥ 6` (`GridGen/Six/`).** Every `6 × (n+1)` grid is ECC at every
+  `k ≥ 6` (`GridGen.Six.ecc_boxProd_pathG_five`); before this, height six was known at `k ≥ 7`.
+  The column-lookback route with six rows (52 patterns, 32 reflection orbits): the pattern weights
+  lie in a cone of five transient rays and a narrow invariant box; a chain-fibre pattern bound
+  (`0.0122`); a symbolic greedy count minimality; 7,768 mismatch classes pointwise (checked at 496
+  dominating classes), 803 by dual certificates over the state bits, three by exact certificates;
+  an exact initial inequality. **Credits.** The route and its certificates are Codex's (OpenAI,
+  2026-10-29, `ai_research_notes/cx/h6k6/NOTE.md`); the independent review, which finished the
+  exact check of the 803 certificates (`ai_research_notes/H6_K6_REVIEW_2026-10-29.md`), and the
+  Lean development are this repository's (Claude, 2026-10-29/30). The route needs height ≤ `k`
+  (the pattern map `patCap`), so heights `≥ 7` at `k = 6` need a new reference.
 
 * **Height-five grids at `k ≥ 5` (`GridGen/Five/`).** Every `5 × (n+1)` grid is ECC at every
   `k ≥ 5` (`GridGen.Five.ecc_boxProd_pathG_four`); before this, height five was known at `k ≥ 7`
