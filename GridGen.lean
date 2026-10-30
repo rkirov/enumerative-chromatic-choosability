@@ -7,6 +7,7 @@ import GridGen.Explicit
 import GridGen.Polymer
 import GridGen.Four.Main
 import GridGen.Five.Main
+import GridGen.Six.Main
 import GridGen.Gauge.Grid
 import GridGen.Gauge.Eight.Main8
 import GridGen.Gauge.Seven.Assemble7
