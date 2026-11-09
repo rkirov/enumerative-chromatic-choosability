@@ -111,8 +111,9 @@ at heights `≥ 7`.
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 4` (`GridGen/Four/`) and height five for `k ≥ 5` (`GridGen/Five/`); and the gauge route, every rectangle at `k ≥ 7` (`GridGen/Gauge/`) |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
+| `ProductCounterexample/` | a clique times a star (Borowiecki–Jendrol'–Král'–Miškuf, Kaul–Mudrock) is not `k`-ECC, which refutes Kirov–Naimi §6 Question 1 |
 | `TwoDegenerate/` | `K₂,₂₆` is not 4-ECC (refuting a uniform 2-degenerate-graph conjecture); `K₂,ₙ` is 3-, 4-, 5-ECC exactly for `n ≤ 11, 25, 43`; `τ(K₂,ₙ) = O(√n)` (`K₂,ₙ` is `k`-ECC for `k ≥ 300`, `n ≤ k²`) |
-| `OpenProblems.lean` | Kirov–Naimi §6's questions; Question 1 still open and asserted with `sorry`, Question 2 **refuted** |
+| `OpenProblems.lean` | Kirov–Naimi §6's questions, both **refuted**; one known remark is still asserted with `sorry` |
 | `formalization.yaml` | registry metadata (mathlib-initiative v0.4): sources, main results, fidelity, and the `alignment` map from every numbered result of the paper, and every result beyond it, to its Lean name, file and status |
 | `book/` | a Verso textbook companion (see `book/README.md`) |
 | `plan.md` | milestones, design decisions, progress log, and findings |
@@ -244,10 +245,14 @@ of two enumeratively chromatic-choosable graphs one?* — for paths, which is th
 > (`ListColoring.ecc_boxProd_pathG_one`), and the count it is tight against is
 > `k(k-1)(k² - 3k + 3)ⁿ` (`ListColoring.colConst_boxProd_pathG_one`).
 
-Question 1 has been open since 2016, and paths are chordal, hence qualify at every list size, so a
-positive answer would give every rectangular grid outright. Only height two is settled here;
-`OpenProblems.lean` records the reduction and the fact that refuting the grid statement would
-refute Question 1.
+Paths are chordal, hence qualify at every list size, so a positive answer to Question 1 would have
+given every rectangular grid outright. **Question 1 itself is false** (recorded 2026-11-09): `K₃`
+times the star with six leaves has a 3-list assignment with no colouring, although both factors are
+chordal — the standard example of a Cartesian product that is not chromatic-choosable
+(Borowiecki–Jendrol'–Král'–Miškuf 2006; Kaul–Mudrock, arXiv:1811.02420), formalized in
+`ProductCounterexample/` and recorded as `ListColoring.OpenProblem.not_question1`. The grid case is
+therefore a conjecture in its own right, not an instance of an open question; only height two is
+settled in `Ladder/`.
 
 The proof is a transfer matrix on rungs. Grade the colourings of the first `j` columns by the
 colours `(a,b)` of the last rung; adding a column replaces that vector by
@@ -390,19 +395,20 @@ keeps the error terms crude; numerically the argument works from `k ≈ 20`.
 ## Standard of proof
 
 * No `sorry`, `admit`, or `native_decide` anywhere in `ListColoring/`, `Cacti/`,
-  `NonPersistence/`, `Ladder/` or `TwoDegenerate/`, checked by CI.
-  The two `sorry`s in the repository are both in `OpenProblems.lean`, which is a **separate
-  `lean_lib`** for exactly that reason: it imports `ListColoring` and nothing imports it, so no
-  theorem can rest on an unproved statement. A `sorry` there means *nobody knows* — those are
-  §6's open questions, not gaps in the formalization of the paper.
+  `NonPersistence/`, `ProductCounterexample/`, `Ladder/` or `TwoDegenerate/`, checked by CI.
+  The one `sorry` in the repository is in `OpenProblems.lean`, which is a **separate
+  `lean_lib`** for exactly that reason: nothing imports it, so no theorem can rest on an unproved
+  statement. It is the paper's remark that `P₂ □ P₃` is not ECC at `2` — known, a corollary of
+  Theorem 2, and not formalized. Both of §6's questions are now refuted there with proofs.
 * Every headline result depends on exactly the three standard Lean axioms — `propext`,
   `Classical.choice`, `Quot.sound` — enforced by the comparator's `permitted_axioms`.
 * Statements were checked by brute-force evaluation *before* being proved, which repeatedly caught
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirty-five keystone theorems** — ten from the
-  paper, three of the cactus classification, two of Zhang–Dong's non-persistence theorem, four
+  `comparator/Challenge.lean`, which claims **thirty-six keystone theorems** — ten from the
+  paper, three of the cactus classification, two of Zhang–Dong's non-persistence theorem, the
+  clique-times-star refutation of Question 1, four
   ladder and height-three results, five maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `11`, maximum degree four at `16`, and the equality case), five on `K₂,ₙ`
   (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact thresholds at list sizes three,

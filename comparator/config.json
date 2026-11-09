@@ -41,6 +41,7 @@
     "ListColoring.IsCactus",
     "ListColoring.HasAtMostOneCycle",
     "ZhangDong.Persistence",
+    "ProductCounterexample.ProductQuestion",
     "ListColoring.PathV",
     "ListColoring.pathEnd",
     "ListColoring.pathG",
@@ -87,7 +88,8 @@
     "GridGen.Four.ecc_boxProd_pathG_three",
     "GridGen.Five.ecc_boxProd_pathG_four",
     "GridGen.Six.ecc_boxProd_pathG_five",
-    "ListColoring.ecc_boxProd_pathG_of_seven"
+    "ListColoring.ecc_boxProd_pathG_of_seven",
+    "ProductCounterexample.not_productQuestion"
   ],
   "permitted_axioms": [
     "propext",

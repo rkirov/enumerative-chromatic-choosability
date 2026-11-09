@@ -80,7 +80,7 @@ theorem exists_ecc_not_ecc_succ (k : ℕ) (hk : 3 ≤ k) (N : ℕ) :
 `n`-monophilic, is it necessarily `(n+1)`-monophilic?*
 
 A copy of `ListColoring.OpenProblem.Question2`. It is restated rather than imported because
-`OpenProblems.lean` still asserts Question 1 without a proof, and nothing here may rest on
+`OpenProblems.lean` carries a statement asserted without a proof, and nothing here may rest on
 that. -/
 def Persistence : Prop :=
   ∀ (n : ℕ) {α : Type} [Fintype α] [DecidableEq α] (G : SimpleGraph α) [DecidableRel G.Adj],

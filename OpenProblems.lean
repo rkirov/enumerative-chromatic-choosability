@@ -4,21 +4,24 @@ Released under Apache 2.0 license.
 -/
 import ListColoring
 import NonPersistence.Statements
+import ProductCounterexample.Main
 
 /-!
-# The questions Kirov–Naimi leave open
+# The questions Kirov–Naimi left open
 
-Section 6 of **Kirov–Naimi 2016** poses two questions. Question 1 is still open. **Question 2 was
-answered — negatively — in August 2026**, by Zhang and Dong; see `not_question2` below, which is
-proved, not assumed. This file states both in Lean, and asserts the still-open one with `sorry`,
-so that the statements are elaborated and type-checked on every build.
+Section 6 of **Kirov–Naimi 2016** poses two questions. **Both are now answered, and both
+negatively.** Question 1 is **refuted** (recorded here 2026-11-09) by the classical
+clique-times-star construction of Borowiecki–Jendrol'–Král'–Miškuf 2006 and Kaul–Mudrock
+(arXiv:1811.02420); see `not_question1`. Question 2 was **refuted in August 2026** by Zhang and
+Dong; see `not_question2`. Both negations are proved, not assumed. This file states the two
+questions in Lean, in the direction the paper conjectured, so that the statements are elaborated
+and type-checked on every build.
 
-## Read the `sorry`s correctly
+## Read the `sorry` correctly
 
-A `sorry` in this file means **nobody knows**, not "we did not get to it". These are not gaps in
-the formalization of the paper; they are the paper's own open questions, and each is stated in the
-direction the paper conjectures. A refutation would be just as good an answer, so proving the
-negation of one of these is not a contradiction with anything asserted here.
+Neither question is asserted with `sorry` any more. The one `sorry` left in this file,
+`not_ecc_two_boxProd_path_two_three`, is **not** an open problem: it is a known fact from the
+paper that is merely unformalized here.
 
 **Nothing in `ListColoring/` may depend on this file.** The dependency runs one way — this library
 imports `ListColoring`, never the reverse — and `ListColoring/` remains free of `sorry`, `admit`
@@ -27,17 +30,22 @@ reason these live in their own library rather than beside the theorems they are 
 
 ## What is here
 
-* `Question1` / `question1` — is the Cartesian product of two `n`-monophilic graphs `n`-monophilic,
-  for `n ≥ 3`? The paper's "product" is `V(G) × V(H)` with `(g,h)` adjacent to `(g',h')` when
-  `g = g'` and `h ~ h'`, or `h = h'` and `g ~ g'` — Mathlib's `SimpleGraph.boxProd`, `G □ H`.
+* `Question1` / `not_question1` — is the Cartesian product of two `n`-monophilic graphs
+  `n`-monophilic, for `n ≥ 3`? The paper's "product" is `V(G) × V(H)` with `(g,h)` adjacent to
+  `(g',h')` when `g = g'` and `h ~ h'`, or `h = h'` and `g ~ g'` — Mathlib's
+  `SimpleGraph.boxProd`, `G □ H`.
+  **Refuted**: `K₃` times the star with one leaf per permutation of three colours is not
+  `3`-monophilic although both factors are chordal. Formalized in `ProductCounterexample/`; the
+  construction is Borowiecki–Jendrol'–Král'–Miškuf's and Kaul–Mudrock's, not ours.
 * `Question2` / `not_question2` — does `n`-monophilic propagate from `n` to `n+1` for an
   `n`-colourable graph? In modern language this asks whether `ν(G) = τ(G)` for every graph; it was
   Question 2 of Allred–Mudrock and Question 1 of Chi et al. 2026, both of which trace it to this
   paper. **Refuted** by Zhang–Dong 2026 (arXiv:2608.19773), Theorem 6, formalized in
   `NonPersistence/`. See `provenance.md` §4.
-* `grid_of_question1` / `not_question1_of_not_gridTarget` — **proved**: the rectangular-grid
-  conjecture of `ai_research_notes/` is the both-factors-are-paths instance of Question 1, so
-  refuting it refutes Question 1.
+* `grid_of_question1` / `not_question1_of_not_gridTarget` — **proved, but now pointless**: the
+  rectangular-grid conjecture of `ai_research_notes/` is the both-factors-are-paths instance of
+  Question 1. Since Question 1 is refuted, these implications have a false hypothesis or an
+  already-proved conclusion; `GridTarget` stands as a conjecture of its own.
 * `not_ecc_two_boxProd_path_two_three` — **not open**, merely unformalized: the paper's own
   negative answer to Question 1 at `n = 2`.
 
@@ -75,45 +83,64 @@ def Question1 : Prop :=
       (G : SimpleGraph α) [DecidableRel G.Adj] (H : SimpleGraph β) [DecidableRel H.Adj],
       G.ECCAt n → H.ECCAt n → (G □ H).ECCAt n
 
-/-- **Open.** Question 1 of Kirov–Naimi §6, in the direction the paper conjectures. Unproved and
-unrefuted; the `sorry` records that, and is not a gap in the formalization of the paper. -/
-theorem question1 : Question1 := sorry
+/-- **Refuted**, and so no longer a `sorry`. For `K₃` and the star whose six leaves are the
+permutations of three colours — both chordal, hence enumeratively chromatic-choosable at every
+list size — the Cartesian product is `3`-colourable but has a `3`-list assignment with no
+colouring at all, so it is not enumeratively chromatic-choosable at `3`. The same construction
+works at every `n ≥ 2` (`ProductCounterexample.not_ecc_top_boxProd_star`).
 
-/-! #### The rectangular-grid conjecture is an instance of Question 1
+The construction is the standard proof that a clique times a large star is not
+chromatic-choosable: Borowiecki, Jendrol', Král' and Miškuf, *List coloring of Cartesian products
+of graphs*, Discrete Math. **306** (2006), and Kaul and Mudrock, *List coloring a Cartesian product
+with a complete bipartite factor* ([arXiv:1811.02420](https://arxiv.org/abs/1811.02420)). The mathematics is theirs; what is
+recorded here (2026-11-09) is only the observation that it answers Kirov–Naimi's Question 1.
+
+`ProductCounterexample.ProductQuestion` is a verbatim copy of `Question1`, restated rather than
+imported so that that library never depends on this file. -/
+theorem not_question1 : ¬ Question1 := ProductCounterexample.not_productQuestion
+
+/-! #### The rectangular-grid conjecture was an instance of Question 1
 
 `ai_research_notes/` pursues, as its own conjecture, the statement that every rectangular grid
-`P_m □ P_n` satisfies `P_ℓ = P` at every list size `k ≥ 3`. It is not a separate problem: both
-factors are paths, paths are enumeratively chromatic-choosable at every list size
-(`ListColoring.ecc_pathG`, itself immediate from `SimpleGraph.ecc_of_isChordal`), so Question 1
-implies it outright with nothing left over.
+`P_m □ P_n` satisfies `P_ℓ = P` at every list size `k ≥ 3`. Both factors are paths, and paths are
+enumeratively chromatic-choosable at every list size (`ListColoring.ecc_pathG`, itself immediate
+from `SimpleGraph.ecc_of_isChordal`), so Question 1 would have implied it outright.
 
-The useful direction is the contrapositive. A counterexample to the grid statement at any `k ≥ 3`
-would refute Question 1 — a question open since 2016 — so the counterexample searches in
-`ai_research_notes/` are worth more than the notes credit them with. Nothing here claims the grid
-statement is true; `question1` above is stated in the direction Kirov–Naimi conjecture, and after
-Zhang–Dong's answer to Question 2 that direction is no longer the safe bet it looked. -/
+**Question 1 is refuted** (`not_question1`, 2026-11-09, by the clique-times-star construction), so
+that derivation is gone: the grid conjecture is a standalone conjecture, no longer an instance of
+an open question. The refutation says nothing about grids — its witness has a factor with a
+vertex of degree `n!`, and neither factor is a path. The implications below remain true and are
+kept for the record, but `grid_of_question1` and `gridTarget_of_question1` now have a false
+hypothesis, and the conclusion of `not_question1_of_not_gridTarget` is known unconditionally.
+Nothing here claims the grid statement is true. -/
 
-/-- **Question 1 implies the rectangular-grid conjecture.** Both hypotheses are discharged
-unconditionally: a path is chordal, hence enumeratively chromatic-choosable at every list size. -/
+/-- **Question 1 would imply the rectangular-grid conjecture.** Both hypotheses are discharged
+unconditionally: a path is chordal, hence enumeratively chromatic-choosable at every list size.
+
+Vacuous since 2026-11-09: the hypothesis `Question1` is false (`not_question1`). -/
 theorem grid_of_question1 (h : Question1) (m n k : ℕ) (hk : 3 ≤ k) :
     (pathG m □ pathG n).ECCAt k :=
   h k hk (pathG m) (pathG n) (ecc_pathG m k) (ecc_pathG n k)
 
-/-- The grid conjecture as `ai_research_notes/` states it, in the `P_ℓ = P` form. -/
+/-- The grid conjecture as `ai_research_notes/` states it, in the `P_ℓ = P` form. A standalone
+conjecture: Question 1, of which it was an instance, is refuted (`not_question1`). -/
 def GridTarget : Prop :=
   ∀ m n k : ℕ, 3 ≤ k →
     (pathG m □ pathG n).listColorFunction k = (pathG m □ pathG n).colConst k
 
+/-- Vacuous since 2026-11-09: the hypothesis `Question1` is false (`not_question1`). -/
 theorem gridTarget_of_question1 (h : Question1) : GridTarget := fun m n k hk =>
   (ecc_iff_listColorFunction_eq k).mp (grid_of_question1 h m n k hk)
 
-/-- **Refuting the grid conjecture would refute Question 1.** -/
+/-- **Refuting the grid conjecture would refute Question 1.** True, but no longer useful: the
+conclusion holds unconditionally (`not_question1`, 2026-11-09, by the clique-times-star
+construction), so a grid counterexample would now be news about grids only. -/
 theorem not_question1_of_not_gridTarget (h : ¬ GridTarget) : ¬ Question1 :=
   fun hq => h (gridTarget_of_question1 hq)
 
-/-- **Not open — known, and merely unformalized here.** Kirov–Naimi's negative answer to Question 1
-at `n = 2`: a grid can fail to be enumeratively chromatic-choosable at `2` even though both its
-factors are (every path is, by `ListColoring.ecc_pathG`).
+/-- **Not open — known, and merely unformalized here.** Kirov–Naimi's own negative answer to
+Question 1 at `n = 2`: a grid can fail to be enumeratively chromatic-choosable at `2` even though
+both its factors are (every path is, by `ListColoring.ecc_pathG`).
 
 Mind the indexing. `pathG k` is the path of *length* `k`, on `k + 1` vertices, so the statement
 below is about the **`3 × 4` grid on 12 vertices**. The paper's own witness is the smaller `2 × 3`

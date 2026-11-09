@@ -76,8 +76,8 @@ project:
     unmatched labels, and exact crossing-walk counts to eighteen cells.
 
     The only sorry in the repository is in OpenProblems.lean, a separate library imported by
-    nothing, which states Kirov-Naimi's still-open Question 1 and one known but unformalized
-    remark. Every claimed result depends on exactly propext, Classical.choice and Quot.sound.
+    nothing, which asserts one known but unformalized remark (Kirov-Naimi's Questions 1 and 2
+    are both refuted there, with proofs). Every claimed result depends on exactly propext, Classical.choice and Quot.sound.
   authors: ["Radoslav Kirov"]
   responsible_maintainers: ["Radoslav Kirov"]
   license: Apache-2.0
@@ -270,9 +270,10 @@ status:
     contains a conditional reduction for grids of every height whose open hypotheses are stated
     as Props, not assumed. There is no sorry, admit or native_decide in any of these libraries,
     which CI checks. OpenProblems.lean is a separate library, imported by nothing, that states
-    Kirov-Naimi's Question 1 (open) and the known but unformalized negative remark under it,
-    both asserted with sorry, and proves Question 2 false from NonPersistence/. Those two are
-    the only sorries in the repository. Not formalized: the Dong-Zhang 2023 threshold
+    the known but unformalized negative remark under Kirov-Naimi's Question 1, asserted with
+    sorry, proves Question 1 false from ProductCounterexample/ (a clique times a star; the
+    construction is Borowiecki-Jendrol'-Kral'-Miskuf's and Kaul-Mudrock's) and proves Question 2
+    false from NonPersistence/. That remark is the only sorry in the repository. Not formalized: the Dong-Zhang 2023 threshold
     |E(G)| - 1, the Chi et al. 2026 theta-graph classification, and the rectangular grids with
     both sides at least 4 at list sizes 3 to 5 (height four) and 3 to 15 (both sides at least 5).
   sorry_count: 2
@@ -612,13 +613,16 @@ alignment:
       status: "stated, asserted with sorry"
       note: "Known (a corollary of Theorem 2), not proved here. Its citation of a nonexistent Theorem 3 is fidelity (4)."
     - source: "Kirov-Naimi 2016, Question 1"
-      lean: ListColoring.OpenProblem.question1
+      lean: ListColoring.OpenProblem.not_question1
       module: OpenProblems.lean
-      status: "open, asserted with sorry"
+      status: "refuted, proved"
       note: >-
-        Is the product of two n-monophilic graphs n-monophilic, for n >= 3? Open. For two paths,
-        the ladder, height-three and maximum-degree results below settle it at heights 2 and 3
-        for every k >= 3, and for every rectangle at k >= 20.
+        Is the product of two n-monophilic graphs n-monophilic, for n >= 3? No: K_k box K_{1,k!}
+        is not even k-choosable (ProductCounterexample.not_ecc_top_boxProd_star,
+        ProductCounterexample.not_productQuestion). The construction is
+        Borowiecki-Jendrol'-Kral'-Miskuf 2006 and Kaul-Mudrock arXiv:1811.02420; only the
+        observation that it answers Question 1 is recorded here as new. For two paths the question
+        survives as the rectangular-grid conjecture; see the grid results below.
     - source: "Kirov-Naimi 2016, Question 2; Zhang-Dong, arXiv:2608.19773, Theorem 6"
       lean: ListColoring.OpenProblem.not_question2
       module: OpenProblems.lean

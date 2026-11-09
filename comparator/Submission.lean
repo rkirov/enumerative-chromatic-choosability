@@ -1,6 +1,7 @@
 import ListColoring
 import Cacti
 import NonPersistence
+import ProductCounterexample
 import Ladder
 import Grid3
 import Grid3.Three.Main
@@ -28,6 +29,8 @@ Section 20 is proved in `GridGen/Six/Main.lean`: every `6 × (n+1)` grid is ECC 
 Section 19 is proved in `GridGen/Five/Main.lean`: every `5 × (n+1)` grid is ECC at every `k ≥ 5`.
 Section 18 is proved in `GridGen/Gauge/Seven/Assemble7.lean`: every rectangular grid is ECC at every
 `k ≥ 7`.
+Section 21 is proved in `ProductCounterexample/Main.lean`: a clique times a star refutes
+Kirov–Naimi's Question 1.
 
 The comparator matches the placeholder statements of `Challenge.lean` against declarations of the
 same fully-qualified names in this module's environment. Every one of them is proved in the

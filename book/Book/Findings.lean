@@ -284,13 +284,16 @@ notes that for `n = 2` a minimizing assignment on a path need not be of type A o
 it without proof ("examples are easy to construct"). Section 6 notes that $`P_2 \square P_3` is not
 enumeratively chromatic-choosable at `2`, which answers its own Question 1 negatively at `n = 2`;
 that one is a corollary of Theorem 2 rather than a separate argument, and it is stated in Lean,
-unproved, alongside the open questions.
+unproved, alongside the two questions.
 
-Beyond the paper, the open question it left behind is still open: whether agreement of $`P_\ell` and
-$`P` at one value of `n` forces agreement at `n + 1`. That is Section 6's Question 2, and in the
-modern vocabulary it asks whether $`\nu(G) = \tau(G)` for every graph. It and Question 1 are stated
-in Lean in
-[OpenProblems.lean](https://github.com/rkirov/enumerative-chromatic-choosability/blob/main/OpenProblems.lean) and
-asserted with `sorry` — a separate library, so that nothing in the development can rest on an
-unproved statement and a `sorry` there means *nobody knows* rather than *not done yet*.
+Beyond the paper, both questions of its Section 6 now have answers, and both answers are no.
+Question 2 asks whether agreement of $`P_\ell` and $`P` at one value of `n` forces agreement at
+`n + 1` — in the modern vocabulary, whether $`\nu(G) = \tau(G)` for every graph; Zhang and Dong
+refuted it in 2026. Question 1 asks whether a Cartesian product of two graphs that are
+enumeratively chromatic-choosable at `n` is so too; a complete graph times a large star, the
+standard example of Borowiecki, Jendrol', Král' and Miškuf and of Kaul and Mudrock, is not even
+`n`-choosable. Both refutations are theorems in
+[OpenProblems.lean](https://github.com/rkirov/enumerative-chromatic-choosability/blob/main/OpenProblems.lean),
+a separate library that also carries the one remark above asserted with `sorry`, so that nothing in
+the development can rest on an unproved statement.
 {ref "twoecc"}[The Theorem 2 chapter] says what is known about the case $`\chi(G) = 2`.

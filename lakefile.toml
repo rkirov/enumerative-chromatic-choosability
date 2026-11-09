@@ -1,8 +1,8 @@
 name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
-defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "Ladder", "Grid3",
-  "TwoDegenerate", "GridGen"]
+defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "ProductCounterexample",
+  "Ladder", "Grid3", "TwoDegenerate", "GridGen"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -17,9 +17,11 @@ rev = "516d31250e96c4e8e76888c3d8e2e43a9642b9ee"
 [[lean_lib]]
 name = "ListColoring"
 
-# Kirov–Naimi §6's two open questions, stated and asserted with `sorry`. Kept in a library of
-# their own so that `ListColoring/` stays provably free of `sorry` — CI greps that directory —
-# and so that no theorem can depend on an unproved statement: the import runs this way only.
+# Kirov–Naimi §6's two questions. Both are now refuted, and proved so here from NonPersistence/
+# and ProductCounterexample/; what is left asserted with `sorry` is one known but unformalized
+# remark. Kept in a library of its own so that `ListColoring/` stays provably free of `sorry` —
+# CI greps that directory — and so that no theorem can depend on an unproved statement: the
+# import runs this way only.
 [[lean_lib]]
 name = "OpenProblems"
 
@@ -36,6 +38,12 @@ name = "Cacti"
 # `OpenProblems.lean` had carried as open. Imports ListColoring, imported by nothing.
 [[lean_lib]]
 name = "NonPersistence"
+
+# A clique times a star with one leaf per permutation (Borowiecki-Jendrol'-Kral'-Miskuf 2006,
+# Kaul-Mudrock arXiv:1811.02420) is not k-ECC although both factors are chordal. This refutes
+# Kirov-Naimi section 6 Question 1. Imports ListColoring only; imported by `OpenProblems.lean`.
+[[lean_lib]]
+name = "ProductCounterexample"
 
 # Ladders P_2 box P_n are k-ECC for every k >= 3 -- the first grid family proved at every list
 # size. Source of record: ai_research_notes/GRID_LADDER_ALL_K_2026-08-24.md, which extends the
