@@ -780,3 +780,31 @@ open scoped SimpleGraph
 theorem ecc_boxProd_pathG_five {k : ℕ} (hk : 6 ≤ k) (n : ℕ) : (pathG 5 □ pathG n).ECCAt k := sorry
 
 end GridGen.Six
+
+/-! ### 21. A clique times a star: Question 1 is false
+
+Kirov–Naimi §6 Question 1 asks whether the Cartesian product of two graphs that are
+enumeratively chromatic-choosable at `n` is so too, for `n ≥ 3`.  It is not: `K_k □ K_{1,k!}` has a
+`k`-list assignment with no colouring.  The construction is the standard example of a Cartesian
+product that is not chromatic-choosable — Borowiecki, Jendrol', Král' and Miškuf, Discrete Math.
+306 (2006); Kaul and Mudrock, arXiv:1811.02420 — and is not ours; formalized in
+`ProductCounterexample/`.
+-/
+
+namespace ProductCounterexample
+
+open SimpleGraph
+open scoped SimpleGraph
+
+/-- **Kirov–Naimi 2016, §6, Question 1**, verbatim: *is the product of two `n`-monophilic graphs
+`n`-monophilic*, for `n ≥ 3`?  Stated as a proposition so that its refutation is a theorem. -/
+def ProductQuestion : Prop :=
+  ∀ (n : ℕ), 3 ≤ n →
+    ∀ {α β : Type} [Fintype α] [DecidableEq α] [Fintype β] [DecidableEq β]
+      (G : SimpleGraph α) [DecidableRel G.Adj] (H : SimpleGraph β) [DecidableRel H.Adj],
+      G.ECCAt n → H.ECCAt n → (G □ H).ECCAt n
+
+/-- **The answer to Question 1: no.** -/
+theorem not_productQuestion : ¬ ProductQuestion := sorry
+
+end ProductCounterexample

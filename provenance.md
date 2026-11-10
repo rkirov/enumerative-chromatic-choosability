@@ -81,9 +81,15 @@ Listed so no reader mistakes an absence for a claim.
 * **Kirov–Naimi §6, Question 1's negative answer at `n = 2`** — that `P₂ □ P₃` is not
   `2`-monophilic while every path is. A corollary of Theorem 2 rather than a separate argument.
   **Stated but not proved**, as `ListColoring.OpenProblem.not_ecc_two_boxProd_path_two_three`.
-* **Kirov–Naimi §6, Question 1** — **open**, and stated as such in `OpenProblems.lean`.
-  A `sorry` there means nobody knows, not that a proof is missing here; the file is a separate
-  `lean_lib` precisely so that no theorem can rest on one. **Question 2** — the modern `ν = τ`
+* **Kirov–Naimi §6, Question 1** — **refuted** (recorded 2026-11-09). `K_k □ K_{1,k!}` has a
+  `k`-list assignment with no colouring, while a clique and a star are chordal. The construction is
+  the standard proof that a Cartesian product with a large star is not chromatic-choosable:
+  Borowiecki–Jendrol'–Král'–Miškuf, Discrete Math. 306 (2006), and Kaul–Mudrock,
+  arXiv:1811.02420. **The mathematics is theirs**; ours is only the observation that it answers
+  Question 1 — we have not found that stated in either paper — and the Lean in
+  `ProductCounterexample/` (`not_ecc_top_boxProd_star`, `not_productQuestion`), recorded as
+  `ListColoring.OpenProblem.not_question1`. `OpenProblems.lean` stays a separate `lean_lib` so
+  that no theorem can rest on its one remaining `sorry` (the remark above). **Question 2** — the modern `ν = τ`
   question recorded in §4 below — was answered negatively by Zhang–Dong (arXiv:2608.19773);
   their theorem *is* formalized, in `NonPersistence/`, and `ListColoring.OpenProblem.not_question2` is proved.
 * **Dong–Koh 2008** (*Bounds for the real zeros of chromatic polynomials*, CPC 17) — real chromatic
