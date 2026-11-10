@@ -266,6 +266,19 @@ published construction.
   uniform threshold by a concurrent Codex review (2026-09-23). No optimality is claimed. A result
   of the 2026 AI research collaboration, like `Cacti/`, `Ladder/` and `Grid3/`.
 
+* **Outerplanar graphs and ears on edges (`Outerplanar/`).** Graphs built by pendant vertices and
+  ears on edges are `k`-ECC for `k ≥ 4`, and `3`-ECC when no ear closes a triangle
+  (`ecc_of_earBuilt_of_four_le`, `ecc_three_of_earBuilt`; for polygon dissections
+  `ecc_of_isDissection`). **New as far as we can determine** (no outerplanar result was found in
+  the literature, 2026-11): a result of the 2026-11 AI research collaboration, paper proof in
+  `ai_research_notes/OUTERPLANAR_PROOF_DRAFT_2026-11-09.md`, reviewed adversarially once before
+  formalization. **Not ours:** Egerváry's theorem (1931), reproved in `Outerplanar/Egervary.lean`;
+  the twisted-cycle count reuses `Cacti/`. **Overlap:** Chi et al. (arXiv:2605.10861) classify
+  theta graphs (two cycles sharing an edge is the smallest case here; only their abstract and
+  main theorem were read); cacti and ladders are earlier special cases in this repository. The
+  inclusion of all outerplanar graphs in the class is formal only for those with a Hamiltonian
+  cycle. Three colours with triangles is open.
+
 * **The formalization itself.** As far as we can determine, list coloring and choosability had not
   been formalized in any proof assistant before this project.
 * **A Mathlib `TODO` discharged.** *A graph that is not 2-colourable contains an odd cycle* is listed

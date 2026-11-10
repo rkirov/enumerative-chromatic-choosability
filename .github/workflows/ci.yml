@@ -69,7 +69,7 @@ jobs:
         run: |
           if grep -rnwE 'sorry|admit|native_decide' ListColoring/ ListColoring.lean Cacti/ Cacti.lean \
                NonPersistence/ NonPersistence.lean ProductCounterexample/ ProductCounterexample.lean \
-               Ladder/ Ladder.lean \
+               Ladder/ Ladder.lean Outerplanar/ Outerplanar.lean \
                TwoDegenerate/ TwoDegenerate.lean Grid3/ Grid3.lean GridGen/ GridGen.lean; then
             echo "::error::found sorry/admit/native_decide in the formalization"
             exit 1

@@ -108,6 +108,7 @@ at heights `≥ 7`.
 | `ListColoring/` | the formalization |
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
+| `Outerplanar/` | graphs built by pendant vertices and ears on edges — in particular outerplanar graphs with a Hamiltonian cycle — are `k`-ECC for every `k ≥ 4`, and 3-ECC when no ear closes a triangle — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 4` (`GridGen/Four/`) and height five for `k ≥ 5` (`GridGen/Five/`); and the gauge route, every rectangle at `k ≥ 7` (`GridGen/Gauge/`) |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
@@ -392,10 +393,39 @@ shared colours the right lists miss — with four regimes of tangent-line bounds
 (`TwoDegenerate/K2nSqrt/`). Overlap `k − 1` is their Lemma 6, reproved. The constant 300 only
 keeps the error terms crude; numerically the argument works from `k ≈ 20`.
 
+## Beyond the paper: outerplanar graphs and ears on edges
+
+`Outerplanar/` proves that a graph built from nothing by adding, one at a time, a vertex with at
+most one earlier neighbour or an *ear on an edge* — a path of new vertices joined to two **adjacent**
+earlier vertices — is `k`-ECC for every `k ≥ 4` (`Outerplanar.ecc_of_earBuilt_of_four_le`), and
+`3`-ECC when every ear has at least two vertices, i.e. no ear closes a triangle
+(`Outerplanar.ecc_three_of_earBuilt`). These are the graphs each of whose blocks is an edge or an
+edge-retaining 2-sum of cycles: all outerplanar graphs, 2-trees, books of cycles. Mathlib has no
+planarity, so the outerplanar case is formal for polygon dissections — the outerplanar graphs with a
+Hamiltonian cycle (`Outerplanar.ecc_of_isDissection`, `ecc_three_of_isDissection`) — and a remark
+for outerplanar graphs with cut vertices. In the vocabulary of the literature these are threshold
+statements, `τ(G) ≤ 4` and `τ(G) ≤ 3`. Three colours with triangles is **open**; no counterexample
+exists through ten vertices.
+
+The adjacency of the two attachment vertices is what separates this class from the series-parallel
+graphs, where `K₂,₁₂` already fails at three colours (`TwoDegenerate/`). The proof carries, for a
+piece rooted at an edge, the invariant that its pair profile dominates a rank-one matrix with
+normalised factors (by Egerváry's theorem, formalized in `Outerplanar/Egervary.lean`, the same as
+a bound on every fixed-point-free bijection between the two lists). Closure under attaching a
+cycle reduces to a capacity lemma for partial covers of a cycle (`Outerplanar.cl_four_le`,
+`cl_three`), proved by induction on the number of colours: remove one cut thread and compare with
+the cover whose monodromy is a derangement. The lemma is false for three colours on the digon,
+which is exactly the triangle case left open. Source of record:
+`ai_research_notes/OUTERPLANAR_PROOF_DRAFT_2026-11-09.md`. A result of the 2026-11 AI research
+collaboration, not of the paper; cacti (`Cacti/`) and ladders (`Ladder/`) are special cases, and
+Chi et al. (arXiv:2605.10861) classify theta graphs, which overlaps the case of two cycles sharing
+an edge.
+
 ## Standard of proof
 
 * No `sorry`, `admit`, or `native_decide` anywhere in `ListColoring/`, `Cacti/`,
-  `NonPersistence/`, `ProductCounterexample/`, `Ladder/` or `TwoDegenerate/`, checked by CI.
+  `NonPersistence/`, `ProductCounterexample/`, `Ladder/`, `Outerplanar/` or `TwoDegenerate/`,
+  checked by CI.
   The one `sorry` in the repository is in `OpenProblems.lean`, which is a **separate
   `lean_lib`** for exactly that reason: nothing imports it, so no theorem can rest on an unproved
   statement. It is the paper's remark that `P₂ □ P₃` is not ECC at `2` — known, a corollary of

@@ -2,7 +2,7 @@ name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
 defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "ProductCounterexample",
-  "Ladder", "Grid3", "TwoDegenerate", "GridGen"]
+  "Ladder", "Grid3", "TwoDegenerate", "GridGen", "Outerplanar"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -80,3 +80,12 @@ name = "TwoDegenerate"
 # Prop. Imports ListColoring, imported by nothing.
 [[lean_lib]]
 name = "GridGen"
+
+# Graphs built from nothing by pendant vertices and ears on edges -- every block an edge or an
+# edge-retaining 2-sum of cycles, so in particular the outerplanar graphs -- are k-ECC for every
+# k >= 4, and 3-ECC when no ear closes a triangle (2026-11 AI research collaboration). Source of
+# record: ai_research_notes/OUTERPLANAR_PROOF_DRAFT_2026-11-09.md. The headline statements are in
+# Outerplanar/Statements.lean. Imports ListColoring and Cacti/BalancedCore (the twisted-cycle
+# count); imported by nothing.
+[[lean_lib]]
+name = "Outerplanar"
