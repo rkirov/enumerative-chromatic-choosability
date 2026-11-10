@@ -277,7 +277,10 @@ published construction.
   theta graphs (two cycles sharing an edge is the smallest case here; only their abstract and
   main theorem were read); cacti and ladders are earlier special cases in this repository. The
   inclusion of all outerplanar graphs in the class is formal only for those with a Hamiltonian
-  cycle. Three colours with triangles is open.
+  cycle. At three colours one triangle is allowed as the seed of the construction
+  (`ecc_three_of_triangle_seed`, same collaboration, 2026-11-10; the triangle's capacity bound is
+  a short variant of the one-thread theorem and not taken from `Cacti/`). Three colours with more
+  than one triangle is open.
 
 * **The formalization itself.** As far as we can determine, list coloring and choosability had not
   been formalized in any proof assistant before this project.
