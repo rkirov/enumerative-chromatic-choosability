@@ -279,8 +279,10 @@ published construction.
   inclusion of all outerplanar graphs in the class is formal only for those with a Hamiltonian
   cycle. At three colours one triangle is allowed as the seed of the construction
   (`ecc_three_of_triangle_seed`, same collaboration, 2026-11-10; the triangle's capacity bound is
-  a short variant of the one-thread theorem and not taken from `Cacti/`). Three colours with more
-  than one triangle is open.
+  a short variant of the one-thread theorem and not taken from `Cacti/`), and more generally any
+  2-tree (`ecc_three_of_twoTree_seed`, same collaboration, 2026-11-10; the six-colouring argument
+  is new here, and a literature search found no prior result on 2-trees or outerplanar graphs for
+  the list colour function). Three colours with triangles outside the seed is open.
 
 * **The formalization itself.** As far as we can determine, list coloring and choosability had not
   been formalized in any proof assistant before this project.

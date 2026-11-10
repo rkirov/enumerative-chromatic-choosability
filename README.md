@@ -108,7 +108,7 @@ at heights `≥ 7`.
 | `ListColoring/` | the formalization |
 | `Cacti/` | the cactus classification — beyond the paper, see below |
 | `Ladder/` | ladders are `k`-ECC for every `k ≥ 3` — beyond the paper, see below |
-| `Outerplanar/` | graphs built by pendant vertices and ears on edges — in particular outerplanar graphs with a Hamiltonian cycle — are `k`-ECC for every `k ≥ 4`, and 3-ECC when no ear closes a triangle (one triangle is allowed as the seed) — beyond the paper, see below |
+| `Outerplanar/` | graphs built by pendant vertices and ears on edges — in particular outerplanar graphs with a Hamiltonian cycle — are `k`-ECC for every `k ≥ 4`, and 3-ECC when no ear closes a triangle (triangles are allowed in a 2-tree seed) — beyond the paper, see below |
 | `Grid3/` | height-three grids are `k`-ECC for every `k ≥ 3` (`Grid3/Four/` is the `k = 4` case, `Grid3/Three/` the `k = 3` case) — beyond the paper, see below |
 | `GridGen/` | maximum-degree thresholds (`k ≥ ceil(5.67Δ)`; `Δ ≤ 3, 4` at `k ≥ 11, 16` by the degree-sensitive certificates); the column-lookback route, carried out at height four for `k ≥ 4` (`GridGen/Four/`) and height five for `k ≥ 5` (`GridGen/Five/`); and the gauge route, every rectangle at `k ≥ 7` (`GridGen/Gauge/`) |
 | `NonPersistence/` | Zhang–Dong's theorem, which refutes Kirov–Naimi §6 Question 2 |
@@ -406,8 +406,11 @@ Hamiltonian cycle (`Outerplanar.ecc_of_isDissection`, `ecc_three_of_isDissection
 for outerplanar graphs with cut vertices. In the vocabulary of the literature these are threshold
 statements, `τ(G) ≤ 4` and `τ(G) ≤ 3`. At three colours one triangle is allowed: a graph built in the
 same way from a triangle instead of from nothing, with ears of at least two vertices, is `3`-ECC
-(`Outerplanar.ecc_three_of_triangle_seed`). Three colours with more than one triangle is **open**; no
-counterexample exists through ten vertices.
+(`Outerplanar.ecc_three_of_triangle_seed`). More generally the seed may be any 2-tree — an edge, then
+vertices joined to the two ends of an existing edge — so all triangles may lie in one triangulated
+region (`Outerplanar.ecc_three_of_twoTree_seed`; the seed carries six list colourings using every
+colour of every list twice). Three colours with triangles outside the seed, closed by an ear below a
+longer face, is **open**; no counterexample exists through ten vertices.
 
 The adjacency of the two attachment vertices is what separates this class from the series-parallel
 graphs, where `K₂,₁₂` already fails at three colours (`TwoDegenerate/`). The proof carries, for a

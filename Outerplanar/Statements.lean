@@ -8,6 +8,7 @@ import Outerplanar.Face
 import Outerplanar.Graph
 import Outerplanar.Dissection
 import Outerplanar.TriangleSeed
+import Outerplanar.TwoTree
 
 /-!
 # Graphs built by pendant vertices and ears on edges are enumeratively chromatic-choosable
@@ -27,11 +28,15 @@ cycle (`Outerplanar/Dissection.lean`); for outerplanar graphs with cut vertices 
   triangle), it is `3`-ECC;
 * `ecc_three_of_triangle_seed` — one triangle is allowed at three colours: a graph built from
   a triangle by pendant vertices and ears of at least two vertices on edges is `3`-ECC;
+* `ecc_three_of_twoTree_seed` — more generally the seed may be any 2-tree (an edge, then
+  vertices joined to the two ends of an existing edge): any number of triangles, as long as
+  they form one such triangulated piece;
 * `ecc_of_isDissection`, `ecc_three_of_isDissection` — the same for polygon dissections.
 
 "`k`-ECC" is the pointwise notion `SimpleGraph.ECCAt`; in the vocabulary of Kaul et al. and
 Allred–Mudrock these are the threshold statements `τ(G) ≤ 4`, resp. `τ(G) ≤ 3`. The case of
-three colours with more than one triangle is open.
+three colours with triangles that do not all lie in one 2-tree seed (for instance a triangle
+closed by an ear below a longer face) is open.
 
 ## Provenance
 
@@ -77,13 +82,27 @@ vertices on edges, then `G` is `3`-ECC. The seed is handled by a capacity bound 
 (`triCover_capGE`, `zgBound_triangle`), after which the induction of `ZG_ge` runs unchanged
 (`ZG_ge_from`).
 
-This is a result of the 2026-11 AI research collaboration on this repository. With three
-colours and more than one triangle the question remains open. -/
+This is a result of the 2026-11 AI research collaboration on this repository. For more than
+one triangle see `ecc_three_of_twoTree_seed`. -/
 theorem ecc_three_of_triangle_seed (t : Fin 3 → V) (ht : Function.Injective t)
     (hadj : ∀ i j, i ≠ j → G.Adj (t i) (t j)) (h : EarBuiltFrom G 2 (univ.image t) univ) :
     G.ECCAt 3 :=
   ecc_of_earBuiltFrom G (le_refl 3) (fun m hm hm2 => faceClosed_of_cl (le_refl 3) hm
     (cl_three (m + 1) (by omega))) (zgBound_triangle G t ht hadj) h
+
+/-- **A 2-tree is allowed at three colours.** If `G` is built from a 2-tree on `S₀` (an edge,
+then vertices joined to exactly the two ends of an existing edge, which may be used again) by
+pendant vertices and by ears of at least two vertices on edges, then `G` is `3`-ECC. The seed
+is handled by six proper list colourings that are matched on every edge, so that every colour
+of every list is used by exactly two of them (`sixFam_of_twoTree`, `zgBound_twoTree`), after
+which the induction runs unchanged (`ZG_ge_from`). This contains `ecc_three_of_triangle_seed`.
+
+This is a result of this repository's 2026-11 AI research collaboration. With three colours,
+triangles outside the seed (closed by a one-vertex ear on a later edge) remain open. -/
+theorem ecc_three_of_twoTree_seed {S₀ : Finset V} (h₀ : TwoTreeOn G S₀)
+    (h : EarBuiltFrom G 2 S₀ univ) : G.ECCAt 3 :=
+  ecc_of_earBuiltFrom G (le_refl 3) (fun m hm hm2 => faceClosed_of_cl (le_refl 3) hm
+    (cl_three (m + 1) (by omega))) (zgBound_twoTree h₀) h
 
 /-- **Every outerplanar graph with a Hamiltonian cycle** (a polygon dissection) **is `k`-ECC
 for `k ≥ 4`.** -/
@@ -100,7 +119,7 @@ theorem ecc_three_of_isDissection {n : ℕ} (G : SimpleGraph (Fin n)) [Decidable
 end Outerplanar
 
 
-/-! The five statements depend on no axioms beyond the three standard ones. -/
+/-! The six statements depend on no axioms beyond the three standard ones. -/
 
 /-- info: 'Outerplanar.ecc_of_earBuilt_of_four_le' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
@@ -113,6 +132,10 @@ end Outerplanar
 /-- info: 'Outerplanar.ecc_three_of_triangle_seed' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
 #print axioms Outerplanar.ecc_three_of_triangle_seed
+
+/-- info: 'Outerplanar.ecc_three_of_twoTree_seed' depends on axioms: [propext, Classical.choice, Quot.sound] -/
+#guard_msgs in
+#print axioms Outerplanar.ecc_three_of_twoTree_seed
 
 /-- info: 'Outerplanar.ecc_of_isDissection' depends on axioms: [propext, Classical.choice, Quot.sound] -/
 #guard_msgs in
