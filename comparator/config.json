@@ -51,11 +51,7 @@
     "Grid3.gam",
     "Grid3.del",
     "Grid3.Fne",
-    "Grid3.Dp",
-    "Outerplanar.EarBuilt",
-    "Outerplanar.EarBuiltFrom",
-    "Outerplanar.TwoTreeOn",
-    "Outerplanar.IsDissection"
+    "Grid3.Dp"
   ],
   "theorem_names": [
     "SimpleGraph.eval_chromaticPolynomial",
