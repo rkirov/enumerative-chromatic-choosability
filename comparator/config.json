@@ -51,7 +51,11 @@
     "Grid3.gam",
     "Grid3.del",
     "Grid3.Fne",
-    "Grid3.Dp"
+    "Grid3.Dp",
+    "Outerplanar.EarBuilt",
+    "Outerplanar.EarBuiltFrom",
+    "Outerplanar.TwoTreeOn",
+    "Outerplanar.IsDissection"
   ],
   "theorem_names": [
     "SimpleGraph.eval_chromaticPolynomial",
@@ -89,7 +93,12 @@
     "GridGen.Five.ecc_boxProd_pathG_four",
     "GridGen.Six.ecc_boxProd_pathG_five",
     "ListColoring.ecc_boxProd_pathG_of_seven",
-    "ProductCounterexample.not_productQuestion"
+    "ProductCounterexample.not_productQuestion",
+    "Outerplanar.ecc_of_earBuilt_of_four_le",
+    "Outerplanar.ecc_three_of_earBuilt",
+    "Outerplanar.ecc_three_of_twoTree_seed",
+    "Outerplanar.ecc_of_isDissection",
+    "Outerplanar.ecc_three_of_isDissection"
   ],
   "permitted_axioms": [
     "propext",

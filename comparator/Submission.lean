@@ -11,6 +11,7 @@ import GridGen.Five.Main
 import GridGen.Six.Main
 import GridGen.Gauge.Seven.Assemble7
 import TwoDegenerate
+import Outerplanar
 /-!
 # Submission: the real development
 

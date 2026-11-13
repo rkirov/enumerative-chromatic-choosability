@@ -808,3 +808,87 @@ def ProductQuestion : Prop :=
 theorem not_productQuestion : ¬ ProductQuestion := sorry
 
 end ProductCounterexample
+
+/-! ### 22. Graphs built by pendant vertices and ears on edges (outerplanar graphs)
+
+Not from the paper.  Results of the 2026-11 AI research collaboration on this repository; source of
+record `ai_research_notes/OUTERPLANAR_PROOF_DRAFT_2026-11-09.md`, formalized in `Outerplanar/`.
+`EarBuilt G m₀ univ` says `G` is built from nothing by adding a vertex with at most one earlier
+neighbour, or an ear of at least `max m₀ 1` new vertices on an existing edge.  For `m₀ = 1` every
+block is an edge or an edge-retaining 2-sum of cycles; every outerplanar graph is such a graph.
+Mathlib has no planarity, so that inclusion is formal only for polygon dissections (the
+outerplanar graphs with a Hamiltonian cycle).  With three colours, triangles that do not all lie
+in one 2-tree seed remain open and are not claimed.
+-/
+
+namespace Outerplanar
+
+open Finset
+
+variable {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
+
+/-- The induced subgraph on `S` is built by pendant vertices and by ears of at least `m₀`
+vertices on edges. -/
+inductive EarBuilt (m₀ : ℕ) : Finset V → Prop
+  | empty : EarBuilt m₀ ∅
+  | pendant (S : Finset V) (x : V) (hx : x ∉ S) (hS : EarBuilt m₀ S)
+      (hdeg : (S.filter (G.Adj x)).card ≤ 1) : EarBuilt m₀ (insert x S)
+  | ear (S : Finset V) (m : ℕ) (hm : 1 ≤ m) (hm₀ : m₀ ≤ m) (u v : V) (hu : u ∈ S) (hv : v ∈ S)
+      (huv : G.Adj u v) (x : Fin m → V) (hinj : Function.Injective x) (hxS : ∀ j, x j ∉ S)
+      (hS : EarBuilt m₀ S)
+      (hold : ∀ j, ∀ y ∈ S, G.Adj (x j) y ↔ (j.val = 0 ∧ y = u) ∨ (j.val + 1 = m ∧ y = v))
+      (hnew : ∀ j j', G.Adj (x j) (x j') ↔ j.val + 1 = j'.val ∨ j'.val + 1 = j.val) :
+      EarBuilt m₀ (S ∪ univ.image x)
+
+/-- The induced subgraph on `S` is built from the one on `S₀` by pendant vertices and by ears
+of at least `m₀` vertices on edges. -/
+inductive EarBuiltFrom (m₀ : ℕ) (S₀ : Finset V) : Finset V → Prop
+  | seed : EarBuiltFrom m₀ S₀ S₀
+  | pendant (S : Finset V) (x : V) (hx : x ∉ S) (hS : EarBuiltFrom m₀ S₀ S)
+      (hdeg : (S.filter (G.Adj x)).card ≤ 1) : EarBuiltFrom m₀ S₀ (insert x S)
+  | ear (S : Finset V) (m : ℕ) (hm : 1 ≤ m) (hm₀ : m₀ ≤ m) (u v : V) (hu : u ∈ S) (hv : v ∈ S)
+      (huv : G.Adj u v) (x : Fin m → V) (hinj : Function.Injective x) (hxS : ∀ j, x j ∉ S)
+      (hS : EarBuiltFrom m₀ S₀ S)
+      (hold : ∀ j, ∀ y ∈ S, G.Adj (x j) y ↔ (j.val = 0 ∧ y = u) ∨ (j.val + 1 = m ∧ y = v))
+      (hnew : ∀ j j', G.Adj (x j) (x j') ↔ j.val + 1 = j'.val ∨ j'.val + 1 = j.val) :
+      EarBuiltFrom m₀ S₀ (S ∪ univ.image x)
+
+/-- The induced subgraph on `S` is a 2-tree: an edge, then vertices joined to exactly the two
+ends of an existing edge. -/
+inductive TwoTreeOn : Finset V → Prop
+  | edge (u w : V) (h : G.Adj u w) : TwoTreeOn {u, w}
+  | add (S : Finset V) (v u w : V) (hv : v ∉ S) (hu : u ∈ S) (hw : w ∈ S) (huw : G.Adj u w)
+      (hS : TwoTreeOn S) (hnb : ∀ y ∈ S, G.Adj v y ↔ y = u ∨ y = w) : TwoTreeOn (insert v S)
+
+/-- A *polygon dissection*: a graph on `Fin n` containing the Hamiltonian cycle
+`0, 1, …, n - 1` and whose edges do not cross. These are the outerplanar graphs with a
+Hamiltonian cycle, i.e. (for `n ≥ 3`) the 2-connected outerplanar graphs. -/
+def IsDissection {n : ℕ} (G : SimpleGraph (Fin n)) : Prop :=
+  (∀ i j : Fin n, i.val + 1 = j.val → G.Adj i j) ∧
+  (∀ i j : Fin n, i.val = 0 → j.val + 1 = n → i ≠ j → G.Adj i j) ∧
+  ∀ a b c d : Fin n, a < b → b < c → c < d → G.Adj a c → ¬ G.Adj b d
+
+/-- **Graphs built by pendant vertices and ears on edges are `k`-ECC for `k ≥ 4`.**
+In particular every outerplanar graph is. -/
+theorem ecc_of_earBuilt_of_four_le {k : ℕ} (hk : 4 ≤ k) (h : EarBuilt G 1 univ) : G.ECCAt k :=
+  sorry
+
+/-- **If no ear closes a triangle, the graph is `3`-ECC.** -/
+theorem ecc_three_of_earBuilt (h : EarBuilt G 2 univ) : G.ECCAt 3 := sorry
+
+/-- **A 2-tree is allowed at three colours.** If `G` is built from a 2-tree on `S₀` by pendant
+vertices and by ears of at least two vertices on edges, then `G` is `3`-ECC. -/
+theorem ecc_three_of_twoTree_seed {S₀ : Finset V} (h₀ : TwoTreeOn G S₀)
+    (h : EarBuiltFrom G 2 S₀ univ) : G.ECCAt 3 := sorry
+
+/-- **Every outerplanar graph with a Hamiltonian cycle** (a polygon dissection) **is `k`-ECC
+for `k ≥ 4`.** -/
+theorem ecc_of_isDissection {n k : ℕ} (hk : 4 ≤ k) (G : SimpleGraph (Fin n))
+    [DecidableRel G.Adj] (h : IsDissection G) : G.ECCAt k := sorry
+
+/-- **A triangle-free polygon dissection is `3`-ECC.** -/
+theorem ecc_three_of_isDissection {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
+    (h : IsDissection G) (htri : ∀ a b c : Fin n, G.Adj a b → G.Adj b c → ¬ G.Adj a c) :
+    G.ECCAt 3 := sorry
+
+end Outerplanar

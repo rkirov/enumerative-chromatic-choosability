@@ -441,14 +441,15 @@ an edge.
   indexing and orientation errors that would not have surfaced as type errors. See the
   "Specs verified numerically" section of `plan.md`. The sweeps that cost minutes of evaluation live in `Checks/`, a library that is not a default build target; CI builds it separately (`lake build Checks`).
 * CI runs the real [leanprover/comparator](https://github.com/leanprover/comparator) against
-  `comparator/Challenge.lean`, which claims **thirty-six keystone theorems** — ten from the
+  `comparator/Challenge.lean`, which claims **forty-one keystone theorems** — ten from the
   paper, three of the cactus classification, two of Zhang–Dong's non-persistence theorem, the
   clique-times-star refutation of Question 1, four
   ladder and height-three results, five maximum-degree results (the `⌈5.67Δ⌉` bound in two forms,
   subcubic graphs at `11`, maximum degree four at `16`, and the equality case), five on `K₂,ₙ`
   (`K₂,₂₆` not ECC at four, `K₂,₂₅` ECC at four, and the exact thresholds at list sizes three,
-  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 4`, height-five grids at `k ≥ 5`, height-six grids at `k ≥ 6`, and every grid at
-  `k ≥ 7` — superseded statements are not claimed —
+  four and five), two for `τ(K₂,ₙ) = O(√n)`, height-four grids at `k ≥ 4`, height-five grids at `k ≥ 5`, height-six grids at `k ≥ 6`, every grid at
+  `k ≥ 7`, and five on graphs built by pendant vertices and ears on edges (`k ≥ 4`, triangle-free and
+  2-tree-seeded at `k = 3`, and the two polygon-dissection forms) — superseded statements are not claimed —
   and the definitions needed to state them — deliberately not the whole library, so that what is certified is legible.
   That checks three things an axiom audit cannot: that the statements really are the ones claimed,
   that only the permitted axioms are used, and that every proof replays through Lean's kernel
