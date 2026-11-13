@@ -124,14 +124,14 @@ at heights `≥ 7`.
 
 ## Building
 
-Toolchain: `leanprover/lean4:v4.35.0-rc3`; Mathlib is pinned in `lake-manifest.json` (master `516d3125`).
+Toolchain: `leanprover/lean4:v4.35.0`; Mathlib is pinned in `lake-manifest.json` (master `56a00585`).
 
 ```sh
 lake exe cache get     # fetch Mathlib oleans (first time only)
 lake build             # the formalization
 ```
 
-For the companion book (Verso `v4.35.0-rc3`):
+For the companion book (Verso `v4.35.0`):
 
 ```sh
 cd book

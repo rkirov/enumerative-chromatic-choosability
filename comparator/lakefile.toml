@@ -18,6 +18,9 @@
 # github.com/rkirov/jacobian-fable (branch `lean-eval`), which in turn follows lean-eval's own
 # workspaces.
 name = "graph_coloring_comparator"
+# Mathlib now declares `requiresModuleSystem`; these libraries are ordinary (non-`module`) files,
+# so opt out of the per-import warning Lake v4.35.0 would otherwise print.
+allowNonModules = true
 defaultTargets = ["Challenge", "Submission"]
 
 [leanOptions]

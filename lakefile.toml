@@ -1,6 +1,9 @@
 name = "graph_coloring"
 version = "0.1.0"
 keywords = ["math", "graph theory", "list coloring"]
+# Mathlib now declares `requiresModuleSystem`; these libraries are ordinary (non-`module`) files,
+# so opt out of the per-import warning Lake v4.35.0 would otherwise print.
+allowNonModules = true
 defaultTargets = ["ListColoring", "OpenProblems", "Cacti", "NonPersistence", "ProductCounterexample",
   "Ladder", "Grid3", "TwoDegenerate", "GridGen"]
 
@@ -12,7 +15,7 @@ relaxedAutoImplicit = false
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
-rev = "516d31250e96c4e8e76888c3d8e2e43a9642b9ee"
+rev = "56a005855ea17e0b0958f73ec801ae140b0a1679"
 
 [[lean_lib]]
 name = "ListColoring"
