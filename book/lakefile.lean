@@ -1,7 +1,7 @@
 import Lake
 open Lake DSL
 
-require verso from git "https://github.com/leanprover/verso" @ "v4.35.0-rc3"
+require verso from git "https://github.com/leanprover/verso" @ "v4.35.0"
 require graph_coloring from ".."
 
 -- `warningAsError` is the point of this block. Verso's failure path for a backticked name it
@@ -17,6 +17,7 @@ require graph_coloring from ".."
 -- is kept clean of it — and is disabled only in `Book/Reference.lean`, where library docstrings
 -- written in Markdown (`**bold**`) are rendered verbatim.
 package book where
+  allowNonModules := true
   leanOptions := #[
     ⟨`experimental.module, false⟩, ⟨`autoImplicit, false⟩, ⟨`relaxedAutoImplicit, false⟩,
     ⟨`warningAsError, true⟩,

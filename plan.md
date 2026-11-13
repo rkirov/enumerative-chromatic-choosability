@@ -91,6 +91,18 @@ gauge layers (Eight/ now covers every `k ≥ 8`), and a shared `GridGen/Lookback
 * Never let Lake build two kernel-decide modules in parallel.
 * The CI placeholder grep scans prose too.
 
+**2026-11-13 — Lean 4.35.0.** Toolchain `v4.35.0-rc3 → v4.35.0` in the root, `comparator/` and
+`book/`; Mathlib `516d3125 → 56a00585` (master, 2026-10-13) and its eight transitive packages, to
+the revisions the sibling `jordan_pick` project pins, whose built tree was copied as before. Verso
+`v4.35.0-rc3 → v4.35.0`; `verify.sh` pins comparator `e3dcf30` and lean4export's `v4.35.0` tag.
+No source file changed. The one configuration change is `allowNonModules = true` in the three Lake
+configs: Mathlib now sets `requiresModuleSystem`, and without the opt-out Lake warns on every
+import from a file that has no `module` header. Left for a follow-up: deprecation warnings in
+`GridGen/` (`cond_true/false → Bool.cond_true/false`, `if_pos/if_neg`, `if_false`,
+`Set.mem_setOf_eq`) and new linter hints (`letI` in proofs, unused `simp` arguments). Build note
+for this machine: `taskset` does not limit Lake's parallelism, `LEAN_NUM_THREADS` does; `GridGen`
+needs `LEAN_NUM_THREADS=1` under a 4.5 GB cap and then takes about 17 hours.
+
 **2026-10-01 — Lean 4.35.0-rc3.** Toolchain `v4.33.0 → v4.35.0-rc3` in the root, `comparator/` and
 `book/`; Mathlib `db584cd6 → 516d3125` (master, after the `v4.35.0-rc3` tag) and all eight
 transitive packages to the revisions the sibling TauCeti project pins, whose toolchain is the same.

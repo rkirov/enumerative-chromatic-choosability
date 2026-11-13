@@ -11,8 +11,8 @@
 # the comparator replays it sequentially through each kernel; two replays plus the build exceed
 # GitHub's six-hour job limit (run 34082945506, 2026-09-07). Lean's own kernel replay is kept.
 #
-# Tool pins: comparator at its v4.35.0-rc3 toolchain bump (fd5d5bc, 2026-09-24) and lean4export at
-# its v4.35.0-rc3 tag, matching the workspace toolchain. (Before 2026-10-01 these mirrored
+# Tool pins: comparator at its v4.35.0 toolchain bump (e3dcf30, 2026-10-12) and lean4export at
+# its v4.35.0 tag, matching the workspace toolchain. (Before 2026-10-01 these mirrored
 # lean-eval's ci.yml at Lean v4.33.0.) Upstream pins lean4export by SHA and copies the workspace
 # `lean-toolchain` over it, which is what makes lean4export able to read this toolchain's `.olean`s.
 #
@@ -21,8 +21,8 @@
 set -euo pipefail
 
 # Pinned tool revisions (bump together with the workspace toolchain).
-COMPARATOR_REV=fd5d5bcf14177b187f66d4502071268d877887c3   # toolchain v4.35.0-rc3
-LEAN4EXPORT_REV=66f1fb4bc256072069767fce52d39480e4524869  # = refs/tags/v4.35.0-rc3
+COMPARATOR_REV=e3dcf3083fc53d44b27a4431fabf7d43181583f5   # toolchain v4.35.0
+LEAN4EXPORT_REV=5a9a355dc6c5fd82b69058d433e2ae2e8dfbf8fe  # = refs/tags/v4.35.0
 LANDRUN_REV=5ed4a3db3a4ad930d577215c6b9abaa19df7f99f
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -43,7 +43,7 @@ clone_at https://github.com/leanprover/lean4export "$WORK/lean4export" "$LEAN4EX
 # lean4export must be built with the toolchain that produced the `.olean`s it reads
 # (upstream does exactly this `cp`).
 cp "$WS/lean-toolchain" "$WORK/lean4export/lean-toolchain"
-# comparator's own pinned toolchain at $COMPARATOR_REV is v4.35.0-rc3, the workspace's. Should they
+# comparator's own pinned toolchain at $COMPARATOR_REV is v4.35.0, the workspace's. Should they
 # diverge again: upstream builds comparator with its OWN toolchain; by default we build it with the
 # workspace toolchain instead, to avoid
 # installing a third full Lean toolchain on a disk-constrained machine. comparator only reads
