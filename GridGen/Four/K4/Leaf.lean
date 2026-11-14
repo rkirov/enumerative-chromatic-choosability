@@ -248,9 +248,9 @@ theorem hrow_eq (s : T4) :
     (first | have e2 := eq_false h2 | have e2 := eq_true h2) <;>
     (first | have e3 := eq_false h3 | have e3 := eq_true h3) <;>
     (try simp only [e1, e2, e3, decide_true, decide_false, and_self, and_true, true_and, and_false, false_and, or_true,
-      true_or, or_false, false_or, if_true, if_false, Bool.and_self, Bool.and_true,
+      true_or, or_false, false_or, ite_true, ite_false, Bool.and_self, Bool.and_true,
       Bool.true_and, Bool.and_false, Bool.false_and, Bool.or_true, Bool.true_or, Bool.or_false,
-      Bool.false_or, cond_true, cond_false]) <;> rfl
+      Bool.false_or, Bool.cond_true, Bool.cond_false]) <;> rfl
 
 /-- Class counts minus a transfer row. -/
 def subH (c : Zp × Zp × Zp × Zp) (h : ℕ × ℕ × ℕ × ℕ) : Zp × Zp × Zp × Zp :=
@@ -334,7 +334,7 @@ theorem leafD_val (B : Col) (I : VN) (hI : I.toVenn = vennOf B.1 B.2.1 B.2.2.1 B
   have hd := dat_eq B.1 B.2.1 B.2.2.1 B.2.2.2 hs
   rw [actDat_eq_datC, ← hI, ← datZ_val] at hd
   · unfold gvec leafD mv
-    rw [if_pos hs, cnt_eq_cls, hd, ← clsZ_val, hrow_eq, subH_val]
+    rw [ite_eq_left hs, cnt_eq_cls, hd, ← clsZ_val, hrow_eq, subH_val]
   · intro h; rw [of_decide_eq_true h]
   · intro h; rw [of_decide_eq_true h]
   · intro h; rw [of_decide_eq_true h]

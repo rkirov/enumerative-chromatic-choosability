@@ -288,9 +288,9 @@ def search (E : List (List ℕ × ℕ)) (hit : (ℕ → ℕ) → Bool) :
 theorem upd_apply (a : ℕ → ℕ) (m v k : ℕ) : upd a m v k = if k = m then v else a k := by
   unfold upd
   by_cases h : k = m
-  · rw [if_pos h, (Nat.beq_eq ▸ h : Nat.beq k m = true)]; rfl
+  · rw [ite_eq_left h, (Nat.beq_eq ▸ h : Nat.beq k m = true)]; rfl
   · have e : Nat.beq k m = false := by rw [← Bool.not_eq_true, Nat.beq_eq]; exact h
-    rw [if_neg h, e]; rfl
+    rw [ite_eq_right h, e]; rfl
 
 theorem lsum_le {a x : ℕ → ℕ} (h : ∀ k, a k ≤ x k) : ∀ S, lsum a S ≤ lsum x S
   | [] => le_rfl
@@ -309,10 +309,10 @@ theorem lsum_upd (a : ℕ → ℕ) {m : ℕ} (hm : a m = 0) (v : ℕ) :
       have h1 : S.contains k = false := by
         rw [Bool.eq_false_iff, ne_eq, List.contains_iff_mem]; exact h.1
       have h2 : (k :: S).contains k = true := by simp
-      rw [h1, h2, if_pos rfl, hm]; simp; ring
+      rw [h1, h2, ite_eq_left rfl, hm]; simp; ring
     · have h2 : (k :: S).contains m = S.contains m := by
         simp [Ne.symm e]
-      rw [h2, if_neg e]; ring
+      rw [h2, ite_eq_right e]; ring
 
 theorem addc_map (E : List (List ℕ × ℕ)) (a : ℕ → ℕ) {m : ℕ} (hm : a m = 0) (v : ℕ)
     (hE : ∀ c ∈ E, c.1.Nodup) :
@@ -407,7 +407,7 @@ theorem search_sound (E : List (List ℕ × ℕ)) (hit : (ℕ → ℕ) → Bool)
     refine search_sound E hit x hE hnd ord _ hnod.2 hfl (fun q hq => ?_) hle' hag' h1
     obtain ⟨b1, b2, b3⟩ := hord q (List.mem_cons_of_mem _ hq)
     refine ⟨b1, b2, ?_⟩
-    rw [ha', upd_apply, if_neg]
+    rw [ha', upd_apply, ite_eq_right]
     · exact b3
     · intro e; exact hnod.1 (e ▸ List.mem_map_of_mem hq)
 

@@ -40,14 +40,14 @@ theorem qterm_spec (L U a b : ℕ) (acc : ℕ × ℕ) {x : ℝ} (hx0 : (L : ℝ)
   unfold qterm
   by_cases h : b ≤ a
   · have h' : Nat.ble b a = true := Nat.ble_eq.mpr h
-    simp only [h', cond_true, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
+    simp only [h', Bool.cond_true, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
     push_cast [h]
     have hba : (0 : ℝ) ≤ (a : ℝ) - b := by have : (b : ℝ) ≤ a := by exact_mod_cast h
                                            linarith
     have : (L : ℝ) ≤ 1000000 * x := by rw [div_le_iff₀ (by norm_num)] at hx0; linarith
     nlinarith
   · have h' : Nat.ble b a = false := by rw [← Bool.not_eq_true, Nat.ble_eq]; exact h
-    simp only [h', cond_false, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
+    simp only [h', Bool.cond_false, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
     have hab : a ≤ b := by omega
     push_cast [hab]
     have : 1000000 * x ≤ (U : ℝ) := by rw [le_div_iff₀ (by norm_num)] at hx1; linarith
@@ -189,7 +189,7 @@ theorem card_DS {sp : XSpec} {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (hA : Atoms
     (fun c _ => Finset.mem_range.mpr (memv5_lt _ _ _ _ _ c))]
   refine Finset.sum_congr rfl fun m hm => ?_
   by_cases hb : S.testBit m = true
-  · rw [if_pos hb]
+  · rw [ite_eq_left hb]
     have hm0 : m ≠ 0 := by rintro rfl; rw [hS] at hb; exact absurd hb (by decide)
     rw [show asz sp.atoms m = asz sp.toSpec5.atoms m from rfl,
       ← hA m (Nat.pos_of_ne_zero hm0) (Finset.mem_range.mp hm)]
@@ -199,7 +199,7 @@ theorem card_DS {sp : XSpec} {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (hA : Atoms
     constructor
     · rintro ⟨⟨h1, -⟩, h2⟩; exact ⟨h1, h2⟩
     · rintro ⟨h1, h2⟩; exact ⟨⟨h1, h2 ▸ hb⟩, h2⟩
-  · rw [if_neg hb, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
+  · rw [ite_eq_right hb, Finset.card_eq_zero, Finset.filter_eq_empty_iff]
     intro c hc e
     simp only [DS, Finset.mem_filter] at hc
     exact hb (e ▸ hc.2)
@@ -488,7 +488,7 @@ theorem penL_le (hs : Proper s) (x : ℕ → Ch) (hx : ∀ k, x k = xch sp.toSpe
     simp only [List.map_cons, List.sum_cons]
     unfold compileOne
     by_cases he : eqsOK (canon s) q.peels = true
-    · simp only [he, if_true]
+    · simp only [he, ite_true]
       unfold penL at *
       simp only [List.map_cons, List.sum_cons]
       refine Nat.add_le_add ?_ ih
@@ -506,7 +506,7 @@ theorem penL_le (hs : Proper s) (x : ℕ → Ch) (hx : ∀ k, x k = xch sp.toSpe
       · exact Nat.zero_le _
       · exact le_rfl
     · simp only [Bool.not_eq_true] at he
-      simp only [he, Bool.false_eq_true, if_false]
+      simp only [he, Bool.false_eq_true, ite_false]
       exact le_trans ih (Nat.le_add_left _ _)
 
 end state

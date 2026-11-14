@@ -2,7 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import Mathlib
+import GridGen.MathlibImports
 
 /-!
 # The bookkeeping of one colour at `k = 7`

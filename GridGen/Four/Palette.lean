@@ -68,7 +68,7 @@ theorem card_insert_sdiff_le (a : ℕ) (T B : Finset ℕ) :
   · have hsub : insert a T \ B ⊆ insert a (T \ B) := by
       intro x; simp only [Finset.mem_sdiff, Finset.mem_insert]; tauto
     have := (Finset.card_le_card hsub).trans (Finset.card_insert_le _ _)
-    simp only [ha, if_false]
+    simp only [ha, ite_false]
     have : (((insert a T \ B).card : ℕ) : ℝ) ≤ ((T \ B).card + 1 : ℕ) := by exact_mod_cast this
     push_cast at this; linarith
 
@@ -89,7 +89,7 @@ theorem card_rows_sdiff_le (B : Finset ℕ) (s : T4) :
       rw [this]; simp [h]
     · have := Finset.card_le_card (Finset.sdiff_subset (s := {r4 s}) (t := B))
       simp only [Finset.card_singleton] at this
-      simp only [h, if_false]; exact_mod_cast this
+      simp only [h, ite_false]; exact_mod_cast this
   linarith
 
 /-- **The reference palette.** -/

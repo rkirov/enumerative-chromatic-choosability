@@ -250,7 +250,7 @@ theorem gvec_eq_cls (B : Col) (I : VN) (hI : I.toVenn = vennOf B.1 B.2.1 B.2.2.1
     gvec B s = cls (datC (ers B s)) - hQ (hrowN (decide (r1 s = r3 s)) (decide (r2 s = r4 s))
       (decide (r1 s = r4 s))) := by
   unfold gvec
-  rw [if_pos hs, cnt_eq_cls, hrow_eq]
+  rw [ite_eq_left hs, cnt_eq_cls, hrow_eq]
   rfl
 
 /-- The intersection sizes of the successor lists as the data vector of the type. -/
@@ -382,7 +382,7 @@ theorem regionV_sound (B : Col) (hB : CardsIn 4 4 B) (I : VN)
       · rfl
       · rw [Nat.eq_of_beq_eq_true e, Nat.zero_testBit] at h; exact absurd h (by decide)
     simp only [regionV, hle, hz _ _ h1, hz _ _ h2, hz _ _ h3, hz _ _ h4, Bool.or_false,
-      cond_false, cond_true]
+      Bool.cond_false, Bool.cond_true]
   · rw [hg]
     exact boxV_sound _ _ _ _ _ _ _ D hbox hb k w hw
 

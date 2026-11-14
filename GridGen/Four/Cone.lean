@@ -444,7 +444,7 @@ theorem vA_pos {m : ℕ} {r : ℝ} (hr : r = 1 - 2 / ((m : ℝ) + 3) ^ 3) {w : W
     mul_nonneg c3 (hr0.le.trans hc)]
 
 theorem rho_eq {m : ℕ} (hm0 : m ≠ 0) (hm : m ≠ 1) : rho (m + 5) = 1 - 2 / ((m : ℝ) + 3) ^ 3 := by
-  unfold rho; rw [if_neg (by omega), if_neg (by omega)]; push_cast; ring_nf
+  unfold rho; rw [ite_eq_right (by omega), ite_eq_right (by omega)]; push_cast; ring_nf
 
 
 /-! At `k = 6` (`ℓ = 4`) the box `[487/500, 1]³`: the same six inequalities, at the eight corners

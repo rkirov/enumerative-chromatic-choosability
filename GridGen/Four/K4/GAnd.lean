@@ -181,10 +181,10 @@ theorem ltypes_cover {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {ρ : 
   -- the realization
   set ρ' : ℕ → ℕ := fun t => if t < n then ρ t else Fl.getD (t - n) 0
   have hFlF : F.length = Fl.length := List.length_map _
-  have hlo : ∀ t < n, ρ' t = ρ t := fun t ht => if_pos ht
+  have hlo : ∀ t < n, ρ' t = ρ t := fun t ht => ite_eq_left ht
   have hhi : ∀ k (hk : k < Fl.length), ρ' (n + k) = Fl[k] := by
     intro k hk
-    simp only [ρ', show ¬ (n + k < n) by omega, if_false, show n + k - n = k by omega]
+    simp only [ρ', show ¬ (n + k < n) by omega, ite_false, show n + k - n = k by omega]
     rw [List.getD_eq_getElem _ _ hk]
   have hFlout : ∀ x ∈ Fl, x ∉ gcolSet nd ρ := fun x hx =>
     (Finset.mem_filter.mp ((hFl_mem x).mp hx)).2
@@ -462,7 +462,7 @@ theorem badF_of_check {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {x y 
         Nat.testBit 8 1 = false ∧ Nat.testBit 8 2 = false ∧ Nat.testBit 8 3 = true := by decide
     obtain ⟨b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12⟩ := bits
     simp only [Finset.filter_insert, Finset.filter_singleton, mx, my, mz, ma, mb, b1, b2, b3, b4,
-      b5, b6, b7, b8, b9, b10, b11, b12, if_true, if_false, Bool.false_eq_true] at r0 r1 r2 r3
+      b5, b6, b7, b8, b9, b10, b11, b12, ite_true, ite_false, Bool.false_eq_true] at r0 r1 r2 r3
     simp only [edgeB, Prod.mk.injEq]
     refine ⟨?_, ?_, ?_, ?_⟩
     · rw [r0]; try simp
@@ -555,7 +555,7 @@ theorem badM_of_check {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {x y 
         Nat.testBit 12 1 = false ∧ Nat.testBit 12 2 = true ∧ Nat.testBit 12 3 = true := by decide
     obtain ⟨b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12⟩ := bits
     simp only [Finset.filter_insert, Finset.filter_singleton, mx, my, mz, ma, mb, b1, b2, b3, b4,
-      b5, b6, b7, b8, b9, b10, b11, b12, if_true, if_false, Bool.false_eq_true] at r0 r1 r2 r3
+      b5, b6, b7, b8, b9, b10, b11, b12, ite_true, ite_false, Bool.false_eq_true] at r0 r1 r2 r3
     simp only [centB, Prod.mk.injEq]
     refine ⟨?_, ?_, ?_, ?_⟩
     · rw [r0]; try simp

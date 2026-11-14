@@ -134,7 +134,7 @@ theorem gfresh_count {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : GNode} {ρ : 
   set F := (Finset.range nd.cols.length).filter fun t => nd.cols.getD t 0 = m
   have hinj : Set.InjOn ρ ↑F := by
     intro t ht t' ht' e
-    simp only [F, Finset.coe_filter, Finset.mem_range, Set.mem_setOf_eq] at ht ht'
+    simp only [F, Finset.coe_filter, Finset.mem_range, Set.mem_ofPred_eq] at ht ht'
     exact hρ.2.1 t ht.1 t' ht'.1 e
   rw [← Finset.card_image_of_injOn hinj, ← Finset.card_union_of_disjoint]
   · apply Finset.card_le_card

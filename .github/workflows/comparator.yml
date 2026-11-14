@@ -63,11 +63,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # The grid3-three shard replays the k = 3 certificate (about 1 h 50 min). Its claim's import
-      # closure is Grid3/ and ListColoring/ (plus Mathlib), so it is run only when one of those,
-      # the build configuration, or the comparator setup changed since the previous commit (push)
-      # or the base (pull request); manual and the weekly scheduled runs always run it. The other
-      # shards take minutes and always run.
+      # Four shards replay kernel-decided certificates: grid3-three (about 80 min), grid4 (about
+      # 60), grid5 (about 30) and grid6 (about 20). The import closure of grid3-three's claim is
+      # Grid3/ and ListColoring/ (plus Mathlib); that of grid4, grid5 and grid6 is inside GridGen/
+      # and ListColoring/. Each is run only when its closure, the build configuration, or the
+      # comparator setup changed since the previous commit (push) or the base (pull request);
+      # manual and the weekly scheduled runs always run all of them. The other shards take
+      # minutes and always run.
       - name: Decide whether this shard must run
         id: scope
         env:
@@ -78,18 +80,24 @@ jobs:
           HEAD: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
         run: |
           run=true
-          if [ "$SHARD" = grid3-three ] && { [ "$EVENT" = push ] || [ "$EVENT" = pull_request ]; } \
+          # The library directories in each heavy shard's import closure (ListColoring/ is in all).
+          case "$SHARD" in
+            grid3-three)       own='Grid3/|Grid3\.lean$' ;;
+            grid4|grid5|grid6) own='GridGen/|GridGen\.lean$' ;;
+            *)                 own='' ;;
+          esac
+          if [ -n "$own" ] && { [ "$EVENT" = push ] || [ "$EVENT" = pull_request ]; } \
              && [ -n "$BASE" ] && [ "$BASE" != 0000000000000000000000000000000000000000 ]; then
             if files=$(gh api "repos/${{ github.repository }}/compare/$BASE...$HEAD" \
                  --jq '.files | if length >= 300 then "TOO_MANY" else .[].filename end'); then
-              if ! echo "$files" | grep -qE '^(TOO_MANY$|Grid3/|Grid3\.lean$|ListColoring/|ListColoring\.lean$|lakefile\.toml$|lake-manifest\.json$|lean-toolchain$|comparator/|verify\.sh$|\.github/workflows/comparator\.yml$)'; then
+              if ! echo "$files" | grep -qE "^(TOO_MANY\$|$own|ListColoring/|ListColoring\.lean\$|lakefile\.toml\$|lake-manifest\.json\$|lean-toolchain\$|comparator/|verify\.sh\$|\.github/workflows/comparator\.yml\$)"; then
                 run=false
               fi
             fi
           fi
           echo "run=$run" >> "$GITHUB_OUTPUT"
           if [ "$run" = false ]; then
-            echo "::notice::grid3-three skipped: nothing in its closure changed between $BASE and $HEAD"
+            echo "::notice::$SHARD skipped: nothing in its closure changed between $BASE and $HEAD"
           fi
 
       # Build the library and fetch the Mathlib olean cache. The comparator workspace

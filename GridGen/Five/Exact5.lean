@@ -682,14 +682,14 @@ theorem corr_k (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) {s : T5} (hs : Proper s) 
   · rw [r, Bool.cond_true]
     by_cases a : (!(Nat.beq (Nat.land (blkOf (canon s) k) I) 0)) = true
     · by_cases b : Nat.beq (Nat.land I (memv5 B₁ B₂ B₃ B₄ B₅ (rowAt k s))) I = true
-      · rw [if_pos ⟨e1.mpr r, e2.mpr a, e3.mpr b⟩, a, b]; rfl
-      · rw [if_neg (fun h => b (e3.mp h.2.2))]
+      · rw [ite_eq_left ⟨e1.mpr r, e2.mpr a, e3.mpr b⟩, a, b]; rfl
+      · rw [ite_eq_right (fun h => b (e3.mp h.2.2))]
         simp only [Bool.not_eq_true] at b
         rw [b, Bool.and_false]; rfl
-    · rw [if_neg (fun h => a (e2.mp h.2.1))]
+    · rw [ite_eq_right (fun h => a (e2.mp h.2.1))]
       simp only [Bool.not_eq_true] at a
       rw [a, Bool.false_and]; rfl
-  · rw [if_neg (fun h => r (e1.mp h.1))]
+  · rw [ite_eq_right (fun h => r (e1.mp h.1))]
     simp only [Bool.not_eq_true] at r
     rw [r]; rfl
 
@@ -704,8 +704,8 @@ theorem vk_get (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) (s : T5) (k : ℕ) {I : �
       (ratom (memv5 B₁ B₂ B₃ B₄ B₅ (rowAt k s)) (blkOf (canon s) k))) 0 := by
   unfold vk
   by_cases r : repB (canon s) k = true
-  · rw [if_pos r, vecV_get _ _ h1 h2, r]; rfl
-  · rw [if_neg r, zeroV_get h1 h2]
+  · rw [ite_eq_left r, vecV_get _ _ h1 h2, r]; rfl
+  · rw [ite_eq_right r, zeroV_get h1 h2]
     simp only [Bool.not_eq_true] at r
     rw [r]; rfl
 
@@ -774,12 +774,12 @@ theorem packV_vk (sp : Spec5) (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) (s : T5) (
     packV (vk B₁ B₂ B₃ B₄ B₅ s k) = (xch sp B₁ B₂ B₃ B₄ B₅ s k).2.2.1 := by
   unfold vk xch
   by_cases r : repB (canon s) k = true
-  · rw [if_pos r]
+  · rw [ite_eq_left r]
     by_cases z : raK B₁ B₂ B₃ B₄ B₅ s k = 0
-    · rw [if_neg (fun h => h.2 z)]
+    · rw [ite_eq_right (fun h => h.2 z)]
       unfold raK at z; rw [z, vecV_zero]; rfl
-    · rw [if_pos ⟨r, z⟩]; rfl
-  · rw [if_neg r, if_neg (fun h => r h.1)]; rfl
+    · rw [ite_eq_left ⟨r, z⟩]; rfl
+  · rw [ite_eq_right r, ite_eq_right (fun h => r h.1)]; rfl
 
 theorem ratom_spec (a b : ℕ) :
     (Nat.land a b = 0 ∧ ratom a b = 0) ∨ (Nat.land a b ≠ 0 ∧ ratom a b = a) := by
@@ -806,16 +806,16 @@ theorem xch_fst {sp : Spec5} {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} {s : T5} {k
       (xch sp B₁ B₂ B₃ B₄ B₅ s k).2.1 = asz sp.atoms (xch sp B₁ B₂ B₃ B₄ B₅ s k).1 := by
   unfold xch at *
   by_cases c : repB (canon s) k = true ∧ raK B₁ B₂ B₃ B₄ B₅ s k ≠ 0
-  · rw [if_pos c] at h ⊢
+  · rw [ite_eq_left c] at h ⊢
     exact ⟨c.1, (raK_ne_zero c.2).1, rfl⟩
-  · rw [if_neg c] at h; exact absurd rfl h
+  · rw [ite_eq_right c] at h; exact absurd rfl h
 
 theorem xch_zero {sp : Spec5} {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} {s : T5} {k : ℕ}
     (h : (xch sp B₁ B₂ B₃ B₄ B₅ s k).1 = 0) : xch sp B₁ B₂ B₃ B₄ B₅ s k = (0, 5, 0, 0) := by
   unfold xch at *
   by_cases c : repB (canon s) k = true ∧ raK B₁ B₂ B₃ B₄ B₅ s k ≠ 0
-  · rw [if_pos c] at h; exact absurd h c.2
-  · rw [if_neg c]
+  · rw [ite_eq_left c] at h; exact absurd h c.2
+  · rw [ite_eq_right c]
 
 theorem mem_atomSet_self (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) {c : ℕ} (h : memv5 B₁ B₂ B₃ B₄ B₅ c ≠ 0) :
     c ∈ atomSet B₁ B₂ B₃ B₄ B₅ (memv5 B₁ B₂ B₃ B₄ B₅ c) :=
@@ -836,8 +836,8 @@ theorem xch_mem {sp : Spec5} {pd : PatD} (hpd : pdOk sp pd = true) {B₁ B₂ B�
   · obtain ⟨r, e1, -⟩ := xch_fst z
     unfold xch at z ⊢
     by_cases c : repB (canon s) k = true ∧ raK B₁ B₂ B₃ B₄ B₅ s k ≠ 0
-    · rw [if_pos c]
-      rw [if_pos c] at z
+    · rw [ite_eq_left c]
+      rw [ite_eq_left c] at z
       obtain ⟨ea, eb⟩ := raK_ne_zero c.2
       rw [ea]
       set a := memv5 B₁ B₂ B₃ B₄ B₅ (rowAt k s) with ha
@@ -853,16 +853,16 @@ theorem xch_mem {sp : Spec5} {pd : PatD} (hpd : pdOk sp pd = true) {B₁ B₂ B�
       rcases h2 with h2 | h2
       · exact absurd (Nat.beq_eq ▸ h2 : Nat.land a (blkOf (canon s) k) = 0) eb
       · exact h2
-    · rw [if_neg c] at z; exact absurd rfl z
+    · rw [ite_eq_right c] at z; exact absurd rfl z
 
 /-! ### Capacity -/
 
 theorem cnt_cons (m a : ℕ) (L : List ℕ) : cnt m (a :: L) = (if a = m then 1 else 0) + cnt m L := by
   show cond (Nat.beq a m) (Nat.succ (cnt m L)) (cnt m L) = _
   by_cases h : a = m
-  · rw [if_pos h, (Nat.beq_eq ▸ h : Nat.beq a m = true)]; simp [Nat.succ_eq_add_one, Nat.add_comm]
+  · rw [ite_eq_left h, (Nat.beq_eq ▸ h : Nat.beq a m = true)]; simp [Nat.succ_eq_add_one, Nat.add_comm]
   · have e : Nat.beq a m = false := by rw [← Bool.not_eq_true, Nat.beq_eq]; exact h
-    rw [if_neg h, e]; simp
+    rw [ite_eq_right h, e]; simp
 
 theorem cnt_range (f : ℕ → ℕ) (m : ℕ) : ∀ k : ℕ,
     cnt m ((List.range k).reverse.map f) = ((range k).filter (fun j => f j = m)).card
@@ -922,7 +922,7 @@ theorem cap_level {sp : Spec5} {B₁ B₂ B₃ B₄ B₅ : Finset ℕ} (hA : Ato
     rw [cnt_range, hsz]
     have h1 := cap_le (sp := sp) (B₁ := B₁) (B₂ := B₂) (B₃ := B₃) (B₄ := B₄) (B₅ := B₅) hs z
       (n := k + 1) (by omega)
-    rw [Finset.range_add_one, Finset.filter_insert, if_pos hm.symm,
+    rw [Finset.range_add_one, Finset.filter_insert, ite_eq_left hm.symm,
       Finset.card_insert_of_notMem (by simp)] at h1
     have hm32 : m < 32 := by rw [e]; exact memv5_lt _ _ _ _ _ _
     rw [hA m (Nat.pos_of_ne_zero z) hm32] at h1
@@ -963,18 +963,18 @@ theorem pinK_cons (q : ℕ × ℕ × ℕ) (Q : List (ℕ × ℕ × ℕ)) (B₁ B
         then q.2.2 else 0) + pinK Q B₁ B₂ B₃ B₄ B₅ s k := by
   unfold pinK
   by_cases c : repB (canon s) k = true ∧ raK B₁ B₂ B₃ B₄ B₅ s k ≠ 0
-  · rw [if_pos c, if_pos c]
+  · rw [ite_eq_left c, ite_eq_left c]
     show cond ((blkOf (canon s) k).testBit q.1 && Nat.beq q.2.1 (raK B₁ B₂ B₃ B₄ B₅ s k)) q.2.2 0
       + pincOf Q _ _ = _
     by_cases t : (blkOf (canon s) k).testBit q.1 = true
     · by_cases e : q.2.1 = raK B₁ B₂ B₃ B₄ B₅ s k
-      · rw [if_pos ⟨c.1, c.2, t, e⟩, t, (Nat.beq_eq ▸ e : Nat.beq _ _ = true)]; rfl
+      · rw [ite_eq_left ⟨c.1, c.2, t, e⟩, t, (Nat.beq_eq ▸ e : Nat.beq _ _ = true)]; rfl
       · have e' : Nat.beq q.2.1 (raK B₁ B₂ B₃ B₄ B₅ s k) = false := by
           rw [← Bool.not_eq_true, Nat.beq_eq]; exact e
-        rw [if_neg (fun h => e h.2.2.2), t, e']; rfl
+        rw [ite_eq_right (fun h => e h.2.2.2), t, e']; rfl
     · simp only [Bool.not_eq_true] at t
-      rw [if_neg (fun h => by rw [t] at h; exact Bool.false_ne_true h.2.2.1), t]; rfl
-  · rw [if_neg c, if_neg c, if_neg (fun h => c ⟨h.1, h.2.1⟩)]
+      rw [ite_eq_right (fun h => by rw [t] at h; exact Bool.false_ne_true h.2.2.1), t]; rfl
+  · rw [ite_eq_right c, ite_eq_right c, ite_eq_right (fun h => c ⟨h.1, h.2.1⟩)]
 
 /-- One pin is counted at most once, and only when it fires. -/
 theorem one_pin_le (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) {s : T5} (hs : Proper s) {r : ℕ} (hr : r < 5)
@@ -998,7 +998,7 @@ theorem one_pin_le (B₁ B₂ B₃ B₄ B₅ : Finset ℕ) {s : T5} (hs : Proper
     · exact Nat.zero_le _
     · exact le_rfl
   · intro k hk hne
-    rw [if_neg]
+    rw [ite_eq_right]
     rintro ⟨h1, -, h3, -⟩
     have t1 := rep_table _ hc r (List.mem_range.mpr hr) k (List.mem_range.mpr (Finset.mem_range.mp hk))
     rw [h1, h3, Bool.and_self] at t1
@@ -1032,10 +1032,10 @@ theorem eqc_eq {s : T5} (hs : Proper s) :
     rw [eqc_eq hs Q hQ]
     congr 1
     by_cases e : rowAt q.1 s = rowAt q.2.1 s
-    · rw [if_pos e, (Nat.beq_eq ▸ (eqv_canon hs hi hj).mp e : Nat.beq _ _ = true)]; rfl
+    · rw [ite_eq_left e, (Nat.beq_eq ▸ (eqv_canon hs hi hj).mp e : Nat.beq _ _ = true)]; rfl
     · have e' : Nat.beq (rowAt q.1 (canon s)) (rowAt q.2.1 (canon s)) = false := by
         rw [← Bool.not_eq_true, Nat.beq_eq]; exact fun h => e ((eqv_canon hs hi hj).mpr h)
-      rw [if_neg e, e']; rfl
+      rw [ite_eq_right e, e']; rfl
 
 /-! ### The enumeration -/
 
@@ -1067,7 +1067,7 @@ theorem term_spec (Lo a b : ℕ) (acc : ℕ × ℕ) {x : ℝ} (hx0 : (Lo : ℝ) 
   by_cases h : b ≤ a
   · have e : Nat.ble b a = true := Nat.ble_eq.mpr h
     rw [e]
-    simp only [cond_true, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
+    simp only [Bool.cond_true, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
     push_cast [h]
     have : ((a : ℝ) - b) * ((Lo : ℝ) / 2000) ≤ ((a : ℝ) - b) * x :=
       mul_le_mul_of_nonneg_left hx0 (by have : (b : ℝ) ≤ a := by exact_mod_cast h
@@ -1076,7 +1076,7 @@ theorem term_spec (Lo a b : ℕ) (acc : ℕ × ℕ) {x : ℝ} (hx0 : (Lo : ℝ) 
   · have e : Nat.ble b a = false := by
       rw [← Bool.not_eq_true, Nat.ble_eq]; exact h
     rw [e]
-    simp only [cond_false, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
+    simp only [Bool.cond_false, Nat.add_eq, Nat.mul_eq, Nat.sub_eq]
     have h' : a ≤ b := by omega
     push_cast [h']
     have : (a : ℝ) ≤ b := by exact_mod_cast h'

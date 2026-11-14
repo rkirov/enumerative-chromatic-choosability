@@ -100,20 +100,20 @@ theorem nextFree_spec {nd : Node} {e13 e24 e14 : Bool} {r : ℕ}
     r < 4 ∧ firstMask nd (cls e13 e24 e14 r) = none := by
   unfold nextFree at h
   cases h0 : (firstMask nd (cls e13 e24 e14 0)).isNone
-  · rw [h0, cond_false] at h
+  · rw [h0, Bool.cond_false] at h
     cases h1 : (firstMask nd (cls e13 e24 e14 1)).isNone
-    · rw [h1, cond_false] at h
+    · rw [h1, Bool.cond_false] at h
       cases h2 : (firstMask nd (cls e13 e24 e14 2)).isNone
-      · rw [h2, cond_false] at h
+      · rw [h2, Bool.cond_false] at h
         cases h3 : (firstMask nd (cls e13 e24 e14 3)).isNone
-        · rw [h3, cond_false] at h; exact absurd h (by simp)
-        · rw [h3, cond_true, Option.some.injEq] at h; subst h
+        · rw [h3, Bool.cond_false] at h; exact absurd h (by simp)
+        · rw [h3, Bool.cond_true, Option.some.injEq] at h; subst h
           exact ⟨by norm_num, Option.isNone_iff_eq_none.mp h3⟩
-      · rw [h2, cond_true, Option.some.injEq] at h; subst h
+      · rw [h2, Bool.cond_true, Option.some.injEq] at h; subst h
         exact ⟨by norm_num, Option.isNone_iff_eq_none.mp h2⟩
-    · rw [h1, cond_true, Option.some.injEq] at h; subst h
+    · rw [h1, Bool.cond_true, Option.some.injEq] at h; subst h
       exact ⟨by norm_num, Option.isNone_iff_eq_none.mp h1⟩
-  · rw [h0, cond_true, Option.some.injEq] at h; subst h
+  · rw [h0, Bool.cond_true, Option.some.injEq] at h; subst h
     exact ⟨by norm_num, Option.isNone_iff_eq_none.mp h0⟩
 
 theorem mem_masksOf {ps m : ℕ} (hm : m < 16) (h : Nat.testBit ps m = true) : m ∈ masksOf ps := by
@@ -148,7 +148,7 @@ theorem real_placeAll {B : Col} {nd : Node} {ρ : ℕ → ℕ} (hρ : nd.Real B 
   split_ifs at e with hjL
   · simp only [Option.some.injEq, Prod.mk.injEq] at e
     obtain ⟨rfl, rfl⟩ := e
-    refine ⟨hr4, by rw [hg r hr4, if_pos hr], by rw [Function.update_self]; exact hm, ?_⟩
+    refine ⟨hr4, by rw [hg r hr4, ite_eq_left hr], by rw [Function.update_self]; exact hm, ?_⟩
     intro j' hj' m'' t'' e' he
     rw [hg j' hj'] at e'
     split_ifs at e' with hj'L
@@ -159,7 +159,7 @@ theorem real_placeAll {B : Col} {nd : Node} {ρ : ℕ → ℕ} (hρ : nd.Real B 
   · obtain ⟨h1, h2, h3, h4⟩ := hρ j hj m' t' e
     have hne := tag_ne j hj m' t' e
     have ht'L : t' ∉ L := fun h => by rw [hfree t' h] at h2; exact absurd h2 (by simp)
-    refine ⟨h1, by rw [hg t' h1, if_neg ht'L]; exact h2, by rw [Function.update_of_ne hne]; exact h3, ?_⟩
+    refine ⟨h1, by rw [hg t' h1, ite_eq_right ht'L]; exact h2, by rw [Function.update_of_ne hne]; exact h3, ?_⟩
     intro j' hj' m'' t'' e' he
     rw [Function.update_of_ne hne] at he
     rw [hg j' hj'] at e'

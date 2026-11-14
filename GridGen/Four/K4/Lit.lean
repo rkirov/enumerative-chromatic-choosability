@@ -82,8 +82,8 @@ partial def parseNat (b : ByteArray) (i : Nat) : Except String (Nat × Nat) :=
 
 /-- `List ℕ` from a list of terms of type `ℕ`. -/
 def mkNatList (xs : List Expr) : Expr :=
-  xs.foldr (fun x acc => mkApp3 (mkConst ``List.cons [levelZero]) (mkConst ``Nat) x acc)
-    (mkApp (mkConst ``List.nil [levelZero]) (mkConst ``Nat))
+  xs.foldr (fun x acc => mkApp3 (mkConst ``List.cons [Lean.Level.zero]) (mkConst ``Nat) x acc)
+    (mkApp (mkConst ``List.nil [Lean.Level.zero]) (mkConst ``Nat))
 
 /-- A list of naturals `[a,b,…]` at position `i` (as raw literals, or as numerals `OfNat.ofNat`
 like elaborated ones). -/
@@ -135,8 +135,8 @@ partial def parseLits (ty : Expr) (s : String) : Except String Expr := do
   let b := s.toUTF8
   let rec go (j : Nat) (acc : Array Expr) : Except String Expr := do
     if j ≥ b.size then
-      return acc.foldr (fun x l => mkApp3 (mkConst ``List.cons [levelZero]) ty x l)
-        (mkApp (mkConst ``List.nil [levelZero]) ty)
+      return acc.foldr (fun x l => mkApp3 (mkConst ``List.cons [Lean.Level.zero]) ty x l)
+        (mkApp (mkConst ``List.nil [Lean.Level.zero]) ty)
     let (e, j') ← parseTerm b j
     go j' (acc.push e)
   go 0 #[]
@@ -144,11 +144,11 @@ partial def parseLits (ty : Expr) (s : String) : Except String Expr := do
 /-- A whole string `[…][…]…` as a list of lists of naturals. -/
 partial def parseNatss (s : String) : Except String Expr := do
   let b := s.toUTF8
-  let ty := mkApp (mkConst ``List [levelZero]) (mkConst ``Nat)
+  let ty := mkApp (mkConst ``List [Lean.Level.zero]) (mkConst ``Nat)
   let rec go (j : Nat) (acc : Array Expr) : Except String Expr := do
     if j ≥ b.size then
-      return acc.foldr (fun x l => mkApp3 (mkConst ``List.cons [levelZero]) ty x l)
-        (mkApp (mkConst ``List.nil [levelZero]) ty)
+      return acc.foldr (fun x l => mkApp3 (mkConst ``List.cons [Lean.Level.zero]) ty x l)
+        (mkApp (mkConst ``List.nil [Lean.Level.zero]) ty)
     let (e, j') ← parseNats b j false
     go j' (acc.push e)
   go 0 #[]

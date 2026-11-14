@@ -305,12 +305,12 @@ theorem testBit_fold_avail (P : ℕ → Bool) (x : ℕ) :
     · left
       cases P a
       · exact h
-      · simp only [cond_true]
+      · simp only [Bool.cond_true]
         rw [show Nat.lor init (Nat.pow 2 a) = init ||| 2 ^ a from rfl, Nat.testBit_or, h,
           Bool.true_or]
     · rcases List.mem_cons.mp h with rfl | h
       · left
-        simp only [hp, cond_true]
+        simp only [hp, Bool.cond_true]
         rw [show Nat.lor init (Nat.pow 2 x) = init ||| 2 ^ x from rfl, Nat.testBit_or,
           Nat.testBit_two_pow_self, Bool.or_true]
       · right; exact ⟨h, hp⟩
@@ -371,7 +371,7 @@ theorem unif_rs (av R : ℕ) {j : ℕ} (hj : j < 4) (b : Bool) :
     have h1 : Nat.land (Nat.land av (Nat.land (tset j true) R)) (upJ (Nat.pow 2 j))
         = Nat.land av (Nat.land (tset j true) R) := by
       apply Nat.eq_of_testBit_eq; intro i
-      simp only [testBit_land', tset, cond_true]
+      simp only [testBit_land', tset, Bool.cond_true]
       cases Nat.testBit av i <;> cases Nat.testBit (upJ (Nat.pow 2 j)) i <;>
         cases Nat.testBit R i <;> rfl
     unfold allJ; rw [h1]; exact Nat.beq_refl _

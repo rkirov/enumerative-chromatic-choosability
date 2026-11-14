@@ -147,7 +147,7 @@ theorem leaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} {v : V5}
     simp only at e0 e1 e2 e3
     subst e0 e1 e2 e3
     cases hadj : (Nat.beq t0 t1 || Nat.beq t1 t2 || Nat.beq t2 t3)
-    · rw [hadj, cond_false, Option.some.injEq] at h
+    · rw [hadj, Bool.cond_false, Option.some.injEq] at h
       subst h
       intro ρ hρ Y _ k w hw
       simp only [fill, fillR]
@@ -188,7 +188,7 @@ theorem leaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} {v : V5}
         rw [Bool.eq_iff_iff, decide_eq_true_iff, Nat.beq_eq]; exact e03
       rw [d02, d13, d03] at this
       exact this
-    · rw [hadj, cond_true] at h; exact absurd h (by simp)
+    · rw [hadj, Bool.cond_true] at h; exact absurd h (by simp)
   · simp at h
 
 
@@ -200,8 +200,8 @@ theorem mem_oldOpt {nd : Node} {i j : ℕ} {o : Opt} (h : o ∈ oldOpt nd i j) :
   split at h
   · next m t e =>
     cases ht : Nat.beq t j
-    · rw [ht, cond_false] at h; simp at h
-    · rw [ht, cond_true, List.mem_singleton] at h
+    · rw [ht, Bool.cond_false] at h; simp at h
+    · rw [ht, Bool.cond_true, List.mem_singleton] at h
       rw [Nat.beq_eq] at ht; subst ht
       exact ⟨m, e, h⟩
   · simp at h
@@ -247,7 +247,7 @@ theorem mem_opts {sh : Sh} {nd : Node} {i : ℕ} {o : Opt} (h : o ∈ opts sh nd
 theorem old_mem_opts (sh : Sh) {nd : Node} (i : ℕ) {m t : ℕ} (ht : t < 4)
     (e : nd.get t = some (m, t)) : Opt.old m t (adjTag nd i t) ∈ opts sh nd i := by
   have hm : Opt.old m t (adjTag nd i t) ∈ oldOpt nd i t := by
-    simp only [oldOpt, e, Nat.beq_refl, cond_true, List.mem_singleton]
+    simp only [oldOpt, e, Nat.beq_refl, Bool.cond_true, List.mem_singleton]
   simp only [opts, List.mem_append]
   interval_cases t
   · exact Or.inl (Or.inl (Or.inl (Or.inl hm)))
@@ -279,7 +279,7 @@ theorem fresh_count {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} {ρ : �
   set F := (Finset.range 4).filter fun j => firstM (nd.get j) m j = true
   have hinj : Set.InjOn ρ ↑F := by
     intro j hj j' hj' e
-    simp only [F, Finset.coe_filter, Finset.mem_range, Set.mem_setOf_eq, firstM_iff] at hj hj'
+    simp only [F, Finset.coe_filter, Finset.mem_range, Set.mem_ofPred_eq, firstM_iff] at hj hj'
     exact ((hρ j hj.1 m j hj.2).2.2.2 j' hj'.1 m j' hj'.2 e)
   rw [← Finset.card_image_of_injOn hinj, ← Finset.card_union_of_disjoint]
   · apply Finset.card_le_card
@@ -510,13 +510,13 @@ theorem evalCT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List (Node ×
   | .prune, nd, v, h => by
     simp only [evalCT] at h
     cases hp : pruneOK sh nd
-    · rw [hp, cond_false] at h; exact absurd h (by simp)
-    · rw [hp, cond_true, Option.some.injEq] at h; subst h; exact prune_good hB hp
+    · rw [hp, Bool.cond_false] at h; exact absurd h (by simp)
+    · rw [hp, Bool.cond_true, Option.some.injEq] at h; subst h; exact prune_good hB hp
   | .node i ts kids ok, nd, v, h => by
     simp only [evalCT] at h
     cases hc : (Nat.blt i 4 && (nd.get i).isNone)
-    · rw [hc, cond_false] at h; exact absurd h (by simp)
-    · rw [hc, cond_true] at h
+    · rw [hc, Bool.cond_false] at h; exact absurd h (by simp)
+    · rw [hc, Bool.cond_true] at h
       simp only [Bool.and_eq_true, Nat.blt_eq, Option.isNone_iff_eq_none] at hc
       split at h
       · next L vo hk ho =>
@@ -529,8 +529,8 @@ theorem evalCT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List (Node ×
     split at h
     · next p hp =>
       cases he : nodeBEq p.1 nd
-      · rw [he, cond_false] at h; exact absurd h (by simp)
-      · rw [he, cond_true, Option.some.injEq] at h
+      · rw [he, Bool.cond_false] at h; exact absurd h (by simp)
+      · rw [he, Bool.cond_true, Option.some.injEq] at h
         subst h
         rw [← eq_of_nodeBEq he]
         exact hgs p (List.mem_of_getElem? hp)
@@ -553,8 +553,8 @@ theorem evalKids_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {gs : List (Node 
       · next v L' hv hL' =>
         rw [Option.some.injEq] at h; subst h
         refine .cons ⟨rfl, ?_, ?_⟩ (evalKids_sound hB hgs ks nd i os' L' hL')
-        · intro himp; rw [himp, cond_true, Option.some.injEq] at hv; exact hv.symm
-        · intro himp; rw [himp, cond_false] at hv; exact evalCT_sound hB hgs k _ v hv
+        · intro himp; rw [himp, Bool.cond_true, Option.some.injEq] at hv; exact hv.symm
+        · intro himp; rw [himp, Bool.cond_false] at hv; exact evalCT_sound hB hgs k _ v hv
       · exact absurd h (by simp)
 end
 

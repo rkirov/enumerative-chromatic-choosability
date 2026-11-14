@@ -264,7 +264,7 @@ theorem used_lt {B : Col} {sh : Sh} (hB : ShapeOf B sh) {nd : Node} {ρ : ℕ �
   set F := (Finset.range 4).filter fun j => firstM (nd.get j) m j = true
   have hinj : Set.InjOn ρ ↑F := by
     intro j hj j' hj' e
-    simp only [F, Finset.coe_filter, Finset.mem_range, Set.mem_setOf_eq, firstM_iff] at hj hj'
+    simp only [F, Finset.coe_filter, Finset.mem_range, Set.mem_ofPred_eq, firstM_iff] at hj hj'
     exact ((hρ j hj.1 m j hj.2).2.2.2 j' hj'.1 m j' hj'.2 e)
   rw [← Finset.card_image_of_injOn hinj]
   have hsub : insert x (F.image ρ) ⊆ atomN B m := by
@@ -379,7 +379,7 @@ theorem real_fresh {B : Col} {nd : Node} {ρ : ℕ → ℕ} (hρ : nd.Real B ρ)
 /-! ### Improper choices -/
 
 theorem gw_improper (B : Col) (w : Q) {s : T4} (hs : ¬ Proper s) : gw B w s = 0 := by
-  unfold gw gvec; rw [if_neg hs, dot_zero]
+  unfold gw gvec; rw [ite_eq_right hs, dot_zero]
 
 theorem sumP_eq_zero (g : T4 → ℤ) (Z : Col)
     (h : ∀ a ∈ Z.1, ∀ b ∈ Z.2.1, ∀ c ∈ Z.2.2.1, ∀ d ∈ Z.2.2.2, g (a, b, c, d) = 0) :

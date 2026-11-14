@@ -2,7 +2,7 @@
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license.
 -/
-import Mathlib
+import GridGen.MathlibImports
 
 /-!
 # The column-lookback route: helpers shared by every height
@@ -251,15 +251,15 @@ theorem card_inter_erase {k : ℕ} {B C : Finset ℕ} (hB : B.card = k) (hC : C.
       have h1 : 1 ≤ (B ∩ C).card := Finset.card_pos.mpr ⟨a, ha⟩
       have h2 : 1 ≤ ((B ∩ C).erase a).card := Finset.card_pos.mpr ⟨b, hb'.mpr hbm⟩
       rw [Finset.card_erase_of_mem ha] at h2
-      simp only [ha, hbm, if_true]; push_cast [Nat.cast_sub h1, Nat.cast_sub h2]; ring
+      simp only [ha, hbm, ite_true]; push_cast [Nat.cast_sub h1, Nat.cast_sub h2]; ring
     · rw [Finset.erase_eq_of_notMem (fun h => hbm (hb'.mp h)), Finset.card_erase_of_mem ha]
       have h1 : 1 ≤ (B ∩ C).card := Finset.card_pos.mpr ⟨a, ha⟩
-      simp only [ha, hbm, if_true, if_false]; push_cast [Nat.cast_sub h1]; ring
+      simp only [ha, hbm, ite_true, ite_false]; push_cast [Nat.cast_sub h1]; ring
     · rw [Finset.card_erase_of_mem (hb'.mpr hbm), Finset.erase_eq_of_notMem ha]
       have h1 : 1 ≤ (B ∩ C).card := Finset.card_pos.mpr ⟨b, hbm⟩
-      simp only [ha, hbm, if_true, if_false]; push_cast [Nat.cast_sub h1]; ring
+      simp only [ha, hbm, ite_true, ite_false]; push_cast [Nat.cast_sub h1]; ring
     · rw [Finset.erase_eq_of_notMem (fun h => hbm (hb'.mp h)), Finset.erase_eq_of_notMem ha]
-      simp only [ha, hbm, if_false]; ring
+      simp only [ha, hbm, ite_false]; ring
   rw [e1]
   unfold mu hb zz
   simp only [Finset.mem_inter]

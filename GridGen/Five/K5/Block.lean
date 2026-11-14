@@ -266,7 +266,7 @@ variable {X₁ X₂ X₃ X₄ X₅ : Finset ℕ}
 
 /-- The membership simp set for the bijections below. -/
 macro "fibsimp" : tactic => `(tactic| simp only [Finset.coe_filter, Finset.coe_product,
-  Set.mem_setOf_eq, Set.mem_prod, Finset.mem_coe, Finset.mem_filter, Finset.mem_product,
+  Set.mem_ofPred_eq, Set.mem_prod, Finset.mem_coe, Finset.mem_filter, Finset.mem_product,
   Finset.mem_erase, GridGen.Five.mem_sts, Four.mem_sts, Four.mem_sts3, Four.mem_sts2,
   GridGen.Five.r1, GridGen.Five.r2, GridGen.Five.r3, GridGen.Five.r4, GridGen.Five.r5,
   Four.r1, Four.r2, Four.r3, Four.r4, Prod.mk.injEq] at *)

@@ -103,6 +103,23 @@ import from a file that has no `module` header. Left for a follow-up: deprecatio
 for this machine: `taskset` does not limit Lake's parallelism, `LEAN_NUM_THREADS` does; `GridGen`
 needs `LEAN_NUM_THREADS=1` under a 4.5 GB cap and then takes about 17 hours.
 
+**2026-11-14 — Faster builds.** Three changes, none touching a statement.
+* *Narrow imports in `GridGen/`.* 332 modules inherited `import Mathlib` through five files (mostly
+  `GridGen/Lookback/Common`). They now import `GridGen/MathlibImports`, which lists the 14 Mathlib
+  modules the directory needs plus `Mathlib.Tactic`. Each Lean process loads about 4,000 Mathlib
+  modules, not 11,800: import cost drops from about 34 s CPU and 5.7 GB mapped to about 8 s and
+  2.9 GB. On this machine three workers now fit under a 5.8 GB cap, and a full `GridGen` rebuild
+  took 2 h 48 min (the 17 hours above were one worker thrashing under a 4.5 GB cap). A new Mathlib
+  dependency in `GridGen/` goes in `MathlibImports.lean`.
+* *Deprecations.* The `GridGen/` deprecation warnings left by the 4.35.0 bump are renamed
+  (`if_pos/if_neg`, `cond_true/false`, `if_true/false`, `dif_pos/neg`, `Set.mem_setOf_eq`,
+  `ite_cond_eq_true/false`, `List.dropLast_cons₂`, `Lean.levelZero`). Four `push_neg` deprecations
+  and the unused-`simp`-argument hints remain.
+* *Comparator shards skip when untouched.* `grid4`, `grid5`, `grid6` now skip, like `grid3-three`,
+  when a push changes nothing they depend on (their own directory, `ListColoring/`, the Lake
+  files, `comparator/`, `verify.sh`, the workflow). These four shards are 18 to 81 minutes each
+  warm; `k2n` and `rest` (3 minutes each) always run.
+
 **2026-10-01 — Lean 4.35.0-rc3.** Toolchain `v4.33.0 → v4.35.0-rc3` in the root, `comparator/` and
 `book/`; Mathlib `db584cd6 → 516d3125` (master, after the `v4.35.0-rc3` tag) and all eight
 transitive packages to the revisions the sibling TauCeti project pins, whose toolchain is the same.

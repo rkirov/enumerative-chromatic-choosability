@@ -107,7 +107,7 @@ theorem venn_shOf (B : Col) : (shOf (atomsOf B)).I.toVenn = vennOf B.1 B.2.1 B.2
     List.map_cons, List.map_nil, List.getD_cons_succ, List.getD_cons_zero, List.sum_cons,
     List.sum_nil, Venn.mk.injEq]
   push_cast
-  simp only [Bool.and_true, Bool.and_false, Bool.true_and, Bool.false_and, if_true, if_false,
+  simp only [Bool.and_true, Bool.and_false, Bool.true_and, Bool.false_and, ite_true, ite_false,
     Bool.false_eq_true]
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩ <;> ring
 

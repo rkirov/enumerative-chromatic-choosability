@@ -113,7 +113,7 @@ theorem leafOfKey_leafKey (I : VN) {m0 m1 m2 m3 : ℕ} (e13 e24 e14 : Bool) (h0 
     leafOfKey I (leafKey m0 m1 m2 m3 e13 e24 e14) = leafV I m0 m1 m2 m3 e13 e24 e14 := by
   unfold leafOfKey leafKey
   simp only [Nat.add_eq, Nat.mul_eq, nat_mod_eq', nat_div_eq']
-  cases e13 <;> cases e24 <;> cases e14 <;> simp only [bn, cond_true, cond_false] <;>
+  cases e13 <;> cases e24 <;> cases e14 <;> simp only [bn, Bool.cond_true, Bool.cond_false] <;>
     congr 1 <;> first | omega | (rw [Nat.beq_eq]; omega) | (rw [Bool.eq_false_iff]; intro h; rw [Nat.beq_eq] at h; omega)
 
 /-- A verified value table: each entry is at most the values of its column type. -/
@@ -207,7 +207,7 @@ theorem gleaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {lv : List (ℕ × KV
       fun x y hx hy => ⟨hinj x hx y hy, fun e => e ▸ rfl⟩
     unfold tupV
     cases hadj : (Nat.beq a b || Nat.beq b c || Nat.beq c d)
-    · rw [cond_false]
+    · rw [Bool.cond_false]
       simp only [Bool.or_eq_false_iff] at hadj
       obtain ⟨⟨nab, nbc⟩, ncd⟩ := hadj
       have hs : Proper (ρ a, ρ b, ρ c, ρ d) :=
@@ -227,7 +227,7 @@ theorem gleaf_good {B : Col} {sh : Sh} (hB : ShapeOf B sh) {lv : List (ℕ × KV
       have mlt : ∀ x, x < cols.length → cols.getD x 0 < 16 := fun x hx => by
         rw [← hm x hx]; exact mv_lt B _
       exact le_trans (leafT_le hlv _ _ _ (mlt a ha') (mlt b hb') (mlt c hc') (mlt d hd') k) this
-    · rw [cond_true, V5.get_zero]
+    · rw [Bool.cond_true, V5.get_zero]
       apply le_of_eq; symm
       apply gw_improper
       simp only [Bool.or_eq_true, Nat.beq_eq] at hadj
@@ -306,14 +306,14 @@ theorem otag_spec (c0 c1 c2 c3 : Option ℕ) {j : ℕ} (hj : j < 4) :
     cases h0 : optBEq c0 (cget c0 c1 c2 c3 j)
     · cases h1 : optBEq c1 (cget c0 c1 c2 c3 j)
       · cases h2 : optBEq c2 (cget c0 c1 c2 c3 j)
-        · simp only [cond_false]
+        · simp only [Bool.cond_false]
           have n0 := mt (optBEq_iff _ _).mpr (by rw [h0]; decide)
           have n1 := mt (optBEq_iff _ _).mpr (by rw [h1]; decide)
           have n2 := mt (optBEq_iff _ _).mpr (by rw [h2]; decide)
           interval_cases j <;> simp_all [cget]
-        · simp only [cond_false, cond_true]; exact (optBEq_iff _ _).mp h2
-      · simp only [cond_false, cond_true]; exact (optBEq_iff _ _).mp h1
-    · simp only [cond_true]; exact (optBEq_iff _ _).mp h0
+        · simp only [Bool.cond_false, Bool.cond_true]; exact (optBEq_iff _ _).mp h2
+      · simp only [Bool.cond_false, Bool.cond_true]; exact (optBEq_iff _ _).mp h1
+    · simp only [Bool.cond_true]; exact (optBEq_iff _ _).mp h0
   · intro r _ e
     unfold otag
     rw [e]
@@ -911,13 +911,13 @@ theorem evalGCT_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : BTab}
   | .prune, nd, v, h => by
     simp only [evalGCT] at h
     cases hp : gpruneOK sh tab.pr nd
-    · rw [hp, cond_false] at h; exact absurd h (by simp)
-    · rw [hp, cond_true, Option.some.injEq] at h; subst h; exact gprune_good hB htab.1 hp
+    · rw [hp, Bool.cond_false] at h; exact absurd h (by simp)
+    · rw [hp, Bool.cond_true, Option.some.injEq] at h; subst h; exact gprune_good hB htab.1 hp
   | .node i ts kids ok, nd, v, h => by
     simp only [evalGCT] at h
     cases hc : (Nat.blt i 4 && (nd.get i).isNone)
-    · rw [hc, cond_false] at h; exact absurd h (by simp)
-    · rw [hc, cond_true] at h
+    · rw [hc, Bool.cond_false] at h; exact absurd h (by simp)
+    · rw [hc, Bool.cond_true] at h
       simp only [Bool.and_eq_true, Nat.blt_eq, Option.isNone_iff_eq_none] at hc
       split at h
       · next L vo hk ho =>
@@ -943,8 +943,8 @@ theorem evalGKids_sound {B : Col} {sh : Sh} (hB : ShapeOf B sh) {tab : BTab}
       · next v L' hv hL' =>
         rw [Option.some.injEq] at h; subst h
         refine .cons ⟨rfl, ?_, ?_⟩ (evalGKids_sound hB htab ks nd i os' L' hL')
-        · intro himp; rw [himp, cond_true, Option.some.injEq] at hv; exact hv.symm
-        · intro himp; rw [himp, cond_false] at hv; exact evalGCT_sound hB htab k _ v hv
+        · intro himp; rw [himp, Bool.cond_true, Option.some.injEq] at hv; exact hv.symm
+        · intro himp; rw [himp, Bool.cond_false] at hv; exact evalGCT_sound hB htab k _ v hv
       · exact absurd h (by simp)
 end
 

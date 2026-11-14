@@ -47,7 +47,7 @@ noncomputable def GB (w : Wt) (B₁ B₂ B₃ B₄ : Finset ℕ) (s : T4) : ℝ 
 noncomputable def rho (k : ℕ) : ℝ :=
   if k = 6 then 487 / 500 else if k = 5 then 118 / 125 else 1 - 2 / ((k : ℝ) - 2) ^ 3
 
-theorem rho_six : rho 6 = 487 / 500 := by unfold rho; rw [if_pos rfl]
+theorem rho_six : rho 6 = 487 / 500 := by unfold rho; rw [ite_eq_left rfl]
 
 theorem rho_five : rho 5 = 118 / 125 := by unfold rho; norm_num
 

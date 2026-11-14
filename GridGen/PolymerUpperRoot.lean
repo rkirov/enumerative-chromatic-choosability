@@ -133,11 +133,11 @@ theorem graphActivity_upper_root {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
     rcases Nat.even_or_odd S.card with hev | hodd
     · have hcoef := blockCoefficient_nonpos_of_even G S hev hne
       have hnot : ¬ (3 ≤ S.card ∧ Odd S.card) := fun h => (Nat.not_odd_iff_even.mpr hev) h.2
-      rw [ite_cond_eq_false _ _ (eq_false hnot)]
+      rw [ite_eq_right_of_eq_false _ _ (eq_false hnot)]
       apply mul_nonpos_of_nonpos_of_nonneg _ (hz _ (sdiff_ssubset_of_mem hv hvS))
       exact mul_nonpos_of_nonpos_of_nonneg (mul_nonpos_of_nonpos_of_nonneg hcoef hf.1)
         (pow_nonneg hx _)
-    · rw [ite_cond_eq_true _ _ (eq_true ⟨by omega, hodd⟩)]
+    · rw [ite_eq_left_of_eq_true _ _ (eq_true ⟨by omega, hodd⟩)]
       have hxS := pow_nonneg hx S.card
       calc
         _ ≤ |blockCoefficient G S| * ((k : ℝ) - t * listDeficiency L k S) * x ^ S.card *
@@ -165,7 +165,7 @@ theorem graphActivity_upper_root {D : ℕ} (hdeg : ∀ v, G.degree v ≤ D)
               split_ifs
               · exact mul_nonneg (hE u) (pow_nonneg hx _)
               · exact le_rfl) huN)
-          simp only [ite_cond_eq_true _ _ (eq_true huT), E]
+          simp only [ite_eq_left_of_eq_true _ _ (eq_true huT), E]
           have hsub : ({v, u} : Finset V) ⊆ S := by
             intro y hy; simp only [Finset.mem_insert, Finset.mem_singleton] at hy
             rcases hy with rfl | rfl <;> assumption

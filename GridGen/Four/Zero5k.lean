@@ -52,8 +52,8 @@ theorem zero_state5 {w : Wt} (hw : InBox 5 w) {B : Finset ℕ} (hB : B.card = 5)
     simp only [Fintype.card_coe, hEcard]
   let e : {x // x ∈ F} ≃ {x // x ∈ E} := Fintype.equivOfCardEq hcard
   let f : ℕ → ℕ := fun x => if h : x ∈ F then (e ⟨x, h⟩ : ℕ) else x
-  have f_out : ∀ x (h : x ∈ F), f x = e ⟨x, h⟩ := fun x h => dif_pos h
-  have f_in : ∀ x, x ∉ F → f x = x := fun x h => dif_neg h
+  have f_out : ∀ x (h : x ∈ F), f x = e ⟨x, h⟩ := fun x h => dite_eq_left h
+  have f_in : ∀ x, x ∉ F → f x = x := fun x h => dite_eq_right h
   have fE : ∀ x (h : x ∈ F), f x ∈ B \ S := fun x h => by
     rw [f_out x h]; exact hEsub (e ⟨x, h⟩).2
   have hinj : Set.InjOn f ↑S := by

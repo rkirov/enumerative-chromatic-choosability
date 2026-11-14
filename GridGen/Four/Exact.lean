@@ -379,8 +379,8 @@ theorem pins_avg {Ω : Finset T4} (u : T4 → ℝ) (hu0 : ∀ t, 0 ≤ u t) {m q
       rw [rowsel_memv]
       have hiff := mem_atomSet (B₁ := B₁) (B₂ := B₂) (B₃ := B₃) (B₄ := B₄) hpm (rowfun p.1 s)
       by_cases h : memv B₁ B₂ B₃ B₄ (rowfun p.1 s) = p.2.1
-      · rw [if_pos (hiff.mp h), if_pos h]
-      · rw [if_neg (fun h' => h (hiff.mpr h')), if_neg h]
+      · rw [ite_eq_left (hiff.mp h), ite_eq_left h]
+      · rw [ite_eq_right (fun h' => h (hiff.mpr h')), ite_eq_right h]
     rw [e1] at hfib
     have hW0 : 0 ≤ ∑ s ∈ Ω, u s := Finset.sum_nonneg (fun s _ => hu0 s)
     have hp' : (0 : ℝ) ≤ p.2.2.1 := by exact_mod_cast hp

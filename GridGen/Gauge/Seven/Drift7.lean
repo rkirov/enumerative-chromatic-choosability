@@ -59,9 +59,9 @@ theorem truncOf_props {hc : 1 ≤ c} {w : ℕ} {l : List (Cell c m)} (hl : Cross
       | a :: b :: t, _ => exact ⟨a, b, t, rfl⟩
     simp only [List.head?_cons, Option.some.injEq] at h1
     subst h1
-    rw [List.dropLast_cons₂, List.isChain_cons_cons]
+    rw [List.dropLast_cons_cons, List.isChain_cons_cons]
     refine ⟨slabAdj_symm (slabAdj_symm (slabAdj_seam (fut0 hc, v₁) rfl)), ?_⟩
-    rw [← List.dropLast_cons₂, List.dropLast_eq_take]
+    rw [← List.dropLast_cons_cons, List.dropLast_eq_take]
     exact hch.take _
   · rw [he]; simp; omega
   · intro z hz
