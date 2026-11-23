@@ -454,10 +454,15 @@ theorem RootEnum.cover_Icc {a b : Fin N} {m : ℕ} {r : Fin (m + 2) → Fin N}
 
 /-- **Building the side `[a, b]` of an edge**, by induction on the width. -/
 theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijective ψ)
-    (hGH : ∀ i j, G.Adj (ψ i) (ψ j) ↔ H.Adj i j) :
-    ∀ (d : ℕ) (a b : Fin N), b.val - a.val ≤ d → a < b → H.Adj a b → GoodP H a b →
+    (hGH : ∀ i j, G.Adj (ψ i) (ψ j) ↔ H.Adj i j) (tag : Fin N → Fin N → NTag)
+    (Good : Fin N → Fin N → Prop)
+    (hrule : ∀ (a b : Fin N) (m : ℕ) (r : Fin (m + 2) → Fin N), H.Adj a b → a < b →
+      RootEnum H a b m r → Good a b → numRule (tag a b) m fun i => tag (r i.castSucc) (r i.succ))
+    (hmono : ∀ (a b : Fin N) (m : ℕ) (r : Fin (m + 2) → Fin N), RootEnum H a b m r → Good a b →
+      ∀ i : Fin (m + 1), Good (r i.castSucc) (r i.succ)) :
+    ∀ (d : ℕ) (a b : Fin N), b.val - a.val ≤ d → a < b → H.Adj a b → Good a b →
     ∀ (T : Finset V) (tg : V → V → NTag), TagBuilt G numSys numRule (fun _ _ => True) T tg →
-      ψ a ∈ T → ψ b ∈ T → (∀ i, a < i → i < b → ψ i ∉ T) → tg (ψ a) (ψ b) = tagOf H a b →
+      ψ a ∈ T → ψ b ∈ T → (∀ i, a < i → i < b → ψ i ∉ T) → tg (ψ a) (ψ b) = tag a b →
       ∃ tg', TagBuilt G numSys numRule (fun _ _ => True) (T ∪ (Icc a b).image ψ) tg' ∧
         ∀ p ∈ T, ∀ q ∈ T, ¬ (p = ψ a ∧ q = ψ b) → tg' p q = tg p q := by
   intro d
@@ -487,9 +492,9 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
   have hear : IsEar G T (ψ a) (ψ b) x := isEar_root hH ψ hψ hGH hadj hab he ha hb hint
   have hpath : ∀ j, earPath (ψ a) (ψ b) x j = ψ (r j) := fun j => by
     rw [hx]; exact earPath_eq ψ he j
-  set τ : Fin (m + 1) → NTag := fun i => tagOf H (r i.castSucc) (r i.succ) with hτ
+  set τ : Fin (m + 1) → NTag := fun i => tag (r i.castSucc) (r i.succ) with hτ
   have hrule : numRule (tg (ψ a) (ψ b)) m τ := by
-    rw [hdem]; exact rule_of_enum hH hadj he hab hg
+    rw [hdem]; exact hrule a b m r hadj hab he hg
   set T₁ := T ∪ univ.image x with hT₁
   set tg₁ := earTags numSys T tg (ψ a) (ψ b) x τ with htg₁
   have hT1 : TagBuilt G numSys numRule (fun _ _ => True) T₁ tg₁ :=
@@ -546,7 +551,7 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
           have hle : r l.succ ≤ r i.castSucc := he.mono.monotone (by
             show l.val + 1 ≤ k; omega)
           exact absurd ((mem_Icc.mp hz').2.trans hle) (not_le.mpr hz1)
-      have hc4 : tgk (ψ (r i.castSucc)) (ψ (r i.succ)) = tagOf H (r i.castSucc) (r i.succ) := by
+      have hc4 : tgk (ψ (r i.castSucc)) (ψ (r i.succ)) = tag (r i.castSucc) (r i.succ) := by
         rw [hpres _ (hRT _) _ (hRT _) fun l hl he' => by
           have := he.mono.injective (hψ.1 he'.1)
           have := congrArg Fin.val this
@@ -554,7 +559,7 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
           omega]
         rw [htg₁, ← hpath i.castSucc, ← hpath i.succ, earTags_fwd (R := numSys) (tg := tg) (τ := τ) hear i]
       obtain ⟨tg', hT', hpres'⟩ := ih (r i.castSucc) (r i.succ) (by omega) hlti
-        (he.adj hH hadj hab i) (hg.mono (he.ge _) (he.le _)) Tk tgk hTk hc1 hc2 hc3 hc4
+        (he.adj hH hadj hab i) (hmono a b m r he hg i) Tk tgk hTk hc1 hc2 hc3 hc4
       refine ⟨tg', ?_, fun p hp q hq hnot => ?_⟩
       · have hset : Tk ∪ (Icc (r i.castSucc) (r i.succ)).image ψ = T₁ ∪
             (univ.filter fun i : Fin (m + 1) => i.val < k + 1).biUnion
@@ -699,6 +704,101 @@ theorem marks_add_rot (hG : IsDissection G) {a b : Fin n} (hab : a < b) (hadj : 
 
 end Sides
 
+/-! ### Building the whole graph from a base edge -/
+
+/-- **The whole graph from a base edge** `(a, b)` (a chord or an edge of the polygon), for any
+family of tags and of good intervals with sound face rules, if both sides of the base edge are
+good: the inside `[a, b]`, and the outside, read in coordinates rotated by `b`. -/
+theorem exists_build {n : ℕ} [NeZero n] (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
+    (hG : IsDissection G) (tag : SimpleGraph (Fin n) → Fin n → Fin n → NTag)
+    (Good : SimpleGraph (Fin n) → Fin n → Fin n → Prop)
+    (hrule : ∀ H : SimpleGraph (Fin n), IsDissection H → ∀ (a b : Fin n) (m : ℕ)
+      (r : Fin (m + 2) → Fin n), H.Adj a b → a < b → RootEnum H a b m r → Good H a b →
+        numRule (tag H a b) m fun i => tag H (r i.castSucc) (r i.succ))
+    (hmono : ∀ (H : SimpleGraph (Fin n)) (a b : Fin n) (m : ℕ) (r : Fin (m + 2) → Fin n),
+      RootEnum H a b m r → Good H a b → ∀ i : Fin (m + 1), Good H (r i.castSucc) (r i.succ))
+    (a b : Fin n) (hab : a < b) (hadj : G.Adj a b) (hg₁ : Good G a b)
+    (hg₂ : Good (G.comap (rot b)) 0 (a - b)) :
+    ∃ tg, TagBuilt G numSys numRule (fun _ _ => True) univ tg := by
+  have hext := extend (G := G) (H := G) hG id Function.bijective_id (fun _ _ => Iff.rfl) (tag G)
+    (Good G) (hrule G hG) (hmono G)
+  have hne : a ≠ b := ne_of_lt hab
+  set c : Fin n := a - b with hc
+  set H₂ := G.comap (rot b) with hH₂
+  have hT0 := TagBuilt.edge (G := G) (R := numSys) (rule := numRule) (glue := fun _ _ => True)
+    a b hadj (tag G a b) (tag H₂ 0 c) trivial
+  -- the inside of the base edge
+  obtain ⟨tg₁, hT₁, hpres₁⟩ := hext (b.val - a.val) a b le_rfl hab hadj hg₁ {a, b} _ hT0
+    (by simp) (by simp) (fun i h1 h2 hi => by
+      simp only [id, mem_insert, mem_singleton] at hi
+      rcases hi with rfl | rfl
+      · exact lt_irrefl _ h1
+      · exact lt_irrefl _ h2)
+    (by simp [edgeTags])
+  -- the outside, in coordinates rotated by `b`
+  have hH₂d := isDissection_rot hG b
+  have hext₂ := extend (G := G) (H := H₂) hH₂d (rot b) (rot_bijective b)
+    (fun _ _ => Iff.rfl) (tag H₂) (Good H₂) (hrule H₂ hH₂d) (hmono H₂)
+  have hr0 : rot b (0 : Fin n) = b := by simp [rot]
+  have hrc : rot b c = a := by simp [rot, hc]
+  have hcpos : (0 : Fin n) < c := by
+    rw [Fin.pos_iff_ne_zero, hc]
+    exact sub_ne_zero.mpr hne
+  have hadj₂ : H₂.Adj 0 c := by
+    show G.Adj (rot b 0) (rot b c)
+    rw [hr0, hrc]; exact hadj.symm
+  set T₁ := ({a, b} : Finset (Fin n)) ∪ (Icc a b).image id with hT₁def
+  obtain ⟨tg₂, hT₂, -⟩ := hext₂ c.val 0 c (by simp) hcpos hadj₂ hg₂ T₁ tg₁
+    hT₁ (by rw [hr0]; simp [hT₁def]) (by rw [hrc]; simp [hT₁def])
+    (fun i h1 h2 hi => by
+      have hi' : rot b i ∈ Icc a b := by
+        simp only [hT₁def, mem_union, mem_insert, mem_singleton, mem_image, id] at hi
+        rcases hi with (h | h) | ⟨y, hy, rfl⟩
+        · rw [h]; exact mem_Icc.mpr ⟨le_rfl, hab.le⟩
+        · rw [h]; exact mem_Icc.mpr ⟨hab.le, le_rfl⟩
+        · exact hy
+      obtain ⟨h3, h4⟩ := mem_Icc.mp hi'
+      have hle : rot b i - b ≤ a - b := by simpa [rot] using h2.le
+      rw [sub_le_iff hab] at hle
+      rcases h3.lt_or_eq with h3 | h3
+      · rcases h4.lt_or_eq with h4 | h4
+        · exact hle ⟨h3, h4⟩
+        · have : i = 0 := by
+            have := congrArg (· - b) h4
+            simpa [rot] using this
+          exact lt_irrefl _ (this ▸ h1)
+      · have : i = c := by
+          have := congrArg (· - b) h3
+          simpa [rot, hc] using this.symm
+        exact lt_irrefl _ (this ▸ h2))
+    (by
+      rw [hr0, hrc, hpres₁ b (by simp) a (by simp) fun h => hne h.2]
+      simp [edgeTags, hne, Ne.symm hne])
+  refine ⟨tg₂, ?_⟩
+  have hset : T₁ ∪ (Icc 0 c).image (rot b) = univ := by
+    ext x
+    simp only [mem_univ, iff_true, hT₁def, mem_union, mem_image, mem_Icc, id]
+    by_cases hx : a ≤ x ∧ x ≤ b
+    · exact Or.inl (Or.inr ⟨x, hx, rfl⟩)
+    · right
+      refine ⟨x - b, ⟨Fin.zero_le _, ?_⟩, by simp [rot]⟩
+      rw [hc, sub_le_iff hab]
+      rintro ⟨h1, h2⟩
+      exact hx ⟨h1.le, h2.le⟩
+  rw [← hset]
+  exact hT₂
+
+/-- The outer edge `(0, n - 1)`, and the outside of it in rotated coordinates: a single edge. -/
+theorem outer_edge {n : ℕ} [NeZero n] (hn : 2 ≤ n) {G : SimpleGraph (Fin n)}
+    (hG : IsDissection G) :
+    ∃ l : Fin n, (0 : Fin n) < l ∧ G.Adj 0 l ∧ (∀ x : Fin n, x ≤ l) ∧ ((0 : Fin n) - l).val = 1 := by
+  refine ⟨⟨n - 1, by omega⟩, by show 0 < n - 1; omega,
+    hG.2.1 0 _ rfl (by show n - 1 + 1 = n; omega) (ne_of_lt (by show 0 < n - 1; omega)),
+    fun x => by show x.val ≤ n - 1; have := x.isLt; omega, ?_⟩
+  rw [sub_val_lt (show (0 : Fin n) < ⟨n - 1, by omega⟩ by show 0 < n - 1; omega)]
+  simp only [Fin.val_zero]
+  omega
+
 /-! ### The theorem -/
 
 open Classical in
@@ -713,7 +813,9 @@ theorem ecc_three_of_six_even {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel 
   suffices h : ∃ tg, TagBuilt G numSys numRule (fun _ _ => True) univ tg by
     obtain ⟨tg, h⟩ := h
     exact ecc_three_of_numBuilt G h
-  have hext := extend (G := G) (H := G) hG id Function.bijective_id fun _ _ => Iff.rfl
+  have hbuild := exists_build G hG (fun H => tagOf H) (fun H => GoodP H)
+    (fun H hH _ _ _ _ hadj hab he hg => rule_of_enum hH hadj he hab hg)
+    (fun _ _ _ _ _ he hg _ => hg.mono (he.ge _) (he.le _))
   -- good from a narrowest heavy chord
   have hgood_of : ∀ a b : Fin n, a < b → (∀ a' b' : Fin n, a' < b' → G.Adj a' b' →
       b'.val - a'.val < b.val - a.val → marks G a' b' ≤ 2) → GoodP G a b := by
@@ -749,97 +851,17 @@ theorem ecc_three_of_six_even {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel 
       intro a' b' h1 h2 hw
       by_contra h
       exact Nat.find_min hex (hd ▸ hw) ⟨a', b', h1, h2, by omega, rfl⟩
-    have hgood := hgood_of a b hab hmin
-    have hne : a ≠ b := ne_of_lt hab
-    set c : Fin n := a - b with hc
-    set H₂ := G.comap (rot b) with hH₂
-    have hT0 := TagBuilt.edge (G := G) (R := numSys) (rule := numRule) (glue := fun _ _ => True)
-      a b hadj (tagOf G a b) (tagOf H₂ 0 c) trivial
-    -- the inside of the chord
-    obtain ⟨tg₁, hT₁, hpres₁⟩ := hext (b.val - a.val) a b le_rfl hab hadj hgood {a, b} _ hT0
-      (by simp) (by simp) (fun i h1 h2 hi => by
-        simp only [id, mem_insert, mem_singleton] at hi
-        rcases hi with rfl | rfl
-        · exact lt_irrefl _ h1
-        · exact lt_irrefl _ h2)
-      (by simp [edgeTags])
-    -- the outside, in coordinates rotated by `b`
-    have hext₂ := extend (G := G) (H := H₂) (isDissection_rot hG b) (rot b) (rot_bijective b)
-      fun _ _ => Iff.rfl
-    have hr0 : rot b (0 : Fin n) = b := by simp [rot]
-    have hrc : rot b c = a := by simp [rot, hc]
-    have hcpos : (0 : Fin n) < c := by
-      rw [Fin.pos_iff_ne_zero, hc]
-      exact sub_ne_zero.mpr hne
-    have hadj₂ : H₂.Adj 0 c := by
-      show G.Adj (rot b 0) (rot b c)
-      rw [hr0, hrc]; exact hadj.symm
-    have hm₂ : marks H₂ 0 c ≤ 3 := by
+    have hm₂ : marks (G.comap (rot b)) 0 (a - b) ≤ 3 := by
       have := marks_add_rot hG hab hadj
-      rw [← hH₂, ← hc] at this
       omega
-    set T₁ := ({a, b} : Finset (Fin n)) ∪ (Icc a b).image id with hT₁def
-    obtain ⟨tg₂, hT₂, -⟩ := hext₂ c.val 0 c (by simp) hcpos hadj₂ (goodP_of_marks_le hm₂) T₁ tg₁
-      hT₁ (by rw [hr0]; simp [hT₁def]) (by rw [hrc]; simp [hT₁def])
-      (fun i h1 h2 hi => by
-        have hi' : rot b i ∈ Icc a b := by
-          simp only [hT₁def, mem_union, mem_insert, mem_singleton, mem_image, id] at hi
-          rcases hi with (h | h) | ⟨y, hy, rfl⟩
-          · rw [h]; exact mem_Icc.mpr ⟨le_rfl, hab.le⟩
-          · rw [h]; exact mem_Icc.mpr ⟨hab.le, le_rfl⟩
-          · exact hy
-        obtain ⟨h3, h4⟩ := mem_Icc.mp hi'
-        have hle : rot b i - b ≤ a - b := by simpa [rot] using h2.le
-        rw [sub_le_iff hab] at hle
-        rcases h3.lt_or_eq with h3 | h3
-        · rcases h4.lt_or_eq with h4 | h4
-          · exact hle ⟨h3, h4⟩
-          · have : i = 0 := by
-              have := congrArg (· - b) h4
-              simpa [rot] using this
-            exact lt_irrefl _ (this ▸ h1)
-        · have : i = c := by
-            have := congrArg (· - b) h3
-            simpa [rot, hc] using this.symm
-          exact lt_irrefl _ (this ▸ h2))
-      (by
-        rw [hr0, hrc, hpres₁ b (by simp) a (by simp) fun h => hne h.2]
-        simp [edgeTags, hne, Ne.symm hne])
-    refine ⟨tg₂, ?_⟩
-    have hset : T₁ ∪ (Icc 0 c).image (rot b) = univ := by
-      ext x
-      simp only [mem_univ, iff_true, hT₁def, mem_union, mem_image, mem_Icc, id]
-      by_cases hx : a ≤ x ∧ x ≤ b
-      · exact Or.inl (Or.inr ⟨x, hx, rfl⟩)
-      · right
-        refine ⟨x - b, ⟨Fin.zero_le _, ?_⟩, by simp [rot]⟩
-        rw [hc, sub_le_iff hab]
-        rintro ⟨h1, h2⟩
-        exact hx ⟨h1.le, h2.le⟩
-    rw [← hset]
-    exact hT₂
+    exact hbuild a b hab hadj (hgood_of a b hab hmin) (goodP_of_marks_le hm₂)
   · -- no heavy chord: build everything from the outer edge `(0, n - 1)`
     push Not at hheavy
-    set l : Fin n := ⟨n - 1, by omega⟩
-    have h0l : (0 : Fin n) < l := by show 0 < n - 1; omega
-    have hadj : G.Adj 0 l := hG.2.1 0 l rfl (by show n - 1 + 1 = n; omega) (ne_of_lt h0l)
+    obtain ⟨l, h0l, hadj, -, hl1⟩ := outer_edge (by omega) hG
     have hgood := hgood_of 0 l h0l fun a' b' h1 h2 _ => by
       have := hheavy a' b' h1 h2; omega
-    have hT0 := TagBuilt.edge (G := G) (R := numSys) (rule := numRule) (glue := fun _ _ => True)
-      0 l hadj (tagOf G 0 l) NTag.plain trivial
-    obtain ⟨tg₁, hT₁, -⟩ := hext l.val 0 l (by simp) h0l hadj hgood {0, l} _ hT0
-      (by simp) (by simp) (fun i h1 h2 hi => by
-        simp only [id, mem_insert, mem_singleton] at hi
-        rcases hi with rfl | rfl
-        · exact lt_irrefl _ h1
-        · exact lt_irrefl _ h2)
-      (by simp [edgeTags])
-    refine ⟨tg₁, ?_⟩
-    have hset : ({0, l} : Finset (Fin n)) ∪ (Icc 0 l).image id = univ := by
-      ext x
-      simp only [mem_univ, iff_true, mem_union, mem_image, mem_Icc, id]
-      exact Or.inr ⟨x, ⟨Fin.zero_le _, by show x.val ≤ n - 1; have := x.isLt; omega⟩, rfl⟩
-    rw [← hset]
-    exact hT₁
+    refine hbuild 0 l h0l hadj hgood (goodP_of_marks_le ?_)
+    rw [marks_edge (by rw [hl1]; simp)]
+    omega
 
 end Outerplanar
