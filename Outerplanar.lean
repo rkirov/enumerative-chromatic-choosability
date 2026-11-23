@@ -3,3 +3,4 @@ import Outerplanar.LongFace
 import Outerplanar.HexWalks
 import Outerplanar.TransportFace
 import Outerplanar.TagBuilt
+import Outerplanar.NumTags
