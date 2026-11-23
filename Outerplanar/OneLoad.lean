@@ -6,24 +6,26 @@ import Outerplanar.Ball
 import Outerplanar.Face
 
 /-!
-# Three colours when every long face has at most one loaded edge: the graph induction
+# Three colours when every even face has at most one loaded edge: the graph induction
 
 The graphs of this file are built from an edge by *ears on edges* (`IsEar`: a path of new
 vertices joined to two adjacent old vertices), with every edge carrying one of two tags.
 
 * An **active** edge may carry anything that is built later.
-* A **tame** edge may only carry triangles, on tame edges again; what hangs on a tame edge can be
-  coloured greedily.
+* A **tame** edge may only carry faces of odd length (triangles, pentagons, …), on tame edges
+  again; what hangs on a tame edge behaves like a plain edge.
 
-A triangle on an active edge may make its two new edges active. An ear of two or more vertices
-must sit on an active edge and makes at most one of its new edges active. So below every face of
-length at least four there is at most one edge with a loaded piece, while triangles branch
-freely. Every 2-connected outerplanar graph whose long faces have at most one such edge (rooted at
-a suitable boundary edge) is built this way; so are chains of faces (weak dual a path).
+A face of odd length on an active edge may make any of its new edges active. A face of even
+length on an active edge makes at most one of its new edges active. So call an edge *loaded* when
+the part of the graph beyond it contains a face of even length: below every face of even length
+there is at most one loaded edge, and faces of odd length are unrestricted. Every 2-connected
+outerplanar graph in which no even face has three sides leading to other even faces is built this
+way (rooted at a suitable boundary edge); so are all graphs whose bounded faces are odd, and
+chains of faces.
 
 `BallBound` is the weighted lower bound carried by the induction: pair profiles in the ball class
-(`InBall`) on active edges and greedy ones (`Dominant`) on tame edges. It needs two properties of
-single faces:
+(`InBall`) on active edges and greedy ones (`Dominant`) on tame edges. It needs four properties
+of single faces:
 
 * `ballTriClosed` — a triangle maps the ball class on its two side edges to the ball class. This
   is proved here, from the six-family extension `Matched.extend`;
@@ -31,7 +33,13 @@ single faces:
   ball class and the others are greedy. This is a *hypothesis* of the theorems of this file, in
   the manner of `FaceClosed`. It is proved for squares in `Outerplanar/SquareThm.lean`, from
   certificates checked by the kernel, and for all `m` in `Outerplanar/LongFace.lean`, by a
-  reduction of longer faces; that file states the resulting theorem `ecc_three_of_oneLoadBuilt`.
+  reduction of longer faces; that file states the resulting theorem `ecc_three_of_oneLoadBuilt`;
+* `DomFaceClosed m` — a face with an odd number `m` of interior vertices maps greedy profiles on
+  all its path edges to a greedy profile. Also a hypothesis here; it is a count of the colourings
+  of a path, proved in `Outerplanar/OddFace.lean`;
+* `BallAllClosed m` — a face with an odd number `m ≥ 3` of interior vertices maps the ball class
+  on all its path edges to the ball class. Also a hypothesis here; it is proved in
+  `Outerplanar/OddBall.lean` from the walks on three colours of `Outerplanar/Walks.lean`.
 
 This is a result of this repository's 2026-11 AI research collaboration.
 -/
@@ -72,6 +80,28 @@ def BallFaceClosed (m : ℕ) : Prop :=
       Dominant (pathList Lu Lv Li j.castSucc) (pathList Lu Lv Li j.succ) (E j) (A j)) →
     InBall Lu Lv (faceSum Li (fun _ _ => 1) E)
       (faceConst3 m * ∏ j, A j)
+
+/-- A face with `m` interior vertices and greedy profiles on all its path edges has a greedy
+profile on its root edge, with the constant of the constant-list count. This holds exactly for
+odd `m` (`domFaceClosed_odd` in `Outerplanar/OddFace.lean`; for even `m` the count can be one
+short). -/
+def DomFaceClosed (m : ℕ) : Prop :=
+  ∀ (Lu Lv : Finset ℕ) (Li : Fin m → Finset ℕ), (∀ j, (Li j).card = 3) →
+    ∀ (E : Fin (m + 1) → ℕ → ℕ → ℝ), (∀ j c d, 0 ≤ E j c d) → ∀ (A : Fin (m + 1) → ℝ),
+    (∀ j, 0 < A j) →
+    (∀ j, Dominant (pathList Lu Lv Li j.castSucc) (pathList Lu Lv Li j.succ) (E j) (A j)) →
+    Dominant Lu Lv (faceSum Li (fun _ _ => 1) E) (faceConst3 m * ∏ j, A j)
+
+/-- A face with `m` interior vertices maps the ball class on *all* its path edges to the ball
+class on its root edge. This holds for odd `m`: `ballTriClosed` for triangles, and
+`ballOddClosed` in `Outerplanar/OddBall.lean` for `m ≥ 3`. It fails for squares. -/
+def BallAllClosed (m : ℕ) : Prop :=
+  ∀ (Lu Lv : Finset ℕ) (Li : Fin m → Finset ℕ), Lu.card = 3 → Lv.card = 3 →
+    (∀ j, (Li j).card = 3) → ∀ (E : Fin (m + 1) → ℕ → ℕ → ℝ), (∀ j c d, 0 ≤ E j c d) →
+    ∀ (A : Fin (m + 1) → ℝ), (∀ j, 0 < A j) →
+    (∀ j : Fin (m + 1),
+      InBall (pathList Lu Lv Li j.castSucc) (pathList Lu Lv Li j.succ) (E j) (A j)) →
+    InBall Lu Lv (faceSum Li (fun _ _ => 1) E) (faceConst3 m * ∏ j, A j)
 
 /-- The same with ordinary edges elsewhere on the path: the form in which a proof is carried
 out. `ballFaceClosed_of_bare` recovers `BallFaceClosed`. -/
@@ -241,13 +271,15 @@ def earPairs {m : ℕ} (u v : V) (x : Fin m → V) (J : Finset (Fin (m + 1))) : 
 
 /-- `OneLoadBuilt G S act`: the induced subgraph on `S` is built from an edge by ears on edges,
 `act` being the set of (ordered pairs of ends of) active edges. A new face on the edge `uv` makes
-the path edges in `J` active; this needs `uv` active, an ear of two or more vertices needs `uv`
-active in any case, and then `J` has at most one element. -/
+the path edges in `J` active; this needs `uv` active, and for an ear with an even number of
+vertices `J` has at most one element. A new face on a tame edge has an odd number of interior
+vertices. -/
 inductive OneLoadBuilt : Finset V → Finset (V × V) → Prop
   | edge (u v : V) (huv : G.Adj u v) : OneLoadBuilt {u, v} {(u, v), (v, u)}
   | face (S : Finset V) (act : Finset (V × V)) (m : ℕ) (u v : V) (x : Fin m → V)
       (he : IsEar G S u v x) (J : Finset (Fin (m + 1))) (hJ : J.Nonempty → (u, v) ∈ act)
-      (hlong : 2 ≤ m → (u, v) ∈ act ∧ J.card ≤ 1) (hS : OneLoadBuilt S act) :
+      (hlong : 2 ≤ m → (u, v) ∈ act → J.card ≤ 1 ∨ Odd m) (hodd : (u, v) ∉ act → Odd m)
+      (hS : OneLoadBuilt S act) :
       OneLoadBuilt (S ∪ univ.image x) (act ∪ earPairs u v x J)
 
 /-- The invariant on one ordered edge: the ball class if it is active, greedy otherwise. -/
@@ -274,7 +306,7 @@ theorem OneLoadBuilt.act_mem {S : Finset V} {act : Finset (V × V)} (h : OneLoad
   | edge u v huv =>
     simp only [mem_insert, mem_singleton, Prod.mk.injEq] at hab ⊢
     rcases hab with ⟨rfl, rfl⟩ | ⟨rfl, rfl⟩ <;> simp
-  | face S act m u v x he J hJ hlong hS ih =>
+  | face S act m u v x he J hJ hlong hodd hS ih =>
     rcases mem_union.mp hab with h1 | h1
     · exact ⟨mem_union_left _ (ih h1).1, mem_union_left _ (ih h1).2⟩
     · simp only [earPairs, mem_union, mem_image, Prod.mk.injEq] at h1
@@ -442,10 +474,11 @@ theorem step_face {m : ℕ} {S : Finset V} {u v : V} {x : Fin m → V} (he : IsE
 /-- The weighted lower bound for graphs built with at most one loaded edge below every long
 face, given closure under single faces. -/
 theorem ballBound_of_oneLoadBuilt (hface : ∀ m, 2 ≤ m → BallFaceClosed m)
+    (hdom : ∀ m, Odd m → DomFaceClosed m) (hall : ∀ m, Odd m → 3 ≤ m → BallAllClosed m)
     {S : Finset V} {act : Finset (V × V)} (h : OneLoadBuilt G S act) : BallBound G S act := by
   induction h with
   | edge u v huv => exact ballBound_edge huv
-  | face S act m u v x he J hJ hlong hS ih =>
+  | face S act m u v x he J hJ hlong hodd hS ih =>
     intro L Ω A hcard hΩ hA hinv
     have hact : ∀ a b, (a, b) ∈ act → a ∈ S ∧ b ∈ S := fun a b hab => hS.act_mem hab
     have hxm : ∀ j, x j ∈ S ∪ univ.image x := fun j =>
@@ -502,33 +535,33 @@ theorem ballBound_of_oneLoadBuilt (hface : ∀ m, 2 ≤ m → BallFaceClosed m)
     refine step_face he L Ω A hcard hΩ hA hsame hinv (fun huvact => ?_) (fun huvact => ?_) ih
     · -- the root edge is active
       by_cases hm2 : 2 ≤ m
-      · -- an ear of two or more vertices: at most one active path edge
-        obtain ⟨j₀, hj₀⟩ : ∃ j₀ : Fin (m + 1), ∀ j, j ≠ j₀ → j ∉ J := by
-          rcases Finset.eq_empty_or_nonempty J with hJe | ⟨j₀, hj₀⟩
-          · exact ⟨0, fun j _ => by simp [hJe]⟩
-          · refine ⟨j₀, fun j hj hjJ => hj ?_⟩
-            exact Finset.card_le_one.mp (hlong hm2).2 j hjJ j₀ hj₀
-        exact hface m hm2 (L u) (L v) (fun j => L (x j)) hcu hcv hci j₀ (earE Ω u v x) hE0 _
-          hApos (hEany j₀) fun j hj => hEt j (hj₀ j hj)
+      · rcases hlong hm2 huvact with hJ1 | hoddm
+        · -- an ear of two or more vertices with at most one active path edge
+          obtain ⟨j₀, hj₀⟩ : ∃ j₀ : Fin (m + 1), ∀ j, j ≠ j₀ → j ∉ J := by
+            rcases Finset.eq_empty_or_nonempty J with hJe | ⟨j₀, hj₀⟩
+            · exact ⟨0, fun j _ => by simp [hJe]⟩
+            · refine ⟨j₀, fun j hj hjJ => hj ?_⟩
+              exact Finset.card_le_one.mp hJ1 j hjJ j₀ hj₀
+          exact hface m hm2 (L u) (L v) (fun j => L (x j)) hcu hcv hci j₀ (earE Ω u v x) hE0 _
+            hApos (hEany j₀) fun j hj => hEt j (hj₀ j hj)
+        · -- an ear with an odd number of vertices: any path edges may be active
+          have h3 : 3 ≤ m := by
+            obtain ⟨r, hr⟩ := hoddm
+            omega
+          exact hall m hoddm h3 (L u) (L v) (fun j => L (x j)) hcu hcv hci (earE Ω u v x) hE0 _
+            hApos hEany
       · -- a triangle
         have hm1 : m = 1 := by have := he.hm; omega
         subst hm1
         have key := ballTriClosed (L u) (L v) (fun j => L (x j)) hcu hcv hci (earE Ω u v x) hE0 _ hApos hEany
         rw [faceConst3_one, one_mul]
         exact key
-    · -- the root edge is tame: a triangle with tame sides
+    · -- the root edge is tame: a face of odd length with tame sides
       have hJe : J = ∅ := by
         by_contra hne
         exact huvact (hJ (Finset.nonempty_iff_ne_empty.mpr hne))
-      have hm1 : m = 1 := by
-        by_contra hne
-        have hm := he.hm
-        exact huvact (hlong (by omega)).1
-      subst hm1
-      have key := dominant_tri (L u) (L v) (fun j => L (x j)) hci (earE Ω u v x) hE0 _
-        (fun j => (hApos j).le) fun j => hEt j (by simp [hJe])
-      rw [faceConst3_one, one_mul]
-      exact key
+      exact hdom m (hodd huvact) (L u) (L v) (fun j => L (x j)) hci (earE Ω u v x) hE0 _ hApos
+        fun j => hEt j (by simp [hJe])
 
 variable (G)
 
@@ -536,9 +569,10 @@ variable (G)
 single faces. `Outerplanar/LongFace.lean` proves the closure and states the theorem without
 this hypothesis (`ecc_three_of_oneLoadBuilt`). -/
 theorem ecc_three_of_oneLoadBuilt_of_face (hface : ∀ m, 2 ≤ m → BallFaceClosed m)
+    (hdom : ∀ m, Odd m → DomFaceClosed m) (hall : ∀ m, Odd m → 3 ≤ m → BallAllClosed m)
     {act : Finset (V × V)} (h : OneLoadBuilt G univ act) : G.ECCAt 3 := by
   intro L hL
-  have key := ballBound_of_oneLoadBuilt hface h L neProfile (fun _ _ => 1)
+  have key := ballBound_of_oneLoadBuilt hface hdom hall h L neProfile (fun _ _ => 1)
     (fun x _ => hL x) (fun _ _ c d => by unfold neProfile; split_ifs <;> norm_num)
     (fun _ _ => one_pos)
     (fun a _ b _ _ => ⟨fun _ => inBall_ne (L a) (L b), fun _ => dominant_ne (L a) (L b)⟩)
@@ -548,7 +582,9 @@ theorem ecc_three_of_oneLoadBuilt_of_face (hface : ∀ m, 2 ≤ m → BallFaceCl
 
 /-- The same from the bare form of the face property. -/
 theorem ecc_three_of_oneLoadBuilt_of_bare (hbare : ∀ m, 2 ≤ m → BallFaceBare m)
+    (hdom : ∀ m, Odd m → DomFaceClosed m) (hall : ∀ m, Odd m → 3 ≤ m → BallAllClosed m)
     {act : Finset (V × V)} (h : OneLoadBuilt G univ act) : G.ECCAt 3 :=
-  ecc_three_of_oneLoadBuilt_of_face G (fun m hm => ballFaceClosed_of_bare (hbare m hm)) h
+  ecc_three_of_oneLoadBuilt_of_face G (fun m hm => ballFaceClosed_of_bare (hbare m hm)) hdom hall
+    h
 
 end Outerplanar

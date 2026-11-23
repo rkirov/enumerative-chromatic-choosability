@@ -4,6 +4,7 @@ Released under Apache 2.0 license.
 -/
 import Outerplanar.LongData
 import Outerplanar.SquareThm
+import Outerplanar.OddBall
 
 /-!
 # Every face with one loaded edge preserves the ball class
@@ -457,11 +458,41 @@ theorem ballFaceBare_all (m : ℕ) : BallFaceBare m := by
 
 variable {V : Type} [Fintype V] [DecidableEq V] (G : SimpleGraph V) [DecidableRel G.Adj]
 
-/-- **Three colours with at most one loaded edge below every long face.** A graph built from an
-edge by ears on edges, where an ear of two or more vertices sits on an active edge and makes at
-most one of its new edges active (triangles may make both of theirs active), is `3`-ECC. -/
+/-- **Three colours when every even face has at most one loaded edge.** A graph built from an
+edge by ears on edges is `3`-ECC if an ear with an even number of vertices on an active edge
+makes at most one of its new edges active, and an ear on a tame edge has an odd number of
+vertices and makes none active; an ear with an odd number of vertices on an active edge may make
+any of its new edges active. So below every face of even length at most one edge may lead to
+another face of even length, and faces of odd length are unrestricted. -/
 theorem ecc_three_of_oneLoadBuilt {act : Finset (V × V)} (h : OneLoadBuilt G Finset.univ act) :
     G.ECCAt 3 :=
-  ecc_three_of_oneLoadBuilt_of_bare G (fun m _ => ballFaceBare_all m) h
+  ecc_three_of_oneLoadBuilt_of_bare G (fun m _ => ballFaceBare_all m) domFaceClosed_odd
+    (fun m hodd h3 => ballOddClosed m hodd h3) h
+
+/-- `OddEarBuilt G S`: the induced subgraph on `S` is built from an edge by ears on edges, each
+with an odd number of new vertices. Every bounded face then has odd length, wherever the
+triangles are. -/
+inductive OddEarBuilt : Finset V → Prop
+  | edge (u v : V) (huv : G.Adj u v) : OddEarBuilt {u, v}
+  | face (S : Finset V) (m : ℕ) (u v : V) (x : Fin m → V) (he : IsEar G S u v x) (hodd : Odd m)
+      (hS : OddEarBuilt S) : OddEarBuilt (S ∪ Finset.univ.image x)
+
+omit [Fintype V] [DecidableRel G.Adj] in
+variable {G} in
+/-- Odd ears never load an edge. -/
+theorem OddEarBuilt.oneLoadBuilt {S : Finset V} (h : OddEarBuilt G S) :
+    ∃ act, OneLoadBuilt G S act := by
+  induction h with
+  | edge u v huv => exact ⟨_, OneLoadBuilt.edge u v huv⟩
+  | face S m u v x he hodd _ ih =>
+    obtain ⟨act, hact⟩ := ih
+    exact ⟨_, OneLoadBuilt.face S act m u v x he ∅ (fun h => absurd h Finset.not_nonempty_empty)
+      (fun _ _ => Or.inl (by simp)) (fun _ => hodd) hact⟩
+
+/-- **All bounded faces odd.** A graph built from an edge by ears with an odd number of vertices
+is `3`-ECC. -/
+theorem ecc_three_of_oddEarBuilt (h : OddEarBuilt G Finset.univ) : G.ECCAt 3 := by
+  obtain ⟨act, hact⟩ := h.oneLoadBuilt
+  exact ecc_three_of_oneLoadBuilt G hact
 
 end Outerplanar
