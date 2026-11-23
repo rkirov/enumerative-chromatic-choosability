@@ -8,3 +8,4 @@ import Outerplanar.SixEvenBuild
 import Outerplanar.LightTriangles
 import Outerplanar.SevenEven
 import Outerplanar.SevenVertex
+import Outerplanar.BallCrit
