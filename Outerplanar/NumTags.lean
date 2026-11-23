@@ -7,6 +7,8 @@ import Outerplanar.TagBuilt
 import Outerplanar.HallTri
 import Outerplanar.HexWalks
 import Outerplanar.Transport2
+import Outerplanar.SqHull
+import Outerplanar.HullTransport
 
 /-!
 # A numeric tag system
@@ -32,14 +34,21 @@ conditions on the tags of the root and of the path edges:
   least five with two non-greedy sides (`τ₁ τ₂` times the other floors, `tb_transport2`);
 * floor: `F = (oddB m / α) ∏ fⱼ` (`dom_face_bare`).
 
-**`ecc_three_of_numBuilt`**: every graph built by ears following `numRule` is 3-ECC. The
-six-even-face theorem without its one remaining single-face lemma (a square over a branch with
-one square) is the special case with the tags `NTag.plain = ⟨true, 1, 1⟩`
-(odd-only), `tSq = ⟨true, 3/4, 2/3⟩` (one square), `tLong = ⟨true, 3/4, 10/11⟩` (one longer
-even face), `tTwo = ⟨true, 1/2, 0⟩`, `tMB = ⟨true, 0, 0⟩` and `tHex = ⟨false, 0, 0⟩`; the rules
-it uses are in the catalogue (`numRule_odd_one`, `numRule_bare_square`, `numRule_bare_long`,
-`numRule_even_one`, `numRule_square_long`, `numRule_tri`, `numRule_odd_two`, `numRule_mb`, `numRule_hex_odd`,
-`numRule_hex_even`).
+**`ecc_three_of_numBuilt`**: every graph built by ears following `numRule` is 3-ECC.
+
+A fourth field `hull` demands the hull class of `Outerplanar/HullClass.lean` (a bare square, and
+what an odd face transports from one such side). It feeds the four-cell disjunct of a square
+over a branch with one square (`tb_square_hull`).
+
+Every single-face step of the six-even-face theorem is a rule of the catalogue, with the tags
+`NTag.plain = ⟨true, 1, 1, false⟩` (odd-only), `tSq = ⟨true, 3/4, 2/3, true⟩` (one square),
+`tLong = ⟨true, 3/4, 10/11, false⟩` (one longer even face), `tTwo = ⟨true, 1/2, 0, false⟩`
+(two marks), `tMB` and `tHex`: `numRule_odd_one`, `numRule_bare_square`, `numRule_bare_long`,
+`numRule_even_one`, `numRule_square_long`, `numRule_square_hull`, `numRule_tri`,
+`numRule_odd_two`, `numRule_mb`, `numRule_hex_odd`, `numRule_hex_even`. That every
+2-connected outerplanar graph with at most six even faces is built by these rules (weak dual
+tree, centroid) is the combinatorial part of the research note, not formalized here, as for
+`OneLoadBuilt`.
 
 Part of the formalization of the six-even-face theorem (proof in
 `ai_research_notes/OUTERPLANAR_SIX_EVEN_2026-11-23.md`, by a ChatGPT session; audited and
@@ -87,13 +96,15 @@ structure NTag where
   tv1 : tv ≤ 1
   fl0 : 0 ≤ fl
   fl1 : fl ≤ 1
+  hull : Bool
 
 /-- The tag of a greedy profile. -/
-def NTag.plain : NTag := ⟨true, 1, 1, zero_le_one, le_refl _, zero_le_one, le_refl _⟩
+def NTag.plain : NTag := ⟨true, 1, 1, zero_le_one, le_refl _, zero_le_one, le_refl _, false⟩
 
 /-- The class of a numeric tag. -/
 def ncls (t : NTag) (S T : Finset ℕ) (W : ℕ → ℕ → ℝ) (A : ℝ) : Prop :=
-  Hex S T W A ∧ (t.mb = true → HasPot S T W A) ∧ TB S T W A t.tv ∧ Dominant S T W (t.fl * A)
+  Hex S T W A ∧ (t.mb = true → HasPot S T W A) ∧ TB S T W A t.tv ∧ Dominant S T W (t.fl * A) ∧
+    (t.hull = true → HullC S T W A)
 
 /-- The numeric class system. -/
 def numSys : ClassSys where
@@ -102,16 +113,16 @@ def numSys : ClassSys where
   cls := ncls
   of_dom t S T W A hA h :=
     ⟨h.hex hA, fun _ => h.hasPot, (h.tb hA).anti t.tv0 t.tv1,
-      h.le (mul_le_of_le_one_left hA t.fl1)⟩
+      h.le (mul_le_of_le_one_left hA t.fl1), fun _ => HullC.of_dom hA h⟩
   dom_of_plain S T W A h := by
-    have := h.2.2.2
+    have := h.2.2.2.1
     simpa [NTag.plain] using this
   mul_dom t S T W W' A A' hA hA' h0 h0' hD h := by
     refine ⟨(hD.hex hA').mul hA' hA h.1, fun hmb => HasPot.mul hA' hA hD.hasPot (h.2.1 hmb),
-      ?_, ?_⟩
+      ?_, ?_, fun hh => HullC.mul_dom hA hA' h0 hD (h.2.2.2.2 hh)⟩
     · have := TB.mul (hD.tb hA') h.2.2.1
       rwa [one_mul] at this
-    · have := Dominant.mul hA' (mul_nonneg t.fl0 hA) hD h.2.2.2
+    · have := Dominant.mul hA' (mul_nonneg t.fl0 hA) hD h.2.2.2.1
       rwa [mul_left_comm] at this
 
 /-! ### The face rule -/
@@ -133,8 +144,12 @@ def numRule (t : NTag) (m : ℕ) (τ : Fin (m + 1) → NTag) : Prop :=
     (m = 1 ∧ ∀ j j', j ≠ j' → t.tv ≤ (τ j).tv * (τ j').tv) ∨
     (m = 2 ∧ t.tv ≤ 3 / 4 * (∏ j, (τ j).fl) ^ 3) ∨
     (Odd m ∧ 3 ≤ m ∧ ∃ j₁ j₂ : Fin (m + 1), j₁ < j₂ ∧ t.tv ≤ (τ j₁).tv * (τ j₂).tv
-      * (∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl) ^ 3)) ∧
-  t.fl ≤ faceFloor m τ
+      * (∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl) ^ 3) ∨
+    (m = 2 ∧ ∃ j₀ : Fin (m + 1), (τ j₀).hull = true ∧ (∀ j, j ≠ j₀ → (τ j).fl = 1) ∧
+      t.tv ≤ 1 / 2)) ∧
+  t.fl ≤ faceFloor m τ ∧
+  (t.hull = true → (m = 2 ∧ ∀ j, (τ j).fl = 1) ∨
+    (Odd m ∧ ∃ j₀ : Fin (m + 1), (τ j₀).hull = true ∧ ∀ j, j ≠ j₀ → (τ j).fl = 1))
 
 section Sound
 
@@ -186,7 +201,7 @@ theorem prod_two_split (j₁ j₂ : Fin (m + 1)) (A : Fin (m + 1) → ℝ) :
 /-- **The face rule is sound.** -/
 theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
   intro Lu Lv Li hLu hLv hLi E hE0 A hA hE
-  obtain ⟨hm1, hhex, hmb, htb, hfl⟩ := hr
+  obtain ⟨hm1, hhex, hmb, htb, hfl, hhull⟩ := hr
   change ∀ j, ncls (τ j) _ _ (E j) (A j) at hE
   change ncls t Lu Lv (faceSum Li (fun _ _ => 1) E) (faceConst3 m * ∏ j, A j)
   have hP : 0 < ∏ j, A j := Finset.prod_pos fun j _ => hA j
@@ -215,10 +230,11 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
       · exact hexOddClosed m hodd h3 Lu Lv Li hLu hLv hLi E hE0 A hA fun j => (hE j).1
     · exact (hpot hall (Or.inl h2)).hex hLu hLv hN.le
   -- the floor
-  have hfloor := num_floor hLi hE0 hA fun j => (hE j).2.2.2
+  have hfloor := num_floor hLi hE0 hA fun j => (hE j).2.2.2.1
   -- the four-cell bound
   have htb' : TB Lu Lv (faceSum Li (fun _ _ => 1) E) (faceConst3 m * ∏ j, A j) t.tv := by
-    rcases htb with hF | ⟨j₀, hj₀⟩ | ⟨rfl, hpair⟩ | ⟨rfl, hsq⟩ | ⟨hodd, h3, j₁, j₂, h12, hj⟩
+    rcases htb with hF | ⟨j₀, hj₀⟩ | ⟨rfl, hpair⟩ | ⟨rfl, hsq⟩ | ⟨hodd, h3, j₁, j₂, h12, hj⟩ |
+        ⟨rfl, j₀, hj₀h, hj₀f, hj₀t⟩
     · exact (hfloor.tb_floor faceFloor_nonneg hN.le).anti t.tv0 hF
     · by_cases hpos : ∀ j ∈ univ.erase j₀, 0 < (τ j).fl
       · set A' : Fin (m + 1) → ℝ := fun j => if j = j₀ then A j else (τ j).fl * A j
@@ -235,7 +251,7 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
         have hD : ∀ j, j ≠ j₀ → Dominant (pathList Lu Lv Li j.castSucc)
             (pathList Lu Lv Li j.succ) (E j) (A' j) := fun j hj => by
           simp only [hA'def, hj, ↓reduceIte]
-          exact (hE j).2.2.2
+          exact (hE j).2.2.2.1
         have h := tb_transport m Lu Lv Li hLv hLi j₀ E hE0 A' hA' hT hD
         rw [show ∏ j, A' j = (∏ j ∈ univ.erase j₀, (τ j).fl) * ∏ j, A j from
           prod_erase_split j₀ A, mul_left_comm] at h
@@ -251,7 +267,7 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
       rw [faceConst3_one, one_mul]
       exact h.anti t.tv0 (hpair 0 1 (by decide))
     · have h := tb_square Lu Lv Li hLi E hE0 (fun j => (τ j).fl * A j)
-        (fun j => mul_nonneg (τ j).fl0 (hA j).le) fun j => (hE j).2.2.2
+        (fun j => mul_nonneg (τ j).fl0 (hA j).le) fun j => (hE j).2.2.2.1
       rw [prod_fl_mul, mul_left_comm] at h
       exact h.scale.anti t.tv0 hsq
     · by_cases hpos : ∀ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), 0 < (τ j).fl
@@ -273,7 +289,7 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
         have hD : ∀ j, j ≠ j₁ → j ≠ j₂ → Dominant (pathList Lu Lv Li j.castSucc)
             (pathList Lu Lv Li j.succ) (E j) (A' j) := fun j h1 h2 => by
           simp only [hA'def, h1, h2, or_self, ↓reduceIte]
-          exact (hE j).2.2.2
+          exact (hE j).2.2.2.1
         have h := tb_transport2 m hodd h3 Lu Lv Li hLv hLi j₁ j₂ h12 E hE0 A' hA' hT₁ hT₂ hD
         rw [show ∏ j, A' j = (∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl)
             * ∏ j, A j from prod_two_split j₁ j₂ A, mul_left_comm] at h
@@ -285,8 +301,25 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
         rw [h0] at hj
         refine (TB.zero hW0).anti t.tv0 ?_
         simpa using hj
+    · have h := tb_square_hull Lu Lv Li hLu hLv hLi j₀ E hE0 A hA ((hE j₀).2.2.2.2 hj₀h)
+        fun j hj => by
+          have := (hE j).2.2.2.1
+          rwa [hj₀f j hj, one_mul] at this
+      exact h.anti t.tv0 hj₀t
+  -- the hull class
+  have hhull' : t.hull = true → HullC Lu Lv (faceSum Li (fun _ _ => 1) E)
+      (faceConst3 m * ∏ j, A j) := by
+    intro ht
+    rcases hhull ht with ⟨rfl, hall⟩ | ⟨hodd, j₀, hj₀, hothers⟩
+    · exact hullC_square Lu Lv Li hLi E hE0 A (fun j => (hA j).le) fun j => by
+        have := (hE j).2.2.2.1
+        rwa [hall j, one_mul] at this
+    · exact hullC_transport m hodd Lu Lv Li hLv hLi j₀ E hE0 A hA ((hE j₀).2.2.2.2 hj₀)
+        fun j hj => by
+          have := (hE j).2.2.2.1
+          rwa [hothers j hj, one_mul] at this
   exact ⟨hhex', fun h => (hmb h).elim fun hall hc => hpot hall hc, htb',
-    hfloor.le (mul_le_mul_of_nonneg_right hfl hN.le)⟩
+    hfloor.le (mul_le_mul_of_nonneg_right hfl hN.le), hhull'⟩
 
 /-- **Any two tags glue**: every class contains the hexagon bound. -/
 theorem num_glue (t₁ t₂ : NTag) : numSys.GlueSound t₁ t₂ := by
@@ -305,19 +338,21 @@ end Sound
 section Catalogue
 
 /-- One square below (the bare-square constants). -/
-noncomputable def tSq : NTag := ⟨true, 3 / 4, 2 / 3, by norm_num, by norm_num, by norm_num, by norm_num⟩
+noncomputable def tSq : NTag :=
+  ⟨true, 3 / 4, 2 / 3, by norm_num, by norm_num, by norm_num, by norm_num, true⟩
 
 /-- One even face of length at least six below. -/
-noncomputable def tLong : NTag := ⟨true, 3 / 4, 10 / 11, by norm_num, by norm_num, by norm_num, by norm_num⟩
+noncomputable def tLong : NTag :=
+  ⟨true, 3 / 4, 10 / 11, by norm_num, by norm_num, by norm_num, by norm_num, false⟩
 
 /-- Two marks below. -/
-noncomputable def tTwo : NTag := ⟨true, 1 / 2, 0, by norm_num, by norm_num, le_refl _, by norm_num⟩
+noncomputable def tTwo : NTag := ⟨true, 1 / 2, 0, by norm_num, by norm_num, le_refl _, by norm_num, false⟩
 
 /-- The matching bound only. -/
-def tMB : NTag := ⟨true, 0, 0, le_refl _, by norm_num, le_refl _, by norm_num⟩
+def tMB : NTag := ⟨true, 0, 0, le_refl _, by norm_num, le_refl _, by norm_num, false⟩
 
 /-- The hexagon bound only. -/
-def tHex : NTag := ⟨false, 0, 0, le_refl _, by norm_num, le_refl _, by norm_num⟩
+def tHex : NTag := ⟨false, 0, 0, le_refl _, by norm_num, le_refl _, by norm_num, false⟩
 
 theorem dd_face {m : ℕ} (j₀ : Fin (m + 1)) :
     dd j₀ (m - j₀) = faceConst3 m - if Even m then 1 else 0 := by
@@ -361,7 +396,8 @@ theorem numRule_odd_one (hm : Odd m) (j₀ : Fin (m + 1)) (hdom : ∀ j, j ≠ j
   have hdd : dd j₀ (m - j₀) = faceConst3 m := by
     rw [dd_face]
     simp [Nat.not_even_iff_odd.mpr hm]
-  refine ⟨hm.pos, Or.inl hm, fun h => ⟨fun j => ?_, ?_⟩, Or.inr (Or.inl ⟨j₀, ?_⟩), ?_⟩
+  refine ⟨hm.pos, Or.inl hm, fun h => ⟨fun j => ?_, ?_⟩, Or.inr (Or.inl ⟨j₀, ?_⟩), ?_,
+    fun h => Or.inr ⟨hm, j₀, h, fun j hj => by rw [hdom j hj]; rfl⟩⟩
   · by_cases hj : j = j₀
     · rw [hj]; exact h
     · rw [hdom j hj]; rfl
@@ -397,7 +433,7 @@ theorem numRule_bare_square : numRule tSq 2 fun _ => NTag.plain := by
     rw [h2]
     norm_num [faceConst3]
   refine ⟨by norm_num, Or.inr ⟨le_refl _, fun _ => rfl⟩, fun _ => ⟨fun _ => rfl, Or.inl le_rfl⟩,
-    Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩))), ?_⟩
+    Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩))), ?_, fun _ => Or.inl ⟨rfl, fun _ => rfl⟩⟩
   · simp [tSq, NTag.plain]
   · rw [hF]
     simp [tSq]
@@ -408,7 +444,7 @@ theorem numRule_bare_long (hm : Even m) (h4 : 4 ≤ m) : numRule tLong m fun _ =
     simp only [faceFloor, NTag.plain, Finset.prod_const_one, mul_one]
     exact oddB_div_even hm h4
   refine ⟨by omega, Or.inr ⟨by omega, fun _ => rfl⟩, fun _ => ⟨fun _ => rfl, Or.inl (by omega)⟩,
-    Or.inl ?_, hF⟩
+    Or.inl ?_, hF, fun h => absurd h (by simp [tLong])⟩
   calc tLong.tv = 3 / 4 := rfl
     _ ≤ (10 / 11) ^ 3 := by norm_num
     _ ≤ _ := pow_le_pow_left₀ (by norm_num) hF 3
@@ -430,7 +466,7 @@ theorem numRule_even_one (hm : Even m) (h4 : 4 ≤ m) (j₀ : Fin (m + 1))
     rw [← e]
     exact oddB_div_even hm h4
   refine ⟨by omega, Or.inr ⟨by omega, hall⟩, fun _ => ⟨hall, Or.inl (by omega)⟩,
-    Or.inr (Or.inl ⟨j₀, ?_⟩), ?_⟩
+    Or.inr (Or.inl ⟨j₀, ?_⟩), ?_, fun h => absurd h (by simp [tTwo])⟩
   · rw [prod_fl_erase j₀ hdom, one_pow, mul_one]
     calc tTwo.tv = 1 / 2 := rfl
       _ ≤ 3 / 4 * (10 / 11) ^ 3 := by norm_num
@@ -447,7 +483,8 @@ theorem numRule_square_long {τ : Fin 3 → NTag} (j₀ : Fin 3) (hdom : ∀ j, 
     · rw [hj]; exact hmb
     · rw [hdom j hj]; rfl
   refine ⟨by norm_num, Or.inr ⟨le_refl _, hall⟩, fun _ => ⟨hall, Or.inl le_rfl⟩,
-    Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩))), faceFloor_nonneg⟩
+    Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩))), faceFloor_nonneg,
+    fun h => absurd h (by simp [tTwo])⟩
   rw [prod_fl_single j₀ hdom]
   calc tTwo.tv = 1 / 2 := rfl
     _ ≤ 3 / 4 * (10 / 11) ^ 3 := by norm_num
@@ -457,7 +494,8 @@ theorem numRule_square_long {τ : Fin 3 → NTag} (j₀ : Fin 3) (hdom : ∀ j, 
 four-cell constants and floors; the matching bound needs `2 τ₀ τ₁ ≥ 1` (Hall). -/
 theorem numRule_tri {τ : Fin 2 → NTag} (t : NTag)
     (hmb : t.mb = true → (τ 0).mb = true ∧ (τ 1).mb = true ∧ 1 ≤ 2 * ((τ 0).tv * (τ 1).tv))
-    (htv : t.tv ≤ (τ 0).tv * (τ 1).tv) (hfl : t.fl ≤ (τ 0).fl * (τ 1).fl) : numRule t 1 τ := by
+    (htv : t.tv ≤ (τ 0).tv * (τ 1).tv) (hfl : t.fl ≤ (τ 0).fl * (τ 1).fl) (hh : t.hull = false) :
+    numRule t 1 τ := by
   have hF : faceFloor 1 τ = (τ 0).fl * (τ 1).fl := by
     rw [faceFloor, oddB_div_odd (m := 1) ⟨0, rfl⟩, one_mul, Fin.prod_univ_two]
   have hpair : ∀ (P : ℝ → ℝ → Prop), (∀ x y, P x y → P y x) → P (τ 0).tv (τ 1).tv →
@@ -465,7 +503,7 @@ theorem numRule_tri {τ : Fin 2 → NTag} (t : NTag)
     intro P hP h j j' hjj'
     fin_cases j <;> fin_cases j' <;> first | exact absurd rfl hjj' | exact h | exact hP _ _ h
   refine ⟨le_refl _, Or.inl ⟨0, rfl⟩, fun h => ⟨fun j => ?_, Or.inr ?_⟩,
-    Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩)), by rw [hF]; exact hfl⟩
+    Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩)), by rw [hF]; exact hfl, fun h => absurd h (by simp [hh])⟩
   · obtain ⟨h0, h1, -⟩ := hmb h
     fin_cases j
     · exact h0
@@ -479,8 +517,8 @@ product of their four-cell constants (`tb_transport2`), with greedy sides elsewh
 theorem numRule_odd_two (hm : Odd m) (h3 : 3 ≤ m) (t : NTag) (j₁ j₂ : Fin (m + 1))
     (h12 : j₁ < j₂) (hdom : ∀ j, j ≠ j₁ → j ≠ j₂ → τ j = NTag.plain)
     (hmb : t.mb = true → (τ j₁).mb = true ∧ (τ j₂).mb = true)
-    (htv : t.tv ≤ (τ j₁).tv * (τ j₂).tv) (hfl : t.fl ≤ (τ j₁).fl * (τ j₂).fl) :
-    numRule t m τ := by
+    (htv : t.tv ≤ (τ j₁).tv * (τ j₂).tv) (hfl : t.fl ≤ (τ j₁).fl * (τ j₂).fl)
+    (hh : t.hull = false) : numRule t m τ := by
   have hne : j₁ ≠ j₂ := ne_of_lt h12
   have hprod : ∏ j, (τ j).fl = (τ j₁).fl * (τ j₂).fl := by
     rw [← Finset.prod_pair (f := fun j => (τ j).fl) hne]
@@ -494,7 +532,8 @@ theorem numRule_odd_two (hm : Odd m) (h3 : 3 ≤ m) (t : NTag) (j₁ j₂ : Fin 
       rw [hdom j hj.1 hj.2]
       rfl
   refine ⟨hm.pos, Or.inl hm, fun h => ⟨fun j => ?_, Or.inl (by omega)⟩,
-    Or.inr (Or.inr (Or.inr (Or.inr ⟨hm, h3, j₁, j₂, h12, by rw [hrest]; simpa using htv⟩))), ?_⟩
+    Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨hm, h3, j₁, j₂, h12, by rw [hrest]; simpa using htv⟩)))),
+    ?_, fun h => absurd h (by simp [hh])⟩
   · by_cases h1 : j = j₁
     · rw [h1]; exact (hmb h).1
     · by_cases h2 : j = j₂
@@ -503,20 +542,33 @@ theorem numRule_odd_two (hm : Odd m) (h3 : 3 ≤ m) (t : NTag) (j₁ j₂ : Fin 
   · rw [faceFloor, oddB_div_odd hm, one_mul, hprod]
     exact hfl
 
+/-- **A square over a branch with one square** (a side of the hull class, greedy sides elsewhere)
+carries `tTwo` (`tb_square_hull`). -/
+theorem numRule_square_hull {τ : Fin 3 → NTag} (j₀ : Fin 3)
+    (hdom : ∀ j, j ≠ j₀ → τ j = NTag.plain) (hmb : (τ j₀).mb = true) (hh : (τ j₀).hull = true) :
+    numRule tTwo 2 τ := by
+  have hall : ∀ j, (τ j).mb = true := fun j => by
+    by_cases hj : j = j₀
+    · rw [hj]; exact hmb
+    · rw [hdom j hj]; rfl
+  exact ⟨by norm_num, Or.inr ⟨le_refl _, hall⟩, fun _ => ⟨hall, Or.inl le_rfl⟩,
+    Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨rfl, j₀, hh, fun j hj => by rw [hdom j hj]; rfl,
+      le_refl _⟩)))), faceFloor_nonneg, fun h => absurd h (by simp [tTwo])⟩
+
 /-- **The matching bound through faces of length at least four.** -/
 theorem numRule_mb (h2 : 2 ≤ m) (hall : ∀ j, (τ j).mb = true) : numRule tMB m τ :=
   ⟨by omega, Or.inr ⟨h2, hall⟩, fun _ => ⟨hall, Or.inl h2⟩,
-    Or.inl (pow_nonneg faceFloor_nonneg 3), faceFloor_nonneg⟩
+    Or.inl (pow_nonneg faceFloor_nonneg 3), faceFloor_nonneg, fun h => absurd h (by simp [tMB])⟩
 
 /-- **The hexagon bound through odd faces**, whatever the sides. -/
 theorem numRule_hex_odd (hm : Odd m) : numRule tHex m τ :=
   ⟨hm.pos, Or.inl hm, fun h => absurd h (by simp [tHex]),
-    Or.inl (pow_nonneg faceFloor_nonneg 3), faceFloor_nonneg⟩
+    Or.inl (pow_nonneg faceFloor_nonneg 3), faceFloor_nonneg, fun h => absurd h (by simp [tHex])⟩
 
 /-- **The hexagon bound through even faces** whose sides have the matching bound. -/
 theorem numRule_hex_even (h2 : 2 ≤ m) (hall : ∀ j, (τ j).mb = true) : numRule tHex m τ :=
   ⟨by omega, Or.inr ⟨h2, hall⟩, fun h => absurd h (by simp [tHex]),
-    Or.inl (pow_nonneg faceFloor_nonneg 3), faceFloor_nonneg⟩
+    Or.inl (pow_nonneg faceFloor_nonneg 3), faceFloor_nonneg, fun h => absurd h (by simp [tHex])⟩
 
 end Catalogue
 
