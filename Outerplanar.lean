@@ -7,3 +7,4 @@ import Outerplanar.NumTags
 import Outerplanar.SixEvenBuild
 import Outerplanar.LightTriangles
 import Outerplanar.SevenEven
+import Outerplanar.SevenVertex
