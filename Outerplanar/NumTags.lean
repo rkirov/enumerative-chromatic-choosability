@@ -6,6 +6,7 @@ import Outerplanar.BareEven
 import Outerplanar.TagBuilt
 import Outerplanar.HallTri
 import Outerplanar.HexWalks
+import Outerplanar.Transport2
 
 /-!
 # A numeric tag system
@@ -27,16 +28,17 @@ conditions on the tags of the root and of the path edges:
   `2 τ₀ τ₁ ≥ 1` (Hall, `hasPot_tri`);
 * four-cell bound: from the floor (`τ ≤ F³`), by transport through a face with one
   non-greedy side (`tb_transport`, with the other sides' floors), at triangles (`τ₀ τ₁`,
-  `tb_tri`), and at squares (`3/4` times the floors, `tb_square`);
+  `tb_tri`), at squares (`3/4` times the floors, `tb_square`), and at odd faces of length at
+  least five with two non-greedy sides (`τ₁ τ₂` times the other floors, `tb_transport2`);
 * floor: `F = (oddB m / α) ∏ fⱼ` (`dom_face_bare`).
 
 **`ecc_three_of_numBuilt`**: every graph built by ears following `numRule` is 3-ECC. The
-six-even-face theorem without the two remaining single-face lemmas (two marked sides at a long
-odd face; a square over a square) is the special case with the tags `NTag.plain = ⟨true, 1, 1⟩`
+six-even-face theorem without its one remaining single-face lemma (a square over a branch with
+one square) is the special case with the tags `NTag.plain = ⟨true, 1, 1⟩`
 (odd-only), `tSq = ⟨true, 3/4, 2/3⟩` (one square), `tLong = ⟨true, 3/4, 10/11⟩` (one longer
 even face), `tTwo = ⟨true, 1/2, 0⟩`, `tMB = ⟨true, 0, 0⟩` and `tHex = ⟨false, 0, 0⟩`; the rules
 it uses are in the catalogue (`numRule_odd_one`, `numRule_bare_square`, `numRule_bare_long`,
-`numRule_even_one`, `numRule_square_long`, `numRule_tri`, `numRule_mb`, `numRule_hex_odd`,
+`numRule_even_one`, `numRule_square_long`, `numRule_tri`, `numRule_odd_two`, `numRule_mb`, `numRule_hex_odd`,
 `numRule_hex_even`).
 
 Part of the formalization of the six-even-face theorem (proof in
@@ -129,7 +131,9 @@ def numRule (t : NTag) (m : ℕ) (τ : Fin (m + 1) → NTag) : Prop :=
     (∃ j₀ : Fin (m + 1), t.tv ≤ (τ j₀).tv * (dd j₀ (m - j₀) / faceConst3 m) ^ 3
       * (∏ j ∈ univ.erase j₀, (τ j).fl) ^ 3) ∨
     (m = 1 ∧ ∀ j j', j ≠ j' → t.tv ≤ (τ j).tv * (τ j').tv) ∨
-    (m = 2 ∧ t.tv ≤ 3 / 4 * (∏ j, (τ j).fl) ^ 3)) ∧
+    (m = 2 ∧ t.tv ≤ 3 / 4 * (∏ j, (τ j).fl) ^ 3) ∨
+    (Odd m ∧ 3 ≤ m ∧ ∃ j₁ j₂ : Fin (m + 1), j₁ < j₂ ∧ t.tv ≤ (τ j₁).tv * (τ j₂).tv
+      * (∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl) ^ 3)) ∧
   t.fl ≤ faceFloor m τ
 
 section Sound
@@ -170,6 +174,15 @@ theorem prod_erase_split (j₀ : Fin (m + 1)) (A : Fin (m + 1) → ℝ) :
   simp only [↓reduceIte, one_mul]
   exact Finset.prod_congr rfl fun j hj => by simp [(mem_erase.mp hj).1]
 
+theorem prod_two_split (j₁ j₂ : Fin (m + 1)) (A : Fin (m + 1) → ℝ) :
+    ∏ j, (if j = j₁ ∨ j = j₂ then A j else (τ j).fl * A j)
+      = (∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl) * ∏ j, A j := by
+  have e : ∀ j, (if j = j₁ ∨ j = j₂ then A j else (τ j).fl * A j)
+      = (if j = j₁ ∨ j = j₂ then 1 else (τ j).fl) * A j := fun j => by split_ifs <;> simp
+  simp only [e, Finset.prod_mul_distrib]
+  congr 1
+  rw [Finset.prod_ite, Finset.prod_const_one, one_mul]
+
 /-- **The face rule is sound.** -/
 theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
   intro Lu Lv Li hLu hLv hLi E hE0 A hA hE
@@ -205,7 +218,7 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
   have hfloor := num_floor hLi hE0 hA fun j => (hE j).2.2.2
   -- the four-cell bound
   have htb' : TB Lu Lv (faceSum Li (fun _ _ => 1) E) (faceConst3 m * ∏ j, A j) t.tv := by
-    rcases htb with hF | ⟨j₀, hj₀⟩ | ⟨rfl, hpair⟩ | ⟨rfl, hsq⟩
+    rcases htb with hF | ⟨j₀, hj₀⟩ | ⟨rfl, hpair⟩ | ⟨rfl, hsq⟩ | ⟨hodd, h3, j₁, j₂, h12, hj⟩
     · exact (hfloor.tb_floor faceFloor_nonneg hN.le).anti t.tv0 hF
     · by_cases hpos : ∀ j ∈ univ.erase j₀, 0 < (τ j).fl
       · set A' : Fin (m + 1) → ℝ := fun j => if j = j₀ then A j else (τ j).fl * A j
@@ -241,6 +254,37 @@ theorem numRule_sound (hr : numRule t m τ) : numSys.RuleSound t m τ := by
         (fun j => mul_nonneg (τ j).fl0 (hA j).le) fun j => (hE j).2.2.2
       rw [prod_fl_mul, mul_left_comm] at h
       exact h.scale.anti t.tv0 hsq
+    · by_cases hpos : ∀ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), 0 < (τ j).fl
+      · set A' : Fin (m + 1) → ℝ := fun j => if j = j₁ ∨ j = j₂ then A j else (τ j).fl * A j
+          with hA'def
+        have hA' : ∀ j, 0 < A' j := fun j => by
+          simp only [hA'def]
+          split_ifs with h
+          · exact hA j
+          · exact mul_pos (hpos j (mem_filter.mpr ⟨mem_univ j, h⟩)) (hA j)
+        have hT₁ : TB (pathList Lu Lv Li j₁.castSucc) (pathList Lu Lv Li j₁.succ) (E j₁) (A' j₁)
+            (τ j₁).tv := by
+          simp only [hA'def, true_or, ↓reduceIte]
+          exact (hE j₁).2.2.1
+        have hT₂ : TB (pathList Lu Lv Li j₂.castSucc) (pathList Lu Lv Li j₂.succ) (E j₂) (A' j₂)
+            (τ j₂).tv := by
+          simp only [hA'def, or_true, ↓reduceIte]
+          exact (hE j₂).2.2.1
+        have hD : ∀ j, j ≠ j₁ → j ≠ j₂ → Dominant (pathList Lu Lv Li j.castSucc)
+            (pathList Lu Lv Li j.succ) (E j) (A' j) := fun j h1 h2 => by
+          simp only [hA'def, h1, h2, or_self, ↓reduceIte]
+          exact (hE j).2.2.2
+        have h := tb_transport2 m hodd h3 Lu Lv Li hLv hLi j₁ j₂ h12 E hE0 A' hA' hT₁ hT₂ hD
+        rw [show ∏ j, A' j = (∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl)
+            * ∏ j, A j from prod_two_split j₁ j₂ A, mul_left_comm] at h
+        exact h.scale.anti t.tv0 hj
+      · simp only [not_forall, not_lt] at hpos
+        obtain ⟨j, hj', hle⟩ := hpos
+        have h0 : ∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl = 0 :=
+          Finset.prod_eq_zero hj' (le_antisymm hle (τ j).fl0)
+        rw [h0] at hj
+        refine (TB.zero hW0).anti t.tv0 ?_
+        simpa using hj
   exact ⟨hhex', fun h => (hmb h).elim fun hall hc => hpot hall hc, htb',
     hfloor.le (mul_le_mul_of_nonneg_right hfl hN.le)⟩
 
@@ -353,7 +397,7 @@ theorem numRule_bare_square : numRule tSq 2 fun _ => NTag.plain := by
     rw [h2]
     norm_num [faceConst3]
   refine ⟨by norm_num, Or.inr ⟨le_refl _, fun _ => rfl⟩, fun _ => ⟨fun _ => rfl, Or.inl le_rfl⟩,
-    Or.inr (Or.inr (Or.inr ⟨rfl, ?_⟩)), ?_⟩
+    Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩))), ?_⟩
   · simp [tSq, NTag.plain]
   · rw [hF]
     simp [tSq]
@@ -403,7 +447,7 @@ theorem numRule_square_long {τ : Fin 3 → NTag} (j₀ : Fin 3) (hdom : ∀ j, 
     · rw [hj]; exact hmb
     · rw [hdom j hj]; rfl
   refine ⟨by norm_num, Or.inr ⟨le_refl _, hall⟩, fun _ => ⟨hall, Or.inl le_rfl⟩,
-    Or.inr (Or.inr (Or.inr ⟨rfl, ?_⟩)), faceFloor_nonneg⟩
+    Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩))), faceFloor_nonneg⟩
   rw [prod_fl_single j₀ hdom]
   calc tTwo.tv = 1 / 2 := rfl
     _ ≤ 3 / 4 * (10 / 11) ^ 3 := by norm_num
@@ -429,6 +473,35 @@ theorem numRule_tri {τ : Fin 2 → NTag} (t : NTag)
   · exact hpair (fun x y => 1 ≤ 2 * (x * y)) (fun x y hxy => by rwa [mul_comm y x])
       (hmb h).2.2
   · exact hpair (fun x y => t.tv ≤ x * y) (fun x y hxy => by rwa [mul_comm y x]) htv
+
+/-- **An odd face of length at least five with two marked sides** carries any tag below the
+product of their four-cell constants (`tb_transport2`), with greedy sides elsewhere. -/
+theorem numRule_odd_two (hm : Odd m) (h3 : 3 ≤ m) (t : NTag) (j₁ j₂ : Fin (m + 1))
+    (h12 : j₁ < j₂) (hdom : ∀ j, j ≠ j₁ → j ≠ j₂ → τ j = NTag.plain)
+    (hmb : t.mb = true → (τ j₁).mb = true ∧ (τ j₂).mb = true)
+    (htv : t.tv ≤ (τ j₁).tv * (τ j₂).tv) (hfl : t.fl ≤ (τ j₁).fl * (τ j₂).fl) :
+    numRule t m τ := by
+  have hne : j₁ ≠ j₂ := ne_of_lt h12
+  have hprod : ∏ j, (τ j).fl = (τ j₁).fl * (τ j₂).fl := by
+    rw [← Finset.prod_pair (f := fun j => (τ j).fl) hne]
+    refine (Finset.prod_subset (subset_univ _) fun j _ hj => ?_).symm
+    simp only [mem_insert, mem_singleton, not_or] at hj
+    rw [hdom j hj.1 hj.2]
+    rfl
+  have hrest : ∏ j ∈ univ.filter (fun j => ¬(j = j₁ ∨ j = j₂)), (τ j).fl = 1 :=
+    Finset.prod_eq_one fun j hj => by
+      simp only [mem_filter, mem_univ, true_and, not_or] at hj
+      rw [hdom j hj.1 hj.2]
+      rfl
+  refine ⟨hm.pos, Or.inl hm, fun h => ⟨fun j => ?_, Or.inl (by omega)⟩,
+    Or.inr (Or.inr (Or.inr (Or.inr ⟨hm, h3, j₁, j₂, h12, by rw [hrest]; simpa using htv⟩))), ?_⟩
+  · by_cases h1 : j = j₁
+    · rw [h1]; exact (hmb h).1
+    · by_cases h2 : j = j₂
+      · rw [h2]; exact (hmb h).2
+      · rw [hdom j h1 h2]; rfl
+  · rw [faceFloor, oddB_div_odd hm, one_mul, hprod]
+    exact hfl
 
 /-- **The matching bound through faces of length at least four.** -/
 theorem numRule_mb (h2 : 2 ≤ m) (hall : ∀ j, (τ j).mb = true) : numRule tMB m τ :=
