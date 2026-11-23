@@ -179,9 +179,33 @@ theorem sqIn_iff_child (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H
   · rintro ⟨F, hF, h4⟩
     exact ⟨F, he.child_sub j hF, h4⟩
 
-/-- **The face rule holds at the root face of a good interval.** -/
-theorem rule_of_enum (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H a b m r)
-    (hab : a < b) (hg : GoodP H a b) :
+/-- In a good interval with three marks and an even root face, the children of the root face
+carry at most two marks. -/
+theorem GoodP.root (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H a b m r)
+    (hg : GoodP H a b) :
+    3 ≤ marks H a b → Even m → ∀ j : Fin (m + 1), marks H (r j.castSucc) (r j.succ) ≤ 2 := by
+  intro _ hev j
+  have hm1 := he.one_le
+  have hevm : Even (m + 2) ↔ Even m := by
+    constructor
+    · rintro ⟨k, hk⟩; exact ⟨k - 1, by omega⟩
+    · rintro ⟨k, hk⟩; exact ⟨k + 1, by omega⟩
+  have h2 : a.val + 2 ≤ b.val := by
+    have := he.card
+    by_contra h
+    have := card_le_two_of_gap (rootFace_sub (H := H) (a := a) (b := b)) fun z _ ⟨h1, h2⟩ => by
+      have : a.val < z.val := h1
+      have : z.val < b.val := h2
+      omega
+    omega
+  exact hg (rootFace H a b) (mem_facesIn.mpr ⟨rootFace_isFace hH hadj h2, rootFace_sub⟩)
+    (by rw [he.card]; exact hevm.mpr hev) _ (he.mem _) _ (he.mem _) (he.lt j) (he.gap j)
+
+/-- **The face rule at the root face of an interval** whose root face, when even and over at
+least three marks, has children with at most two marks each. -/
+theorem rule_of_enum' (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H a b m r)
+    (hab : a < b)
+    (hg : 3 ≤ marks H a b → Even m → ∀ j : Fin (m + 1), marks H (r j.castSucc) (r j.succ) ≤ 2) :
     numRule (tagOf H a b) m (fun i => tagOf H (r i.castSucc) (r i.succ)) := by
   classical
   have hM := he.marks_eq hH hadj hab
@@ -204,9 +228,7 @@ theorem rule_of_enum (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H a
   · rw [tagOf_three h3]
     rcases Nat.even_or_odd m with hev | hodd
     · refine numRule_hex_even (by obtain ⟨k, hk⟩ := hev; omega) fun j => ?_
-      have hc := hg (rootFace H a b) (mem_facesIn.mpr ⟨rootFace_isFace hH hadj h2, rootFace_sub⟩)
-        (by rw [he.card]; exact hevm.mpr hev) _ (he.mem _) _ (he.mem _) (he.lt j) (he.gap j)
-      exact tagOf_mb hc
+      exact tagOf_mb (hg h3 hev j)
     · exact numRule_hex_odd hodd
   have hsum : univ.sum f ≤ 2 := by
     have : univ.sum f ≤ marks H a b := by rw [hM]; split_ifs <;> omega
@@ -310,6 +332,12 @@ theorem rule_of_enum (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H a
     · exact numRule_odd_two hodd h3m tTwo j₁ j₂ h12 (fun i h1 h2 => tagOf_zero (hz i h1 h2))
         (fun _ => ⟨hb1, hb2⟩) (by rw [hv1, hv2]; norm_num [tTwo])
         (mul_nonneg (τ j₁).fl0 (τ j₂).fl0) rfl
+
+/-- **The face rule holds at the root face of a good interval.** -/
+theorem rule_of_enum (hH : IsDissection H) (hadj : H.Adj a b) (he : RootEnum H a b m r)
+    (hab : a < b) (hg : GoodP H a b) :
+    numRule (tagOf H a b) m (fun i => tagOf H (r i.castSucc) (r i.succ)) :=
+  rule_of_enum' hH hadj he hab (hg.root hH hadj he)
 
 end Rule
 
@@ -453,17 +481,18 @@ theorem RootEnum.cover_Icc {a b : Fin N} {m : ℕ} {r : Fin (m + 2) → Fin N}
     simp at h'
 
 /-- **Building the side `[a, b]` of an edge**, by induction on the width. -/
-theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijective ψ)
-    (hGH : ∀ i j, G.Adj (ψ i) (ψ j) ↔ H.Adj i j) (tag : Fin N → Fin N → NTag)
+theorem extend {R : ClassSys} {rule : R.Tag → (m : ℕ) → (Fin (m + 1) → R.Tag) → Prop}
+    (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijective ψ)
+    (hGH : ∀ i j, G.Adj (ψ i) (ψ j) ↔ H.Adj i j) (tag : Fin N → Fin N → R.Tag)
     (Good : Fin N → Fin N → Prop)
     (hrule : ∀ (a b : Fin N) (m : ℕ) (r : Fin (m + 2) → Fin N), H.Adj a b → a < b →
-      RootEnum H a b m r → Good a b → numRule (tag a b) m fun i => tag (r i.castSucc) (r i.succ))
+      RootEnum H a b m r → Good a b → rule (tag a b) m fun i => tag (r i.castSucc) (r i.succ))
     (hmono : ∀ (a b : Fin N) (m : ℕ) (r : Fin (m + 2) → Fin N), RootEnum H a b m r → Good a b →
       ∀ i : Fin (m + 1), Good (r i.castSucc) (r i.succ)) :
     ∀ (d : ℕ) (a b : Fin N), b.val - a.val ≤ d → a < b → H.Adj a b → Good a b →
-    ∀ (T : Finset V) (tg : V → V → NTag), TagBuilt G numSys numRule (fun _ _ => True) T tg →
+    ∀ (T : Finset V) (tg : V → V → R.Tag), TagBuilt G R rule (fun _ _ => True) T tg →
       ψ a ∈ T → ψ b ∈ T → (∀ i, a < i → i < b → ψ i ∉ T) → tg (ψ a) (ψ b) = tag a b →
-      ∃ tg', TagBuilt G numSys numRule (fun _ _ => True) (T ∪ (Icc a b).image ψ) tg' ∧
+      ∃ tg', TagBuilt G R rule (fun _ _ => True) (T ∪ (Icc a b).image ψ) tg' ∧
         ∀ p ∈ T, ∀ q ∈ T, ¬ (p = ψ a ∧ q = ψ b) → tg' p q = tg p q := by
   intro d
   induction d with
@@ -492,13 +521,13 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
   have hear : IsEar G T (ψ a) (ψ b) x := isEar_root hH ψ hψ hGH hadj hab he ha hb hint
   have hpath : ∀ j, earPath (ψ a) (ψ b) x j = ψ (r j) := fun j => by
     rw [hx]; exact earPath_eq ψ he j
-  set τ : Fin (m + 1) → NTag := fun i => tag (r i.castSucc) (r i.succ) with hτ
-  have hrule : numRule (tg (ψ a) (ψ b)) m τ := by
+  set τ : Fin (m + 1) → R.Tag := fun i => tag (r i.castSucc) (r i.succ) with hτ
+  have hrule : rule (tg (ψ a) (ψ b)) m τ := by
     rw [hdem]; exact hrule a b m r hadj hab he hg
   set T₁ := T ∪ univ.image x with hT₁
-  set tg₁ := earTags numSys T tg (ψ a) (ψ b) x τ with htg₁
-  have hT1 : TagBuilt G numSys numRule (fun _ _ => True) T₁ tg₁ :=
-    TagBuilt.face (R := numSys) (rule := numRule) (glue := fun _ _ => True) T tg m (ψ a) (ψ b) x
+  set tg₁ := earTags R T tg (ψ a) (ψ b) x τ with htg₁
+  have hT1 : TagBuilt G R rule (fun _ _ => True) T₁ tg₁ :=
+    TagBuilt.face (R := R) (rule := rule) (glue := fun _ _ => True) T tg m (ψ a) (ψ b) x
       hear τ hrule hT
   -- the vertices of the root face are in `T₁`
   have hRT : ∀ j : Fin (m + 2), ψ (r j) ∈ T₁ := by
@@ -509,7 +538,7 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
     · rw [e]; exact mem_union_left _ hb
     · rw [e]; exact mem_union_right _ (mem_image_of_mem _ (mem_univ _))
   -- the children, one by one
-  have hloop : ∀ k, k ≤ m + 1 → ∃ tgk, TagBuilt G numSys numRule (fun _ _ => True)
+  have hloop : ∀ k, k ≤ m + 1 → ∃ tgk, TagBuilt G R rule (fun _ _ => True)
       (T₁ ∪ (univ.filter fun i : Fin (m + 1) => i.val < k).biUnion
         fun i => (Icc (r i.castSucc) (r i.succ)).image ψ) tgk ∧
       ∀ p ∈ T₁, ∀ q ∈ T₁, (∀ i : Fin (m + 1), i.val < k →
@@ -557,7 +586,7 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
           have := congrArg Fin.val this
           simp [hi] at this
           omega]
-        rw [htg₁, ← hpath i.castSucc, ← hpath i.succ, earTags_fwd (R := numSys) (tg := tg) (τ := τ) hear i]
+        rw [htg₁, ← hpath i.castSucc, ← hpath i.succ, earTags_fwd (R := R) (tg := tg) (τ := τ) hear i]
       obtain ⟨tg', hT', hpres'⟩ := ih (r i.castSucc) (r i.succ) (by omega) hlti
         (he.adj hH hadj hab i) (hmono a b m r he hg i) Tk tgk hTk hc1 hc2 hc3 hc4
       refine ⟨tg', ?_, fun p hp q hq hnot => ?_⟩
@@ -602,7 +631,7 @@ theorem extend (hH : IsDissection H) (ψ : Fin N → V) (hψ : Function.Bijectiv
     rw [← hset]; exact hTf
   · have hp1 : p ∈ T₁ := mem_union_left _ hp
     have hq1 : q ∈ T₁ := mem_union_left _ hq
-    rw [hpresf p hp1 q hq1 fun i _ ⟨e1, e2⟩ => ?_, htg₁, earTags_old (R := numSys) (tg := tg) (τ := τ) hear hp hq hnot]
+    rw [hpresf p hp1 q hq1 fun i _ ⟨e1, e2⟩ => ?_, htg₁, earTags_old (R := R) (tg := tg) (τ := τ) hear hp hq hnot]
     -- a child's ends are not both in `T`
     have hw := he.width i
     have k1 : r i.castSucc = a := by
@@ -709,23 +738,24 @@ end Sides
 /-- **The whole graph from a base edge** `(a, b)` (a chord or an edge of the polygon), for any
 family of tags and of good intervals with sound face rules, if both sides of the base edge are
 good: the inside `[a, b]`, and the outside, read in coordinates rotated by `b`. -/
-theorem exists_build {n : ℕ} [NeZero n] (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
-    (hG : IsDissection G) (tag : SimpleGraph (Fin n) → Fin n → Fin n → NTag)
+theorem exists_build {n : ℕ} [NeZero n] {R : ClassSys}
+    {rule : R.Tag → (m : ℕ) → (Fin (m + 1) → R.Tag) → Prop} (G : SimpleGraph (Fin n)) [DecidableRel G.Adj]
+    (hG : IsDissection G) (tag : SimpleGraph (Fin n) → Fin n → Fin n → R.Tag)
     (Good : SimpleGraph (Fin n) → Fin n → Fin n → Prop)
     (hrule : ∀ H : SimpleGraph (Fin n), IsDissection H → ∀ (a b : Fin n) (m : ℕ)
       (r : Fin (m + 2) → Fin n), H.Adj a b → a < b → RootEnum H a b m r → Good H a b →
-        numRule (tag H a b) m fun i => tag H (r i.castSucc) (r i.succ))
+        rule (tag H a b) m fun i => tag H (r i.castSucc) (r i.succ))
     (hmono : ∀ (H : SimpleGraph (Fin n)) (a b : Fin n) (m : ℕ) (r : Fin (m + 2) → Fin n),
       RootEnum H a b m r → Good H a b → ∀ i : Fin (m + 1), Good H (r i.castSucc) (r i.succ))
     (a b : Fin n) (hab : a < b) (hadj : G.Adj a b) (hg₁ : Good G a b)
     (hg₂ : Good (G.comap (rot b)) 0 (a - b)) :
-    ∃ tg, TagBuilt G numSys numRule (fun _ _ => True) univ tg := by
+    ∃ tg, TagBuilt G R rule (fun _ _ => True) univ tg := by
   have hext := extend (G := G) (H := G) hG id Function.bijective_id (fun _ _ => Iff.rfl) (tag G)
     (Good G) (hrule G hG) (hmono G)
   have hne : a ≠ b := ne_of_lt hab
   set c : Fin n := a - b with hc
   set H₂ := G.comap (rot b) with hH₂
-  have hT0 := TagBuilt.edge (G := G) (R := numSys) (rule := numRule) (glue := fun _ _ => True)
+  have hT0 := TagBuilt.edge (G := G) (R := R) (rule := rule) (glue := fun _ _ => True)
     a b hadj (tag G a b) (tag H₂ 0 c) trivial
   -- the inside of the base edge
   obtain ⟨tg₁, hT₁, hpres₁⟩ := hext (b.val - a.val) a b le_rfl hab hadj hg₁ {a, b} _ hT0
@@ -813,7 +843,8 @@ theorem ecc_three_of_six_even {n : ℕ} (G : SimpleGraph (Fin n)) [DecidableRel 
   suffices h : ∃ tg, TagBuilt G numSys numRule (fun _ _ => True) univ tg by
     obtain ⟨tg, h⟩ := h
     exact ecc_three_of_numBuilt G h
-  have hbuild := exists_build G hG (fun H => tagOf H) (fun H => GoodP H)
+  have hbuild := exists_build (R := numSys) (rule := numRule) G hG (fun H => tagOf H)
+    (fun H => GoodP H)
     (fun H hH _ _ _ _ hadj hab he hg => rule_of_enum hH hadj he hab hg)
     (fun _ _ _ _ _ he hg _ => hg.mono (he.ge _) (he.le _))
   -- good from a narrowest heavy chord

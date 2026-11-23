@@ -455,7 +455,8 @@ theorem ecc_three_of_lightTriangles {n : ℕ} (G : SimpleGraph (Fin n)) [Decidab
   suffices h : ∃ tg, TagBuilt G numSys numRule (fun _ _ => True) univ tg by
     obtain ⟨tg, h⟩ := h
     exact ecc_three_of_numBuilt G h
-  have hbuild := exists_build G hG (fun H => tagL H) (fun H => CondL H)
+  have hbuild := exists_build (R := numSys) (rule := numRule) G hG (fun H => tagL H)
+    (fun H => CondL H)
     (fun H hH _ _ _ _ hadj hab he hg => ruleL hH hadj he hab hg)
     (fun _ _ _ _ _ he hg _ => hg.mono (he.ge _) (he.le _))
   by_cases hbig : ∃ a b : Fin n, a < b ∧ G.Adj a b ∧ numEvenFaces G < 2 * marks G a b
