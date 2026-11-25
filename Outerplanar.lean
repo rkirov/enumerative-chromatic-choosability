@@ -10,3 +10,5 @@ import Outerplanar.SevenEven
 import Outerplanar.SevenVertex
 import Outerplanar.BallCrit
 import Outerplanar.SevenBlocks
+import Outerplanar.LongFaceGain
+import Outerplanar.SqMultiRuns
