@@ -15,3 +15,5 @@ import Outerplanar.SqMultiRuns
 import Outerplanar.SqHull17
 import Outerplanar.MarkThreeFour
 import Outerplanar.ThirteenBlocks
+import Outerplanar.Sq15Runs
+import Outerplanar.FifteenBlocks
