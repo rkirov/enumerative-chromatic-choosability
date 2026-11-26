@@ -12,3 +12,6 @@ import Outerplanar.BallCrit
 import Outerplanar.SevenBlocks
 import Outerplanar.LongFaceGain
 import Outerplanar.SqMultiRuns
+import Outerplanar.SqHull17
+import Outerplanar.MarkThreeFour
+import Outerplanar.ThirteenBlocks
